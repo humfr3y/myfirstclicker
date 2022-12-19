@@ -7,60 +7,16 @@
     <title>My 1st Clicker 0.1</title>
 </head>
 <body>
-    <style>
-    .presss {
-        text-align: center;
-        color:black;
-    }
-    .summ {
-        text-align: center;
-        color:black;
-    }
-    .warning1 {
-        text-align: center;
-        color:red;
-    }
-    .button {
-        background-color: #ff000000;
-        border: none;
-        color: rgba(255, 0, 0, 0);
-        margin-left: 480px;
-            }
-    .dboost {
-        background-color: #22b31a;
-        border: 10px;
-        border-radius: 4px;
-        border-color: white;
-        color: rgb(255, 255, 255);
-        text-align: left;
-        font-family:'Times New Roman', Times, serif;
-        font-size: large;
-        padding-bottom: 40px;
-        padding-top: 40px;
-        width: 1500px;
-        text-align: center;
-    }
-    .mboost {
-        background-color: #1d9617;
-        border: 10px;
-        border-radius: 4px;
-        border-color: white;
-        color: rgb(255, 255, 255);
-        text-align: left;
-        font-family:'Times New Roman', Times, serif;
-        font-size: large;
-        padding-bottom: 40px;
-        padding-top: 40px;
-        width: 1500px;
-        text-align: center;
-    }
-    </style>
+    <link rel="stylesheet" href="buttons.css" type="text/css">
     <script src="javascript/clicker.js"></script>
     <p><h1 id="ele" class="presss">Нажмите на монету / Click on the coin</h1>
     <button onclick="monetka()" onkeydown="alert('Нельзя нажимать на кнопку!')" class="button"><img src="javascript/images/coin6.png" alt=""></button><p>
-    <button onclick="doubleboost(this)" class="dboost">Открыть новое улучшение! Стоимость: 10 монет. / Unlock new upgrade! Cost: 10 coins.</button>
-    <button onclick="multiboost(this)" class="mboost">Открыть новое улучшение! Стоимость: 100 монет. / Unlock new upgrade! Cost: 100 coins. </button>
+    <button onclick="doubleboost(this)" class="butt_click dboost">Открыть новое улучшение! Стоимость: 10 монет. / Unlock new upgrade! Cost: 10 coins.</button>
+    <button onclick="multiboost(this)" class="butt_click mboost">Открыть новое улучшение! Стоимость: 100 монет. / Unlock new upgrade! Cost: 100 coins. </button>
     <p><h2 id="summa" class="summ">Тут будет отображаться всего полученных монет / There will be total amount of coins.</h2></p>
-    <p><h1 class="warning1">Обновление страницы сбрасывает игру! / Reloading page resets the game!</h1>
+    <p><h1 class="warning1">Обновление страницы сбрасывает игру! СОХРАНЯЙТЕ ИГРУ! / Reloading page resets the game! SAVING THE GAME!</h1>
+    <button onclick="savezone(this)" class="saver">Сохранить игру / Save the game</button>
+    <button onclick="loadzone(this)" class="loader">Загрузить игру / Load the game</button>
+    <a href="changelog.md" target="_blank"><button onclick="changelog(this)" class="changelogg">Журнал изменений / Changelog</button></a>
 </body>
 </html>

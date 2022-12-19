@@ -1,0 +1,60 @@
+
+.presss {
+    text-align: center;
+    color:black;
+}
+.summ {
+    text-align: center;
+    color:black;
+}
+.warning1 {
+    text-align: center;
+    color:red;
+}
+.button {
+    background-color: #ff000000;
+    border: none;
+    color: rgba(255, 0, 0, 0);
+    margin-left: 480px;
+        }
+.dboost {
+    background-color: #22b31a;
+}
+.mboost {
+    background-color: #1d9617;
+}
+.butt_click{
+    border: 10px;
+    border-radius: 4px;
+    border-color: white;
+    color: rgb(255, 255, 255);
+    text-align: left;
+    font-family:'Times New Roman', Times, serif;
+    font-size: large;
+    padding-bottom: 40px;
+    padding-top: 40px;
+    display: flexbox;
+    flex: 100px;
+    max-width: 500px;
+    min-width: 100px;
+    text-align: center;
+    align-content: center;
+}
+.saver {
+    width: 200px;
+    height: 100px;
+    background-color: rgb(86, 123, 255);
+    text-align: center;
+}
+.loader {
+    width: 200px;
+    height: 100px;
+    background-color: rgb(196, 245, 63);
+    text-align: center;
+}
+.changelogg {
+    width: 200px;
+    height: 100px;
+    background-color: rgb(245, 63, 218);
+    text-align: center;
+}
