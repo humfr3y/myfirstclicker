@@ -1,0 +1,3 @@
+Спасибо за покупку! Теперь ваше первое улучшение умножено на x" + mboost.toFixed(1) + "! Следующая покупка стоит " + (multiprice+100) + " долларов!" //текст для мб
+
+console.log(money + ".db " + db + ". mb " + mb + ". multip " + multiprice + ". mamount" + mamount + ". mboost" + mboost) //дебаг мб

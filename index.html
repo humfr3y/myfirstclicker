@@ -4,14 +4,63 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript</title>
+    <title>My 1st Clicker 0.1</title>
 </head>
 <body>
+    <style>
+    .presss {
+        text-align: center;
+        color:black;
+    }
+    .summ {
+        text-align: center;
+        color:black;
+    }
+    .warning1 {
+        text-align: center;
+        color:red;
+    }
+    .button {
+        background-color: #ff000000;
+        border: none;
+        color: rgba(255, 0, 0, 0);
+        margin-left: 480px;
+            }
+    .dboost {
+        background-color: #22b31a;
+        border: 10px;
+        border-radius: 4px;
+        border-color: white;
+        color: rgb(255, 255, 255);
+        text-align: left;
+        font-family:'Times New Roman', Times, serif;
+        font-size: large;
+        padding-bottom: 40px;
+        padding-top: 40px;
+        width: 1500px;
+        text-align: center;
+    }
+    .mboost {
+        background-color: #1d9617;
+        border: 10px;
+        border-radius: 4px;
+        border-color: white;
+        color: rgb(255, 255, 255);
+        text-align: left;
+        font-family:'Times New Roman', Times, serif;
+        font-size: large;
+        padding-bottom: 40px;
+        padding-top: 40px;
+        width: 1500px;
+        text-align: center;
+    }
+    </style>
     <script src="javascript/clicker.js"></script>
-    <button type="submit" id="submit" onclick="monetka()">Получить доллар</button>
-    <button type="submit" id="submit" onclick="doubleboost()">Увеличить количество долларов за клик</button>
-    <button type="submit" id="submit" onclick="multiboost()">Увеличить бонус первого улучшения на 10%</button>
-    <h>Обновление страницы сбрасывает игру!</h>
-    <b>ТРЕБУЕТСЯ ВКЛЮЧИТЬ КОНСОЛЬ!!! ВЫ МОЖЕТЕ ВКЛЮЧИТЬ ЕЁ НАЖАВ ПРАВОЙ КНОПКОЙ МЫШИ (ИЛИ F12) -> КОД СТРАНИЦЫ -> CONSOLE</b>
+    <p><h1 id="ele" class="presss">Нажмите на монету / Click on the coin</h1>
+    <button onclick="monetka()" onkeydown="alert('Нельзя нажимать на кнопку!')" class="button"><img src="javascript/images/coin6.png" alt=""></button><p>
+    <button onclick="doubleboost(this)" class="dboost">Открыть новое улучшение! Стоимость: 10 монет. / Unlock new upgrade! Cost: 10 coins.</button>
+    <button onclick="multiboost(this)" class="mboost">Открыть новое улучшение! Стоимость: 100 монет. / Unlock new upgrade! Cost: 100 coins. </button>
+    <p><h2 id="summa" class="summ">Тут будет отображаться всего полученных монет / There will be total amount of coins.</h2></p>
+    <p><h1 class="warning1">Обновление страницы сбрасывает игру! / Reloading page resets the game!</h1>
 </body>
 </html>
