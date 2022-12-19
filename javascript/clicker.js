@@ -26,7 +26,9 @@ function doubleboost(ele2) {
     if (money>=doubleprice) 
     {amount=amount+1; money=money - doubleprice; db=db+1
     if (data) {ele2.innerHTML = "Улучшение даёт +" + db + " монет за нажатие. Чтобы улучшить его вам нужно " + (doubleprice+10).toFixed(0) + " монет."} 
-    else {ele2.innerHTML = "Upgrade gives +" + db + " coins per click. You need for next upgrade " + (doubleprice+10).toFixed(0) + " coins."}}
+    else {ele2.innerHTML = "Upgrade gives +" + db + " coins per click. You need for next upgrade " + (doubleprice+10).toFixed(0) + " coins."}
+    if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " монет. Вы купили первое улучшение.";}
+    else {document.getElementById('ele').innerHTML = money.toFixed(0) + " coins. You have bought first upgrade.";}}
     return doubleprice;
 };
 function multiboost(ele3) {
@@ -35,7 +37,9 @@ function multiboost(ele3) {
     if (money>multiprice) 
     {mamount++; mb++; money=money-multiprice;
     if (data) {ele3.innerHTML = "Улучшение увеличивает бонус первого улучшения на +" + (mamount*10) + "%. Чтобы улучшить его вам нужно " + (multiprice+100).toFixed(0) + " монет."} 
-    else {ele3.innerHTML = "Upgrade increases first upgrade bonus by +" + (mamount*10) + "%. You need for next upgrade " + (multiprice+100).toFixed(0) + " coins."}};
+    else {ele3.innerHTML = "Upgrade increases first upgrade bonus by +" + (mamount*10) + "%. You need for next upgrade " + (multiprice+100).toFixed(0) + " coins."}
+    if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " монет. Вы купили второе улучшение.";}
+    else {document.getElementById('ele').innerHTML = money.toFixed(0) + " coins. You have bought second upgrade.";}};
     if (mamount>=1) {mboost=1+(mb/10)};
     if (mamount>=1) {multiprice=(mamount+1)*94.9} else {multiprice=100};
 } 
