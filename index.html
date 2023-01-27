@@ -4,19 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My 1st Clicker 0.1</title>
+    <title>My 1st Clicker</title>
+    <style>
+        body {
+         background: url(javascript/images/BG.png); 
+        }
+       </style>
 </head>
 <body>
     <link rel="stylesheet" href="buttons.css" type="text/css">
+    <link rel="stylesheet" href="fonts.css" type="text/css">
     <script src="javascript/clicker.js"></script>
     <p><h1 id="ele" class="presss">Нажмите на монету / Click on the coin</h1>
-    <button onclick="monetka()" onkeydown="alert('Нельзя нажимать на кнопку!')" class="button"><img src="javascript/images/coin6.png" alt=""></button><p>
+    <button onclick="monetka()" onkeydown="alert('Нельзя нажимать на кнопку!')" class="button"><img src="javascript/images/coin6.png" alt="" style="width: 300px;"></button><p>
     <button onclick="doubleboost(this)" class="butt_click dboost">Открыть новое улучшение! Стоимость: 10 монет. / Unlock new upgrade! Cost: 10 coins.</button>
     <button onclick="multiboost(this)" class="butt_click mboost">Открыть новое улучшение! Стоимость: 100 монет. / Unlock new upgrade! Cost: 100 coins. </button>
+    <button onclick="fiveboost(this)" class="butt_click fboost">Открыть новое улучшение! Стоимость: 1000 монет. / Unlock new upgrade! Cost: 1000 coins. </button>
     <p><h2 id="summa" class="summ">Тут будет отображаться всего полученных монет / There will be total amount of coins.</h2></p>
     <p><h1 class="warning1">Обновление страницы сбрасывает игру! СОХРАНЯЙТЕ ИГРУ! / Reloading page resets the game! SAVING THE GAME!</h1>
     <button onclick="savezone(this)" class="saver">Сохранить игру / Save the game</button>
     <button onclick="loadzone(this)" class="loader">Загрузить игру / Load the game</button>
+    <button onclick="saveorno(this)" class="autosave">Автосохранение: выкл / Auto-save: off</button>
     <a href="changelog.md" target="_blank"><button onclick="changelog(this)" class="changelogg">Журнал изменений / Changelog</button></a>
 </body>
 </html>

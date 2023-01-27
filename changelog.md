@@ -1,3 +1,15 @@
+28.01.2023 | My 1st clicker 0.3. More Graphic Update (Codename: CHEST):
+- NEW UPGRADE! Third upgrade can boost your coin gain by 5%.
+- MAJOR DESIGN UPDATE! Game has some bg and font.
+- AUTOSAVING! You can enable autosave, and it will save every 10 sec (When you load it does disable it).
+- Recolored buttons (give me ideas about bottom one please idk what to do).
+- Changed coin icon, it suits bg better.
+- Changed cost formula to good one (logarithm goes brrr).
+- Improved upgrade texts.
+- Save n load contains prices.
+[Dev comment]
+Finally comeback for it and did not bad update tho. Added bg and some stuff. Next goal is new special upgrades.
+
 20.12.2022 | My 1st clicker 0.2. SAVE Update (Codename: Save):
 - You can finally save n load the game by bottom buttons (but text for upgrades doesn't refresh)
 - Changelog button added

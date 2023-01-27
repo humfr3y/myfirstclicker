@@ -1,32 +1,46 @@
 
 .presss {
     text-align: center;
-    color:black;
+    color:rgb(255, 255, 255);
+    text-shadow: 1px 0 1px #000, 
+    0 1px 1px #000, 
+    -1px 0 1px #000, 
+    0 -1px 1px #000;
 }
 .summ {
     text-align: center;
-    color:black;
+    color:rgb(255, 255, 255);
+    text-shadow: 1px 0 1px #000, 
+    0 1px 1px #000, 
+    -1px 0 1px #000, 
+    0 -1px 1px #000;
 }
 .warning1 {
     text-align: center;
     color:red;
+    text-shadow: 1px 0 1px #000, 
+    0 1px 1px #000, 
+    -1px 0 1px #000, 
+    0 -1px 1px #000;
 }
 .button {
     background-color: #ff000000;
     border: none;
     color: rgba(255, 0, 0, 0);
-    margin-left: 480px;
+    margin: 0 auto; 
+    display: block;
         }
 .dboost {
-    background-color: #22b31a;
+    background-color: #21ca18;
 }
 .mboost {
-    background-color: #1d9617;
+    background-color: #23ae1c;
+}
+.fboost {
+    background-color: #1c8e16;
 }
 .butt_click{
-    border: 10px;
-    border-radius: 4px;
-    border-color: white;
+    border-radius: 30px;
     color: rgb(255, 255, 255);
     text-align: left;
     font-family:'Times New Roman', Times, serif;
@@ -35,26 +49,42 @@
     padding-top: 40px;
     display: flexbox;
     flex: 100px;
-    max-width: 500px;
+    max-width: 480px;
     min-width: 100px;
     text-align: center;
     align-content: center;
+    font-family: "Poly";
 }
 .saver {
+    border-radius: 5px;
     width: 200px;
     height: 100px;
-    background-color: rgb(86, 123, 255);
+    background-color: rgb(55, 58, 237);
     text-align: center;
+    font-family: "Poly"; 
 }
 .loader {
+    border-radius: 5px;
     width: 200px;
     height: 100px;
-    background-color: rgb(196, 245, 63);
+    background-color: rgb(55, 58, 237);
     text-align: center;
+    font-family: "Poly"; 
 }
 .changelogg {
+    border-radius: 5px;
     width: 200px;
     height: 100px;
-    background-color: rgb(245, 63, 218);
+    background-color: rgb(55, 58, 237);
     text-align: center;
+    font-family: "Poly"; 
+}
+.autosave {
+    border-radius: 5px;
+    width: 200px;
+    height: 100px;
+    background-color: rgb(55, 58, 237);
+    text-align: center;
+    font-family: "Poly"; 
+    hyphens: auto;
 }
