@@ -1,3 +1,17 @@
+29.01.2023 | My1stClicker 0.4. Simple Update (Codename: SIMPLE):
+- NEW TYPE OF UPGRADES - SINGLE. You can buy them only once. Right?
+- 3 NEW UPGRADES! First increases gain based on total coins, second doubles coin gain and third increases bonus of 2nd upgrade based on amount of 1st.
+- Text in game has own language and doesn't have two languages like rus / eng
+- Fixed autosave jumping button
+- Buffed cost formula for upgrades.
+- Game autoloads progress after page refresh.
+- Now there is two changelogs: russian and english. 
+- NEW BUTTON - HARD RESET. It can blow up your saved files and reset everything in the game
+- After load text stays as before save.
+- Upgrade's buttons has red color when you cant afford it and sligtly brightness when you hover on it and you can buy it. Also brightness affects on bottom buttons.
+[Dev comment]
+This is one more great upgrade for design (at least for me), next goals are tabs, honestly idk how to do them. And probably one more QoL upgrade :eyes:
+
 28.01.2023 | My 1st clicker 0.3. More Graphic Update (Codename: CHEST):
 - NEW UPGRADE! Third upgrade can boost your coin gain by 5%.
 - MAJOR DESIGN UPDATE! Game has some bg and font.

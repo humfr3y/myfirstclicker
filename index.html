@@ -7,24 +7,40 @@
     <title>My 1st Clicker</title>
     <style>
         body {
-         background: url(javascript/images/BG.png); 
+         background: url(javascript/cssfiles/images/BG.png);
+         background-size: cover; 
+         background-repeat: no-repeat;
         }
        </style>
 </head>
 <body>
-    <link rel="stylesheet" href="buttons.css" type="text/css">
-    <link rel="stylesheet" href="fonts.css" type="text/css">
-    <script src="javascript/clicker.js"></script>
-    <p><h1 id="ele" class="presss">Нажмите на монету / Click on the coin</h1>
-    <button onclick="monetka()" onkeydown="alert('Нельзя нажимать на кнопку!')" class="button"><img src="javascript/images/coin6.png" alt="" style="width: 300px;"></button><p>
-    <button onclick="doubleboost(this)" class="butt_click dboost">Открыть новое улучшение! Стоимость: 10 монет. / Unlock new upgrade! Cost: 10 coins.</button>
-    <button onclick="multiboost(this)" class="butt_click mboost">Открыть новое улучшение! Стоимость: 100 монет. / Unlock new upgrade! Cost: 100 coins. </button>
-    <button onclick="fiveboost(this)" class="butt_click fboost">Открыть новое улучшение! Стоимость: 1000 монет. / Unlock new upgrade! Cost: 1000 coins. </button>
-    <p><h2 id="summa" class="summ">Тут будет отображаться всего полученных монет / There will be total amount of coins.</h2></p>
-    <p><h1 class="warning1">Обновление страницы сбрасывает игру! СОХРАНЯЙТЕ ИГРУ! / Reloading page resets the game! SAVING THE GAME!</h1>
-    <button onclick="savezone(this)" class="saver">Сохранить игру / Save the game</button>
-    <button onclick="loadzone(this)" class="loader">Загрузить игру / Load the game</button>
-    <button onclick="saveorno(this)" class="autosave">Автосохранение: выкл / Auto-save: off</button>
-    <a href="changelog.md" target="_blank"><button onclick="changelog(this)" class="changelogg">Журнал изменений / Changelog</button></a>
+    <link rel="stylesheet" href="javascript/cssfiles/buttons.css" type="text/css">
+    <link rel="stylesheet" href="javascript/cssfiles/fonts.css" type="text/css">
+
+    <span id="notification" class="noti"></span>
+    <span><p id="ele" class="presss"></p></span>
+    <button onclick="monetka()" onkeydown="alert('Нельзя нажимать на кнопку!')" class="button"><img src="javascript/cssfiles/images/coin6.png" alt="" style="width: 300px;"></button><p>
+
+    <button onclick="doubleboost(this)" id = "fupg" class="butt_click dboost" disabled>Открыть новое улучшение! Стоимость: 10 монет. / Unlock new upgrade! Cost: 10 coins.</button>
+    <button onclick="multiboost(this)" id = "supg" class="butt_click mboost">Открыть новое улучшение! Стоимость: 100 монет. / Unlock new upgrade! Cost: 100 coins. </button>
+    <button onclick="fiveboost(this)" id = "thupg" class="butt_click fboost">Открыть новое улучшение! Стоимость: 1000 монет. / Unlock new upgrade! Cost: 1000 coins. </button>
+    <br>
+    <button onclick="fourthupgrade(this)" id = "foupg" class="butt_click fuboost"></button>
+    <button onclick="fifthupgrade(this)" id = "fiupg" class="butt_click fiboost"></button>
+    <button onclick="sixthupgrade(this)" id = "siupg" class="butt_click siboost"></button>
+
+    <p id="summa" class="summ"></p>  
+    <button onclick="savezone(this)" id= "saveme" class="saver botbut">Сохранить игру / Save the game</button>
+    <button onclick="loadzone(this)" id= "loadme" class="loader botbut">Загрузить игру / Load the game</button>
+    <button onclick="saveorno(this)" id= "autosaveme" class="autosave botbut">Автосохранение: выкл / Auto-save: off</button>
+    <a href="changelog.md" id="link" target="_blank"><button onclick="changelog(this)" id= "changelog1" class="changelogg botbut">Журнал изменений / Changelog</button></a>
+    <button onclick="hardreset(this)" id= "hard" class="hardres botbut"></button>
+    <p id="warning" class="warning1"></p>
+    <script src="javascript/jsfiles/classes.js"></script>
+    <script src="javascript/jsfiles/clicker.js"></script>
+    <script src="javascript/jsfiles/saving.js"></script>
+    <script src="javascript/jsfiles/upgrades.js"></script>
+    <script>window.onload = loadzone()</script>
+
 </body>
 </html>
