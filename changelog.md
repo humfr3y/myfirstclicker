@@ -23,7 +23,7 @@ That's crazy, i've spent for it a week. Well I spent some hours everyday and fin
 - NEW TYPE OF UPGRADES - SINGLE. You can buy them only once. Right?
 - 3 NEW UPGRADES! First increases gain based on total α-coins, second doublesα-coin gain and third increases bonus of 2nd upgrade based on amount of 1st.
 - Text in game has own language and doesn't have two languages like rus / eng
-- Fixed autosave jumping button
+- Fixed autosave jumping button.
 - Buffed cost formula for upgrades.
 - Game autoloads progress after page refresh.
 - Now there is two changelogs: russian and english. 
