@@ -1,34 +1,43 @@
 window.setInterval(savezone2, 10000); //таймер
 
+var firstprice = Math.round(first.basecost*Math.pow(1.175, first.amount))
+var secondprice = Math.round(second.basecost*Math.pow(1.275, second.amount));
+var thirdprice = Math.round(third.basecost*Math.pow(1.375, third.amount))
+
+
 function upges() {
     if (first.amount >=1){
         var firstbf = first.b*second.boost
-    if (data) {fupg.innerHTML = "Улучшение даёт +" + firstbf.toFixed(1) + " монет за нажатие. Чтобы улучшить его вам нужно " + Math.round(10+((first.amount+1)*10*Math.log(first.amount+1)/1.85)).toFixed(0) + " монет."} 
-        else {fupg.innerHTML = "Upgrade gives +" + firstbf.toFixed(1) + " coins per click. You need for next upgrade " + Math.round(10+((first.amount+1)*10*Math.log(first.amount+1)/1.85)).toFixed(0) + " coins."}}
+        if (data) {fupg.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает монеты за нажатие. <br> Стоимость: " + Math.round(first.basecost*Math.pow(1.175, first.amount)).toFixed(0) + " α-монет. <br> Бонус: +" + firstbf.toFixed(1) } 
+        else {fupg.innerHTML = "<ut>Small Investment</ut> <br> Increases coins gain per click. <br> Cost: " + Math.round(first.basecost*Math.pow(1.175, first.amount)).toFixed(0) + " α-coins. <br> Currently: +" + firstbf.toFixed(1)}}
+        
     if (second.amount >=1){
-        if (data) {supg.innerHTML = "Улучшение увеличивает бонус первого улучшения на +" + (second.amount*10) + "%. Чтобы увеличить бонус на 10% вам нужно " + Math.round(100+((second.amount+1)*100*Math.log(second.amount+1)/2.25)).toFixed(0) + " монет."} 
-        else {supg.innerHTML = "Upgrade increases first upgrade bonus by +" + (second.mamount*10) + "%. You need for next upgrade " + Math.round(100+((second.amount+1)*100*Math.log(second.amount+1)/2.25)).toFixed(0) + " coins."};
+        if (data) {supg.innerHTML = "<ut>Продуктивность</ut> <br> Увеличивает бонус Небольшая Инвестиция. <br> Стоимость: " + Math.round(second.basecost*Math.pow(1.275, second.amount)).toFixed(0) + " α-монет. <br> Бонус: +" + ((second.amount*10)*sixth.x).toFixed(0) + "%"} 
+        else {supg.innerHTML = "<ut>Productivity</ut> <br> Increases Small Investment bonus. <br> Cost: " + Math.round(second.basecost*Math.pow(1.275, second.amount)).toFixed(0) + " α-coins. <br> Currently: +" + ((second.amount*10)*sixth.x).toFixed(0) + "%"};
     }
     if (third.amount >=1){
-        if (data) {thupg.innerHTML = "Улучшение увеличивает монеты за клик на +" + ((third.b/20)*100).toFixed(0) + "%. Чтобы улучшить его вам нужно " + Math.round(1000+((third.amount+1)*1000*Math.log(third.amount+1)/2.9)).toFixed() + " монет."} 
-        else {thupg.innerHTML = "Upgrade increases coin gain by +" + ((fb/20)*100).toFixed(0) + "%. You need for next upgrade " + Math.round(1000+((third.amount+1)*1000*Math.log(third.amount+1)/2.9)).toFixed(0) + " coins."}
+        if (data) {thupg.innerHTML = "<ut>Золотой Мешок</ut> <br> Умножает α-монеты за клик на 1.05. <br> Стоимость: " +Math.round(third.basecost*Math.pow(1.375, third.amount)).toFixed() + " α-монет. <br> Бонус: х" + third.boost.toFixed(2)} 
+        else {thupg.innerHTML = "<ut>Golden Pouch</ut> <br> Multiplies α-coins gain by 1.05. <br> Cost: " + Math.round(third.basecost*Math.pow(1.375, third.amount)).toFixed() + " α-coins. <br> Currently: х" + third.boost.toFixed(2)}
     }
     if (fourth.amount >=1){
         fourth.x = Math.log(total)
         window.setInterval(fupgboost, 100)
-        if (data) {foupg.innerHTML = "Улучшение увеличивает монеты за клик в зависимости от всего монет. Текущий бонус: x" + fourth.x.toFixed(2)}
-        else {foupg.innerHTML = "Upgrade increases coin gain based on total coins. Currently: x" + fourth.x.toFixed(2)}
+        foupg.style.backgroundColor = '#1724b1'; foupg.style.color = '#000000'
+        if (data) {foupg.innerHTML = "<ut>Богатая Слава</ut> <br> Увеличивает α-монеты за нажатие в зависимости от количества всего α-монет. <br> Текущий бонус: x" + fourth.x.toFixed(2)}
+        else {foupg.innerHTML = "<ut>Rich Fame</ut> <br> Increases α-coins gain based on total α-coins. <br> Currently: x" + fourth.x.toFixed(2)}
     }
     if (fifth.amount >=1){
         fifth.x = 2
-        if (data) {fiupg.innerHTML = "Улучшение удваивает монеты за клик"}
-        else {fiupg.innerHTML = "Upgrade doubles your coin gain."}
+        fiupg.style.backgroundColor = '#111b8a'; fiupg.style.color = '#000000'
+        if (data) {fiupg.innerHTML = "<ut>Бездонный Кошелёк</ut> <br> Удваивает α-монеты за нажатие."}
+        else {fiupg.innerHTML = "<ut>Bottomless Wallet</ut> <br> Doubles your α-coins gain."}
     }
     if (sixth.amount >=1){
         sixth.x = Math.log(first.amount)
         window.setInterval(siupgboost, 100)
-        if (data) {siupg.innerHTML = "Улучшение увеличивает бонус второго улучшения в зависимости от кол-ва покупок первого. Текущий бонус: x" + sixth.x.toFixed(2)}
-        else {siupg.innerHTML = "Upgrade increases bonus of second upgrade based on amount of first upgrade. Currently: x" + sixth.x.toFixed(2)}
+        siupg.style.backgroundColor = '#0c1575'; siupg.style.color = '#000000'
+        if (data) {siupg.innerHTML = "<ut>Сверхпродуктивность</ut> <br> Увеличивает бонус Продуктивность в зависимости от кол-ва покупок Небольшая Инвестиция. <br> Бонус: x" + sixth.x.toFixed(2)}
+        else {siupg.innerHTML = "<ut>Super Productivity</ut> <br> Increases bonus of Productivity based on amount of Small Investment. Currently: x" + sixth.x.toFixed(2)}
     }
 }
 
@@ -71,6 +80,10 @@ if (localStorage)
             localStorage["fourx_mfs_count"] = fourth.x;
             localStorage["fivex_mfs_count"] = fifth.x;
             localStorage["sixx_mfs_count"] = sixth.x;
+            localStorage["complete_mfs_count"] = completion;
+            localStorage["firstprice_mfs_count"] = firstprice;
+            localStorage["secondprice_mfs_count"] = secondprice;
+            localStorage["thirdprice_mfs_count"] = thirdprice;
     }
 }
 function loadzone () {
@@ -97,6 +110,10 @@ function loadzone () {
         var savedfox = localStorage["fourx_mfs_count"] 
         var savedfix = localStorage["fivex_mfs_count"] 
         var savedsix = localStorage["sixx_mfs_count"] 
+        var ibeatit = localStorage["complete_mfs_count"] 
+        var fstprice = localStorage["firstprice_mfs_count"]
+        var sndprice = localStorage["secondprice_mfs_count"]
+        var thiprice = localStorage["thirdprice_mfs_count"]
     }
         if (savedmoney != null) money=Number(savedmoney);
         if (saveddouble != null) first.price=Number(saveddouble);
@@ -120,10 +137,14 @@ function loadzone () {
         if (savedfox != null) fourth.x=Number(savedfox);
         if (savedfix != null) fifth.x=Number(savedfix);
         if (savedsix != null) sixth.x=Number(savedsix);
-        if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " монет. Нажмите на монету.";}
-        else {document.getElementById('ele').innerHTML = money.toFixed(0) + " coins. Click on the coin.";}
-        if (data) {summa.innerHTML = "Всего вы собрали " + total.toFixed(0) + " монет."} 
-        else{summa.innerHTML = "Total you collected " + total.toFixed(0) + " coins."}
+        if (ibeatit != null) completion=Boolean(ibeatit);
+        if (fstprice != null) firstprice=Number(fstprice);
+        if (sndprice != null) secondprice=Number(sndprice);
+        if (thiprice != null) thirdprice=Number(thiprice);
+        if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-монет. Нажмите на α-монету.";}
+        else {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-coins. Click on the α-coin.";}
+        if (data) {summa.innerHTML = "Всего вы собрали " + total.toFixed(0) + " α-монет."} 
+        else{summa.innerHTML = "Total you collected " + total.toFixed(0) + " α-coins."}
         upges.call()
     }
 
@@ -158,7 +179,10 @@ function savezone2 () {
                 localStorage["fourx_mfs_count"] = fourth.x;
                 localStorage["fivex_mfs_count"] = fifth.x;
                 localStorage["sixx_mfs_count"] = sixth.x;
-        
+                localStorage["complete_mfs_count"] = completion;
+                localStorage["firstprice_mfs_count"] = firstprice;
+                localStorage["secondprice_mfs_count"] = secondprice;
+                localStorage["thirdprice_mfs_count"] = thirdprice;
             }
         }
     }
@@ -179,7 +203,7 @@ function hardreset () {
             third.b  = 0
             total = 10
             second.boost = 1
-            third.boost = 0
+            third.boost = 1
             fourth.amount = 0
             fifth.amount = 0
             sixth.amount = 0
@@ -188,12 +212,20 @@ function hardreset () {
             sixth.x = 1
             fourth.price = 10000
             fifth.price = 1200000
-            sixth.price = 15000000
+            sixth.price = 5000000
+            firstprice = 10
+            secondprice = 100
+            thirdprice = 1000
+            completion = false;
             savezone.call();
             upgs.call();
-            if (data) {ele.innerHTML = innerHTML = money.toFixed(0) + " монет. Нажмите на монету."} 
-            else {ele.innerHTML = innerHTML = money.toFixed(0) + " coins. Click on the coin."}
-            if (data) {summa.innerHTML = "Всего вы собрали " + total.toFixed(0) + " монет."} 
-            else {summa.innerHTML = "Total you collected " + total.toFixed(0) + " coins."}
+            if (data) {ele.innerHTML = innerHTML = money.toFixed(0) + " α-монет. Нажмите на α-монету."} 
+            else {ele.innerHTML = innerHTML = money.toFixed(0) + " α-coins. Click on the α-coin."}
+            if (data) {summa.innerHTML = "Всего вы собрали " + total.toFixed(0) + " α-монет."} 
+            else {summa.innerHTML = "Total you collected " + total.toFixed(0) + " α-coins."}
+            window.clearInterval(window.setInterval(doubletext))
+            window.clearInterval(window.setInterval(fupgboost))
+            window.clearInterval(window.setInterval(siupgboost))
+            window.clearInterval(window.setInterval(multitext))
     }
 }

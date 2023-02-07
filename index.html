@@ -7,7 +7,7 @@
     <title>My 1st Clicker</title>
     <style>
         body {
-         background: url(javascript/cssfiles/images/BG.png);
+         background: #060606;
          background-size: cover; 
          background-repeat: no-repeat;
         }
@@ -16,26 +16,46 @@
 <body>
     <link rel="stylesheet" href="javascript/cssfiles/buttons.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/fonts.css" type="text/css">
-
+    <div id="buttongroup" class="buttontab">
+        <button onclick="settingtab(this)" id= "setting" class="settingscreen bg">Настройки</button>
+        <button onclick="maintab(this)" id= "clicking" class="clickingscreen bg">Кликер</button>
+        <button onclick="unknowntab(this)" id= "unknownthing" class="unknown bg">?????</button>
+        <button onclick="info1(this)" id= "info" class="infor bg">Информация</button>
+    </div>
+    <div id="settscr">
+        <button onclick="savezone(this)" id= "saveme" class="saver botbut">Сохранить игру / Save the game</button>
+        <button onclick="loadzone(this)" id= "loadme" class="loader botbut">Загрузить игру / Load the game</button>
+        <br>
+        <button onclick="saveorno(this)" id= "autosaveme" class="autosave botbut">Автосохранение: выкл / Auto-save: off</button>
+        <a href="changelog.md" id="link" target="_blank"><button onclick="changelog(this)" id= "changelog1" class="changelogg botbut">Журнал изменений / Changelog</button></a>
+        <br>
+        <button onclick="hardreset(this)" id= "hard" class="hardres botbut"></button>
+        </div>
+    <div id="mainscr">
     <span id="notification" class="noti"></span>
     <span><p id="ele" class="presss"></p></span>
-    <button onclick="monetka()" onkeydown="alert('Нельзя нажимать на кнопку!')" class="button"><img src="javascript/cssfiles/images/coin6.png" alt="" style="width: 300px;"></button><p>
-
-    <button onclick="doubleboost(this)" id = "fupg" class="butt_click dboost" disabled>Открыть новое улучшение! Стоимость: 10 монет. / Unlock new upgrade! Cost: 10 coins.</button>
-    <button onclick="multiboost(this)" id = "supg" class="butt_click mboost">Открыть новое улучшение! Стоимость: 100 монет. / Unlock new upgrade! Cost: 100 coins. </button>
-    <button onclick="fiveboost(this)" id = "thupg" class="butt_click fboost">Открыть новое улучшение! Стоимость: 1000 монет. / Unlock new upgrade! Cost: 1000 coins. </button>
+    <span><p id="coinsget" class="coingain"></p></span>
+    <button onclick="monetka()" onkeydown="alert('Нельзя нажимать на кнопку!')" class="button"><img src="javascript/cssfiles/images/CoinOff.png" style="width:0px" alt="" class="coin"></button><p>
+    <button onclick="doubleboost(this)" id = "fupg" class="butt_click dboost">Открыть новое улучшение! Стоимость: 10 α-монет. / Unlock new upgrade! Cost: 10 α-coins.</button>
+    <button onclick="multiboost(this)" id = "supg" class="butt_click mboost">Открыть новое улучшение! Стоимость: 100 α-монет. / Unlock new upgrade! Cost: 100 α-coins. </button>
+    <button onclick="fiveboost(this)" id = "thupg" class="butt_click fboost">Открыть новое улучшение! Стоимость: 1000 α-монет. / Unlock new upgrade! Cost: 1000 α-coins. </button>
     <br>
     <button onclick="fourthupgrade(this)" id = "foupg" class="butt_click fuboost"></button>
     <button onclick="fifthupgrade(this)" id = "fiupg" class="butt_click fiboost"></button>
     <button onclick="sixthupgrade(this)" id = "siupg" class="butt_click siboost"></button>
-
-    <p id="summa" class="summ"></p>  
-    <button onclick="savezone(this)" id= "saveme" class="saver botbut">Сохранить игру / Save the game</button>
-    <button onclick="loadzone(this)" id= "loadme" class="loader botbut">Загрузить игру / Load the game</button>
-    <button onclick="saveorno(this)" id= "autosaveme" class="autosave botbut">Автосохранение: выкл / Auto-save: off</button>
-    <a href="changelog.md" id="link" target="_blank"><button onclick="changelog(this)" id= "changelog1" class="changelogg botbut">Журнал изменений / Changelog</button></a>
-    <button onclick="hardreset(this)" id= "hard" class="hardres botbut"></button>
     <p id="warning" class="warning1"></p>
+    </div>  
+    <div id="unkscr">
+        <p id="thegoal" class="goal">Цель</p> 
+        </div>
+    <div id="infoscr">
+    <p id="summa" class="summ">Всего</p> 
+    <p id="about" class="aboutgame">О игре</p>
+    </div>
+    <div id="endscr">
+        <p id="endscreen" class="gg">Достиг цели</p> 
+        <button onclick="maintab(this)" id= "playmore" class="playmore1">Играть дальше</button>
+        </div>
     <script src="javascript/jsfiles/classes.js"></script>
     <script src="javascript/jsfiles/clicker.js"></script>
     <script src="javascript/jsfiles/saving.js"></script>

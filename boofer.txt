@@ -12,3 +12,11 @@ if (data) {notification.innerHTML = "Игра сохранена"}
 else {notification.innerHTML = "Game saved"};
 
 }
+
+box-shadow: 0 0 10px #fff;
+
+α
+
+
+    if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-монет.";}
+    else {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-coins.";}}

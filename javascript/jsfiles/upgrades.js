@@ -1,39 +1,42 @@
 function doubleboost(ele2) {
-    if (first.amount>=1) {first.price=Math.round(10+((first.amount+1)*10*Math.log(first.amount+1)/1.65))} else firstprice=10;
-    if (second.amount>=1) {second.boost=1+(second.b/10)};
+    if (first.amount>=1) {first.price=Math.round(first.basecost*Math.pow(1.175, first.amount))} 
+    else first.price=10;
+    if (second.amount>=1) {second.boost=1+((second.b/10)*sixth.x)};
     if (money>=first.price) 
     {first.amount=first.amount+1; money=money - first.price; first.b=first.b+1;
     var firstbf = first.b*second.boost
-    if (data) {ele2.innerHTML = "Улучшение даёт +" + firstbf.toFixed(1) + " монет за нажатие. Чтобы улучшить его вам нужно " + Math.round(10+((first.amount+1)*10*Math.log(first.amount+1)/1.65)).toFixed(0) + " монет."} 
-    else {ele2.innerHTML = "Upgrade gives +" + firstbf.toFixed(1) + " coins per click. You need for next upgrade " + Math.round(10+((first.amount+1)*10*Math.log(first.amount+1)/1.65)).toFixed(0) + " coins."}
-    if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " монет. Вы купили первое улучшение.";}
-    else {document.getElementById('ele').innerHTML = money.toFixed(0) + " coins. You have bought first upgrade.";}}
-    return first.amount, first.b, first.price;
+    firstprice = Math.round(first.basecost*Math.pow(1.175, first.amount))
+    if (data) {ele2.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает монеты за нажатие. <br> Стоимость: " + firstprice.toFixed(0) + " α-монет. <br> Бонус: +" + firstbf.toFixed(1) } 
+    else {ele2.innerHTML = "<ut>Small Investment</ut> <br> Increases coins gain per click. <br> Cost: " + firstprice.toFixed(0) + " α-coins. <br> Currently: +" + firstbf.toFixed(1)}
+    if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-монет";}
+    else {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-coins";}}
+    return first.amount, first.b, first.price, firstprice;
 };
 function multiboost(ele3) {
     if (second.amount==0) {second.boost=1} 
-    if (second.amount>=1) {second.boost=1+((second.b/10)*sixth.x)};
-    if (second.amount>=1) {second.price=Math.round(100+((second.amount+1)*100*Math.log(second.amount+1)/2))} else {second.price=100};
-    if (money>second.price) 
+    if (second.amount>=1) {second.boost=1+((second.b/10)*sixth.x); second.price=Math.round(second.basecost*Math.pow(1.275, second.amount))} 
+    else second.price=100;
+    if (money>=second.price) 
     {second.amount++; second.b++; money=money-second.price;
-    
-    if (data) {ele3.innerHTML = "Улучшение увеличивает бонус первого улучшения на +" + ((second.amount*10)*sixth.x).toFixed(0) + "%. Чтобы увеличить бонус на 10% вам нужно " + Math.round(100+((second.amount+1)*100*Math.log(second.amount+1)/2)).toFixed(0) + " монет."} 
-        else {ele3.innerHTML = "Upgrade increases first upgrade bonus by +" + ((second.amount*10)*sixth.x).toFixed(0) + "%. You need for next upgrade " + Math.round(100+((second.amount+1)*100*Math.log(second.amount+1)/2)).toFixed(0) + " coins."};
-    if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " монет. Вы купили второе улучшение.";}
-        else {document.getElementById('ele').innerHTML = money.toFixed(0) + " coins. You have bought second upgrade.";}};
-    return second.amount, second.b, second.boost, second.price;
+    secondprice = Math.round(second.basecost*Math.pow(1.275, second.amount));
+    window.setInterval(doubletext, 100)
+    if (data) {ele3.innerHTML = "<ut>Продуктивность</ut> <br> Увеличивает бонус Небольшая Инвестиция. <br> Стоимость: " + secondprice.toFixed(0) + " α-монет. <br> Бонус: +" + ((second.amount*10)*sixth.x).toFixed(0) + "%"} 
+    else {ele3.innerHTML = "<ut>Productivity</ut> <br> Increases Small Investment bonus. <br> Cost: " + secondprice.toFixed(0) + " α-coins. <br> Currently: +" + ((second.amount*10)*sixth.x).toFixed(0) + "%"};
+    if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-монет";}
+    else {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-coins";}}
+    return second.amount, second.b, second.boost, second.price, secondprice;
 };
 function fiveboost(ele4) {
-    if (third.amount==0) {third.boost=0} 
-    if (third.amount>=1) {third.boost=(third.b/20)};
-    if (third.amount>=1) {third.price=Math.round(1000+((third.amount+1)*1000*Math.log(third.amount+1)/2.5))} else third.price=1000;
+    if (third.amount==0) {third.boost=1} 
+    if (third.amount>=1) {third.price=Math.round(third.basecost*Math.pow(1.375, third.amount))} 
+    else third.price=1000;
     if (money>=third.price) 
-    {third.amount=third.amount+1; money=money - third.price; third.b=third.b+1;
-    if (data) {ele4.innerHTML = "Улучшение увеличивает монеты за клик на +" + ((third.b/20)*100).toFixed(0) + "%. Чтобы улучшить его вам нужно " + Math.round(1000+((third.amount+1)*1000*Math.log(third.amount+1)/2.5)).toFixed() + " монет."} 
-    else {ele4.innerHTML = "Upgrade increases coin gain by +" + ((third.b/20)*100).toFixed(0) + "%. You need for next upgrade " + Math.round(1000+((third.amount+1)*1000*Math.log(third.amount+1)/2.5)).toFixed(0) + " coins."}
-    if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " монет. Вы купили третье улучшение.";}
-    else {document.getElementById('ele').innerHTML = money.toFixed(0) + " coins. You have bought third upgrade.";}}
-    if (third.amount>=1) {third.boost=(third.b/20)};
+    {third.amount=third.amount+1; money=money - third.price; third.boost*=1.05;
+    thirdprice = Math.round(third.basecost*Math.pow(1.375, third.amount))
+    if (data) {ele4.innerHTML = "<ut>Золотой Мешок</ut> <br> Умножает α-монеты за клик на 1.05. <br> Стоимость: " + thirdprice.toFixed() + " α-монет. <br> Бонус: х" + third.boost.toFixed(2)} 
+    else {ele4.innerHTML = "<ut>Golden Pouch</ut> <br> Multiplies α-coins gain by 1.05. <br> Cost: " + thirdprice.toFixed() + " α-coins. <br> Currently: х" + third.boost.toFixed(2)}
+    if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-монет";}
+    else {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-coins";}}
     return third.amount, third.b, third.price, third.boost;
 }
 
@@ -42,30 +45,30 @@ function fourthupgrade(ele5) {
     {money=money - fourth.price; fourth.amount++;
     fourth.x = Math.log(total)
     window.setInterval(fupgboost, 100)
-    if (data) {ele5.innerHTML = "Улучшение увеличивает монеты за клик в зависимости от всего монет. Текущий бонус: x" + fourth.x.toFixed(2)}
-    else {ele5.innerHTML = "Upgrade increases coin gain based on total coins. Currently: x" + fourth.x.toFixed(2)}
-    if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " монет. Вы купили четвёртое улучшение.";}
-    else {document.getElementById('ele').innerHTML = money.toFixed(0) + " coins. You have bought fourth upgrade.";}}
+    foupg.style.backgroundColor = '#1724b1'; foupg.style.color = '#000000'
+    if (data) {ele5.innerHTML = "<ut>Богатая Слава</ut> <br> Увеличивает α-монеты за нажатие в зависимости от количества всего α-монет. <br> Текущий бонус: x" + fourth.x.toFixed(2)}
+    else {ele5.innerHTML = "<ut>Rich Fame</ut> <br> Increases α-coins gain based on total α-coins. <br> Currently: x" + fourth.x.toFixed(2)}
+    if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-монет";}
+    else {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-coins";}}
     return fourth.amount, fourth.price, fourth.x
-    
 }
 
 function fupgboost(){
-    fourth.x = Math.log(total)/2
-    if (data) {foupg.innerHTML = "Улучшение увеличивает монеты за клик в зависимости от всего монет. Текущий бонус: x" + fourth.x.toFixed(2)}
-    else {foupg.innerHTML = "Upgrade increases coin gain based on total coins. Currently: x" + fourth.x.toFixed(2)}
+    fourth.x = Math.log(total)
+    if (data) {foupg.innerHTML = "<ut>Богатая Слава</ut> <br> Увеличивает α-монеты за нажатие в зависимости от количества всего α-монет. <br> Бонус: x" + fourth.x.toFixed(2)}
+    else {foupg.innerHTML = "<ut>Rich Fame</ut> <br> Increases α-coins gain based on total α-coins. <br> Currently: x" + fourth.x.toFixed(2)}
 }
 
 function fifthupgrade(ele6) {
     if (money>=fifth.price && fifth.amount<1)
     {money=money - fifth.price; fifth.amount++;
     fifth.x = 2
-    if (data) {ele6.innerHTML = "Улучшение удваивает монеты за клик"}
-    else {ele6.innerHTML = "Upgrade doubles your coin gain."}
-    if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " монет. Вы купили пятое улучшение.";}
-    else {document.getElementById('ele').innerHTML = money.toFixed(0) + " coins. You have bought fifth upgrade.";}}
+    fiupg.style.backgroundColor = '#111b8a'; fiupg.style.color = '#000000'
+    if (data) {ele6.innerHTML = "<ut>Бездонный Кошелёк</ut> <br> Удваивает α-монеты за нажатие."}
+    else {ele6.innerHTML = "<ut>Bottomless Wallet</ut> <br> Doubles your α-coins gain."}
+    if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-монет";}
+    else {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-coins";}}
     return fifth.amount, fifth.price, fifth.x
-    
 }
 
 function sixthupgrade(ele7) {
@@ -73,31 +76,30 @@ function sixthupgrade(ele7) {
     {money=money - sixth.price; sixth.amount++;
     sixth.x = Math.log(first.amount)
     window.setInterval(siupgboost, 100)
-    if (data) {ele7.innerHTML = "Улучшение увеличивает бонус второго улучшения в зависимости от кол-ва покупок первого. Текущий бонус: x" + sixth.x.toFixed(2)}
-    else {ele7.innerHTML = "Upgrade increases bonus of second upgrade based on amount of first upgrade. Currently: x" + sixth.x.toFixed(2)}
-    if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " монет. Вы купили шестое улучшение.";}
-    else {document.getElementById('ele').innerHTML = money.toFixed(0) + " coins. You have bought sixth upgrade.";}}
+    window.setInterval(multitext, 100)
+    siupg.style.backgroundColor = '#0c1575'; siupg.style.color = '#000000'
+    if (data) {ele7.innerHTML = "<ut>Сверхпродуктивность</ut> <br> Увеличивает бонус Продуктивность в зависимости от кол-ва покупок Небольшая Инвестиция. <br> Бонус: x" + sixth.x.toFixed(2)}
+    else {ele7.innerHTML = "<ut>Super Productivity</ut> <br> Increases bonus of Productivity based on amount of Small Investment. Currently: x" + sixth.x.toFixed(2)}
+    if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-монет";}
+    else {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-coins";}}
     return sixth.amount, sixth.price, sixth.x
     
 }
 
 function siupgboost(){
-    sixth.x = Math.log(first.amount)
-    if (data) {siupg.innerHTML = "Улучшение увеличивает бонус второго улучшения в зависимости от кол-ва покупок первого. Текущий бонус: x" + sixth.x.toFixed(2)}
-    else {siupg.innerHTML = "Upgrade increases bonus of second upgrade based on amount of first upgrade. Currently: x" + sixth.x.toFixed(2)}
+    sixth.x = Math.pow(Math.log(first.amount), 2);
+    if (data) {siupg.innerHTML = "<ut>Сверхпродуктивность</ut> <br> Увеличивает бонус Продуктивность в зависимости от кол-ва покупок Небольшая Инвестиция. <br> Бонус: x" + sixth.x.toFixed(2)}
+    else {siupg.innerHTML = "<ut>Super Productivity</ut> <br> Increases bonus of Productivity based on amount of Small Investment. Currently: x" + sixth.x.toFixed(2)}
     return sixth.amount, sixth.price, sixth.x
 }
 
+function doubletext() {
+    var firstbf = first.b*second.boost
+    if (data) {fupg.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает монеты за нажатие. <br> Стоимость: " + firstprice.toFixed(0) + " α-монет. <br> Бонус: +" + firstbf.toFixed(1) } 
+    else {fupg.innerHTML = "<ut>Small Investment</ut> <br> Increases coins gain per click. <br> Cost: " + firstprice.toFixed(0) + " α-coins. <br> Currently: +" + firstbf.toFixed(1)}
+}
 
-
-
-
-
-
-
-
-//function doubletext(ele2) {
-//    var firstbf = first.b*second.boost
-//    if (data) {ele2.innerHTML = "Улучшение даёт +" + firstbf.toFixed(1) + " монет за нажатие. Чтобы улучшить его вам нужно " + Math.round(10+((first.amount+1)*10*Math.log(first.amount+1)/1.85)).toFixed(0) + " монет."} 
-//    else {ele2.innerHTML = "Upgrade gives +" + firstbf.toFixed(1) + " coins per click. You need for next upgrade " + Math.round(10+((first.amount+1)*10*Math.log(first.amount+1)/1.85)).toFixed(0) + " coins."}
-//}
+function multitext() {
+    if (data) {supg.innerHTML = "<ut>Продуктивность</ut> <br> Увеличивает бонус Небольшая Инвестиция. <br> Стоимость: " + secondprice.toFixed(0) + " α-монет. <br> Бонус: +" + ((second.amount*10)*sixth.x).toFixed(0) + "%"} 
+        else {supg.innerHTML = "<ut>Productivity</ut> <br> Increases Small Investment bonus. <br> Cost: " + secondprice.toFixed(0) + " α-coins. <br> Currently: +" + ((second.amount*10)*sixth.x).toFixed(0) + "%"};
+}
