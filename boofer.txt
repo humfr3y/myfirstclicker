@@ -20,3 +20,5 @@ box-shadow: 0 0 10px #fff;
 
     if (data) {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-монет.";}
     else {document.getElementById('ele').innerHTML = money.toFixed(0) + " α-coins.";}}
+
+    ff
