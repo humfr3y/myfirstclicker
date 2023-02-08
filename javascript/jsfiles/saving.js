@@ -219,6 +219,7 @@ function hardreset () {
             completion = false;
             savezone.call();
             upgs.call();
+            window.location.reload(true);
             if (data) {ele.innerHTML = innerHTML = money.toFixed(0) + " α-монет. Нажмите на α-монету."} 
             else {ele.innerHTML = innerHTML = money.toFixed(0) + " α-coins. Click on the α-coin."}
             if (data) {summa.innerHTML = "Всего вы собрали " + total.toFixed(0) + " α-монет."} 
