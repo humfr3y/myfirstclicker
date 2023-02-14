@@ -5,62 +5,65 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My 1st Clicker</title>
-    <style>
-        body {
-         background: #060606;
-         background-size: cover; 
-         background-repeat: no-repeat;
-        }
-       </style>
-</head>
-<body>
     <link rel="stylesheet" href="javascript/cssfiles/buttons.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/fonts.css" type="text/css">
-    <div id="buttongroup" class="buttontab">
-        <button onclick="settingtab(this)" id= "setting" class="settingscreen bg">Настройки</button>
-        <button onclick="maintab(this)" id= "clicking" class="clickingscreen bg">Кликер</button>
-        <button onclick="unknowntab(this)" id= "unknownthing" class="unknown bg">?????</button>
-        <button onclick="info1(this)" id= "info" class="infor bg">Информация</button>
+    <link rel="stylesheet" href="javascript/cssfiles/miscellaneous.css" type="text/css">
+    <link rel="stylesheet" href="javascript/cssfiles/endscreen.css" type="text/css">
+    <link rel="stylesheet" href="javascript/cssfiles/info.css" type="text/css">
+    <link rel="stylesheet" href="javascript/cssfiles/main.css" type="text/css">
+    <link rel="stylesheet" href="javascript/cssfiles/prestige.css" type="text/css">
+    <link rel="stylesheet" href="javascript/cssfiles/settings.css" type="text/css">
+    <link rel="stylesheet" href="javascript/cssfiles/upgrades.css" type="text/css">
+</head>
+<body>
+    <div id="topButtons">
+        <button onclick="settingsScreen(this)" id= "settingsTab" class="tabButton">Настройки</button>
+        <button onclick="mainScreen(this)" id= "mainTab" class="tabButton">Кликер</button>
+        <button onclick="prestigeScreen(this)" id= "prestigeTab" class="tabButton">?????</button>
+        <button onclick="infoScreen(this)" id= "infoTab" class="tabButton">Информация</button>
     </div>
-    <div id="settscr">
-        <button onclick="savezone(this)" id= "saveme" class="saver botbut">Сохранить игру / Save the game</button>
-        <button onclick="loadzone(this)" id= "loadme" class="loader botbut">Загрузить игру / Load the game</button>
+    <div id="settingButtons">
+        <button onclick="saveGame(this)" id= "savingGame" class="settingButton">Сохранить игру / Save the game</button>
+        <button onclick="loadGame(this)" id= "loadingGame" class="settingButton">Загрузить игру / Load the game</button>
         <br>
-        <button onclick="saveorno(this)" id= "autosaveme" class="autosave botbut">Автосохранение: выкл / Auto-save: off</button>
-        <a href="changelog.md" id="link" target="_blank"><button onclick="changelog(this)" id= "changelog1" class="changelogg botbut">Журнал изменений / Changelog</button></a>
+        <button onclick="autoSaveGame(this)" id= "autoSavingGame" class="settingButton">Автосохранение: выкл / Auto-save: off</button>
+        <a href="changelog.md" id="link" target="_blank">
+        <button onclick="changelog(this)" id= "changelogOpen" class="settingButton">Журнал изменений / Changelog</button>
+        </a>
         <br>
-        <button onclick="hardreset(this)" id= "hard" class="hardres botbut"></button>
+        <button onclick="doHardReset(this)" id= "hardRes" class="settingButton"></button>
         </div>
-    <div id="mainscr">
-    <span id="notification" class="noti"></span>
-    <span><p id="ele" class="presss"></p></span>
-    <span><p id="coinsget" class="coingain"></p></span>
-    <button onclick="monetka()" onkeydown="alert('Нельзя нажимать на кнопку!')" class="button"><img src="javascript/cssfiles/images/CoinOff.png" style="width:0px" alt="" class="coin"></button><p>
-    <button onclick="doubleboost(this)" id = "fupg" class="butt_click dboost">Открыть новое улучшение! Стоимость: 10 α-монет. / Unlock new upgrade! Cost: 10 α-coins.</button>
-    <button onclick="multiboost(this)" id = "supg" class="butt_click mboost">Открыть новое улучшение! Стоимость: 100 α-монет. / Unlock new upgrade! Cost: 100 α-coins. </button>
-    <button onclick="fiveboost(this)" id = "thupg" class="butt_click fboost">Открыть новое улучшение! Стоимость: 1000 α-монет. / Unlock new upgrade! Cost: 1000 α-coins. </button>
-    <br>
-    <button onclick="fourthupgrade(this)" id = "foupg" class="butt_click fuboost"></button>
-    <button onclick="fifthupgrade(this)" id = "fiupg" class="butt_click fiboost"></button>
-    <button onclick="sixthupgrade(this)" id = "siupg" class="butt_click siboost"></button>
-    <p id="warning" class="warning1"></p>
+    <div id="mainButtons">
+    <p id="coinsCount"></p>
+    <p id="coinsGain"></p>
+    <button onclick="getCoin()" id = "coinGain" onkeydown="alert('Нельзя нажимать на кнопку!')" class="coinCss"><img src="javascript/cssfiles/images/CoinOff.png" style="width:0px" alt="" class="coinImage"></button><p>
+    <div id="commonUpgrades">
+    <button onclick="commonUpgrade1(this)" id = "commonU1" class="upgradeButton">Открыть новое улучшение! Стоимость: 10 α-монет. / Unlock new upgrade! Cost: 10 α-coins.</button>
+    <button onclick="commonUpgrade2(this)" id = "commonU2" class="upgradeButton">Открыть новое улучшение! Стоимость: 100 α-монет. / Unlock new upgrade! Cost: 100 α-coins. </button>
+    <button onclick="commonUpgrade3(this)" id = "commonU3" class="upgradeButton">Открыть новое улучшение! Стоимость: 1000 α-монет. / Unlock new upgrade! Cost: 1000 α-coins. </button>
+    </div>
+    <div id="singleUpgrades">
+    <button onclick="singleUpgrade1(this)" id = "singleU1" class="upgradeButton"></button>
+    <button onclick="singleUpgrade2(this)" id = "singleU2" class="upgradeButton"></button>
+    <button onclick="singleUpgrade3(this)" id = "singleU3" class="upgradeButton"></button>
     </div>  
-    <div id="unkscr">
-        <p id="thegoal" class="goal">Цель</p> 
+    </div>  
+    <div id="prestigeButtons">
+        <p id="theGoal">Цель</p> 
         </div>
-    <div id="infoscr">
-    <p id="summa" class="summ">Всего</p> 
-    <p id="about" class="aboutgame">О игре</p>
+    <div id="statsScreen">
+    <p id="totalCoins">Всего</p> 
+    <p id="aboutGame">О игре</p>
     </div>
-    <div id="endscr">
-        <p id="endscreen" class="gg">Достиг цели</p> 
-        <button onclick="maintab(this)" id= "playmore" class="playmore1">Играть дальше</button>
+    <div id="endGoodGameScreen">
+        <p id="endScreen">Достиг цели</p> 
+        <button onclick="mainScreen(this)" id= "playMore">Играть дальше</button>
         </div>
     <script src="javascript/jsfiles/classes.js"></script>
     <script src="javascript/jsfiles/clicker.js"></script>
     <script src="javascript/jsfiles/saving.js"></script>
     <script src="javascript/jsfiles/upgrades.js"></script>
-    <script>window.onload = loadzone()</script>
+    <script>window.onload = loadGame()</script>
 
 </body>
 </html>

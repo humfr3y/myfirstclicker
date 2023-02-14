@@ -1,3 +1,13 @@
+15.02.2023 | My1stClicker 0.5.1.
+Design changes:
+- Finally top and upgrades buttons were centered.
+- Now buying Productivity updates Small Investment (but does it weirdly sometimes doesn't but its formula issue).
+- Autosaving turned on after starting new game.
+- Great optimization of code for me. (Actually this update about it).
+- Notice: update unstable because i have almost 1 AM and can't test it rn. You can do it yourself and send me some issues in discord Humf#9778.
+[Dev comment]
+Sorry for the little update, I'm just learning a little HTML, CSS and Vue.js (rn at CSS), so that's not procrastination! I wanna make fine interface especially for the next update. Ok you can check through console new 0.6 thing will be Prestige ofc. But what'll it make? Stay tuned!
+
 08.02.2023 | My1stClicker 0.5. Revolution Update (Codename: ANTIMATTER)
 Design changes:
 - FULL REDESIGN OF GAME! Simple black bg, buttons with disabled/enabled/hovered functions, new coin icon.

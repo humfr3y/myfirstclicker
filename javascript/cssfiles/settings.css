@@ -1,0 +1,43 @@
+#settingButtons {
+    margin: 0 auto;
+    display: flex;
+    justify-content: left;
+}
+
+.settingButton{
+    border-style: solid;
+    border-radius: 5px;
+    width: 200px;
+    height: 100px;
+    border-color:rgb(65, 68, 207);
+    color: rgb(65, 68, 207);
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+    font-family: "Poly"; 
+    font-size: 15px;
+    transition: transform 0.1s ease-in-out;
+    transition: filter 0.2s ease-in-out;
+    vertical-align: middle;
+    display: inline-block;
+    position: relative;
+    margin-bottom: 10px;
+    cursor: pointer;
+    margin-right: 5px;
+    
+}
+.settingButton:active {
+    transform: scale(0.98); 
+}
+.settingButton:hover{
+    background-color: rgb(53, 55, 162);
+    color: #000000;
+}
+#hardRes {
+    background-color: rgb(0, 0, 0);
+    color:rgb(255, 0, 0);
+    border-color:red;
+}
+#hardRes:hover {
+    background-color: rgb(255, 0, 0);
+    color:rgb(0, 0, 0);
+}
