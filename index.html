@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My 1st Clicker</title>
+    <title>Digital God</title>
+    <link rel="icon" type="image/x-con" href="javascript/cssfiles/images/game.ico">
     <link rel="stylesheet" href="javascript/cssfiles/buttons.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/fonts.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/miscellaneous.css" type="text/css">
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="javascript/cssfiles/info.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/main.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/prestige.css" type="text/css">
+    <link rel="stylesheet" href="javascript/cssfiles/fortune.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/settings.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/upgrades.css" type="text/css">
 </head>
@@ -20,39 +22,96 @@
         <button onclick="settingsScreen(this)" id= "settingsTab" class="tabButton">Настройки</button>
         <button onclick="mainScreen(this)" id= "mainTab" class="tabButton">Кликер</button>
         <button onclick="prestigeScreen(this)" id= "prestigeTab" class="tabButton">?????</button>
+        <button onclick="fortuneScreen(this)" id= "fortuneTab" class="tabButton">Фортуна</button>
+        <button onclick="autoScreen(this)" id= "autoTab" class="tabButton">Автоматизация</button>
         <button onclick="infoScreen(this)" id= "infoTab" class="tabButton">Информация</button>
     </div>
     <div id="settingButtons">
+        <p id="settingsTitle" class="titleTab">Настройки</p>
+        <div class="settingButtonsWindow">
+            <div id="firstSettingsRow">
         <button onclick="saveGame(this)" id= "savingGame" class="settingButton">Сохранить игру / Save the game</button>
         <button onclick="loadGame(this)" id= "loadingGame" class="settingButton">Загрузить игру / Load the game</button>
-        <br>
         <button onclick="autoSaveGame(this)" id= "autoSavingGame" class="settingButton">Автосохранение: выкл / Auto-save: off</button>
-        <a href="changelog.md" id="link" target="_blank">
-        <button onclick="changelog(this)" id= "changelogOpen" class="settingButton">Журнал изменений / Changelog</button>
-        </a>
-        <br>
-        <button onclick="doHardReset(this)" id= "hardRes" class="settingButton"></button>
+        <button onclick="changeLanguage(this)" id= "changingLanguage" class="settingButton">Сменить язык</button>
         </div>
+        <div id="secondSettingsRow">
+        <button onclick="importSave(this)" id= "impSave" class="settingButton">импорт</button>
+        <button onclick="exportSave(this)" id= "expSave" class="settingButton">экспорт</button>
+        <a href="changelog.md" id="link" target="_blank">
+            <button onclick="changelog(this)" id= "changelogOpen" class="settingButton">Журнал изменений / Changelog</button>
+            </a>
+            <button onclick="doHardReset(this)" id= "hardRes" class="settingButton"></button>
+        </div>
+        </div>
+        </div>
+    <div id="automationScreen">
+        <div id="auto-buy2-container">
+            <div id="auto-buy2">
+              <label for="auto-buy2-checkbox" id="autoBuy1to3" class="autobuy4-6">Авто-покупка 1-3 улучшений: </label>
+              <input type="checkbox" id="auto-buy2-checkbox">
+            </div>
+          </div>
+        <div id="auto-buy1-container">
+            <div id="auto-buy1">
+              <label for="auto-buy1-checkbox" id="autoBuy4to6" class="autobuy4-6">Авто-покупка 4-6 улучшений: </label>
+              <input type="checkbox" id="auto-buy1-checkbox">
+            </div>
+          </div>
+        <div id="auto-buy3-container">
+            <div id="auto-buy3">
+              <label for="auto-buy3-checkbox" id="autoMoney" class="autobuy4-6">Монеты в секунду: </label>
+              <input type="checkbox" id="auto-buy3-checkbox">
+            </div>
+          </div>
+    </div>
     <div id="mainButtons">
     <p id="coinsCount"></p>
     <p id="coinsGain"></p>
     <button onclick="getCoin()" id = "coinGain" onkeydown="alert('Нельзя нажимать на кнопку!')" class="coinCss"><img src="javascript/cssfiles/images/CoinOff.png" style="width:0px" alt="" class="coinImage"></button><p>
     <div id="commonUpgrades">
-    <button onclick="commonUpgrade1(this)" id = "commonU1" class="upgradeButton">Открыть новое улучшение! Стоимость: 10 α-монет. / Unlock new upgrade! Cost: 10 α-coins.</button>
-    <button onclick="commonUpgrade2(this)" id = "commonU2" class="upgradeButton">Открыть новое улучшение! Стоимость: 100 α-монет. / Unlock new upgrade! Cost: 100 α-coins. </button>
-    <button onclick="commonUpgrade3(this)" id = "commonU3" class="upgradeButton">Открыть новое улучшение! Стоимость: 1000 α-монет. / Unlock new upgrade! Cost: 1000 α-coins. </button>
+    <button onclick="commonUpgrade1(this)" id = "commonU1" class="upgradeButton commonButton">Открыть новое улучшение! Стоимость: 10 α-монет. / Unlock new upgrade! Cost: 10 α-coins.</button>
+    <button onclick="commonUpgrade2(this)" id = "commonU2" class="upgradeButton commonButton">Открыть новое улучшение! Стоимость: 100 α-монет. / Unlock new upgrade! Cost: 100 α-coins. </button>
+    <button onclick="commonUpgrade3(this)" id = "commonU3" class="upgradeButton commonButton">Открыть новое улучшение! Стоимость: 1000 α-монет. / Unlock new upgrade! Cost: 1000 α-coins. </button>
     </div>
     <div id="singleUpgrades">
-    <button onclick="singleUpgrade1(this)" id = "singleU1" class="upgradeButton"></button>
-    <button onclick="singleUpgrade2(this)" id = "singleU2" class="upgradeButton"></button>
-    <button onclick="singleUpgrade3(this)" id = "singleU3" class="upgradeButton"></button>
+    <button onclick="singleUpgrade1(this)" id = "singleU1" class="upgradeButton singleButton"></button>
+    <button onclick="singleUpgrade2(this)" id = "singleU2" class="upgradeButton singleButton"></button>
+    <button onclick="singleUpgrade3(this)" id = "singleU3" class="upgradeButton singleButton"></button>
     </div>  
     </div>  
     <div id="prestigeButtons">
         <p id="theGoal">Цель</p> 
+        <div id="prestigeButton">
+        <button onclick="doPrestigeReset(this)" id="doPrestige">Сделать сброс престижа</button>
         </div>
+        <div id="prestigeBuyableUpgrades">
+            <button onclick="pBuyableUpgrade1(this)" id = "pBuyableU1" class="upgradeButton pBuyableButton"></button>
+            <button onclick="pBuyableUpgrade2(this)" id = "pBuyableU2" class="upgradeButton pBuyableButton"></button>
+            <button onclick="pBuyableUpgrade3(this)" id = "pBuyableU3" class="upgradeButton pBuyableButton"></button>
+            <button onclick="pBuyableUpgrade4(this)" id = "pBuyableU4" class="upgradeButton pBuyableButton"></button>
+            </div>
+        <div id="prestigeAutoUpgrades">
+            <button onclick="pAutoUpgrade1(this)" id = "pAutoU1" class="upgradeButton pBuyableButton"></button>
+            <button onclick="pAutoUpgrade2(this)" id = "pAutoU2" class="upgradeButton pBuyableButton"></button>
+            <button onclick="pAutoUpgrade3(this)" id = "pAutoU3" class="upgradeButton pBuyableButton"></button>
+            <button onclick="pAutoUpgrade4(this)" id = "pAutoU4" class="upgradeButton pBuyableButton"></button>
+            </div>
+        <div id="prestigeSingleUpgrades">
+            <button onclick="pSingleUpgrade1(this)" id = "pSingleU1" class="upgradeButton pBuyableButton"></button>
+            <button onclick="pSingleUpgrade2(this)" id = "pSingleU2" class="upgradeButton pBuyableButton"></button>
+            <button onclick="pSingleUpgrade3(this)" id = "pSingleU3" class="upgradeButton pBuyableButton"></button>
+            <button onclick="pSingleUpgrade4(this)" id = "pSingleU4" class="upgradeButton pBuyableButton"></button>
+                </div>
+        </div>
+    <div id="fortuneButtons">
+    <p id="fortuneNotImplemented" class="titleTab">Не реализовано!</p>
+    </div>
     <div id="statsScreen">
-    <p id="totalCoins">Всего</p> 
+    <p id="statsTitle" class="titleTab">Статистика</p>
+    <p id="totalCoins" class="statsSlot"></p> 
+    <p id="totalDiamonds" class="statsSlot"></p> 
+    <p id="totalResets" class="statsSlot"></p> 
     <p id="aboutGame">О игре</p>
     </div>
     <div id="endGoodGameScreen">
@@ -63,6 +122,8 @@
     <script src="javascript/jsfiles/clicker.js"></script>
     <script src="javascript/jsfiles/saving.js"></script>
     <script src="javascript/jsfiles/upgrades.js"></script>
+    <script src="javascript/jsfiles/prestige.js"></script>
+    <script src="javascript/jsfiles/automation.js"></script>
     <script>window.onload = loadGame()</script>
 
 </body>

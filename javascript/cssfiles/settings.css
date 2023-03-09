@@ -1,26 +1,26 @@
+
 #settingButtons {
     margin: 0 auto;
     display: flex;
-    justify-content: left;
+    justify-content: center;
 }
 
 .settingButton{
     border-style: solid;
     border-radius: 5px;
-    width: 200px;
-    height: 100px;
+    width: 150px;
+    height: 80px;
     border-color:rgb(65, 68, 207);
     color: rgb(65, 68, 207);
     background-color: rgb(0, 0, 0);
     text-align: center;
     font-family: "Poly"; 
-    font-size: 15px;
+    font-size: 13px;
     transition: transform 0.1s ease-in-out;
     transition: filter 0.2s ease-in-out;
     vertical-align: middle;
     display: inline-block;
     position: relative;
-    margin-bottom: 10px;
     cursor: pointer;
     margin-right: 5px;
     
@@ -40,4 +40,15 @@
 #hardRes:hover {
     background-color: rgb(255, 0, 0);
     color:rgb(0, 0, 0);
+}
+#firstSettingsRow {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+#secondSettingsRow {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
 }

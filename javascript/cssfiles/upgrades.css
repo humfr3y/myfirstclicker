@@ -10,11 +10,11 @@
 }
 .upgradeButton{
     border-style: solid;
-    border-radius: 30px;
+    border-radius: 10px;
     background-color: black;
     color: rgb(255, 255, 255);
-    font-size: 18px;
-    width: 480px;
+    font-size: 13px;
+    width: 240px;
     height: 120px;
     text-align: center;
     font-family: "Poly";
@@ -39,53 +39,84 @@
     background-color: rgb(255, 63, 63);
     color: black;
 }
-#commonU1 {
+.commonButton{
+    background-color: #000000;
     border-color: #23e019;
- }
- 
- #commonU1:hover:enabled{
-     background-color: #1bbc12;
+    color: rgb(255, 255, 255);
+}
+.commonButton:hover:enabled{
+     background-color: #23e019;
      box-shadow: 0 0 10px #23e019;
      color: black;
  }
- #commonU2 {
-     border-color: #1baf13;
+ .singleButton{
+    background-color: #000000;
+    border-color: #0c1bc4;
+    color: rgb(255, 255, 255);
+}
+.singleButton:hover:enabled{
+     background-color: #0c1bc4;
+     box-shadow: 0 0 10px #0c1bc4;
+     color: black;
  }
- #commonU2:hover:enabled{
-    background-color: rgb(24, 150, 18);
-    box-shadow: 0 0 10px #1baf13;
+ .singleButton.purchased {
+    background-color: #0c1bc4;
     color: black;
 }
-#commonU3 {
-     border-color: #129e0b;
- }
-#commonU3:hover:enabled{
-        background-color: #0f7b09;
-        box-shadow: 0 0 10px #129e0b;
-        color: black;
-    }
- 
- #singleU1{
-     border-color: #1f2fda;
- }
- #singleU1:hover:enabled{
-    background-color: #1724b1;
-    box-shadow: 0 0 10px #1f2fda;
-    color: black;
+#automationScreen {
+    display: flex;
+    justify-content: center;
 }
-#singleU2 {
-     border-color: #1421a5;
- }
- #singleU2:hover:enabled{
-    background-color: #111b8a;
-    box-shadow: 0 0 10px #1421a5;
-    color: black;
- }
- #singleU3 {
-     border-color: #151e83;
- }
- #singleU3:hover:enabled{
-    background-color: #0c1575;
-    box-shadow: 0 0 10px #151e83;
-    color: black;
- }
+#auto-buy1-container {
+    border: 3px solid rgb(255, 231, 94);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    width: 200px;
+    margin-right: 20px
+  }
+  #auto-buy2-container {
+    border: 3px solid rgb(255, 231, 94);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    width: 200px;
+    margin-right: 20px
+  }
+  #auto-buy3-container {
+    border: 3px solid rgb(255, 231, 94);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    width: 200px;
+    margin-right: 20px
+  }
+  #auto-buy1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  #auto-buy2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  #auto-buy3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+.autobuy4-6 {
+    color: gold;
+    text-align: center;
+    margin-bottom: 10px;
+}

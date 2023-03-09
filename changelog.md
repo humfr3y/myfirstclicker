@@ -1,3 +1,34 @@
+09.03.2023 | Digital God 0.6. Prestige Update (Codename: PRESTIGE)
+Design changes:
+- Changed game name to Digital God 0.6. Reason: Game will be a clicker only at start, then after some upgrade money gain become automated and there is no will be any clicking things. I had idea make diamond gain clickable but that'll be weird.
+- Added page icon. Lightning. God. Zeus.
+- Buttons and text got smaller.
+- Settings and Statistics has title.
+- Improved settings buttons.
+- Removed "?????" button, now it'll appear at 1e9 coins.
+- Improved Stats text.
+- Main upgrades doesn't have shades anymore.
+- Saving and Loading now using stringify method.
+- Tab buttons no longer has "active mode", but they changing color while hover.
+- Some little improvements.
+Feature changes:
+- IMPORT AND EXPORT! You can make base64-encoded text and it'll contain all your values. You can create your savebank or share with your friends!
+- CHANGE LANGUAGE! You can change language without refreshing page.
+- Removed confirmation for changing message while refreshing page.
+- Now Hard Reset doesn't refreshing page.
+- Values has scientific notation after 1,000,000 number.
+- Fixed autosaving was unchangeable.
+Gameplay changes:
+- PRESTIGE! Reset whole progress to get diamonds, which boosts your production!
+- DIAMONDS! Spend them for new prestige upgrades which can boost your progress even further!
+- NEW PRESTIGE UPGRADES! They have 4 layers: Buyable, Automatic, Single and last of them is Unlockable upgrades which unlocking next layers of prestige upgrades, they're always last in them row.
+- AUTOMATION! After buying 5-7 Prestige Upgrades you will be able to autobuy upgrades or gain coins per second.
+- Added softcaps for coin gain at e20 and e35 and for diamonds gain at 4000 and 100000
+- Slightly better formula for Superproductivity.
+- Buffed cost formula for 1-3 Main Upgrades.
+[Dev comment]
+Finally! After 2 weeks I finish this update. It's biggest update in the history of game. I have seen so many bugs and errors, and so much or a little less i solved. The hardest thing for me was to figure out how to remove blue (purchased) color for 4-6 upgrades. I spent two days on this, and it's the reason why i abandoned the game for 2 weeks. The rest bugs were "Problem on a problem" when after solving one, another appeared, btw it was the reason to fix that "hardest" bug. I wanted to make changing language button, and it turned out to suffer and fix that bug. Well it wasn't hard. I'm glad i finished this update and didn't abandon it. I'll be really glad if you play it at least for a little and those works, that time i spent for making update (3-7 hours per day) will not pass in vain. What about name of the game? Let me explain with small lore: You, a poor creature, aspire to become a God in virtual reality, but you need incredible power of God, which lies in the some coins that you collect during the game and then spend to get even more. Each currency makes you stronger and more powerful. However will everything will be simple? Will Fortune help this time?
+
 15.02.2023 | My1stClicker 0.5.1.
 Design changes:
 - Finally top and upgrades buttons were centered.

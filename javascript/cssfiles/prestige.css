@@ -1,0 +1,79 @@
+#prestigeBuyableUpgrades {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+#prestigeAutoUpgrades {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+}
+#prestigeSingleUpgrades {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+}
+#theGoal {
+    font-size: 22px;
+}
+#doPrestige {
+    border-style: solid;
+    border-radius: 30px;
+    background-color: black;
+    color: aqua;
+    font-size: 14px;
+    width: 260px;
+    height: 180px;
+    text-align: center;
+    font-family: "Poly";
+    transition: transform 0.1s ease-in-out;
+    transition: filter 0.2s ease-in-out;
+    transition:  0.2s ease-in-out;
+    margin-bottom: 20px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-right:10px;
+    position: relative;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-color:aqua;
+}
+#doPrestige:hover {
+    background-color: aqua;
+    color:black;
+}
+#prestigeButton {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+dm {
+    font-size: 40px;
+    text-shadow: 0 0 5px aqua;
+    color:aqua;
+}
+#prestigeTab {
+    color :aqua; 
+    border-Color: aqua
+}
+#prestigeTab:hover {
+    background-color: aqua;
+    color:black;
+}
+.pBuyableButton{
+    background-color: #000000;
+    border-color: aqua;
+    color: rgb(255, 255, 255);
+}
+.pBuyableButton:hover:enabled{
+    background-color: aqua;
+    box-shadow: 0 0 10px aqua;
+    color: black;
+}
+.pBuyableButton.purchased {
+    background-color: aqua;
+    color: black;
+}
