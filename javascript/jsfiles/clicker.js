@@ -228,7 +228,7 @@ function getCoin() {
     if (!checkCoin.checked){
     if (third.boost == 0)
     {third.boost = 1}
-    gain = 1*(first.b*second.boost*third.boost*fourth.x*fifth.x)+100000000;
+    gain = 1*(first.b*second.boost*third.boost*fourth.x*fifth.x)+1;
     gain = Math.pow(gain, pbfirst.boost)
     if (diamonds >= 1) {gain*=(diamonds*pbsecond.boost+1)}
     if (gain >= 1e19) {
