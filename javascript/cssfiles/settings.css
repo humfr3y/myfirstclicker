@@ -8,7 +8,7 @@
 .settingButton{
     border-style: solid;
     border-radius: 5px;
-    width: 150px;
+    width: 180px;
     height: 80px;
     border-color:rgb(65, 68, 207);
     color: rgb(65, 68, 207);
@@ -23,7 +23,6 @@
     position: relative;
     cursor: pointer;
     margin-right: 5px;
-    
 }
 .settingButton:active {
     transform: scale(0.98); 
@@ -51,4 +50,28 @@
     margin: 0 auto;
     display: flex;
     justify-content: center;
+    margin-bottom: 10px;
+}
+#thirdSettingsRow {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+#autoSaveInterval {
+    border-style: solid;
+    border-radius: 5px;
+    width: 177px;
+    height: 77px;
+    border-width: 2px;
+    border-color:rgb(65, 68, 207);
+    color: rgb(65, 68, 207);
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+    font-size: 13px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 5px;
+}
+#autoSlider {
+    width: 140px;
 }

@@ -1,3 +1,21 @@
+15.05.2023 | Digital God 0.7 | "You really want it" Update (Codename: QOL)
+Design changes:
+- Amount of coins, diamonds, and prestige reset button now displayed in header.
+- Slightly changed buttons. Upgrade buttons size and settings buttons location.
+- Added subtabs in Info page.
+- Added notifications when saving, loading, importing, exporting, hard reseting.
+- Fixed display of some upgrades effects.
+- New stats: Time spent in the game/prestige, fastest prestige.
+Feature changes:
+- "BUY ALL" BUTTON! Now you can buy all stuff just by clicking that one button.
+- Added possibility to make Prestige Reset by pressing "P" and Max Buy by pressing "M".
+- Export always saves text file with save in your device (it's still copies into your clipboard)
+Gameplay changes:
+- Many Prestige Upgrades has been nerfed. But some of them are got a slightly buff.
+- More roughly diamonds gain softcap.
+[Dev comment]
+Yeah, so small update after 2 months, cuz i started to make it yesterday, i just didn't want to do it. Well i actually did, but some troubles appeared and i couldn't make something. But 0.8 will change EVERYTHING, because it's Coins Update! New upgrades, mechanics changing and more! 0.9 also takes something like Prestige Update 2! Well, when i'll start to do it? Idk.
+
 09.03.2023 | Digital God 0.6. Prestige Update (Codename: PRESTIGE)
 Design changes:
 - Changed game name to Digital God 0.6. Reason: Game will be a clicker only at start, then after some upgrade money gain become automated and there is no will be any clicking things. I had idea make diamond gain clickable but that'll be weird.

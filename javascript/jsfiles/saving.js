@@ -1,4 +1,4 @@
- setInterval(autoSaveThis, 10000); //таймер
+ setInterval(autoSaveThis, 30000); //таймер
 
 var firstprice = Math.round(first.basePrice*Math.pow(1.15, first.amount))
 var secondprice = Math.round(second.basePrice*Math.pow(1.21, second.amount));
@@ -258,10 +258,25 @@ function saveGame () {
             psfourth_boost: psfourth.boost,
             check46_checked: check46.checked,
             check13_checked: check13.checked,
-            checkCoin_checked: checkCoin.checked
+            checkCoin_checked: checkCoin.checked,
+            gameSeconds: gameSeconds,
+            gameMinutes: gameMinutes,
+            gameHours: gameHours,
+            prestigeSeconds: prestigeSeconds,
+            prestigeMinutes: prestigeMinutes,
+            prestigeHours: prestigeHours,
+            fastPrestigeSeconds: fastPrestigeSeconds,
+            fastPrestigeMinutes: fastPrestigeMinutes,
+            fastPrestigeHours: fastPrestigeHours,
+            fastPrestigeSecondsTimer: fastPrestigeSecondsTimer,
+            bestPrestigeRun: bestPrestigeRun,
 
     }; //образуем переменную с кучей других переменных
-    
+
+    var saveNotify
+    if (data == 1) saveNotify = 'Игра сохранена!'
+    else saveNotify = 'Game saved!'
+    notify(saveNotify);
     let stringifiedData = JSON.stringify(datasave); //превратим в строчку
     
     // сохранить в LocalStorage по ключу коунтдата
@@ -345,6 +360,22 @@ function loadGame () {
         check13.checked = parsedData.check13_checked;
         check46.checked = parsedData.check46_checked;
         checkCoin.checked = parsedData.checkCoin_checked;
+        gameSeconds = parseFloat(parsedData.gameSeconds);
+        gameMinutes = parseFloat(parsedData.gameMinutes);
+        gameHours = parseFloat(parsedData.gameHours);
+        prestigeSeconds = parseFloat(parsedData.prestigeSeconds);
+        prestigeMinutes = parseFloat(parsedData.prestigeMinutes);
+        prestigeHours = parseFloat(parsedData.prestigeHours);
+        fastPrestigeSeconds = parseFloat(parsedData.fastPrestigeSeconds);
+        fastPrestigeMinutes = parseFloat(parsedData.fastPrestigeMinutes);
+        fastPrestigeHours = parseFloat(parsedData.fastPrestigeHours);
+        fastPrestigeSecondsTimer = parseFloat(parsedData.fastPrestigeSecondsTimer);
+        bestPrestigeRun = parseFloat(parsedData.bestPrestigeRun);
+
+        var loadNotify
+        if (data == 1) loadNotify = 'Игра загружена!'
+        else loadNotify = 'Game load!'
+        notify(loadNotify);
 
         if (data==1) {coinsCount.innerHTML = money.toFixed(0) + " α-монет. Нажмите на α-монету.";  document.getElementById('coinsGain').innerHTML = ""} 
             else {coinsCount.innerHTML = money.toFixed(0) + " α-coins. Click on the α-coin."; document.getElementById('coinsGain').innerHTML = "";}
@@ -378,6 +409,9 @@ function loadGame () {
         pSU1B =  setInterval(prestigeSingleUpgrade1Boost, 100)
         if (psthird.amount>=1)
         pSU3B =  setInterval(prestigeSingleUpgrade3Boost, 100)
+        if (unlockedPrestige == 1 || totalDiamond>=1) {prestigeTab.style.display = "block"; unlockPrestige(); 
+        if (totalDiamond>1) crystalCount.style.display = "block"}
+        
     }
 
 function changelog(){}
@@ -439,13 +473,13 @@ function doHardReset () {
             pafirst.amount = 0
             pafirst.price = 1000
             pasecond.amount = 0
-            pasecond.price = 2000
+            pasecond.price = 2500
             pathird.amount = 0
-            pathird.price = 3500
+            pathird.price = 5000
             pafourth.amount = 0
-            pafourth.price = 5000
+            pafourth.price = 15000
             psfirst.amount = 0
-            psfirst.price = 10000
+            psfirst.price = 50000
             psfirst.boost = 1
             pssecond.amount = 0
             pssecond.price = 1000000
@@ -462,6 +496,17 @@ function doHardReset () {
             totalDiamond = 0
             totalPrestiges = 0
             amounts = 1
+            gameSeconds = 0
+            gameMinutes = 0
+            gameHours = 0
+            prestigeSeconds = 0
+            prestigeMinutes = 0
+            prestigeHours = 0
+            fastPrestigeSeconds = 0
+            fastPrestigeMinutes = 0
+            fastPrestigeHours = 0
+            fastPrestigeSecondsTimer = 0
+            bestPrestigeRun = 1e9
             saveGame.call();
             loadUpgrades.call();
             stopIntervals.call();
@@ -472,6 +517,8 @@ function doHardReset () {
             prestigeAutoUpgrades.style.display = "none"
             prestigeSingleUpgrades.style.display = "none"
             prestigeTab.style.display = "none"
+            crystalCount.style.display = "none"
+            doPrestige.style.display = "none"  
             autoTab.style.display = "none"
             fortuneTab.style.display = "none"
             container1.style.display = "none"
@@ -482,6 +529,13 @@ function doHardReset () {
             check13.checked = false
             checkCoin.checked = false
             
+            
+            var hardNotify, hardNotifyColor
+            if (data == 1) hardNotify = 'Игра сброшена!'
+            else hardNotify = 'Game reseted!'
+            hardNotifyColor = "red";
+            notify(hardNotify, hardNotifyColor);
+
             purchasedButtonSingleU1.classList.remove('purchased');
             purchasedButtonSingleU2.classList.remove('purchased');
             purchasedButtonSingleU3.classList.remove('purchased');
@@ -526,6 +580,13 @@ function prestigeReset (){
             firstprice = 10
             secondprice = 100
             thirdprice = 1000
+            prestigeSeconds = 0
+            prestigeMinutes = 0
+            prestigeHours = 0
+            fastPrestigeSecondsTimer = 0
+            prestigeSeconds = ("0" + prestigeSeconds).slice(-2)
+            prestigeMinutes = ("0" + prestigeMinutes).slice(-2)
+            prestigeHours = ("0" + prestigeHours).slice(-2)
             stopPRInterval.call()
             stopPRInterval.call()
             startTextOfUpgrades.call();
@@ -616,8 +677,24 @@ function exportSave() {
             psfourth_boost: psfourth.boost,
             check46_checked: check46.checked,
             check13_checked: check13.checked,
-            checkCoin_checked: checkCoin.checked
+            checkCoin_checked: checkCoin.checked,
+            gameSeconds: gameSeconds,
+            gameMinutes: gameMinutes,
+            gameHours: gameHours,
+            prestigeSeconds: prestigeSeconds,
+            prestigeMinutes: prestigeMinutes,
+            prestigeHours: prestigeHours,
+            fastPrestigeSeconds: fastPrestigeSeconds,
+            fastPrestigeMinutes: fastPrestigeMinutes,
+            fastPrestigeHours: fastPrestigeHours,
+            fastPrestigeSecondsTimer: fastPrestigeSecondsTimer,
+            bestPrestigeRun: bestPrestigeRun,
     }; //образуем переменную с кучей других переменных
+
+    var exportNotify
+    if (data == 1) exportNotify = 'Игра экспортирована!'
+    else exportNotify = 'Game exported!'
+    notify(exportNotify);
 
     let exportedData = JSON.stringify(datasave); //превратим в строчку
     
@@ -625,6 +702,16 @@ function exportSave() {
     console.log(base64)
     navigator.clipboard.writeText(base64)
 
+    let today = new Date();
+    let date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
+    let filename = 'Digital-God-Save-' + date + '.txt';
+
+  // создание и запись содержимого в новый файл
+    let file = new Blob([base64], {type: 'text/plain'});
+    let a = document.createElement('a');
+    a.download = filename;
+    a.href = URL.createObjectURL(file);
+    a.click();
 }
 
 function importSave() {
@@ -714,7 +801,22 @@ function importSave() {
     check13.checked = parsedData.check13_checked;
     check46.checked = parsedData.check46_checked;
     checkCoin.checked = parsedData.checkCoin_checked;
+    gameSeconds = parseFloat(parsedData.gameSeconds);
+    gameMinutes = parseFloat(parsedData.gameMinutes);
+    gameHours = parseFloat(parsedData.gameHours);
+    prestigeSeconds = parseFloat(parsedData.prestigeSeconds);
+    prestigeMinutes = parseFloat(parsedData.prestigeMinutes);
+    prestigeHours = parseFloat(parsedData.prestigeHours);
+    fastPrestigeSeconds = parseFloat(parsedData.fastPrestigeSeconds);
+    fastPrestigeMinutes = parseFloat(parsedData.fastPrestigeMinutes);
+    fastPrestigeHours = parseFloat(parsedData.fastPrestigeHours);
+    fastPrestigeSecondsTimer = parseFloat(parsedData.fastPrestigeSecondsTimer);
+    bestPrestigeRun = parseFloat(parsedData.bestPrestigeRun);
 
+    var importNotify
+    if (data == 1) importNotify = 'Игра импортирована!'
+    else importNotify = 'Game imported!'
+    notify(importNotify);
 
     if (data==1) {coinsCount.innerHTML = money.toFixed(0) + " α-монет. Нажмите на α-монету.";  document.getElementById('coinsGain').innerHTML = ""} 
             else {coinsCount.innerHTML = money.toFixed(0) + " α-coins. Click on the α-coin."; document.getElementById('coinsGain').innerHTML = "";}
@@ -748,7 +850,10 @@ function importSave() {
         pSU1B =  setInterval(prestigeSingleUpgrade1Boost, 100)
         if (psthird.amount>=1)
         pSU3B =  setInterval(prestigeSingleUpgrade3Boost, 100)
+        if (unlockedPrestige == 1 || totalDiamond>=1) {prestigeTab.style.display = "block"; unlockPrestige(); 
+        if (totalDiamond>1) crystalCount.style.display = "block"}
     }
+    
     catch {alert('Wrong input')}
 }
 

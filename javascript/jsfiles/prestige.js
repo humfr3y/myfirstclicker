@@ -4,6 +4,7 @@ var diamondsBoost = 0
 var singleUpgradeHover1 = document.querySelector('#singleU1')
 var singleUpgradeHover2 = document.querySelector('#singleU2')
 var singleUpgradeHover3 = document.querySelector('#singleU3')
+var bestPrestigeRun = 1000000
 function canPrestige () {
 if (money>1e9) {
    // if (diamondsGain<1e5)
@@ -11,29 +12,28 @@ if (money>1e9) {
     diamondsGain = diamondsGain*psthird.boost
     if (diamondsGain >= 4000) {
         var softDiamondsGain1 = diamondsGain/4000
-        diamondsGain = Math.floor(4000*Math.pow(softDiamondsGain1, 0.25))
+        diamondsGain = Math.floor(4000*Math.pow(softDiamondsGain1, 0.2075))
     }
     if (diamondsGain >= 100000) {
         var softDiamondsGain2 = diamondsGain/100000
-        diamondsGain = Math.floor(1e5*Math.pow(softDiamondsGain2, 0.75))
+        diamondsGain = Math.floor(1e5*Math.pow(softDiamondsGain2, 0.475))
     }
     if (diamondsGain<1e6){
-    if (data==1) {doPrestige.innerHTML = "<ut>Стать престижным</ut> <br> Сбросьте все α-монеты и улучшения чтобы получить " + diamondsGain + " алмазов." } 
-    else {doPrestige.innerHTML =  "<ut>Became prestige</ut> <br> Reset all α-coins and upgrades for " + diamondsGain + " diamonds."}
+    if (data==1) {doPrestige.innerHTML = "<ut>Стать престижным</ut> <br> Сбросьте всё и получите " + diamondsGain + " алмазов."}
+    else {doPrestige.innerHTML =  "<ut>Became prestige</ut> <br> Reset everything for " + diamondsGain + " diamonds."}
     }
     if (diamondsGain>=1e6){
-        if (data==1) {doPrestige.innerHTML = "<ut>Стать престижным</ut> <br> Сбросьте все α-монеты и улучшения чтобы получить " + diamondsGain.toExponential(2).replace("+","") + " алмазов." } 
-        else {doPrestige.innerHTML =  "<ut>Became prestige</ut> <br> Reset all α-coins and upgrades for " + diamondsGain.toExponential(2).replace("+","") + " diamonds."}
+        if (data==1) {doPrestige.innerHTML = "<ut>Стать престижным</ut> <br> Сбросьте всё и получите " + diamondsGain.toExponential(2).replace("+","") + " алмазов." } 
+        else {doPrestige.innerHTML =  "<ut>Became prestige</ut> <br> Reset everything for " + diamondsGain.toExponential(2).replace("+","") + " diamonds."}
         }
     return diamondsGain, diamonds;
     }
-else {
-    if (data==1) {doPrestige.innerHTML = "<ut>Стать престижным</ut> <br> Накопите 1,000,000,000 α-монет" } 
-    else {doPrestige.innerHTML =  "<ut>Became prestige</ut> <br> Get 1,000,000,000 α-coins"}
-}
+    if (data==1) doPrestige.innerHTML = "Соберите 1е9 алмазов"
+    else doPrestige.innerHTML = "Gather 1e9 diamonds"
 }
 function doPrestigeReset () {
     if (money>1e9) {
+        crystalCount.style.display = "block"
         diamonds = diamonds + diamondsGain;
         diamondsBoost = diamonds // and multipliers
         totalDiamond = totalDiamond + diamonds
@@ -47,14 +47,30 @@ function doPrestigeReset () {
         if (data==1) {totalResets.innerHTML = "Всего вы сделали " + totalPrestiges.toFixed(0) + " престиж сбросов."} 
         else {totalResets.innerHTML = "Totally you did " + totalPrestiges.toFixed(0) + " prestige resets."}
 
+        if (bestPrestigeRun > fastPrestigeSecondsTimer) {
+            bestPrestigeRun = fastPrestigeSecondsTimer
+            fastPrestigeHours = 0, fastPrestigeMinutes = 0, fastPrestigeSeconds = 0
+            if (fastPrestigeSecondsTimer >= 60) {
+                while (fastPrestigeSecondsTimer >= 60) {
+                    if (fastPrestigeSecondsTimer >= 60) {fastPrestigeSecondsTimer -= 60, fastPrestigeMinutes++; fastPrestigeSeconds = ("0" + fastPrestigeSeconds).slice(-2); fastPrestigeMinutes = ("0" + fastPrestigeMinutes).slice(-2)}
+                    if (fastPrestigeMinutes >= 60) {fastPrestigeMinutes -= 60, fastPrestigeHours++; fastPrestigeMinutes = ("0" + fastPrestigeMinutes).slice(-2)}
+                } 
+            }
+            else fastPrestigeSeconds = fastPrestigeSecondsTimer
+        }
         unlockPrestige.call();
         prestigeReset.call()
         stopPRInterval.call()
+        
     }
 }
 setInterval(canPrestige,50)
 
-
+document.addEventListener("keydown", function(event) {
+    if (event.key == "P" || event.key == "p" || event.key == "З" || event.key == "з") {
+      doPrestigeReset();
+    }
+  });
 
 
 

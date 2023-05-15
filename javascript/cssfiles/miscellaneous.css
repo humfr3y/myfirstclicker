@@ -8,7 +8,11 @@ body {
     display: flex;
     justify-content: center;
 }
-
+#statsSubButtons {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
 .titleTab {
     margin: 0 auto;
     color: white;
@@ -41,3 +45,8 @@ body {
 ut { /*title of upgrade */
     font-weight:900
 }
+
+.subButtons {
+    width: 100px;
+    height: 25px;
+  }

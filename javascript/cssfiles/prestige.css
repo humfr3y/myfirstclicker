@@ -21,25 +21,22 @@
 }
 #doPrestige {
     border-style: solid;
-    border-radius: 30px;
+    border-radius: 5px;
     background-color: black;
     color: aqua;
-    font-size: 14px;
-    width: 260px;
-    height: 180px;
+    font-size: 12px;
+    width: 200px;
+    height: 70px;
     text-align: center;
     font-family: "Poly";
     transition: transform 0.1s ease-in-out;
     transition: filter 0.2s ease-in-out;
     transition:  0.2s ease-in-out;
-    margin-bottom: 20px;
-    vertical-align: middle;
-    display: inline-block;
-    margin-right:10px;
-    position: relative;
-    margin-bottom: 10px;
     cursor: pointer;
     border-color:aqua;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
 }
 #doPrestige:hover {
     background-color: aqua;

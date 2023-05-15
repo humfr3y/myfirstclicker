@@ -21,19 +21,32 @@ document.getElementById('auto-buy1-checkbox').addEventListener('change', functio
     // логика автопокупки 4-6 улучшений
   }
 
-  document.getElementById('auto-buy2-checkbox').addEventListener('change', function() {
-    if (this.checked) { // флажок отмечен
-      autoBuy13Interval = setInterval(autoBuy13, 33); // запускаем функцию autoBuy46() каждую секунду
-    } else { // флажок снят
-      clearInterval(autoBuy13Interval); // останавливаем запуск функции autoBuy46()
-    }
-    return autoBuy13Interval;
-  });
+  const timePerFrame = 50; // время между кадрами
+  let previousTimestamp = Date.now();
+  let delta = 0;
+
+document.getElementById('auto-buy2-checkbox').addEventListener('change', function() {
+  if (this.checked) { // флажок отмечен
+    
+    autoBuy13Interval = setInterval(() => {
+      const now = Date.now();
+      delta += now - previousTimestamp;
+      previousTimestamp = now;
+
+      while (delta >= timePerFrame) {
+        delta -= timePerFrame;
+        
+        autoBuy13(); // выполняем функцию автопокупки
+      }
+    }, 0); // 0 мс означает, что функция будет запускаться как можно чаще
+
+  } else { // флажок снят
+    clearInterval(autoBuy13Interval); // останавливаем запуск функции autoBuy46()
+  }
+});
 
   function autoBuy13() {
-    commonUpgrade1.call()
-    commonUpgrade2.call()
-    commonUpgrade3.call()
+    maxBuyAll()
     // логика автопокупки 4-6 улучшений
   }
 

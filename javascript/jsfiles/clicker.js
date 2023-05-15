@@ -3,8 +3,8 @@ var total = 10;
 var gain = 1;
 var autoSaving = 0; 
 var endGoal = 1e100;
-var completion
-var unlockedPrestige = 0;
+var completion;
+var unlockedPrestige;
 var totalCoins = document.getElementById('totalCoins');
 var totalDiamond = 0
 var totalPrestiges = 0
@@ -17,26 +17,75 @@ var data = 0;
 var container1 = document.getElementById('auto-buy1-container')
 var container2 = document.getElementById('auto-buy2-container')
 var container3 = document.getElementById('auto-buy3-container')
+var crystalCount = document.getElementById('crystalCount')
+var doPrestige = document.getElementById('doPrestige')
 var amounts = 1
-function loadStats() {
-    if (data==1) {totalCoins.innerHTML = "Всего вы собрали " + total.toFixed(0) + " α-монет."} 
-    else {totalCoins.innerHTML = "Totally you collected " + total.toFixed(0) + " α-coins."}
-    if (total>1e6)
-        if (data==1) {totalCoins.innerHTML = "Всего вы собрали " + total.toExponential(2).replace("+","") + " α-монет."} 
-        else {totalCoins.innerHTML = "Totally you collected " + total.toExponential(2).replace("+","") + " α-coins."}
-        if (totalDiamond>=1) {
-            if (data==1) {totalDiamonds.innerHTML = "Всего вы собрали " + totalDiamond.toFixed(0) + " алмазов."} 
-            else {totalDiamonds.innerHTML = "Totally you collected " + totalDiamond.toFixed(0) + " diamonds."}
-            if (totalDiamond>1e6){
-                if (data==1) {totalDiamonds.innerHTML = "Всего вы собрали " + totalDiamond.toExponential(2).replace("+","") + " алмазов."} 
-                else {totalDiamonds.innerHTML = "Totally you collected " + totalDiamond.toExponential(2).replace("+","") + " diamonds."}
-            }
-            if (data==1) {totalResets.innerHTML = "Всего вы сделали " + totalPrestiges.toFixed(0) + " престиж сбросов."} 
-            else {totalResets.innerHTML = "Totally you did " + totalPrestiges.toFixed(0) + " prestige resets."}
-        }
-        else {totalDiamonds.innerHTML = ""; totalResets.innerHTML = ""}
-        }
+var gameHours = 0, gameMinutes = 0, gameSeconds = 0;
+var prestigeHours = 0, prestigeMinutes = 0, prestigeSeconds = 0
+var fastPrestigeHours = 0, fastPrestigeMinutes = 0, fastPrestigeSeconds = 0
+var fastPrestigeSecondsTimer = 0
+gameSeconds = ("0" + gameSeconds).slice(-2)
+gameMinutes = ("0" + gameMinutes).slice(-2)
+gameHours = ("0" + gameHours).slice(-2)
+prestigeSeconds = ("0" + prestigeSeconds).slice(-2)
+prestigeMinutes = ("0" + prestigeMinutes).slice(-2)
+prestigeHours = ("0" + prestigeHours).slice(-2)
+fastPrestigeSeconds = ("0" + fastPrestigeSeconds).slice(-2)
+fastPrestigeMinutes = ("0" + fastPrestigeMinutes).slice(-2)
+fastPrestigeHours = ("0" + fastPrestigeHours).slice(-2)
 
+function loadStats() {
+    var whichTotalCoins, whichTotalDiamonds, whichTotalPrestiges
+    fastPrestigeSeconds = ("0" + fastPrestigeSeconds).slice(-2)
+    fastPrestigeMinutes = ("0" + fastPrestigeMinutes).slice(-2)
+    fastPrestigeHours = ("0" + fastPrestigeHours).slice(-2)
+    const totalCoins1 = total.toFixed(0)
+    const totalCoins2 = total.toExponential(2).replace("+","")
+    const totalDiamonds1 = totalDiamond.toFixed(0)
+    const totalDiamonds2 = totalDiamond.toExponential(2).replace("+","")
+    const totalPrestiges1 = totalPrestiges.toFixed(0)
+    const totalPrestiges2 = totalPrestiges.toExponential(2).replace("+","")
+    if (total<1e6) whichTotalCoins = totalCoins1
+    else if (total>=1e6) whichTotalCoins = totalCoins2
+    if (totalDiamond<1e6) whichTotalDiamonds = totalDiamonds1
+    else if (totalDiamond>=1e6) whichTotalDiamonds = totalDiamonds2
+    if (totalPrestiges<1e6) whichTotalPrestiges = totalPrestiges1
+    else if (totalPrestiges>=1e6) whichTotalPrestiges = totalPrestiges2
+        if (data==1) {totalCoins.innerHTML = "Всего вы собрали " + whichTotalCoins + " α-монет."} 
+        else {totalCoins.innerHTML = "Totally you collected " + whichTotalCoins + " α-coins."}
+        if (data==1) {gameTime.innerHTML = `Всего вы провели ${gameHours}:${gameMinutes}:${gameSeconds} в игре.`}
+        else {gameTime.innerHTML = `You spent ${gameHours}:${gameMinutes}:${gameSeconds} in the game.`}
+    if (totalDiamond>=1) {
+        if (data==1) {prestigeStats.innerHTML = "Престиж"}
+        else {prestigeStats.innerHTML = "Prestige"}
+        if (data==1) {totalDiamonds.innerHTML = "Всего вы собрали " + whichTotalDiamonds + " алмазов."} 
+        else {totalDiamonds.innerHTML = "Totally you collected " + whichTotalDiamonds + " diamonds."}
+        if (data==1) {totalResets.innerHTML = "Всего вы сделали " + whichTotalPrestiges + " престиж сбросов."} 
+        else {totalResets.innerHTML = "Totally you did " + whichTotalPrestiges + " prestige resets."}
+        if (data==1) {prestigeTime.innerHTML = `Вы провели ${prestigeHours}:${prestigeMinutes}:${prestigeSeconds} в текущем престиже.`}
+        else {prestigeTime.innerHTML = `You spent ${prestigeHours}:${prestigeMinutes}:${prestigeSeconds} in current prestige.`}
+        if (data==1) {fastestPrestigeTime.innerHTML = `Самый быстрый сброс престижа был за ${fastPrestigeHours}:${fastPrestigeMinutes}:${fastPrestigeSeconds}`}
+        else {fastestPrestigeTime.innerHTML = `Your fastest prestige was ${fastPrestigeHours}:${fastPrestigeMinutes}:${fastPrestigeSeconds}`}
+        }
+        else {totalDiamonds.innerHTML = ""; totalResets.innerHTML = ""; prestigeTime.innerHTML = ""; prestigeStats.innerHTML = ""; fastestPrestigeTime.innerHTML = ""}
+        }
+function addSecond () {
+    gameSeconds++
+    prestigeSeconds++
+    fastPrestigeSecondsTimer++
+    gameSeconds = ("0" + gameSeconds).slice(-2)
+    gameMinutes = ("0" + gameMinutes).slice(-2)
+    gameHours = ("0" + gameHours).slice(-2)
+    prestigeSeconds = ("0" + prestigeSeconds).slice(-2)
+    prestigeMinutes = ("0" + prestigeMinutes).slice(-2)
+    prestigeHours = ("0" + prestigeHours).slice(-2)
+    if (gameSeconds == 60) {gameSeconds = 0, gameMinutes++; gameSeconds = ("0" + gameSeconds).slice(-2); gameMinutes = ("0" + gameMinutes).slice(-2)}
+    if (gameMinutes == 60) {gameMinutes = 0, gameHours++; gameMinutes = ("0" + gameMinutes).slice(-2)}
+    if (prestigeSeconds == 60) {prestigeSeconds = 0, prestigeMinutes++; prestigeSeconds = ("0" + prestigeSeconds).slice(-2); prestigeMinutes = ("0" + prestigeMinutes).slice(-2)}
+    if (prestigeMinutes == 60) {prestigeMinutes = 0, prestigeHours++; prestigeMinutes = ("0" + prestigeMinutes).slice(-2)}
+}
+setInterval(loadStats, 1000)
+setInterval(addSecond, 1000)
 function changedLanguage () {
 if (data==1) {settingsTab.innerHTML = "Настройки"}
 else {settingsTab.innerHTML = "Settings"}
@@ -50,6 +99,16 @@ if (data==1) {autoTab.innerHTML = "Автоматизация"}
 else {autoTab.innerHTML = "Automation"}
 if (data==1) {fortuneTab.innerHTML = "Фортуна"}
 else {fortuneTab.innerHTML = "Fortune"}
+if (data==1) {settingsTab.innerHTML = "Настройки"}
+else {settingsTab.innerHTML = "Settings"}
+
+if (data==1) {maxbuy.innerHTML = "Купить всё"}
+else {maxbuy.innerHTML = "Max buy"}
+
+if (data==1) {statisticsTab.innerHTML = "Статистика"}
+else {statisticsTab.innerHTML = "Statistics"}
+if (data==1) {aboutGameTab.innerHTML = "Об игре"}
+else {aboutGameTab.innerHTML = "About game"}
 
 loadStats.call()
 if (data==1) {coinGain.innerHTML = money.toFixed(0) + " α-монет. Нажмите на α-монету."} 
@@ -95,17 +154,19 @@ else {autoMoney.innerHTML = "Money autogain"}
 if (data==1) {fortuneNotImplemented.innerHTML = "Не реализовано!"}
 else {fortuneNotImplemented.innerHTML = "Not implemented!"}
 
-if (data==1) {aboutGame.innerHTML = "Об игре: <br><br> Цифровой Бог 0.6 <br> Главная цель: 1e100 α-монет. <br><br> Спасибо Орехус#7698 за перевод на русский. <br> Спасибо также всем кто хоть немного поиграл в игру."}
-else {aboutGame.innerHTML = "About game: <br> <br> Digital God 0.6 <br> Main goal: 1e100 α-coins. <br><br> Thanks Орехус#7698 for russian translate. <br> Thanks everyone for playing."}
+if (data==1) {aboutGame.innerHTML = "Об игре: <br><br> Цифровой Бог 0.7 <br> Главная цель: 1e100 α-монет. <br><br> Спасибо Орехус#7698 за перевод на русский. <br> Спасибо также всем кто хоть немного поиграл в игру."}
+else {aboutGame.innerHTML = "About game: <br> <br> Digital God 0.7 <br> Main goal: 1e100 α-coins. <br><br> Thanks Орехус#7698 for russian translate. <br> Thanks everyone for playing."}
 
 if (data==1) {endScreen.innerHTML = "Поздравляем, вы прошли игру! Однако, только в этой версии. В следующих обновлениях будет всё больше новых вещей. Если будешь ещё играть нажимай \"Играть Дальше!\""}
 else {endScreen.innerHTML = "Congratulations, you have completed game! However, only in this version. In the future there will be many new things. If you wanna play more press \"Play More!\""}
 }
 changedLanguage.call()
- setInterval(disabledUpgrades, 10); 
+    setInterval(disabledUpgrades, 10); 
 
 statsScreen.style.display = "none"
 prestigeButtons.style.display = "none"
+doPrestige.style.display = "none"
+crystalCount.style.display = "none"
 settingButtons.style.display = "none"
 automationScreen.style.display = "none"
 endGoodGameScreen.style.display = "none"
@@ -115,6 +176,7 @@ fortuneTab.style.display = "none"
 fortuneButtons.style.display = "none"
 prestigeAutoUpgrades.style.display = "none"
 prestigeSingleUpgrades.style.display = "none"
+aboutGamePage.style.display = "none"
 container1.style.display = "none"
 container2.style.display = "none"
 container3.style.display = "none"
@@ -166,7 +228,7 @@ function getCoin() {
     if (!checkCoin.checked){
     if (third.boost == 0)
     {third.boost = 1}
-    gain = 1*(first.b*second.boost*third.boost*fourth.x*fifth.x)+1;
+    gain = 1*(first.b*second.boost*third.boost*fourth.x*fifth.x)+100000000;
     gain = Math.pow(gain, pbfirst.boost)
     if (diamonds >= 1) {gain*=(diamonds*pbsecond.boost+1)}
     if (gain >= 1e19) {
@@ -201,28 +263,40 @@ function getCoin() {
 }
     return gain, money;
 }
-if (unlockedPrestige == 1) {prestigeTab.style.display = "block"}
+if (unlockedPrestige == 1 || totalDiamond>=1) {prestigeTab.style.display = "block"}
 
 function unlockPrestige() {
     prestigeTab.style.display = "block"
+    doPrestige.style.display = "block"
     const diamond1 = diamonds
     const diamond2 = diamonds.toExponential(2).replace("+","")
+    const getDiamond1 = (diamonds*pbsecond.boost*100).toFixed(0)
+    const getDiamond2 = (diamonds*pbsecond.boost*100).toExponential(2).replace("+","")
     var whichDiamond
     if (diamonds<1e6) whichDiamond = diamond1
     if (diamonds>=1e6) whichDiamond = diamond2
-    if ((diamonds*pbsecond.boost*100)<1e6){
+    if ((diamonds*pbsecond.boost*100)<1e6) whichGetDiamond = getDiamond1
+    if ((diamonds*pbsecond.boost*100)>=1e6) whichGetDiamond = getDiamond2
     if (data==1) {prestigeTab.innerHTML = "Престиж";
-    theGoal.innerHTML = `У вас <dm>${whichDiamond}</dm> алмазов, которые увеличивают монеты за нажатия на <dm>+${(diamonds*pbsecond.boost*100).toFixed(0)}%</dm>`}
+    theGoal.innerHTML = `У вас <dm>${whichDiamond}</dm> алмазов, которые увеличивают монеты за нажатия на <dm>+${whichGetDiamond}%</dm>`
+    crystalCount.innerHTML = `У вас ${whichDiamond} алмазов`}
     else {prestigeTab.innerHTML = "Prestige";
-    theGoal.innerHTML = `You have <dm>${whichDiamond}</dm> diamonds. They're increase coin gain by <dm>+${(diamonds*pbsecond.boost*100).toFixed(0)}%</dm>`}
-    }
-    if ((diamonds*pbsecond.boost*100)>=1e6){
-        if (data==1) {prestigeTab.innerHTML = "Престиж";
-        theGoal.innerHTML = `У вас <dm>${whichDiamond}</dm> алмазов, которые увеличивают монеты за нажатия на <dm>+${(diamonds*pbsecond.boost*100).toExponential(2).replace("+","")}%</dm>`}
-        else {prestigeTab.innerHTML = "Prestige";
-        theGoal.innerHTML = `You have <dm>${whichDiamond}</dm> diamonds. They're increase coin gain by <dm>+${(diamonds*pbsecond.boost*100).toExponential(2).replace("+","")}%</dm>`}
-        }
+    theGoal.innerHTML = `You have <dm>${whichDiamond}</dm> diamonds. They're increase coin gain by <dm>+${whichGetDiamond}%</dm>`
+    crystalCount.innerHTML = `You have ${whichDiamond} diamonds`}
+    return diamonds;
 }
+
+function checkingDiamonds() {
+const diamond1 = diamonds
+const diamond2 = diamonds.toExponential(2).replace("+","")
+if (diamonds<1e6) whichDiamond = diamond1
+if (diamonds>=1e6) whichDiamond = diamond2
+var whichDiamond
+if (data==1) crystalCount.innerHTML = `У вас ${whichDiamond} алмазов`
+else crystalCount.innerHTML = `You have ${whichDiamond} diamonds`
+}
+
+setInterval(checkingDiamonds, 50)
 
 function settingsScreen() {
     mainButtons.style.display = "none";
@@ -293,6 +367,16 @@ function endGameScreen() {
     fortuneButtons.style.display = "none"
 }
 
+function statisticScreen() {
+    aboutGamePage.style.display = "none";
+    statisticsPage.style.display = "block"
+}
+
+
+function aboutGameScreen() {
+    aboutGamePage.style.display = "block";
+    statisticsPage.style.display = "none"
+}
 
 function disabledUpgrades(){
     if (money>=firstprice) {
@@ -442,3 +526,28 @@ function changeLanguage() {
     if (data==1) {coinsCount.innerHTML = money.toExponential(2).replace("+","") + " α-монет"; document.getElementById('coinsGain').innerHTML = "Вы получили за нажатие " + gain.toExponential(2).replace("+","")+ " α-монет"}
     else {coinsCount.innerHTML = money.toExponential(2).replace("+","") + " α-coins"; document.getElementById('coinsGain').innerHTML = "You've earned from a click " + gain.toExponential(2).replace("+","") + " α-coins";}
 }
+
+var notiString = ''
+var notiColor;
+var notiWidth;
+
+function notify(notiString, notiColor, notiWidth) {
+    const notification = document.createElement('div');
+
+    notification.classList.add('notification');
+    notification.innerHTML = notiString;
+    notification.style.backgroundColor = notiColor;
+    notification.style.width = notiWidth;
+    document.body.appendChild(notification);
+  
+    setTimeout(() => {
+      notification.classList.add('show');
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+          notification.remove();
+        }, 1500); // подождать завершения анимации исчезновения
+      }, 1700); // показывать уведомление 5 секунд
+    }, 0);
+  }
+  

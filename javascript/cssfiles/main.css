@@ -1,20 +1,21 @@
 #coinsCount {
     text-align: center;
+    align-items: center;
     color:rgb(255, 217, 0);
     font-size: 35px;
     margin: 5px;
+    margin-top: 15px;
     text-shadow: 0 0 5px rgb(255, 217, 0);
+    width:25%;
+
 }
 
 #coinsGain {
     color: #656565;
     font-size: 16px;
     text-align: center;
-    text-shadow: 1px 0 1px #000, 
-    0 1px 1px #000, 
-    -1px 0 1px #000, 
-    0 -1px 1px #000;
     margin: 5px;
+    
 }
 
 #coinGain {
@@ -24,8 +25,8 @@
     margin: 0 auto; 
     display: block;
     transition: transform 0.1s ease-in-out;
-    width: 250px;
-    height: 250px;
+    width: 225px;
+    height: 225px;
     transition: background-image 0.2s ease-in-out;
     background-image: url("images/CoinOff.png");
     background-size: contain;
@@ -39,4 +40,66 @@
 
 #coinGain:hover {
     background-image: url("images/CoinOn.png");
+}
+
+.notification {
+    background-color: rgb(55, 244, 55);
+    color: black;
+    margin-top: 30px;
+    width: 150px;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    right: -240px;
+    transform: translate(0, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(2, 0, 0);
+    opacity: 0;
+    z-index: 9999;
+    transition: right 1s ease-in-out, opacity 1s ease-in-out;
+  }
+  
+  .notification.hide {
+    right: -200%; /* смещаем уведомление вправо за экран для скрытия */
+    transition: right 1s ease-in-out;
+  }
+
+  .notification.show {
+    right: 0;
+    opacity: 1;
+    transition: right 1s ease-in-out, opacity 1s ease-in-out;
+  }
+  #topValues {
+    height: 140px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    display: flex;
+  }
+
+  .crystalCounter {
+    text-align: center;
+    color:aqua;
+    font-size: 25px;
+    margin: 5px;
+    margin-top: 15px;
+    text-shadow: 0 0 5px aqua;
+    align-items: center;
+    justify-content:center;
+}
+
+.crystalCounter span {
+    margin: auto;
+}
+.topVars {
+  width: 350px;
+  padding-bottom: 200px;
+}
+
+#coinGet {
+  text-align: center;
 }

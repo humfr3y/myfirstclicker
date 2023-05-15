@@ -18,6 +18,27 @@
     <link rel="stylesheet" href="javascript/cssfiles/upgrades.css" type="text/css">
 </head>
 <body>
+    <!-- <div class="notification" style="display:none;">
+        You got achievement!
+      </div> -->
+    <div id="topValues">
+      <div id="invisible" class="topVars">
+        <span id="invis">hey</span>
+      </div>
+      <div id="coinGet" class="topVars">
+        <br>
+        <span id="coinsCount"></span>
+        <br>
+        <br>
+        <span id="coinsGain"></span>
+      </div>
+      <div id="crystalGet" class="topVars crystalCounter">
+        <span id="crystalCount">Lorem, ipsum dolor.</span>
+        <br>
+          <button onclick="doPrestigeReset(this)" id="doPrestige">Сделать сброс престижа</button>
+      </div>
+    </div>
+    <hr>
     <div id="topButtons">
         <button onclick="settingsScreen(this)" id= "settingsTab" class="tabButton">Настройки</button>
         <button onclick="mainScreen(this)" id= "mainTab" class="tabButton">Кликер</button>
@@ -33,15 +54,17 @@
         <button onclick="saveGame(this)" id= "savingGame" class="settingButton">Сохранить игру / Save the game</button>
         <button onclick="loadGame(this)" id= "loadingGame" class="settingButton">Загрузить игру / Load the game</button>
         <button onclick="autoSaveGame(this)" id= "autoSavingGame" class="settingButton">Автосохранение: выкл / Auto-save: off</button>
-        <button onclick="changeLanguage(this)" id= "changingLanguage" class="settingButton">Сменить язык</button>
         </div>
         <div id="secondSettingsRow">
         <button onclick="importSave(this)" id= "impSave" class="settingButton">импорт</button>
         <button onclick="exportSave(this)" id= "expSave" class="settingButton">экспорт</button>
+        </div>
+        <div id="thirdSettingsRow">
+        <button onclick="changeLanguage(this)" id= "changingLanguage" class="settingButton">Сменить язык</button>
         <a href="changelog.md" id="link" target="_blank">
-            <button onclick="changelog(this)" id= "changelogOpen" class="settingButton">Журнал изменений / Changelog</button>
-            </a>
-            <button onclick="doHardReset(this)" id= "hardRes" class="settingButton"></button>
+        <button onclick="changelog(this)" id= "changelogOpen" class="settingButton">Журнал изменений / Changelog</button>
+        </a>
+        <button onclick="doHardReset(this)" id= "hardRes" class="settingButton"></button>
         </div>
         </div>
         </div>
@@ -66,9 +89,10 @@
           </div>
     </div>
     <div id="mainButtons">
-    <p id="coinsCount"></p>
-    <p id="coinsGain"></p>
-    <button onclick="getCoin()" id = "coinGain" onkeydown="alert('Нельзя нажимать на кнопку!')" class="coinCss"><img src="javascript/cssfiles/images/CoinOff.png" style="width:0px" alt="" class="coinImage"></button><p>
+    <button onclick="getCoin()" id = "coinGain" class="coinCss"><img src="javascript/cssfiles/images/CoinOff.png" style="width:0px" alt="" class="coinImage"></button><p>  
+    <div id="maxBuyLine">
+    <button onclick="maxBuyAll(this)" id="maxbuy" class="upgradeButton maxBuy">Max Buy</button>
+    </div>
     <div id="commonUpgrades">
     <button onclick="commonUpgrade1(this)" id = "commonU1" class="upgradeButton commonButton">Открыть новое улучшение! Стоимость: 10 α-монет. / Unlock new upgrade! Cost: 10 α-coins.</button>
     <button onclick="commonUpgrade2(this)" id = "commonU2" class="upgradeButton commonButton">Открыть новое улучшение! Стоимость: 100 α-монет. / Unlock new upgrade! Cost: 100 α-coins. </button>
@@ -79,12 +103,10 @@
     <button onclick="singleUpgrade2(this)" id = "singleU2" class="upgradeButton singleButton"></button>
     <button onclick="singleUpgrade3(this)" id = "singleU3" class="upgradeButton singleButton"></button>
     </div>  
+
     </div>  
     <div id="prestigeButtons">
         <p id="theGoal">Цель</p> 
-        <div id="prestigeButton">
-        <button onclick="doPrestigeReset(this)" id="doPrestige">Сделать сброс престижа</button>
-        </div>
         <div id="prestigeBuyableUpgrades">
             <button onclick="pBuyableUpgrade1(this)" id = "pBuyableU1" class="upgradeButton pBuyableButton"></button>
             <button onclick="pBuyableUpgrade2(this)" id = "pBuyableU2" class="upgradeButton pBuyableButton"></button>
@@ -108,11 +130,23 @@
     <p id="fortuneNotImplemented" class="titleTab">Не реализовано!</p>
     </div>
     <div id="statsScreen">
-    <p id="statsTitle" class="titleTab">Статистика</p>
-    <p id="totalCoins" class="statsSlot"></p> 
-    <p id="totalDiamonds" class="statsSlot"></p> 
-    <p id="totalResets" class="statsSlot"></p> 
-    <p id="aboutGame">О игре</p>
+    <div id="statsSubButtons">
+      <button onclick="statisticScreen(this)" id= "statisticsTab" class="tabButton subButtons">Статистика</button>
+      <button onclick="aboutGameScreen(this)" id= "aboutGameTab" class="tabButton subButtons">Об игре</button>
+    </div>
+    <div id="statisticsPage">
+      <p id="statsTitle" class="titleTab">Статистика</p>
+      <p id="totalCoins" class="statsSlot"></p> 
+      <p id="gameTime" class="statsSlot">placeholder</p> 
+      <p id="prestigeStats" class="headerr" style="color:aqua">BLACK PENCIL?</p> 
+      <p id="totalDiamonds" class="statsSlot"></p> 
+      <p id="totalResets" class="statsSlot"></p> 
+      <p id="prestigeTime" class="statsSlot">placeholder</p> 
+      <p id="fastestPrestigeTime" class="statsSlot">fastest prestige</p> 
+    </div>
+    <div id="aboutGamePage">
+      <p id="aboutGame">Об игре</p>
+    </div>
     </div>
     <div id="endGoodGameScreen">
         <p id="endScreen">Достиг цели</p> 
@@ -124,6 +158,7 @@
     <script src="javascript/jsfiles/upgrades.js"></script>
     <script src="javascript/jsfiles/prestige.js"></script>
     <script src="javascript/jsfiles/automation.js"></script>
+    <!-- <script src="javascript/jsfiles/achievements.js"></script> -->
     <script>window.onload = loadGame()</script>
 
 </body>
