@@ -57,14 +57,41 @@
         </div>
         <div id="secondSettingsRow">
         <button onclick="importSave(this)" id= "impSave" class="settingButton">импорт</button>
+        <label for="file-upload" class="settingButton loadfile">
+          Загрузить файл
+        </label>
+        <input type="file" id="file-upload">
+        <p class="file-name"></p>
         <button onclick="exportSave(this)" id= "expSave" class="settingButton">экспорт</button>
         </div>
         <div id="thirdSettingsRow">
         <button onclick="changeLanguage(this)" id= "changingLanguage" class="settingButton">Сменить язык</button>
-        <a href="changelog.md" id="link" target="_blank">
+        <!-- <a href="changelog.md" id="link" target="_blank"> -->
         <button onclick="changelog(this)" id= "changelogOpen" class="settingButton">Журнал изменений / Changelog</button>
-        </a>
+        <!-- </a> -->
         <button onclick="doHardReset(this)" id= "hardRes" class="settingButton"></button>
+        </div>
+        </div>
+        <div id="myPopupBackdrop"></div>
+        <div id="changelogWindow">
+          <div id="titleDiv">
+            <span id="changelogTitle">Changelog</span>
+          </div>
+            <button onclick="hidePopup()" id="closeWindow"></button>
+          <div id="versionChooser">
+            <button onclick="showChangelog(desc00)" class="versionButton">0.0</button>
+            <button onclick="showChangelog(desc01)" class="versionButton">0.1</button>
+            <button onclick="showChangelog(desc02)" class="versionButton">0.2</button>
+            <button onclick="showChangelog(desc03)" class="versionButton">0.3</button>
+            <button onclick="showChangelog(desc04)" class="versionButton">0.4</button>
+            <button onclick="showChangelog(desc05)" class="versionButton">0.5</button>
+            <button onclick="showChangelog(desc051)" class="versionButton">0.5.1</button>
+            <button onclick="showChangelog(desc06)" class="versionButton">0.6</button>
+            <button onclick="showChangelog(desc07)" class="versionButton">0.7</button>
+            <button onclick="showChangelog(desc071)" class="versionButton">0.7.1</button>
+          </div>
+        <div id="versionDiv">
+          <p id="versionDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, quos cumque quisquam ducimus in eius illo facere. Non, impedit earum ab asperiores sequi repudiandae repellat pariatur eligendi perferendis est molestiae quasi autem. Minus sit eveniet iste, iure, sapiente voluptas saepe atque omnis officiis nesciunt inventore consequatur eos quos voluptates amet.</p>
         </div>
         </div>
         </div>
@@ -132,6 +159,7 @@
     <div id="statsScreen">
     <div id="statsSubButtons">
       <button onclick="statisticScreen(this)" id= "statisticsTab" class="tabButton subButtons">Статистика</button>
+      <button onclick="latestPrestigesScreen(this)" id= "latestPrestigesTab" class="tabButton subButtons">Сбросы Престижа</button>
       <button onclick="aboutGameScreen(this)" id= "aboutGameTab" class="tabButton subButtons">Об игре</button>
     </div>
     <div id="statisticsPage">
@@ -147,6 +175,19 @@
     <div id="aboutGamePage">
       <p id="aboutGame">Об игре</p>
     </div>
+    <div id="latestPrestigesPage">
+      <p id="latestPrestigesTitle" class="titleTab">10 последних престижей: </p>
+      <span class="prestigeText">1. </span><span id="firstPrestigeRun" class="prestigeText">1</span><br>
+      <span class="prestigeText">2. </span><span id="secondPrestigeRun" class="prestigeText">2</span><br>
+      <span class="prestigeText">3. </span><span id="thirdPrestigeRun" class="prestigeText">3</span><br>
+      <span class="prestigeText">4. </span><span id="fourthPrestigeRun" class="prestigeText">4</span><br>
+      <span class="prestigeText">5. </span><span id="fifthPrestigeRun" class="prestigeText">5</span><br>
+      <span class="prestigeText">6. </span><span id="sixthPrestigeRun" class="prestigeText">6</span><br>
+      <span class="prestigeText">7. </span><span id="seventhPrestigeRun" class="prestigeText">7</span><br>
+      <span class="prestigeText">8. </span><span id="eighthPrestigeRun" class="prestigeText">8</span><br>
+      <span class="prestigeText">9. </span><span id="ninthPrestigeRun" class="prestigeText">9</span><br>
+      <span class="prestigeText">10. </span><span id="tenthPrestigeRun" class="prestigeText">10</span><br>
+    </div>
     </div>
     <div id="endGoodGameScreen">
         <p id="endScreen">Достиг цели</p> 
@@ -154,6 +195,7 @@
         </div>
     <script src="javascript/jsfiles/classes.js"></script>
     <script src="javascript/jsfiles/clicker.js"></script>
+    <script src="javascript/jsfiles/changelog.js"></script>
     <script src="javascript/jsfiles/saving.js"></script>
     <script src="javascript/jsfiles/upgrades.js"></script>
     <script src="javascript/jsfiles/prestige.js"></script>

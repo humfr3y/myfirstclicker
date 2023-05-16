@@ -86,81 +86,7 @@ function addSecond () {
 }
 setInterval(loadStats, 1000)
 setInterval(addSecond, 1000)
-function changedLanguage () {
-if (data==1) {settingsTab.innerHTML = "Настройки"}
-else {settingsTab.innerHTML = "Settings"}
-if (data==1) {mainTab.innerHTML = "Кликер"}
-else {mainTab.innerHTML = "Clicker"}
-if (data==1) {prestigeTab.innerHTML = "Престиж"}
-else {prestigeTab.innerHTML = "Prestige"}
-if (data==1) {infoTab.innerHTML = "Информация"}
-else {infoTab.innerHTML = "Information"}
-if (data==1) {autoTab.innerHTML = "Автоматизация"}
-else {autoTab.innerHTML = "Automation"}
-if (data==1) {fortuneTab.innerHTML = "Фортуна"}
-else {fortuneTab.innerHTML = "Fortune"}
-if (data==1) {settingsTab.innerHTML = "Настройки"}
-else {settingsTab.innerHTML = "Settings"}
 
-if (data==1) {maxbuy.innerHTML = "Купить всё"}
-else {maxbuy.innerHTML = "Max buy"}
-
-if (data==1) {statisticsTab.innerHTML = "Статистика"}
-else {statisticsTab.innerHTML = "Statistics"}
-if (data==1) {aboutGameTab.innerHTML = "Об игре"}
-else {aboutGameTab.innerHTML = "About game"}
-
-loadStats.call()
-if (data==1) {coinGain.innerHTML = money.toFixed(0) + " α-монет. Нажмите на α-монету."} 
-else {coinGain.innerHTML = money.toFixed(0) + " α-coins. Click on the α-coin."}
-
-if (data==1) {savingGame.innerHTML = "Сохранить игру"} 
-else {savingGame.innerHTML = "Save game"}
-if (data==1) {loadingGame.innerHTML = "Загрузить игру"} 
-else {loadingGame.innerHTML = "Load game"}
-if (data==1) {autoSavingGame.innerHTML = "Автосохранение вкл."}
-else {autoSavingGame.innerHTML = "Autosave on."}
-if (data==1) {changingLanguage.innerHTML = "Сменить язык на английский"}
-else {changingLanguage.innerHTML = "Switch language to russian"}
-if (data==1) {impSave.innerHTML = "Импорт"}
-else {impSave.innerHTML = "Import"}
-if (data==1) {expSave.innerHTML = "Экспорт"}
-else {expSave.innerHTML = "Export"}
-if (data==1) {changelogOpen.innerHTML = "Журнал изменений"}
-else {changelogOpen.innerHTML = "Changelog"}
-if (data==1) {link.href = 'changelogru.md'}
-else {link.href = 'changelog.md'}
-if (data==1) {hardRes.innerHTML = "Сбросить игру"}
-else {hardRes.innerHTML = "Reset the game"}
-
-if (data==1) {playMore.innerHTML = "Играть дальше"}
-else {playMore.innerHTML = "Play more"}
-
-if (data==1) {doPrestige.innerHTML = "Стать престижным"}
-else {doPrestige.innerHTML = "Become prestige"}
-
-if (data==1) {settingsTitle.innerHTML = "Настройки"}
-else {settingsTitle.innerHTML = "Settings"}
-if (data==1) {statsTitle.innerHTML = "Статистика"}
-else {statsTitle.innerHTML = "Statistics"}
-
-if (data==1) {autoBuy1to3.innerHTML = "Автопокупка 1-3 улучшений"}
-else {autoBuy1to3.innerHTML = "1-3 upgrades autobuyer"}
-if (data==1) {autoBuy4to6.innerHTML = "Автопокупка 4-6 улучшений"}
-else {autoBuy4to6.innerHTML = "4-6 upgrades autobuyer"}
-if (data==1) {autoMoney.innerHTML = "Автополучение монет"}
-else {autoMoney.innerHTML = "Money autogain"}
-
-if (data==1) {fortuneNotImplemented.innerHTML = "Не реализовано!"}
-else {fortuneNotImplemented.innerHTML = "Not implemented!"}
-
-if (data==1) {aboutGame.innerHTML = "Об игре: <br><br> Цифровой Бог 0.7 <br> Главная цель: 1e100 α-монет. <br><br> Спасибо Орехус#7698 за перевод на русский. <br> Спасибо также всем кто хоть немного поиграл в игру."}
-else {aboutGame.innerHTML = "About game: <br> <br> Digital God 0.7 <br> Main goal: 1e100 α-coins. <br><br> Thanks Орехус#7698 for russian translate. <br> Thanks everyone for playing."}
-
-if (data==1) {endScreen.innerHTML = "Поздравляем, вы прошли игру! Однако, только в этой версии. В следующих обновлениях будет всё больше новых вещей. Если будешь ещё играть нажимай \"Играть Дальше!\""}
-else {endScreen.innerHTML = "Congratulations, you have completed game! However, only in this version. In the future there will be many new things. If you wanna play more press \"Play More!\""}
-}
-changedLanguage.call()
     setInterval(disabledUpgrades, 10); 
 
 statsScreen.style.display = "none"
@@ -177,6 +103,8 @@ fortuneButtons.style.display = "none"
 prestigeAutoUpgrades.style.display = "none"
 prestigeSingleUpgrades.style.display = "none"
 aboutGamePage.style.display = "none"
+latestPrestigesPage.style.display = "none"
+latestPrestigesTab.style.display = "none"
 container1.style.display = "none"
 container2.style.display = "none"
 container3.style.display = "none"
@@ -209,8 +137,8 @@ function startTextOfPrestigeUpgrades() {
     else if (data==0) {pAutoU1.innerHTML = "Unlock upgrade for 1000 diamonds. <br>Unlocks 4-6 upgrades autobuyer."}
     if (data==1) {pAutoU2.innerHTML = "Открыть улучшение за 2500 алмазов. <br>Открывет Автоматизацию покупки 1-3 улучшений."}
     else if (data==0) {pAutoU2.innerHTML = "Unlock upgrade for 2500 diamonds. <br>Unlocks 1-3 upgrades autobuyer."}
-    if (data==1) {pAutoU3.innerHTML = "Открыть улучшение за 5000 алмазов. <br>Открывет Автоматизацию получения монет."}
-    else if (data==0) {pAutoU3.innerHTML = "Unlock upgrade for 5000 diamonds. <br>Unlocks autogain of coins."}
+    if (data==1) {pAutoU3.innerHTML = "Открыть улучшение за 5000 алмазов. <br>Открывет Автоматизацию получения α-монет."}
+    else if (data==0) {pAutoU3.innerHTML = "Unlock upgrade for 5000 diamonds. <br>Unlocks autogain of α-coins."}
     if (data==1) {pAutoU4.innerHTML = "Открыть улучшение за 15000 алмазов. <br>Открывает новые улучшения престижа. <br> Нужны три предыдущих улучшения."}
     else if (data==0) {pAutoU4.innerHTML = "Unlock upgrade for 15000 diamonds. <br>Unlocks new prestige upgrades.<br> Requires three previous upgrades."}
     if (data==1) {pSingleU1.innerHTML = "Открыть улучшение за 50000 алмазов. <br> Уменьшает цену престижных улучшений."}
@@ -278,10 +206,10 @@ function unlockPrestige() {
     if ((diamonds*pbsecond.boost*100)<1e6) whichGetDiamond = getDiamond1
     if ((diamonds*pbsecond.boost*100)>=1e6) whichGetDiamond = getDiamond2
     if (data==1) {prestigeTab.innerHTML = "Престиж";
-    theGoal.innerHTML = `У вас <dm>${whichDiamond}</dm> алмазов, которые увеличивают монеты за нажатия на <dm>+${whichGetDiamond}%</dm>`
+    theGoal.innerHTML = `У вас <dm>${whichDiamond}</dm> алмазов, которые увеличивают α-монеты за нажатия на <dm>+${whichGetDiamond}%</dm>`
     crystalCount.innerHTML = `У вас ${whichDiamond} алмазов`}
     else {prestigeTab.innerHTML = "Prestige";
-    theGoal.innerHTML = `You have <dm>${whichDiamond}</dm> diamonds. They're increase coin gain by <dm>+${whichGetDiamond}%</dm>`
+    theGoal.innerHTML = `You have <dm>${whichDiamond}</dm> diamonds. They're increase α-coin gain by <dm>+${whichGetDiamond}%</dm>`
     crystalCount.innerHTML = `You have ${whichDiamond} diamonds`}
     return diamonds;
 }
@@ -369,13 +297,21 @@ function endGameScreen() {
 
 function statisticScreen() {
     aboutGamePage.style.display = "none";
-    statisticsPage.style.display = "block"
+    statisticsPage.style.display = "block";
+    latestPrestigesPage.style.display = "none";
 }
 
 
 function aboutGameScreen() {
     aboutGamePage.style.display = "block";
     statisticsPage.style.display = "none"
+    latestPrestigesPage.style.display = "none";
+}
+
+function latestPrestigesScreen() {
+    aboutGamePage.style.display = "none";
+    statisticsPage.style.display = "none"
+    latestPrestigesPage.style.display = "block";
 }
 
 function disabledUpgrades(){
@@ -550,4 +486,20 @@ function notify(notiString, notiColor, notiWidth) {
       }, 1700); // показывать уведомление 5 секунд
     }, 0);
   }
-  
+
+var backdrop = document.getElementById("myPopupBackdrop")
+var popup = document.getElementById("changelogWindow");
+
+function changelog(){
+
+
+    changelogWindow.style.display = "block"
+    backdrop.style.display = "flex";
+}
+
+function hidePopup() {
+    popup.style.display = "none";
+    backdrop.style.display = "none";
+    }
+
+backdrop.addEventListener("click", hidePopup);

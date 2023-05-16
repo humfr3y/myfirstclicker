@@ -8,8 +8,8 @@ var thirdprice = Math.round(third.basePrice*Math.pow(1.275, third.amount))
 function loadUpgrades() {
     if (first.amount >=1){
         var firstBoost = first.b*second.boost
-        if (data==1) {commonU1.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает монеты за нажатие. <br> Стоимость: " + Math.round(first.basePrice*Math.pow(1.15, first.amount)).toFixed(0) + " α-монет. <br> Бонус: +" + firstBoost.toFixed() } 
-        else {commonU1.innerHTML = "<ut>Small Investment</ut> <br> Increases coins gain per click. <br> Cost: " + Math.round(first.basePrice*Math.pow(1.15, first.amount)).toFixed(0) + " α-coins. <br> Currently: +" + firstBoost.toFixed()}}
+        if (data==1) {commonU1.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает α-монеты за нажатие. <br> Стоимость: " + Math.round(first.basePrice*Math.pow(1.15, first.amount)).toFixed(0) + " α-монет. <br> Бонус: +" + firstBoost.toFixed() } 
+        else {commonU1.innerHTML = "<ut>Small Investment</ut> <br> Increases α-coins gain per click. <br> Cost: " + Math.round(first.basePrice*Math.pow(1.15, first.amount)).toFixed(0) + " α-coins. <br> Currently: +" + firstBoost.toFixed()}}
         
     if (second.amount >=1){
         cU1TL =  setInterval(commonUpgrade1TextLoad, 100)
@@ -81,12 +81,12 @@ function loadUpgrades() {
     if (pbfirst.amount >=1){
         pbfirstprice = Math.round(pbfirst.basePrice*Math.pow(1.5, pbfirst.amount)/psfirst.boost)
         if (pbfirstprice<1e6){
-            if (data==1) {pBuyableU1.innerHTML = "<ut>Суперпроцессор</ut> <br> Усиливает монеты за нажатие. <br> Стоимость: " + pbfirstprice.toFixed(0) + " алмазов. <br> Бонус: ^" + pbfirst.boost.toFixed(3) } 
-            else {pBuyableU1.innerHTML = "<ut>Superprocessor</ut> <br> Increases power of coins gain per click. <br> Cost: " + pbfirstprice.toFixed(0) + " diamonds. <br> Currently: ^" + pbfirst.boost.toFixed(3)}
+            if (data==1) {pBuyableU1.innerHTML = "<ut>Суперпроцессор</ut> <br> Усиливает α-монеты за нажатие. <br> Стоимость: " + pbfirstprice.toFixed(0) + " алмазов. <br> Бонус: ^" + pbfirst.boost.toFixed(3) } 
+            else {pBuyableU1.innerHTML = "<ut>Superprocessor</ut> <br> Increases power of α-coins gain per click. <br> Cost: " + pbfirstprice.toFixed(0) + " diamonds. <br> Currently: ^" + pbfirst.boost.toFixed(3)}
         }
         else if (pbfirstprice>=1e6){
-            if (data==1) {pBuyableU1.innerHTML = "<ut>Суперпроцессор</ut> <br> Усиливает монеты за нажатие. <br> Стоимость: " + pbfirstprice.toExponential(2).replace("+","") + " алмазов. <br> Бонус: ^" + pbfirst.boost.toFixed(3) } 
-            else {pBuyableU1.innerHTML = "<ut>Superprocessor</ut> <br> Increases power of coins gain per click. <br> Cost: " + pbfirstprice.toExponential(2).replace("+","") + " diamonds. <br> Currently: ^" + pbfirst.boost.toFixed(3)}
+            if (data==1) {pBuyableU1.innerHTML = "<ut>Суперпроцессор</ut> <br> Усиливает α-монеты за нажатие. <br> Стоимость: " + pbfirstprice.toExponential(2).replace("+","") + " алмазов. <br> Бонус: ^" + pbfirst.boost.toFixed(3) } 
+            else {pBuyableU1.innerHTML = "<ut>Superprocessor</ut> <br> Increases power of α-coins gain per click. <br> Cost: " + pbfirstprice.toExponential(2).replace("+","") + " diamonds. <br> Currently: ^" + pbfirst.boost.toFixed(3)}
         }}
     if (pbsecond.amount >=1){
         pbsecondprice = Math.round(pbsecond.basePrice*Math.pow(1.25, pbsecond.amount)/psfirst.boost)
@@ -127,8 +127,8 @@ function loadUpgrades() {
         container2.style.display = "flex"
     }
     if (pathird.amount >=1) {
-        if (data==1) {pAutoU3.innerHTML = "<ut>Авто-Покупщик 3.0</ut> <br> Вы получаете 100% от монет за нажатия в секунду"}
-        else {pAutoU3.innerHTML = "<ut>Auto-Buyer 3.0</ut> <br> You automatically earning 100% coin gain per second"}
+        if (data==1) {pAutoU3.innerHTML = "<ut>Авто-Покупщик 3.0</ut> <br> Вы получаете 100% от α-монет за нажатия в секунду"}
+        else {pAutoU3.innerHTML = "<ut>Auto-Buyer 3.0</ut> <br> You automatically earning 100% α-coin gain per second"}
         purchasedButtonpAutoU3.classList.add('purchased')
         container3.style.display = "flex"
     }
@@ -139,8 +139,8 @@ function loadUpgrades() {
         purchasedButtonpAutoU4.classList.add('purchased')
     }
     if (psfirst.amount >=1) {
-        if (data==1) {pSingleU1.innerHTML = "<ut>Бриллиантовый Торговец</ut> <br>Делит цену улучшений Престижа в зависимости от текущего количества монет <br> Бонус: / " + psfirst.boost.toFixed(2)}
-        else {pSingleU1.innerHTML = "<ut>Diamond Trader</ut> <br>Divides price of Prestige upgrades based on current coins <br> Currently: / " + psfirst.boost.toFixed(2)}
+        if (data==1) {pSingleU1.innerHTML = "<ut>Бриллиантовый Торговец</ut> <br>Делит цену улучшений Престижа в зависимости от текущего количества α-монет <br> Бонус: / " + psfirst.boost.toFixed(2)}
+        else {pSingleU1.innerHTML = "<ut>Diamond Trader</ut> <br>Divides price of Prestige upgrades based on current α-coins <br> Currently: / " + psfirst.boost.toFixed(2)}
         purchasedButtonpSingleU1.classList.add('purchased')
     }
     if (pssecond.amount >=1) {
@@ -189,6 +189,7 @@ function saveGame () {
             data: data,
             money: money,
             completion: completion,
+            onecheck: onecheck,
             autoSaving: autoSaving,
             unlockedPrestige: unlockedPrestige,
             total: total,
@@ -270,6 +271,16 @@ function saveGame () {
             fastPrestigeHours: fastPrestigeHours,
             fastPrestigeSecondsTimer: fastPrestigeSecondsTimer,
             bestPrestigeRun: bestPrestigeRun,
+            firstBank: (encodeURIComponent(firstBank)),
+            secondBank: (encodeURIComponent(secondBank)),
+            thirdBank: (encodeURIComponent(thirdBank)),
+            fourthBank: (encodeURIComponent(fourthBank)),
+            fifthBank: (encodeURIComponent(fifthBank)),
+            sixthBank: (encodeURIComponent(sixthBank)),
+            seventhBank: (encodeURIComponent(seventhBank)),
+            eighthBank: (encodeURIComponent(eighthBank)),
+            ninthBank: (encodeURIComponent(ninthBank)),
+            tenthBank: (encodeURIComponent(tenthBank)),
 
     }; //образуем переменную с кучей других переменных
 
@@ -285,12 +296,12 @@ function saveGame () {
 function loadGame () {
         let storedData = localStorage.getItem('datasaving'); //спарсим его обратно объект
         let parsedData = JSON.parse(storedData);
-
         
         money = parseFloat(parsedData.money);
         data = parseFloat(parsedData.data);
         autoSaving = parseFloat(parsedData.autoSaving)
         completion = parseFloat(parsedData.completion)
+        onecheck = parseFloat(parsedData.onecheck)
         total = parseFloat(parsedData.total);
         totalDiamond = parseFloat(parsedData.totalDiamond);
         totalPrestiges = parseFloat(parsedData.totalPrestiges);
@@ -371,7 +382,16 @@ function loadGame () {
         fastPrestigeHours = parseFloat(parsedData.fastPrestigeHours);
         fastPrestigeSecondsTimer = parseFloat(parsedData.fastPrestigeSecondsTimer);
         bestPrestigeRun = parseFloat(parsedData.bestPrestigeRun);
-
+        firstBank = decodeURIComponent((parsedData.firstBank));
+        secondBank = decodeURIComponent((parsedData.secondBank));;
+        thirdBank = decodeURIComponent((parsedData.thirdBank));
+        fourthBank = decodeURIComponent((parsedData.fourthBank));
+        fifthBank = decodeURIComponent((parsedData.fifthBank));
+        sixthBank = decodeURIComponent((parsedData.sixthBank));
+        seventhBank = decodeURIComponent((parsedData.seventhBank));
+        eighthBank = decodeURIComponent((parsedData.eighthBank));
+        ninthBank = decodeURIComponent((parsedData.ninthBank));
+        tenthBank = decodeURIComponent((parsedData.tenthBank));
         var loadNotify
         if (data == 1) loadNotify = 'Игра загружена!'
         else loadNotify = 'Game load!'
@@ -409,12 +429,20 @@ function loadGame () {
         pSU1B =  setInterval(prestigeSingleUpgrade1Boost, 100)
         if (psthird.amount>=1)
         pSU3B =  setInterval(prestigeSingleUpgrade3Boost, 100)
-        if (unlockedPrestige == 1 || totalDiamond>=1) {prestigeTab.style.display = "block"; unlockPrestige(); 
+        if (unlockedPrestige == 1 || totalDiamond>=1) {prestigeTab.style.display = "block"; unlockPrestige(); latestPrestigesTab.style.display = "block"
         if (totalDiamond>1) crystalCount.style.display = "block"}
-        
+        tenthPrestigeRun.innerHTML = tenthBank
+        ninthPrestigeRun.innerHTML = ninthBank
+        eighthPrestigeRun.innerHTML = eighthBank
+        seventhPrestigeRun.innerHTML = seventhBank
+        sixthPrestigeRun.innerHTML = sixthBank
+        fifthPrestigeRun.innerHTML = fifthBank
+        fourthPrestigeRun.innerHTML = fourthBank
+        thirdPrestigeRun.innerHTML = thirdBank
+        secondPrestigeRun.innerHTML = secondBank
+        firstPrestigeRun.innerHTML = firstBank
     }
 
-function changelog(){}
 
 function autoSaveThis () {
             if (autoSaving==1)
@@ -491,6 +519,7 @@ function doHardReset () {
             psfourth.price = 1e9
             psfourth.boost = 1
             completion = 0;
+            onecheck = 0
             unlockedPrestige = 0;
             autoSaving = 1;
             totalDiamond = 0
@@ -507,6 +536,16 @@ function doHardReset () {
             fastPrestigeHours = 0
             fastPrestigeSecondsTimer = 0
             bestPrestigeRun = 1e9
+            firstBank = ""
+            secondBank = ""
+            thirdBank = ""
+            fourthBank = ""
+            fifthBank = ""
+            sixthBank = ""
+            seventhBank = ""
+            eighthBank = ""
+            ninthBank = ""
+            tenthBank = ""
             saveGame.call();
             loadUpgrades.call();
             stopIntervals.call();
@@ -524,12 +563,23 @@ function doHardReset () {
             container1.style.display = "none"
             container2.style.display = "none"
             container3.style.display = "none"
+            latestPrestigesTab.style.display = "none"
+            latestPrestigesPage.style.display = "none"
             startTextOfUpgrades.call();
             check46.checked = false
             check13.checked = false
             checkCoin.checked = false
             
-            
+            tenthPrestigeRun.innerHTML = ""
+            ninthPrestigeRun.innerHTML = ""
+            eighthPrestigeRun.innerHTML = ""
+            seventhPrestigeRun.innerHTML = ""
+            sixthPrestigeRun.innerHTML = ""
+            fifthPrestigeRun.innerHTML = ""
+            fourthPrestigeRun.innerHTML = ""
+            thirdPrestigeRun.innerHTML = ""
+            secondPrestigeRun.innerHTML = ""
+            firstPrestigeRun.innerHTML = ""
             var hardNotify, hardNotifyColor
             if (data == 1) hardNotify = 'Игра сброшена!'
             else hardNotify = 'Game reseted!'
@@ -609,6 +659,7 @@ function exportSave() {
             money: money,
             completion: completion,
             autoSaving: autoSaving,
+            onecheck: onecheck,
             unlockedPrestige: unlockedPrestige,
             total: total,
             totalDiamond: totalDiamond,
@@ -689,6 +740,16 @@ function exportSave() {
             fastPrestigeHours: fastPrestigeHours,
             fastPrestigeSecondsTimer: fastPrestigeSecondsTimer,
             bestPrestigeRun: bestPrestigeRun,
+            firstBank: (encodeURIComponent(firstBank)),
+            secondBank: (encodeURIComponent(secondBank)),
+            thirdBank: (encodeURIComponent(thirdBank)),
+            fourthBank: (encodeURIComponent(fourthBank)),
+            fifthBank: (encodeURIComponent(fifthBank)),
+            sixthBank: (encodeURIComponent(sixthBank)),
+            seventhBank: (encodeURIComponent(seventhBank)),
+            eighthBank: (encodeURIComponent(eighthBank)),
+            ninthBank: (encodeURIComponent(ninthBank)),
+            tenthBank: (encodeURIComponent(tenthBank)),
     }; //образуем переменную с кучей других переменных
 
     var exportNotify
@@ -697,7 +758,6 @@ function exportSave() {
     notify(exportNotify);
 
     let exportedData = JSON.stringify(datasave); //превратим в строчку
-    
     let base64 = btoa(exportedData); // кодируем строку в base64
     console.log(base64)
     navigator.clipboard.writeText(base64)
@@ -721,6 +781,13 @@ function importSave() {
         return;
     }
     try {
+    importing(base64);
+    }
+    
+    catch {alert('Wrong input')}
+}
+
+function importing(base64) {
     const importedData = atob(base64);
     localStorage.setItem('datasaving', importedData);
     const datasave = JSON.parse(importedData);
@@ -730,13 +797,14 @@ function importSave() {
 
     money = parseFloat(parsedData.money);
     data = parseFloat(parsedData.data);
-    autoSaving = parseFloat(parsedData.autoSaving)
-    completion = parseFloat(parsedData.completion)
+    autoSaving = parseFloat(parsedData.autoSaving);
+    completion = parseFloat(parsedData.completion);
+    onecheck = parseFloat(parsedData.onecheck)
     total = parseFloat(parsedData.total);
     totalDiamond = parseFloat(parsedData.totalDiamond);
     totalPrestiges = parseFloat(parsedData.totalPrestiges);
     amounts = parseFloat(parsedData.amounts);
-    unlockedPrestige = parseFloat(parsedData.unlockedPrestige)
+    unlockedPrestige = parseFloat(parsedData.unlockedPrestige);
     diamonds = parseFloat(parsedData.diamonds);
     diamondsBoost = parseFloat(parsedData.diamondsBoost);
     first.price = parseFloat(parsedData.first_price);
@@ -812,49 +880,71 @@ function importSave() {
     fastPrestigeHours = parseFloat(parsedData.fastPrestigeHours);
     fastPrestigeSecondsTimer = parseFloat(parsedData.fastPrestigeSecondsTimer);
     bestPrestigeRun = parseFloat(parsedData.bestPrestigeRun);
+    firstBank = decodeURIComponent((parsedData.firstBank));
+    secondBank = decodeURIComponent((parsedData.secondBank));;
+    thirdBank = decodeURIComponent((parsedData.thirdBank));
+    fourthBank = decodeURIComponent((parsedData.fourthBank));
+    fifthBank = decodeURIComponent((parsedData.fifthBank));
+    sixthBank = decodeURIComponent((parsedData.sixthBank));
+    seventhBank = decodeURIComponent((parsedData.seventhBank));
+    eighthBank = decodeURIComponent((parsedData.eighthBank));
+    ninthBank = decodeURIComponent((parsedData.ninthBank));
+    tenthBank = decodeURIComponent((parsedData.tenthBank));
 
-    var importNotify
-    if (data == 1) importNotify = 'Игра импортирована!'
-    else importNotify = 'Game imported!'
+    var importNotify;
+    if (data == 1)
+        importNotify = 'Игра импортирована!';
+    else
+        importNotify = 'Game imported!';
     notify(importNotify);
 
-    if (data==1) {coinsCount.innerHTML = money.toFixed(0) + " α-монет. Нажмите на α-монету.";  document.getElementById('coinsGain').innerHTML = ""} 
-            else {coinsCount.innerHTML = money.toFixed(0) + " α-coins. Click on the α-coin."; document.getElementById('coinsGain').innerHTML = "";}
-        if (money>1e6)
-        if (data==1) {coinsCount.innerHTML = money.toExponential(2).replace("+","") + " α-монет"; document.getElementById('coinsGain').innerHTML = ""}
-        else {coinsCount.innerHTML = money.toExponential(2).replace("+","") + " α-coins"; document.getElementById('coinsGain').innerHTML = "";}
-        loadStats.call()
-        changedLanguage.call()
-        stopIntervals.call()
-        startTextOfUpgrades.call()
-        startTextOfPrestigeUpgrades.call()
-        loadUpgrades.call()
-        checkThisBox.call()
-        if (autoSaving==1) {
-        if (data==1) {autoSavingGame.innerHTML = "Автосохранение вкл."}
-        else {autoSavingGame.innerHTML = "Autosave on."}
-        } 
-        else {
-        if (data==1) {autoSavingGame.innerHTML = "Автосохранение выкл."}
-            else {autoSavingGame.innerHTML = "Autosave off."}
-        }
-        if (first.amount>=1)
-        cU1TL =  setInterval(commonUpgrade1TextLoad, 100)
-        if (fourth.amount>=1)
-        sU1B =  setInterval(singleUpgrade1Boost, 100)
-        if (sixth.amount>=1)
-        sU3B =  setInterval(singleUpgrade3Boost, 100)
-        if (second.amount>=1)
-        cU2TL =  setInterval(commonUpgrade2TextLoad, 100)
-        if (psfirst.amount>=1)
-        pSU1B =  setInterval(prestigeSingleUpgrade1Boost, 100)
-        if (psthird.amount>=1)
-        pSU3B =  setInterval(prestigeSingleUpgrade3Boost, 100)
-        if (unlockedPrestige == 1 || totalDiamond>=1) {prestigeTab.style.display = "block"; unlockPrestige(); 
-        if (totalDiamond>1) crystalCount.style.display = "block"}
+    if (data == 1) { coinsCount.innerHTML = money.toFixed(0) + " α-монет. Нажмите на α-монету."; document.getElementById('coinsGain').innerHTML = ""; }
+    else { coinsCount.innerHTML = money.toFixed(0) + " α-coins. Click on the α-coin."; document.getElementById('coinsGain').innerHTML = ""; }
+    if (money > 1e6)
+        if (data == 1) { coinsCount.innerHTML = money.toExponential(2).replace("+", "") + " α-монет"; document.getElementById('coinsGain').innerHTML = ""; }
+        else { coinsCount.innerHTML = money.toExponential(2).replace("+", "") + " α-coins"; document.getElementById('coinsGain').innerHTML = ""; }
+    loadStats.call();
+    changedLanguage.call();
+    stopIntervals.call();
+    startTextOfUpgrades.call();
+    startTextOfPrestigeUpgrades.call();
+    loadUpgrades.call();
+    checkThisBox.call();
+    if (autoSaving == 1) {
+        if (data == 1) { autoSavingGame.innerHTML = "Автосохранение вкл."; }
+        else { autoSavingGame.innerHTML = "Autosave on."; }
     }
-    
-    catch {alert('Wrong input')}
+    else {
+        if (data == 1) { autoSavingGame.innerHTML = "Автосохранение выкл."; }
+        else { autoSavingGame.innerHTML = "Autosave off."; }
+    }
+    if (first.amount >= 1)
+        cU1TL = setInterval(commonUpgrade1TextLoad, 100);
+    if (fourth.amount >= 1)
+        sU1B = setInterval(singleUpgrade1Boost, 100);
+    if (sixth.amount >= 1)
+        sU3B = setInterval(singleUpgrade3Boost, 100);
+    if (second.amount >= 1)
+        cU2TL = setInterval(commonUpgrade2TextLoad, 100);
+    if (psfirst.amount >= 1)
+        pSU1B = setInterval(prestigeSingleUpgrade1Boost, 100);
+    if (psthird.amount >= 1)
+        pSU3B = setInterval(prestigeSingleUpgrade3Boost, 100);
+    if (unlockedPrestige == 1 || totalDiamond >= 1) {
+        prestigeTab.style.display = "block"; unlockPrestige(); latestPrestigesTab.style.display = "block";
+        if (totalDiamond > 1)
+            crystalCount.style.display = "block";
+    }
+        tenthPrestigeRun.innerHTML = tenthBank
+        ninthPrestigeRun.innerHTML = ninthBank
+        eighthPrestigeRun.innerHTML = eighthBank
+        seventhPrestigeRun.innerHTML = seventhBank
+        sixthPrestigeRun.innerHTML = sixthBank
+        fifthPrestigeRun.innerHTML = fifthBank
+        fourthPrestigeRun.innerHTML = fourthBank
+        thirdPrestigeRun.innerHTML = thirdBank
+        secondPrestigeRun.innerHTML = secondBank
+        firstPrestigeRun.innerHTML = firstBank
 }
 
 function stopIntervals () {
@@ -912,3 +1002,22 @@ function checkThisBox () {
             }
             return autoCoinInterval, autoBuy46Interval, autoBuy13Interval;
           }
+
+          
+  var fileUpload = document.getElementById('file-upload');
+  var fileName = document.querySelector('.file-name');
+  
+  fileUpload.addEventListener('change', function(base64) {
+    var file = base64.target.files[0];
+  
+    fileName.textContent = file.name;
+  
+    var reader = new FileReader();
+  
+    reader.onload = function(base64) {
+      importing(base64.target.result)
+    };
+  
+    reader.readAsText(file);
+    fileUpload.value = null;
+  });

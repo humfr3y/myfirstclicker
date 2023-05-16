@@ -16,7 +16,7 @@ Gameplay changes:
 [Dev comment]
 Yeah, so small update after 2 months, cuz i started to make it yesterday, i just didn't want to do it. Well i actually did, but some troubles appeared and i couldn't make something. But 0.8 will change EVERYTHING, because it's Coins Update! New upgrades, mechanics changing and more! 0.9 also takes something like Prestige Update 2! Well, when i'll start to do it? Idk.
 
-09.03.2023 | Digital God 0.6. Prestige Update (Codename: PRESTIGE)
+09.03.2023 | Digital God 0.6. Prestige Update (Codename: PRESTIGE):
 Design changes:
 - Changed game name to Digital God 0.6. Reason: Game will be a clicker only at start, then after some upgrade money gain become automated and there is no will be any clicking things. I had idea make diamond gain clickable but that'll be weird.
 - Added page icon. Lightning. God. Zeus.
@@ -57,7 +57,7 @@ Design changes:
 [Dev comment]
 Sorry for the little update, I'm just learning a little HTML, CSS and Vue.js (rn at CSS), so that's not procrastination! I wanna make fine interface especially for the next update. Ok you can check through console new 0.6 thing will be Prestige ofc. But what'll it make? Stay tuned!
 
-08.02.2023 | My1stClicker 0.5. Revolution Update (Codename: ANTIMATTER)
+08.02.2023 | My1stClicker 0.5. Revolution Update (Codename: ANTIMATTER):
 Design changes:
 - FULL REDESIGN OF GAME! Simple black bg, buttons with disabled/enabled/hovered functions, new coin icon.
 - INTERFACE CHANGE! You can select 4 tabs: settings, clicker, ?????? and info.

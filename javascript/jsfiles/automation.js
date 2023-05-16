@@ -26,7 +26,7 @@ document.getElementById('auto-buy1-checkbox').addEventListener('change', functio
   let delta = 0;
 
 document.getElementById('auto-buy2-checkbox').addEventListener('change', function() {
-  if (this.checked) { // флажок отмечен
+  if (this.checked) { 
     
     autoBuy13Interval = setInterval(() => {
       const now = Date.now();
@@ -36,9 +36,9 @@ document.getElementById('auto-buy2-checkbox').addEventListener('change', functio
       while (delta >= timePerFrame) {
         delta -= timePerFrame;
         
-        autoBuy13(); // выполняем функцию автопокупки
+        autoBuy13(); 
       }
-    }, 0); // 0 мс означает, что функция будет запускаться как можно чаще
+    }, 50);
 
   } else { // флажок снят
     clearInterval(autoBuy13Interval); // останавливаем запуск функции autoBuy46()
@@ -98,4 +98,8 @@ document.getElementById('auto-buy2-checkbox').addEventListener('change', functio
     if (money<endGoal && (completion == 1)) {completion = 0; onecheck = 1}
     }
     return gain, money;
+}
+function checking() {
+  console.log(completion)
+  console.log(onecheck)
 }

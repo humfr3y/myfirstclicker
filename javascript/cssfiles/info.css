@@ -25,3 +25,14 @@
     margin: 35px;
     justify-content: center;
 }
+
+.prestigeText {
+    font-size: 20px;
+    color: white;
+}
+
+#latestPrestigesPage {
+    display: none;
+    align-items: center;
+    text-align: center;
+}

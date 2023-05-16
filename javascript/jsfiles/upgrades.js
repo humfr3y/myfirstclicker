@@ -164,15 +164,15 @@ function commonUpgrade1TextLoad() {
     if (second.amount >= 1){
         var firstBoost = first.b*second.boost
         if (first.price<=1e6)
-        if (data==1) {commonU1.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает монеты за нажатие. <br> Стоимость: " + firstprice.toFixed(0) + " α-монет. <br> Бонус: +" + firstBoost.toFixed(0) } 
-        else {commonU1.innerHTML = "<ut>Small Investment</ut> <br> Increases coins gain per click. <br> Cost: " + firstprice.toFixed(0) + " α-coins. <br> Currently: +" + firstBoost.toFixed(0)}
+        if (data==1) {commonU1.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает α-монеты за нажатие. <br> Стоимость: " + firstprice.toFixed(0) + " α-монет. <br> Бонус: +" + firstBoost.toFixed(0) } 
+        else {commonU1.innerHTML = "<ut>Small Investment</ut> <br> Increases α-coins gain per click. <br> Cost: " + firstprice.toFixed(0) + " α-coins. <br> Currently: +" + firstBoost.toFixed(0)}
         if (first.price>1e6) {
-            if (data==1) {commonU1.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает монеты за нажатие. <br> Стоимость: " + firstprice.toExponential(2).replace("+","") + " α-монет. <br> Бонус: +" + firstBoost.toFixed(0) } 
-            else {commonU1.innerHTML = "<ut>Small Investment</ut> <br> Increases coins gain per click. <br> Cost: " + firstprice.toExponential(2).replace("+","") + " α-coins. <br> Currently: +" + firstBoost.toFixed(0)}    
+            if (data==1) {commonU1.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает α-монеты за нажатие. <br> Стоимость: " + firstprice.toExponential(2).replace("+","") + " α-монет. <br> Бонус: +" + firstBoost.toFixed(0) } 
+            else {commonU1.innerHTML = "<ut>Small Investment</ut> <br> Increases α-coins gain per click. <br> Cost: " + firstprice.toExponential(2).replace("+","") + " α-coins. <br> Currently: +" + firstBoost.toFixed(0)}    
         }
         if (firstBoost>1e6) {
-            if (data==1) {commonU1.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает монеты за нажатие. <br> Стоимость: " + firstprice.toExponential(2).replace("+","") + " α-монет. <br> Бонус: +" + firstBoost.toExponential(2).replace("+","") } 
-            else {commonU1.innerHTML = "<ut>Small Investment</ut> <br> Increases coins gain per click. <br> Cost: " + firstprice.toExponential(2).replace("+","") + " α-coins. <br> Currently: +" + firstBoost.toExponential(2).replace("+","")}}
+            if (data==1) {commonU1.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает α-монеты за нажатие. <br> Стоимость: " + firstprice.toExponential(2).replace("+","") + " α-монет. <br> Бонус: +" + firstBoost.toExponential(2).replace("+","") } 
+            else {commonU1.innerHTML = "<ut>Small Investment</ut> <br> Increases α-coins gain per click. <br> Cost: " + firstprice.toExponential(2).replace("+","") + " α-coins. <br> Currently: +" + firstBoost.toExponential(2).replace("+","")}}
     
     }
     }
@@ -193,15 +193,15 @@ function pBuyableUpgrade1() {
     if (pbfirst.amount>=1) {pbfirst.price=Math.round(pbfirst.basePrice*Math.pow(1.5, pbfirst.amount)/psfirst.boost)} 
     else pbfirst.price=2;
     if (diamonds>=pbfirst.price) 
-    {pbfirst.amount=pbfirst.amount+1; diamonds=diamonds - pbfirst.price; pbfirst.boost=pbfirst.boost+0.02875;
+    {pbfirst.amount=pbfirst.amount+1; diamonds=diamonds - pbfirst.price; pbfirst.boost=pbfirst.boost+0.02375;
     pbfirstprice = Math.round(pbfirst.basePrice*Math.pow(1.5, pbfirst.amount)/psfirst.boost)
     if (pbfirstprice<1e6){
-        if (data==1) {pBuyableU1.innerHTML = "<ut>Суперпроцессор</ut> <br> Усиливает монеты за нажатие. <br> Стоимость: " + pbfirstprice.toFixed(0) + " алмазов. <br> Бонус: ^" + pbfirst.boost.toFixed(3) } 
-        else {pBuyableU1.innerHTML = "<ut>Superprocessor</ut> <br> Increases power of coins gain per click. <br> Cost: " + pbfirstprice.toFixed(0) + " diamonds. <br> Currently: ^" + pbfirst.boost.toFixed(3)}
+        if (data==1) {pBuyableU1.innerHTML = "<ut>Суперпроцессор</ut> <br> Усиливает α-монеты за нажатие. <br> Стоимость: " + pbfirstprice.toFixed(0) + " алмазов. <br> Бонус: ^" + pbfirst.boost.toFixed(3) } 
+        else {pBuyableU1.innerHTML = "<ut>Superprocessor</ut> <br> Increases power of α-coins gain per click. <br> Cost: " + pbfirstprice.toFixed(0) + " diamonds. <br> Currently: ^" + pbfirst.boost.toFixed(3)}
     }
     else if (pbfirstprice>=1e6){
-        if (data==1) {pBuyableU1.innerHTML = "<ut>Суперпроцессор</ut> <br> Усиливает монеты за нажатие. <br> Стоимость: " + pbfirstprice.toExponential(2).replace("+","") + " алмазов. <br> Бонус: ^" + pbfirst.boost.toFixed(3) } 
-        else {pBuyableU1.innerHTML = "<ut>Superprocessor</ut> <br> Increases power of coins gain per click. <br> Cost: " + pbfirstprice.toExponential(2).replace("+","") + " diamonds. <br> Currently: ^" + pbfirst.boost.toFixed(3)}
+        if (data==1) {pBuyableU1.innerHTML = "<ut>Суперпроцессор</ut> <br> Усиливает α-монеты за нажатие. <br> Стоимость: " + pbfirstprice.toExponential(2).replace("+","") + " алмазов. <br> Бонус: ^" + pbfirst.boost.toFixed(3) } 
+        else {pBuyableU1.innerHTML = "<ut>Superprocessor</ut> <br> Increases power of α-coins gain per click. <br> Cost: " + pbfirstprice.toExponential(2).replace("+","") + " diamonds. <br> Currently: ^" + pbfirst.boost.toFixed(3)}
     }
     diamondCountCheck.call()
     }
@@ -214,7 +214,7 @@ function pBuyableUpgrade2() {
     if (diamonds>=pbsecond.price) 
     {
         pbsecond.amount=pbsecond.amount+1; diamonds=diamonds - pbsecond.price; pbsecond.boost=pbsecond.boost*1.2;
-        pbsecondprice = Math.round(pbsecond.basePrice*Math.pow(1.255, pbsecond.amount)/psfirst.boost)
+        pbsecondprice = Math.round(pbsecond.basePrice*Math.pow(1.2575, pbsecond.amount)/psfirst.boost)
         const pbsboost1 = pbsecond.boost.toFixed(2)
         const pbsboost2 = pbsecond.boost.toFixed(0)
         const pbsboost3 = pbsecond.boost.toExponential(2).replace("+","")
@@ -239,7 +239,7 @@ function pBuyableUpgrade3() {
     if (pbthird.amount>=1) {pbthird.price=Math.round(pbthird.basePrice*Math.pow(1.4, pbthird.amount)/psfirst.boost)} 
     else pbthird.price=50;
     if (diamonds>=pbthird.price) 
-    {pbthird.amount=pbthird.amount+1; diamonds=diamonds - pbthird.price; pbthird.boost=pbthird.boost+0.15;
+    {pbthird.amount=pbthird.amount+1; diamonds=diamonds - pbthird.price; pbthird.boost=pbthird.boost+0.125;
     pbthirdprice = Math.round(pbthird.basePrice*Math.pow(1.4, pbthird.amount)/psfirst.boost)
     if (pbthirdprice<1e6){
         if (data==1) {pBuyableU3.innerHTML = "<ut>Престижная Слава</ut> <br> Усиливает бонус Богатой Славы. <br> Стоимость: " + pbthirdprice.toFixed(0) + " алмазов. <br> Бонус: ^" + pbthird.boost.toFixed(2) } 
@@ -293,8 +293,8 @@ function pAutoUpgrade2() {
 function pAutoUpgrade3() {
     if (diamonds>=pathird.price && pathird.amount<1) 
     {pathird.amount=pathird.amount+1; diamonds=diamonds - pathird.price;
-        if (data==1) {pAutoU3.innerHTML = "<ut>Авто-Покупщик 3.0</ut> <br> Вы получаете 100% от монет за нажатия в секунду"}
-        else {pAutoU3.innerHTML = "<ut>Auto-Buyer 3.0</ut> <br> You automatically earning 100% coin gain per second"}
+        if (data==1) {pAutoU3.innerHTML = "<ut>Авто-Покупщик 3.0</ut> <br> Вы получаете 100% от α-монет за нажатия в секунду"}
+        else {pAutoU3.innerHTML = "<ut>Auto-Buyer 3.0</ut> <br> You automatically earning 100% α-coin gain per second"}
         purchasedButtonpAutoU3.classList.add('purchased')
         if (autoTab.style.display == "none") {autoTab.style.display = "block"}
         container3.style.display = "flex"
@@ -304,16 +304,16 @@ function pAutoUpgrade3() {
 
 function diamondCountCheck() {
     if (diamonds < 1e6) {
-        if (data == 1) { theGoal.innerHTML = `У вас <dm>${diamonds}</dm> алмазов, которые увеличивают монеты за нажатия на <dm>+${(diamonds * pbsecond.boost * 100).toFixed(0)}%</dm>`; }
-        else { theGoal.innerHTML = `You have <dm>${diamonds}</dm> diamonds. They're increase coin gain by <dm>+${(diamonds * pbsecond.boost * 100).toFixed(0)}%</dm>`; }
+        if (data == 1) { theGoal.innerHTML = `У вас <dm>${diamonds}</dm> алмазов, которые увеличивают α-монеты за нажатия на <dm>+${(diamonds * pbsecond.boost * 100).toFixed(0)}%</dm>`; }
+        else { theGoal.innerHTML = `You have <dm>${diamonds}</dm> diamonds. They're increase α-coin gain by <dm>+${(diamonds * pbsecond.boost * 100).toFixed(0)}%</dm>`; }
     }
     if ((diamonds * pbsecond.boost * 100) >= 1e6) {
-        if (data == 1) { theGoal.innerHTML = `У вас <dm>${diamonds}</dm> алмазов, которые увеличивают монеты за нажатия на <dm>+${(diamonds * pbsecond.boost * 100).toExponential(2).replace("+", "")}%</dm>`; }
-        else { theGoal.innerHTML = `You have <dm>${diamonds}</dm> diamonds. They're increase coin gain by <dm>+${(diamonds * pbsecond.boost * 100).toExponential(2).replace("+", "")}%</dm>`; }
+        if (data == 1) { theGoal.innerHTML = `У вас <dm>${diamonds}</dm> алмазов, которые увеличивают α-монеты за нажатия на <dm>+${(diamonds * pbsecond.boost * 100).toExponential(2).replace("+", "")}%</dm>`; }
+        else { theGoal.innerHTML = `You have <dm>${diamonds}</dm> diamonds. They're increase α-coin gain by <dm>+${(diamonds * pbsecond.boost * 100).toExponential(2).replace("+", "")}%</dm>`; }
     }
     if (diamonds >= 1e6) {
-        if (data == 1) { theGoal.innerHTML = `У вас <dm>${diamonds.toExponential(2).replace("+", "")}</dm> алмазов, которые увеличивают монеты за нажатия на <dm>+${(diamonds * pbsecond.boost * 100).toExponential(2).replace("+", "")}%</dm>`; }
-        else { theGoal.innerHTML = `You have <dm>${diamonds.toExponential(2).replace("+", "")}</dm> diamonds. They're increase coin gain by <dm>+${(diamonds * pbsecond.boost * 100).toExponential(2).replace("+", "")}%</dm>`; }
+        if (data == 1) { theGoal.innerHTML = `У вас <dm>${diamonds.toExponential(2).replace("+", "")}</dm> алмазов, которые увеличивают α-монеты за нажатия на <dm>+${(diamonds * pbsecond.boost * 100).toExponential(2).replace("+", "")}%</dm>`; }
+        else { theGoal.innerHTML = `You have <dm>${diamonds.toExponential(2).replace("+", "")}</dm> diamonds. They're increase α-coin gain by <dm>+${(diamonds * pbsecond.boost * 100).toExponential(2).replace("+", "")}%</dm>`; }
     }
 }
 
@@ -332,8 +332,8 @@ function pSingleUpgrade1() {
     if (diamonds>=psfirst.price && psfirst.amount<1) 
     {psfirst.amount=psfirst.amount+1; diamonds=diamonds - psfirst.price; psfirst.boost=(Math.log(Math.log(money))+1)/1.5
         pSU1B = window.setInterval(prestigeSingleUpgrade1Boost, 100)
-        if (data==1) {pSingleU1.innerHTML = "<ut>Бриллиантовый Торговец</ut> <br>Делит цену улучшений Престижа в зависимости от текущего количества монет <br> Бонус: / " + psfirst.boost.toFixed(2)}
-        else {pSingleU1.innerHTML = "<ut>Diamond Trader</ut> <br>Divides price of Prestige upgrades based on current coins <br> Currently: / " + psfirst.boost.toFixed(2)}
+        if (data==1) {pSingleU1.innerHTML = "<ut>Бриллиантовый Торговец</ut> <br>Делит цену улучшений Престижа в зависимости от текущего количества α-монет <br> Бонус: / " + psfirst.boost.toFixed(2)}
+        else {pSingleU1.innerHTML = "<ut>Diamond Trader</ut> <br>Divides price of Prestige upgrades based on current α-coins <br> Currently: / " + psfirst.boost.toFixed(2)}
         diamondCountCheck.call()
         purchasedButtonpSingleU1.classList.add('purchased')}
         return psfirst.amount, psfirst.price, psfirst.boost
@@ -341,8 +341,8 @@ function pSingleUpgrade1() {
 
 function prestigeSingleUpgrade1Boost(){
     psfirst.boost=(Math.log(Math.log(money))+1)*1.55
-    if (data==1) {pSingleU1.innerHTML = "<ut>Бриллиантовый Торговец</ut> <br>Делит цену улучшений Престижа в зависимости от текущего количества монет <br> Бонус: / " + psfirst.boost.toFixed(2)}
-    else {pSingleU1.innerHTML = "<ut>Diamond Trader</ut> <br>Divides price of Prestige upgrades based on current coins <br> Currently: / " + psfirst.boost.toFixed(2)}
+    if (data==1) {pSingleU1.innerHTML = "<ut>Бриллиантовый Торговец</ut> <br>Делит цену улучшений Престижа в зависимости от текущего количества α-монет <br> Бонус: / " + psfirst.boost.toFixed(2)}
+    else {pSingleU1.innerHTML = "<ut>Diamond Trader</ut> <br>Divides price of Prestige upgrades based on current α-coins <br> Currently: / " + psfirst.boost.toFixed(2)}
     pbfirst.price = Math.round(pbfirst.basePrice*Math.pow(1.5, pbfirst.amount)/psfirst.boost)
     pbfirstprice = Math.round(pbfirst.basePrice*Math.pow(1.5, pbfirst.amount)/psfirst.boost)
     const pbsboost1 = pbsecond.boost.toFixed(2)
@@ -353,12 +353,12 @@ function prestigeSingleUpgrade1Boost(){
     if (pbsecond.boost > 100 && pbsecond.boost <= 1e6) whichpbs = pbsboost2
     if (pbsecond.boost > 1e6) {whichpbs = pbsboost3}
     if (pbfirstprice<1e6){
-        if (data==1) {pBuyableU1.innerHTML = "<ut>Суперпроцессор</ut> <br> Усиливает монеты за нажатие. <br> Стоимость: " + pbfirstprice.toFixed(0) + " алмазов. <br> Бонус: ^" + pbfirst.boost.toFixed(3) } 
-        else {pBuyableU1.innerHTML = "<ut>Superprocessor</ut> <br> Increases power of coins gain per click. <br> Cost: " + pbfirstprice.toFixed(0) + " diamonds. <br> Currently: ^" + pbfirst.boost.toFixed(3)}
+        if (data==1) {pBuyableU1.innerHTML = "<ut>Суперпроцессор</ut> <br> Усиливает α-монеты за нажатие. <br> Стоимость: " + pbfirstprice.toFixed(0) + " алмазов. <br> Бонус: ^" + pbfirst.boost.toFixed(3) } 
+        else {pBuyableU1.innerHTML = "<ut>Superprocessor</ut> <br> Increases power of α-coins gain per click. <br> Cost: " + pbfirstprice.toFixed(0) + " diamonds. <br> Currently: ^" + pbfirst.boost.toFixed(3)}
     }
     else if (pbfirstprice>=1e6){
-        if (data==1) {pBuyableU1.innerHTML = "<ut>Суперпроцессор</ut> <br> Усиливает монеты за нажатие. <br> Стоимость: " + pbfirstprice.toExponential(2).replace("+","") + " алмазов. <br> Бонус: ^" + pbfirst.boost.toFixed(3) } 
-        else {pBuyableU1.innerHTML = "<ut>Superprocessor</ut> <br> Increases power of coins gain per click. <br> Cost: " + pbfirstprice.toExponential(2).replace("+","") + " diamonds. <br> Currently: ^" + pbfirst.boost.toFixed(3)}
+        if (data==1) {pBuyableU1.innerHTML = "<ut>Суперпроцессор</ut> <br> Усиливает α-монеты за нажатие. <br> Стоимость: " + pbfirstprice.toExponential(2).replace("+","") + " алмазов. <br> Бонус: ^" + pbfirst.boost.toFixed(3) } 
+        else {pBuyableU1.innerHTML = "<ut>Superprocessor</ut> <br> Increases power of α-coins gain per click. <br> Cost: " + pbfirstprice.toExponential(2).replace("+","") + " diamonds. <br> Currently: ^" + pbfirst.boost.toFixed(3)}
     }
     pbsecondprice = Math.round(pbsecond.basePrice*Math.pow(1.25, pbsecond.amount)/psfirst.boost)
     if (pbsecondprice<1e6){
@@ -518,16 +518,16 @@ document.addEventListener("keydown", function(event) {
 
     function firstUpgIfElse() {
         if (first.price <= 1e6) {
-            if (data == 1) { commonU1.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает монеты за нажатие. <br> Стоимость: " + firstprice.toFixed(0) + " α-монет. <br> Бонус: +" + firstBoost.toFixed(0); }
-            else { commonU1.innerHTML = "<ut>Small Investment</ut> <br> Increases coins gain per click. <br> Cost: " + firstprice.toFixed(0) + " α-coins. <br> Currently: +" + firstBoost.toFixed(0); }
+            if (data == 1) { commonU1.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает α-монеты за нажатие. <br> Стоимость: " + firstprice.toFixed(0) + " α-монет. <br> Бонус: +" + firstBoost.toFixed(0); }
+            else { commonU1.innerHTML = "<ut>Small Investment</ut> <br> Increases α-coins gain per click. <br> Cost: " + firstprice.toFixed(0) + " α-coins. <br> Currently: +" + firstBoost.toFixed(0); }
         }
         else {
-            if (data == 1) { commonU1.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает монеты за нажатие. <br> Стоимость: " + firstprice.toExponential(2).replace("+", "") + " α-монет. <br> Бонус: +" + firstBoost.toFixed(0); }
-            else { commonU1.innerHTML = "<ut>Small Investment</ut> <br> Increases coins gain per click. <br> Cost: " + firstprice.toExponential(2).replace("+", "") + " α-coins. <br> Currently: +" + firstBoost.toFixed(0); }
+            if (data == 1) { commonU1.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает α-монеты за нажатие. <br> Стоимость: " + firstprice.toExponential(2).replace("+", "") + " α-монет. <br> Бонус: +" + firstBoost.toFixed(0); }
+            else { commonU1.innerHTML = "<ut>Small Investment</ut> <br> Increases α-coins gain per click. <br> Cost: " + firstprice.toExponential(2).replace("+", "") + " α-coins. <br> Currently: +" + firstBoost.toFixed(0); }
         }
         if (firstBoost > 1e6) {
-            if (data == 1) { commonU1.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает монеты за нажатие. <br> Стоимость: " + firstprice.toExponential(2).replace("+", "") + " α-монет. <br> Бонус: +" + firstBoost.toExponential(2).replace("+", ""); }
-            else { commonU1.innerHTML = "<ut>Small Investment</ut> <br> Increases coins gain per click. <br> Cost: " + firstprice.toExponential(2).replace("+", "") + " α-coins. <br> Currently: +" + firstBoost.toExponential(2).replace("+", ""); }
+            if (data == 1) { commonU1.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает α-монеты за нажатие. <br> Стоимость: " + firstprice.toExponential(2).replace("+", "") + " α-монет. <br> Бонус: +" + firstBoost.toExponential(2).replace("+", ""); }
+            else { commonU1.innerHTML = "<ut>Small Investment</ut> <br> Increases α-coins gain per click. <br> Cost: " + firstprice.toExponential(2).replace("+", "") + " α-coins. <br> Currently: +" + firstBoost.toExponential(2).replace("+", ""); }
         }
         if (money <= 1e6) {
             if (data == 1) { coinsCount.innerHTML = money.toFixed(0) + " α-монет"; }
