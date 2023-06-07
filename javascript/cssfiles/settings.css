@@ -8,8 +8,8 @@
 .settingButton{
     border-style: solid;
     border-radius: 5px;
-    width: 180px;
-    height: 80px;
+    width: 160px;
+    height: 70px;
     border-color:rgb(65, 68, 207);
     color: rgb(65, 68, 207);
     background-color: rgb(0, 0, 0);
@@ -57,29 +57,15 @@
     display: flex;
     justify-content: center;
 }
-#autoSaveInterval {
-    border-style: solid;
-    border-radius: 5px;
-    width: 177px;
-    height: 77px;
-    border-width: 2px;
-    border-color:rgb(65, 68, 207);
-    color: rgb(65, 68, 207);
-    background-color: rgb(0, 0, 0);
-    text-align: center;
-    font-size: 13px;
-    vertical-align: middle;
-    display: inline-block;
-    margin-right: 5px;
-}
 
 .loadfile {
     display:flex;
     justify-content: center;
     text-align: center;
     align-items: center;
-    height: 77px;
+    height: 67.2px;
     border-width: 2.2px;
+    width: 158px;
 }
 
 #file-upload {
@@ -90,7 +76,8 @@
     display: none;
 }
 
-#changelogWindow {
+
+.gameWindow {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -108,7 +95,9 @@
 
 
 
-#myPopupBackdrop {
+
+
+.myPopupBackdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -119,19 +108,19 @@
     display: none; /* начальное состояние - затемнение скрыто */
 }
 
-#titleDiv {
+.titleDivClass {
     height: 50px;
     text-align: center;
     align-items: center;
 }
 
-#changelogTitle{
+.windowTitle{
     z-index: 9999;
     color:#ffffff;
     font-size: 25px;
 }
 
-#closeWindow {
+.closeWindow {
     z-index: 9998;
     left: 93.5%;
     bottom: 92.5%;
@@ -145,7 +134,7 @@
     padding-left: 5px;
 }
 
-#closeWindow::before {
+.closeWindow::before {
     content: "";
     display: block;
     width: 20px;
@@ -185,7 +174,7 @@
     background-color: rgb(255, 255, 255);
 }
 
-#versionDiv {
+.windowDesc {
     overflow-y: auto;
     color:white;
     margin-top:0;

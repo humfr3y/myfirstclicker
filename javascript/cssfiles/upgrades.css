@@ -1,4 +1,4 @@
-#commonUpgrades {
+#buyableUpgrades {
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -7,6 +7,11 @@
     margin: 0 auto;
     display: flex;
     justify-content: center;
+}
+#singleUpgrades2 {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
 }
 #maxBuyLine {
   margin: 0 auto;
@@ -18,9 +23,9 @@
     border-radius: 10px;
     background-color: black;
     color: rgb(255, 255, 255);
-    font-size: 13px;
-    width: 230px;
-    height: 115px;
+    font-size: 9.75px;
+    width: 175px;
+    height: 90px;
     text-align: center;
     font-family: "Poly";
     transition: transform 0.1s ease-in-out;
@@ -35,8 +40,8 @@
     cursor: pointer;
 }
 .maxBuy{
-  height: 40px;
-  width: 80px;
+  height: 35px;
+  width: 70px;
   text-align: center;
   border-color: white;
 }
@@ -50,12 +55,12 @@
     background-color: rgb(255, 63, 63);
     color: black;
 }
-.commonButton{
+.buyableButton{
     background-color: #000000;
     border-color: #23e019;
     color: rgb(255, 255, 255);
 }
-.commonButton:hover:enabled{
+.buyableButton:hover:enabled{
      background-color: #23e019;
      box-shadow: 0 0 10px #23e019;
      color: black;
@@ -130,4 +135,32 @@
     color: gold;
     text-align: center;
     margin-bottom: 10px;
+}
+
+#umultiplierBoost {
+  border-color:cadetblue;
+}
+
+#umultiplierBoost:disabled{
+  border-color: rgb(46, 45, 45);
+}
+
+#umultiplierBoost:hover:enabled{
+  background-color: cadetblue;
+  box-shadow: 0 0 10px cadetblue;
+  color: black;
+}
+
+#upowerBoost {
+  border-color:palevioletred;
+}
+
+#upowerBoost:disabled{
+  border-color: rgb(46, 45, 45);
+}
+
+#upowerBoost:hover:enabled{
+  background-color: palevioletred;
+  box-shadow: 0 0 10px palevioletred;
+  color: black;
 }

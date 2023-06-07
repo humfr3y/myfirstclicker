@@ -1,0 +1,107 @@
+{
+    "moneyCount": "You have {{money}} α-coins",
+    "moneyPerSec": "You're getting {{gainPerSec}} α-coins per second",
+
+    "settingsButton": "Settings",
+    "clickerButton": "Clicker",
+    "achievementsButton": "Achievements",
+    "informationSubButton": "Information",
+    "statisticsSubButton": "Statistics",
+    "aboutButton": "About game",
+
+    "settingsTitle": "Settings",
+
+    "saveGame": "Save game",
+    "loadGame": "Load game",
+    "autosaveGame": "Auto save: {{autoSave}}",
+    "importGame": "Import game",
+    "importGameFromAFile": "Import game from a file",
+    "exportGame": "Export game",
+    "changeLanguage": "Change language",
+    "changelog": "Changelog",
+    "hardReset": "Hard reset",
+
+    "umultiplierText": "<ut>U-multiplier ({{umultipliercount}})</ut> <br> Reset upgrades to give a x2 multiplier to coin gain <br> Currently: x{{umultiplier}} <br> Requires: {{umultiplierCost}} Small Investments",
+    "upowerText": "<ut>U-power ({{upowercount}})</ut> <br> Reset upgrades and U-multipliers to give a +0.1 power to coin gain <br> Currently: ^{{upower}} <br> Requires: {{upowerCost}} Small Investments and 4 U-multiplers",
+
+    "maxBuy": "Buy All",
+
+    "firstBuyable": "<ut>Small Investment ({{firstBuyableAmount}})</ut> <br> Increase the α-coins per second <br> Currently: +{{firstBuyableEffect}} <br> Cost: {{firstBuyablePrice}} α-coins",
+    "secondBuyable": "<ut>Productivity ({{secondBuyableAmount}})</ut> <br> Increase Small Investment effect <br> Currently: +{{secondBuyableEffect}}% <br> Cost: {{secondBuyablePrice}} α-coins",
+    "thirdBuyable": "<ut> Doubler ({{thirdBuyableAmount}})</ut> <br> Multiply the α-coins per click by 2 <br> Currently: x{{thirdBuyableEffect}} <br> Cost: {{thirdBuyablePrice}} α-coins",
+    "fourthBuyable": "<ut> Multiplier ({{fourthBuyableAmount}})</ut> <br> Multiply the α-coins per second by 1.05 <br> Currently: x{{fourthBuyableEffect}} <br> Cost: {{fourthBuyablePrice}} α-coins",
+    "fifthBuyable": "<ut> Alpha Particle ({{fifthBuyableAmount}})</ut> <br> Increase the α-coins per click based on coins per second <br> Currently: x{{fifthBuyableEffect}} <br> Cost: {{fifthBuyablePrice}} α-coins",
+
+    "firstSingle": "<ut> Rich Fame </ut> <br> Increase the coins per second based on total coins <br> Currently: x{{firstSingleEffect}} <br>  {{firstSinglePrice}}",
+    "secondSingle": "<ut> Midas Cursor </ut> <br> Increase the power of coins per click based on total clicks <br> Currently: ^{{secondSingleEffect}} <br> {{secondSinglePrice}}",
+    "thirdSingle": "<ut> Doubler+ </ut> <br> Doubles coin gain by 2 <br> Currently: x{{thirdSingleEffect}} <br> {{thirdSinglePrice}}",
+    "fourthSingle": "<ut> Super Productivity </ut> <br> Increase Productivity effect based on Small Investment amount <br> Currently: x{{fourthSingleEffect}} <br> {{fourthSinglePrice}}",
+    "fifthSingle": "<ut> Super Multiplier </ut> <br> Multiplier amount increases their effect<br> Currently: x{{fifthSingleEffect}} <br> {{fifthSinglePrice}}",
+    "sixthSingle": "<ut> Negative Alpha Particle </ut> <br> Increase the coins per second based on coins per click <br> Currently: x{{sixthSingleEffect}} <br> {{sixthSinglePrice}}",
+    "seventhSingle": "<ut> Cashback </ut> <br> All purchases increase the coin gain <br> Currently: x{{seventhSingleEffect}} <br>  {{seventhSinglePrice}}",
+    "eighthSingle": "<ut> Reward For Feats </ut> <br> Unlocked achievements boosts the coins per click <br> Currently: x{{eighthSingleEffect}} <br> {{eighthSinglePrice}}",
+    "ninthSingle": "<ut> Activity 1.0 </ut> <br> Increases power of Rich Fame based on played time <br> Currently: ^{{ninthSingleEffect}} <br> {{ninthSinglePrice}}",
+    "tenthSingle": "<ut> Blessing </ut> <br> Increase power of achievement multipliers <br> Currently: ^{{tenthSingleEffect}}<br>  {{tenthSinglePrice}}",
+
+    "firstSinglePriceText": "Cost: 100000 α-coins",
+    "secondSinglePriceText": "Cost: 1.5e6 α-coins",
+    "thirdSinglePriceText": "Cost: 3.5e6 α-coins",
+    "fourthSinglePriceText": "Cost: 3e7 α-coins",
+    "fifthSinglePriceText": "Cost: 5e8 α-coins",
+    "sixthSinglePriceText": "Cost: 3e9 α-coins",
+    "seventhSinglePriceText": "Cost: 1.1e10 α-coins",
+    "eighthSinglePriceText": "Cost: 1.5e11 α-coins",
+    "ninthSinglePriceText": "Cost: 1.2e12 α-coins",
+    "tenthSinglePriceText": "Cost: 1e13 α-coins",
+
+    "achievementsTitle": "Achievements",
+
+    "achievementsDesc": "Unlock achievements and get bonus for coin gain! Also some of them has own rewards. For filling a row you will get significant boost for it",
+    "achievementsBonus": "Achievements provides a: x{{achievementBonus}} multiplier for α-coins",
+        "achRow1": {
+            "name": ["\"Without walkers\"", "\"First thousand\"", "\"I'm calling a police! No, I do!\"", "\"Breakin da wall\"", "\"Master clicker\"", "\"Hellish productivity\"", "\"Time to sleep!\"", "\"Another breakin da wall\"", "\"Million multiplier\"", "\"Final stretch?\""]
+        },
+    "achievement11Desc": "<ut> Without walkers (11) </ut> <br> <br> Begin generating α-coins!",
+    "achievement12Desc": "<ut> First thousand (12) </ut> <br> <br> Collect 1000 α-coins.",
+    "achievement13Desc": "<ut> I'm calling a police! No, I do! (13) </ut> <br> <br> Make α-coins per click x2.01 more than α-coins per second.",
+    "achievement14Desc": "<ut> Breakin da wall! (14) </ut> <br> <br> Do U-Multiplier.",
+    "achievement15Desc": "<ut> Master clicker (15) </ut> <br> <br> Make 1000 clicks. <br> <br> <it> Reward: Every click increases CPS by +0.01%. Also unlocks \"Max all\" button.</it>",
+    "achievement16Desc": "<ut> Hellish productivity (16) </ut> <br> <br> Make Productivity effect 6666% <br> <br> <it> Reward: Increase base effect of Productivity to 1.1.</it>",
+    "achievement17Desc": "<ut> Time to sleep! (17) </ut> <br> <br> Spend 1000 seconds in game. <br> <br> <it> Reward: Every minute increases Cashback effect by х(1.05*hours).</it>",
+    "achievement18Desc": "<ut> Another breakin da wall (18) </ut> <br> <br> Do U-Power.",
+    "achievement19Desc": "<ut> Million multiplier (19) </ut> <br> <br> Reach x1e6 multiplier of Doubler. <br> <br> <it> Reward: Makes Midas Cursor formula better.</it>",
+    "achievement20Desc": "<ut> Final stretch? (20) </ut> <br> <br> Buy all upgrades. <br> <br> <it> Reward: Unlock Prestige.</it>",
+
+    "stastisticsTitle": "Statistics",
+
+    "totalMoney": "Total you collected {{totalCoins}}  α-coins",
+    "gameTime": "You have played for {{gameHoursText}} hours, {{gameMinutesText}} minutes and {{gameSecondsText}} seconds.",
+
+    "aboutGameTitle": "About game",
+
+    "aboutGame": "<ut> Digital God 0.8. Coins Update</ut> <br> Main goal: 1e15 α-coins <br> <br> Thanks Орехус#7698 for russian translation <br> And thanks everyone for playing.",
+
+    "offlineGainTitle": "Welcome back!",
+    "offlineGain": "You have been offline for {{timeDifference}} seconds. <br> You'ge got while you were offline: <br> +{{moneyTemp}} α-coins",
+
+    "saveGameNotification": "Game saved!",
+    "loadGameNotification": "Game loaded!",
+    "exportGameNotification": "Game exported!",
+    "importGameNotification": "Game imported!",
+    "resetGameNotification": "Game reseted!",
+    "achievementGameNotification": "You've got an achievement: ",
+
+    "startDescription": "Choose version number above to check it's changelog.",
+
+    "version00": "<b>18.12.2022 | My 1st Clicker 0.0. Null Update (Codename: NULL):</b><br>- NEW MECHANIC! You need to clicking on the button for gaining α-coins.<br>- NEW 2 UPGRADES! First increases α-coin per click by 1, second increases bonus of first one by 10%.<br>- Some bugs like you sometimes cant get bonus from 2nd upgrade. Idk why.<br><br>[Dev comment]<br>This is a first game made by me from scratch, and i spent for it a some time. Well it's actually my second game, but that first made it's just mod.Idk if i want to continue it.",
+    "version01": "<b>19.12.2022 | My 1st clicker 0.1. Graphic Update (Codename: BUTTON):</b><br>- Game has beautiful α-coin icon instead of depressed button.<br>- Upgrades buttons became a little better.<br>- A little decreasing of cost formula for upgrades.<br><br>[Dev comment]<br>Well i continued it and i did something good even with zero html and css skills, it's really impressive and i really should learn them both later.<br>There a really much things which i should do, and which i dont know how to do. Also i tried to add icons for buttons but when you buying upgrades it disappears, i should to link it somehow...",
+    "version02": "<b>20.12.2022 | My 1st clicker 0.2. SAVE Update (Codename: Save):</b><br>- You can finally save n load the game by bottom buttons (but text for upgrades doesn't refresh).<br>- Changelog button added.<br>- Now CSS lines have moved to a separate .css file.<br>- BETA button changes. <br><br>[Dev comment]<br>Actually i did it in one day but now i have 20th December. Most funny thing that i spent for saving not much time. Next goal is new interesting upgrades.",
+    "version03": "<b>28.01.2023 | My 1st clicker 0.3. More Graphic Update (Codename: CHEST):</b><br>- NEW UPGRADE! Third upgrade can boost yourα-coin gain by 5%.<br>- MAJOR DESIGN UPDATE! Game has some bg and font.<br>- AUTOSAVING! You can enable autosave, and it will save every 10 sec (When you load it does disable it).<br>- Recolored buttons (give me ideas about bottom one please idk what to do).<br>- Changedα-coin icon, it suits bg better.<br>- Changed cost formula to good one (logarithm goes brrr).<br>- Improved upgrade texts.<br>- Save n load contains prices.<br><br>[Dev comment]<br>Finally comeback for it and did not bad update tho. Added bg and some stuff. Next goal is new special upgrades.",
+    "version04": "<b>29.01.2023 | My1stClicker 0.4. Simple Update (Codename: SIMPLE):</b><br>- NEW TYPE OF UPGRADES - SINGLE. You can buy them only once. Right?<br>- 3 NEW UPGRADES! First increases gain based on total α-coins, second doublesα-coin gain and third increases bonus of 2nd upgrade based on amount of 1st.<br>- Text in game has own language and doesn't have two languages like rus / eng.<br>- Fixed autosave jumping button.<br>- Buffed cost formula for upgrades.<br>- Game autoloads progress after page refresh.<br>- Now there is two changelogs: russian and english. <br>- NEW BUTTON - HARD RESET. It can blow up your saved files and reset everything in the game- After load text stays as before save.<br>- Upgrade's buttons has red color when you cant afford it and sligtly brightness when you hover on it and you can buy it. Also brightness affects on bottom buttons.<br><br>[Dev comment]<br>This is one more great upgrade for design (at least for me), next goals are tabs, honestly idk how to do them. And probably one more QoL upgrade :eyes:",
+    "version05": "<b>08.02.2023 | My1stClicker 0.5. Revolution Update (Codename: ANTIMATTER):</b><br>Design changes:<br>- FULL REDESIGN OF GAME! Simple black bg, buttons with disabled/enabled/hovered functions, new coin icon.<br>- INTERFACE CHANGE! You can select 4 tabs: settings, clicker, ?????? and info.<br>- Save, Load, Changelog, Hard reset, Autosave buttons replaced to Settings tab.<br>- Improved button text. Added titles.<br>- Improved coin text. \"You have earned\" text replaced separately.<br>- Added information text with version, main goal, and thanks.<br>- Coins became α-coins.<br>- 1st, 2nd, 4th, 6th upgrades text updates every purchasing.<br>- Better russian translate for changelogru.<br>Gameplay changes:<br>- Added official goal - 1,000,000,000 α-coins. If you achieve this goal, there appears special tab.<br>- Fully changed cost formula for 1-3 upgrades. Now there is no inflation. I hope.<br>- Buffed 3rd upgrade effect from +1.05 to x1.05 (multiplies itself).<br>- Buffed 4th upgrade effect (log(x)/2 -> log(x)).<br>- Buffed 6th upgrade effect (log(x) -> log(x)^2).<br>- Reduced 6th upgrade cost (15,000,000 -> 5,000,000).<br><br>[Dev comment]<br>That's crazy, i've spent for it a week. Well I spent some hours everyday and finally 0.5 came out. Enjoy the first Revolution Update. Tbh i wanted to do this style earlier, but for some reason i didnt do it. Next update will contain that unknown thing.",
+    "version051": "<b>15.02.2023 | My1stClicker 0.5.1:</b><br>Design changes:<br>- Finally top and upgrades buttons were centered.<br>- Now buying Productivity updates Small Investment (but does it weirdly sometimes doesn't but its formula issue).<br>- Autosaving turned on after starting new game.<br>- Great optimization of code for me. (Actually this update about it).<br>- Notice: update unstable because i have almost 1 AM and can't test it rn. You can do it yourself and send me some issues in discord Humf#9778.<br><br>[Dev comment]<br>Sorry for the little update, I'm just learning a little HTML, CSS and Vue.js (rn at CSS), so that's not procrastination! I wanna make fine interface especially for the next update. Ok you can check through console new 0.6 thing will be Prestige ofc. But what'll it make? Stay tuned!",
+    "version06": "<b>09.03.2023 | Digital God 0.6. Prestige Update (Codename: PRESTIGE):</b><br>Design changes:<br>- Changed game name to Digital God 0.6. Reason: Game will be a clicker only at start, then after some upgrade money gain become automated and there is no will be any clicking things. I had idea make diamond gain clickable but that'll be weird.<br>- Added page icon. Lightning. God. Zeus.<br>- Buttons and text got smaller.<br>- Settings and Statistics has title.<br>- Improved settings buttons.<br>- Removed \"?????\" button, now it'll appear at 1e9 coins.<br>- Improved Stats text.<br>- Main upgrades doesn't have shades anymore.<br>- Saving and Loading now using stringify method.<br>- Tab buttons no longer has \"active mode\", but they changing color while hover.<br>- Some little improvements.<br>Feature changes:<br>- IMPORT AND EXPORT! You can make base64-encoded text and it'll contain all your values. You can create your savebank or share with your friends!<br>- CHANGE LANGUAGE! You can change language without refreshing page.<br>- Removed confirmation for changing message while refreshing page.<br>- Now Hard Reset doesn't refreshing page.<br>- Values has scientific notation after 1,000,000 number.<br>- Fixed autosaving was unchangeable.<br>Gameplay changes:<br>- PRESTIGE! Reset whole progress to get diamonds, which boosts your production!<br>- DIAMONDS! Spend them for new prestige upgrades which can boost your progress even further!<br>- NEW PRESTIGE UPGRADES! They have 4 layers: Buyable, Automatic, Single and last of them is Unlockable upgrades which unlocking next layers of prestige upgrades, they're always last in them row.<br>- AUTOMATION! After buying 5-7 Prestige Upgrades you will be able to autobuy upgrades or gain coins per second.<br>- Added softcaps for coin gain at e20 and e35 and for diamonds gain at 4000 and 100000.<br>- Slightly better formula for Superproductivity.<br>- Buffed cost formula for 1-3 Main Upgrades.<br><br>[Dev comment]<br>Finally! After 2 weeks I finish this update. It's biggest update in the history of game. I have seen so many bugs and errors, and so much or a little less i solved. The hardest thing for me was to figure out how to remove blue (purchased) color for 4-6 upgrades. I spent two days on this, and it's the reason why i abandoned the game for 2 weeks. The rest bugs were \"Problem on a problem\" when after solving one, another appeared, btw it was the reason to fix that \"hardest\" bug. I wanted to make changing language button, and it turned out to suffer and fix that bug. Well it wasn't hard. I'm glad i finished this update and didn't abandon it. I'll be really glad if you play it at least for a little and those works, that time i spent for making update (3-7 hours per day) will not pass in vain. What about name of the game? Let me explain with small lore: You, a poor creature, aspire to become a God in virtual reality, but you need incredible power of God, which lies in the some coins that you collect during the game and then spend to get even more. Each currency makes you stronger and more powerful. However will everything will be simple? Will Fortune help this time?",
+    "version07": "<b>15.05.2023 | Digital God 0.7 | \"You really want it\" Update (Codename: QOL):</b><br>Design changes:<br>- Amount of coins, diamonds, and prestige reset button now displayed in header.<br>- Slightly changed buttons. Upgrade buttons size and settings buttons location.<br>- Added subtabs in Info page.<br>- Added notifications when saving, loading, importing, exporting, hard reseting.<br>- Fixed display of some upgrades effects.<br>- New stats: Time spent in the game/prestige, fastest prestige.<br>Feature changes:<br>- \"BUY ALL\" BUTTON! Now you can buy all stuff just by clicking that one button.<br>- Added possibility to make Prestige Reset by pressing \"P\" and Max Buy by pressing \"M\".<br>- Export always saves text file with save in your device (it's still copies into your clipboard).<br>Gameplay changes:<br>- Many Prestige Upgrades has been nerfed. But some of them are got a slightly buff.<br>- More roughly diamonds gain softcap.<br><br>[Dev comment]<br>Yeah, so small update after 2 months, cuz i started to make it yesterday, i just didn't want to do it. Well i actually did, but some troubles appeared and i couldn't make something. But 0.8 will change EVERYTHING, because it's Coins Update! New upgrades, mechanics changing and more! 0.9 also takes something like Prestige Update 2! Well, when i'll start to do it? Idk.",
+    "version071": "<b>17.05.2023 | Digital God 0.7.1:</b><br>Design changes:<br>- Added \"α-\" to all \"coins\" strings without it.<br>- Fixed Prestige reset button text<br>Feature changes:<br>- Added statistics with latest 10 Prestige resets<br>- Added possibility to import from the file.<br>- Changelog appears in game itself not in separate file.<br>- Fixed bug which sends you annoying message about completing the game.<br>Gameplay changes:<br>- Fixed bug where you could turn on automation and it'll freeze the game.<br>- Increased diamonds gain softcap.<br>- Decreased Prestige upgrades effects.<br><br>[Dev Comment]<br>I'm really tired, that latest 10 Prestige resets feature took a lot of time, cuz i couldn't to export their strings. Next update - 0.8.",
+    "version08": "07.06.2023 | Digital God 0.8 | Coin Update:<br>Design changes:<br>- CHANGING TEXT THROUGH JSON FILES. Now it became easier to make any languages or adding to already existed. If someone interested on adding himself language dm me. <br>- Making numbers to scientific notation became easier.<br>- Upgrade buttons became smaller.<br>- Text became smaller.<br>- Coins per click appears when you clicking on the coin.<br>- Statistics tab looks better and \"About Game\" too.<br>- New tab - Achievements.<br>- Remade save, load, export, import, reset functions.<br>- Buying upgrades has same function but different arguments.<br>Feature changes:<br>- ABSOLUTELY REMAKE COINS!<br>- NEW UPGRADES - 15! 5 - Buybles and 10 singles. Some of them stay, some became little changed.<br>- COIN GAIN DIVIDED TO COINS PER SECOND AND COINS PER CLICK.<br>- OFFLINE GAIN! Gather coins while offline! (May be still unstable)<br>- U-Multiplier and U-Power! Reset all upgrades for getting better next time!<br>- ACHIEVEMENTS! Unlock achievements and get more bonus for coin gain. Some of them has their rewards.<br>Gameplay changes:<br>- Prestige and Automation has been removed. They're come in new colors in 0.9<br>- Now prestige goal is 1e15 coins, actually that's a main goal of the game.<br><br>[Dev comment]<br>That's crazy. I spent a whole 5 days (even more), 8+ hours each day on this. The real nightmare began with Achievements. I struggled for a long time to figure out how to make tooltips for them, and eventually someone suggested using Popper.js, which worked successfully. Then came the another horror - importing - I couldn't figure out how to save an array of achievement completions ([true, false, false, ...]), so I simply combined both base64 strings and split them during import. And then came the true worst nightmare - Offline Progress. I must have spent around 15 hours in total on it, constantly finding loopholes in this fragile paper ship that is barely holding together even now. Setting up the language was also a challenge, as even ChatGPT couldn't help. Overall, I'm really glad I overcame these challenges that once seemed impossible to me..."
+}

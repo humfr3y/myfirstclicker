@@ -1,0 +1,102 @@
+
+#firstAchievementRow {
+    position: relative; /* установить позицию для контейнера */
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+.ach {
+    position: relative; /* установить позицию для контейнера */
+    border-style: solid;
+    border-radius: 3px;
+    border-color: rgb(255, 101, 101);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 90.4px;
+    height: 90.4px;
+    margin-top: 10px;
+    margin: 5px;
+    border-width: 1.8px;
+    z-index:900;
+}
+
+.achRow::after {
+    content: ""; 
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7; 
+} 
+
+.ach::after {
+    content: ""; 
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.7; 
+} 
+
+.green::after {
+    background-color: rgba(0, 255, 0, 0.5);
+
+}
+
+.greenborder {
+    border-color: rgb(3, 192, 3);
+}
+
+#ach11 {
+    background-image: url("images/ach11.png");
+}
+
+#ach12 {
+    background-image: url("images/ach12.png");
+}
+
+#ach13 {
+    background-image: url("images/ach13.jpg");
+}
+
+#ach14 {
+    background-image: url("images/ach14.jpg");
+}
+
+#ach15 {
+    background-image: url("images/ach15.jpg");
+}
+
+#ach16 {
+    background-image: url("images/ach16.jpg");
+}
+
+#ach17 {
+    background-image: url("images/ach17.jpg");
+}
+
+#ach18 {
+    background-image: url("images/ach18.jpg");
+}
+
+#ach19 {
+    background-image: url("images/ach19.jpg");
+}
+
+#ach20 {
+    background-image: url("images/ach20.jpg");
+}
+
+
+
+#tooltip {
+    /* ... */
+    display: none;
+  }
+  
+  #tooltip[data-show] {
+    display: block;
+  }

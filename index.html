@@ -6,21 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital God</title>
     <link rel="icon" type="image/x-con" href="javascript/cssfiles/images/game.ico">
+    <link rel="stylesheet" href="javascript/cssfiles/achievements.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/buttons.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/fonts.css" type="text/css">
+    <link rel="stylesheet" href="javascript/cssfiles/settings.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/miscellaneous.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/endscreen.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/info.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/main.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/prestige.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/fortune.css" type="text/css">
-    <link rel="stylesheet" href="javascript/cssfiles/settings.css" type="text/css">
+
     <link rel="stylesheet" href="javascript/cssfiles/upgrades.css" type="text/css">
 </head>
 <body>
-    <!-- <div class="notification" style="display:none;">
-        You got achievement!
-      </div> -->
     <div id="topValues">
       <div id="invisible" class="topVars">
         <span id="invis">hey</span>
@@ -45,6 +44,7 @@
         <button onclick="prestigeScreen(this)" id= "prestigeTab" class="tabButton">?????</button>
         <button onclick="fortuneScreen(this)" id= "fortuneTab" class="tabButton">Фортуна</button>
         <button onclick="autoScreen(this)" id= "autoTab" class="tabButton">Автоматизация</button>
+        <button onclick="achScreen(this)" id= "achTab" class="tabButton">Достижения</button>
         <button onclick="infoScreen(this)" id= "infoTab" class="tabButton">Информация</button>
     </div>
     <div id="settingButtons">
@@ -57,7 +57,7 @@
         </div>
         <div id="secondSettingsRow">
         <button onclick="importSave(this)" id= "impSave" class="settingButton">импорт</button>
-        <label for="file-upload" class="settingButton loadfile">
+        <label id="fileUploader" for="file-upload" class="settingButton loadfile">
           Загрузить файл
         </label>
         <input type="file" id="file-upload">
@@ -65,19 +65,17 @@
         <button onclick="exportSave(this)" id= "expSave" class="settingButton">экспорт</button>
         </div>
         <div id="thirdSettingsRow">
-        <button onclick="changeLanguage(this)" id= "changingLanguage" class="settingButton">Сменить язык</button>
-        <!-- <a href="changelog.md" id="link" target="_blank"> -->
+        <button id= "changingLanguage" class="settingButton">Сменить язык</button>
         <button onclick="changelog(this)" id= "changelogOpen" class="settingButton">Журнал изменений / Changelog</button>
-        <!-- </a> -->
         <button onclick="doHardReset(this)" id= "hardRes" class="settingButton"></button>
         </div>
         </div>
-        <div id="myPopupBackdrop"></div>
-        <div id="changelogWindow">
-          <div id="titleDiv">
-            <span id="changelogTitle">Changelog</span>
+        <div id="myPopupBackdrop1" class="myPopupBackdrop"></div>
+        <div id="changelogWindow" class="gameWindow">
+          <div id="titleDiv" class="titleDivClass">
+            <span id="changelogTitle" class="windowTitle">Changelog</span>
           </div>
-            <button onclick="hidePopup()" id="closeWindow"></button>
+            <button onclick="hidePopup()" class="closeWindow"></button>
           <div id="versionChooser">
             <button onclick="showChangelog(desc00)" class="versionButton">0.0</button>
             <button onclick="showChangelog(desc01)" class="versionButton">0.1</button>
@@ -89,9 +87,10 @@
             <button onclick="showChangelog(desc06)" class="versionButton">0.6</button>
             <button onclick="showChangelog(desc07)" class="versionButton">0.7</button>
             <button onclick="showChangelog(desc071)" class="versionButton">0.7.1</button>
+            <button onclick="showChangelog(desc08)" class="versionButton">0.8</button>
           </div>
-        <div id="versionDiv">
-          <p id="versionDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, quos cumque quisquam ducimus in eius illo facere. Non, impedit earum ab asperiores sequi repudiandae repellat pariatur eligendi perferendis est molestiae quasi autem. Minus sit eveniet iste, iure, sapiente voluptas saepe atque omnis officiis nesciunt inventore consequatur eos quos voluptates amet.</p>
+        <div id="versionDiv" class="windowDesc">
+          <p id="versionDescription">Choose version</p>
         </div>
         </div>
         </div>
@@ -116,45 +115,122 @@
           </div>
     </div>
     <div id="mainButtons">
-    <button onclick="getCoin()" id = "coinGain" class="coinCss"><img src="javascript/cssfiles/images/CoinOff.png" style="width:0px" alt="" class="coinImage"></button><p>  
+    <div id="getCoinLine">
+      <button onclick="doUmulti(this)" id = "umultiplierBoost" class="upgradeButton"><ut>У-множитель (0)</ut> <br> Сбросьте всё и получите х2 к доходу монет! <br> Для след. сброса требуется 100 Небольших Инвестиций</button>
+      <button onclick="getCoin()" id = "coinGain" class="coinCss"><img src="javascript/cssfiles/images/CoinOff.png" style="width:0px" alt="" class="coinImage"></button><p>  
+      <button onclick="doUpower(this)" id = "upowerBoost" class="upgradeButton"><ut>У-множитель (0)</ut> <br> Сбросьте всё с У-множителями и получите +0.1 к силе дохода монет! <br> Для след. сброса требуется 250 Небольших Инвестиций и 4 У-множителя</button>
+    </div>
     <div id="maxBuyLine">
     <button onclick="maxBuyAll(this)" id="maxbuy" class="upgradeButton maxBuy">Max Buy</button>
     </div>
-    <div id="commonUpgrades">
-    <button onclick="commonUpgrade1(this)" id = "commonU1" class="upgradeButton commonButton">Открыть новое улучшение! Стоимость: 10 α-монет. / Unlock new upgrade! Cost: 10 α-coins.</button>
-    <button onclick="commonUpgrade2(this)" id = "commonU2" class="upgradeButton commonButton">Открыть новое улучшение! Стоимость: 100 α-монет. / Unlock new upgrade! Cost: 100 α-coins. </button>
-    <button onclick="commonUpgrade3(this)" id = "commonU3" class="upgradeButton commonButton">Открыть новое улучшение! Стоимость: 1000 α-монет. / Unlock new upgrade! Cost: 1000 α-coins. </button>
-    </div>
+    <div id="buyableUpgrades">
+    <button onclick="buyBuyableUpgrade(firstBuyable)" id = "buyableU1" class="upgradeButton buyableButton">Открыть новое улучшение! Стоимость: 10 α-монет. / Unlock new upgrade! Cost: 10 α-coins.</button>
+    <button onclick="buyBuyableUpgrade(secondBuyable)" id = "buyableU2" class="upgradeButton buyableButton">Открыть новое улучшение! Стоимость: 100 α-монет. / Unlock new upgrade! Cost: 100 α-coins.</button>
+    <button onclick="buyBuyableUpgrade(thirdBuyable)" id = "buyableU3" class="upgradeButton buyableButton">Открыть новое улучшение! Стоимость: 500 α-монет. / Unlock new upgrade! Cost: 500 α-coins.</button>
+    <button onclick="buyBuyableUpgrade(fourthBuyable)" id = "buyableU4" class="upgradeButton buyableButton">Открыть новое улучшение! Стоимость: 500 α-монет. / Unlock new upgrade! Cost: 500 α-coins.</button>
+    <button onclick="buyBuyableUpgrade(fifthBuyable)" id = "buyableU5" class="upgradeButton buyableButton">Открыть новое улучшение! Стоимость: 500 α-монет. / Unlock new upgrade! Cost: 500 α-coins.</button>
+  </div>
     <div id="singleUpgrades">
-    <button onclick="singleUpgrade1(this)" id = "singleU1" class="upgradeButton singleButton"></button>
-    <button onclick="singleUpgrade2(this)" id = "singleU2" class="upgradeButton singleButton"></button>
-    <button onclick="singleUpgrade3(this)" id = "singleU3" class="upgradeButton singleButton"></button>
+      <button onclick="buySingleUpgrade(firstSingle)" id = "singleU1" class="upgradeButton singleButton"><br><span id="singleU1Price">Стоимость</span></button>
+      <button onclick="buySingleUpgrade(secondSingle)" id = "singleU2" class="upgradeButton singleButton"><br><span id="singleU2Price">Стоимость</span></button>
+      <button onclick="buySingleUpgrade(thirdSingle)" id = "singleU3" class="upgradeButton singleButton"><br><span id="singleU3Price">Стоимость</span></button>
+      <button onclick="buySingleUpgrade(fourthSingle)" id = "singleU4" class="upgradeButton singleButton"><br><span id="singleU4Price">Стоимость</span></button>
+      <button onclick="buySingleUpgrade(fifthSingle)" id = "singleU5" class="upgradeButton singleButton"><br><span id="singleU5Price">Стоимость</span></button>
     </div>  
-
+    <div id="singleUpgrades2">
+      <button onclick="buySingleUpgrade(sixthSingle)" id = "singleU6" class="upgradeButton singleButton"><br><span id="singleU6Price">Стоимость</span></button>
+      <button onclick="buySingleUpgrade(seventhSingle)" id = "singleU7" class="upgradeButton singleButton"><br><span id="singleU7Price">Стоимость</span></button>
+      <button onclick="buySingleUpgrade(eighthSingle)" id = "singleU8" class="upgradeButton singleButton"><br><span id="singleU8Price">Стоимость</span></button>
+      <button onclick="buySingleUpgrade(ninthSingle)" id = "singleU9" class="upgradeButton singleButton"><br><span id="singleU9Price">Стоимость</span></button>
+      <button onclick="buySingleUpgrade(tenthSingle)" id = "singleU10" class="upgradeButton singleButton"><br><span id="singleU10Price">Стоимость</span></button>
+    </div>  
     </div>  
     <div id="prestigeButtons">
         <p id="theGoal">Цель</p> 
         <div id="prestigeBuyableUpgrades">
-            <button onclick="pBuyableUpgrade1(this)" id = "pBuyableU1" class="upgradeButton pBuyableButton"></button>
-            <button onclick="pBuyableUpgrade2(this)" id = "pBuyableU2" class="upgradeButton pBuyableButton"></button>
-            <button onclick="pBuyableUpgrade3(this)" id = "pBuyableU3" class="upgradeButton pBuyableButton"></button>
-            <button onclick="pBuyableUpgrade4(this)" id = "pBuyableU4" class="upgradeButton pBuyableButton"></button>
             </div>
         <div id="prestigeAutoUpgrades">
-            <button onclick="pAutoUpgrade1(this)" id = "pAutoU1" class="upgradeButton pBuyableButton"></button>
-            <button onclick="pAutoUpgrade2(this)" id = "pAutoU2" class="upgradeButton pBuyableButton"></button>
-            <button onclick="pAutoUpgrade3(this)" id = "pAutoU3" class="upgradeButton pBuyableButton"></button>
-            <button onclick="pAutoUpgrade4(this)" id = "pAutoU4" class="upgradeButton pBuyableButton"></button>
             </div>
         <div id="prestigeSingleUpgrades">
-            <button onclick="pSingleUpgrade1(this)" id = "pSingleU1" class="upgradeButton pBuyableButton"></button>
-            <button onclick="pSingleUpgrade2(this)" id = "pSingleU2" class="upgradeButton pBuyableButton"></button>
-            <button onclick="pSingleUpgrade3(this)" id = "pSingleU3" class="upgradeButton pBuyableButton"></button>
-            <button onclick="pSingleUpgrade4(this)" id = "pSingleU4" class="upgradeButton pBuyableButton"></button>
                 </div>
         </div>
     <div id="fortuneButtons">
     <p id="fortuneNotImplemented" class="titleTab">Не реализовано!</p>
+    </div>
+    <div id="achivScreen">
+      <div id="achScreenDescription">
+        <p id="achievementsTitle" class="titleTab">Достижения</p>
+        <p id="achievementsDesc"  class="achievementPageDescription statsSlot">
+        Выполняйте Достижения чтобы получить бонус к доходу различных валют! Некоторые достижения также имеют свои награды. За заполнение ряда вы получите значительное увеличение бонуса за Достижения.
+        </p>
+        <p id="achBonus" class="achievementPageDescription statsSlot">
+          Сейчас ваши достижения дают: 
+        </p>
+        <div id="achievementsList">
+          <div id="firstAchievementRow" class="achRow">
+
+            <div id="ach11" class="ach" aria-describedby="tooltip"></div>
+            <div id="tooltip-ach11" class="tooltip" role="tooltip">
+              <ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+            
+            <div id="ach12" class="ach"></div>
+            <div id="tooltip-ach12" class="tooltip" role="tooltip">
+              <ut> Первая тысяча! (12) </ut> <br> <br> Собрать 1000 монет.
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+            
+            <div id="ach13" class="ach"></div>
+            <div id="tooltip-ach13" class="tooltip" role="tooltip">
+              <ut> Я вызываю полицию! Нет, я! (13) </ut> <br> <br> Сделайте монеты за клики в х2.01 больше чем монеты за секунду
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+
+            <div id="ach14" class="ach"></div>
+            <div id="tooltip-ach14" class="tooltip" role="tooltip">
+              <ut> Есть пробитие! (14) </ut> <br> <br> Выполнить У-множение.
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+
+            <div id="ach15" class="ach"></div>
+            <div id="tooltip-ach15" class="tooltip" role="tooltip">
+              <ut> Мастер кликер (15) </ut> <br> <br> Сделать 1000 нажатий. <br> <br> <it> Награда: каждое нажатие увеличивает МЗС на +0.01%.</it>
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+
+            <div id="ach16" class="ach"></div>
+            <div id="tooltip-ach16" class="tooltip" role="tooltip">
+              <ut> Адская продуктивность (16) </ut> <br> <br> Довести бонус Продуктивности до 6666% <br> <br> <it> Награда: Базовый эффект Продуктивности умножен на 1.1.</it>
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+
+            <div id="ach17" class="ach"></div>
+            <div id="tooltip-ach17" class="tooltip" role="tooltip">
+              <ut> Пора спать! (17) </ut> <br> <br> Провести в игре 1000 секунд. <br> <br> <it> Награда: Каждая минута увеличивает эффект Кэшбэка на х(1.05*минуты).</it>
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+
+            <div id="ach18" class="ach"></div>
+            <div id="tooltip-ach18" class="tooltip" role="tooltip">
+              <ut> Снова стена и снова пробитие! (18) </ut> <br> <br> Выполнить У-силение.
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+
+            <div id="ach19" class="ach"></div>
+            <div id="tooltip-ach19" class="tooltip" role="tooltip">
+              <ut> Миллионый множитель! (19) </ut> <br> <br> Довести множитель Удвоителя до х1е6. <br> <br> <it> Награда: Улучшает формулу Курсора Мидаса.</it>
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+
+            <div id="ach20" class="ach"></div>
+            <div id="tooltip-ach20" class="tooltip" role="tooltip">
+              <ut> Финишная прямая? (20) </ut> <br> <br> Купить все улучшения. <br> <br> <it> Награда: Откроет возможность стать престижным.</it>
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div id="statsScreen">
     <div id="statsSubButtons">
@@ -166,14 +242,15 @@
       <p id="statsTitle" class="titleTab">Статистика</p>
       <p id="totalCoins" class="statsSlot"></p> 
       <p id="gameTime" class="statsSlot">placeholder</p> 
-      <p id="prestigeStats" class="headerr" style="color:aqua">BLACK PENCIL?</p> 
+      <!-- <p id="prestigeStats" class="headerr" style="color:aqua">BLACK PENCIL?</p> 
       <p id="totalDiamonds" class="statsSlot"></p> 
       <p id="totalResets" class="statsSlot"></p> 
       <p id="prestigeTime" class="statsSlot">placeholder</p> 
-      <p id="fastestPrestigeTime" class="statsSlot">fastest prestige</p> 
+      <p id="fastestPrestigeTime" class="statsSlot">fastest prestige</p>  -->
     </div>
     <div id="aboutGamePage">
-      <p id="aboutGame">Об игре</p>
+      <p id="aboutGameTitle" class="titleTab">Об игре</p>
+      <p id="aboutGame">Об игре 2</p>
     </div>
     <div id="latestPrestigesPage">
       <p id="latestPrestigesTitle" class="titleTab">10 последних престижей: </p>
@@ -193,15 +270,56 @@
         <p id="endScreen">Достиг цели</p> 
         <button onclick="mainScreen(this)" id= "playMore">Играть дальше</button>
         </div>
-    <script src="javascript/jsfiles/classes.js"></script>
+
+        <div id="myPopupBackdrop2" class="myPopupBackdrop"></div>
+
+        <div id="offlineGainWindow" class="gameWindow offlineGainWindow2">
+          <div id="offTitleDiv" class="titleDivClass">
+            <span id="offlineGainTitle" class="windowTitle">С возвращением!</span>
+          </div>
+            <button onclick="hidePopup()" id="closeOfflineWindow" class="closeWindow"></button>
+        <div id="offlineShowTime" class="windowDesc">
+          <p id="offlineShowGain"> impedit earum ab asperiores sequi repudiandae reure, sapiente voluptas saepe atque ore consequatur eos quos voluptates amet.</p>
+        </div>
+        </div>
+
+        </div>
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+    <script src="javascript/jsfiles/achievements.js"></script>
+    <script src="javascript/jsfiles/uboosts.js"></script>
     <script src="javascript/jsfiles/clicker.js"></script>
     <script src="javascript/jsfiles/changelog.js"></script>
     <script src="javascript/jsfiles/saving.js"></script>
-    <script src="javascript/jsfiles/upgrades.js"></script>
+    <script src="javascript/jsfiles/upgrades2.0.js"></script>
     <script src="javascript/jsfiles/prestige.js"></script>
     <script src="javascript/jsfiles/automation.js"></script>
-    <!-- <script src="javascript/jsfiles/achievements.js"></script> -->
-    <script>window.onload = loadGame()</script>
+    <script type="module" src="javascript/jsfiles/languages.js"></script>
 
+    <script>
+    var backdrop2 = document.getElementById("myPopupBackdrop2")
+    loadNotify = 'Game loaded!'
+    window.onload = loadGame();
+    let autosaver
+    function intervaling (){
+      autosaver = setInterval(autoSaveThis, 30000);  getCoinPerSecond = setInterval(getCoinPerSec, 50)
+    }
+    window.onload = intervaling()
+    function showOfflineGain() {
+
+    offlineGainWindow.style.display = "block";
+    backdrop2.style.display = "flex";
+    offlineGainWindow.style.width = "400px";
+    offlineGainWindow.style.height = "250px"
+    closeOfflineWindow.style.left = "90.5%"
+    closeOfflineWindow.style.bottom = "85%"
+    offlineShowTime.style.textAlign = "center"
+    
+    }
+    window.onload = showOfflineGain()
+    backdrop2.addEventListener("click", hidePopup);
+    // console.log(gainPerSecond)
+    offlineShowGain.innerHTML = "Вы были оффлайн " + timeDifference + " секунд. <br> За это время вы получили оффлайн: <br> +" + moneyTemp.toFixed(0) + " монет."
+
+    </script>
 </body>
 </html>

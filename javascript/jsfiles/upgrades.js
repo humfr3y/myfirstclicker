@@ -503,17 +503,13 @@ function maxBuyAll () {
     thirdupgMax();
 }
 
-document.addEventListener("keydown", function(event) {
-    if (event.key == "M" || event.key == "m" || event.key == "ь" || event.key == "Ь") {
-      maxBuyAll();
-    }
-  });
 
-  document.addEventListener("keydown", function(event) {
+
+document.addEventListener("keydown", function(event) {
     if (event.key == "Enter") {
-     alert('Нельзя нажимать на кнопку!')
+    alert('Нельзя нажимать на кнопку!')
     }
-  });
+});
 
 
     function firstUpgIfElse() {

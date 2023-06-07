@@ -1,530 +1,133 @@
- setInterval(autoSaveThis, 30000); //таймер
-
-var firstprice = Math.round(first.basePrice*Math.pow(1.15, first.amount))
-var secondprice = Math.round(second.basePrice*Math.pow(1.21, second.amount));
-var thirdprice = Math.round(third.basePrice*Math.pow(1.275, third.amount))
 
 
-function loadUpgrades() {
-    if (first.amount >=1){
-        var firstBoost = first.b*second.boost
-        if (data==1) {commonU1.innerHTML = "<ut>Небольшая Инвестиция</ut> <br> Увеличивает α-монеты за нажатие. <br> Стоимость: " + Math.round(first.basePrice*Math.pow(1.15, first.amount)).toFixed(0) + " α-монет. <br> Бонус: +" + firstBoost.toFixed() } 
-        else {commonU1.innerHTML = "<ut>Small Investment</ut> <br> Increases α-coins gain per click. <br> Cost: " + Math.round(first.basePrice*Math.pow(1.15, first.amount)).toFixed(0) + " α-coins. <br> Currently: +" + firstBoost.toFixed()}}
-        
-    if (second.amount >=1){
-        cU1TL =  setInterval(commonUpgrade1TextLoad, 100)
-        if (data==1) {commonU2.innerHTML = "<ut>Продуктивность</ut> <br> Увеличивает бонус Небольшая Инвестиция. <br> Стоимость: " + Math.round(second.basePrice*Math.pow(1.21, second.amount)).toFixed(0) + " α-монет. <br> Бонус: +" + ((second.amount*10)*sixth.x).toFixed(0) + "%"} 
-        else {commonU2.innerHTML = "<ut>Productivity</ut> <br> Increases Small Investment bonus. <br> Cost: " + Math.round(second.basePrice*Math.pow(1.22, second.amount)).toFixed(0) + " α-coins. <br> Currently: +" + ((second.amount*10)*sixth.x).toFixed(0) + "%"};
-    }
-    if (third.amount >=1){
-        if (third.price<=1e6){
-            if (data==1) {commonU3.innerHTML = "<ut>Золотой Мешок</ut> <br> Умножает α-монеты за клик на 1.05. <br> Стоимость: " + thirdprice.toFixed() + " α-монет. <br> Бонус: х" + third.boost.toFixed(2)} 
-            else {commonU3.innerHTML = "<ut>Golden Pouch</ut> <br> Multiplies α-coins gain by 1.05. <br> Cost: " + thirdprice.toFixed() + " α-coins. <br> Currently: х" + third.boost.toFixed(2)}}
-            if (third.price>1e6){
-                if (data==1) {commonU3.innerHTML = "<ut>Золотой Мешок</ut> <br> Умножает α-монеты за клик на 1.05. <br> Стоимость: " + thirdprice.toExponential(2).replace("+","") + " α-монет. <br> Бонус: х" + third.boost.toFixed(2)} 
-                else {commonU3.innerHTML = "<ut>Golden Pouch</ut> <br> Multiplies α-coins gain by 1.05. <br> Cost: " + thirdprice.toExponential(2).replace("+","") + " α-coins. <br> Currently: х" + third.boost.toFixed(2)}}
-            if (third.boost>1e6){
-                if (data==1) {commonU3.innerHTML = "<ut>Золотой Мешок</ut> <br> Умножает α-монеты за клик на 1.05. <br> Стоимость: " + thirdprice.toExponential(2).replace("+","") + " α-монет. <br> Бонус: х" + third.boost.toExponential(2).replace("+","")} 
-                else {commonU3.innerHTML = "<ut>Golden Pouch</ut> <br> Multiplies α-coins gain by 1.05. <br> Cost: " + thirdprice.toExponential(2).replace("+","") + " α-coins. <br> Currently: х" + third.boost.toExponential(2).replace("+","")}}
-            }
-    if (fourth.amount >=1){
-        fourth.x = Math.pow(Math.log(total),pbthird.boost)
-        sU1B =  setInterval(singleUpgrade1Boost, 100)
-        purchasedButtonSingleU1.classList.add('purchased');
-        if (fourth.x<100) {
-            if (data==1) {singleU1.innerHTML = "<ut>Богатая Слава</ut> <br> Увеличивает α-монеты за нажатие в зависимости от количества всего α-монет. <br> Бонус: x" + fourth.x.toFixed(2)}
-            else {singleU1.innerHTML = "<ut>Rich Fame</ut> <br> Increases α-coins gain based on total α-coins. <br> Currently: x" + fourth.x.toFixed(2)}
-        }
-        if (fourth.x>=100) {
-            if (data==1) {singleU1.innerHTML = "<ut>Богатая Слава</ut> <br> Увеличивает α-монеты за нажатие в зависимости от количества всего α-монет. <br> Бонус: x" + fourth.x.toFixed(0)}
-            else {singleU1.innerHTML = "<ut>Rich Fame</ut> <br> Increases α-coins gain based on total α-coins. <br> Currently: x" + fourth.x.toFixed(0)}
-        }
-        if (fourth.x>=1e6) {
-            if (data==1) {singleU1.innerHTML = "<ut>Богатая Слава</ut> <br> Увеличивает α-монеты за нажатие в зависимости от количества всего α-монет. <br> Бонус: x" + fourth.x.toExponential(2).replace("+","")}
-            else {singleU1.innerHTML = "<ut>Rich Fame</ut> <br> Increases α-coins gain based on total α-coins. <br> Currently: x" + fourth.x.toExponential(2).replace("+","")}
-    }}
-    if (fifth.amount >=1){
-        if (fifth.amount==1 && pssecond.amount==0) 
-        {fifth.x=2;
-        if (data==1) {singleU2.innerHTML = "<ut>Бездонный Кошелёк</ut> <br> Удваивает α-монеты за нажатие."}
-        else {singleU2.innerHTML = "<ut>Bottomless Wallet</ut> <br> Doubles your α-coins gain."}
-        purchasedButtonSingleU2.classList.add('purchased')
-        }
-    if (fifth.amount>=2 || pssecond.amount==1) 
-    {
-    if (fifth.price<1e6){
-        if (data==1) {singleU2.innerHTML = "<ut>Бездонный Кошелёк</ut> <br> Умножает α-монеты за нажатие в два раза при покупке <br> Стоимость: " + fifth.price.toFixed() + "<br> Бонус: x" + fifth.x}
-        else {singleU2.innerHTML = "<ut>Bottomless Wallet</ut> <br> Multiplies your α-coin gain by x2 per buying. <br> Cost: " + fifth.price.toFixed() + "<br> Currently: x" + fifth.x}
-        purchasedButtonSingleU2.classList.remove('purchased')
-    }
-    if (fifth.price>1e6) {
-            if (data==1) {singleU2.innerHTML = "<ut>Бездонный Кошелёк</ut> <br> Умножает α-монеты за нажатие в два раза при покупке <br> Стоимость: " + fifth.price.toExponential(2).replace("+","") + "<br> Бонус: x" + fifth.x}
-            else {singleU2.innerHTML = "<ut>Bottomless Wallet</ut> <br> Multiplies your α-coin gain by x2 per buying. <br> Cost: " + fifth.price.toExponential(2).replace("+","") + "<br> Currently: x" + fifth.x}
-            purchasedButtonSingleU2.classList.remove('purchased')
-        if (fifth.x > 1e6) 
-        {
-            if (data==1) {singleU2.innerHTML = "<ut>Бездонный Кошелёк</ut> <br> Умножает α-монеты за нажатие в два раза при покупке <br> Стоимость: " + fifth.price.toExponential(2).replace("+","") + "<br> Бонус: x" + fifth.x.toExponential(2).replace("+","")}
-            else {singleU2.innerHTML = "<ut>Bottomless Wallet</ut> <br> Multiplies your α-coin gain by x2 per buying. <br> Cost: " + fifth.price.toExponential(2).replace("+","") + "<br> Currently: x" + fifth.x.toExponential(2).replace("+","")}
-            purchasedButtonSingleU2.classList.remove('purchased')
-        }
-        }
+
+
+
+// function loadUpgrades() {
+//     if (money>1e9 || diamonds>=1) {unlockedPrestige = 1}
+//     else {unlockedPrestige = 0}
+//     if (unlockedPrestige == 1) {unlockPrestige.call()}
+// }
+
+function singleUpgradePurchasedRemove () {
+    var singleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
+    for (var i = 0; i < singleArray.length; i++){
+        singleArray[i].updateText.classList.remove('purchased')
     }
 }
-    if (sixth.amount >=1){
-        sixth.x = Math.log(first.amount)
-        purchasedButtonSingleU3.classList.add('purchased')
-        sU3B =  setInterval(singleUpgrade3Boost, 100)
-        cU2TL =  setInterval(commonUpgrade2TextLoad, 100)
-        if (data==1) {singleU3.innerHTML = "<ut>Сверхпродуктивность</ut> <br> Увеличивает бонус Продуктивность в зависимости от кол-ва покупок Небольшая Инвестиция. <br> Бонус: x" + sixth.x.toFixed(2)}
-        else {singleU3.innerHTML = "<ut>Super Productivity</ut> <br> Increases bonus of Productivity based on amount of Small Investment. Currently: x" + sixth.x.toFixed(2)}
+
+function achievementGottenRemove () {
+    for (var i = 0; i < 10; i++){
+        var element = document.getElementsByClassName("ach")[i]
+        element.classList.remove("green");
+        element.classList.remove("greenborder");
     }
-    if (pbfirst.amount >=1){
-        pbfirstprice = Math.round(pbfirst.basePrice*Math.pow(1.5, pbfirst.amount)/psfirst.boost)
-        if (pbfirstprice<1e6){
-            if (data==1) {pBuyableU1.innerHTML = "<ut>Суперпроцессор</ut> <br> Усиливает α-монеты за нажатие. <br> Стоимость: " + pbfirstprice.toFixed(0) + " алмазов. <br> Бонус: ^" + pbfirst.boost.toFixed(3) } 
-            else {pBuyableU1.innerHTML = "<ut>Superprocessor</ut> <br> Increases power of α-coins gain per click. <br> Cost: " + pbfirstprice.toFixed(0) + " diamonds. <br> Currently: ^" + pbfirst.boost.toFixed(3)}
-        }
-        else if (pbfirstprice>=1e6){
-            if (data==1) {pBuyableU1.innerHTML = "<ut>Суперпроцессор</ut> <br> Усиливает α-монеты за нажатие. <br> Стоимость: " + pbfirstprice.toExponential(2).replace("+","") + " алмазов. <br> Бонус: ^" + pbfirst.boost.toFixed(3) } 
-            else {pBuyableU1.innerHTML = "<ut>Superprocessor</ut> <br> Increases power of α-coins gain per click. <br> Cost: " + pbfirstprice.toExponential(2).replace("+","") + " diamonds. <br> Currently: ^" + pbfirst.boost.toFixed(3)}
-        }}
-    if (pbsecond.amount >=1){
-        pbsecondprice = Math.round(pbsecond.basePrice*Math.pow(1.25, pbsecond.amount)/psfirst.boost)
-        if (pbsecondprice<1e6){
-        if (data==1) {pBuyableU2.innerHTML = "<ut>Алмазный Шифратор</ut> <br> Умножает бонус алмазов. <br> Стоимость: " + pbsecondprice.toFixed(0) + " алмазов. <br> Бонус: x" + pbsecond.boost.toFixed(2) } 
-        else {pBuyableU2.innerHTML = "<ut>Diamond Encoder</ut> <br> Multiplies diamonds bonus. <br> Cost: " + pbsecondprice.toFixed(0) + " diamonds. <br> Currently: x" + pbsecond.boost.toFixed(2)}
-        }
-        else if (pbfirstprice>=1e6){
-        if (data==1) {pBuyableU2.innerHTML = "<ut>Алмазный Шифратор</ut> <br> Умножает бонус алмазов. <br> Стоимость: " + pbsecondprice.toExponential(2).replace("+","") + " алмазов. <br> Бонус: x" + pbsecond.boost.toFixed(2) } 
-        else {pBuyableU2.innerHTML = "<ut>Diamond Encoder</ut> <br> Multiplies diamonds bonus. <br> Cost: " + pbsecondprice.toExponential(2).replace("+","") + " diamonds. <br> Currently: x" + pbsecond.boost.toFixed(2)}
-        }}
-    if (pbthird.amount >=1) {
-        pbthirdprice = Math.round(pbthird.basePrice*Math.pow(1.4, pbthird.amount)/psfirst.boost)
-    if (pbthirdprice<1e6){
-        if (data==1) {pBuyableU3.innerHTML = "<ut>Престижная Слава</ut> <br> Усиливает бонус Богатой Славы. <br> Стоимость: " + pbthirdprice.toFixed(0) + " алмазов. <br> Бонус: ^" + pbthird.boost.toFixed(2) } 
-        else {pBuyableU3.innerHTML = "<ut>Prestige Fame</ut> <br> Increases power of Rich Fame. <br> Cost: " + pbthirdprice.toFixed(0) + " diamonds. <br> Currently: ^" + pbthird.boost.toFixed(2)}
-        }
-    else if (pbthirdprice>=1e6){
-        if (data==1) {pBuyableU3.innerHTML = "<ut>Престижная Слава</ut> <br> Усиливает бонус Богатой Славы. <br> Стоимость: " + pbthirdprice.toExponential(2).replace("+","") + " алмазов. <br> Бонус: ^" + pbthird.boost.toFixed(2) } 
-        else {pBuyableU3.innerHTML = "<ut>Prestige Fame</ut> <br> Increases power of Rich Fame. <br> Cost: " + pbthirdprice.toExponential(2).replace("+","") + " diamonds. <br> Currently: ^" + pbthird.boost.toFixed(2)}
-        }}
-    if (pbfourth.amount >=1) {
-        if (data==1) {pBuyableU4.innerHTML = "<ut>Завод Роботов</ut> <br> Открывает улучшения Автоматизации."}
-        else {pBuyableU4.innerHTML = "<ut>Robot Factory</ut> <br> Unlocks Automation upgrades."}
-        purchasedButtonpBuyableU4.classList.add('purchased')
-        prestigeAutoUpgrades.style.display = "flex"
-    }
-    if (pafirst.amount >=1) {
-        if (data==1) {pAutoU1.innerHTML = "<ut>Авто-Покупщик 1.0</ut> <br> Автоматически покупает 4-6 улучшения."}
-        else {pAutoU1.innerHTML = "<ut>Auto-Buyer 1.0</ut> <br> Automatically buys 4-6 upgrades."}
-        purchasedButtonpAutoU1.classList.add('purchased')
-        container1.style.display = "flex"
-    }
-    if (pasecond.amount >=1) {
-        if (data==1) {pAutoU2.innerHTML = "<ut>Авто-Покупщик 2.0</ut> <br> Автоматически покупает 1-3 улучшения"}
-        else {pAutoU2.innerHTML = "<ut>Auto-Buyer 2.0</ut> <br> Automatically buys 1-3 upgrades"}
-        purchasedButtonpAutoU2.classList.add('purchased')
-        container2.style.display = "flex"
-    }
-    if (pathird.amount >=1) {
-        if (data==1) {pAutoU3.innerHTML = "<ut>Авто-Покупщик 3.0</ut> <br> Вы получаете 100% от α-монет за нажатия в секунду"}
-        else {pAutoU3.innerHTML = "<ut>Auto-Buyer 3.0</ut> <br> You automatically earning 100% α-coin gain per second"}
-        purchasedButtonpAutoU3.classList.add('purchased')
-        container3.style.display = "flex"
-    }
-    if (pafourth.amount >=1) {
-        if (data==1) {pAutoU4.innerHTML = "<ut>Супер Престиж</ut> <br>Вы открыли новые улучшения престижа"}
-        else {pAutoU4.innerHTML = "<ut>Super Prestige</ut> <br>You unlock new prestige upgrades"}
-        prestigeSingleUpgrades.style.display = "flex"
-        purchasedButtonpAutoU4.classList.add('purchased')
-    }
-    if (psfirst.amount >=1) {
-        if (data==1) {pSingleU1.innerHTML = "<ut>Бриллиантовый Торговец</ut> <br>Делит цену улучшений Престижа в зависимости от текущего количества α-монет <br> Бонус: / " + psfirst.boost.toFixed(2)}
-        else {pSingleU1.innerHTML = "<ut>Diamond Trader</ut> <br>Divides price of Prestige upgrades based on current α-coins <br> Currently: / " + psfirst.boost.toFixed(2)}
-        purchasedButtonpSingleU1.classList.add('purchased')
-    }
-    if (pssecond.amount >=1) {
-        if (data==1) {pSingleU2.innerHTML = "<ut>Мультиплексор</ut> <br> Снимает ограничение с Бездонный Кошелёк"}
-            else {pSingleU2.innerHTML = "<ut>Multiplexor</ut> <br> Removes cap from Bottomless Wallet"}
-        if (data==1) {singleU2.innerHTML = "<ut>Бездонный Кошелёк</ut> <br> Умножает α-монеты за нажатие в два раза при покупке <br> Стоимость: " + fifth.price.toExponential(2).replace("+","") + "<br> Бонус: x" + fifth.x}
-            else {singleU2.innerHTML = "<ut>Bottomless Wallet</ut> <br> Multiplies your α-coin gain by x2 per buying. <br> Cost: " + fifth.price.toExponential(2).replace("+","") + "<br> Currently: x" + fifth.x}
-        purchasedButtonSingleU2.classList.remove('purchased')
-        diamondCountCheck.call()
-        purchasedButtonpSingleU2.classList.add('purchased')
-        purchasedButtonSingleU2.classList.remove('purchased')}
-    if (psthird.amount >=1) {
-        if (data==1) {pSingleU3.innerHTML = "<ut>Алмазное Хеширование</ut> <br> Увеличивает алмазы за сброс в зависимости от количества купленных основных улучшений <br> Бонус: " + psthird.boost.toFixed(2)}
-        else {pSingleU3.innerHTML = "<ut>Diamond Hashing</ut> <br> Increases diamonds gain based on total amount of bought main upgrades <br> Currently: x" + psthird.boost.toFixed(2)}
-        purchasedButtonpSingleU3.classList.add('purchased')
-    }
-    if (psfourth.amount >=1) {
-        fortuneTab.style.display = "block"
-        if (data==1) {pSingleU4.innerHTML = "<ut>Вызов Фортуны</ut> <br> Вы открыли Фортуну"}
-        else {pSingleU4.innerHTML = "<ut>Fortune Challenge</ut> <br> You have unlocked Fortune"}
-        purchasedButtonpSingleU4.classList.add('purchased')
-    }
-    if (pafirst.amount==1 || pasecond.amount==1 || pathird.amount == 1) {
-        if (autoTab.style.display == "none") {autoTab.style.display = "block"}
-    }
-    if (money>1e9 || diamonds>=1) {unlockedPrestige = 1}
-    else {unlockedPrestige = 0}
-    if (unlockedPrestige == 1) {unlockPrestige.call()}
 }
 
 function autoSaveGame(){
-    if (autoSaving==0) 
+    if (autoSaving== 'no') 
     {
-        autoSaving=1;
-        if (data==1) {autoSavingGame.innerHTML = "Автосохранение вкл."}
-        else {autoSavingGame.innerHTML = "Autosave on."}
+        autoSaving = 'yes';
     } 
     else {
-        autoSaving=0;
-        if (data==1) {autoSavingGame.innerHTML = "Автосохранение выкл."}
-        else {autoSavingGame.innerHTML = "Autosave off."}
-    }
+        autoSaving = 'no';
+   }
 }
+
+let datasave
+var gainPerSecondSave
+
 function saveGame () { 
-    let datasave = {
-            data: data,
-            money: money,
-            completion: completion,
-            onecheck: onecheck,
-            autoSaving: autoSaving,
-            unlockedPrestige: unlockedPrestige,
-            total: total,
-            totalDiamond: totalDiamond,
-            totalPrestiges: totalPrestiges,
-            amounts: amounts,
-            first_price: first.price,
-            firstprice: firstprice,
-            first_amount: first.amount,
-            first_b: first.b,
-            second_price: second.price,
-            secondprice: secondprice,
-            second_amount: second.amount,
-            second_b: second.b,
-            second_boost: second.boost,
-            third_price: third.price,
-            thirdprice: thirdprice,
-            third_amount: third.amount,
-            third_boost: third.boost,
-            fourth_price: fourth.price,
-            fourth_amount: fourth.amount,
-            fourth_x: fourth.x,
-            fifth_price: fifth.price,
-            fifth_amount: fifth.amount,
-            fifth_x: fifth.x,
-            sixth_price: sixth.price,
-            sixth_amount: sixth.amount,
-            sixth_x: sixth.x,
-            diamonds: diamonds,
-            diamondsBoost: diamondsBoost,
-            pbfirstprice: pbfirstprice,
-            pbfirst_Baseprice: pbfirst.Baseprice,
-            pbfirst_price: pbfirst.price,
-            pbfirst_amount: pbfirst.amount,
-            pbfirst_boost: pbfirst.boost,
-            pbsecondprice: pbsecondprice,
-            pbsecond_Baseprice: pbsecond.Baseprice,
-            pbsecond_price: pbsecond.price,
-            pbsecond_amount: pbsecond.amount,
-            pbsecond_boost: pbsecond.boost,
-            pbthirdprice: pbthirdprice,
-            pbthird_Baseprice: pbthird.Baseprice,
-            pbthird_price: pbthird.price,
-            pbthird_amount: pbthird.amount,
-            pbthird_boost: pbthird.boost,
-            pbfourth_price: pbfourth.price,
-            pbfourth_amount: pbfourth.amount,
-            pafirst_price: pafirst.price,
-            pafirst_amount: pafirst.amount,
-            pasecond_price: pasecond.price,
-            pasecond_amount: pasecond.amount,
-            pathird_price: pathird.price,
-            pathird_amount: pathird.amount,
-            pafourth_price: pafourth.price,
-            pafourth_amount: pafourth.amount,
-            psfirst_price: psfirst.price,
-            psfirst_amount: psfirst.amount,
-            psfirst_boost: psfirst.boost,
-            pssecond_price: pssecond.price,
-            pssecond_amount: pssecond.amount,
-            pssecond_boost: pssecond.boost,
-            psthird_price: psthird.price,
-            psthird_amount: psthird.amount,
-            psthird_boost: psthird.boost,
-            psfourth_price: psfourth.price,
-            psfourth_amount: psfourth.amount,
-            psfourth_boost: psfourth.boost,
-            check46_checked: check46.checked,
-            check13_checked: check13.checked,
-            checkCoin_checked: checkCoin.checked,
-            gameSeconds: gameSeconds,
-            gameMinutes: gameMinutes,
-            gameHours: gameHours,
-            prestigeSeconds: prestigeSeconds,
-            prestigeMinutes: prestigeMinutes,
-            prestigeHours: prestigeHours,
-            fastPrestigeSeconds: fastPrestigeSeconds,
-            fastPrestigeMinutes: fastPrestigeMinutes,
-            fastPrestigeHours: fastPrestigeHours,
-            fastPrestigeSecondsTimer: fastPrestigeSecondsTimer,
-            bestPrestigeRun: bestPrestigeRun,
-            firstBank: (encodeURIComponent(firstBank)),
-            secondBank: (encodeURIComponent(secondBank)),
-            thirdBank: (encodeURIComponent(thirdBank)),
-            fourthBank: (encodeURIComponent(fourthBank)),
-            fifthBank: (encodeURIComponent(fifthBank)),
-            sixthBank: (encodeURIComponent(sixthBank)),
-            seventhBank: (encodeURIComponent(seventhBank)),
-            eighthBank: (encodeURIComponent(eighthBank)),
-            ninthBank: (encodeURIComponent(ninthBank)),
-            tenthBank: (encodeURIComponent(tenthBank)),
-
-    }; //образуем переменную с кучей других переменных
-
-    var saveNotify
-    if (data == 1) saveNotify = 'Игра сохранена!'
-    else saveNotify = 'Game saved!'
+    gainPerSecondSave = gainPerSecond * 20
+    whatsYourCurrentTime()
+    datasave = savingTheGame(); //образуем переменную с кучей других переменных
+    autoSaverTimer = 0
     notify(saveNotify);
     let stringifiedData = JSON.stringify(datasave); //превратим в строчку
+
+    localStorage.setItem('completion', JSON.stringify(achRow1.completion))
     
     // сохранить в LocalStorage по ключу коунтдата
     localStorage.setItem('datasaving', stringifiedData);
 }
+var loadNotify
+var saveNotify
+var exportNotify
+var importNotify
+var hardNotify
+
 function loadGame () {
-        let storedData = localStorage.getItem('datasaving'); //спарсим его обратно объект
-        let parsedData = JSON.parse(storedData);
-        
-        money = parseFloat(parsedData.money);
-        data = parseFloat(parsedData.data);
-        autoSaving = parseFloat(parsedData.autoSaving)
-        completion = parseFloat(parsedData.completion)
-        onecheck = parseFloat(parsedData.onecheck)
-        total = parseFloat(parsedData.total);
-        totalDiamond = parseFloat(parsedData.totalDiamond);
-        totalPrestiges = parseFloat(parsedData.totalPrestiges);
-        amounts = parseFloat(parsedData.amounts);
-        unlockedPrestige = parseFloat(parsedData.unlockedPrestige)
-        diamonds = parseFloat(parsedData.diamonds);
-        diamondsBoost = parseFloat(parsedData.diamondsBoost);
-        first.price = parseFloat(parsedData.first_price);
-        firstprice = parseFloat(parsedData.firstprice);
-        first.amount = parseFloat(parsedData.first_amount);
-        first.b = parseFloat(parsedData.first_b);
-        second.price = parseFloat(parsedData.second_price);
-        secondprice = parseFloat(parsedData.secondprice);
-        second.amount = parseFloat(parsedData.second_amount);
-        second.b = parseFloat(parsedData.second_b);
-        second.boost = parseFloat(parsedData.second_boost);
-        third.price = parseFloat(parsedData.third_price);
-        thirdprice = parseFloat(parsedData.thirdprice);
-        third.amount = parseFloat(parsedData.third_amount);
-        third.boost = parseFloat(parsedData.third_boost);
-        fourth.price = parseFloat(parsedData.fourth_price);
-        fourth.amount = parseFloat(parsedData.fourth_amount);
-        fourth.x = parseFloat(parsedData.fourth_x);
-        fifth.price = parseFloat(parsedData.fifth_price);
-        fifth.amount = parseFloat(parsedData.fifth_amount);
-        fifth.x = parseFloat(parsedData.fifth_x);
-        sixth.price = parseFloat(parsedData.sixth_price);
-        sixth.amount = parseFloat(parsedData.sixth_amount);
-        sixth.x = parseFloat(parsedData.sixth_x);
-        pbfirst.price = parseFloat(parsedData.pbfirst_price);
-        pbfirstprice = parseFloat(parsedData.pbfirstprice);
-        pbfirst.Baseprice = parseFloat(parsedData.pbfirst_Baseprice);
-        pbfirst.amount = parseFloat(parsedData.pbfirst_amount);
-        pbfirst.boost = parseFloat(parsedData.pbfirst_boost);
-        pbsecond.price = parseFloat(parsedData.pbsecond_price);
-        pbsecondprice = parseFloat(parsedData.pbsecondprice);
-        pbsecond.Baseprice = parseFloat(parsedData.pbsecond_Baseprice);
-        pbsecond.amount = parseFloat(parsedData.pbsecond_amount);
-        pbsecond.boost = parseFloat(parsedData.pbsecond_boost);
-        pbthird.price = parseFloat(parsedData.pbthird_price);
-        pbthirdprice = parseFloat(parsedData.pbthirdprice);
-        pbthird.Baseprice = parseFloat(parsedData.pbthird_Baseprice);
-        pbthird.amount = parseFloat(parsedData.pbthird_amount);
-        pbthird.boost = parseFloat(parsedData.pbthird_boost);
-        pbfourth.price = parseFloat(parsedData.pbfourth_price);
-        pbfourth.amount = parseFloat(parsedData.pbfourth_amount);
-        pafirst.price = parseFloat(parsedData.pafirst_price);
-        pafirst.amount = parseFloat(parsedData.pafirst_amount);
-        pasecond.price = parseFloat(parsedData.pasecond_price);
-        pasecond.amount = parseFloat(parsedData.pasecond_amount);
-        pathird.price = parseFloat(parsedData.pathird_price);
-        pathird.amount = parseFloat(parsedData.pathird_amount);
-        pafourth.price = parseFloat(parsedData.pafourth_price);
-        pafourth.amount = parseFloat(parsedData.pafourth_amount);
-        psfirst.price = parseFloat(parsedData.psfirst_price);
-        psfirst.amount = parseFloat(parsedData.psfirst_amount);
-        psfirst.boost = parseFloat(parsedData.psfirst_boost);
-        pssecond.price = parseFloat(parsedData.pssecond_price);
-        pssecond.amount = parseFloat(parsedData.pssecond_amount);
-        pssecond.boost = parseFloat(parsedData.pssecond_boost);
-        psthird.price = parseFloat(parsedData.psthird_price);
-        psthird.amount = parseFloat(parsedData.psthird_amount);
-        psthird.boost = parseFloat(parsedData.psthird_boost);
-        psfourth.price = parseFloat(parsedData.psfourth_price);
-        psfourth.amount = parseFloat(parsedData.psfourth_amount);
-        psfourth.boost = parseFloat(parsedData.psfourth_boost);
-        check13.checked = parsedData.check13_checked;
-        check46.checked = parsedData.check46_checked;
-        checkCoin.checked = parsedData.checkCoin_checked;
-        gameSeconds = parseFloat(parsedData.gameSeconds);
-        gameMinutes = parseFloat(parsedData.gameMinutes);
-        gameHours = parseFloat(parsedData.gameHours);
-        prestigeSeconds = parseFloat(parsedData.prestigeSeconds);
-        prestigeMinutes = parseFloat(parsedData.prestigeMinutes);
-        prestigeHours = parseFloat(parsedData.prestigeHours);
-        fastPrestigeSeconds = parseFloat(parsedData.fastPrestigeSeconds);
-        fastPrestigeMinutes = parseFloat(parsedData.fastPrestigeMinutes);
-        fastPrestigeHours = parseFloat(parsedData.fastPrestigeHours);
-        fastPrestigeSecondsTimer = parseFloat(parsedData.fastPrestigeSecondsTimer);
-        bestPrestigeRun = parseFloat(parsedData.bestPrestigeRun);
-        firstBank = decodeURIComponent((parsedData.firstBank));
-        secondBank = decodeURIComponent((parsedData.secondBank));;
-        thirdBank = decodeURIComponent((parsedData.thirdBank));
-        fourthBank = decodeURIComponent((parsedData.fourthBank));
-        fifthBank = decodeURIComponent((parsedData.fifthBank));
-        sixthBank = decodeURIComponent((parsedData.sixthBank));
-        seventhBank = decodeURIComponent((parsedData.seventhBank));
-        eighthBank = decodeURIComponent((parsedData.eighthBank));
-        ninthBank = decodeURIComponent((parsedData.ninthBank));
-        tenthBank = decodeURIComponent((parsedData.tenthBank));
-        var loadNotify
-        if (data == 1) loadNotify = 'Игра загружена!'
-        else loadNotify = 'Game load!'
+        achievementGottenRemove ()
+        singleUpgradePurchasedRemove ()
+        loadingTheGame();
+        singleUpgradeTextUpdate ()
+        singleUpgradePurchased ()
+        achRow1.completion = JSON.parse(localStorage.getItem('completion')).map(Boolean);
+        achCompletionsChecker()
+        getCoinPerSec()
+        whatsYourCurrentTime2()
+        offlineGain()
+        offlineGainTime()
+        convertingTime()
+        autoSaverTimer = 0
+        clearInterval(autoSaveTime)
+        clearInterval(autoSaveTime)
+        clearInterval(autoSaveTime)
+        clearInterval(autoSaveTime)
+        clearInterval(autoSaveTime)
+        clearInterval(autoSaveTime)
+        clearInterval(autoSaveTime)
+        clearInterval(autoSaveTime)
+        clearInterval(autoSaveTime)
+        clearInterval(autoSaveTime)
+        clearInterval(autoSaveTime)
+        clearInterval(autoSaveTime)
+        clearInterval(autoSaveTime)
+        clearInterval(autoSaveTime)
+        autoSaveTime = setInterval(autoSaveTimer, 1000)
+
         notify(loadNotify);
+//         loadStats.call()
+//         changedLanguage.call()
+//         loadUpgrades.call()
+//         checkThisBox.call()
+        loadingTheGame2();
+}
 
-        if (data==1) {coinsCount.innerHTML = money.toFixed(0) + " α-монет. Нажмите на α-монету.";  document.getElementById('coinsGain').innerHTML = ""} 
-            else {coinsCount.innerHTML = money.toFixed(0) + " α-coins. Click on the α-coin."; document.getElementById('coinsGain').innerHTML = "";}
-        if (money>1e6)
-        if (data==1) {coinsCount.innerHTML = money.toExponential(2).replace("+","") + " α-монет"; document.getElementById('coinsGain').innerHTML = ""}
-        else {coinsCount.innerHTML = money.toExponential(2).replace("+","") + " α-coins"; document.getElementById('coinsGain').innerHTML = "";}
-        loadStats.call()
-        changedLanguage.call()
-        stopIntervals.call()
-        startTextOfUpgrades.call()
-        startTextOfPrestigeUpgrades.call()
-        loadUpgrades.call()
-        checkThisBox.call()
-        if (autoSaving==1) {
-        if (data==1) {autoSavingGame.innerHTML = "Автосохранение вкл."}
-        else {autoSavingGame.innerHTML = "Autosave on."}
-        } 
-        else {
-        if (data==1) {autoSavingGame.innerHTML = "Автосохранение выкл."}
-            else {autoSavingGame.innerHTML = "Autosave off."}
-        }
-        if (first.amount>=1)
-        cU1TL =  setInterval(commonUpgrade1TextLoad, 100)
-        if (fourth.amount>=1)
-        sU1B =  setInterval(singleUpgrade1Boost, 100)
-        if (sixth.amount>=1)
-        sU3B =  setInterval(singleUpgrade3Boost, 100)
-        if (second.amount>=1)
-        cU2TL =  setInterval(commonUpgrade2TextLoad, 100)
-        if (psfirst.amount>=1)
-        pSU1B =  setInterval(prestigeSingleUpgrade1Boost, 100)
-        if (psthird.amount>=1)
-        pSU3B =  setInterval(prestigeSingleUpgrade3Boost, 100)
-        if (unlockedPrestige == 1 || totalDiamond>=1) {prestigeTab.style.display = "block"; unlockPrestige(); latestPrestigesTab.style.display = "block"
-        if (totalDiamond>1) crystalCount.style.display = "block"}
-        tenthPrestigeRun.innerHTML = tenthBank
-        ninthPrestigeRun.innerHTML = ninthBank
-        eighthPrestigeRun.innerHTML = eighthBank
-        seventhPrestigeRun.innerHTML = seventhBank
-        sixthPrestigeRun.innerHTML = sixthBank
-        fifthPrestigeRun.innerHTML = fifthBank
-        fourthPrestigeRun.innerHTML = fourthBank
-        thirdPrestigeRun.innerHTML = thirdBank
-        secondPrestigeRun.innerHTML = secondBank
-        firstPrestigeRun.innerHTML = firstBank
-    }
 
+var autoSaverTimer = 0
+var autoSaveTime
 
 function autoSaveThis () {
-            if (autoSaving==1)
-            {saveGame.call()}
+    if (autoSaving == 'yes')
+        {
+            saveGame()
+        }
+
+    }
+
+    function autoSaveTimer () {
+        autoSaverTimer++
+        // console.log(autoSaverTimer + " autosaver time")
     }
 
 function doHardReset () {
     if (data==1) var hr = confirm("Вы точно хотите стереть весь прогресс? Это так же коснётся ваших сохранений.")
     else var hr = confirm ("Do you want erase the whole progress? This is also affects on your save.")
     if (hr){
+        gainPerSecondSave = gainPerSecond * 20
+            gain = 1;
+            gainPerClick = 1;
+            clickCount = 0
             money = 10
-            first.price = 10
-            second.price = 100
-            third.price = 1000
-            first.amount = 0
-            second.amount = 0
-            third.amount = 0
-            first.b  = 0
-            second.b  = 0
-            third.b  = 0
             total = 10
-            second.boost = 1
-            third.boost = 1
-            fourth.amount = 0
-            fifth.amount = 0
-            sixth.amount = 0
-            fourth.x = 1
-            fifth.x = 1
-            sixth.x = 1
-            fourth.price = 10000
-            fifth.price = 1200000
-            sixth.price = 5000000
-            firstprice = 10
-            secondprice = 100
-            thirdprice = 1000
-            diamonds = 0
-            diamondsGain = 0
-            diamondsBoost = 0
-            pbfirst.amount = 0
-            pbfirst.basePrice = 2
-            pbfirst.price = 2
-            pbfirstprice = 2
-            pbfirst.boost = 1
-            pbsecond.amount = 0
-            pbsecond.basePrice = 10
-            pbsecond.price = 10
-            pbsecondprice = 10
-            pbsecond.boost = 1
-            pbthird.amount = 0
-            pbthird.basePrice = 50
-            pbthird.price = 50
-            pbthirdprice = 50
-            pbthird.boost = 1
-            pbfourth.amount = 0
-            pbfourth.price = 500
-            pafirst.amount = 0
-            pafirst.price = 1000
-            pasecond.amount = 0
-            pasecond.price = 2500
-            pathird.amount = 0
-            pathird.price = 5000
-            pafourth.amount = 0
-            pafourth.price = 15000
-            psfirst.amount = 0
-            psfirst.price = 50000
-            psfirst.boost = 1
-            pssecond.amount = 0
-            pssecond.price = 1000000
-            pssecond.boost = 1
-            psthird.amount = 0
-            psthird.price = 1e7
-            psthird.boost = 1
-            psfourth.amount = 0
-            psfourth.price = 1e9
-            psfourth.boost = 1
             completion = 0;
             onecheck = 0
             unlockedPrestige = 0;
-            autoSaving = 1;
+            autoSaving = 'yes';
             totalDiamond = 0
             totalPrestiges = 0
-            amounts = 1
+            gameTimer = 0
             gameSeconds = 0
             gameMinutes = 0
             gameHours = 0
@@ -536,6 +139,23 @@ function doHardReset () {
             fastPrestigeHours = 0
             fastPrestigeSecondsTimer = 0
             bestPrestigeRun = 1e9
+            achievementBonus = 1
+            achBonus = document.getElementById('achBonus')
+            achCount = 0
+            achRowCount = 0
+            achRow1 = {
+                condition: [1, 1000, 2.01, 1, 1000, 666, 1000, 1, 1e6, 1],
+                reward: [0, 0, 0, 0, 1.01, 11, 1.05, 0, 1.33, 0],
+                completion: [false, false, false, false, false, false, false, false, false, false],
+                name: ['"Без ходуль"', '"Первая тысяча"', '"Я вызываю полицию! Нет, я!"', '"Есть пробитие!"', '"Мастер-кликер"', '"Адская продуктивность"', '"Пора спать!"', '"Снова стена и снова пробитие!"', '"Миллионный множитель"', '"Финишная прямая?"'],
+                fullRow: 0
+            }
+            umultiplier = 1
+            umultipliercount = 0
+            upower = 1
+            upowercount = 0
+            upgradeReset();
+            whatsYourCurrentTime()
             firstBank = ""
             secondBank = ""
             thirdBank = ""
@@ -546,13 +166,11 @@ function doHardReset () {
             eighthBank = ""
             ninthBank = ""
             tenthBank = ""
-            saveGame.call();
-            loadUpgrades.call();
-            stopIntervals.call();
-            stopIntervals.call();
-            stopIntervals.call();
-            stopIntervals.call();
-            loadStats.call()
+            autoSaverTimer = 0
+            clearInterval(autoSaveTime)
+            autoSaveTime = setInterval(autoSaveTimer, 1000)
+            saveGame();
+            gainPerSecondSave = gainPerSecond * 20
             prestigeAutoUpgrades.style.display = "none"
             prestigeSingleUpgrades.style.display = "none"
             prestigeTab.style.display = "none"
@@ -565,7 +183,6 @@ function doHardReset () {
             container3.style.display = "none"
             latestPrestigesTab.style.display = "none"
             latestPrestigesPage.style.display = "none"
-            startTextOfUpgrades.call();
             check46.checked = false
             check13.checked = false
             checkCoin.checked = false
@@ -580,31 +197,14 @@ function doHardReset () {
             thirdPrestigeRun.innerHTML = ""
             secondPrestigeRun.innerHTML = ""
             firstPrestigeRun.innerHTML = ""
-            var hardNotify, hardNotifyColor
-            if (data == 1) hardNotify = 'Игра сброшена!'
-            else hardNotify = 'Game reseted!'
+            var hardNotifyColor
             hardNotifyColor = "red";
             notify(hardNotify, hardNotifyColor);
-
-            purchasedButtonSingleU1.classList.remove('purchased');
-            purchasedButtonSingleU2.classList.remove('purchased');
-            purchasedButtonSingleU3.classList.remove('purchased');
-            purchasedButtonpBuyableU4.classList.remove('purchased')
-            purchasedButtonpAutoU1.classList.remove('purchased')
-            purchasedButtonpAutoU2.classList.remove('purchased')
-            purchasedButtonpAutoU3.classList.remove('purchased')
-            purchasedButtonpAutoU4.classList.remove('purchased')
-            purchasedButtonpSingleU1.classList.remove('purchased');
-            purchasedButtonpSingleU2.classList.remove('purchased');
-            purchasedButtonpSingleU3.classList.remove('purchased');
-            purchasedButtonpSingleU4.classList.remove('purchased');
-            if (data==1) {coinsCount.innerHTML = money.toFixed(0) + " α-монет. Нажмите на α-монету.";  document.getElementById('coinsGain').innerHTML = ""} 
-            else {coinsCount.innerHTML = money.toFixed(0) + " α-coins. Click on the α-coin."; document.getElementById('coinsGain').innerHTML = "";}
-            if (data==1) {totalCoins.innerHTML = "Всего вы собрали " + total.toFixed(0) + " α-монет."} 
-            else {totalCoins.innerHTML = "Total you collected " + total.toFixed(0) + " α-coins."}
-            startTextOfPrestigeUpgrades.call()
-    }
+            singleUpgradePurchasedRemove()
+            achievementGottenRemove()}
 }
+
+
 function prestigeReset (){
             money = 10
             first.price = 10
@@ -643,125 +243,32 @@ function prestigeReset (){
             purchasedButtonSingleU1.classList.remove('purchased');
             purchasedButtonSingleU2.classList.remove('purchased');
             purchasedButtonSingleU3.classList.remove('purchased');
-            if (data==1) {coinsCount.innerHTML = money.toFixed(0) + " α-монет. Нажмите на α-монету.";  document.getElementById('coinsGain').innerHTML = ""} 
-            else {coinsCount.innerHTML = money.toFixed(0) + " α-coins. Click on the α-coin."; document.getElementById('coinsGain').innerHTML = "";}
-            if (data==1) {totalCoins.innerHTML = "Всего вы собрали " + total.toFixed(0) + " α-монет."} 
-            else {totalCoins.innerHTML = "Total you collected " + total.toFixed(0) + " α-coins."}
-            loadStats.call()
+
 
             
 }
 
 function exportSave() {
+    gainPerSecondSave = gainPerSecond * 20;
+    whatsYourCurrentTime();
 
-    let datasave = {
-        data: data,
-            money: money,
-            completion: completion,
-            autoSaving: autoSaving,
-            onecheck: onecheck,
-            unlockedPrestige: unlockedPrestige,
-            total: total,
-            totalDiamond: totalDiamond,
-            totalPrestiges: totalPrestiges,
-            amounts: amounts,
-            first_price: first.price,
-            firstprice: firstprice,
-            first_amount: first.amount,
-            first_b: first.b,
-            second_price: second.price,
-            secondprice: secondprice,
-            second_amount: second.amount,
-            second_b: second.b,
-            second_boost: second.boost,
-            third_price: third.price,
-            thirdprice: thirdprice,
-            third_amount: third.amount,
-            third_boost: third.boost,
-            fourth_price: fourth.price,
-            fourth_amount: fourth.amount,
-            fourth_x: fourth.x,
-            fifth_price: fifth.price,
-            fifth_amount: fifth.amount,
-            fifth_x: fifth.x,
-            sixth_price: sixth.price,
-            sixth_amount: sixth.amount,
-            sixth_x: sixth.x,
-            diamonds: diamonds,
-            diamondsBoost: diamondsBoost,
-            pbfirstprice: pbfirstprice,
-            pbfirst_Baseprice: pbfirst.Baseprice,
-            pbfirst_price: pbfirst.price,
-            pbfirst_amount: pbfirst.amount,
-            pbfirst_boost: pbfirst.boost,
-            pbsecondprice: pbsecondprice,
-            pbsecond_Baseprice: pbsecond.Baseprice,
-            pbsecond_price: pbsecond.price,
-            pbsecond_amount: pbsecond.amount,
-            pbsecond_boost: pbsecond.boost,
-            pbthirdprice: pbthirdprice,
-            pbthird_Baseprice: pbthird.Baseprice,
-            pbthird_price: pbthird.price,
-            pbthird_amount: pbthird.amount,
-            pbthird_boost: pbthird.boost,
-            pbfourth_price: pbfourth.price,
-            pbfourth_amount: pbfourth.amount,
-            pafirst_price: pafirst.price,
-            pafirst_amount: pafirst.amount,
-            pasecond_price: pasecond.price,
-            pasecond_amount: pasecond.amount,
-            pathird_price: pathird.price,
-            pathird_amount: pathird.amount,
-            pafourth_price: pafourth.price,
-            pafourth_amount: pafourth.amount,
-            psfirst_price: psfirst.price,
-            psfirst_amount: psfirst.amount,
-            psfirst_boost: psfirst.boost,
-            pssecond_price: pssecond.price,
-            pssecond_amount: pssecond.amount,
-            pssecond_boost: pssecond.boost,
-            psthird_price: psthird.price,
-            psthird_amount: psthird.amount,
-            psthird_boost: psthird.boost,
-            psfourth_price: psfourth.price,
-            psfourth_amount: psfourth.amount,
-            psfourth_boost: psfourth.boost,
-            check46_checked: check46.checked,
-            check13_checked: check13.checked,
-            checkCoin_checked: checkCoin.checked,
-            gameSeconds: gameSeconds,
-            gameMinutes: gameMinutes,
-            gameHours: gameHours,
-            prestigeSeconds: prestigeSeconds,
-            prestigeMinutes: prestigeMinutes,
-            prestigeHours: prestigeHours,
-            fastPrestigeSeconds: fastPrestigeSeconds,
-            fastPrestigeMinutes: fastPrestigeMinutes,
-            fastPrestigeHours: fastPrestigeHours,
-            fastPrestigeSecondsTimer: fastPrestigeSecondsTimer,
-            bestPrestigeRun: bestPrestigeRun,
-            firstBank: (encodeURIComponent(firstBank)),
-            secondBank: (encodeURIComponent(secondBank)),
-            thirdBank: (encodeURIComponent(thirdBank)),
-            fourthBank: (encodeURIComponent(fourthBank)),
-            fifthBank: (encodeURIComponent(fifthBank)),
-            sixthBank: (encodeURIComponent(sixthBank)),
-            seventhBank: (encodeURIComponent(seventhBank)),
-            eighthBank: (encodeURIComponent(eighthBank)),
-            ninthBank: (encodeURIComponent(ninthBank)),
-            tenthBank: (encodeURIComponent(tenthBank)),
-    }; //образуем переменную с кучей других переменных
+    let datasave = savingTheGame(); 
 
-    var exportNotify
-    if (data == 1) exportNotify = 'Игра экспортирована!'
-    else exportNotify = 'Game exported!'
     notify(exportNotify);
 
+    //     let obj = {
+    //     achiRow: achRow1.completion,
+    //     datasave: datasave
+    // };
+    // console.log(obj)
     let exportedData = JSON.stringify(datasave); //превратим в строчку
-    let base64 = btoa(exportedData); // кодируем строку в base64
+    let exportedData2 = JSON.stringify(achRow1.completion)
+    let base641 = btoa(exportedData); // кодируем строку в base64
+    let base642 = btoa(exportedData2); // кодируем строку в base64
+    var base64 = `${base641}|${base642}`
     console.log(base64)
     navigator.clipboard.writeText(base64)
-
+    
     let today = new Date();
     let date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
     let filename = 'Digital-God-Save-' + date + '.txt';
@@ -776,96 +283,202 @@ function exportSave() {
 
 function importSave() {
     const base64 = prompt("Insert save in base64 format");
-    if (!base64) {
-        alert("Canceled")
-        return;
-    }
-    try {
     importing(base64);
-    }
-    
-    catch {alert('Wrong input')}
 }
 
 function importing(base64) {
-    const importedData = atob(base64);
-    localStorage.setItem('datasaving', importedData);
-    const datasave = JSON.parse(importedData);
-    console.log(datasave);
+    const [base64DataSave, base64Completion] = base64.split("|");
+    const importedData1 = atob(base64DataSave);
+    const importedData2 = atob(base64Completion);
+    console.log(importedData1) 
+    console.log (importedData2)
+    localStorage.setItem('datasaving', importedData1);
+    localStorage.setItem('completion', importedData2);
+    // const datasave = JSON.parse(base64DataSave);
+    // console.log(datasave);
+    achievementGottenRemove ()
+    singleUpgradePurchasedRemove ()
+    importingTheGame();
+    singleUpgradeTextUpdate ()
+    singleUpgradePurchased ()
+    achCompletionsChecker()
+    getCoinPerSec()
+    whatsYourCurrentTime2()
+    offlineGain()
+    offlineGainTime()
+    convertingTime()
+    autoSaverTimer = 0
+    clearInterval(autoSaveTime)
+    autoSaveTime = setInterval(autoSaveTimer, 1000)
+    notify(importNotify);
+
+}
+
+function checkThisBox () {
+            if (check46.checked) { // флажок отмечен
+              autoBuy46Interval = setInterval(autoBuy46, 100); // запускаем функцию autoBuy46() каждую секунду
+            } else { // флажок снят
+              clearInterval(autoBuy46Interval); // останавливаем запуск функции autoBuy46()
+            }
+            if (check13.checked) { // флажок отмечен
+              autoBuy13Interval = setInterval(autoBuy13, 33); // запускаем функцию autoBuy46() каждую секунду
+            } else { // флажок снят
+              clearInterval(autoBuy13Interval); // останавливаем запуск функции autoBuy46()
+            }
+            if (checkCoin.checked) { // флажок отмечен
+              autoCoinInterval = setInterval(autoCoin, 33); // запускаем функцию autoBuy46() каждую секунду
+            } else { // флажок снят
+              clearInterval(autoCoinInterval); // останавливаем запуск функции autoBuy46()
+            }
+            return autoCoinInterval, autoBuy46Interval, autoBuy13Interval;
+        }
+
+var fileUpload = document.getElementById('file-upload');
+var fileName = document.querySelector('.file-name');
+
+fileUpload.addEventListener('change', function(base64) {
+    var file = base64.target.files[0];
+
+    fileName.textContent = file.name;
+
+    var reader = new FileReader();
+
+    reader.onload = function(base64) {
+    importing(base64.target.result)
+    };
+
+    reader.readAsText(file);
+    fileUpload.value = null;
+});
+
+function savingTheGame() {
+    return {
+        gainPerSecondSave: gainPerSecondSave,
+        lastOnlineTime: lastOnlineTime,
+        money: money,
+        completion: completion,
+        onecheck: onecheck,
+        autoSaving: autoSaving,
+        unlockedPrestige: unlockedPrestige,
+        gainPerSecond: gainPerSecond,
+        gainPerClick: gainPerClick,
+        total: total,
+        clickCount: clickCount,
+        gameTimer: gameTimer,
+        totalDiamond: totalDiamond,
+        totalPrestiges: totalPrestiges,
+        amountsOfUpgrades: amountsOfUpgrades,
+        check46_checked: check46.checked,
+        check13_checked: check13.checked,
+        checkCoin_checked: checkCoin.checked,
+        gameSeconds: gameSeconds,
+        gameMinutes: gameMinutes,
+        gameHours: gameHours,
+        prestigeSeconds: prestigeSeconds,
+        prestigeMinutes: prestigeMinutes,
+        prestigeHours: prestigeHours,
+        fastPrestigeSeconds: fastPrestigeSeconds,
+        fastPrestigeMinutes: fastPrestigeMinutes,
+        fastPrestigeHours: fastPrestigeHours,
+        fastPrestigeSecondsTimer: fastPrestigeSecondsTimer,
+        bestPrestigeRun: bestPrestigeRun,
+        firstBank: (encodeURIComponent(firstBank)),
+        secondBank: (encodeURIComponent(secondBank)),
+        thirdBank: (encodeURIComponent(thirdBank)),
+        fourthBank: (encodeURIComponent(fourthBank)),
+        fifthBank: (encodeURIComponent(fifthBank)),
+        sixthBank: (encodeURIComponent(sixthBank)),
+        seventhBank: (encodeURIComponent(seventhBank)),
+        eighthBank: (encodeURIComponent(eighthBank)),
+        ninthBank: (encodeURIComponent(ninthBank)),
+        tenthBank: (encodeURIComponent(tenthBank)),
+        firstBuyable_amount: firstBuyable.amount,
+        firstBuyable_baseEffect: firstBuyable.baseEffect,
+        firstBuyable_price: firstBuyable.price,
+        firstBuyable_basePrice: firstBuyable.basePrice,
+        firstBuyable_power: firstBuyable.power,
+        secondBuyable_amount: secondBuyable.amount,
+        secondBuyable_baseEffect: secondBuyable.baseEffect,
+        secondBuyable_price: secondBuyable.price,
+        secondBuyable_basePrice: secondBuyable.basePrice,
+        secondBuyable_power: secondBuyable.power,
+        thirdBuyable_amount: thirdBuyable.amount,
+        thirdBuyable_baseEffect: thirdBuyable.baseEffect,
+        thirdBuyable_price: thirdBuyable.price,
+        thirdBuyable_basePrice: thirdBuyable.basePrice,
+        thirdBuyable_power: thirdBuyable.power,
+        fourthBuyable_amount: fourthBuyable.amount,
+        fourthBuyable_baseEffect: fourthBuyable.baseEffect,
+        fourthBuyable_price: fourthBuyable.price,
+        fourthBuyable_basePrice: fourthBuyable.basePrice,
+        fourthBuyable_power: fourthBuyable.power,
+        fifthBuyable_amount: fifthBuyable.amount,
+        fifthBuyable_baseEffect: fifthBuyable.baseEffect,
+        fifthBuyable_price: fifthBuyable.price,
+        fifthBuyable_basePrice: fifthBuyable.basePrice,
+        fifthBuyable_power: fifthBuyable.power,
+        firstSingle_amount: firstSingle.amount,
+        firstSingle_baseEffect: firstSingle.baseEffect,
+        firstSingle_price: firstSingle.price,
+        secondSingle_amount: secondSingle.amount,
+        secondSingle_baseEffect: secondSingle.baseEffect,
+        secondSingle_price: secondSingle.price,
+        thirdSingle_amount: thirdSingle.amount,
+        thirdSingle_baseEffect: thirdSingle.baseEffect,
+        thirdSingle_price: thirdSingle.price,
+        fourthSingle_amount: fourthSingle.amount,
+        fourthSingle_baseEffect: fourthSingle.baseEffect,
+        fourthSingle_price: fourthSingle.price,
+        fifthSingle_amount: fifthSingle.amount,
+        fifthSingle_baseEffect: fifthSingle.baseEffect,
+        fifthSingle_price: fifthSingle.price,
+        sixthSingle_amount: sixthSingle.amount,
+        sixthSingle_baseEffect: sixthSingle.baseEffect,
+        sixthSingle_price: sixthSingle.price,
+        seventhSingle_amount: seventhSingle.amount,
+        seventhSingle_baseEffect: seventhSingle.baseEffect,
+        seventhSingle_price: seventhSingle.price,
+        eighthSingle_amount: eighthSingle.amount,
+        eighthSingle_baseEffect: eighthSingle.baseEffect,
+        eighthSingle_price: eighthSingle.price,
+        ninthSingle_amount: ninthSingle.amount,
+        ninthSingle_baseEffect: ninthSingle.baseEffect,
+        ninthSingle_price: ninthSingle.price,
+        tenthSingle_amount: tenthSingle.amount,
+        tenthSingle_baseEffect: tenthSingle.baseEffect,
+        tenthSingle_price: tenthSingle.price,
+        umultiplier: umultiplier,
+        umultipliercount: umultipliercount,
+        upower: upower,
+        upowercount: upowercount,
+    };
+}
+
+function loadingTheGame() {
     let storedData = localStorage.getItem('datasaving'); //спарсим его обратно объект
     let parsedData = JSON.parse(storedData);
+    //тут мы парсируем не datasave а именно весь obj, но нам нужно достать из obj datasave и сделать это с ачивками
+    // можно попробовать datasave {*переменные*} сделать
 
+
+    gainPerSecondSave = parseFloat(parsedData.gainPerSecondSave)
+    lastOnlineTime = parseFloat(parsedData.lastOnlineTime)
+    gainPerSecond = parseFloat(parsedData.gainPerSecond)
     money = parseFloat(parsedData.money);
-    data = parseFloat(parsedData.data);
-    autoSaving = parseFloat(parsedData.autoSaving);
+    autoSaving = parsedData.autoSaving;
     completion = parseFloat(parsedData.completion);
-    onecheck = parseFloat(parsedData.onecheck)
+    onecheck = parseFloat(parsedData.onecheck);
     total = parseFloat(parsedData.total);
-    totalDiamond = parseFloat(parsedData.totalDiamond);
-    totalPrestiges = parseFloat(parsedData.totalPrestiges);
-    amounts = parseFloat(parsedData.amounts);
-    unlockedPrestige = parseFloat(parsedData.unlockedPrestige);
-    diamonds = parseFloat(parsedData.diamonds);
-    diamondsBoost = parseFloat(parsedData.diamondsBoost);
-    first.price = parseFloat(parsedData.first_price);
-    firstprice = parseFloat(parsedData.firstprice);
-    first.amount = parseFloat(parsedData.first_amount);
-    first.b = parseFloat(parsedData.first_b);
-    second.price = parseFloat(parsedData.second_price);
-    secondprice = parseFloat(parsedData.secondprice);
-    second.amount = parseFloat(parsedData.second_amount);
-    second.b = parseFloat(parsedData.second_b);
-    second.boost = parseFloat(parsedData.second_boost);
-    third.price = parseFloat(parsedData.third_price);
-    thirdprice = parseFloat(parsedData.thirdprice);
-    third.amount = parseFloat(parsedData.third_amount);
-    third.boost = parseFloat(parsedData.third_boost);
-    fourth.price = parseFloat(parsedData.fourth_price);
-    fourth.amount = parseFloat(parsedData.fourth_amount);
-    fourth.x = parseFloat(parsedData.fourth_x);
-    fifth.price = parseFloat(parsedData.fifth_price);
-    fifth.amount = parseFloat(parsedData.fifth_amount);
-    fifth.x = parseFloat(parsedData.fifth_x);
-    sixth.price = parseFloat(parsedData.sixth_price);
-    sixth.amount = parseFloat(parsedData.sixth_amount);
-    sixth.x = parseFloat(parsedData.sixth_x);
-    pbfirst.price = parseFloat(parsedData.pbfirst_price);
-    pbfirstprice = parseFloat(parsedData.pbfirstprice);
-    pbfirst.Baseprice = parseFloat(parsedData.pbfirst_Baseprice);
-    pbfirst.amount = parseFloat(parsedData.pbfirst_amount);
-    pbfirst.boost = parseFloat(parsedData.pbfirst_boost);
-    pbsecond.price = parseFloat(parsedData.pbsecond_price);
-    pbsecondprice = parseFloat(parsedData.pbsecondprice);
-    pbsecond.Baseprice = parseFloat(parsedData.pbsecond_Baseprice);
-    pbsecond.amount = parseFloat(parsedData.pbsecond_amount);
-    pbsecond.boost = parseFloat(parsedData.pbsecond_boost);
-    pbthird.price = parseFloat(parsedData.pbthird_price);
-    pbthirdprice = parseFloat(parsedData.pbthirdprice);
-    pbthird.Baseprice = parseFloat(parsedData.pbthird_Baseprice);
-    pbthird.amount = parseFloat(parsedData.pbthird_amount);
-    pbthird.boost = parseFloat(parsedData.pbthird_boost);
-    pbfourth.price = parseFloat(parsedData.pbfourth_price);
-    pbfourth.amount = parseFloat(parsedData.pbfourth_amount);
-    pafirst.price = parseFloat(parsedData.pafirst_price);
-    pafirst.amount = parseFloat(parsedData.pafirst_amount);
-    pasecond.price = parseFloat(parsedData.pasecond_price);
-    pasecond.amount = parseFloat(parsedData.pasecond_amount);
-    pathird.price = parseFloat(parsedData.pathird_price);
-    pathird.amount = parseFloat(parsedData.pathird_amount);
-    pafourth.price = parseFloat(parsedData.pafourth_price);
-    pafourth.amount = parseFloat(parsedData.pafourth_amount);
-    psfirst.price = parseFloat(parsedData.psfirst_price);
-    psfirst.amount = parseFloat(parsedData.psfirst_amount);
-    psfirst.boost = parseFloat(parsedData.psfirst_boost);
-    pssecond.price = parseFloat(parsedData.pssecond_price);
-    pssecond.amount = parseFloat(parsedData.pssecond_amount);
-    pssecond.boost = parseFloat(parsedData.pssecond_boost);
-    psthird.price = parseFloat(parsedData.psthird_price);
-    psthird.amount = parseFloat(parsedData.psthird_amount);
-    psthird.boost = parseFloat(parsedData.psthird_boost);
-    psfourth.price = parseFloat(parsedData.psfourth_price);
-    psfourth.amount = parseFloat(parsedData.psfourth_amount);
-    psfourth.boost = parseFloat(parsedData.psfourth_boost);
+    gainPerSecond = parseFloat(parsedData.gainPerSecond);
+    gainPerClick = parseFloat(parsedData.gainPerClick);
+    // totalDiamond = parseFloat(parsedData.totalDiamond);
+    // totalPrestiges = parseFloat(parsedData.totalPrestiges);
+    amountsOfUpgrades = parseFloat(parsedData.amountsOfUpgrades);
+    clickCount = parseFloat(parsedData.clickCount);
+    gameTimer = parseFloat(parsedData.gameTimer);
+    // unlockedPrestige = parseFloat(parsedData.unlockedPrestige)
+    // diamonds = parseFloat(parsedData.diamonds);
+    // diamondsBoost = parseFloat(parsedData.diamondsBoost);
     check13.checked = parsedData.check13_checked;
     check46.checked = parsedData.check46_checked;
     checkCoin.checked = parsedData.checkCoin_checked;
@@ -890,134 +503,315 @@ function importing(base64) {
     eighthBank = decodeURIComponent((parsedData.eighthBank));
     ninthBank = decodeURIComponent((parsedData.ninthBank));
     tenthBank = decodeURIComponent((parsedData.tenthBank));
+    firstBuyable.amount = parseFloat(parsedData.firstBuyable_amount);
+    firstBuyable.baseEffect = parseFloat(parsedData.firstBuyable_baseEffect);
+    firstBuyable.price = parseFloat(parsedData.firstBuyable_price);
+    firstBuyable.basePrice = parseFloat(parsedData.firstBuyable_basePrice);
+    firstBuyable.power = parseFloat(parsedData.firstBuyable_power);
+    secondBuyable.amount = parseFloat(parsedData.secondBuyable_amount);
+    secondBuyable.baseEffect = parseFloat(parsedData.secondBuyable_baseEffect);
+    secondBuyable.price = parseFloat(parsedData.secondBuyable_price);
+    secondBuyable.basePrice = parseFloat(parsedData.secondBuyable_basePrice);
+    secondBuyable.power = parseFloat(parsedData.secondBuyable_power);
+    thirdBuyable.amount = parseFloat(parsedData.thirdBuyable_amount);
+    thirdBuyable.baseEffect = parseFloat(parsedData.thirdBuyable_baseEffect);
+    thirdBuyable.price = parseFloat(parsedData.thirdBuyable_price);
+    thirdBuyable.basePrice = parseFloat(parsedData.thirdBuyable_basePrice);
+    thirdBuyable.power = parseFloat(parsedData.thirdBuyable_power);
+    fourthBuyable.amount = parseFloat(parsedData.fourthBuyable_amount);
+    fourthBuyable.baseEffect = parseFloat(parsedData.fourthBuyable_baseEffect);
+    fourthBuyable.price = parseFloat(parsedData.fourthBuyable_price);
+    fourthBuyable.basePrice = parseFloat(parsedData.fourthBuyable_basePrice);
+    fourthBuyable.power = parseFloat(parsedData.fourthBuyable_power);
+    fifthBuyable.amount = parseFloat(parsedData.fifthBuyable_amount);
+    fifthBuyable.baseEffect = parseFloat(parsedData.fifthBuyable_baseEffect);
+    fifthBuyable.price = parseFloat(parsedData.fifthBuyable_price);
+    fifthBuyable.basePrice = parseFloat(parsedData.fifthBuyable_basePrice);
+    fifthBuyable.power = parseFloat(parsedData.fifthBuyable_power);
+    firstSingle.amount = parseFloat(parsedData.firstSingle_amount);
+    firstSingle.baseEffect = parseFloat(parsedData.firstSingle_baseEffect);
+    firstSingle.price = parseFloat(parsedData.firstSingle_price);
+    secondSingle.amount = parseFloat(parsedData.secondSingle_amount);
+    secondSingle.baseEffect = parseFloat(parsedData.secondSingle_baseEffect);
+    secondSingle.price = parseFloat(parsedData.secondSingle_price);
+    thirdSingle.amount = parseFloat(parsedData.thirdSingle_amount);
+    thirdSingle.baseEffect = parseFloat(parsedData.thirdSingle_baseEffect);
+    thirdSingle.price = parseFloat(parsedData.thirdSingle_price);
+    fourthSingle.amount = parseFloat(parsedData.fourthSingle_amount);
+    fourthSingle.baseEffect = parseFloat(parsedData.fourthSingle_baseEffect);
+    fourthSingle.price = parseFloat(parsedData.fourthSingle_price);
+    fifthSingle.amount = parseFloat(parsedData.fifthSingle_amount);
+    fifthSingle.baseEffect = parseFloat(parsedData.fifthSingle_baseEffect);
+    fifthSingle.price = parseFloat(parsedData.fifthSingle_price);
+    sixthSingle.amount = parseFloat(parsedData.sixthSingle_amount);
+    sixthSingle.baseEffect = parseFloat(parsedData.sixthSingle_baseEffect);
+    sixthSingle.price = parseFloat(parsedData.sixthSingle_price);
+    seventhSingle.amount = parseFloat(parsedData.seventhSingle_amount);
+    seventhSingle.baseEffect = parseFloat(parsedData.seventhSingle_baseEffect);
+    seventhSingle.price = parseFloat(parsedData.seventhSingle_price);
+    eighthSingle.amount = parseFloat(parsedData.eighthSingle_amount);
+    eighthSingle.baseEffect = parseFloat(parsedData.eighthSingle_baseEffect);
+    eighthSingle.price = parseFloat(parsedData.eighthSingle_price);
+    ninthSingle.amount = parseFloat(parsedData.ninthSingle_amount);
+    ninthSingle.baseEffect = parseFloat(parsedData.ninthSingle_baseEffect);
+    ninthSingle.price = parseFloat(parsedData.ninthSingle_price);
+    tenthSingle.amount = parseFloat(parsedData.tenthSingle_amount);
+    tenthSingle.baseEffect = parseFloat(parsedData.tenthSingle_baseEffect);
+    tenthSingle.price = parseFloat(parsedData.tenthSingle_price);
+    umultiplier = parseFloat(parsedData.umultiplier);
+    umultipliercount = parseFloat(parsedData.umultipliercount);
+    upower = parseFloat(parsedData.upower);
+    upowercount = parseFloat(parsedData.upowercount);
 
-    var importNotify;
-    if (data == 1)
-        importNotify = 'Игра импортирована!';
-    else
-        importNotify = 'Game imported!';
-    notify(importNotify);
+}
 
-    if (data == 1) { coinsCount.innerHTML = money.toFixed(0) + " α-монет. Нажмите на α-монету."; document.getElementById('coinsGain').innerHTML = ""; }
-    else { coinsCount.innerHTML = money.toFixed(0) + " α-coins. Click on the α-coin."; document.getElementById('coinsGain').innerHTML = ""; }
-    if (money > 1e6)
-        if (data == 1) { coinsCount.innerHTML = money.toExponential(2).replace("+", "") + " α-монет"; document.getElementById('coinsGain').innerHTML = ""; }
-        else { coinsCount.innerHTML = money.toExponential(2).replace("+", "") + " α-coins"; document.getElementById('coinsGain').innerHTML = ""; }
-    loadStats.call();
-    changedLanguage.call();
-    stopIntervals.call();
-    startTextOfUpgrades.call();
-    startTextOfPrestigeUpgrades.call();
-    loadUpgrades.call();
-    checkThisBox.call();
-    if (autoSaving == 1) {
-        if (data == 1) { autoSavingGame.innerHTML = "Автосохранение вкл."; }
-        else { autoSavingGame.innerHTML = "Autosave on."; }
-    }
-    else {
-        if (data == 1) { autoSavingGame.innerHTML = "Автосохранение выкл."; }
-        else { autoSavingGame.innerHTML = "Autosave off."; }
-    }
-    if (first.amount >= 1)
-        cU1TL = setInterval(commonUpgrade1TextLoad, 100);
-    if (fourth.amount >= 1)
-        sU1B = setInterval(singleUpgrade1Boost, 100);
-    if (sixth.amount >= 1)
-        sU3B = setInterval(singleUpgrade3Boost, 100);
-    if (second.amount >= 1)
-        cU2TL = setInterval(commonUpgrade2TextLoad, 100);
-    if (psfirst.amount >= 1)
-        pSU1B = setInterval(prestigeSingleUpgrade1Boost, 100);
-    if (psthird.amount >= 1)
-        pSU3B = setInterval(prestigeSingleUpgrade3Boost, 100);
+function importingTheGame() {
+    let storedData = localStorage.getItem('datasaving'); //спарсим его обратно объект
+    let parsedData = JSON.parse(storedData);
+    //тут мы парсируем не datasave а именно весь obj, но нам нужно достать из obj datasave и сделать это с ачивками
+    // можно попробовать datasave {*переменные*} сделать хз
+    achRow1.completion = JSON.parse(localStorage.getItem('completion')).map(Boolean);
+    console.log(achRow1.completion)
+
+    gainPerSecondSave = parseFloat(parsedData.gainPerSecondSave)
+    lastOnlineTime = parseFloat(parsedData.lastOnlineTime)
+    gainPerSecond = parseFloat(parsedData.gainPerSecond)
+    money = parseFloat(parsedData.money);
+    autoSaving = parsedData.autoSaving
+    completion = parseFloat(parsedData.completion);
+    onecheck = parseFloat(parsedData.onecheck);
+    total = parseFloat(parsedData.total);
+    gainPerSecond = parseFloat(parsedData.gainPerSecond);
+    gainPerClick = parseFloat(parsedData.gainPerClick);
+    // totalDiamond = parseFloat(parsedData.totalDiamond);
+    // totalPrestiges = parseFloat(parsedData.totalPrestiges);
+    amountsOfUpgrades = parseFloat(parsedData.amountsOfUpgrades);
+    clickCount = parseFloat(parsedData.clickCount);
+    gameTimer = parseFloat(parsedData.gameTimer);
+    // unlockedPrestige = parseFloat(parsedData.unlockedPrestige)
+    // diamonds = parseFloat(parsedData.diamonds);
+    // diamondsBoost = parseFloat(parsedData.diamondsBoost);
+    check13.checked = parsedData.check13_checked;
+    check46.checked = parsedData.check46_checked;
+    checkCoin.checked = parsedData.checkCoin_checked;
+    gameSeconds = parseFloat(parsedData.gameSeconds);
+    gameMinutes = parseFloat(parsedData.gameMinutes);
+    gameHours = parseFloat(parsedData.gameHours);
+    prestigeSeconds = parseFloat(parsedData.prestigeSeconds);
+    prestigeMinutes = parseFloat(parsedData.prestigeMinutes);
+    prestigeHours = parseFloat(parsedData.prestigeHours);
+    fastPrestigeSeconds = parseFloat(parsedData.fastPrestigeSeconds);
+    fastPrestigeMinutes = parseFloat(parsedData.fastPrestigeMinutes);
+    fastPrestigeHours = parseFloat(parsedData.fastPrestigeHours);
+    fastPrestigeSecondsTimer = parseFloat(parsedData.fastPrestigeSecondsTimer);
+    bestPrestigeRun = parseFloat(parsedData.bestPrestigeRun);
+    firstBank = decodeURIComponent((parsedData.firstBank));
+    secondBank = decodeURIComponent((parsedData.secondBank));;
+    thirdBank = decodeURIComponent((parsedData.thirdBank));
+    fourthBank = decodeURIComponent((parsedData.fourthBank));
+    fifthBank = decodeURIComponent((parsedData.fifthBank));
+    sixthBank = decodeURIComponent((parsedData.sixthBank));
+    seventhBank = decodeURIComponent((parsedData.seventhBank));
+    eighthBank = decodeURIComponent((parsedData.eighthBank));
+    ninthBank = decodeURIComponent((parsedData.ninthBank));
+    tenthBank = decodeURIComponent((parsedData.tenthBank));
+    firstBuyable.amount = parseFloat(parsedData.firstBuyable_amount);
+    firstBuyable.baseEffect = parseFloat(parsedData.firstBuyable_baseEffect);
+    firstBuyable.price = parseFloat(parsedData.firstBuyable_price);
+    firstBuyable.basePrice = parseFloat(parsedData.firstBuyable_basePrice);
+    firstBuyable.power = parseFloat(parsedData.firstBuyable_power);
+    secondBuyable.amount = parseFloat(parsedData.secondBuyable_amount);
+    secondBuyable.baseEffect = parseFloat(parsedData.secondBuyable_baseEffect);
+    secondBuyable.price = parseFloat(parsedData.secondBuyable_price);
+    secondBuyable.basePrice = parseFloat(parsedData.secondBuyable_basePrice);
+    secondBuyable.power = parseFloat(parsedData.secondBuyable_power);
+    thirdBuyable.amount = parseFloat(parsedData.thirdBuyable_amount);
+    thirdBuyable.baseEffect = parseFloat(parsedData.thirdBuyable_baseEffect);
+    thirdBuyable.price = parseFloat(parsedData.thirdBuyable_price);
+    thirdBuyable.basePrice = parseFloat(parsedData.thirdBuyable_basePrice);
+    thirdBuyable.power = parseFloat(parsedData.thirdBuyable_power);
+    fourthBuyable.amount = parseFloat(parsedData.fourthBuyable_amount);
+    fourthBuyable.baseEffect = parseFloat(parsedData.fourthBuyable_baseEffect);
+    fourthBuyable.price = parseFloat(parsedData.fourthBuyable_price);
+    fourthBuyable.basePrice = parseFloat(parsedData.fourthBuyable_basePrice);
+    fourthBuyable.power = parseFloat(parsedData.fourthBuyable_power);
+    fifthBuyable.amount = parseFloat(parsedData.fifthBuyable_amount);
+    fifthBuyable.baseEffect = parseFloat(parsedData.fifthBuyable_baseEffect);
+    fifthBuyable.price = parseFloat(parsedData.fifthBuyable_price);
+    fifthBuyable.basePrice = parseFloat(parsedData.fifthBuyable_basePrice);
+    fifthBuyable.power = parseFloat(parsedData.fifthBuyable_power);
+    firstSingle.amount = parseFloat(parsedData.firstSingle_amount);
+    firstSingle.baseEffect = parseFloat(parsedData.firstSingle_baseEffect);
+    firstSingle.price = parseFloat(parsedData.firstSingle_price);
+    secondSingle.amount = parseFloat(parsedData.secondSingle_amount);
+    secondSingle.baseEffect = parseFloat(parsedData.secondSingle_baseEffect);
+    secondSingle.price = parseFloat(parsedData.secondSingle_price);
+    thirdSingle.amount = parseFloat(parsedData.thirdSingle_amount);
+    thirdSingle.baseEffect = parseFloat(parsedData.thirdSingle_baseEffect);
+    thirdSingle.price = parseFloat(parsedData.thirdSingle_price);
+    fourthSingle.amount = parseFloat(parsedData.fourthSingle_amount);
+    fourthSingle.baseEffect = parseFloat(parsedData.fourthSingle_baseEffect);
+    fourthSingle.price = parseFloat(parsedData.fourthSingle_price);
+    fifthSingle.amount = parseFloat(parsedData.fifthSingle_amount);
+    fifthSingle.baseEffect = parseFloat(parsedData.fifthSingle_baseEffect);
+    fifthSingle.price = parseFloat(parsedData.fifthSingle_price);
+    sixthSingle.amount = parseFloat(parsedData.sixthSingle_amount);
+    sixthSingle.baseEffect = parseFloat(parsedData.sixthSingle_baseEffect);
+    sixthSingle.price = parseFloat(parsedData.sixthSingle_price);
+    seventhSingle.amount = parseFloat(parsedData.seventhSingle_amount);
+    seventhSingle.baseEffect = parseFloat(parsedData.seventhSingle_baseEffect);
+    seventhSingle.price = parseFloat(parsedData.seventhSingle_price);
+    eighthSingle.amount = parseFloat(parsedData.eighthSingle_amount);
+    eighthSingle.baseEffect = parseFloat(parsedData.eighthSingle_baseEffect);
+    eighthSingle.price = parseFloat(parsedData.eighthSingle_price);
+    ninthSingle.amount = parseFloat(parsedData.ninthSingle_amount);
+    ninthSingle.baseEffect = parseFloat(parsedData.ninthSingle_baseEffect);
+    ninthSingle.price = parseFloat(parsedData.ninthSingle_price);
+    tenthSingle.amount = parseFloat(parsedData.tenthSingle_amount);
+    tenthSingle.baseEffect = parseFloat(parsedData.tenthSingle_baseEffect);
+    tenthSingle.price = parseFloat(parsedData.tenthSingle_price);
+    umultiplier = parseFloat(parsedData.umultiplier);
+    umultipliercount = parseFloat(parsedData.umultipliercount);
+    upower = parseFloat(parsedData.upower);
+    upowercount = parseFloat(parsedData.upowercount);
+}
+
+
+
+
+function loadingTheGame2() {
+    singleUpgradePurchased();
     if (unlockedPrestige == 1 || totalDiamond >= 1) {
         prestigeTab.style.display = "block"; unlockPrestige(); latestPrestigesTab.style.display = "block";
         if (totalDiamond > 1)
             crystalCount.style.display = "block";
     }
-        tenthPrestigeRun.innerHTML = tenthBank
-        ninthPrestigeRun.innerHTML = ninthBank
-        eighthPrestigeRun.innerHTML = eighthBank
-        seventhPrestigeRun.innerHTML = seventhBank
-        sixthPrestigeRun.innerHTML = sixthBank
-        fifthPrestigeRun.innerHTML = fifthBank
-        fourthPrestigeRun.innerHTML = fourthBank
-        thirdPrestigeRun.innerHTML = thirdBank
-        secondPrestigeRun.innerHTML = secondBank
-        firstPrestigeRun.innerHTML = firstBank
+    tenthPrestigeRun.innerHTML = tenthBank;
+    ninthPrestigeRun.innerHTML = ninthBank;
+    eighthPrestigeRun.innerHTML = eighthBank;
+    seventhPrestigeRun.innerHTML = seventhBank;
+    sixthPrestigeRun.innerHTML = sixthBank;
+    fifthPrestigeRun.innerHTML = fifthBank;
+    fourthPrestigeRun.innerHTML = fourthBank;
+    thirdPrestigeRun.innerHTML = thirdBank;
+    secondPrestigeRun.innerHTML = secondBank;
+    firstPrestigeRun.innerHTML = firstBank;
 }
 
-function stopIntervals () {
-    clearInterval(cU1TL)
-    clearInterval(sU1B)
-    clearInterval(sU3B)
-    clearInterval(cU2TL)
-    clearInterval(cU1TL)
-    clearInterval(sU1B)
-    clearInterval(sU3B)
-    clearInterval(cU2TL)
-    clearInterval(cU1TL)
-    clearInterval(sU1B)
-    clearInterval(sU3B)
-    clearInterval(cU2TL)
-    clearInterval(pSU1B)
-    clearInterval(pSU1B)
-    clearInterval(pSU1B)
-    clearInterval(pSU3B)
-    clearInterval(pSU3B)
-    clearInterval(pSU3B)
-    clearInterval(autoBuy13Interval)
-    clearInterval(autoBuy46Interval)
-    clearInterval(autoCoinInterval)
-    clearInterval(autoBuy13Interval)
-    clearInterval(autoBuy46Interval)
-    clearInterval(autoCoinInterval)
-    clearInterval(autoBuy13Interval)
-    clearInterval(autoBuy46Interval)
-    clearInterval(autoCoinInterval)
-}
 
-function stopPRInterval () {
-    clearInterval(cU1TL)
-    clearInterval(sU1B)
-    clearInterval(sU3B)
-    clearInterval(cU2TL)
-}
 
-function checkThisBox () {
-            if (check46.checked) { // флажок отмечен
-              autoBuy46Interval = setInterval(autoBuy46, 100); // запускаем функцию autoBuy46() каждую секунду
-            } else { // флажок снят
-              clearInterval(autoBuy46Interval); // останавливаем запуск функции autoBuy46()
-            }
-            if (check13.checked) { // флажок отмечен
-              autoBuy13Interval = setInterval(autoBuy13, 33); // запускаем функцию autoBuy46() каждую секунду
-            } else { // флажок снят
-              clearInterval(autoBuy13Interval); // останавливаем запуск функции autoBuy46()
-            }
-            if (checkCoin.checked) { // флажок отмечен
-              autoCoinInterval = setInterval(autoCoin, 33); // запускаем функцию autoBuy46() каждую секунду
-            } else { // флажок снят
-              clearInterval(autoCoinInterval); // останавливаем запуск функции autoBuy46()
-            }
-            return autoCoinInterval, autoBuy46Interval, autoBuy13Interval;
-          }
 
-          
-  var fileUpload = document.getElementById('file-upload');
-  var fileName = document.querySelector('.file-name');
-  
-  fileUpload.addEventListener('change', function(base64) {
-    var file = base64.target.files[0];
-  
-    fileName.textContent = file.name;
-  
-    var reader = new FileReader();
-  
-    reader.onload = function(base64) {
-      importing(base64.target.result)
+
+function upgradeReset() {
+    secondBuyable = {
+        amount: 0,
+        baseEffect: 0,
+        price: 100,
+        basePrice: 100,
+        updateText: document.getElementById('buyableU2'),
+        power: 1.1415
     };
-  
-    reader.readAsText(file);
-    fileUpload.value = null;
-  });
+    firstBuyable = {
+        amount: 0,
+        baseEffect: 0,
+        price: 10,
+        basePrice: 10,
+        updateText: document.getElementById('buyableU1'),
+        power: 1.095
+    };
+    thirdBuyable = {
+        amount: 0,
+        baseEffect: 0,
+        price: 500,
+        basePrice: 500,
+        updateText: document.getElementById('buyableU3'),
+        power: 6.15
+    };
+    fourthBuyable = {
+        amount: 0,
+        baseEffect: 0,
+        price: 1000,
+        basePrice: 1000,
+        updateText: document.getElementById('buyableU4'),
+        power: 1.55
+    };
+    fifthBuyable = {
+        amount: 0,
+        baseEffect: 0,
+        price: 5000,
+        basePrice: 5000,
+        updateText: document.getElementById('buyableU5'),
+        power: 2.2
+    };
+    firstSingle = {
+        amount: 0,
+        baseEffect: 0,
+        price: 100000,
+        updateText: document.getElementById('singleU1'),
+        priceText: "<br> Стоимость: 25000 α-монет"
+    }
+    secondSingle = {
+        amount: 0,
+        baseEffect: 0,
+        price: 1.5e6,
+        updateText: document.getElementById('singleU2'),
+        priceText: "<br> Стоимость: 250000 α-монет"
+    }
+    thirdSingle = {
+        amount: 0,
+        baseEffect: 0,
+        price: 3.5e6,
+        updateText: document.getElementById('singleU3'),
+        priceText: "<br> Стоимость: 1e6 α-монет"
+    }
+    fourthSingle = {
+        amount: 0,
+        baseEffect: 0,
+        price: 3e7,
+        updateText: document.getElementById('singleU4'),
+        priceText: "<br> Стоимость: 5e6 α-монет"
+    }
+    fifthSingle = {
+        amount: 0,
+        baseEffect: 0,
+        price: 5e8,
+        updateText: document.getElementById('singleU5'),
+        priceText: "<br> Стоимость: 2.5e7 α-монет"
+    }
+    sixthSingle = {
+        amount: 0,
+        baseEffect: 0,
+        price: 3e9,
+        updateText: document.getElementById('singleU6'),
+        priceText: "<br> Стоимость: 7.77e7 α-монет"
+    }
+    seventhSingle = {
+        amount: 0,
+        baseEffect: 0,
+        price: 1.1e10,
+        updateText: document.getElementById('singleU7'),
+        priceText: "<br> Стоимость: 1.5e8 α-монет"
+    }
+    eighthSingle = {
+        amount: 0,
+        baseEffect: 0,
+        price: 1.5e11,
+        updateText: document.getElementById('singleU8'),
+        priceText: "<br> Стоимость: 1e10 α-монет"
+    }
+    ninthSingle = {
+        amount: 0,
+        baseEffect: 0,
+        price: 1.2e12,
+        updateText: document.getElementById('singleU9'),
+        priceText: "<br> Стоимость: 1.11e11 α-монет"
+    }
+    tenthSingle = {
+        amount: 0,
+        baseEffect: 0,
+        price: 1e13,
+        updateText: document.getElementById('singleU10'),
+        priceText: "<br> Стоимость: 2e12 α-монет"
+    }
+
+}

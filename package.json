@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@types/i18next": "^13.0.0",
+    "i18next": "^22.5.0"
+  }
+}

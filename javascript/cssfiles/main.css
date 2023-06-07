@@ -1,8 +1,12 @@
+body {
+  overflow: hidden;
+}
+
 #coinsCount {
     text-align: center;
     align-items: center;
-    color:rgb(255, 217, 0);
-    font-size: 35px;
+    color:#ffd900;
+    font-size: 30px;
     margin: 5px;
     margin-top: 15px;
     text-shadow: 0 0 5px rgb(255, 217, 0);
@@ -12,7 +16,7 @@
 
 #coinsGain {
     color: #656565;
-    font-size: 16px;
+    font-size: 15px;
     text-align: center;
     margin: 5px;
     
@@ -25,8 +29,8 @@
     margin: 0 auto; 
     display: block;
     transition: transform 0.1s ease-in-out;
-    width: 225px;
-    height: 225px;
+    width: 195px;
+    height: 195px;
     transition: background-image 0.2s ease-in-out;
     background-image: url("images/CoinOff.png");
     background-size: contain;
@@ -35,7 +39,7 @@
 }
 
 #coinGain:active {
-    transform: scale(0.88); 
+    transform: scale(0.95); 
 }
 
 #coinGain:hover {
@@ -74,8 +78,9 @@
     opacity: 1;
     transition: right 1s ease-in-out, opacity 1s ease-in-out;
   }
+  
   #topValues {
-    height: 140px;
+    height: 115px;
     justify-content: space-between;
     margin-bottom: 10px;
     display: flex;
@@ -96,10 +101,44 @@
     margin: auto;
 }
 .topVars {
-  width: 350px;
   padding-bottom: 200px;
 }
 
 #coinGet {
   text-align: center;
+}
+
+#getCoinLine {
+  height: 195px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  display: flex;
+  width: 1000px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.myMessage {
+  position: absolute; 
+  display: flex; 
+  padding: 5px;
+  text-shadow: 1px 1px #ffd900, -1px -1px #ffd900, 1px -1px #ffd900, -1px 1px #ffd900;
+  font-weight:900;
+  color: rgb(0, 0, 0);
+  cursor:default;
+  transition: top 1s ease-in-out, opacity 1s ease-in-out, transform 1s ease-in-out;
+  pointer-events: none; /* текст сообщения не мешает кликать по кнопке */
+  user-select: none;
+}
+
+.myMessage.hide {
+  opacity: 0;
+  transform: translateY(-50px);
+}
+
+.myMessage.show {
+  right: 0;
+  opacity: 1;
+  transition: top 1s ease-in-out, opacity 1s ease-in-out;
+  display: block;
 }
