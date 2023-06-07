@@ -182,7 +182,7 @@ function formatPower(power) {
 document.getElementById('changingLanguage').addEventListener('click', () => {
 
     const currentLanguage = i18next.language === 'ru' ? 'en' : 'ru';
-    console.log(currentLanguage)
+    // console.log(currentLanguage)
     i18next.changeLanguage(currentLanguage, () => {
       // Обновление текста после смены языка
     loadTranslations();

@@ -266,7 +266,7 @@ function exportSave() {
     let base641 = btoa(exportedData); // кодируем строку в base64
     let base642 = btoa(exportedData2); // кодируем строку в base64
     var base64 = `${base641}|${base642}`
-    console.log(base64)
+    // console.log(base64)
     navigator.clipboard.writeText(base64)
     
     let today = new Date();
@@ -290,8 +290,8 @@ function importing(base64) {
     const [base64DataSave, base64Completion] = base64.split("|");
     const importedData1 = atob(base64DataSave);
     const importedData2 = atob(base64Completion);
-    console.log(importedData1) 
-    console.log (importedData2)
+    // console.log(importedData1) 
+    // console.log (importedData2)
     localStorage.setItem('datasaving', importedData1);
     localStorage.setItem('completion', importedData2);
     // const datasave = JSON.parse(base64DataSave);
@@ -571,7 +571,7 @@ function importingTheGame() {
     //тут мы парсируем не datasave а именно весь obj, но нам нужно достать из obj datasave и сделать это с ачивками
     // можно попробовать datasave {*переменные*} сделать хз
     achRow1.completion = JSON.parse(localStorage.getItem('completion')).map(Boolean);
-    console.log(achRow1.completion)
+    // console.log(achRow1.completion)
 
     gainPerSecondSave = parseFloat(parsedData.gainPerSecondSave)
     lastOnlineTime = parseFloat(parsedData.lastOnlineTime)

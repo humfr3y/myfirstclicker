@@ -59,7 +59,12 @@ function achievementChecker() {
     }
     achievementBonus = achCount * 1.175 + achRowCount * 15.245
     tenthSingle.amount == 1 ? achievementBonus = Math.pow(achCount * 1.175 + achRowCount * 15.245, 1.5) : achievementBonus = achievementBonus
-    achRow1.completion[4] == true ? maxbuy.style.display = 'block' : maxbuy.style.display = 'none'  
+    achRow1.completion[4] == true ? maxbuy.style.display = 'block' : maxbuy.style.display = 'none' 
+    if (achRow1.fullRow == 10)
+    {
+        achRowCount = 1
+    } 
+    else achRowCount = 0
 }
 function achNotification(i) {
     achNotify += achRow1.name[i];
