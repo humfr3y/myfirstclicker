@@ -88,6 +88,7 @@
             <button onclick="showChangelog(desc07)" class="versionButton">0.7</button>
             <button onclick="showChangelog(desc071)" class="versionButton">0.7.1</button>
             <button onclick="showChangelog(desc08)" class="versionButton">0.8</button>
+            <button onclick="showChangelog(desc0801)" class="versionButton">0.8.0.1</button>
           </div>
         <div id="versionDiv" class="windowDesc">
           <p id="versionDescription">Choose version</p>
@@ -279,7 +280,7 @@
           </div>
             <button onclick="hidePopup()" id="closeOfflineWindow" class="closeWindow"></button>
         <div id="offlineShowTime" class="windowDesc">
-          <p id="offlineShowGain"> impedit earum ab asperiores sequi repudiandae reure, sapiente voluptas saepe atque ore consequatur eos quos voluptates amet.</p>
+          <p id="offlineShowGain">Loading...</p>
         </div>
         </div>
 
@@ -289,16 +290,18 @@
     <script src="javascript/jsfiles/uboosts.js"></script>
     <script src="javascript/jsfiles/clicker.js"></script>
     <script src="javascript/jsfiles/changelog.js"></script>
-    <script src="javascript/jsfiles/saving.js"></script>
     <script src="javascript/jsfiles/upgrades2.0.js"></script>
     <script src="javascript/jsfiles/prestige.js"></script>
     <script src="javascript/jsfiles/automation.js"></script>
     <script type="module" src="javascript/jsfiles/languages.js"></script>
+    <script src="javascript/jsfiles/saving.js"></script>
 
     <script>
+      window.onload = whatsYourCurrentTime();
     var backdrop2 = document.getElementById("myPopupBackdrop2")
     loadNotify = 'Game loaded!'
-    window.onload = loadGame();
+      window.onload = loadGame();
+      window.onload = whatsYourCurrentTime();
     let autosaver
     function intervaling (){
       autosaver = setInterval(autoSaveThis, 30000);  getCoinPerSecond = setInterval(getCoinPerSec, 50)
@@ -315,10 +318,11 @@
     offlineShowTime.style.textAlign = "center"
     
     }
-    window.onload = showOfflineGain()
+    if (timeDifference > 10) {
+      window.onload = showOfflineGain()
+          }
     backdrop2.addEventListener("click", hidePopup);
     // console.log(gainPerSecond)
-    offlineShowGain.innerHTML = "Вы были оффлайн " + timeDifference + " секунд. <br> За это время вы получили оффлайн: <br> +" + moneyTemp.toFixed(0) + " монет."
 
     </script>
 </body>

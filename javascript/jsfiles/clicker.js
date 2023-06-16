@@ -8,7 +8,7 @@ var gainPerSecond = 1;
 var clickCount = 0
 var gameMinutesTemp = 0;
 var gameHoursTemp = 0;
-var autoSaving = 'no'; 
+var autoSaving = 'yes'; 
 var endGoal = 1e100;
 var completion;
 var unlockedPrestige;
@@ -453,7 +453,7 @@ function offlineGain () {
     // console.log(gainPerSecondSave + " gain")
 
     // console.log(timeDifference + ` timedif`)
-    //     console.log( + " - gain * autosavertimer")
+    //     console.log(autoSaverTimer + "autosavertimer")
 }
 //если ты находишься 10 секунд в игре затем ливаешь и перезаходишь то ты получаешь ещё 10 секунд получения монет. 
 
@@ -469,28 +469,13 @@ function offlineGainTime() {
 
 document.addEventListener("visibilitychange", function() {
     if (!document.hidden) { // проверяем, что страница стала видимой
-            clearInterval(autosaver)
-            clearInterval(getCoinPerSecond)
-            clearInterval(autosaver)
-            clearInterval(getCoinPerSecond)
+    clearInterval(getCoinPerSecond)
+    clearInterval(autosaver)
+    clearInterval(autoSaveTime)
     offlineGain();
     autoSaverTimer = 0
     autosaver = setInterval(autoSaveThis, 30000); //таймер
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
+
     autoSaveTime = setInterval(autoSaveTimer, 1000)
     getCoinPerSecond = setInterval(getCoinPerSec, 50)
     saveGame()
@@ -499,25 +484,9 @@ document.addEventListener("visibilitychange", function() {
 
 document.addEventListener("visibilitychange", function() {
     if (document.hidden) { // проверяем, что страница стала невидимой
-    clearInterval(autosaver)
-    clearInterval(getCoinPerSecond)
-    clearInterval(autosaver)
-    clearInterval(getCoinPerSecond)
-    clearInterval(autosaver)
-    clearInterval(getCoinPerSecond)
-
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-    clearInterval(autoSaveTime)
-
+        clearInterval(getCoinPerSecond)
+        clearInterval(autosaver)
+        clearInterval(autoSaveTime)
     }
 });
 

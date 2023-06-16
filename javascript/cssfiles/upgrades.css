@@ -67,16 +67,16 @@
  }
  .singleButton{
     background-color: #000000;
-    border-color: #0c1bc4;
+    border-color: #1226ff;
     color: rgb(255, 255, 255);
 }
 .singleButton:hover:enabled{
-     background-color: #0c1bc4;
-     box-shadow: 0 0 10px #0c1bc4;
+     background-color: #1226ff;
+     box-shadow: 0 0 10px #1226ff;
      color: black;
  }
  .singleButton.purchased {
-    background-color: #0c1bc4;
+    background-color: #1226ff;
     color: black;
 }
 #automationScreen {

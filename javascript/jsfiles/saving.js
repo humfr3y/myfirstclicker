@@ -62,7 +62,11 @@ function loadGame () {
         loadingTheGame();
         singleUpgradeTextUpdate ()
         singleUpgradePurchased ()
-        achRow1.completion = JSON.parse(localStorage.getItem('completion')).map(Boolean);
+        const achCompletions = localStorage.getItem('completion')
+        if (achCompletions != null){
+            localStorage.setItem('completion', JSON.stringify(achRow1.completion))
+            achRow1.completion = JSON.parse(achCompletions).map(Boolean);
+        }
         achCompletionsChecker()
         getCoinPerSec()
         whatsYourCurrentTime2()
@@ -71,21 +75,14 @@ function loadGame () {
         convertingTime()
         autoSaverTimer = 0
         clearInterval(autoSaveTime)
-        clearInterval(autoSaveTime)
-        clearInterval(autoSaveTime)
-        clearInterval(autoSaveTime)
-        clearInterval(autoSaveTime)
-        clearInterval(autoSaveTime)
-        clearInterval(autoSaveTime)
-        clearInterval(autoSaveTime)
-        clearInterval(autoSaveTime)
-        clearInterval(autoSaveTime)
-        clearInterval(autoSaveTime)
-        clearInterval(autoSaveTime)
-        clearInterval(autoSaveTime)
-        clearInterval(autoSaveTime)
         autoSaveTime = setInterval(autoSaveTimer, 1000)
-
+        if (isNaN(money)) {
+            money = 10;
+        }
+        if (isNaN(total)) {
+            total = 10;
+        }
+        gainPerSecondSave = gainPerSecond * 20
         notify(loadNotify);
 //         loadStats.call()
 //         changedLanguage.call()
@@ -131,14 +128,14 @@ function doHardReset () {
             gameSeconds = 0
             gameMinutes = 0
             gameHours = 0
-            prestigeSeconds = 0
-            prestigeMinutes = 0
-            prestigeHours = 0
-            fastPrestigeSeconds = 0
-            fastPrestigeMinutes = 0
-            fastPrestigeHours = 0
-            fastPrestigeSecondsTimer = 0
-            bestPrestigeRun = 1e9
+            // prestigeSeconds = 0
+            // prestigeMinutes = 0
+            // prestigeHours = 0
+            // fastPrestigeSeconds = 0
+            // fastPrestigeMinutes = 0
+            // fastPrestigeHours = 0
+            // fastPrestigeSecondsTimer = 0
+            // bestPrestigeRun = 1e9
             achievementBonus = 1
             achBonus = document.getElementById('achBonus')
             achCount = 0
@@ -156,52 +153,55 @@ function doHardReset () {
             upowercount = 0
             upgradeReset();
             whatsYourCurrentTime()
-            firstBank = ""
-            secondBank = ""
-            thirdBank = ""
-            fourthBank = ""
-            fifthBank = ""
-            sixthBank = ""
-            seventhBank = ""
-            eighthBank = ""
-            ninthBank = ""
-            tenthBank = ""
+            // firstBank = ""
+            // secondBank = ""
+            // thirdBank = ""
+            // fourthBank = ""
+            // fifthBank = ""
+            // sixthBank = ""
+            // seventhBank = ""
+            // eighthBank = ""
+            // ninthBank = ""
+            // tenthBank = ""
             autoSaverTimer = 0
             clearInterval(autoSaveTime)
             autoSaveTime = setInterval(autoSaveTimer, 1000)
             saveGame();
             gainPerSecondSave = gainPerSecond * 20
-            prestigeAutoUpgrades.style.display = "none"
-            prestigeSingleUpgrades.style.display = "none"
-            prestigeTab.style.display = "none"
-            crystalCount.style.display = "none"
-            doPrestige.style.display = "none"  
-            autoTab.style.display = "none"
-            fortuneTab.style.display = "none"
-            container1.style.display = "none"
-            container2.style.display = "none"
-            container3.style.display = "none"
-            latestPrestigesTab.style.display = "none"
-            latestPrestigesPage.style.display = "none"
-            check46.checked = false
-            check13.checked = false
-            checkCoin.checked = false
+            // prestigeAutoUpgrades.style.display = "none"
+            // prestigeSingleUpgrades.style.display = "none"
+            // prestigeTab.style.display = "none"
+            // crystalCount.style.display = "none"
+            // doPrestige.style.display = "none"  
+            // autoTab.style.display = "none"
+            // fortuneTab.style.display = "none"
+            // container1.style.display = "none"
+            // container2.style.display = "none"
+            // container3.style.display = "none"
+            // latestPrestigesTab.style.display = "none"
+            // latestPrestigesPage.style.display = "none"
+            // check46.checked = false
+            // check13.checked = false
+            // checkCoin.checked = false
             
-            tenthPrestigeRun.innerHTML = ""
-            ninthPrestigeRun.innerHTML = ""
-            eighthPrestigeRun.innerHTML = ""
-            seventhPrestigeRun.innerHTML = ""
-            sixthPrestigeRun.innerHTML = ""
-            fifthPrestigeRun.innerHTML = ""
-            fourthPrestigeRun.innerHTML = ""
-            thirdPrestigeRun.innerHTML = ""
-            secondPrestigeRun.innerHTML = ""
-            firstPrestigeRun.innerHTML = ""
+            // tenthPrestigeRun.innerHTML = ""
+            // ninthPrestigeRun.innerHTML = ""
+            // eighthPrestigeRun.innerHTML = ""
+            // seventhPrestigeRun.innerHTML = ""
+            // sixthPrestigeRun.innerHTML = ""
+            // fifthPrestigeRun.innerHTML = ""
+            // fourthPrestigeRun.innerHTML = ""
+            // thirdPrestigeRun.innerHTML = ""
+            // secondPrestigeRun.innerHTML = ""
+            // firstPrestigeRun.innerHTML = ""
             var hardNotifyColor
             hardNotifyColor = "red";
             notify(hardNotify, hardNotifyColor);
             singleUpgradePurchasedRemove()
-            achievementGottenRemove()}
+            achievementGottenRemove()
+            localStorage.clear()
+            location.reload()
+        }
 }
 
 
@@ -350,7 +350,7 @@ fileUpload.addEventListener('change', function(base64) {
     reader.readAsText(file);
     fileUpload.value = null;
 });
-
+var currentLanguage = 'en'
 function savingTheGame() {
     return {
         gainPerSecondSave: gainPerSecondSave,
@@ -365,33 +365,34 @@ function savingTheGame() {
         total: total,
         clickCount: clickCount,
         gameTimer: gameTimer,
-        totalDiamond: totalDiamond,
-        totalPrestiges: totalPrestiges,
+        // totalDiamond: totalDiamond,
+        // totalPrestiges: totalPrestiges,
         amountsOfUpgrades: amountsOfUpgrades,
-        check46_checked: check46.checked,
-        check13_checked: check13.checked,
-        checkCoin_checked: checkCoin.checked,
+        // check46_checked: check46.checked,
+        // check13_checked: check13.checked,
+        // checkCoin_checked: checkCoin.checked,
         gameSeconds: gameSeconds,
         gameMinutes: gameMinutes,
         gameHours: gameHours,
-        prestigeSeconds: prestigeSeconds,
-        prestigeMinutes: prestigeMinutes,
-        prestigeHours: prestigeHours,
-        fastPrestigeSeconds: fastPrestigeSeconds,
-        fastPrestigeMinutes: fastPrestigeMinutes,
-        fastPrestigeHours: fastPrestigeHours,
-        fastPrestigeSecondsTimer: fastPrestigeSecondsTimer,
-        bestPrestigeRun: bestPrestigeRun,
-        firstBank: (encodeURIComponent(firstBank)),
-        secondBank: (encodeURIComponent(secondBank)),
-        thirdBank: (encodeURIComponent(thirdBank)),
-        fourthBank: (encodeURIComponent(fourthBank)),
-        fifthBank: (encodeURIComponent(fifthBank)),
-        sixthBank: (encodeURIComponent(sixthBank)),
-        seventhBank: (encodeURIComponent(seventhBank)),
-        eighthBank: (encodeURIComponent(eighthBank)),
-        ninthBank: (encodeURIComponent(ninthBank)),
-        tenthBank: (encodeURIComponent(tenthBank)),
+        currentLanguage: currentLanguage,
+        // prestigeSeconds: prestigeSeconds,
+        // prestigeMinutes: prestigeMinutes,
+        // prestigeHours: prestigeHours,
+        // fastPrestigeSeconds: fastPrestigeSeconds,
+        // fastPrestigeMinutes: fastPrestigeMinutes,
+        // fastPrestigeHours: fastPrestigeHours,
+        // fastPrestigeSecondsTimer: fastPrestigeSecondsTimer,
+        // bestPrestigeRun: bestPrestigeRun,
+        // firstBank: (encodeURIComponent(firstBank)),
+        // secondBank: (encodeURIComponent(secondBank)),
+        // thirdBank: (encodeURIComponent(thirdBank)),
+        // fourthBank: (encodeURIComponent(fourthBank)),
+        // fifthBank: (encodeURIComponent(fifthBank)),
+        // sixthBank: (encodeURIComponent(sixthBank)),
+        // seventhBank: (encodeURIComponent(seventhBank)),
+        // eighthBank: (encodeURIComponent(eighthBank)),
+        // ninthBank: (encodeURIComponent(ninthBank)),
+        // tenthBank: (encodeURIComponent(tenthBank)),
         firstBuyable_amount: firstBuyable.amount,
         firstBuyable_baseEffect: firstBuyable.baseEffect,
         firstBuyable_price: firstBuyable.price,
@@ -460,7 +461,7 @@ function loadingTheGame() {
     //тут мы парсируем не datasave а именно весь obj, но нам нужно достать из obj datasave и сделать это с ачивками
     // можно попробовать datasave {*переменные*} сделать
 
-
+    if (parsedData != null) {
     gainPerSecondSave = parseFloat(parsedData.gainPerSecondSave)
     lastOnlineTime = parseFloat(parsedData.lastOnlineTime)
     gainPerSecond = parseFloat(parsedData.gainPerSecond)
@@ -471,6 +472,7 @@ function loadingTheGame() {
     total = parseFloat(parsedData.total);
     gainPerSecond = parseFloat(parsedData.gainPerSecond);
     gainPerClick = parseFloat(parsedData.gainPerClick);
+    currentLanguage = parsedData.currentLanguage;
     // totalDiamond = parseFloat(parsedData.totalDiamond);
     // totalPrestiges = parseFloat(parsedData.totalPrestiges);
     amountsOfUpgrades = parseFloat(parsedData.amountsOfUpgrades);
@@ -479,30 +481,30 @@ function loadingTheGame() {
     // unlockedPrestige = parseFloat(parsedData.unlockedPrestige)
     // diamonds = parseFloat(parsedData.diamonds);
     // diamondsBoost = parseFloat(parsedData.diamondsBoost);
-    check13.checked = parsedData.check13_checked;
-    check46.checked = parsedData.check46_checked;
-    checkCoin.checked = parsedData.checkCoin_checked;
+    // check13.checked = parsedData.check13_checked;
+    // check46.checked = parsedData.check46_checked;
+    // checkCoin.checked = parsedData.checkCoin_checked;
     gameSeconds = parseFloat(parsedData.gameSeconds);
     gameMinutes = parseFloat(parsedData.gameMinutes);
     gameHours = parseFloat(parsedData.gameHours);
-    prestigeSeconds = parseFloat(parsedData.prestigeSeconds);
-    prestigeMinutes = parseFloat(parsedData.prestigeMinutes);
-    prestigeHours = parseFloat(parsedData.prestigeHours);
-    fastPrestigeSeconds = parseFloat(parsedData.fastPrestigeSeconds);
-    fastPrestigeMinutes = parseFloat(parsedData.fastPrestigeMinutes);
-    fastPrestigeHours = parseFloat(parsedData.fastPrestigeHours);
-    fastPrestigeSecondsTimer = parseFloat(parsedData.fastPrestigeSecondsTimer);
-    bestPrestigeRun = parseFloat(parsedData.bestPrestigeRun);
-    firstBank = decodeURIComponent((parsedData.firstBank));
-    secondBank = decodeURIComponent((parsedData.secondBank));;
-    thirdBank = decodeURIComponent((parsedData.thirdBank));
-    fourthBank = decodeURIComponent((parsedData.fourthBank));
-    fifthBank = decodeURIComponent((parsedData.fifthBank));
-    sixthBank = decodeURIComponent((parsedData.sixthBank));
-    seventhBank = decodeURIComponent((parsedData.seventhBank));
-    eighthBank = decodeURIComponent((parsedData.eighthBank));
-    ninthBank = decodeURIComponent((parsedData.ninthBank));
-    tenthBank = decodeURIComponent((parsedData.tenthBank));
+    // prestigeSeconds = parseFloat(parsedData.prestigeSeconds);
+    // prestigeMinutes = parseFloat(parsedData.prestigeMinutes);
+    // prestigeHours = parseFloat(parsedData.prestigeHours);
+    // fastPrestigeSeconds = parseFloat(parsedData.fastPrestigeSeconds);
+    // fastPrestigeMinutes = parseFloat(parsedData.fastPrestigeMinutes);
+    // fastPrestigeHours = parseFloat(parsedData.fastPrestigeHours);
+    // fastPrestigeSecondsTimer = parseFloat(parsedData.fastPrestigeSecondsTimer);
+    // bestPrestigeRun = parseFloat(parsedData.bestPrestigeRun);
+    // firstBank = decodeURIComponent((parsedData.firstBank));
+    // secondBank = decodeURIComponent((parsedData.secondBank));;
+    // thirdBank = decodeURIComponent((parsedData.thirdBank));
+    // fourthBank = decodeURIComponent((parsedData.fourthBank));
+    // fifthBank = decodeURIComponent((parsedData.fifthBank));
+    // sixthBank = decodeURIComponent((parsedData.sixthBank));
+    // seventhBank = decodeURIComponent((parsedData.seventhBank));
+    // eighthBank = decodeURIComponent((parsedData.eighthBank));
+    // ninthBank = decodeURIComponent((parsedData.ninthBank));
+    // tenthBank = decodeURIComponent((parsedData.tenthBank));
     firstBuyable.amount = parseFloat(parsedData.firstBuyable_amount);
     firstBuyable.baseEffect = parseFloat(parsedData.firstBuyable_baseEffect);
     firstBuyable.price = parseFloat(parsedData.firstBuyable_price);
@@ -562,7 +564,7 @@ function loadingTheGame() {
     umultipliercount = parseFloat(parsedData.umultipliercount);
     upower = parseFloat(parsedData.upower);
     upowercount = parseFloat(parsedData.upowercount);
-
+    }
 }
 
 function importingTheGame() {
@@ -583,6 +585,7 @@ function importingTheGame() {
     total = parseFloat(parsedData.total);
     gainPerSecond = parseFloat(parsedData.gainPerSecond);
     gainPerClick = parseFloat(parsedData.gainPerClick);
+    currentLanguage = parsedData.currentLanguage;
     // totalDiamond = parseFloat(parsedData.totalDiamond);
     // totalPrestiges = parseFloat(parsedData.totalPrestiges);
     amountsOfUpgrades = parseFloat(parsedData.amountsOfUpgrades);
@@ -591,30 +594,30 @@ function importingTheGame() {
     // unlockedPrestige = parseFloat(parsedData.unlockedPrestige)
     // diamonds = parseFloat(parsedData.diamonds);
     // diamondsBoost = parseFloat(parsedData.diamondsBoost);
-    check13.checked = parsedData.check13_checked;
-    check46.checked = parsedData.check46_checked;
-    checkCoin.checked = parsedData.checkCoin_checked;
+    // check13.checked = parsedData.check13_checked;
+    // check46.checked = parsedData.check46_checked;
+    // checkCoin.checked = parsedData.checkCoin_checked;
     gameSeconds = parseFloat(parsedData.gameSeconds);
     gameMinutes = parseFloat(parsedData.gameMinutes);
     gameHours = parseFloat(parsedData.gameHours);
-    prestigeSeconds = parseFloat(parsedData.prestigeSeconds);
-    prestigeMinutes = parseFloat(parsedData.prestigeMinutes);
-    prestigeHours = parseFloat(parsedData.prestigeHours);
-    fastPrestigeSeconds = parseFloat(parsedData.fastPrestigeSeconds);
-    fastPrestigeMinutes = parseFloat(parsedData.fastPrestigeMinutes);
-    fastPrestigeHours = parseFloat(parsedData.fastPrestigeHours);
-    fastPrestigeSecondsTimer = parseFloat(parsedData.fastPrestigeSecondsTimer);
-    bestPrestigeRun = parseFloat(parsedData.bestPrestigeRun);
-    firstBank = decodeURIComponent((parsedData.firstBank));
-    secondBank = decodeURIComponent((parsedData.secondBank));;
-    thirdBank = decodeURIComponent((parsedData.thirdBank));
-    fourthBank = decodeURIComponent((parsedData.fourthBank));
-    fifthBank = decodeURIComponent((parsedData.fifthBank));
-    sixthBank = decodeURIComponent((parsedData.sixthBank));
-    seventhBank = decodeURIComponent((parsedData.seventhBank));
-    eighthBank = decodeURIComponent((parsedData.eighthBank));
-    ninthBank = decodeURIComponent((parsedData.ninthBank));
-    tenthBank = decodeURIComponent((parsedData.tenthBank));
+    // prestigeSeconds = parseFloat(parsedData.prestigeSeconds);
+    // prestigeMinutes = parseFloat(parsedData.prestigeMinutes);
+    // prestigeHours = parseFloat(parsedData.prestigeHours);
+    // fastPrestigeSeconds = parseFloat(parsedData.fastPrestigeSeconds);
+    // fastPrestigeMinutes = parseFloat(parsedData.fastPrestigeMinutes);
+    // fastPrestigeHours = parseFloat(parsedData.fastPrestigeHours);
+    // fastPrestigeSecondsTimer = parseFloat(parsedData.fastPrestigeSecondsTimer);
+    // bestPrestigeRun = parseFloat(parsedData.bestPrestigeRun);
+    // firstBank = decodeURIComponent((parsedData.firstBank));
+    // secondBank = decodeURIComponent((parsedData.secondBank));;
+    // thirdBank = decodeURIComponent((parsedData.thirdBank));
+    // fourthBank = decodeURIComponent((parsedData.fourthBank));
+    // fifthBank = decodeURIComponent((parsedData.fifthBank));
+    // sixthBank = decodeURIComponent((parsedData.sixthBank));
+    // seventhBank = decodeURIComponent((parsedData.seventhBank));
+    // eighthBank = decodeURIComponent((parsedData.eighthBank));
+    // ninthBank = decodeURIComponent((parsedData.ninthBank));
+    // tenthBank = decodeURIComponent((parsedData.tenthBank));
     firstBuyable.amount = parseFloat(parsedData.firstBuyable_amount);
     firstBuyable.baseEffect = parseFloat(parsedData.firstBuyable_baseEffect);
     firstBuyable.price = parseFloat(parsedData.firstBuyable_price);
@@ -681,21 +684,21 @@ function importingTheGame() {
 
 function loadingTheGame2() {
     singleUpgradePurchased();
-    if (unlockedPrestige == 1 || totalDiamond >= 1) {
-        prestigeTab.style.display = "block"; unlockPrestige(); latestPrestigesTab.style.display = "block";
-        if (totalDiamond > 1)
-            crystalCount.style.display = "block";
-    }
-    tenthPrestigeRun.innerHTML = tenthBank;
-    ninthPrestigeRun.innerHTML = ninthBank;
-    eighthPrestigeRun.innerHTML = eighthBank;
-    seventhPrestigeRun.innerHTML = seventhBank;
-    sixthPrestigeRun.innerHTML = sixthBank;
-    fifthPrestigeRun.innerHTML = fifthBank;
-    fourthPrestigeRun.innerHTML = fourthBank;
-    thirdPrestigeRun.innerHTML = thirdBank;
-    secondPrestigeRun.innerHTML = secondBank;
-    firstPrestigeRun.innerHTML = firstBank;
+    // if (unlockedPrestige == 1 || totalDiamond >= 1) {
+    //     prestigeTab.style.display = "block"; unlockPrestige(); latestPrestigesTab.style.display = "block";
+    //     if (totalDiamond > 1)
+    //         crystalCount.style.display = "block";
+    // }
+    // tenthPrestigeRun.innerHTML = tenthBank;
+    // ninthPrestigeRun.innerHTML = ninthBank;
+    // eighthPrestigeRun.innerHTML = eighthBank;
+    // seventhPrestigeRun.innerHTML = seventhBank;
+    // sixthPrestigeRun.innerHTML = sixthBank;
+    // fifthPrestigeRun.innerHTML = fifthBank;
+    // fourthPrestigeRun.innerHTML = fourthBank;
+    // thirdPrestigeRun.innerHTML = thirdBank;
+    // secondPrestigeRun.innerHTML = secondBank;
+    // firstPrestigeRun.innerHTML = firstBank;
 }
 
 

@@ -2,7 +2,7 @@ var verDesc = document.getElementById("versionDescription")
 function showChangelog (desc){
     verDesc.innerHTML = desc;
 }
-var startDesc, desc00, desc01, desc02, desc03, desc04, desc05, desc051, desc06, desc07, desc071, desc08;
+var startDesc, desc00, desc01, desc02, desc03, desc04, desc05, desc051, desc06, desc07, desc071, desc08, desc0801;
 // <br>
 
 // function chooseVersionText() {

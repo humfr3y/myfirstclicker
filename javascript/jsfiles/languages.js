@@ -7,7 +7,7 @@ const responseRu = await fetch('./javascript/jsfiles/ru.json');
 const translationsEnData = await responseEn.json();
 const translationsRuData = await responseRu.json();
 await i18next.init({
-    lng: 'ru',
+    lng: currentLanguage,
     resources: {
         en: { translation: translationsEnData },
         ru: { translation: translationsRuData }
@@ -130,6 +130,7 @@ try {
     achNotify = i18next.t('achievementGameNotification');
 
     startDesc = i18next.t('startDescription');
+    changelogTitle.innerHTML = i18next.t('changeLogTitleText');
 
     desc00 = i18next.t('version00');
     desc01 = i18next.t('version01');
@@ -142,6 +143,7 @@ try {
     desc07 = i18next.t('version07');
     desc071 = i18next.t('version071');
     desc08 = i18next.t('version08');
+    desc0801 = i18next.t('version0801');
 
 } catch (error) {
     console.error('Ошибка загрузки и инициализации переводов:', error);
@@ -181,7 +183,7 @@ function formatPower(power) {
 
 document.getElementById('changingLanguage').addEventListener('click', () => {
 
-    const currentLanguage = i18next.language === 'ru' ? 'en' : 'ru';
+    currentLanguage = i18next.language === 'ru' ? 'en' : 'ru';
     // console.log(currentLanguage)
     i18next.changeLanguage(currentLanguage, () => {
       // Обновление текста после смены языка
