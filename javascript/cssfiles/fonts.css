@@ -7,3 +7,30 @@
 body {
     font-family: "Poly"; 
 }
+@font-face {
+    font-family: "swkeys";
+    src: url("fonts/Swkeys1.ttf") format("truetype");
+    font-style: normal; 
+    font-weight: normal; 
+}
+
+@font-face {
+    font-family: "Comic Sans";
+    src: url("fonts/comic.ttf") format("truetype");
+    font-style: normal; 
+    font-weight: normal; 
+}
+
+@font-face {
+    font-family: "PAPYRUS THE GREAT";
+    src: url("fonts/papyrusutrusbylyajka.otf") format("opentype");
+    font-style: normal; 
+    font-weight: normal; 
+}
+
+@font-face {
+    font-family: "monotyper";
+    src: url("fonts/MonospaceTypewriter.ttf") format("truetype");
+    font-style: normal; 
+    font-weight: normal; 
+}

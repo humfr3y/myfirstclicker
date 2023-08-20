@@ -7,3 +7,5 @@ What it contains?
 - Few bugs: they're always exist, ye?
 Will do it have update?
 Probably. I should learn more js and html for it.
+
+0.0 desc xd  - me at 21:32 09.07.2023

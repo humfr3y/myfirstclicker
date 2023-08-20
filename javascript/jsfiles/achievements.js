@@ -10,7 +10,7 @@ var achRow1 = {
     fullRow: 0
 }
 var achNotify
-setInterval(achievementChecker, 50)
+setInterval(achievementChecker, 100)
 var achNotifyColor = "yellow", achNotifyWidth = '350px'
 function achievementChecker() {
     if (firstBuyable.amount >= achRow1.condition[0] && !achRow1.completion[0])
@@ -21,7 +21,7 @@ function achievementChecker() {
     {
         achNotification(1);
     }
-    if ((gainPerClick >= gainPerSecond * 20 * achRow1.condition[2]) && !achRow1.completion[2])
+    if ((gainPerClick >= gainPerSecond * 20 * 2.01) && !achRow1.completion[2] && gainPerSecond != 0)
     {
         achNotification(2);
         // console.log(gainPerClick)
@@ -57,11 +57,14 @@ function achievementChecker() {
     {
         achNotification(9);
     }
-    achievementBonus = achCount * 1.175 + achRowCount * 15.245
-    tenthSingle.amount == 1 ? achievementBonus = Math.pow(achCount * 1.175 + achRowCount * 15.245, 1.5) : achievementBonus = achievementBonus
+    achCount != 0 ? achievementBonus = achCount * 1.09 + achRowCount * 15.245 : achievementBonus = 1
+    tenthSingle.amount == 1 ? achievementBonus = Math.pow(achCount * 1.109 + achRowCount * 15.245, 1.5) : achievementBonus = achievementBonus
     achRow1.completion[4] == true ? maxbuy.style.display = 'block' : maxbuy.style.display = 'none' 
+    achRow1.completion[4] == true ? maxOrNoUpgrades.style.display = 'block' : maxOrNoUpgrades.style.display = 'none'; 
     if (achRow1.fullRow == 10)
     {
+        var element2 = document.getElementById("firstAchievementRow");
+        element2.classList.add("green");
         achRowCount = 1
     } 
     else achRowCount = 0
@@ -76,17 +79,12 @@ function achNotification(i) {
     element.classList.add("greenborder");
     achRow1.fullRow++
     achCount++
-    if (achRow1.fullRow == 10) {
-        var element2 = document.getElementById("firstAchievementRow");
-        element2.classList.add("green");
-        achRowCount++
-    }
-    else achRowCount = 0
+
 }
 
 function achCompletionsChecker() {
     achievementBonus = 1
-    achCount = 1
+    achCount = 0
     achRow1.fullRow = 0
     for (var i = 0; i < achRow1.completion.length; i++){
         if (achRow1.completion[i] == true) {
@@ -95,7 +93,7 @@ function achCompletionsChecker() {
             element.classList.add("greenborder");
             achRow1.fullRow++
             achCount++
-            achievementBonus += 1.175
+            achievementBonus += 1.09
         }
     }
 }

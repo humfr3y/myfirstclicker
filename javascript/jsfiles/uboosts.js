@@ -13,32 +13,34 @@ var upowerCost = 250 + (100 * upowercount)
 
 function doUmulti () {
     if (firstBuyable.amount >= umultiplierCost){
-        gainPerSecond = 1
-        gainPerSecondSave = 1
-        moneyTemp = 1
+        clearInterval(getCoinPerSecond)
+        gainPerSecond = 0
+        gainPerSecondSave = 0
+        moneyTemp = 0
         whatsYourCurrentTime()
         doUmultireset()
         umultipliercount++
         umultiplier *= 2
         saveGame()
-        money = 10
-        gainPerSecond = 1
-        money = 10
+        gainPerSecond = 0
+        gain = 0
+        getCoinPerSecond = setInterval(getCoinPerSec, 50)
     }
 }
 
 
 function doUpower () {
     if ((firstBuyable.amount >= upowerCost) && (umultipliercount >= 4)){
-        gainPerSecond = 1
-        gainPerSecondSave = 1
+        clearInterval(getCoinPerSecond)
+        gainPerSecond = 0
+        gainPerSecondSave = 0
         moneyTemp = 1
         whatsYourCurrentTime()
         doUpowerreset()
         upowercount++
-        upower += 0.1
+        upower += 0.045
         saveGame()
-        money = 10
+        getCoinPerSecond = setInterval(getCoinPerSec, 50)
     }
 }
 
@@ -48,10 +50,9 @@ function doUmultireset() {
     money = 10
     gain = 1;
     gainPerClick = 1;
-    gainPerSecond = 1;
+    gainPerSecond = 0;
     upgradeReset();        
     singleUpgradePurchasedRemove()
-    singleUpgradeTextUpdate()
     money = 10
 }
 
@@ -59,7 +60,7 @@ function doUpowerreset() {
     money = 10
     gain = 1;
     gainPerClick = 1;
-    gainPerSecond = 1
+    gainPerSecond = 0
     upgradeReset();        
     singleUpgradePurchasedRemove()
     singleUpgradeTextUpdate()

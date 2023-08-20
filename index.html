@@ -14,16 +14,20 @@
     <link rel="stylesheet" href="javascript/cssfiles/endscreen.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/info.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/main.css" type="text/css">
-    <link rel="stylesheet" href="javascript/cssfiles/prestige.css" type="text/css">
-    <link rel="stylesheet" href="javascript/cssfiles/fortune.css" type="text/css">
-
     <link rel="stylesheet" href="javascript/cssfiles/upgrades.css" type="text/css">
 </head>
 <body>
+  <div id="loadingScreen">
+  </div>
+
+  <div class="progress-bar-base">
+    <div id="progressbar" class="progress-bar">
+      <span id="percent">10%</span>
+    </div>
+  </div>
+
+  <footer id="autoTimer">It's text</footer>
     <div id="topValues">
-      <div id="invisible" class="topVars">
-        <span id="invis">hey</span>
-      </div>
       <div id="coinGet" class="topVars">
         <br>
         <span id="coinsCount"></span>
@@ -31,51 +35,97 @@
         <br>
         <span id="coinsGain"></span>
       </div>
-      <div id="crystalGet" class="topVars crystalCounter">
-        <span id="crystalCount">Lorem, ipsum dolor.</span>
-        <br>
-          <button onclick="doPrestigeReset(this)" id="doPrestige">Сделать сброс престижа</button>
-      </div>
     </div>
     <hr>
     <div id="topButtons">
+        <!-- <button onclick="newsScreen(this)" id= "newsTab" class="tabButton">Новости</button> -->
         <button onclick="settingsScreen(this)" id= "settingsTab" class="tabButton">Настройки</button>
         <button onclick="mainScreen(this)" id= "mainTab" class="tabButton">Кликер</button>
-        <button onclick="prestigeScreen(this)" id= "prestigeTab" class="tabButton">?????</button>
-        <button onclick="fortuneScreen(this)" id= "fortuneTab" class="tabButton">Фортуна</button>
-        <button onclick="autoScreen(this)" id= "autoTab" class="tabButton">Автоматизация</button>
         <button onclick="achScreen(this)" id= "achTab" class="tabButton">Достижения</button>
         <button onclick="infoScreen(this)" id= "infoTab" class="tabButton">Информация</button>
+        <button onclick="shopScreen(this)" id="shopTab" class="tabButton">Магазин</button>
+    </div>
+    <div id="newsInfo">
+      <p class="titleTab">Text!</p>
     </div>
     <div id="settingButtons">
-        <p id="settingsTitle" class="titleTab">Настройки</p>
+      <div id="settingSubButtons">
+        <button onclick="saveScreen(this)" id="saveTab" class="tabButton subButton">Saves</button>
+        <button onclick="graphicScreen(this)" id="graphicTab" class="tabButton subButton">Graphic</button>
+        <button onclick="otherScreen(this)" id="otherTab" class="tabButton subButton">Other</button>
+      </div>
+      <!-- Saves -->
         <div class="settingButtonsWindow">
-            <div id="firstSettingsRow">
-        <button onclick="saveGame(this)" id= "savingGame" class="settingButton">Сохранить игру / Save the game</button>
-        <button onclick="loadGame(this)" id= "loadingGame" class="settingButton">Загрузить игру / Load the game</button>
-        <button onclick="autoSaveGame(this)" id= "autoSavingGame" class="settingButton">Автосохранение: выкл / Auto-save: off</button>
-        </div>
-        <div id="secondSettingsRow">
-        <button onclick="importSave(this)" id= "impSave" class="settingButton">импорт</button>
-        <label id="fileUploader" for="file-upload" class="settingButton loadfile">
-          Загрузить файл
-        </label>
-        <input type="file" id="file-upload">
-        <p class="file-name"></p>
-        <button onclick="exportSave(this)" id= "expSave" class="settingButton">экспорт</button>
-        </div>
-        <div id="thirdSettingsRow">
-        <button id= "changingLanguage" class="settingButton">Сменить язык</button>
-        <button onclick="changelog(this)" id= "changelogOpen" class="settingButton">Журнал изменений / Changelog</button>
-        <button onclick="doHardReset(this)" id= "hardRes" class="settingButton"></button>
-        </div>
+          <div id="saveSettings">
+            <p id="settingsTitle" class="titleTab">Настройки сохранений</p>
+            <div id="firstSaveSettingsRow" class="settingsRow">
+              <button onclick="saveGame(this)" id= "savingGame" class="settingButton">Сохранить игру / Save the game</button>
+              <button onclick="loadGame(this)" id= "loadingGame" class="settingButton">Загрузить игру / Load the game</button>
+              <button onclick="autoSaveGame(this)" id= "autoSavingGame" class="settingButton">Автосохранение: выкл / Auto-save: off</button>
+              </div>
+              <div id="secondSaveSettingsRow" class="settingsRow">
+              <button onclick="importSave(this)" id= "impSave" class="settingButton">импорт</button>
+              <label id="fileUploader" for="file-upload" class="settingButton loadfile">
+                Загрузить файл
+              </label>
+              <input type="file" id="file-upload">
+              <p class="file-name"></p>
+              <button onclick="exportSave(this)" id= "expSave" class="settingButton">экспорт</button>
+            </div>
+              <div id="thirdSaveSettingsRow" class="settingsRow">
+              <button onclick="resetConfirmationOpen(this)" id= "hardRes" class="settingButton"></button>
+              </div>
+              </div>
+          </div>
+    <!-- Graphic -->
+        <div id="graphicSettings" style="display: none;">
+          <p id="settingsTitle2" class="titleTab">Настройки графики</p>
+          <div id="firstGraphicSettingsRow" class="settingsRow">
+            <select id="changeFont" class="settingButton selectSetting">
+              <option value="option1" class="fontSelector">Poly</option>
+              <option value="option2" class="fontSelector">Serif</option>
+              <option value="option3" class="fontSelector">Impact</option>
+              <option value="option4" class="fontSelector">Courier</option>
+              <option value="option5" class="fontSelector">Verdana</option>
+              <option value="option6" class="fontSelector">System-Ui</option>
+              <option value="option7" class="fontSelector">PAPYRUS</option>
+              <option value="option8" class="fontSelector">Comic Sans</option>
+              <option value="option9" class="fontSelector">Monospace (English)</option>
+              <option value="option10" class="fontSelector">Swkeys (English)</option>
+            </select>
+            <!-- <select id="changeTheme" class="settingButton selectSetting">
+              <option value="theme1" class="themeSelector">Dark theme</option>
+              <option value="theme2" class="themeSelector">Light theme</option>
+            </select> -->
+            <button id= "changingLanguage" class="settingButton">Сменить язык</button>
+            </div>
+          </div>
+    <!-- Other -->
+    <div id="otherSettings" style="display: none;">
+          <p id="settingsTitle3" class="titleTab">Другие настройки</p>
+          <div id="firstOtherSettingsRow" class="settingsRow">
+            <button onclick="changelog(this)" id= "changelogOpen" class="settingButton">Журнал изменений / Changelog</button>
+            <button onclick="gameLoreOpen(this)" id="gameLore" class="settingButton">Лор игры</button>
+            <button onclick="howToPlayOpen(this)" id="howToPlay" class="settingButton">Помощь</button>
+          </div>
+          <div id="secondOtherSettingsRow"class="settingsRow">
+            <div id="inputBorder">
+              <p id="inputText"> Введите код</p>
+              <input type="text" id="codeInput">
+            </div>
+          </div>
+          <div id="secondOtherSettingsRow"class="settingsRow">
+            <button onclick="getDaily(this)" id="getDailyReward" class="settingButton">Получить ежедневную награду</button>
+          </div>
+    </div>
+        <footer id="hotkeys" class="statsSlot">Hotkey</footer>
         </div>
         <div id="myPopupBackdrop1" class="myPopupBackdrop"></div>
         <div id="changelogWindow" class="gameWindow">
           <div id="titleDiv" class="titleDivClass">
-            <span id="changelogTitle" class="windowTitle">Changelog</span>
-          </div>
+            <p id="changelogTitle" class="windowTitle">Changelog</p>
             <button onclick="hidePopup()" class="closeWindow"></button>
+          </div>
           <div id="versionChooser">
             <button onclick="showChangelog(desc00)" class="versionButton">0.0</button>
             <button onclick="showChangelog(desc01)" class="versionButton">0.1</button>
@@ -89,33 +139,59 @@
             <button onclick="showChangelog(desc071)" class="versionButton">0.7.1</button>
             <button onclick="showChangelog(desc08)" class="versionButton">0.8</button>
             <button onclick="showChangelog(desc0801)" class="versionButton">0.8.0.1</button>
+            <button onclick="showChangelog(desc09)" class="versionButton">0.9</button>
           </div>
         <div id="versionDiv" class="windowDesc">
           <p id="versionDescription">Choose version</p>
         </div>
         </div>
+        <div id="gameLoreWindow" class="gameWindow">
+          <div id="loreTitleDiv" class="titleDivClass">
+            <p id="loreTitle" class="windowTitle">Changelog</p>
+          </div>
+          <button onclick="hidePopup()" class="closeWindow"></button>
+          <div id="chapterChooser">
+            <button onclick="showStory(chapter1)" id="chapter1Tab" class="versionButton loreChapter">Начало</button>
+            <button onclick="showStory(chapter2)" id="chapter2Tab" class="versionButton loreChapter">Улучшения</button>
+            <button onclick="showStory(chapter3)" id="chapter3Tab" class="versionButton loreChapter">У-множение</button>
+            <button onclick="showStory(chapter4)" id="chapter4Tab" class="versionButton loreChapter">У-силение</button>
+            <button class="versionButton">???????</button>
+          </div>
+          <div id="chapterDiv" class="windowDesc">
+            <p id="chapterDescription">Choose chapter</p>
+          </div>
         </div>
-    <div id="automationScreen">
-        <div id="auto-buy2-container">
-            <div id="auto-buy2">
-              <label for="auto-buy2-checkbox" id="autoBuy1to3" class="autobuy4-6">Авто-покупка 1-3 улучшений: </label>
-              <input type="checkbox" id="auto-buy2-checkbox">
-            </div>
+
+        <div id="gameHelpWindow" class="gameWindow">
+          <div id="helpTitleDiv" class="titleDivClass">
+            <p id="helpTitle" class="windowTitle">Помощь</p>
           </div>
-        <div id="auto-buy1-container">
-            <div id="auto-buy1">
-              <label for="auto-buy1-checkbox" id="autoBuy4to6" class="autobuy4-6">Авто-покупка 4-6 улучшений: </label>
-              <input type="checkbox" id="auto-buy1-checkbox">
-            </div>
+          <button onclick="hidePopup()" class="closeWindow"></button>
+          <div id="horizontalLine"></div>
+          <div id="helpPageChooser">
+            <button onclick="showHelpPage(help1, helpName1)" id="helpTab1" class="versionButton versionButtonVertical">Вступление</button>
+            <button onclick="showHelpPage(help2, helpName2)" id="helpTab2" class="versionButton versionButtonVertical">Вкладки</button>
+            <button onclick="showHelpPage(help3, helpName3)" id="helpTab3" class="versionButton versionButtonVertical">Улучшения</button>
+            <button onclick="showHelpPage(help4, helpName4)" id="helpTab4" class="versionButton versionButtonVertical">У-множители</button>
+            <button onclick="showHelpPage(help5, helpName5)" id="helpTab5" class="versionButton versionButtonVertical">У-силители</button>
+            <button onclick="showHelpPage(help6, helpName6)" id="helpTab6" class="versionButton versionButtonVertical">Супер-монеты</button>
+            <button onclick="showHelpPage(help7, helpName7)" id="helpTab7" class="versionButton versionButtonVertical">Овердрайв</button>
           </div>
-        <div id="auto-buy3-container">
-            <div id="auto-buy3">
-              <label for="auto-buy3-checkbox" id="autoMoney" class="autobuy4-6">Монеты в секунду: </label>
-              <input type="checkbox" id="auto-buy3-checkbox">
-            </div>
+          <div id="line"></div>
+          <div id="helpDiv" class="windowDesc">
+            <p id="helpPageTitle">Helper</p>
+            <p id="helpDescription">еуче</p>
           </div>
-    </div>
+        </div>
     <div id="mainButtons">
+        <div id="mainSubButtons">
+          <button onclick="moneyScreen(this)" id="moneyTab" class="tabButton subButton">Монеты</button>
+          <button onclick="overdriveScreen(this)" id="overdriveTab" class="tabButton subButton" style="display: none">Овердрайв</button>
+        </div>
+    <div id="moneyPage">
+    <div id="mainSettings">
+      <button onclick="maxOrNo(this)" id="maxOrNoUpgrades">Купить один</button>
+    </div>
     <div id="getCoinLine">
       <button onclick="doUmulti(this)" id = "umultiplierBoost" class="upgradeButton"><ut>У-множитель (0)</ut> <br> Сбросьте всё и получите х2 к доходу монет! <br> Для след. сброса требуется 100 Небольших Инвестиций</button>
       <button onclick="getCoin()" id = "coinGain" class="coinCss"><img src="javascript/cssfiles/images/CoinOff.png" style="width:0px" alt="" class="coinImage"></button><p>  
@@ -125,11 +201,11 @@
     <button onclick="maxBuyAll(this)" id="maxbuy" class="upgradeButton maxBuy">Max Buy</button>
     </div>
     <div id="buyableUpgrades">
-    <button onclick="buyBuyableUpgrade(firstBuyable)" id = "buyableU1" class="upgradeButton buyableButton">Открыть новое улучшение! Стоимость: 10 α-монет. / Unlock new upgrade! Cost: 10 α-coins.</button>
-    <button onclick="buyBuyableUpgrade(secondBuyable)" id = "buyableU2" class="upgradeButton buyableButton">Открыть новое улучшение! Стоимость: 100 α-монет. / Unlock new upgrade! Cost: 100 α-coins.</button>
-    <button onclick="buyBuyableUpgrade(thirdBuyable)" id = "buyableU3" class="upgradeButton buyableButton">Открыть новое улучшение! Стоимость: 500 α-монет. / Unlock new upgrade! Cost: 500 α-coins.</button>
-    <button onclick="buyBuyableUpgrade(fourthBuyable)" id = "buyableU4" class="upgradeButton buyableButton">Открыть новое улучшение! Стоимость: 500 α-монет. / Unlock new upgrade! Cost: 500 α-coins.</button>
-    <button onclick="buyBuyableUpgrade(fifthBuyable)" id = "buyableU5" class="upgradeButton buyableButton">Открыть новое улучшение! Стоимость: 500 α-монет. / Unlock new upgrade! Cost: 500 α-coins.</button>
+    <button id = "buyableU1" class="upgradeButton buyableButton">Открыть новое улучшение! Стоимость: 10 α-монет. / Unlock new upgrade! Cost: 10 α-coins.</button>
+    <button id = "buyableU2" class="upgradeButton buyableButton">Открыть новое улучшение! Стоимость: 100 α-монет. / Unlock new upgrade! Cost: 100 α-coins.</button>
+    <button id = "buyableU3" class="upgradeButton buyableButton">Открыть новое улучшение! Стоимость: 500 α-монет. / Unlock new upgrade! Cost: 500 α-coins.</button>
+    <button id = "buyableU4" class="upgradeButton buyableButton">Открыть новое улучшение! Стоимость: 500 α-монет. / Unlock new upgrade! Cost: 500 α-coins.</button>
+    <button id = "buyableU5" class="upgradeButton buyableButton">Открыть новое улучшение! Стоимость: 500 α-монет. / Unlock new upgrade! Cost: 500 α-coins.</button>
   </div>
     <div id="singleUpgrades">
       <button onclick="buySingleUpgrade(firstSingle)" id = "singleU1" class="upgradeButton singleButton"><br><span id="singleU1Price">Стоимость</span></button>
@@ -145,19 +221,24 @@
       <button onclick="buySingleUpgrade(ninthSingle)" id = "singleU9" class="upgradeButton singleButton"><br><span id="singleU9Price">Стоимость</span></button>
       <button onclick="buySingleUpgrade(tenthSingle)" id = "singleU10" class="upgradeButton singleButton"><br><span id="singleU10Price">Стоимость</span></button>
     </div>  
-    </div>  
-    <div id="prestigeButtons">
-        <p id="theGoal">Цель</p> 
-        <div id="prestigeBuyableUpgrades">
-            </div>
-        <div id="prestigeAutoUpgrades">
-            </div>
-        <div id="prestigeSingleUpgrades">
-                </div>
-        </div>
-    <div id="fortuneButtons">
-    <p id="fortuneNotImplemented" class="titleTab">Не реализовано!</p>
     </div>
+    <div id="overdrivePage" style="display: none">
+      <div id="overdriveType1">
+        <div id="overdriveType1Title">
+          <p id="overdriveType1Name" class="whiteText">Overdrive Type 1</p>
+        </div>
+        <div id="overdriveType1Div">
+          <div id="overdriveType1ProgressBarBase">
+            <div id="overdriveType1ProgressBar">
+            </div>
+            <div id="overdriveType1Ghost">
+              <span id="progressBarGain">10% (1e10) <br> x3.1 for coin gain <br> Cost: 1e11 </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>  
     <div id="achivScreen">
       <div id="achScreenDescription">
         <p id="achievementsTitle" class="titleTab">Достижения</p>
@@ -190,8 +271,9 @@
 
             <div id="ach14" class="ach"></div>
             <div id="tooltip-ach14" class="tooltip" role="tooltip">
-              <ut> Есть пробитие! (14) </ut> <br> <br> Выполнить У-множение.
               <div class="arrow" data-popper-arrow></div>
+              <ut> Есть пробитие! (14) </ut> <br> <br> Выполнить У-множение.
+
             </div>
 
             <div id="ach15" class="ach"></div>
@@ -235,25 +317,25 @@
     </div>
     <div id="statsScreen">
     <div id="statsSubButtons">
-      <button onclick="statisticScreen(this)" id= "statisticsTab" class="tabButton subButtons">Статистика</button>
-      <button onclick="latestPrestigesScreen(this)" id= "latestPrestigesTab" class="tabButton subButtons">Сбросы Престижа</button>
-      <button onclick="aboutGameScreen(this)" id= "aboutGameTab" class="tabButton subButtons">Об игре</button>
+      <button onclick="statisticScreen(this)" id= "statisticsTab" class="tabButton subButton">Статистика</button>
+      <button onclick="multipliersScreen(this)" id="multiplierTab" class="tabButton subButton">Мультипликаторы</button>
+      <button onclick="aboutGameScreen(this)" id= "aboutGameTab" class="tabButton subButton">Об игре</button>
     </div>
     <div id="statisticsPage">
       <p id="statsTitle" class="titleTab">Статистика</p>
       <p id="totalCoins" class="statsSlot"></p> 
+      <p id="totalSuperCoinsStats" class="statsSlot"></p>
       <p id="gameTime" class="statsSlot">placeholder</p> 
-      <!-- <p id="prestigeStats" class="headerr" style="color:aqua">BLACK PENCIL?</p> 
-      <p id="totalDiamonds" class="statsSlot"></p> 
-      <p id="totalResets" class="statsSlot"></p> 
-      <p id="prestigeTime" class="statsSlot">placeholder</p> 
-      <p id="fastestPrestigeTime" class="statsSlot">fastest prestige</p>  -->
+      <p id="totalClicks" class="statsSlot">You made 10 clicks</p>
     </div>
     <div id="aboutGamePage">
       <p id="aboutGameTitle" class="titleTab">Об игре</p>
       <p id="aboutGame">Об игре 2</p>
+      <div id="socialNetworks">
+        <button id="galaxyClickButton">Оставить отзыв в galaxy.click</button>
+      </div>
     </div>
-    <div id="latestPrestigesPage">
+    <!-- <div id="latestPrestigesPage">
       <p id="latestPrestigesTitle" class="titleTab">10 последних престижей: </p>
       <span class="prestigeText">1. </span><span id="firstPrestigeRun" class="prestigeText">1</span><br>
       <span class="prestigeText">2. </span><span id="secondPrestigeRun" class="prestigeText">2</span><br>
@@ -265,13 +347,248 @@
       <span class="prestigeText">8. </span><span id="eighthPrestigeRun" class="prestigeText">8</span><br>
       <span class="prestigeText">9. </span><span id="ninthPrestigeRun" class="prestigeText">9</span><br>
       <span class="prestigeText">10. </span><span id="tenthPrestigeRun" class="prestigeText">10</span><br>
-    </div>
-    </div>
-    <div id="endGoodGameScreen">
-        <p id="endScreen">Достиг цели</p> 
-        <button onclick="mainScreen(this)" id= "playMore">Играть дальше</button>
+    </div> -->
+    <div id="multipliersPage" style="display: none">
+      <p id="multiplierTitle" class="titleTab" style="width: 100%">Мультипликаторы</p>
+      <div id="multiplierChoose">
+        <button onclick="showClickStats(this)" id="chooseClick" class="versionButton versionButtonVertical multiplierChooser">Нажатие</button>
+        <button onclick="showSecondStats(this)" id="chooseSecond" class="versionButton versionButtonVertical multiplierChooser">В секунду</button>
+        <button onclick="showGainStats(this)" id="chooseGain" class="versionButton versionButtonVertical multiplierChooser">Доход</button>
+      </div>
+      <div id="multiplierStats">
+        <p id="multBreakdownTitle">Монеты за нажатия</p>
+        <div id="gainPerClickStats">
+          <div class="multiplierString" display="flex">
+            <span id="doublerStats" class="whiteText" style="margin-left: 30px;">Удвоитель</span>
+            <span id="doublerStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
+            <span id="midasCursorStats" class="whiteText" style="margin-left: 30px;">Курсор Мидаса</span>
+            <span id="midasCursorStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
+            <span id="rewardForFeatsStats" class="whiteText" style="margin-left: 30px;">Награда за Подвиги</span>
+            <span id="rewardForFeatsStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
+            <span id="goldenGloveStats" class="whiteText" style="margin-left: 30px;">Общий доход</span>
+            <span id="goldenGloveStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
+            <span id="gainStats" class="whiteText" style="margin-left: 30px;">Общий доход</span>
+            <span id="gainStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div id="lastClickStats">
+            <div class="multiplierString" display="flex">
+              <span id="alphaPowerStats" class="whiteText" style="margin-left: 30px;">Альфа-Усилитель</span>
+              <span id="alphaPowerStatsEffect" class="whiteText" style="margin-right: 30px;">^1.021</span>
+            </div>
+            <div id="postE13SoftcapClick" class="multiplierString" display="flex">
+              <span id="postE13coinsSoftcapClickStats" class="whiteText" style="margin-left: 30px;">Пост-е13 Софткап</span>
+              <span id="postE13coinsSoftcapClickStatsEffect" class="whiteText" style="margin-right: 30px;">^0.5</span>
+            </div>
+            <div class="multiplierString footer" display="flex">
+              <span id="summaryClickStats" class="whiteText" style="margin-left: 30px;">Общий множитель</span>
+              <span id="summaryClickStatsEffect" class="whiteText" style="margin-right: 30px;">1.37x</span>
+            </div>
+          </div>
         </div>
 
+        <div id="gainPerSecondStats" style="display:none">
+          <div class="multiplierString" display="flex"> <!--инвестиция, умножитель, богатая слава, негативная альфа частичка, у-силитель, доход общий-->
+            <span id="smallInvestmentStats" class="whiteText" style="margin-left: 30px;">Небольшая Инвестиция</span>
+            <span id="smallInvestmentStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
+            <span id="multiplierUpgradeStats" class="whiteText" style="margin-left: 30px;">Умножитель</span>
+            <span id="multiplierUpgradeStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
+            <span id="richFameStats" class="whiteText" style="margin-left: 30px;">Богатая Слава</span>
+            <span id="richFameStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
+            <span id="negativeAlphaStats" class="whiteText" style="margin-left: 30px;">Негативная альфа частичка</span>
+            <span id="negativeAlphaStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
+            <span id="achievement15Stats" class="whiteText" style="margin-left: 30px;">Достижение 15</span>
+            <span id="achievement15StatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
+            <span id="goldenClockStats" class="whiteText" style="margin-left: 30px;">Достижение 15</span>
+            <span id="goldenClockStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
+            <span id="gain2Stats" class="whiteText" style="margin-left: 30px;">Общий доход</span>
+            <span id="gain2StatsEffect" class="whiteText" style="margin-right: 30px;">^1.021</span>
+          </div>
+          <div id="postE13SoftcapSecond" class="multiplierString" display="flex">
+            <span id="postE13coinsSoftcapSecondStats" class="whiteText" style="margin-left: 30px;">Пост-е13 Софткап</span>
+            <span id="postE13coinsSoftcapSecondStatsEffect" class="whiteText" style="margin-right: 30px;">^0.5</span>
+          </div>
+          <div class="multiplierString footer" display="flex">
+            <span id="summarySecondStats" class="whiteText" style="margin-left: 30px;">Общий множитель</span>
+            <span id="summarySecondStatsEffect" class="whiteText" style="margin-right: 30px;">1.37x</span>
+          </div>
+        </div>
+        <div id="wholeGainStats" style="display:none">
+          <div class="multiplierString" display="flex"> <!--удвоитель+, кэшбэк, достижения, у-множители-->
+            <span id="doublerPlusStats" class="whiteText" style="margin-left: 30px;">Удвоитель+</span>
+            <span id="doublerPlusStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
+            <span id="cashBackStats" class="whiteText" style="margin-left: 30px;">Кэшбэк</span>
+            <span id="cashBackStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
+            <span id="goldenKeyStats" class="whiteText" style="margin-left: 30px;">Достижения</span>
+            <span id="goldenKeyStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
+            <span id="overdriveType1Stats" class="whiteText" style="margin-left: 30px;">Овердрайв</span>
+            <span id="overdriveType1StatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
+            <span id="achievementsStats" class="whiteText" style="margin-left: 30px;">Достижения</span>
+            <span id="achievementsStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
+            <span id="umultiplierStats" class="whiteText" style="margin-left: 30px;">У-множители</span>
+            <span id="umultiplierStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
+            <span id="upowerStats" class="whiteText" style="margin-left: 30px;">У-силитель</span>
+            <span id="upowerStatsEffect" class="whiteText" style="margin-right: 30px;">^1.045</span>
+          </div>
+          <div class="multiplierString footer" display="flex">
+            <span id="summaryGainStats" class="whiteText" style="margin-left: 30px;">Общий множитель</span>
+            <span id="summaryGainStatsEffect" class="whiteText" style="margin-right: 30px;">1.37x</span>
+          </div>
+        </div>
+      </div>
+      <div id="gainPerClickGraphic" class="gainGraphic">
+        <div id="doublerPiece" class="graphicPiece" style="background-image: radial-gradient(#23e019, rgba(0, 0, 0, 0)210%)">
+          <span id="doublerPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="midasCursorPiece" class="graphicPiece" style="background-image: radial-gradient(#1226ff, black 210%)">
+          <span id="midasCursorPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="rewardPiece" class="graphicPiece" style="background-image: radial-gradient(#1226ff, black 210%)">
+          <span id="rewardPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="goldenGlovePiece" class="graphicPiece" style="background-image: radial-gradient(rgb(255, 174, 0), black 210%)">
+          <span id="goldenGlovePiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="gainClickPiece" class="graphicPiece" style="background-image: radial-gradient(gold, black 210%)">
+          <span id="gainClickPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="alphaPowerPiece" class="graphicPiece" style="background-image: radial-gradient(#23e019, black 210%)">
+          <span id="alphaPowerPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+      </div>
+      <div id="gainPerSecondGraphic" class="gainGraphic" style="display: none">
+        <div id="smallInvestmentPiece" class="graphicPiece" style="background-image: radial-gradient(#23e019, rgba(0, 0, 0, 0)210%)">
+          <span id="smallInvestmentPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="multiplierPiece" class="graphicPiece" style="background-image: radial-gradient(#23e019, black 210%)">
+          <span id="multiplierPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="richFamePiece" class="graphicPiece" style="background-image: radial-gradient(#1226ff, black 210%)">
+          <span id="richFamePiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="negativeAlphaPiece" class="graphicPiece" style="background-image: radial-gradient(#1226ff, black 210%)">
+          <span id="negativeAlphaPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="achievement15Piece" class="graphicPiece" style="background-image: radial-gradient(lightsteelblue, black 210%)">
+          <span id="achievement15PiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="goldenClockPiece" class="graphicPiece" style="background-image: radial-gradient(rgb(255, 174, 0), black 210%)">
+          <span id="goldenClockPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="gainSecondPiece" class="graphicPiece" style="background-image: radial-gradient(gold, black 210%)">
+          <span id="gainSecondPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+      </div>
+      <div id="gainGraphic" class="gainGraphic" style="display: none">
+        <div id="doublerPlusPiece" class="graphicPiece" style="background-image: radial-gradient(#1226ff, rgba(0, 0, 0, 0)210%)">
+          <span id="doublerPlusPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="cashBackPiece" class="graphicPiece" style="background-image: radial-gradient(#1226ff, black 210%)">
+          <span id="cashBackPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="goldenKeyPiece" class="graphicPiece" style="background-image: radial-gradient(rgb(255, 174, 0), black 210%)">
+          <span id="goldenKeyPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="overdriveType1Piece" class="graphicPiece" style="background-image: radial-gradient(gold, black 210%)">
+          <span id="overdriveType1PiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="achievementsPiece" class="graphicPiece" style="background-image: radial-gradient(lightsteelblue, black 210%)">
+          <span id="achievementsPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="umultiplierPiece" class="graphicPiece" style="background-image: radial-gradient(cadetblue, black 210%)">
+          <span id="umultiplierPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="upowerPiece" class="graphicPiece"style="background-image: radial-gradient(palevioletred, black 210%)">
+          <span id="upowerPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div id="shoppingScreen" style="display: flex; justify-content: center;">
+      <div style="display: flex; justify-content:center">
+        <p id="superCount" class="titleTab">У вас 10 Супер-монет</p>
+      </div>
+      <p id="shopDesc" class="statsSlot">Здесь вы можете купить дополнительные улучшения, чтобы ускорить прогресс. Вы можете сбросить свои покупки и вернуть свои Супер-монеты, но единичные улучшения не сбросятся.</p>
+      <div id="shopDiv2">
+        <div id="shopTitleDiv">
+          <p id="shopTitle" class="whiteText">Улучшения</p>
+        </div>
+      <div id="shopDiv">
+        <div id="leftShopArrowDiv" class="shopArrowDiv"style=" display: none">
+          <button onclick="nextShopPage('left')" id="leftShopArrow" class="shopArrow" >
+            <span class="whiteText" style="cursor: default;">←</span>
+          </button>
+        </div>
+        <div id="shoppingDiv">
+          <div id="firstShopRow" class="shopRow">
+            <button onclick="buyShopBuyable(firstShopBuyable, 100)" id="shopBuyableU1" class="shopButton">Золотая перчатка <br> Увеличивает монеты за нажатия<br> Эффект: +2% <br> Стоимость: 2 Супер-монет</button>
+            <button onclick="buyShopBuyable(secondShopBuyable, 100)" id="shopBuyableU2" class="shopButton">Золотые часы <br> Увеличивает монеты за секунду<br> Эффект: +2% <br> Стоимость: 2 Супер-монет</button>
+            <button onclick="buyShopBuyable(thirdShopBuyable, 100)" id="shopBuyableU3" class="shopButton">Золотой ключ <br> Увеличивает доход монет <br> Эффект: +2% <br> Стоимость: 2 Супер-монет</button>
+            <button onclick="buyShopBuyable(fourthShopBuyable, 100)" id="shopBuyableU4" class="shopButton">Супер-клевер <br> Увеличивает шанс получения Супер-монет<br> Эффект: +10% <br> Стоимость: 20 Супер-монет</button>
+          </div>
+          <div id="firstItemRow" class="shopRow" style="display: none">
+            <!-- <button class="shopButton"></button>
+            <button class="shopButton"></button>
+            <button class="shopButton"></button>
+            <button class="shopButton"></button>
+            <button class="shopButton"></button> -->
+          </div>
+          <hr style="margin: 0">
+          <div id=secondShopRow class="shopRow">
+            <button onclick="buyShopSingle(firstShopSingle, 1, 'overdriveTab')" id="shopSingleU1" class="shopButton">Оведрайв <br> Разблокировать Овердрайв <br>Стоимость: 100 Супер-монет</button>
+          </div>
+          <div id="secondItemRow" class="shopRow" style="display: none">
+            <!-- <button class="shopButton"></button>
+            <button class="shopButton"></button>
+            <button class="shopButton"></button>
+            <button class="shopButton"></button>
+            <button class="shopButton"></button> -->
+          </div>
+        </div>
+
+        <div id="rightShopArrowDiv" class="shopArrowDiv">
+          <button onclick="nextShopPage('right')" id="rightShopArrow" class="shopArrow">
+            <span class="whiteText" style="cursor: default;">→</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+      <div id="bottomDiv">
+        <button id="respecShop" onclick="respecBuyables()" class="shopBottomButton">Сбросить</button>
+      </div>
+    </div>
         <div id="myPopupBackdrop2" class="myPopupBackdrop"></div>
 
         <div id="offlineGainWindow" class="gameWindow offlineGainWindow2">
@@ -284,19 +601,59 @@
         </div>
         </div>
 
+        <div id="resetConfirmation" class="gameWindow confirmationWindow">
+          <div id="resetTitleDiv" class="titleDivClass confTitleDiv">
+            <span id="resetTitle" class="windowTitle">Вы точно хотите сбросить игру?</span>
+          </div>
+            <button onclick="hidePopup()" id="closeResetWindow" class="closeWindow confClose"></button>
+        <div id="confirmationButtons" class="windowDesc">
+          <button onclick="doHardReset()" id="yes" class="tabButton">Да</button>
+          <button onclick="hidePopup()" id="no" class="tabButton">Нет</button>
         </div>
+        </div>
+
+        <div id="codeCheck" class="gameWindow confirmationWindow centerText">
+            <span id="whichCode" class="windowDesc">Вы точно хотите сбросить игру?</span>
+            <button onclick="hidePopup()" id="closeResetWindow" class="closeWindow confClose"></button>
+          </div>
+
+          <div id="dailyCheck" class="gameWindow confirmationWindow centerText">
+            <span id="dailyDesc" class="windowDesc">Вы точно хотите сбросить игру?</span>
+            <button onclick="hidePopup()" id="closeResetWindow" class="closeWindow confClose"></button>
+          </div>
+
+        <audio id="THEMEOFTHEGREAT1">
+          <source src="javascript/cssfiles/music/pprus1.ogg" type="audio/mpeg">
+          ochko
+        </audio>
+        <audio id="THEMEOFTHEGREAT2">
+          <source src="javascript/cssfiles/music/pprus2.ogg" type="audio/mpeg">
+          ochko
+        </audio>
+
     <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
     <script src="javascript/jsfiles/achievements.js"></script>
     <script src="javascript/jsfiles/uboosts.js"></script>
     <script src="javascript/jsfiles/clicker.js"></script>
     <script src="javascript/jsfiles/changelog.js"></script>
     <script src="javascript/jsfiles/upgrades2.0.js"></script>
-    <script src="javascript/jsfiles/prestige.js"></script>
-    <script src="javascript/jsfiles/automation.js"></script>
     <script type="module" src="javascript/jsfiles/languages.js"></script>
     <script src="javascript/jsfiles/saving.js"></script>
 
     <script>
+    var select = document.getElementById("changeFont");
+    var select2 = document.getElementById("changeTheme");
+    var options = document.getElementsByClassName("fontSelector");
+    var themes = document.getElementsByClassName("themeSelector");
+
+    var selectedOption, selectedTheme;
+    var body = document.querySelector("body")
+    var buttons = document.querySelectorAll("button")
+    var label = document.querySelector("label")
+
+    var audio1 = document.getElementById('THEMEOFTHEGREAT1')
+    var audio2 = document.getElementById('THEMEOFTHEGREAT2')
+
       window.onload = whatsYourCurrentTime();
     var backdrop2 = document.getElementById("myPopupBackdrop2")
     loadNotify = 'Game loaded!'
@@ -323,7 +680,68 @@
           }
     backdrop2.addEventListener("click", hidePopup);
     // console.log(gainPerSecond)
+    
+    select.addEventListener("change", function(){
+    selectedOption = select.options[select.selectedIndex];
+    changeFonts(selectedOption)
+})
+
+  function findRatio (multiplier, multipliers){
+	return parseFloat((Math.log(multiplier)/ Math.log(multipliers)*100).toFixed(2))
+	}
+
+  function findMultiplier(base, power) {
+	let num = Math.pow(base, power)
+	return num/base
+}
+
+    doublerPiece.addEventListener("mouseenter", () => {hoverColor("doubler")})
+    doublerPiece.addEventListener("mouseleave", () => {hoverColorInverse("doubler")})
+    midasCursorPiece.addEventListener("mouseenter", () => {hoverColor("midasCursor")})
+    midasCursorPiece.addEventListener("mouseleave", () => {hoverColorInverse("midasCursor")})
+    rewardPiece.addEventListener("mouseenter", () => {hoverColor("rewardForFeats")})
+    rewardPiece.addEventListener("mouseleave", () => {hoverColorInverse("rewardForFeats")})
+    goldenGlovePiece.addEventListener("mouseenter", () => {hoverColor("goldenGlove")})
+    goldenGlovePiece.addEventListener("mouseleave", () => {hoverColorInverse("goldenGlove")})
+    gainClickPiece.addEventListener("mouseenter", () => {hoverColor("gain")})
+    gainClickPiece.addEventListener("mouseleave", () => {hoverColorInverse("gain")})
+    alphaPowerPiece.addEventListener("mouseenter", () => {hoverColor("alphaPower")})
+    alphaPowerPiece.addEventListener("mouseleave", () => {hoverColorInverse("alphaPower")})
+
+
+    smallInvestmentPiece.addEventListener("mouseenter", () => {hoverColor("smallInvestment")})
+    smallInvestmentPiece.addEventListener("mouseleave", () => {hoverColorInverse("smallInvestment")})
+    multiplierPiece.addEventListener("mouseenter", () => {hoverColor("multiplierUpgrade")})
+    multiplierPiece.addEventListener("mouseleave", () => {hoverColorInverse("multiplierUpgrade")})
+    richFamePiece.addEventListener("mouseenter", () => {hoverColor("richFame")})
+    richFamePiece.addEventListener("mouseleave", () => {hoverColorInverse("richFame")})
+    negativeAlphaPiece.addEventListener("mouseenter", () => {hoverColor("negativeAlpha")})
+    negativeAlphaPiece.addEventListener("mouseleave", () => {hoverColorInverse("negativeAlpha")})
+    achievement15Piece.addEventListener("mouseenter", () => {hoverColor("achievement15")})
+    achievement15Piece.addEventListener("mouseleave", () => {hoverColorInverse("achievement15")})
+    goldenClockPiece.addEventListener("mouseenter", () => {hoverColor("goldenClock")})
+    goldenClockPiece.addEventListener("mouseleave", () => {hoverColorInverse("goldenClock")})
+    gainSecondPiece.addEventListener("mouseenter", () => {hoverColor("gain2")})
+    gainSecondPiece.addEventListener("mouseleave", () => {hoverColorInverse("gain2")})
+
+    doublerPlusPiece.addEventListener("mouseenter", () => {hoverColor("doublerPlus")})
+    doublerPlusPiece.addEventListener("mouseleave", () => {hoverColorInverse("doublerPlus")})
+    cashBackPiece.addEventListener("mouseenter", () => {hoverColor("cashBack")})
+    cashBackPiece.addEventListener("mouseleave", () => {hoverColorInverse("cashBack")})
+    overdriveType1Piece.addEventListener("mouseenter", () => {hoverColor("overdriveType1")})
+    overdriveType1Piece.addEventListener("mouseleave", () => {hoverColorInverse("overdriveType1")})
+    achievementsPiece.addEventListener("mouseenter", () => {hoverColor("achievements")})
+    achievementsPiece.addEventListener("mouseleave", () => {hoverColorInverse("achievements")})
+    goldenKeyPiece.addEventListener("mouseenter", () => {hoverColor("goldenKey")})
+    goldenKeyPiece.addEventListener("mouseleave", () => {hoverColorInverse("goldenKey")})
+    umultiplierPiece.addEventListener("mouseenter", () => {hoverColor("umultiplier")})
+    umultiplierPiece.addEventListener("mouseleave", () => {hoverColorInverse("umultiplier")})
+    upowerPiece.addEventListener("mouseenter", () => {hoverColor("upower")})
+    upowerPiece.addEventListener("mouseleave", () => {hoverColorInverse("upower")})
+
+
 
     </script>
+    
 </body>
 </html>

@@ -13,11 +13,6 @@
     font-size: 20px;
     color: white;
 }
-#theGoal {
-    text-align: center;
-    font-size: 50px;
-    color: white;
-}
 
 .headerr {
     text-align: center;
@@ -36,4 +31,21 @@
     display: none;
     align-items: center;
     text-align: center;
+}
+
+#socialNetworks {
+    display: flex;
+    justify-content: center;
+}
+
+#galaxyClickButton {
+    text-align: center;
+    color: darkorchid;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #000000;
+    border-radius: 3px;
+    border: rgb(57, 18, 76) 1px solid;
+    font-size: 14px;
+    cursor: pointer;
 }

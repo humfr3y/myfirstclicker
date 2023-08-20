@@ -40,23 +40,17 @@
     background-color: rgb(255, 0, 0);
     color:rgb(0, 0, 0);
 }
-#firstSettingsRow {
+
+
+
+
+.settingsRow {
     margin: 0 auto;
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
 }
-#secondSettingsRow {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-}
-#thirdSettingsRow {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-}
+
 
 .loadfile {
     display:flex;
@@ -84,18 +78,14 @@
     transform: translate(-50%, -50%);
     background-color: #000000;
     border: solid 3px #ffffff;
-    padding: 5px;
+    /* padding: 5px; */
     width: 750px;
     height: 550px;
     z-index: 9989;
     text-align: left;
-    display: none; /* начальное состояние - окно скрыто */
-
+    display: none;
+    border-radius: 10px;
 }
-
-
-
-
 
 .myPopupBackdrop {
     position: fixed;
@@ -109,7 +99,6 @@
 }
 
 .titleDivClass {
-    height: 50px;
     text-align: center;
     align-items: center;
 }
@@ -118,6 +107,8 @@
     z-index: 9999;
     color:#ffffff;
     font-size: 25px;
+    margin: 0 auto;
+    margin-block: 10px;
 }
 
 .closeWindow {
@@ -132,6 +123,7 @@
     cursor: pointer;
     padding: 1px;
     padding-left: 5px;
+    border-radius: 5px;
 }
 
 .closeWindow::before {
@@ -142,6 +134,9 @@
     background-image: url("images/close.png");
     background-size: contain;
     background-repeat: no-repeat;
+}
+.closeWindow:hover {
+    background-color: rgb(62, 62, 62);
 }
 #versionChooser {
     z-index: 9998;
@@ -154,37 +149,182 @@
     align-items: center;
     text-align: left;
 }
+
+#chapterChooser {
+    z-index: 9998;
+    display: flex;
+    border-top: solid 2px;
+    border-bottom: solid 2px;
+    border-color: #ffffff;
+    width:100%;
+    height:6%;
+    align-items: center;
+    text-align: left;
+}
+
 .versionButton {
     border-style: solid;
-    border-radius: 5px;
     width: 80px;
-    height: 30px;
-    border-color:rgb(255, 255, 255);
+    height: 33px;
+    border-color: rgb(255, 255, 255);
     color: rgb(255, 255, 255);
     background-color: rgb(0, 0, 0);
     text-align: center;
-    font-family: "Poly"; 
+    font-family: "Poly";
     font-size: 13px;
     cursor: pointer;
-    margin-right: 5px;
+    padding: 0px;
+    border-width: 1px;
+    border-block-width: 0px;
+}
+
+.versionButtonVertical {
+    border-width: 1px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    margin: 0px;
 }
 
 .versionButton:hover {
     color: rgb(0, 0, 0);
     background-color: rgb(255, 255, 255);
 }
-
+#versionDescription {
+    margin-left: 5px;
+    margin-top: 0.4em;
+}
+#chapterDescription {
+    margin-left: 5px;
+    margin-top: 0.4em;
+}
 .windowDesc {
     overflow-y: auto;
     color:white;
     margin-top:0;
-    max-height: 460px; /* максимальная высота контейнера */
-    -ms-overflow-style: none; /* скрытие полосы прокрутки в IE 10+ */
-    scrollbar-width: none; /* скрытие полосы прокрутки в Firefox */
-    margin-right: -20px; /* компенсация ширины полосы прокрутки */
-    padding-right: 20px; /* добавление отступа на ширину полосы прокрутки */
+    max-height: 460px;
 }
 
-#versionDiv::-webkit-scrollbar {
-    width: 0 !important; /* скрытие полосы прокрутки в Chrome, Safari */
+.loreChapter {
+    display: none;
+}
+
+.unlockedChapter {
+    display: block;
+}
+  body {
+    position: relative;
+    min-height: 98.9vh;
+  }
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+  }
+  
+#autoTimer { 
+    height: 15px; 
+    width: 155px;
+    font-size: 12px;  
+    background-color: #060606;
+    color: white;
+    border: rgb(170, 170, 170) 1px solid;
+    padding: 0;
+    border-width: 1px 1px 0px 0px;
+    position: fixed;
+  }
+
+#helpPageChooser{
+    display: flex;
+    height: 90.5%;
+    width: 10.7%;
+    flex-direction: column;
+}
+
+#helpTitleDiv {
+    width: 100%;
+}
+
+#helpDiv {
+    width: 89%;
+    /* margin: 0px; */
+    max-height: 500px;
+    margin-right: 0px;
+}
+
+#gameHelpWindow {
+    flex-wrap: wrap;
+}
+
+#line {
+    background-color: white;
+    width: 0.1%;
+}
+
+#horizontalLine {
+    background-color: white;
+    width: 100%;
+    height:1.1px;
+}
+
+#helpDescription {
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+#helpPageTitle {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.selectSetting {
+    border-width: 2px;
+}
+
+.selectSetting:hover {
+    background-color: black;
+    color: rgb(53, 55, 162);
+}
+
+.selectSetting:active {
+    transform: scale(1); 
+}
+
+.selectSetting option {
+    background-color: #000000;
+    color: rgb(65, 68, 207);
+}
+
+#inputBorder{
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    width: 490px;
+    height: 200px;
+    border-color:rgb(65, 68, 207);
+    color: rgb(65, 68, 207);
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+    font-family: "Poly"; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    margin-right: 5px;
+    flex-direction: column;
+}
+
+#inputText {
+    color: rgb(65, 68, 207);
+    margin-top: 0;
+}
+
+.centerText {
+    display: none;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 23px;
+    text-align: center;
 }
