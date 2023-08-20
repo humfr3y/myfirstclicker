@@ -447,11 +447,11 @@ function importingTheGame() {
 }
 
 function upgradeReset() {
-    let arrayReset = ['secondBuyable', 'firstBuyable', 'thirdBuyable', 'fourthBuyable', 'fifthBuyable', 'firstSingle', 'secondSingle', 'thirdSingle', 'fourthSingle', 'fifthSingle', 'sixthSingle', 'seventhSingle', 'eighthSingle', 'ninthSingle', 'tenthSingle']
-    arrayReset.forEach((item) => {
-    item.amount = 0
-    item.baseEffect = 0
-    });
+    let arrayReset = [secondBuyable, firstBuyable, thirdBuyable, fourthBuyable, fifthBuyable, firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
+    for (let i = 0; i < arrayReset.length; i++){
+        arrayReset[i].amount = 0
+        arrayReset[i].baseEffect = 0
+    }
     firstBuyable.price = 10
     secondBuyable.price = 100
     thirdBuyable.price = 500

@@ -2,6 +2,10 @@
     "moneyCount": "У вас {{money}} α-монет",
     "moneyPerSec": "Вы получаете в секунду {{gainPerSec}} α-монет",
 
+    "crystalCount": "У вас {{crystals}} кристаллов",
+    "prestigeDisabled": "Соберите 1е15 α-монет",
+    "prestigeEnabled": "Сбросьте всё и получите {{crystalsTemp}} кристаллов",
+
     "maxUpgradesTrue": "Купить все",
     "maxUpgradesFalse": "Купить один",
 

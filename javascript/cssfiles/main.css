@@ -147,13 +147,13 @@ hr {
   
   #topValues {
     height: 115px;
-    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 10px;
     display: flex;
   }
 
 .topVars {
-  padding-bottom: 200px;
+  width: 350px;
 }
 
 #coinGet {
@@ -469,18 +469,43 @@ hr {
   left: 50%;
   transform: translate(-50%, -200%);
 }
-/* #overDrive{
-  width:100%;
-  height:10px;
-  background-color: gray;
-  overflow: hidden;
+
+#crystalCount {
+  text-align: center;
+  color:aqua;
+  margin: 0 auto;
+  text-shadow: 0 0 5px aqua;
+  font-size: 20px;
 }
-.progress-bar {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50%;
+
+#doPrestige {
+  border-style: solid;
+  border-radius: 5px;
+  background-color: black;
+  color: aqua;
   font-size: 12px;
-  background-image: radial-gradient(#15fa01, #040000 170%);
-} */
+  width: 200px;
+  height: 70px;
+  text-align: center;
+  transition:  0.2s ease-in-out;
+  cursor: pointer;
+  border-color:aqua;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#doPrestige:hover {
+  background-color: aqua;
+  color:black;
+}
+
+#prestigeGet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+    justify-content: space-around;
+
+}

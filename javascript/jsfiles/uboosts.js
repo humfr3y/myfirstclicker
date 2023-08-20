@@ -4,26 +4,23 @@ var upower = 1
 var upowercount = 0
 var umultipliertext = document.getElementById('umultiplier')
 var upowertext = document.getElementById('upower')
+var prestigeCount = 0, crystals = 0, crystalsTemp = 1
 
 //(100 + (50 * umultipliercount))
 
 var umultiplierCost = 100 + (50 * umultipliercount)
 var upowerCost = 250 + (100 * upowercount)
 
+// setInterval(()=>{
+//     crystalsTemp = 
+// }, 50)
 
 function doUmulti () {
     if (firstBuyable.amount >= umultiplierCost){
-        clearInterval(getCoinPerSecond)
-        gainPerSecond = 0
-        gainPerSecondSave = 0
-        moneyTemp = 0
-        whatsYourCurrentTime()
-        doUmultireset()
+        doReset()
         umultipliercount++
         umultiplier *= 2
         saveGame()
-        gainPerSecond = 0
-        gain = 0
         getCoinPerSecond = setInterval(getCoinPerSec, 50)
     }
 }
@@ -31,40 +28,37 @@ function doUmulti () {
 
 function doUpower () {
     if ((firstBuyable.amount >= upowerCost) && (umultipliercount >= 4)){
-        clearInterval(getCoinPerSecond)
-        gainPerSecond = 0
-        gainPerSecondSave = 0
-        moneyTemp = 1
-        whatsYourCurrentTime()
-        doUpowerreset()
+        doReset()
         upowercount++
         upower += 0.045
+        umultiplier = 1
+        umultipliercount = 0
         saveGame()
         getCoinPerSecond = setInterval(getCoinPerSec, 50)
     }
 }
 
+function doPrestigeReset(){
+    if (money >= 1e15){
+        doReset()
+        getCoinPerSecond = setInterval(getCoinPerSec, 50)
+        crystals += crystalsTemp
+        upower = 1
+        umultiplier = 1
+        upowercount = 0
+        umultipliercount = 0
+    }
+}
 
-
-function doUmultireset() {
+function doReset(){
+    clearInterval(getCoinPerSecond)
+    whatsYourCurrentTime()
     money = 10
     gain = 1;
     gainPerClick = 1;
     gainPerSecond = 0;
+    gainPerSecondSave = 0
     upgradeReset();        
     singleUpgradePurchasedRemove()
-    money = 10
-}
 
-function doUpowerreset() {
-    money = 10
-    gain = 1;
-    gainPerClick = 1;
-    gainPerSecond = 0
-    upgradeReset();        
-    singleUpgradePurchasedRemove()
-    singleUpgradeTextUpdate()
-    umultiplier = 1
-    umultipliercount = 0
-    money = 10
 }

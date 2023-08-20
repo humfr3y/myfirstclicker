@@ -20,6 +20,13 @@ try {
     coinsCount.innerHTML = i18next.t('moneyCount', { money: formatNumber(money)});
     coinsGain.innerHTML = i18next.t('moneyPerSec', { gainPerSec: formatBoost(gainPerSecond*20)});
 
+    // crystalCount.innerHTML = i18next.t('crystalCount', { crystals: formatNumber(crystals)});
+    
+    // if (money >= 1e15) {
+    //     doPrestige.innerHTML = i18next.t('prestigeEnabled', { crystalsTemp: formatNumber(crystalsTemp)});
+    // }
+    // else doPrestige.innerHTML = i18next.t('prestigeDisabled');
+
     if (maxOrNoVar) {
         maxOrNoUpgrades.innerHTML = i18next.t('maxUpgradesTrue');
     }
