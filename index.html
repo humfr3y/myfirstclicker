@@ -30,38 +30,35 @@
     <div id="topValues">
       <div id="idk" class="topVars"></div>
       <div id="coinGet" class="topVars">
-        <br>
         <span id="coinsCount"></span>
-        <br>
-        <br>
         <span id="coinsGain"></span>
       </div>
       <div id="prestigeGet" class="topVars">
-        <!-- <span id="crystalCount">У вас 10 кристаллов</span>
-        <button onclick="doPrestigeReset(this)" id="doPrestige">Выполнить престиж</button> -->
+        <!-- <span id="crystalCount" style="display: none">У вас 10 кристаллов</span>
+        <button onclick="doPrestigeReset(this)" id="doPrestige" style="display: none">Выполнить престиж</button> -->
       </div>
     </div>
     <hr>
     <div id="topButtons">
         <!-- <button onclick="newsScreen(this)" id= "newsTab" class="tabButton">Новости</button> -->
-        <button onclick="settingsScreen(this)" id= "settingsTab" class="tabButton">Настройки</button>
-        <button onclick="mainScreen(this)" id= "mainTab" class="tabButton">Кликер</button>
-        <button onclick="achScreen(this)" id= "achTab" class="tabButton">Достижения</button>
-        <button onclick="infoScreen(this)" id= "infoTab" class="tabButton">Информация</button>
-        <button onclick="shopScreen(this)" id="shopTab" class="tabButton">Магазин</button>
+        <button onclick="selectTab(settingsTab, false)" id= "settingsSelect" class="tabButton">Настройки</button>
+        <button onclick="selectTab(mainTab, false)" id= "mainSelect" class="tabButton">Кликер</button>
+        <button onclick="selectTab(achTab, false)" id= "achSelect" class="tabButton">Достижения</button>
+        <button onclick="selectTab(infoTab, false)" id= "infoSelect" class="tabButton">Информация</button>
+        <button onclick="selectTab(shopTab, false)" id="shopSelect" class="tabButton">Магазин</button>
     </div>
-    <div id="newsInfo">
+    <div id="newsTab" style="display:none">
       <p class="titleTab">Text!</p>
     </div>
-    <div id="settingButtons">
+    <div id="settingsTab" style="display:none">
       <div id="settingSubButtons">
-        <button onclick="saveScreen(this)" id="saveTab" class="tabButton subButton">Saves</button>
-        <button onclick="graphicScreen(this)" id="graphicTab" class="tabButton subButton">Graphic</button>
-        <button onclick="otherScreen(this)" id="otherTab" class="tabButton subButton">Other</button>
+        <button onclick="selectSubTab(settingsSaveTab, false, 'settings')" id="saveSelect" class="tabButton subButton">Saves</button>
+        <button onclick="selectSubTab(settingsGraphicTab, false, 'settings')" id="graphicSelect" class="tabButton subButton">Graphic</button>
+        <button onclick="selectSubTab(settingsOtherTab, false, 'settings')" id="otherSelect" class="tabButton subButton">Other</button>
       </div>
       <!-- Saves -->
         <div class="settingButtonsWindow">
-          <div id="saveSettings">
+          <div id="settingsSaveTab" >
             <p id="settingsTitle" class="titleTab">Настройки сохранений</p>
             <div id="firstSaveSettingsRow" class="settingsRow">
               <button onclick="saveGame(this)" id= "savingGame" class="settingButton">Сохранить игру / Save the game</button>
@@ -78,12 +75,12 @@
               <button onclick="exportSave(this)" id= "expSave" class="settingButton">экспорт</button>
             </div>
               <div id="thirdSaveSettingsRow" class="settingsRow">
-              <button onclick="resetConfirmationOpen(this)" id= "hardRes" class="settingButton"></button>
+              <button onclick="openWindow('hardReset', false)" id= "hardRes" class="settingButton"></button>
               </div>
               </div>
           </div>
     <!-- Graphic -->
-        <div id="graphicSettings" style="display: none;">
+        <div id="settingsGraphicTab" style="display: none;">
           <p id="settingsTitle2" class="titleTab">Настройки графики</p>
           <div id="firstGraphicSettingsRow" class="settingsRow">
             <select id="changeFont" class="settingButton selectSetting">
@@ -106,7 +103,7 @@
             </div>
           </div>
     <!-- Other -->
-    <div id="otherSettings" style="display: none;">
+    <div id="settingsOtherTab" style="display: none;">
           <p id="settingsTitle3" class="titleTab">Другие настройки</p>
           <div id="firstOtherSettingsRow" class="settingsRow">
             <button onclick="changelog(this)" id= "changelogOpen" class="settingButton">Журнал изменений / Changelog</button>
@@ -145,6 +142,7 @@
             <button onclick="showChangelog(desc08)" class="versionButton">0.8</button>
             <button onclick="showChangelog(desc0801)" class="versionButton">0.8.0.1</button>
             <button onclick="showChangelog(desc09)" class="versionButton">0.9</button>
+            <button onclick="showChangelog(desc091)" class="versionButton">0.9.1</button>
           </div>
         <div id="versionDiv" class="windowDesc">
           <p id="versionDescription">Choose version</p>
@@ -188,12 +186,12 @@
             <p id="helpDescription">еуче</p>
           </div>
         </div>
-    <div id="mainButtons">
+    <div id="mainTab">
         <div id="mainSubButtons">
-          <button onclick="moneyScreen(this)" id="moneyTab" class="tabButton subButton">Монеты</button>
-          <button onclick="overdriveScreen(this)" id="overdriveTab" class="tabButton subButton" style="display: none">Овердрайв</button>
+          <button onclick="selectSubTab(coinsTab, false, 'clicker')" id="coinsSelect" class="tabButton subButton">Монеты</button>
+          <button onclick="selectSubTab(overdriveTab, true, 'clicker')" id="overdriveSelect" class="tabButton subButton" style="display: none">Овердрайв</button>
         </div>
-    <div id="moneyPage">
+    <div id="coinsTab">
     <div id="mainSettings">
       <button onclick="maxOrNo(this)" id="maxOrNoUpgrades">Купить один</button>
     </div>
@@ -227,7 +225,7 @@
       <button onclick="buySingleUpgrade(tenthSingle)" id = "singleU10" class="upgradeButton singleButton"><br><span id="singleU10Price">Стоимость</span></button>
     </div>  
     </div>
-    <div id="overdrivePage" style="display: none">
+    <div id="overdriveTab" style="display:none">
       <div id="overdriveType1">
         <div id="overdriveType1Title">
           <p id="overdriveType1Name" class="whiteText">Overdrive Type 1</p>
@@ -244,7 +242,7 @@
       </div>
     </div>
     </div>  
-    <div id="achivScreen">
+    <div id="achTab" style="display:none">
       <div id="achScreenDescription">
         <p id="achievementsTitle" class="titleTab">Достижения</p>
         <p id="achievementsDesc"  class="achievementPageDescription statsSlot">
@@ -320,22 +318,23 @@
         </div>
       </div>
     </div>
-    <div id="statsScreen">
+    <div id="infoTab" style="display:none">
     <div id="statsSubButtons">
-      <button onclick="statisticScreen(this)" id= "statisticsTab" class="tabButton subButton">Статистика</button>
-      <button onclick="multipliersScreen(this)" id="multiplierTab" class="tabButton subButton">Мультипликаторы</button>
-      <button onclick="aboutGameScreen(this)" id= "aboutGameTab" class="tabButton subButton">Об игре</button>
+      <button onclick="selectSubTab(statisticsTab, false, 'info')" id= "statisticsSelect" class="tabButton subButton">Статистика</button>
+      <button onclick="selectSubTab(multipliersTab, true, 'info')" id="multiplierSelect" class="tabButton subButton">Мультипликаторы</button>
+      <button onclick="selectSubTab(aboutGameTab, false, 'info')" id= "aboutGameSelect" class="tabButton subButton">Об игре</button>
     </div>
-    <div id="statisticsPage">
+    <div id="statisticsTab">
       <p id="statsTitle" class="titleTab">Статистика</p>
-      <p id="totalCoins" class="statsSlot"></p> 
-      <p id="totalSuperCoinsStats" class="statsSlot"></p>
-      <p id="gameTime" class="statsSlot">placeholder</p> 
-      <p id="totalClicks" class="statsSlot">You made 10 clicks</p>
+      <p id="totalCoins" class="statsSlot">TOTAL COINS</p> 
+      <p id="totalSuperCoinsStats" class="statsSlot">TOTAL SUPER COINS</p>
+      <!-- <p id="totalCrystalsStats" class="statsSlot" style="display: none">TOTAL CRYSTALS</p> -->
+      <p id="gameTime" class="statsSlot">GAME TIME</p> 
+      <p id="totalClicks" class="statsSlot">CLICKS</p>
     </div>
-    <div id="aboutGamePage">
+    <div id="aboutGameTab" style="display:none">
       <p id="aboutGameTitle" class="titleTab">Об игре</p>
-      <p id="aboutGame">Об игре 2</p>
+      <p id="aboutGame" >Об игре 2</p>
       <div id="socialNetworks">
         <button id="galaxyClickButton">Оставить отзыв в galaxy.click</button>
       </div>
@@ -353,12 +352,12 @@
       <span class="prestigeText">9. </span><span id="ninthPrestigeRun" class="prestigeText">9</span><br>
       <span class="prestigeText">10. </span><span id="tenthPrestigeRun" class="prestigeText">10</span><br>
     </div> -->
-    <div id="multipliersPage" style="display: none">
+    <div id="multipliersTab" style="display: none">
       <p id="multiplierTitle" class="titleTab" style="width: 100%">Мультипликаторы</p>
       <div id="multiplierChoose">
-        <button onclick="showClickStats(this)" id="chooseClick" class="versionButton versionButtonVertical multiplierChooser">Нажатие</button>
-        <button onclick="showSecondStats(this)" id="chooseSecond" class="versionButton versionButtonVertical multiplierChooser">В секунду</button>
-        <button onclick="showGainStats(this)" id="chooseGain" class="versionButton versionButtonVertical multiplierChooser">Доход</button>
+        <button onclick="showStats(0) " id="chooseClick" class="versionButton versionButtonVertical multiplierChooser">Нажатие</button>
+        <button onclick="showStats(1)" id="chooseSecond" class="versionButton versionButtonVertical multiplierChooser">В секунду</button>
+        <button onclick="showStats(2)" id="chooseGain" class="versionButton versionButtonVertical multiplierChooser">Доход</button>
       </div>
       <div id="multiplierStats">
         <p id="multBreakdownTitle">Монеты за нажатия</p>
@@ -540,7 +539,7 @@
       </div>
     </div>
     </div>
-    <div id="shoppingScreen" style="display: flex; justify-content: center;">
+    <div id="shopTab" style="display: none; justify-content: center;">
       <div style="display: flex; justify-content:center">
         <p id="superCount" class="titleTab">У вас 10 Супер-монет</p>
       </div>
@@ -571,7 +570,7 @@
           </div>
           <hr style="margin: 0">
           <div id=secondShopRow class="shopRow">
-            <button onclick="buyShopSingle(firstShopSingle, 1, 'overdriveTab')" id="shopSingleU1" class="shopButton">Оведрайв <br> Разблокировать Овердрайв <br>Стоимость: 100 Супер-монет</button>
+            <button onclick="buyShopSingle(firstShopSingle, 1, 'overdriveSelect')" id="shopSingleU1" class="shopButton">Оведрайв <br> Разблокировать Овердрайв <br>Стоимость: 100 Супер-монет</button>
           </div>
           <div id="secondItemRow" class="shopRow" style="display: none">
             <!-- <button class="shopButton"></button>
@@ -595,7 +594,6 @@
       </div>
     </div>
         <div id="myPopupBackdrop2" class="myPopupBackdrop"></div>
-
         <div id="offlineGainWindow" class="gameWindow offlineGainWindow2">
           <div id="offTitleDiv" class="titleDivClass">
             <span id="offlineGainTitle" class="windowTitle">С возвращением!</span>
@@ -606,26 +604,20 @@
         </div>
         </div>
 
-        <div id="resetConfirmation" class="gameWindow confirmationWindow">
-          <div id="resetTitleDiv" class="titleDivClass confTitleDiv">
-            <span id="resetTitle" class="windowTitle">Вы точно хотите сбросить игру?</span>
+        <div id="window" class="gameWindow confirmationWindow centerText">
+          <div id="windowTitleDiv" class="titleDivClass">
+            <span id="windowTitle2" class="windowTitle">Вы точно хотите сбросить игру?</span>
           </div>
-            <button onclick="hidePopup()" id="closeResetWindow" class="closeWindow confClose"></button>
-        <div id="confirmationButtons" class="windowDesc">
-          <button onclick="doHardReset()" id="yes" class="tabButton">Да</button>
-          <button onclick="hidePopup()" id="no" class="tabButton">Нет</button>
-        </div>
-        </div>
+            <button onclick="hidePopup()" id="closeWindow2" class="closeWindow confClose"></button>
 
-        <div id="codeCheck" class="gameWindow confirmationWindow centerText">
-            <span id="whichCode" class="windowDesc">Вы точно хотите сбросить игру?</span>
-            <button onclick="hidePopup()" id="closeResetWindow" class="closeWindow confClose"></button>
-          </div>
-
-          <div id="dailyCheck" class="gameWindow confirmationWindow centerText">
-            <span id="dailyDesc" class="windowDesc">Вы точно хотите сбросить игру?</span>
-            <button onclick="hidePopup()" id="closeResetWindow" class="closeWindow confClose"></button>
-          </div>
+            <div id="confirmationButtons" class="windowDesc" style="display: none">
+              <button onclick="doHardReset()" id="yes" class="tabButton">Да</button>
+              <button onclick="hidePopup()" id="no" class="tabButton">Нет</button>
+            </div>
+            <span id="whichCode" class="windowDesc" style="display: none">КОД</span>
+            <span id="dailyDesc" class="windowDesc" style="display: none">ЕЖЕДНЕВКА</span>
+            </div>
+        </div>
 
         <audio id="THEMEOFTHEGREAT1">
           <source src="javascript/cssfiles/music/pprus1.ogg" type="audio/mpeg">

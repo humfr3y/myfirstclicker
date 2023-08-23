@@ -28,14 +28,8 @@
     height: 90px;
     text-align: center;
     font-family: "Poly";
-    transition: transform 0.1s ease-in-out;
-    transition: filter 0.2s ease-in-out;
     transition:  0.2s ease-in-out;
-    margin-bottom: 20px;
-    vertical-align: middle;
-    display: inline-block;
     margin-right:10px;
-    position: relative;
     margin-bottom: 10px;
     cursor: pointer;
 }
@@ -47,7 +41,7 @@
   margin-right: 0px;
 }
 .upgradeButton:active:enabled {
-    transform: scale(0.9); 
+    transform: scale(0.95); 
 }
 .upgradeButton:disabled{
     background-color: rgb(46, 45, 45);
@@ -141,6 +135,7 @@
 #umultiplierBoost {
   border-color:cadetblue;
   margin-left: 8em;
+  margin-right: 0px;
 }
 
 #umultiplierBoost:disabled{
@@ -156,6 +151,7 @@
 #upowerBoost {
   border-color:palevioletred;
   margin-right: 8em;
+  margin-left: 0px;
 }
 
 #upowerBoost:disabled{

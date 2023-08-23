@@ -67,7 +67,8 @@ hr {
     margin: 5px;
     margin-top: 15px;
     text-shadow: 0 0 5px rgb(255, 217, 0);
-    width:25%;
+    white-space: nowrap;
+    margin-bottom: 15px
 }
 
 #coinsGain {
@@ -158,6 +159,9 @@ hr {
 
 #coinGet {
   text-align: center;
+  display:flex;
+  flex-direction: column;
+  
 }
 
 #getCoinLine {
@@ -199,7 +203,7 @@ hr {
   width: 400px;
   height: 250px;
 }
-.confTitleDiv {
+#windowTitleDiv {
   width: 100%;
   margin-top: 50px;
 }
@@ -216,13 +220,14 @@ hr {
   align-items: center;
   display: flex;
   justify-content: center;
-  height: 100%;
+  height: 50%;
 }
 
-#multipliersPage{
+#multipliersTab{
     justify-content: center;
     flex-wrap: wrap;
 }
+
 #multiplierChoose {
     width: 100px;
     height: 400px;

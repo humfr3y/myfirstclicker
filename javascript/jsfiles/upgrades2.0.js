@@ -321,12 +321,6 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
-coinGain.addEventListener("keydown", function(event) {
-    if (event.key == "Enter") {
-    alert('You can\'t just hold on it!')
-    }
-});
-
 
 
 

@@ -54,7 +54,9 @@ body {
 }
 
 ut { /*title of upgrade */
-    font-weight:900
+    font-weight:900;
+    pointer-events: none; /* текст сообщения не мешает кликать по кнопке */
+    user-select: none;
 }
 
 it {

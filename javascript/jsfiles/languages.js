@@ -27,27 +27,27 @@ try {
     // }
     // else doPrestige.innerHTML = i18next.t('prestigeDisabled');
 
-    if (maxOrNoVar) {
-        maxOrNoUpgrades.innerHTML = i18next.t('maxUpgradesTrue');
-    }
-    else {
-        maxOrNoUpgrades.innerHTML = i18next.t('maxUpgradesFalse');
-    }
+    // if (maxOrNoVar) {
+    //     maxOrNoUpgrades.innerHTML = i18next.t('maxUpgradesTrue');
+    // }
+    // else {
+    //     maxOrNoUpgrades.innerHTML = i18next.t('maxUpgradesFalse');
+    // }
 
     // newsTab.innerHTML = i18next.t('newsButton');
-    settingsTab.innerHTML = i18next.t('settingsButton');
-    mainTab.innerHTML = i18next.t('clickerButton');
-    achTab.innerHTML = i18next.t('achievementsButton');
-    infoTab.innerHTML = i18next.t('informationSubButton');
-    statisticsTab.innerHTML = i18next.t('statisticsSubButton');
-    shopTab.innerHTML = i18next.t('shopButton');
-    multiplierTab.innerHTML = i18next.t('multipliersSubButton');
-    aboutGameTab.innerHTML = i18next.t('aboutButton');
-    saveTab.innerHTML = i18next.t('saveButton');
-    graphicTab.innerHTML = i18next.t('graphicButton');
-    otherTab.innerHTML = i18next.t('otherButton');
-    moneyTab.innerHTML = i18next.t('moneyButton');
-    overdriveTab.innerHTML = i18next.t('overdriveButton');
+    settingsSelect.innerHTML = i18next.t('settingsButton');
+    mainSelect.innerHTML = i18next.t('clickerButton');
+    achSelect.innerHTML = i18next.t('achievementsButton');
+    infoSelect.innerHTML = i18next.t('informationSubButton');
+    statisticsSelect.innerHTML = i18next.t('statisticsSubButton');
+    shopSelect.innerHTML = i18next.t('shopButton');
+    multiplierSelect.innerHTML = i18next.t('multipliersSubButton');
+    aboutGameSelect.innerHTML = i18next.t('aboutButton');
+    saveSelect.innerHTML = i18next.t('saveButton');
+    graphicSelect.innerHTML = i18next.t('graphicButton');
+    otherSelect.innerHTML = i18next.t('otherButton');
+    coinsSelect.innerHTML = i18next.t('moneyButton');
+    overdriveSelect.innerHTML = i18next.t('overdriveButton');
 
     settingsTitle.innerHTML = i18next.t('saveTitle');
     settingsTitle2.innerHTML = i18next.t('graphicTitle');
@@ -68,7 +68,9 @@ try {
     autoSaverTimer += 0.05
     autoTimer.innerHTML = i18next.t('autoSave', {autoSaverTimer: autoSaverTimer.toFixed(2)});
 
-    resetTitle.innerHTML = i18next.t('resetConfirm');
+    resetTitle = i18next.t('resetConfirm');
+    NaNedTitle = i18next.t('oopsNaNed');
+
     yes.innerHTML = i18next.t('yes');
     no.innerHTML = i18next.t('no');
 
@@ -164,14 +166,19 @@ try {
 
     totalCoins.innerHTML = i18next.t('totalMoney', {totalCoins: formatNumber(total)});
     totalSuperCoinsStats.innerHTML = i18next.t('totalSuperMoney', {totalSuperCoins: formatNumber(totalSuperCoins)});
+    // totalCrystalsStats.innerHTML = i18next.t('totalCrystals', {totalCrystals: formatNumber(totalCrystals)});
     gameTime.innerHTML = i18next.t('gameTime', {gameDaysText: gameDaysText, gameHoursText: gameHoursText, gameMinutesText: gameMinutesText, gameSecondsText: gameSecondsText});
     totalClicks.innerHTML = i18next.t('totalClicks', {clickCount})
 
     multiplierTitle.innerHTML = i18next.t('multipliersTitle');
 
-    if (multIdentifier == 0) multBreakdownTitle.innerHTML = i18next.t('clickTitle')
-    else if (multIdentifier == 1) multBreakdownTitle.innerHTML = i18next.t('secondTitle')
-    else if (multIdentifier == 2) multBreakdownTitle.innerHTML = i18next.t('gainTitle')
+    gainPerClickTitle = i18next.t('clickTitle')
+    gainPerSecondTitle = i18next.t('secondTitle')
+    gainTitle = i18next.t('gainTitle')
+
+    if (multIdentifier == 0) {multBreakdownTitle.innerHTML = gainPerClickTitle}
+    else if (multIdentifier == 1) {multBreakdownTitle.innerHTML = gainPerSecondTitle}
+    else if (multIdentifier == 2) {multBreakdownTitle.innerHTML = gainTitle}
 
     chooseClick.innerHTML = i18next.t('clickTitle')
     chooseSecond.innerHTML = i18next.t('secondTitle')
@@ -302,6 +309,7 @@ try {
     desc08 = i18next.t('version08');
     desc0801 = i18next.t('version0801');
     desc09 = i18next.t('version09');
+    desc091 = i18next.t('version091');
 
     chapter1Tab.innerHTML = i18next.t('chapter1Name');
     chapter2Tab.innerHTML = i18next.t('chapter2Name');
@@ -393,6 +401,9 @@ document.getElementById('changingLanguage').addEventListener('click', () => {
     showChangelog(startDesc)
     showStory(startChapDesc)
     showHelpPage(startHelpDesc, empty)
+    if (multIdentifier == 0) {multBreakdownTitle.innerHTML = gainPerClickTitle}
+    else if (multIdentifier == 1) {multBreakdownTitle.innerHTML = gainPerSecondTitle}
+    else if (multIdentifier == 2) {multBreakdownTitle.innerHTML = gainTitle}
     });
 });
 

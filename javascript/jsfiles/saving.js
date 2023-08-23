@@ -33,6 +33,7 @@ function saveGame () {
     localStorage.setItem('chapters', JSON.stringify(loreBoolean))
     // сохранить в LocalStorage по ключу коунтдата
     localStorage.setItem('datasaving', stringifiedData);
+    if (isNaN(money)) openWindow('gotNaNed', false)
     
 }
 var loadNotify
@@ -83,12 +84,14 @@ function loadGame() {
 var autoSaverTimer = 0
 var autoSaveTime
 
+
+
 function autoSaveThis () {
     if (autoSaving == 'yes')
         {
             saveGame()
         }
-
+        if (isNaN(money)) openWindow('gotNaNed', false)
     }
 
 function doHardReset () {

@@ -1,42 +1,34 @@
-var money = 10, total = 10;
-var notCapped, capped;
-var lastOnlineTime = 0, currentOnlineTime = 0;
-var gain = 1, gainPerClick = 1, gainPerSecond = 0, getCoinPerSecond
-var clickCount = 0
-var gameMinutesTemp = 0, gameHoursTemp = 0, gameDaysTemp = 0;
-var autoSaving = 'yes'; 
-var totalCoins = document.getElementById('totalCoins');
-var link = document.getElementById('link');
-var gameHours = 0, gameMinutes = 0, gameSeconds = 0, gameTimer = 0, gameDays = 0, gameSecondsText, gameMinutesText, gameHoursText, gameDaysText
-var dailySeconds = 0, dailyMinutes = 0, dailyHours = 0, dailyTimer = 0;
-var multIdentifier = 0
-var backdrop1 = document.getElementById("myPopupBackdrop1")
-var popup = document.getElementById("changelogWindow");
-var popup2 = document.getElementById("gameLoreWindow");
-var popup3 = document.getElementById("gameHelpWindow");
-var popup4 = document.getElementById("resetConfirmation");
-var popup5 = document.getElementById("codeCheck");
-var popup6 = document.getElementById("dailyCheck");
-var offlinePopup = document.getElementById("offlineGainWindow");
-var progress = document.getElementById("progressbar")
-var notiString = '', notiColor, notiWidth;
-var coinGains = document.getElementById("coinGain");
-var timeDifference = currentOnlineTime - lastOnlineTime, moneyTemp = 1, gameSecondsTemp = 1, gameTimerTemp = 1
-var superCoins = 0, totalSuperCoins = 0, superCoinsTemp = 0;
-var optionValue = "option1"
-var overdriveType1Activate, overdriveType1Bool = false, overdriveType1Price = 0
-var codeIsFalse, codeIsTrue, codeIsUsed, code1Reward;
-var code, codeReward
-var superCoinsTemp2 = 0
-var dailyIsTrue, dailyIsFalse
-
-newsInfo.style.display = "none"
-statsScreen.style.display = "none"
-settingButtons.style.display = "none"
-achivScreen.style.display = "none"
-aboutGamePage.style.display = "none"
-maxbuy.style.display = 'none' 
-shoppingScreen.style.display = "none"
+let money = 10, total = 10;
+let notCapped, capped;
+let lastOnlineTime = 0, currentOnlineTime = 0;
+let gain = 1, gainPerClick = 1, gainPerSecond = 0, getCoinPerSecond
+let clickCount = 0
+let gameMinutesTemp = 0, gameHoursTemp = 0, gameDaysTemp = 0;
+let autoSaving = 'yes'; 
+let totalCoins = document.getElementById('totalCoins');
+let link = document.getElementById('link');
+let gameHours = 0, gameMinutes = 0, gameSeconds = 0, gameTimer = 0, gameDays = 0, gameSecondsText, gameMinutesText, gameHoursText, gameDaysText
+let dailySeconds = 0, dailyMinutes = 0, dailyHours = 0, dailyTimer = 0;
+let backdrop1 = document.getElementById("myPopupBackdrop1")
+let popup = document.getElementById("changelogWindow");
+let popup2 = document.getElementById("gameLoreWindow");
+let popup3 = document.getElementById("gameHelpWindow");
+let openedWindow = document.getElementById("window");
+let offlinePopup = document.getElementById("offlineGainWindow");
+let progress = document.getElementById("progressbar")
+let notiString = '', notiColor, notiWidth;
+let coinGains = document.getElementById("coinGain");
+let timeDifference = currentOnlineTime - lastOnlineTime, moneyTemp = 1, gameSecondsTemp = 1, gameTimerTemp = 1
+let superCoins = 0, totalSuperCoins = 0, superCoinsTemp = 0;
+let optionValue = "option1"
+let overdriveType1Activate, overdriveType1Bool = false, overdriveType1Price = 0
+let codeIsFalse, codeIsTrue, codeIsUsed, code1Reward;
+let code, codeReward
+let superCoinsTemp2 = 0
+let dailyIsTrue, dailyIsFalse
+let gainPerClickTitle, gainPerSecondTitle, gainTitle
+let multIdentifier = 0
+let resetTitle, NaNedTitle, clicksPerSecond = 0
 
 function randomNumber (min, max) {
     return min + Math.floor(Math.random() * (max + 1 - min))
@@ -156,164 +148,83 @@ function getCoinPerSec() {
     total = total+gainPerSecond;
     umultiplierCost = 100 + (50 * umultipliercount)
     upowerCost = 250 + (100 * upowercount)
+    // if (total >= 1e15) {
+    //     crystalCount.style.display = 'block'
+    //     doPrestige.style.display = 'block'
+    //     totalCrystalsStats.style.display = 'block'
+    // }
 }
 
 
 function getCoin() {
-    clickCount++
-    randomNumber(0, 100/1+fourthShopBuyableEffect) == 0 ? (superCoins++, totalSuperCoins++) : superCoins;
-    gainPerClick = 1
-    gainPerClick *= Math.pow(2, thirdBuyable.baseEffect) 
-    gainPerClick *= 1+firstShopBuyableEffect
-    eighthSingle.amount == 1 ? gainPerClick *= eighthSingleEffect : gainPerClick = gainPerClick
-    secondSingle.amount == 1 ? gainPerClick *= midasFormula : gainPerClick = gainPerClick
-    gainPerClick *= gain
-    gainPerClick = Math.pow(gainPerClick, fifthBuyableEffect)
-    gainPerClick = softCap(gainPerClick, 1e13, 0.5)
-    money = money+gainPerClick;
-    total = total+gainPerClick;
+    if (clicksPerSecond < 10) {
+        clickCount++
+        randomNumber(0, 100/1+fourthShopBuyableEffect) == 0 ? (superCoins++, totalSuperCoins++) : superCoins;
+        gainPerClick = 1
+        gainPerClick *= Math.pow(2, thirdBuyable.baseEffect) 
+        gainPerClick *= 1+firstShopBuyableEffect
+        eighthSingle.amount == 1 ? gainPerClick *= eighthSingleEffect : gainPerClick = gainPerClick
+        secondSingle.amount == 1 ? gainPerClick *= midasFormula : gainPerClick = gainPerClick
+        gainPerClick *= gain
+        gainPerClick = Math.pow(gainPerClick, fifthBuyableEffect)
+        gainPerClick = softCap(gainPerClick, 1e13, 0.5)
+        clicksPerSecond++
+        coinGains.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+                event.preventDefault(); // Эта строка предотвращает стандартное поведение (например, отправку формы)
+                // Ничего не делаем, не меняем значение gainPerClick
+            }})
+        money = money+gainPerClick;
+        total = total+gainPerClick;
+    }
 }
 
+setInterval(() => {
+    clicksPerSecond = 0
+}, 1000);
 
-function settingsScreen() {
-    mainButtons.style.display = "none";
-    statsScreen.style.display = "none";
-    settingButtons.style.display = "block";
-    achivScreen.style.display = "none"
-    newsInfo.style.display = "none"
-    shoppingScreen.style.display = "none"
+function selectTab(argument, isFlex) {
+    const tabsToHide = ['mainTab', 'infoTab', 'settingsTab', 'achTab', 'newsTab', 'shopTab']
+    for (const tabId of tabsToHide) {
+        const tab = document.getElementById(tabId);
+        if (tab) {
+            tab.style.display = "none";
+        }
+    }
+    if (!isFlex) argument.style.display = "block"
+    else argument.style.display = "flex"
 }
 
-function saveScreen() {
-    saveSettings.style.display = "block";
-    graphicSettings.style.display = "none"
-    otherSettings.style.display = "none";
+function selectSubTab(argument, isFlex, mainTab) {
+    const settingsTabsToHide = ['settingsSaveTab', 'settingsGraphicTab', 'settingsOtherTab']
+    const clickerTabsToHide = ['coinsTab', 'overdriveTab']
+    const infoTabsToHide = ['aboutGameTab', 'statisticsTab', 'multipliersTab']
+    let tabsToHide
+    if (mainTab == 'settings') tabsToHide = settingsTabsToHide
+    else if (mainTab == 'clicker') tabsToHide = clickerTabsToHide
+    else if (mainTab == 'info') tabsToHide = infoTabsToHide
+    for (const tabId of tabsToHide) {
+        const tab = document.getElementById(tabId);
+        if (tab) {
+            tab.style.display = "none";
+        }
+    }
+    if (!isFlex) argument.style.display = "block"
+    else argument.style.display = "flex"
 }
 
-function graphicScreen() {
-    saveSettings.style.display = "none";
-    graphicSettings.style.display = "block"
-    otherSettings.style.display = "none";
-}
-
-function otherScreen() {
-    saveSettings.style.display = "none";
-    graphicSettings.style.display = "none"
-    otherSettings.style.display = "block";
-}
-
-function mainScreen() {
-    mainButtons.style.display = "block";
-    statsScreen.style.display = "none";
-    settingButtons.style.display = "none";
-    topButtons.style.display = "flex";
-    achivScreen.style.display = "none"
-    newsInfo.style.display = "none"
-    shoppingScreen.style.display = "none"
-}
-
-function moneyScreen() {
-    moneyPage.style.display = "block"
-    overdrivePage.style.display = "none"
-}
-
-function overdriveScreen() {
-    moneyPage.style.display = "none"
-    overdrivePage.style.display = "flex"
-}
-
-function infoScreen() {
-    mainButtons.style.display = "none";
-    statsScreen.style.display = "block";
-    settingButtons.style.display = "none";
-    achivScreen.style.display = "none"
-    newsInfo.style.display = "none"
-    shoppingScreen.style.display = "none"
-}
-
-
-
-function statisticScreen() {
-    aboutGamePage.style.display = "none";
-    statisticsPage.style.display = "block";
-    achivScreen.style.display = "none"
-    newsInfo.style.display = "none"
-    multipliersPage.style.display = "none";
-    shoppingScreen.style.display = "none"
-}
-
-
-function aboutGameScreen() {
-    aboutGamePage.style.display = "block";
-    statisticsPage.style.display = "none"
-    achivScreen.style.display = "none"
-    multipliersPage.style.display = "none";
-}
-
-function multipliersScreen() {
-    aboutGamePage.style.display = "none";
-    statisticsPage.style.display = "none"
-    achivScreen.style.display = "none"
-    multipliersPage.style.display = "flex";
-}
-
-function showClickStats() {
-    gainPerClickStats.style.display = 'block'
-    gainPerSecondStats.style.display = 'none'
-    wholeGainStats.style.display = 'none'
-    gainPerClickGraphic.style.display = 'block'
-    gainPerSecondGraphic.style.display = 'none'
-    gainGraphic.style.display = 'none'
-    multIdentifier = 0
-
-}
-
-function showSecondStats() {
-    gainPerClickStats.style.display = 'none'
-    gainPerSecondStats.style.display = 'block'
-    wholeGainStats.style.display = 'none'
-    gainPerClickGraphic.style.display = 'none'
-    gainPerSecondGraphic.style.display = 'block'
-    gainGraphic.style.display = 'none'
-    multIdentifier = 1
-}
-
-function showGainStats() {
-    gainPerClickStats.style.display = 'none'
-    gainPerSecondStats.style.display = 'none'
-    wholeGainStats.style.display = 'block'
-    gainPerClickGraphic.style.display = 'none'
-    gainPerSecondGraphic.style.display = 'none'
-    gainGraphic.style.display = 'block'
-    multIdentifier = 2
-}
-
-function achScreen () {
-    achivScreen.style.display = "block"
-    mainButtons.style.display = "none";
-    statsScreen.style.display = "none";
-    settingButtons.style.display = "none";
-    newsInfo.style.display = "none"
-    shoppingScreen.style.display = "none"
-
-}
-
-function newsScreen() {
-    achivScreen.style.display = "none"
-    mainButtons.style.display = "none";
-    statsScreen.style.display = "none";
-    settingButtons.style.display = "none";
-    newsInfo.style.display = "block"
-    shoppingScreen.style.display = "none"
-}
-
-function shopScreen() {
-    achivScreen.style.display = "none"
-    mainButtons.style.display = "none";
-    statsScreen.style.display = "none";
-    settingButtons.style.display = "none";
-    newsInfo.style.display = "none"
-    shoppingScreen.style.display = "block"
+function showStats(multId) {
+    const tabsToHide = ['gainPerClickStats', 'gainPerSecondStats', 'wholeGainStats', 'gainPerClickGraphic', 'gainPerSecondGraphic', 'gainGraphic']
+    for (const tabId of tabsToHide) {
+        const tab = document.getElementById(tabId);
+        if (tab) {
+            tab.style.display = "none";
+        }
+    }
+    multIdentifier = multId
+    if (multId == 0) {gainPerClickStats.style.display = 'block'; gainPerClickGraphic.style.display = 'block'; multBreakdownTitle.innerHTML = gainPerClickTitle}
+    else if (multId == 1) {gainPerSecondStats.style.display = 'block'; gainPerSecondGraphic.style.display = 'block'; multBreakdownTitle.innerHTML = gainPerSecondTitle}
+    else if (multId == 2) {wholeGainStats.style.display = 'block'; gainGraphic.style.display = 'block'; multBreakdownTitle.innerHTML = gainTitle}
 }
 
 function checkBuyableDisabledUpgrade (x, y) {
@@ -398,23 +309,33 @@ function resetConfirmationOpen(){
     backdrop1.style.display = "flex";
 }
 
-function codeBool() {
-    popup5.style.display = "flex"
+function openWindow(arg, isFlex) {
+    const descsToHide = ['confirmationButtons', 'whichCode', 'dailyDesc']
+    for (const descId of descsToHide) {
+        const desc = document.getElementById(descId);
+        if (desc) {
+            desc.style.display = "none";
+        }
+    }
+    if (!isFlex) openedWindow.style.display = "block"
+    else openedWindow.style.display = "flex"
+    if (arg == 'hardReset' || arg == 'gotNaNed') {
+        confirmationButtons.style.display = "flex";windowTitleDiv.style.display = 'block' 
+        if (arg == 'hardReset') {windowTitle2.innerHTML = resetTitle}
+        else if (arg == 'gotNaNed') {windowTitle2.innerHTML = NaNedTitle}
+}
+    else if (arg == 'code') {whichCode.style.display = "block"; windowTitle2.innerHTML = ''; windowTitleDiv.style.display = 'none'}
+    else if (arg == 'daily') {dailyDesc.style.display = "block"; windowTitle2.innerHTML = ''; windowTitleDiv.style.display = 'none'}
     backdrop1.style.display = "flex";
 }
 
-function dailyWindow () {
-    popup6.style.display = "flex";
-    backdrop1.style.display = "flex"
-}
+
 
 function hidePopup() {
     popup.style.display = "none";
     popup2.style.display = "none";
     popup3.style.display = "none";
-    popup4.style.display = "none";
-    popup5.style.display = "none";
-    popup6.style.display = "none";
+    openedWindow.style.display = "none";
     backdrop1.style.display = "none";
     backdrop2.style.display = "none";
     offlinePopup.style.display = "none";
@@ -714,7 +635,7 @@ function readCode () {
     }
     else if (code == 'digitalgod' && code1Check == true) whichCode.innerHTML = codeIsUsed
     else if (code != 'digitalgod') whichCode.innerHTML = codeIsFalse
-    codeBool()
+    openWindow('code', true)
 }
 
 function getDaily() {
@@ -727,7 +648,7 @@ function getDaily() {
         convertingTime2()
     }
     else {dailyDesc.innerHTML = dailyIsFalse}
-    dailyWindow()
+    openWindow('daily', true)
 }
 function nextShopPage(direction) {
     if (direction == 'right'){
