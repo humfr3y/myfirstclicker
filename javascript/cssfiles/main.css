@@ -68,7 +68,9 @@ hr {
     margin-top: 15px;
     text-shadow: 0 0 5px rgb(255, 217, 0);
     white-space: nowrap;
-    margin-bottom: 15px
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
 }
 
 #coinsGain {
@@ -76,14 +78,15 @@ hr {
     font-size: 15px;
     text-align: center;
     margin: 5px;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
     
 }
-
 #coinGain {
     background-color: #ff000000;
     border: none;
     color: rgba(255, 0, 0, 0);
-    margin: 0 auto; 
     display: block;
     transition: transform 0.1s ease-in-out;
     width: 195px;
@@ -93,6 +96,7 @@ hr {
     background-size: contain;
     background-repeat: no-repeat;
     cursor: pointer;
+    border-radius: 200px;
 }
 
 #loadingScreen {
@@ -161,12 +165,11 @@ hr {
   text-align: center;
   display:flex;
   flex-direction: column;
-  
 }
 
 #getCoinLine {
   height: 195px;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-bottom: 10px;
   display: flex;
   margin: 0 auto;
@@ -431,9 +434,9 @@ hr {
   margin: 5px;
   margin-top: 15px;
   text-shadow: 0 0 5px rgb(255, 174, 0);
-  width:25%;
+  width:100%;
 }
-#overdrivePage {
+#overdriveTab {
   display: flex;
   justify-content: center;
 }
@@ -513,4 +516,29 @@ hr {
     margin-top: 5px;
     justify-content: space-around;
 
+}
+
+
+@media screen and (max-width: 600px) {
+  #coinGain, #umultiplierBoost, #upowerBoost {
+      /* Здесь можно установить максимальную ширину для кнопки */
+      max-width: 50%; /* Или другое значение */
+  }
+  #maxOrNoUpgrades {
+    width: 30px;
+    height: 30px;
+    font-size: 9px;
+}
+  #mainSettings {
+    width: 35px;
+  }
+  .shopButton {
+    font-size: 9px;
+  }
+  #shopTitleDiv {
+    width: 89.35%;
+  }
+  #shopDiv {
+    width: 90%
+  }
 }

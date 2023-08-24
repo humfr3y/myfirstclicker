@@ -30,6 +30,24 @@ let gainPerClickTitle, gainPerSecondTitle, gainTitle
 let multIdentifier = 0
 let resetTitle, NaNedTitle, clicksPerSecond = 0
 
+const versionDiv = document.getElementById('versionDiv');
+let startY;
+let startScrollTop;
+
+versionDiv.addEventListener('touchstart', (event) => {
+    startY = event.touches[0].clientY;
+    startScrollTop = versionDiv.scrollTop;
+});
+
+versionDiv.addEventListener('touchmove', (event) => {
+    const currentY = event.touches[0].clientY;
+    const deltaY = currentY - startY;
+    versionDiv.scrollTop = startScrollTop - deltaY;
+
+    event.preventDefault(); // Отменяем стандартное скроллирование
+});
+
+
 function randomNumber (min, max) {
     return min + Math.floor(Math.random() * (max + 1 - min))
 }
@@ -60,7 +78,7 @@ overdriveType1ProgressBarBase.addEventListener("click", function() {
             if (money >= overdriveType1.price){
                 money -= overdriveType1.price
                 overdriveType1.percent += 0.033
-                overdriveType1.effect = Math.pow(2, overdriveType1.percent/3.33)/1.5
+                overdriveType1.effect = 1+Math.pow(2, overdriveType1.percent/3.33)/1.5
                 overdriveType1.price = 100+Math.pow(10, overdriveType1.percent)/20*2
             }
         }, 50)
@@ -128,6 +146,7 @@ function softCap(resource, conditionCount, softCapPower) {
 
 function getCoinPerSec() {
     randomNumber(0, 2000/1+fourthShopBuyableEffect) == 0 ? (superCoins++, totalSuperCoins++) : superCoins;
+    superCoins = Math.round(superCoins)
     gain = 1-thirdSingle.baseEffect+(thirdSingle.baseEffect*2)
     gain *= 1+thirdShopBuyableEffect
     gain *= overdriveType1.effect

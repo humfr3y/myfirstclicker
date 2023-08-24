@@ -33,6 +33,13 @@
     margin-bottom: 10px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 600px) {
+  .upgradeButton {
+      font-size: 8.5px
+  }
+}
+
 .maxBuy{
   height: 35px;
   width: 70px;
@@ -134,8 +141,6 @@
 
 #umultiplierBoost {
   border-color:cadetblue;
-  margin-left: 8em;
-  margin-right: 0px;
 }
 
 #umultiplierBoost:disabled{
@@ -150,8 +155,6 @@
 
 #upowerBoost {
   border-color:palevioletred;
-  margin-right: 8em;
-  margin-left: 0px;
 }
 
 #upowerBoost:disabled{

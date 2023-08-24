@@ -36,16 +36,28 @@
 #socialNetworks {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
-#galaxyClickButton {
+.networkButton {
     text-align: center;
-    color: darkorchid;
     text-decoration: none;
     padding: 10px 20px;
     background-color: #000000;
     border-radius: 3px;
-    border: rgb(57, 18, 76) 1px solid;
+    border: 2px solid;
     font-size: 14px;
     cursor: pointer;
+    width: 300px
+}
+
+#galaxyClickButton {
+    color: darkorchid;
+    border-color: rgb(123, 39, 164)
+}
+
+#galaxyClickButton:hover {
+    background-color: rgb(123, 39, 164);
+    color:#000000;
 }

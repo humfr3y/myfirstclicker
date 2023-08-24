@@ -59,7 +59,7 @@ function loadGame() {
                 checkLoreShorter(loreBoolean, i)
             }
         }
-        checkShopSingle (firstShopSingle.amount, 'overdriveTab')
+        checkShopSingle (firstShopSingle.amount, 'overdriveSelect')
         achCompletionsChecker()
         getCoinPerSec()
         whatsYourCurrentTime2()
@@ -196,7 +196,7 @@ function importing(base64) {
     }
     singleUpgradeTextUpdate ()
     singleUpgradePurchased ()
-    checkShopSingle (firstShopSingle.amount, 'overdriveTab')
+    checkShopSingle (firstShopSingle.amount, 'overdriveSelect')
     achCompletionsChecker()
     getCoinPerSec()
     whatsYourCurrentTime2()
