@@ -27,12 +27,12 @@ try {
     // }
     // else doPrestige.innerHTML = i18next.t('prestigeDisabled');
 
-    // if (maxOrNoVar) {
-    //     maxOrNoUpgrades.innerHTML = i18next.t('maxUpgradesTrue');
-    // }
-    // else {
-    //     maxOrNoUpgrades.innerHTML = i18next.t('maxUpgradesFalse');
-    // }
+    if (maxOrNoVar) {
+        maxOrNoUpgrades.innerHTML = i18next.t('maxUpgradesTrue');
+    }
+    else {
+        maxOrNoUpgrades.innerHTML = i18next.t('maxUpgradesFalse');
+    }
 
     // newsTab.innerHTML = i18next.t('newsButton');
     settingsSelect.innerHTML = i18next.t('settingsButton');
@@ -218,6 +218,10 @@ try {
 
     aboutGame.innerHTML = i18next.t('aboutGame');
     galaxyClickButton.innerHTML = i18next.t('galaxyClickText');
+    discordButton.innerHTML = i18next.t('discordText');
+    telegramChannelButton.innerHTML = i18next.t('telegramChannelText');
+    telegramChatButton.innerHTML = i18next.t('telegramChatText');
+    gmailButton.innerHTML = i18next.t('gmailText');
 
     shopDesc.innerHTML = i18next.t('shopDesc');
     shopTitle.innerHTML = i18next.t('shopTitle2');
@@ -310,6 +314,7 @@ try {
     desc0801 = i18next.t('version0801');
     desc09 = i18next.t('version09');
     desc091 = i18next.t('version091');
+    desc092 = i18next.t('version092');
 
     chapter1Tab.innerHTML = i18next.t('chapter1Name');
     chapter2Tab.innerHTML = i18next.t('chapter2Name');

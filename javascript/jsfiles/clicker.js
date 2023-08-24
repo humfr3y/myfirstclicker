@@ -692,7 +692,23 @@ function nextShopPage(direction) {
 
 galaxyClickButton.addEventListener('click', function() {
     window.open('https://galaxy.click/play/131', '_blank');
-  });
+});
+
+gmailButton.addEventListener('click', function() {
+    window.open('mailto:madkotodax@gmail.com', '_blank');
+});
+
+discordButton.addEventListener('click', function() {
+    window.open('https://discord.gg/jdnnX2Vq5Q', '_blank');
+});
+
+telegramChatButton.addEventListener('click', function() {
+    window.open('https://t.me/+zy5z7obW4cBjMTA6', '_blank');
+});
+
+telegramChannelButton.addEventListener('click', function() {
+    window.open('https://t.me/+pqju4vzGrrY2NzI6', '_blank');
+});
 
 
 const achEls = document.querySelectorAll('.ach');

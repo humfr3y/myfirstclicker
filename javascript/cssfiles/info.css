@@ -49,7 +49,8 @@
     border: 2px solid;
     font-size: 14px;
     cursor: pointer;
-    width: 300px
+    width: 300px;
+    margin-bottom: 2px
 }
 
 #galaxyClickButton {
@@ -60,4 +61,31 @@
 #galaxyClickButton:hover {
     background-color: rgb(123, 39, 164);
     color:#000000;
+}
+
+#discordButton {
+    color: rgb(87, 105, 231);
+    border-color: rgb(87, 105, 231);
+}
+#discordButton:hover {
+    background-color: rgb(87, 105, 231);
+    color: black;
+}
+
+#telegramChatButton, #telegramChannelButton {
+    color: #2298d5;
+    border-color: #2298d5;
+}
+#telegramChatButton:hover, #telegramChannelButton:hover {
+    background-color: #2298d5;
+    color: black;
+}
+
+#gmailButton {
+    color: #d94b3d;
+    border-color: #d94b3d;
+}
+#gmailButton:hover {
+    background-color: #d94b3d;
+    color: black;
 }
