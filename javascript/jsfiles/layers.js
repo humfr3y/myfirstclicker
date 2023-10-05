@@ -66,6 +66,9 @@ function doPrestigeReset(){
         umultiplier = 1
         upowercount = prestigeSinglesEffects[12][1]
         umultipliercount = prestigeSinglesEffects[12][0]
+        overdriveType1.percent = 0
+        overdriveType1.effect = 1
+        overdriveType1.price = 100
         if (prestigeTimer < fastestPrestigeTimer) {
             fastestPrestigeSeconds = prestigeSeconds
             fastestPrestigeMinutes = prestigeMinutes
