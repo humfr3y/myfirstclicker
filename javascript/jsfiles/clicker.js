@@ -1,14 +1,9 @@
-let money = 10, total = 10;
+let money = 10, total = 10, moneyTemp = 1, clicksPerSecond = 0, clickCount = 0, gain = 1, gainPerClick = 1, gainPerSecond = 0, getCoinPerSecond;
 let notCapped, capped;
 let lastOnlineTime = 0, currentOnlineTime = 0;
-let gain = 1, gainPerClick = 1, gainPerSecond = 0, getCoinPerSecond
-let clickCount = 0
-let gameMinutesTemp = 0, gameHoursTemp = 0, gameDaysTemp = 0;
-let autoSaving = 'yes'; 
+let autoSaving = 'yes', isMuted = 'no'; 
 let totalCoins = document.getElementById('totalCoins');
 let link = document.getElementById('link');
-let gameHours = 0, gameMinutes = 0, gameSeconds = 0, gameTimer = 0, gameDays = 0, gameSecondsText, gameMinutesText, gameHoursText, gameDaysText
-let dailySeconds = 0, dailyMinutes = 0, dailyHours = 0, dailyTimer = 0;
 let backdrop1 = document.getElementById("myPopupBackdrop1")
 let popup = document.getElementById("changelogWindow");
 let popup2 = document.getElementById("gameLoreWindow");
@@ -18,103 +13,207 @@ let offlinePopup = document.getElementById("offlineGainWindow");
 let progress = document.getElementById("progressbar")
 let notiString = '', notiColor, notiWidth;
 let coinGains = document.getElementById("coinGain");
-let timeDifference = currentOnlineTime - lastOnlineTime, moneyTemp = 1, gameSecondsTemp = 1, gameTimerTemp = 1
-let superCoins = 0, totalSuperCoins = 0, superCoinsTemp = 0;
+let shardGains = document.getElementById("shardsClick");
+let timeDifference = currentOnlineTime - lastOnlineTime
+let superCoins = 0, totalSuperCoins = 0, superCoinsTemp;
 let optionValue = "option1"
 let overdriveType1Activate, overdriveType1Bool = false, overdriveType1Price = 0
-let codeIsFalse, codeIsTrue, codeIsUsed, code1Reward;
+let codeIsFalse, codeIsTrue, codeIsUsed, code1Reward, code2Reward;
+let code1Check = false, code2Check = false
 let code, codeReward
 let superCoinsTemp2 = 0
-let dailyIsTrue, dailyIsFalse
-let gainPerClickTitle, gainPerSecondTitle, gainTitle
+let gainPerClickTitle, gainPerSecondTitle, gainTitle, superCoinsChanceTitle, crystalsMultiplierTitle
 let multIdentifier = 0
-let resetTitle, NaNedTitle, clicksPerSecond = 0
-
-const versionDiv = document.getElementById('versionDiv');
-let startY;
-let startScrollTop;
-
-versionDiv.addEventListener('touchstart', (event) => {
-    startY = event.touches[0].clientY;
-    startScrollTop = versionDiv.scrollTop;
-});
-
-versionDiv.addEventListener('touchmove', (event) => {
-    const currentY = event.touches[0].clientY;
-    const deltaY = currentY - startY;
-    versionDiv.scrollTop = startScrollTop - deltaY;
-
-    event.preventDefault(); // Отменяем стандартное скроллирование
-});
+let resetTitle, NaNedTitle
+let dailyIsTrue, dailyIsFalse
+let dailySeconds = 0, dailyMinutes = 0, dailyHours = 0, dailyTimer = 0;
+let gameHours = 0, gameMinutes = 0, gameSeconds = 0, gameTimer = 0, gameDays = 0, gameSecondsTemp = 1, gameTimerTemp = 1
+let prestigeSeconds = 0, prestigeMinutes = 0, prestigeHours = 0, prestigeDays = 0, prestigeTimer = 0, prestigeSecondsTemp = 1, prestigeTimerTemp = 1, umultiplierTimer = 0, upowerTimer = 0
+let fastestPrestigeSeconds = 0, fastestPrestigeMinutes = 0, fastestPrestigeHours = 0, fastestPrestigeDays = 0, fastestPrestigeTimer = 1e69
+let fastestPrestigeDaysText, fastestPrestigeHoursText, fastestPrestigeMinutesText
+let offlineCrystalsTemp = 0, offlineCrystalsGain
+let didMaxBuy = false
+let offlinePrestigesGain = '', offlinePrestigesTemp
+let automationUpgradesArray = document.getElementsByClassName('automationUpgrade')
+let coinsFromAutoPrestige = '', timeFromAutoPrestige = ''
+let autoPrestigeTime = '', autoPrestigeCoins = ''
+let whichPrestigeMode = 'time', prestigeConditionTime = 3600, prestigeConditionCoins = 1e15
+let prestigeCountText = '', bulkBuyText = ''
+let shards = 0, brokenCrystals = 0, brokenCrystalsTemp = 0, shardsPerClick = 0, shardsPerSecond = 0, shardsTemp = 0, shardsEffect = 0, offlineShardsTemp = 1
+let shardChanceMinimum = 1, shardChanceMaximum = 100
+let getShardsPerSecond
+let offlineShardsGain = ''
+let mutedAudio = false
+let spirits = 0, spiritEffects = [1, 1, 1, 1]
+let dayOfMonth = new Date().getDate(), currentMonth = new Date().getMonth() + 1;
+let isSpiritualEvent = false
+let progressBarTitles = ['Престиж: ', 'Испытания Монет: ']
+let progressBarCurrencies = ['монеты']
+const mediaQuery = window.matchMedia('screen and (max-width: 600px)');
 
 
 function randomNumber (min, max) {
     return min + Math.floor(Math.random() * (max + 1 - min))
 }
 
-function addSecond () {
-    gameTimer++
-    gameSeconds++
-    convertingTime2()
-    dailyTimer <= 0 ? dailyTimer = 0 : dailyTimer--
-    dailySeconds <= 0 ? dailySeconds = 0 : dailySeconds--
-    convertingTime();
+function addSecond() {
+    gameTimer += 0.05
+    gameSeconds += 0.05
+    prestigeSeconds += 0.05
+    prestigeTimer += 0.05
+    umultiplierTimer += 0.05
+    upowerTimer += 0.05
+    prestigeSeconds = Math.max(0, prestigeSeconds)
+    prestigeTimer = Math.max(0, prestigeTimer)
+    convertingDailyTime()
+    dailyTimer <= 0 ? dailyTimer = 0 : dailyTimer -= 0.05
+    dailySeconds <= 0 ? dailySeconds = 0 : dailySeconds -= 0.05
+    convertingTime(gameSeconds, gameMinutes, gameHours, gameDays, 'game');
+    convertingTime(prestigeSeconds, prestigeMinutes, prestigeHours, prestigeDays, 'prestige');
+    whatsYourCurrentTime2()
+    whatsYourCurrentTime() 
 }
 
 setInterval(()=>{
-    progress.style.width = Math.min(Math.log(money)/Math.log(1e15)*100, 100)  + "%"
-    percent.innerHTML = formatNumber2(money) + "/1e15 (" + Math.min(findRatio(money, 1e15), 100) + "%)"
+    if (totalCrystals == 0) {
+        progress.style.width = Math.min(Math.log(money)/Math.log(1e15)*100, 100)  + "%"
+        percent.innerHTML = progressBarTitles[0] + ": " + formatNumber2(money) + "/1e15 " + progressBarCurrencies[0] + " (" + Math.min(findRatio(money, 1e15), 100) + "%)"
+    }
+    else {
+        progress.style.width = Math.min(Math.log(money)/Math.log(1e30)*100, 100)  + "%"
+        percent.innerHTML = progressBarTitles[1] + ": " + formatNumber2(money) + "/1e30 " + progressBarCurrencies[0] + " (" + Math.min(findRatio(money, 1e30), 100) + "%)"
+    }
+    if (mediaQuery.matches) {
+        overdriveType1ProgressBarActive.style.width = (overdriveType1.percent*3) + "px"
+        overdriveType1ProgressBar.style.width = (overdriveType1.percent*3) + "px"
+    } else {
+        overdriveType1ProgressBarActive.style.width = (overdriveType1.percent*8) + "px"
+        overdriveType1ProgressBar.style.width = (overdriveType1.percent*8) + "px"
+    }
 
-    overdriveType1ProgressBar.style.width = overdriveType1.percent + "%"
+    shardUnlock1.style.width = shardUnlockablePerSecond.percent + "%"
+    shardUnlock2.style.width = shardUnlockableClick.percent + "%"
+    shardUnlock3.style.width = shardUnlockableBuyables.percent + "%"
+    shardUnlock4.style.width = shardUnlockableSingles.percent + "%"
+    const shardUnlockableArray = [shardUnlockablePerSecond, shardUnlockableClick, shardUnlockableBuyables, shardUnlockableSingles]
+    const shardUnlockableTextArray = ['shardsPerSecondText', 'shardsClick', 'shardBuyables', 'shardSingles']
+    for (let i = 0; i < 4; i++) {
+        if (shardUnlockableArray[i].percent == 100) {
+            clearInterval(shardUnlockableArray[i].interval)
+            window['shardUnlockableBase'+(i+1)].style.display = 'none'
+            document.getElementById(shardUnlockableTextArray[i]).style.display = 'flex'
+        }
+        else  {
+            window['shardUnlockableBase'+(i+1)].style.display = 'flex'
+            document.getElementById(shardUnlockableTextArray[i]).style.display = 'none'
+        }
+    }
 },50)
-setInterval(addSecond, 1000)
 var overdriveType1ProgressBarBase = document.getElementById('overdriveType1ProgressBarBase')
 var overdriveType1ProgressBar = document.getElementById('overdriveType1ProgressBar')
-
+let overdriveType1ProgressBarActive = document.getElementById('overdriveType1ProgressBarActive')
+let overdriveChange
 overdriveType1ProgressBarBase.addEventListener("click", function() {
     overdriveType1Bool ? overdriveType1Bool = false : overdriveType1Bool = true
     if (overdriveType1Bool){
+        overdriveChange = setInterval(()=> {
+            overdriveType1ProgressBarActive.style.opacity == 1 ? overdriveType1ProgressBarActive.style.opacity = 0 :  overdriveType1ProgressBarActive.style.opacity = 1
+        }, 500)
         overdriveType1Activate = setInterval(()=> {
             if (money >= overdriveType1.price){
-                money -= overdriveType1.price
-                overdriveType1.percent += 0.033
-                overdriveType1.effect = 1+Math.pow(2, overdriveType1.percent/3.33)/1.5
-                overdriveType1.price = 100+Math.pow(10, overdriveType1.percent)/20*2
+                money -= overdriveType1.price;
+                overdriveType1.percent += 0.033;
+                overdriveType1.percent = Math.min(overdriveType1.percent, 100)
+                overdriveType1.effect = 1+Math.pow(2, overdriveType1.percent/2.33)/8
+                achRow1.completion[18] ? overdriveType1.effect *= 1.1 : overdriveType1.effect
+                overdriveType1.price = 100+Math.pow(10, overdriveType1.percent)/20*2;
             }
         }, 50)
     }
-    else clearInterval(overdriveType1Activate)
+    else {clearInterval(overdriveType1Activate)
+    clearInterval(overdriveChange)
+    overdriveType1ProgressBarActive.style.opacity = 0}
 })
 
-function convertingTime() {
-    gameSecondsText = Math.round(gameSeconds)
-    gameMinutesText = gameMinutes
-    gameHoursText = gameHours
-    gameDaysText = gameDays
-    if (gameSeconds >= 60) {
-        gameMinutesTemp = Math.floor(gameSeconds / 60)
-        gameSeconds = Math.round(((gameSeconds / 60) - gameMinutesTemp) * 60)
-        gameMinutes += gameMinutesTemp
-        gameSecondsText = gameSeconds;
-        gameMinutesText = gameMinutes; 
-        }
-    if (gameMinutes >= 60) {
-            gameHoursTemp = Math.floor(gameMinutes / 60)
-            gameMinutes = Math.round(((gameMinutes / 60) - gameHoursTemp) * 60)
-            gameHours += gameHoursTemp
-            gameMinutesText = gameMinutes;
-            gameHoursText = gameHours
+function fillTheProgressBar(shardUnlockable) {
+    let subPerTick = shardUnlockable.price/500
+    shardUnlockable.bool ? shardUnlockable.bool = false : shardUnlockable.bool = true
+    if (shardUnlockable.bool){
+        shardUnlockable.interval = setInterval(()=> {
+            if (shards >= subPerTick){
+                shards -= subPerTick
+                shardUnlockable.consumedShards += subPerTick
+                shardUnlockable.percent += 0.2;
+                shardUnlockable.percent = Math.min(shardUnlockable.percent, 100)
             }
-    if (gameHours >= 24) {
-            gameDaysTemp = Math.floor(gameHours / 24) //100/24 = 4
-            gameHours = Math.round(((gameHours / 24) - gameDaysTemp) * 24) //4.16-4=0.16*24=4
-            gameDays += gameDaysTemp // 0 + 4 = 4
-            gameHoursText = gameHours; // text = 4 (100-24*4=4)
-            gameDaysText = gameDays // text = 4
+        }, 50)
+    }
+    else clearInterval(shardUnlockable.interval)
+}
+
+shardUnlockableBase1.addEventListener("click", () => {
+    fillTheProgressBar(shardUnlockablePerSecond)
+})
+
+shardUnlockableBase2.addEventListener("click", () => {
+    fillTheProgressBar(shardUnlockableClick)
+})
+
+shardUnlockableBase3.addEventListener("click", () => {
+    fillTheProgressBar(shardUnlockableBuyables)
+})
+
+shardUnlockableBase4.addEventListener("click", () => {
+    fillTheProgressBar(shardUnlockableSingles)
+})
+
+
+function convertingTime(seconds, minutes, hours, days, type) {
+    seconds = Math.round(seconds)
+    let minutesTemp, hoursTemp, daysTemp
+    const boolGame = (type == 'game'), boolPrestige = (type == 'prestige') 
+    if (seconds >= 60) {
+            minutesTemp = Math.floor(seconds / 60)
+            seconds = Math.round(((seconds / 60) - minutesTemp) * 60)
+            minutes += minutesTemp
+            if (boolGame) {
+                gameSeconds = seconds
+                gameMinutes = minutes
+            }
+            else if (boolPrestige) {
+                prestigeSeconds = seconds
+                prestigeMinutes = minutes
+            }
+        }
+    if (minutes >= 60) {
+            hoursTemp = Math.floor(minutes / 60)
+            minutes = Math.round(((minutes / 60) - hoursTemp) * 60)
+            hours += hoursTemp
+            if (boolGame) {
+                gameMinutes = minutes
+                gameHours = hours
+            }
+            else if (boolPrestige) {
+                prestigeMinutes = minutes
+                prestigeHours = hours
+            }
+            }
+    if (hours >= 24) {
+            daysTemp = Math.floor(hours / 24) //100/24 = 4
+            hours = Math.round(((hours / 24) - daysTemp) * 24) //4.16-4=0.16*24=4
+            days += daysTemp // 0 + 4 = 4
+            if (boolGame) {
+                gameHours = hours
+                gameDays= days
+            }
+            else if (boolPrestige) {
+                prestigeHours = hours
+                prestigeDays = days
+            }
             }
 }
 
-function convertingTime2() {
+function convertingDailyTime() {
     if (dailySeconds >= 60) {
         let minutesTemp = Math.floor(dailySeconds / 60)
         dailySeconds = Math.round(((dailySeconds / 60) - minutesTemp) * 60)
@@ -144,41 +243,87 @@ function softCap(resource, conditionCount, softCapPower) {
     else return resource
 }
 
+function limits(variable, min, max) {
+    if (variable >= min && variable <= max) {
+        return true
+    }
+    else return false
+}
+
 function getCoinPerSec() {
-    randomNumber(0, 2000/1+fourthShopBuyableEffect) == 0 ? (superCoins++, totalSuperCoins++) : superCoins;
+    randomNumber(0, (2000/(1+fourthShopBuyableEffect)/prestigeSinglesEffects[2][0]/spiritEffects[1])) == 0 ? (superCoins++, totalSuperCoins++) : superCoins;
     superCoins = Math.round(superCoins)
-    gain = 1-thirdSingle.baseEffect+(thirdSingle.baseEffect*2)
-    gain *= 1+thirdShopBuyableEffect
-    gain *= overdriveType1.effect
-    gain *= achievementBonus
-    gain *= seventhSingleEffect
-    gain *= umultiplier
+    umultiplier = Math.pow(baseUmult, umultipliercount)
+    upower = 1 + baseUpow*upowercount
+    const gainMultiplierArray = [1+thirdShopBuyableEffect, overdriveType1.effect, achievementBonus, seventhSingleEffect, umultiplier, prestigeSinglesEffects[8], prestigeSinglesEffects[9], 1+shardsEffect, spiritEffects[0]]
+    const gainPerSecondArray = [1+secondShopBuyableEffect, sixthSingleEffect, gain]
+    gain = 1+thirdSingle.baseEffect
+    for (let i = 0; i < gainMultiplierArray.length; i++) {
+        gain *= gainMultiplierArray[i]
+    }
+    achRow1.completion[17] ? gain *= 4 : gain
     gain = Math.pow(gain, upower)
+    gain = Math.pow(gain, prestigeSinglesEffects[1])
+
+    gain = softCap(gain, 1e15, 0.5)
     gainPerSecond = firstBuyableEffect
-    gainPerSecond *= 1+secondShopBuyableEffect
-    gainPerSecond *= sixthSingleEffect
+    for (let i = 0; i < gainPerSecondArray.length; i++) {
+        gainPerSecond *= gainPerSecondArray[i]
+    }
     fourthBuyable.amount >= 1 ? gainPerSecond *= fourthBuyableEffect : gainPerSecond = gainPerSecond
     achRow1.completion[4] ? gainPerSecond *= (1+0.0001*clickCount) : gainPerSecond = gainPerSecond
     firstSingle.amount == 1 ? gainPerSecond *= firstSingleEffect : gainPerSecond = gainPerSecond
-    gainPerSecond *= gain
-    gainPerSecond = softCap(gainPerSecond, 1e13, 0.5)
+    gainPerSecond = softCap(gainPerSecond, 1e13, prestigeSinglesEffects[10])
     gainPerSecond /= 20.0
+
+    gainPerClick = 1
+    gainPerClick *= Math.pow(2, thirdBuyable.baseEffect) 
+    gainPerClick *= 1+firstShopBuyableEffect
+    eighthSingle.amount == 1 ? gainPerClick *= eighthSingleEffect : gainPerClick = gainPerClick
+    secondSingle.amount == 1 ? gainPerClick *= midasFormula : gainPerClick = gainPerClick
+    gainPerClick *= gain
+    gainPerClick = Math.pow(gainPerClick, fifthBuyableEffect)
+    gainPerClick = softCap(gainPerClick, 1e13, prestigeSinglesEffects[10])
     money = money+gainPerSecond;
     total = total+gainPerSecond;
     umultiplierCost = 100 + (50 * umultipliercount)
     upowerCost = 250 + (100 * upowercount)
-    // if (total >= 1e15) {
-    //     crystalCount.style.display = 'block'
-    //     doPrestige.style.display = 'block'
-    //     totalCrystalsStats.style.display = 'block'
-    // }
+    umultiplierBulkCost = Math.floor((firstBuyable.amount-(umultiplierCost-50))/50) //(SI's - prev umulti cost) / scaling -> floored number
+    if (achRow1.completion[13]) {
+        upowerCost = upowerCost - (10 * (1+upowercount))
+        upowerBulkCost = Math.floor((firstBuyable.amount-(upowerCost-90))/90)
+    }
+    else upowerBulkCost = Math.floor((firstBuyable.amount-(upowerCost-100))/100)
+    if (achRow1.completion[9]) doPrestige.style.display = 'block'
+    else doPrestige.style.display = 'none'
+    if (totalCrystals >= 1) {
+        crystalCount.style.display = 'block'
+        prestigeSection.style.display = 'block'
+        prestigeSelect.style.display = 'block'
+        totalPrestigesStats.style.display = 'block'
+        offlinePrestigeFarm.style.display = 'block'
+        prestigeHelpDiv.style.display = 'block'
+    }
+    else {
+        crystalCount.style.display = 'none'
+        prestigeSection.style.display = 'none'
+        prestigeSelect.style.display = 'none'
+        totalPrestigesStats.style.display = 'none'
+        offlinePrestigeFarm.style.display = 'none'
+        prestigeHelpDiv.style.display = 'none'
+    }
 }
-
+let superCoinChance, spiritChance
 
 function getCoin() {
     if (clicksPerSecond < 10) {
         clickCount++
-        randomNumber(0, 100/1+fourthShopBuyableEffect) == 0 ? (superCoins++, totalSuperCoins++) : superCoins;
+        superCoinChance = randomNumber(0, (100/(1+fourthShopBuyableEffect)/prestigeSinglesEffects[2][0]/spiritEffects[1]))
+        if (superCoinChance == 0) {
+        superCoins++, totalSuperCoins++
+        }
+        spiritChance = randomNumber(0, 100)
+        spiritChance == 0 ? spirits++ : spirits
         gainPerClick = 1
         gainPerClick *= Math.pow(2, thirdBuyable.baseEffect) 
         gainPerClick *= 1+firstShopBuyableEffect
@@ -186,12 +331,11 @@ function getCoin() {
         secondSingle.amount == 1 ? gainPerClick *= midasFormula : gainPerClick = gainPerClick
         gainPerClick *= gain
         gainPerClick = Math.pow(gainPerClick, fifthBuyableEffect)
-        gainPerClick = softCap(gainPerClick, 1e13, 0.5)
+        gainPerClick = softCap(gainPerClick, 1e13, prestigeSinglesEffects[10])
         clicksPerSecond++
         coinGains.addEventListener("keydown", function(event) {
         if (event.key === "Enter") {
-                event.preventDefault(); // Эта строка предотвращает стандартное поведение (например, отправку формы)
-                // Ничего не делаем, не меняем значение gainPerClick
+                event.preventDefault();
             }})
         money = money+gainPerClick;
         total = total+gainPerClick;
@@ -202,8 +346,39 @@ setInterval(() => {
     clicksPerSecond = 0
 }, 1000);
 
+function getShardPerClick() {
+    if (clicksPerSecond < 10 && shardUnlockableClick.percent == 100) {
+        clickCount++
+        clicksPerSecond++
+        shardGains.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                    event.preventDefault();
+                }})
+        shardsPerClick = 1
+        shardsPerClick *= firstShardBuyableEffect
+        shards += shardsPerClick
+    }
+}
+
+function getShardPerSec() {
+    if (shardUnlockablePerSecond.percent == 100) {
+        shardsPerSecond = 1
+        shardsPerSecond *= secondShardBuyableEffect
+        shardsPerSecond *= spiritEffects[3]
+        shardsPerSecond /= 20
+        shards += shardsPerSecond
+    }
+    shardsEffect = shards/100
+    shardsEffect = Math.pow(shardsEffect, fourthShardSingleEffect)
+    shardsEffect = softCap(shardsEffect, 1e7, 0.3)
+    
+    achRow1.completion[19] ? shardsEffect *= 1+prestigeCount/100 : shardsEffect
+    shardChanceMinimum = thirdShardBuyableEffect[0]
+    shardChanceMaximum = 100*thirdShardBuyableEffect[1]
+}
+
 function selectTab(argument, isFlex) {
-    const tabsToHide = ['mainTab', 'infoTab', 'settingsTab', 'achTab', 'newsTab', 'shopTab']
+    const tabsToHide = ['mainTab', 'prestigeTab', 'infoTab', 'settingsTab', 'achTab', 'eventTab', 'shopTab']
     for (const tabId of tabsToHide) {
         const tab = document.getElementById(tabId);
         if (tab) {
@@ -218,10 +393,12 @@ function selectSubTab(argument, isFlex, mainTab) {
     const settingsTabsToHide = ['settingsSaveTab', 'settingsGraphicTab', 'settingsOtherTab']
     const clickerTabsToHide = ['coinsTab', 'overdriveTab']
     const infoTabsToHide = ['aboutGameTab', 'statisticsTab', 'multipliersTab']
+    const prestigeTabsToHide = ['upgradesTab', 'milestonesTab', 'automationTab', 'shardsTab']
     let tabsToHide
     if (mainTab == 'settings') tabsToHide = settingsTabsToHide
     else if (mainTab == 'clicker') tabsToHide = clickerTabsToHide
     else if (mainTab == 'info') tabsToHide = infoTabsToHide
+    else if (mainTab == 'prestige') tabsToHide = prestigeTabsToHide
     for (const tabId of tabsToHide) {
         const tab = document.getElementById(tabId);
         if (tab) {
@@ -233,7 +410,7 @@ function selectSubTab(argument, isFlex, mainTab) {
 }
 
 function showStats(multId) {
-    const tabsToHide = ['gainPerClickStats', 'gainPerSecondStats', 'wholeGainStats', 'gainPerClickGraphic', 'gainPerSecondGraphic', 'gainGraphic']
+    const tabsToHide = ['gainPerClickStats', 'gainPerSecondStats', 'wholeGainStats', 'superCoinsChanceStats', 'crystalsMultiplierStats', 'gainPerClickGraphic', 'gainPerSecondGraphic', 'gainGraphic', 'superCoinsChanceGraphic', 'crystalsMultiplierGraphic']
     for (const tabId of tabsToHide) {
         const tab = document.getElementById(tabId);
         if (tab) {
@@ -244,6 +421,8 @@ function showStats(multId) {
     if (multId == 0) {gainPerClickStats.style.display = 'block'; gainPerClickGraphic.style.display = 'block'; multBreakdownTitle.innerHTML = gainPerClickTitle}
     else if (multId == 1) {gainPerSecondStats.style.display = 'block'; gainPerSecondGraphic.style.display = 'block'; multBreakdownTitle.innerHTML = gainPerSecondTitle}
     else if (multId == 2) {wholeGainStats.style.display = 'block'; gainGraphic.style.display = 'block'; multBreakdownTitle.innerHTML = gainTitle}
+    else if (multId == 3) {superCoinsChanceStats.style.display = 'block'; superCoinsChanceGraphic.style.display = 'block'; multBreakdownTitle.innerHTML = superCoinsChanceTitle}
+    else if (multId == 4) {crystalsMultiplierStats.style.display = 'block'; crystalsMultiplierGraphic.style.display = 'block'; multBreakdownTitle.innerHTML = crystalsMultiplierTitle}
 }
 
 function checkBuyableDisabledUpgrade (x, y) {
@@ -258,31 +437,68 @@ function checkSingleDisabledUpgrade (x, y) {
 function checkShopSingleDisabledUpgrade (x, y) {
     superCoins >= Math.round(x.price) || x.amount == 1 ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
 }
+function checkPrestigeBuyableDisabledUpgrade (x, y) {
+    crystals >= x.price ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
+}
+function checkPrestigeSingleDisabledUpgrade (x, y, z) {
+    if ((crystals >= x.price || x.amount == 1) && (z == 1)) {
+    document.getElementById(y).disabled = false
+    }
+    else document.getElementById(y).disabled = true
+}
+function checkShardBuyableDisabledUpgrade (x, y) {
+    shards >= x.price ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
+}
+function checkShardSingleDisabledUpgrade (x, y) {
+    shards >= x.price || x.amount == 1 ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
+}
 function disabledUpgrades(){
-    checkBuyableDisabledUpgrade(firstBuyable, 'buyableU1')
-    checkBuyableDisabledUpgrade(secondBuyable, 'buyableU2')
-    checkBuyableDisabledUpgrade(thirdBuyable, 'buyableU3')
-    checkBuyableDisabledUpgrade(fourthBuyable, 'buyableU4')
-    checkBuyableDisabledUpgrade(fifthBuyable, 'buyableU5')
-    checkSingleDisabledUpgrade(firstSingle, 'singleU1')
-    checkSingleDisabledUpgrade(secondSingle, 'singleU2')
-    checkSingleDisabledUpgrade(thirdSingle, 'singleU3')
-    checkSingleDisabledUpgrade(fourthSingle, 'singleU4')
-    checkSingleDisabledUpgrade(fifthSingle, 'singleU5')
-    checkSingleDisabledUpgrade(sixthSingle, 'singleU6')
-    checkSingleDisabledUpgrade(seventhSingle, 'singleU7')
-    checkSingleDisabledUpgrade(eighthSingle, 'singleU8')
-    checkSingleDisabledUpgrade(ninthSingle, 'singleU9')
-    checkSingleDisabledUpgrade(tenthSingle, 'singleU10')
+    const buyableUpgrades = [firstBuyable, secondBuyable, thirdBuyable, fourthBuyable, fifthBuyable];
+    const singleUpgrades = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle];
+    const prestigeBuyableUpgrades = [firstPrestigeBuyable, secondPrestigeBuyable];
+    const prestigeSingleUpgrades = [
+        [firstPrestigeSingle, secondPrestigeSingle, thirdPrestigeSingle, fourthPrestigeSingle],
+        [fifthPrestigeSingle, sixthPrestigeSingle, seventhPrestigeSingle, eighthPrestigeSingle],
+        [ninthPrestigeSingle, tenthPrestigeSingle, eleventhPrestigeSingle, twelfthPrestigeSingle],
+        [thirteenthPrestigeSingle, fourteenthPrestigeSingle, fifteenthPrestigeSingle, sixteenthPrestigeSingle]];
+    const shardsBuyableUpgrades = [firstShardBuyable, secondShardBuyable, thirdShardBuyable];
+    const shardsSingleUpgrades = [firstShardSingle, secondShardSingle, thirdShardSingle, fourthShardSingle, fifthShardSingle, sixthShardSingle];
+    for (let i = 0; i < buyableUpgrades.length; i++) {
+        checkBuyableDisabledUpgrade(buyableUpgrades[i], 'buyableU' + (i + 1));
+    }
+    for (let i = 0; i < singleUpgrades.length; i++) {
+        checkSingleDisabledUpgrade(singleUpgrades[i], 'singleU' + (i + 1));
+    }
+    for (let i = 0; i < prestigeBuyableUpgrades.length; i++) {
+    checkPrestigeBuyableDisabledUpgrade(prestigeBuyableUpgrades[i], 'pBuyableU' + (i + 1));
+    }
+    for (let i = 0; i < shardsBuyableUpgrades.length; i++) {
+        checkShardBuyableDisabledUpgrade(shardsBuyableUpgrades[i], 'shBuyableU' + (i + 1));
+    }
+    for (let i = 0; i < shardsSingleUpgrades.length; i++) {
+        checkShardSingleDisabledUpgrade(shardsSingleUpgrades[i], 'shSingleU' + (i + 1));
+        }
+    let j = 0, m = 0
+    for (let i = 0; i < 4; i++) {
+        for (let k = 0; k < 4; k++) {
+            let variable = {
+                amount: 1
+            }
+            if (k > 0) variable = prestigeSingleUpgrades[i][m]
+            checkPrestigeSingleDisabledUpgrade(prestigeSingleUpgrades[i][k], 'pSingleU' + (j + 1), variable.amount);
+            if (k > 0) m++
+            j++
+        }
+        m = 0
+    }
     checkShopBuyableDisabledUpgrade(firstShopBuyable, 'shopBuyableU1', 100)
     checkShopBuyableDisabledUpgrade(secondShopBuyable, 'shopBuyableU2', 100)
     checkShopBuyableDisabledUpgrade(thirdShopBuyable, 'shopBuyableU3', 100)
     checkShopBuyableDisabledUpgrade(fourthShopBuyable, 'shopBuyableU4', 100)
     checkShopSingleDisabledUpgrade(firstShopSingle, 'shopSingleU1')
-    firstBuyable.amount >= 100 + (50 * umultipliercount) ? document.getElementById('umultiplierBoost').disabled = false : document.getElementById('umultiplierBoost').disabled = true;
-    (firstBuyable.amount >= 250 + (100 * upowercount)) && (umultipliercount >= 4) ? document.getElementById('upowerBoost').disabled = false : document.getElementById('upowerBoost').disabled = true
+    firstBuyable.amount >= umultiplierCost ? document.getElementById('umultiplierBoost').disabled = false : document.getElementById('umultiplierBoost').disabled = true;
+    (firstBuyable.amount >= upowerCost) && (umultipliercount >= 4) ? document.getElementById('upowerBoost').disabled = false : document.getElementById('upowerBoost').disabled = true
     }
-setInterval(disabledUpgrades, 50)
 
 
 
@@ -329,7 +545,7 @@ function resetConfirmationOpen(){
 }
 
 function openWindow(arg, isFlex) {
-    const descsToHide = ['confirmationButtons', 'whichCode', 'dailyDesc']
+    const descsToHide = ['confirmationButtons', 'whichCode', 'dailyDesc', 'breakCrystal', 'brokeCrystals', 'falseBrokeCrystals']
     for (const descId of descsToHide) {
         const desc = document.getElementById(descId);
         if (desc) {
@@ -345,6 +561,9 @@ function openWindow(arg, isFlex) {
 }
     else if (arg == 'code') {whichCode.style.display = "block"; windowTitle2.innerHTML = ''; windowTitleDiv.style.display = 'none'}
     else if (arg == 'daily') {dailyDesc.style.display = "block"; windowTitle2.innerHTML = ''; windowTitleDiv.style.display = 'none'}
+    else if (arg == 'break') {breakCrystal.style.display = "flex"; windowTitle2.innerHTML = ''; windowTitleDiv.style.display = 'none'}
+    else if (arg == 'submit') {brokeCrystals.style.display = "block"; windowTitle2.innerHTML = ''; windowTitleDiv.style.display = 'none'}
+    else if (arg == 'falseSubmit') {falseBrokeCrystals.style.display = "block"; windowTitle2.innerHTML = ''; windowTitleDiv.style.display = 'none'}
     backdrop1.style.display = "flex";
 }
 
@@ -373,8 +592,8 @@ coinGains.addEventListener("click", function(event) {
     var x = event.clientX;
     var y = event.clientY;
 
-    myMessage.style.left = (x - 20 ) + "px";
-    myMessage.style.top = (y - 35) + "px";
+    myMessage.style.left = (x - 20) + "px";
+    myMessage.style.top = (y - 30) + "px";
 
     myMessage.classList.add('myMessage');
     myMessage.innerHTML = ("+" + formatNumber2(gainPerClick));
@@ -392,6 +611,85 @@ coinGains.addEventListener("click", function(event) {
     },0 );
 
 }})
+
+shardGains.addEventListener("click", function(event) {
+    {
+        const shardCountPerClick = document.createElement('div');
+    
+        var x = event.clientX;
+        var y = event.clientY;
+    
+        shardCountPerClick.style.left = (x - 20) + "px";
+        shardCountPerClick.style.top = (y - 20) + "px";
+    
+        shardCountPerClick.classList.add('shardCountPerClick');
+        shardCountPerClick.innerHTML = ("+" + formatNumber2(shardsPerClick));
+        document.body.appendChild(shardCountPerClick);
+    
+        setTimeout(() => {
+            shardCountPerClick.classList.add('show');
+            setTimeout(() => {
+            shardCountPerClick.classList.remove('show');
+            shardCountPerClick.classList.add('hide')
+            setTimeout(() => {
+                shardCountPerClick.remove();
+              }, 500); // подождать завершения анимации исчезновения
+            }, 0); // показывать уведомление 5 секунд
+        },0 );
+    }})
+
+    coinGains.addEventListener("click", function(event) {
+            if (superCoinChance == 0) {
+                const superCoinText = document.createElement('div');
+        
+                var x = event.clientX;
+                var y = event.clientY;
+            
+                superCoinText.style.left = (x - 20) + "px";
+                superCoinText.style.top = (y - 10) + "px";
+            
+                superCoinText.classList.add('superCoinText');
+                superCoinText.innerHTML = ("+1");
+                document.body.appendChild(superCoinText);
+            
+                setTimeout(() => {
+                    superCoinText.classList.add('show');
+                    setTimeout(() => {
+                        superCoinText.classList.remove('show');
+                        superCoinText.classList.add('hide')
+                    setTimeout(() => {
+                        superCoinText.remove();
+                      }, 500); // подождать завершения анимации исчезновения
+                    }, 0); // показывать уведомление 5 секунд
+                },0 );
+            }})
+
+    coinGains.addEventListener("click", function(event) {
+        if (spiritChance == 0 && isSpiritualEvent) {
+            const spiritText = document.createElement('div');
+            
+            var x = event.clientX;
+            var y = event.clientY;
+                
+            spiritText.style.left = (x - 20) + "px";
+            spiritText.style.top = (y) + "px";
+                
+            spiritText.classList.add('spiritText');
+            spiritText.innerHTML = ("+1");
+            document.body.appendChild(spiritText);
+                
+                setTimeout(() => {
+                    spiritText.classList.add('show');
+                    setTimeout(() => {
+                        spiritText.classList.remove('show');
+                        spiritText.classList.add('hide')
+                    setTimeout(() => {
+                        spiritText.remove();
+                        }, 500); // подождать завершения анимации исчезновения
+                    }, 0); // показывать уведомление 5 секунд
+                },0 );
+            }})
+
 function formatNumber2(number) {
     if (number < 1000000) {
         return number.toFixed(0);
@@ -399,129 +697,117 @@ function formatNumber2(number) {
         return number.toExponential(2).replace("+","");
     }
 }
+function formatNumber21(number) {
+    if (number < 1000000) {
+        return number.toFixed(0);
+    } else {
+        return number.toExponential(0).replace("+","");
+    }
+}
 function whatsYourCurrentTime () {
-    let now = new Date()
-
-    var realSeconds = now.getSeconds()
-    var realMinutes = now.getMinutes()
-    var realHours = now.getHours()
-    var realDays = now.getDate() 
-    var realMonths = now.getMonth()+1
-    var realYear = now.getFullYear()
-    realMonths += realYear * 12
-    realDays += realMonths * 30
-    realHours += realDays * 24
-    realMinutes += realHours * 60
-    realSeconds += realMinutes * 60
-    lastOnlineTime = realSeconds
-    return lastOnlineTime
+    lastOnlineTime = new Date()
 }
 
 function whatsYourCurrentTime2 () {
-    let now = new Date()
-
-    var realSeconds = now.getSeconds()
-    var realMinutes = now.getMinutes()
-    var realHours = now.getHours()
-    var realDays = now.getDate() 
-    var realMonths = now.getMonth()+1
-    var realYear = now.getFullYear()
-    realMonths += realYear * 12
-    realDays += realMonths * 30
-    realHours += realDays * 24
-    realMinutes += realHours * 60
-    realSeconds += realMinutes * 60
-    currentOnlineTime = realSeconds
-
-    return currentOnlineTime
+    currentOnlineTime = new Date()
 }
 
-setInterval(whatsYourCurrentTime2, 1000)
+function offlineGain() {
+    timeDifference = (currentOnlineTime - lastOnlineTime)/1000
+    timeDifference = Math.min(1000000, timeDifference)
+    checkUpgradesText()
+    prestigeSingleEffect()
 
-function offlineGain () {
-    timeDifference = currentOnlineTime - lastOnlineTime
-    if (timeDifference >= 1000) {
-        superCoinsTemp = timeDifference/(1000/(1+fourthShopBuyableEffect))
+    if (timeDifference >= (1000/(1+(fourthShopBuyableEffect)/prestigeSinglesEffects[2][1]/spiritEffects[1]))) {
+        superCoinsTemp = timeDifference/(1000/(1+fourthShopBuyableEffect)/prestigeSinglesEffects[2][1]/spiritEffects[1])
     }
     else superCoinsTemp = 0
+    if (achRow1.completion[11]) {
+        offlineCrystalsTemp = timeDifference/(43200/secondPrestigeBuyableEffect)
+        achRow1.completion[17] ? offlineCrystalsTemp *= 4 : offlineCrystalsTemp
+        offlineCrystalsTemp *= firstShardSingleEffect
+        offlineCrystalsTemp *= firstPrestigeBuyableEffect
+        crystals += offlineCrystalsTemp
+        }
+    if (prestigeMilestonesEffects[15]){
+        offlinePrestigesTemp = (timeDifference/60)*(fastestNoMaxBuyPrestiges/20)
+        prestigeCount += offlinePrestigesTemp
+        }
+    if (shardUnlockablePerSecond.percent == 100) {
+        getShardPerSec()
+        offlineShardsTemp = shardsPerSecond * 20 * timeDifference
+        shards += offlineShardsTemp
+        }
+
     dailyTimer -= timeDifference
-    dailyTimer += autoSaverTimer
     dailyMinutes = 0
     dailyHours = 0
     dailySeconds = dailyTimer
-    convertingTime2()
+    convertingDailyTime()
     superCoins += superCoinsTemp
     totalSuperCoins += superCoinsTemp
-    moneyTemp = gainPerSecondSave * timeDifference
-    moneyTemp -= gainPerSecondSave * autoSaverTimer
-    money += moneyTemp
-    total += moneyTemp
+    setTimeout(() => {
+        getCoinPerSec()
+        moneyTemp = gainPerSecond * 20 * timeDifference
+        moneyTemp = Math.max(0, moneyTemp)  
+        money += moneyTemp
+        total += moneyTemp
+    }, 300);
+
     gameSecondsTemp = timeDifference
-    gameSecondsTemp -= autoSaverTimer
     gameTimerTemp = timeDifference
-    gameTimerTemp -= autoSaverTimer
+    prestigeSecondsTemp = timeDifference
+    prestigeTimerTemp = timeDifference
     gameSeconds += gameSecondsTemp
     gameTimer += gameTimerTemp
+    prestigeSeconds += prestigeSecondsTemp
+    prestigeTimer += prestigeTimerTemp
+    umultiplierTimer += timeDifference
+    upowerTimer += timeDifference
 }
 //если ты находишься 10 секунд в игре затем ливаешь и перезаходишь то ты получаешь ещё 10 секунд получения монет. 
 
 
 function offlineGainTime() {
-    convertingTime()
+    convertingTime(gameSeconds, gameMinutes, gameHours, gameDays, 'game')
+    convertingTime(prestigeSeconds, prestigeMinutes, prestigeHours, prestigeDays, 'prestige')
     whatsYourCurrentTime()
 }
 
 document.addEventListener("visibilitychange", function() {
     if (!document.hidden) { // проверяем, что страница стала видимой
-    clearInterval(getCoinPerSecond)
+    clearInterval(everythingInterval)
     clearInterval(autosaver)
     clearInterval(autoSaveTime)
+    clearInterval(getCoinPerSecond)
     offlineGain();
     autoSaverTimer = 0
     autosaver = setInterval(autoSaveThis, 30000); //таймер
+    everythingInterval = setInterval(updateTick, 50)
     getCoinPerSecond = setInterval(getCoinPerSec, 50)
     saveGame()
+    if (optionValue == 'option7' && !mutedAudio) {
+        audio.play()
+    }
     }
 });
 
 document.addEventListener("visibilitychange", function() {
     if (document.hidden) { // проверяем, что страница стала невидимой
-        clearInterval(getCoinPerSecond)
+        clearInterval(everythingInterval)
         clearInterval(autosaver)
         clearInterval(autoSaveTime)
+        clearInterval(getCoinPerSecond)
+        if (optionValue == 'option7' && !mutedAudio) {
+            audio.pause()
+        }
     }
 });
 
-function hoverColor(iden){
-    let stats = iden + "Stats";
-    let effect = iden + "StatsEffect"
-    let element = document.getElementById(stats)
-    let element2 = document.getElementById(effect)
-    element.style.color = 'yellow';
-    element2.style.color = 'yellow';
-}
-
-function hoverColorInverse(iden){
-    let stats = iden + "Stats";
-    let effect = iden + "StatsEffect"
-    let element = document.getElementById(stats)
-    let element2 = document.getElementById(effect)
-    element.style.color = 'white';
-    element2.style.color = 'white';
-}
-
-
 function playSong1() {
-    audio1.play()
+    audio.play()
 
-    audio1.addEventListener("ended", function() {
-        playSong2()
-    })
-}
-function playSong2() {
-    audio2.play()
-
-    audio2.addEventListener("ended", function() {
+    audio.addEventListener("ended", function() {
         playSong1()
     })
 }
@@ -549,7 +835,13 @@ function changeFonts(option) {
     }
     if (option.value == 'option7') {
         font = 'PAPYRUS THE GREAT'
-        playSong1();
+        if (!mutedAudio) {
+            playSong1();
+        }
+        else {
+            audio.currentTime = 0
+            audio.pause()
+        }
     }
     if (option.value == 'option8') {
         font = 'Comic Sans'
@@ -561,10 +853,8 @@ function changeFonts(option) {
         font = 'swkeys'
     }
     if (option.value != 'option7'){
-        audio1.currentTime = 0
-        audio1.pause()
-        audio2.currentTime = 0
-        audio2.pause()
+        audio.currentTime = 0
+        audio.pause()
     }
     body.style.fontFamily = font
     select.style.fontFamily = font
@@ -597,7 +887,13 @@ function changeFonts2(option) {
     }
     if (option == 'option7') {
         font = 'PAPYRUS THE GREAT'
-        setTimeout(playSong1,3000);
+        if (!mutedAudio) {
+            setTimeout(playSong1,3000);
+        }
+        else {
+            audio.currentTime = 0
+            audio.pause()
+        }
     }
     if (option == 'option8') {
         font = 'Comic Sans'
@@ -609,16 +905,25 @@ function changeFonts2(option) {
         font = 'swkeys'
     }
     if (option != 'option7'){
-        audio1.currentTime = 0
-        audio1.pause()
-        audio2.currentTime = 0
-        audio2.pause()
+        audio.currentTime = 0
+        audio.pause()
     }
     body.style.fontFamily = font
     select.style.fontFamily = font
     label.style.fontFamily = font
     for (var i = 0; i < buttons.length; i++){
         buttons[i].style.fontFamily = font
+    }
+}
+
+function muteTheAudio() {
+    mutedAudio ? (mutedAudio = false, isMuted = 'no') : (mutedAudio = true, isMuted = 'yes')
+    if (optionValue == 'option7' && !mutedAudio) {
+        setTimeout(playSong1,1000);
+    }
+    else {
+        audio.currentTime = 0
+        audio.pause()
     }
 }
 
@@ -643,17 +948,32 @@ codeInput.addEventListener("keydown", function(event) {
     }
 });
 
-var code1Check = false;
+
 function readCode () {
-    if (code == 'digitalgod' && code1Check == false) {
-        code1Check = true
-        superCoins += 69
-        totalSuperCoins += 69
-        codeReward = code1Reward
-        whichCode.innerHTML = codeIsTrue
+    if (code == 'digitalgod'){
+        if (code1Check == false) {
+            code1Check = true
+            superCoins += 69
+            totalSuperCoins += 69
+            codeReward = code1Reward
+            whichCode.innerHTML = codeIsTrue
+        } 
+        else {
+        whichCode.innerHTML = codeIsUsed
+        }
     }
-    else if (code == 'digitalgod' && code1Check == true) whichCode.innerHTML = codeIsUsed
-    else if (code != 'digitalgod') whichCode.innerHTML = codeIsFalse
+    else if (code == 'shirakamifubuki' && isSpiritualEvent) {
+        if (code2Check == false) {
+            code2Check = true
+            spirits += 55
+            codeReward = code2Reward
+            whichCode.innerHTML = codeIsTrue
+        }
+        else {
+        whichCode.innerHTML = codeIsUsed
+        }
+    }
+    else whichCode.innerHTML = codeIsFalse
     openWindow('code', true)
 }
 
@@ -664,7 +984,7 @@ function getDaily() {
         dailyTimer = 86399
         dailySeconds = dailyTimer
         dailyDesc.innerHTML = dailyIsTrue
-        convertingTime2()
+        convertingDailyTime()
     }
     else {dailyDesc.innerHTML = dailyIsFalse}
     openWindow('daily', true)
@@ -708,6 +1028,24 @@ telegramChatButton.addEventListener('click', function() {
 
 telegramChannelButton.addEventListener('click', function() {
     window.open('https://t.me/+pqju4vzGrrY2NzI6', '_blank');
+});
+
+
+const versionDiv = document.getElementById('versionDiv');
+let startY;
+let startScrollTop;
+
+versionDiv.addEventListener('touchstart', (event) => {
+    startY = event.touches[0].clientY;
+    startScrollTop = versionDiv.scrollTop;
+});
+
+versionDiv.addEventListener('touchmove', (event) => {
+    const currentY = event.touches[0].clientY;
+    const deltaY = currentY - startY;
+    versionDiv.scrollTop = startScrollTop - deltaY;
+
+    event.preventDefault(); // Отменяем стандартное скроллирование
 });
 
 

@@ -1,4 +1,4 @@
-var version = "0.9"
+var version = "0.10"
 function singleUpgradePurchasedRemove () {
     var singleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
     for (var i = 0; i < singleArray.length; i++){
@@ -24,12 +24,17 @@ var gainPerSecondSave
 function saveGame () { 
     gainPerSecondSave = gainPerSecond * 20
     whatsYourCurrentTime()
-    datasave = savingTheGame(); //образуем переменную с кучей других переменных
+    savingTheGame(); //образуем переменную с кучей других переменных
     autoSaverTimer = 0
     notify(saveNotify);
     let stringifiedData = JSON.stringify(datasave); //превратим в строчку
-
+    while ((achRow1.completion).length < 20) {
+        (achRow1.completion).push(false);
+    }
     localStorage.setItem('completion', JSON.stringify(achRow1.completion))
+    while (loreBoolean.length < 8) {
+        loreBoolean.push(false);
+    }
     localStorage.setItem('chapters', JSON.stringify(loreBoolean))
     // сохранить в LocalStorage по ключу коунтдата
     localStorage.setItem('datasaving', stringifiedData);
@@ -46,7 +51,6 @@ function loadGame() {
         achievementGottenRemove ()
         singleUpgradePurchasedRemove ()
         loadingTheGame();
-        singleUpgradeTextUpdate ()
         singleUpgradePurchased ()
         const achCompletions = localStorage.getItem('completion')
         const loreChapters = localStorage.getItem('chapters')
@@ -58,6 +62,7 @@ function loadGame() {
             for (let i = 0; i < loreBoolean.length; i++){
                 checkLoreShorter(loreBoolean, i)
             }
+
         }
         checkShopSingle (firstShopSingle.amount, 'overdriveSelect')
         achCompletionsChecker()
@@ -65,7 +70,9 @@ function loadGame() {
         whatsYourCurrentTime2()
         offlineGain()
         offlineGainTime()
-        convertingTime()
+        loadAutomations()
+        changeInputValue()
+        convertingTime(gameSeconds, gameMinutes, gameHours, gameDays, 'game')
         changeFonts2(optionValue)
         autoSaverTimer = 0
         clearInterval(autoSaveTime)
@@ -77,14 +84,10 @@ function loadGame() {
         }
         gainPerSecondSave = gainPerSecond * 20
         notify(loadNotify);
-        version = "0.9"
 }
-
 
 var autoSaverTimer = 0
 var autoSaveTime
-
-
 
 function autoSaveThis () {
     if (autoSaving == 'yes')
@@ -95,43 +98,14 @@ function autoSaveThis () {
     }
 
 function doHardReset () {
-        gainPerSecondSave = gainPerSecond * 20
-            gain = 1;
-            gainPerClick = 1;
-            clickCount = 0
-            money = 10
-            total = 10
             autoSaving = 'yes';
-            totalDiamond = 0
-            totalPrestiges = 0
-            gameTimer = 0
-            gameSeconds = 0
-            gameMinutes = 0
-            gameHours = 0
-            gameDays = 0
             maxOrNoVar = false
             achievementBonus = 1
             achBonus = document.getElementById('achBonus')
-            achCount = 0
-            achRowCount = 0
-            achRow1 = {
-                condition: [1, 1000, 2.01, 1, 1000, 666, 1000, 1, 1e6, 1],
-                reward: [0, 0, 0, 0, 1.01, 11, 1.05, 0, 1.33, 0],
-                completion: [false, false, false, false, false, false, false, false, false, false],
-                name: ['"Без ходуль"', '"Первая тысяча"', '"Я вызываю полицию! Нет, я!"', '"Есть пробитие!"', '"Мастер-кликер"', '"Адская продуктивность"', '"Пора спать!"', '"Снова стена и снова пробитие!"', '"Миллионный множитель"', '"Финишная прямая?"'],
-                fullRow: 0
-            }
-            loreBoolean = [false, false, false, false]
-            umultiplier = 1
-            umultipliercount = 0
-            upower = 1
-            upowercount = 0
             upgradeReset();
             whatsYourCurrentTime()
-            autoSaverTimer = 0
             clearInterval(autoSaveTime)
             saveGame();
-            gainPerSecondSave = gainPerSecond * 20
             var hardNotifyColor
             hardNotifyColor = "red";
             notify(hardNotify, hardNotifyColor);
@@ -144,9 +118,7 @@ function doHardReset () {
 function exportSave() {
     gainPerSecondSave = gainPerSecond * 20;
     whatsYourCurrentTime();
-
-    let datasave = savingTheGame(); 
-
+    savingTheGame(); 
     notify(exportNotify);
     let exportedData = JSON.stringify(datasave); //превратим в строчку
     let exportedData2 = JSON.stringify(achRow1.completion)
@@ -189,12 +161,10 @@ function importing(base64) {
 
     achievementGottenRemove ()
     singleUpgradePurchasedRemove ()
-    importingTheGame();
     loadingTheGame()
     for (let i = 0; i < loreBoolean.length; i++){
         checkLoreShorter(loreBoolean, i)
     }
-    singleUpgradeTextUpdate ()
     singleUpgradePurchased ()
     checkShopSingle (firstShopSingle.amount, 'overdriveSelect')
     achCompletionsChecker()
@@ -202,12 +172,14 @@ function importing(base64) {
     whatsYourCurrentTime2()
     offlineGain()
     offlineGainTime()
-    convertingTime()
+    loadAutomations()
+    changeInputValue()
+    convertingTime(gameSeconds, gameMinutes, gameHours, gameDays, 'game')
     changeFonts2(optionValue)
     autoSaverTimer = 0
     clearInterval(autoSaveTime)
     notify(importNotify);
-    version = "0.9"
+    location.reload()
 }
 
 
@@ -229,108 +201,132 @@ fileUpload.addEventListener('change', function(base64) {
     fileUpload.value = null;
 });
 var currentLanguage = 'en'
+
 function savingTheGame() {
-    return {
-        version: version,
+    datasave = {
+        version,
         select_selectedIndex: select.selectedIndex,
-        gainPerSecondSave: gainPerSecondSave,
-        lastOnlineTime: lastOnlineTime,
-        money: money,
-        superCoins: superCoins,
-        totalSuperCoins: totalSuperCoins,
-        spentSuperCoins: spentSuperCoins,
-        autoSaving: autoSaving,
-        maxOrNoVar: maxOrNoVar,
-        gainPerSecond: gainPerSecond,
-        gainPerClick: gainPerClick,
-        total: total,
-        clickCount: clickCount,
-        gameTimer: gameTimer,
-        amountsOfUpgrades: amountsOfUpgrades,
-        gameSeconds: gameSeconds,
-        gameMinutes: gameMinutes,
-        gameHours: gameHours,
-        gameDays: gameDays,
-        dailyTimer: dailyTimer,
-        dailySeconds: dailySeconds,
-        dailyMinutes: dailyMinutes,
-        dailyHours: dailyHours,
-        currentLanguage: currentLanguage,
-        optionValue: optionValue,
-        code1Check: code1Check,
-        firstBuyable_amount: firstBuyable.amount,
-        firstBuyable_baseEffect: firstBuyable.baseEffect,
-        firstBuyable_price: firstBuyable.price,
-        firstBuyable_basePrice: firstBuyable.basePrice,
-        firstBuyable_power: firstBuyable.power,
-        secondBuyable_amount: secondBuyable.amount,
-        secondBuyable_baseEffect: secondBuyable.baseEffect,
-        secondBuyable_price: secondBuyable.price,
-        secondBuyable_basePrice: secondBuyable.basePrice,
-        secondBuyable_power: secondBuyable.power,
-        thirdBuyable_amount: thirdBuyable.amount,
-        thirdBuyable_baseEffect: thirdBuyable.baseEffect,
-        thirdBuyable_price: thirdBuyable.price,
-        thirdBuyable_basePrice: thirdBuyable.basePrice,
-        thirdBuyable_power: thirdBuyable.power,
-        fourthBuyable_amount: fourthBuyable.amount,
-        fourthBuyable_baseEffect: fourthBuyable.baseEffect,
-        fourthBuyable_price: fourthBuyable.price,
-        fourthBuyable_basePrice: fourthBuyable.basePrice,
-        fourthBuyable_power: fourthBuyable.power,
-        fifthBuyable_amount: fifthBuyable.amount,
-        fifthBuyable_baseEffect: fifthBuyable.baseEffect,
-        fifthBuyable_price: fifthBuyable.price,
-        fifthBuyable_basePrice: fifthBuyable.basePrice,
-        fifthBuyable_power: fifthBuyable.power,
-        firstSingle_amount: firstSingle.amount,
-        firstSingle_baseEffect: firstSingle.baseEffect,
-        firstSingle_price: firstSingle.price,
-        secondSingle_amount: secondSingle.amount,
-        secondSingle_baseEffect: secondSingle.baseEffect,
-        secondSingle_price: secondSingle.price,
-        thirdSingle_amount: thirdSingle.amount,
-        thirdSingle_baseEffect: thirdSingle.baseEffect,
-        thirdSingle_price: thirdSingle.price,
-        fourthSingle_amount: fourthSingle.amount,
-        fourthSingle_baseEffect: fourthSingle.baseEffect,
-        fourthSingle_price: fourthSingle.price,
-        fifthSingle_amount: fifthSingle.amount,
-        fifthSingle_baseEffect: fifthSingle.baseEffect,
-        fifthSingle_price: fifthSingle.price,
-        sixthSingle_amount: sixthSingle.amount,
-        sixthSingle_baseEffect: sixthSingle.baseEffect,
-        sixthSingle_price: sixthSingle.price,
-        seventhSingle_amount: seventhSingle.amount,
-        seventhSingle_baseEffect: seventhSingle.baseEffect,
-        seventhSingle_price: seventhSingle.price,
-        eighthSingle_amount: eighthSingle.amount,
-        eighthSingle_baseEffect: eighthSingle.baseEffect,
-        eighthSingle_price: eighthSingle.price,
-        ninthSingle_amount: ninthSingle.amount,
-        ninthSingle_baseEffect: ninthSingle.baseEffect,
-        ninthSingle_price: ninthSingle.price,
-        tenthSingle_amount: tenthSingle.amount,
-        tenthSingle_baseEffect: tenthSingle.baseEffect,
-        tenthSingle_price: tenthSingle.price,
-        umultiplier: umultiplier,
-        umultipliercount: umultipliercount,
-        upower: upower,
-        upowercount: upowercount,
-        firstShopBuyable_amount: firstShopBuyable.amount,
-        firstShopBuyable_price: firstShopBuyable.price,
-        secondShopBuyable_amount: secondShopBuyable.amount,
-        secondShopBuyable_price: secondShopBuyable.price,
-        thirdShopBuyable_amount: thirdShopBuyable.amount,
-        thirdShopBuyable_price: thirdShopBuyable.price,
-        fourthShopBuyable_amount: fourthShopBuyable.amount,
-        fourthShopBuyable_price: fourthShopBuyable.price,
-        firstShopSingle_amount: firstShopSingle.amount,
-        firstShopSingle_price: firstShopSingle.price,
-        overdriveType1_percent: overdriveType1.percent,
-        overdriveType1_effect: overdriveType1.effect,
-        overdriveType1_price: overdriveType1.price,
+        gainPerSecondSave,
+        lastOnlineTime: lastOnlineTime-0,
+        money,
+        total,
+        superCoins,
+        totalSuperCoins,
+        spentSuperCoins,
+        crystals,
+        totalCrystals,
+        prestigeCount,
+        autoSaving,
+        maxOrNoVar,
+        gainPerSecond,
+        gainPerClick,
+        clickCount,
+        gameTimer,
+        prestigeTimer,
+        fastestPrestigeTimer,
+        amountsOfUpgrades,
+        gameSeconds,
+        gameMinutes,
+        gameHours,
+        gameDays,
+        prestigeSeconds,
+        prestigeMinutes,
+        prestigeHours,
+        prestigeDays,
+        fastestPrestigeSeconds,
+        fastestPrestigeMinutes,
+        fastestPrestigeHours,
+        fastestPrestigeDays,
+        dailyTimer,
+        dailySeconds,
+        dailyMinutes,
+        dailyHours,
+        currentLanguage,
+        optionValue,
+        code1Check,
+        code2Check,
+        umultiplier,
+        umultipliercount,
+        upower,
+        upowercount,
+        achFullRow1,
+        achFullRow2, 
+        amountOfPrestigeUpgrades,
+        fastestNoMaxBuyPrestiges,
+        prestigeConditionCoins: parseFloat(prestigeConditionCoins),
+        prestigeConditionTime: parseFloat(prestigeConditionTime),
+        whichPrestigeMode,
+        umultiplierTimer,
+        upowerTimer,
+        autoUmultiInput_value: autoUmultiInput.value,
+        autoUpowerInput_value: autoUpowerInput.value,
+        autoUpowerInput2_value: autoUpowerInput2.value,
+        shards,
+        shardsPerSecond,
+        brokenCrystals,
+        mutedAudio,
+        isMuted,
+        spirits
     };
+    
+    const buyablesAndSingles = [
+        'firstBuyable', 'secondBuyable', 'thirdBuyable', 'fourthBuyable', 'fifthBuyable',
+        'firstSingle', 'secondSingle', 'thirdSingle', 'fourthSingle', 'fifthSingle',
+        'sixthSingle', 'seventhSingle', 'eighthSingle', 'ninthSingle', 'tenthSingle',
+        'firstShopBuyable', 'secondShopBuyable', 'thirdShopBuyable', 'fourthShopBuyable',
+        'firstShopSingle',
+        'firstPrestigeSingle', 'secondPrestigeSingle', 'thirdPrestigeSingle', 'fourthPrestigeSingle',
+        'fifthPrestigeSingle', 'sixthPrestigeSingle', 'seventhPrestigeSingle', 'eighthPrestigeSingle',
+        'ninthPrestigeSingle', 'tenthPrestigeSingle', 'eleventhPrestigeSingle', 'twelfthPrestigeSingle',
+        'thirteenthPrestigeSingle', 'fourteenthPrestigeSingle', 'fifteenthPrestigeSingle', 'sixteenthPrestigeSingle',
+        'firstPrestigeBuyable', 'secondPrestigeBuyable',
+        'firstShardBuyable', 'secondShardBuyable', 'thirdShardBuyable',
+        'firstShardSingle', 'secondShardSingle', 'thirdShardSingle', 'fourthShardSingle', 'fifthShardSingle', 'sixthShardSingle',
+    ];
+
+    const intervals = [
+        'singleInterval', 'buyableInterval', 'umultiplierInterval', 'upowerInterval', 'prestigeInterval'
+    ]
+
+    const checkmarks = [
+        'autoSingleUpgradeCheckbox', 'autoBuyableUpgradeCheckbox', 'autoUmultiplierCheckbox', 'autoUpowerCheckbox', 'autoPrestigeCheckbox'
+    ]
+
+    const shardBars = ['shardUnlockablePerSecond', 'shardUnlockableClick', 'shardUnlockableBuyables', 'shardUnlockableSingles']
+
+    for (const i of shardBars) {
+        datasave[`${i}_percent`] = window[i].percent
+        datasave[`${i}_consumedShards`] = window[i].consumedShards
+    }
+
+
+    for (const i of checkmarks) {
+        datasave[`${i}_checked`] = document.getElementById(i).checked
+    }
+
+    for (const i of intervals) {
+        datasave[`${i}_time`] = window[i].time;
+        datasave[`${i}_price`] = window[i].price;
+        if (window[i].hasOwnProperty('effect')) {
+            datasave[`${i}_effect`] = window[i].effect;
+        }
+    }
+    
+    for (const item of buyablesAndSingles) {
+        datasave[`${item}_amount`] = window[item].amount;
+        if (window[item].hasOwnProperty('baseEffect') && !(item.includes('ShardSingle'))) {
+            datasave[`${item}_baseEffect`] = window[item].baseEffect;
+        }
+        if (window[item].hasOwnProperty('price') && !(item.includes('ShardSingle'))) {
+            datasave[`${item}_price`] = window[item].price;
+        }
+    }
+    
+    datasave.overdriveType1_percent = overdriveType1.percent;
+    datasave.overdriveType1_effect = overdriveType1.effect;
+    datasave.overdriveType1_price = overdriveType1.price;
+    
+    return datasave;
 }
 
 function loadingTheGame() {
@@ -354,77 +350,38 @@ function loadingTheGame() {
     gameSeconds = parseFloat(parsedData.gameSeconds);
     gameMinutes = parseFloat(parsedData.gameMinutes);
     gameHours = parseFloat(parsedData.gameHours);
-    firstBuyable.amount = parseFloat(parsedData.firstBuyable_amount);
-    firstBuyable.baseEffect = parseFloat(parsedData.firstBuyable_baseEffect);
-    firstBuyable.price = parseFloat(parsedData.firstBuyable_price);
-    firstBuyable.basePrice = parseFloat(parsedData.firstBuyable_basePrice);
-    firstBuyable.power = parseFloat(parsedData.firstBuyable_power);
-    secondBuyable.amount = parseFloat(parsedData.secondBuyable_amount);
-    secondBuyable.baseEffect = parseFloat(parsedData.secondBuyable_baseEffect);
-    secondBuyable.price = parseFloat(parsedData.secondBuyable_price);
-    secondBuyable.basePrice = parseFloat(parsedData.secondBuyable_basePrice);
-    secondBuyable.power = parseFloat(parsedData.secondBuyable_power);
-    thirdBuyable.amount = parseFloat(parsedData.thirdBuyable_amount);
-    thirdBuyable.baseEffect = parseFloat(parsedData.thirdBuyable_baseEffect);
-    thirdBuyable.price = parseFloat(parsedData.thirdBuyable_price);
-    thirdBuyable.basePrice = parseFloat(parsedData.thirdBuyable_basePrice);
-    thirdBuyable.power = parseFloat(parsedData.thirdBuyable_power);
-    fourthBuyable.amount = parseFloat(parsedData.fourthBuyable_amount);
-    fourthBuyable.baseEffect = parseFloat(parsedData.fourthBuyable_baseEffect);
-    fourthBuyable.price = parseFloat(parsedData.fourthBuyable_price);
-    fourthBuyable.basePrice = parseFloat(parsedData.fourthBuyable_basePrice);
-    fourthBuyable.power = parseFloat(parsedData.fourthBuyable_power);
-    fifthBuyable.amount = parseFloat(parsedData.fifthBuyable_amount);
-    fifthBuyable.baseEffect = parseFloat(parsedData.fifthBuyable_baseEffect);
-    fifthBuyable.price = parseFloat(parsedData.fifthBuyable_price);
-    fifthBuyable.basePrice = parseFloat(parsedData.fifthBuyable_basePrice);
-    fifthBuyable.power = parseFloat(parsedData.fifthBuyable_power);
-    firstSingle.amount = parseFloat(parsedData.firstSingle_amount);
-    firstSingle.baseEffect = parseFloat(parsedData.firstSingle_baseEffect);
-    firstSingle.price = parseFloat(parsedData.firstSingle_price);
-    secondSingle.amount = parseFloat(parsedData.secondSingle_amount);
-    secondSingle.baseEffect = parseFloat(parsedData.secondSingle_baseEffect);
-    secondSingle.price = parseFloat(parsedData.secondSingle_price);
-    thirdSingle.amount = parseFloat(parsedData.thirdSingle_amount);
-    thirdSingle.baseEffect = parseFloat(parsedData.thirdSingle_baseEffect);
-    thirdSingle.price = parseFloat(parsedData.thirdSingle_price);
-    fourthSingle.amount = parseFloat(parsedData.fourthSingle_amount);
-    fourthSingle.baseEffect = parseFloat(parsedData.fourthSingle_baseEffect);
-    fourthSingle.price = parseFloat(parsedData.fourthSingle_price);
-    fifthSingle.amount = parseFloat(parsedData.fifthSingle_amount);
-    fifthSingle.baseEffect = parseFloat(parsedData.fifthSingle_baseEffect);
-    fifthSingle.price = parseFloat(parsedData.fifthSingle_price);
-    sixthSingle.amount = parseFloat(parsedData.sixthSingle_amount);
-    sixthSingle.baseEffect = parseFloat(parsedData.sixthSingle_baseEffect);
-    sixthSingle.price = parseFloat(parsedData.sixthSingle_price);
-    seventhSingle.amount = parseFloat(parsedData.seventhSingle_amount);
-    seventhSingle.baseEffect = parseFloat(parsedData.seventhSingle_baseEffect);
-    seventhSingle.price = parseFloat(parsedData.seventhSingle_price);
-    eighthSingle.amount = parseFloat(parsedData.eighthSingle_amount);
-    eighthSingle.baseEffect = parseFloat(parsedData.eighthSingle_baseEffect);
-    eighthSingle.price = parseFloat(parsedData.eighthSingle_price);
-    ninthSingle.amount = parseFloat(parsedData.ninthSingle_amount);
-    ninthSingle.baseEffect = parseFloat(parsedData.ninthSingle_baseEffect);
-    ninthSingle.price = parseFloat(parsedData.ninthSingle_price);
-    tenthSingle.amount = parseFloat(parsedData.tenthSingle_amount);
-    tenthSingle.baseEffect = parseFloat(parsedData.tenthSingle_baseEffect);
-    tenthSingle.price = parseFloat(parsedData.tenthSingle_price);
+
+    const buyableCount = ["first","second","third","fourth","fifth"];
+    for (let i of buyableCount) {
+    window[i+"Buyable"].amount = parseFloat(parsedData[i+"Buyable_amount"]);
+    window[i+"Buyable"].baseEffect = parseFloat(parsedData[i+"Buyable_baseEffect"]);
+    window[i+"Buyable"].price = parseFloat(parsedData[i+"Buyable_price"]);
+    }
+
+    const singleCount = ["first","second","third","fourth","fifth","sixth","seventh","eighth","ninth","tenth"];
+    for (let i of singleCount) {
+    window[i+"Single"].amount = parseFloat(parsedData[i+"Single_amount"]);
+    window[i+"Single"].baseEffect = parseFloat(parsedData[i+"Single_baseEffect"]);
+    }
+
     umultiplier = parseFloat(parsedData.umultiplier);
     umultipliercount = parseFloat(parsedData.umultipliercount);
     upower = parseFloat(parsedData.upower);
     upowercount = parseFloat(parsedData.upowercount);
+
     if (parsedData.firstShopBuyable_amount != null) {
         version = parsedData.version;
-        firstShopBuyable.amount = parseFloat(parsedData.firstShopBuyable_amount);
-        firstShopBuyable.price = parseFloat(parsedData.firstShopBuyable_price);
-        secondShopBuyable.amount = parseFloat(parsedData.secondShopBuyable_amount);
-        secondShopBuyable.price = parseFloat(parsedData.secondShopBuyable_price);
-        thirdShopBuyable.amount = parseFloat(parsedData.thirdShopBuyable_amount);
-        thirdShopBuyable.price = parseFloat(parsedData.thirdShopBuyable_price);
-        fourthShopBuyable.amount = parseFloat(parsedData.fourthShopBuyable_amount);
-        fourthShopBuyable.price = parseFloat(parsedData.fourthShopBuyable_price);
-        firstShopSingle.amount = parseFloat(parsedData.firstShopSingle_amount);
-        firstShopSingle.price = parseFloat(parsedData.firstShopSingle_price);
+
+        const shopBuyableCount = ["first","second","third","fourth"];
+        for (let i of shopBuyableCount) {
+        window[i+"ShopBuyable"].amount = parseFloat(parsedData[i+"ShopBuyable_amount"]);
+        window[i+"ShopBuyable"].price = parseFloat(parsedData[i+"ShopBuyable_price"]);
+        }
+        const shopSingleCount = ["first"];
+        for (let i of shopSingleCount) {
+        window[i+"ShopSingle"].amount = parseFloat(parsedData[i+"ShopSingle_amount"]);
+        window[i+"ShopSingle"].price = parseFloat(parsedData[i+"ShopSingle_price"]);
+        }
         overdriveType1.percent = parseFloat(parsedData.overdriveType1_percent);
         overdriveType1.effect = parseFloat(parsedData.overdriveType1_effect);
         overdriveType1.price = parseFloat(parsedData.overdriveType1_price);
@@ -441,16 +398,123 @@ function loadingTheGame() {
         optionValue = parsedData.optionValue;
     }
 
+    const prestigeSingleCount = ["first","second","third","fourth","fifth","sixth","seventh","eighth","ninth","tenth","eleventh","twelfth","thirteenth","fourteenth","fifteenth","sixteenth"];
+    const prestigeBuyableCount = ["first","second", "third"];
+    const shardBars = ['shardUnlockablePerSecond', 'shardUnlockableClick', 'shardUnlockableBuyables', 'shardUnlockableSingles']
+
+    if (version == "0.10") {
+        prestigeCount = parseFloat(parsedData.prestigeCount);
+        crystals = parseFloat(parsedData.crystals);
+        totalCrystals = parseFloat(parsedData.totalCrystals);
+
+        prestigeSeconds = parseFloat(parsedData.prestigeSeconds);
+        prestigeMinutes = parseFloat(parsedData.prestigeMinutes);
+        prestigeHours = parseFloat(parsedData.prestigeHours);
+        prestigeDays = parseFloat(parsedData.prestigeDays);
+
+        fastestPrestigeSeconds = parseFloat(parsedData.fastestPrestigeSeconds);
+        fastestPrestigeMinutes = parseFloat(parsedData.fastestPrestigeMinutes);
+        fastestPrestigeHours = parseFloat(parsedData.fastestPrestigeHours);
+        fastestPrestigeDays = parseFloat(parsedData.fastestPrestigeDays);
+
+        prestigeTimer = parseFloat(parsedData.prestigeTimer);
+        fastestPrestigeTimer = parseFloat(parsedData.fastestPrestigeTimer);
+        fastestNoMaxBuyPrestiges = parseFloat(parsedData.fastestNoMaxBuyPrestiges);
+
+        achFullRow1 = parseFloat(parsedData.achFullRow1)
+        achFullRow2 = parseFloat(parsedData.achFullRow2)
+
+        prestigeConditionCoins = parseFloat(parsedData.prestigeConditionCoins)
+        prestigeConditionTime = parseFloat(parsedData.prestigeConditionTime)
+        whichPrestigeMode = parsedData.whichPrestigeMode
+
+        umultiplierTimer = parseFloat(parsedData.umultiplierTimer);
+        upowerTimer = parseFloat(parsedData.upowerTimer);
+
+        amountOfPrestigeUpgrades = parseFloat(parsedData.amountOfPrestigeUpgrades)
+        autoUmultiInput.value = parseFloat(parsedData.autoUmultiInput_value)
+        autoUpowerInput.value = parseFloat(parsedData.autoUpowerInput_value)
+        autoUpowerInput2.value = parseFloat(parsedData.autoUpowerInput2_value)
+
+        shards = parseFloat(parsedData.shards)
+        shardsPerSecond = parseFloat(parsedData.shardsPerSecond)
+        brokenCrystals = parseFloat(parsedData.brokenCrystals)
+
+        mutedAudio = parsedData.mutedAudio
+        isMuted = parsedData.isMuted
+
+        if (parsedData.spirits != null) spirits = parseFloat(parsedData.spirits)
+
+        code2Check = parsedData.code2Check
+
+        for (let i = 0; i < 2; i++) {
+        window[prestigeBuyableCount[i]+"PrestigeBuyable"].amount = parseFloat(parsedData[prestigeBuyableCount[i]+"PrestigeBuyable_amount"]);
+        window[prestigeBuyableCount[i]+"PrestigeBuyable"].price = parseFloat(parsedData[prestigeBuyableCount[i]+"PrestigeBuyable_price"]);
+        }
+
+        for (let i of prestigeSingleCount) {
+        window[i+"PrestigeSingle"].amount = parseFloat(parsedData[i+"PrestigeSingle_amount"]);
+        }
+
+        for (let i of prestigeBuyableCount) {
+            window[i+"ShardBuyable"].amount = parseFloat(parsedData[i+"ShardBuyable_amount"]);
+            window[i+"ShardBuyable"].price = parseFloat(parsedData[i+"ShardBuyable_price"]);
+        }
+
+        for (let i = 0; i < 6; i++) {
+            window[prestigeSingleCount[i]+"ShardSingle"].amount = parseFloat(parsedData[prestigeSingleCount[i]+"ShardSingle_amount"]);
+        }
+
+        const intervalsCount = [
+            'singleInterval', 'buyableInterval', 'umultiplierInterval', 'upowerInterval', 'prestigeInterval'
+        ]
+
+        for (let i of intervalsCount) {
+            window[i].price = parseFloat(parsedData[i+"_price"]);
+            window[i].time = parseFloat(parsedData[i+"_time"]);
+            }
+
+        buyableInterval.effect = parseFloat(parsedData.buyableInterval_effect);
+
+        const checkmarks = [
+            'autoSingleUpgradeCheckbox', 'autoBuyableUpgradeCheckbox', 'autoUmultiplierCheckbox', 'autoUpowerCheckbox', 'autoPrestigeCheckbox'
+            ]
+        
+        for (let i of checkmarks) {
+            document.getElementById(i).checked = parsedData[`${i}_checked`]
+        }
+
+        for (const i of shardBars) {
+            window[i].percent = parseFloat(parsedData[i+"_percent"])
+            window[i].consumedShards =  parseFloat(parsedData[i+"_consumedShards"])
+        }
+
+    }
+    else {
+        for (let i of prestigeSingleCount) {
+            window[i+"PrestigeSingle"].amount = 0
+            }
+        for (const i of shardBars) {
+            window[i].percent = 0
+            window[i].consumedShards = 0
+            }
+        brokenCrystals = 0
+        shards = 0
+        prestigeCount = 0
+        crystals = 0
+        totalCrystals = 0
+        noResets = false
+        fastestPrestigeTimer = 1e69
+        spirits = 0
+        for (let i = 10; i < 20; i++)
+        achRow1.completion[i] = false
+        }
+    version = "0.10"
 }
-}
-
-function importingTheGame() {
-
-
 }
 
 function upgradeReset() {
-    let arrayReset = [secondBuyable, firstBuyable, thirdBuyable, fourthBuyable, fifthBuyable, firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
+    let arrayReset = [secondBuyable, firstBuyable, thirdBuyable, fourthBuyable, fifthBuyable]
     for (let i = 0; i < arrayReset.length; i++){
         arrayReset[i].amount = 0
         arrayReset[i].baseEffect = 0
@@ -460,15 +524,56 @@ function upgradeReset() {
     thirdBuyable.price = 500
     fourthBuyable.price = 1000
     fifthBuyable.price = 5000
+}
 
+function singlesReset() {
+    let arrayReset = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
+    for (let i = 0; i < arrayReset.length; i++){
+        arrayReset[i].amount = 0
+        arrayReset[i].baseEffect = 0
+    }
     firstSingle.price = 1e5
-    secondSingle.price = 1.5e6
-    thirdSingle.price = 3.5e6
-    fourthSingle.price = 3e7
-    fifthSingle.price = 5e8
-    sixthSingle.price = 3e9
-    seventhSingle.price = 1.1e10
-    eighthSingle.price = 1.5e11
-    ninthSingle.price = 1.2e12
+    secondSingle.price = 3e6
+    thirdSingle.price = 5e6
+    fourthSingle.price = 2.5e7
+    fifthSingle.price = 6.5e8
+    sixthSingle.price = 5e9
+    seventhSingle.price = 5e10
+    eighthSingle.price = 7e11
+    ninthSingle.price = 2e12
     tenthSingle.price = 1e13
+}
+
+function loadAutomations() {
+    for (let i = 0; i < autoSetIntervals.length; i++) {
+        clearInterval(autoSetIntervals[i]);
+        autoSetIntervals[i] = ''
+    }
+    if (singleCheckbox.checked) { 
+        autoSetIntervals[0] = setInterval(autoBuySingle, singleInterval.time); 
+    }
+    if (buyableCheckbox.checked) { 
+        autoSetIntervals[1] = setInterval(autoBuyBuyable, buyableInterval.time); 
+    }
+    if (umultiplierCheckbox.checked) {
+        if (umultiplierInterval.time != 50) {
+            autoSetIntervals[2] = setInterval(doUmulti, umultiplierInterval.time);
+        } else {
+            uMultiReautomate()
+        }
+    }
+    if (upowerCheckbox.checked) {
+        if (upowerInterval.time != 50) {
+            autoSetIntervals[3] = setInterval(doUpower, upowerInterval.time);
+        } else {
+            uPowerReautomate()
+        }
+    }
+    if (prestigeCheckbox.checked) {
+        if ((!prestigeMilestonesEffects[13]) || prestigeInterval.time != 50) {
+            autoSetIntervals[4] = setInterval(doPrestigeReset, prestigeInterval.time);
+        } else {
+            reautomate()
+        }
+    }
 }

@@ -214,17 +214,16 @@
 .unlockedChapter {
     display: block;
 }
-  body {
+body {
     position: relative;
     min-height: 98.9vh;
-  }
-  footer {
+}
+footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    padding: 20px;
-  }
-  
+}
+
 #autoTimer { 
     height: 15px; 
     width: 155px;
@@ -235,7 +234,7 @@
     padding: 0;
     border-width: 1px 1px 0px 0px;
     position: fixed;
-  }
+}
 
 #helpPageChooser{
     display: flex;

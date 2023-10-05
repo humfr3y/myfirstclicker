@@ -25,6 +25,11 @@ body {
     display: flex;
     justify-content: center;
 }
+#prestigeSubButtons {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
 .titleTab {
     margin: 0 auto;
     color: white;
@@ -48,6 +53,7 @@ body {
     margin-bottom: 10px;
     cursor: pointer;
     margin-right: 5px;
+    white-space: nowrap;
 }
 .tabButton:hover {
     background-color: rgb(62, 62, 62)
@@ -72,17 +78,16 @@ it {
 .tooltip {
     background: #000000;
     color: white;
-    /* padding: -4px -8px; */
     font-size: 13px;
     border-radius: 4px;
     border-color: white;
     border: 2px solid rgb(255, 255, 255);
     display: none;
-    padding-bottom: 10px;
     width: 180px;
     text-align: center;
     word-wrap: break-word;
-    padding-top: 5px;
+    padding: 5px 5px 5px 5px;
+    z-index: 10000;
 
 }
 
@@ -96,7 +101,7 @@ it {
     width: 8px;
     height: 8px;
     background: inherit;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
     border: solid 0px;
     content: '';
 }
@@ -108,8 +113,8 @@ it {
 .arrow::before {
     visibility: visible;
     transform: rotate(45deg);
-    border-bottom-width: 20px;
-    border-right-width: 20px;
+    border-bottom-width: 1.8px;
+    border-right-width: 1.8px;
     content: '';
     right: 0px;
     top: 4px
@@ -131,10 +136,83 @@ it {
     left: -4px;
 }
 
-#newsTab {
+#eventSelect {
     border-color: red;
 }
 
-#newsTab:hover {
+#eventSelect:hover {
     background-color: rgba(255, 0, 0, 0.338);
+}
+
+#spiritualEvent {
+    flex-direction: column;
+}
+
+#automationTab {
+    display: none;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.automationContainer {
+    border: 2px solid rgb(202, 255, 248);
+    border-radius: 10px;
+    display: flex;
+    height: 130px;
+    width: 230px;
+    background-color: #101010;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0px;
+}
+
+.automationUpgrade, .automationUpgrade2 {
+    border: 2px rgb(202, 255, 248) solid;
+    height: 50px;
+    background-color:  #101010;
+    color: rgb(202, 255, 248);;
+    cursor:pointer;
+    border-radius: 5px;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+
+.automationUpgrade:hover, #autoPrestigeMode:hover, .automationUpgrade2:hover {
+    background-color: rgb(202, 255, 248);;
+    color: black
+}
+
+.automationRow {
+    display:flex;
+    flex-direction: row;
+    margin-bottom:20px
+}
+
+#autoPrestigeMode {
+    border: 2px rgb(202, 255, 248) solid;
+    background-color: #101010;
+    color: rgb(202, 255, 248);
+    cursor: pointer;
+    font-size: 12px;
+    border-bottom: 0px;
+}
+
+.prestigeInput {
+    border: 2px rgb(202, 255, 248) solid;
+    background-color: #222222;
+    color: white;
+}
+
+#autoUmultiInterval, #autoUpowerInterval, #autoUpowerInterval2 {
+    font-size: 12px;
+    color: white;
+}
+
+input:focus {
+    outline: none;
+}
+
+input {
+    font-family: 'Poly';
 }

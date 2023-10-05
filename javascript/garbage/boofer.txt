@@ -82,3 +82,24 @@ showEvents.forEach((event) => {
 hideEvents.forEach((event) => {
     ach11.addEventListener(event, hide);
 });
+
+    // firstSingle.amount = parseFloat(parsedData.firstSingle_amount);
+    // firstSingle.baseEffect = parseFloat(parsedData.firstSingle_baseEffect);
+    // secondSingle.amount = parseFloat(parsedData.secondSingle_amount);
+    // secondSingle.baseEffect = parseFloat(parsedData.secondSingle_baseEffect);
+    // thirdSingle.amount = parseFloat(parsedData.thirdSingle_amount);
+    // thirdSingle.baseEffect = parseFloat(parsedData.thirdSingle_baseEffect);
+    // fourthSingle.amount = parseFloat(parsedData.fourthSingle_amount);
+    // fourthSingle.baseEffect = parseFloat(parsedData.fourthSingle_baseEffect);
+    // fifthSingle.amount = parseFloat(parsedData.fifthSingle_amount);
+    // fifthSingle.baseEffect = parseFloat(parsedData.fifthSingle_baseEffect);
+    // sixthSingle.amount = parseFloat(parsedData.sixthSingle_amount);
+    // sixthSingle.baseEffect = parseFloat(parsedData.sixthSingle_baseEffect);
+    // seventhSingle.amount = parseFloat(parsedData.seventhSingle_amount);
+    // seventhSingle.baseEffect = parseFloat(parsedData.seventhSingle_baseEffect);
+    // eighthSingle.amount = parseFloat(parsedData.eighthSingle_amount);
+    // eighthSingle.baseEffect = parseFloat(parsedData.eighthSingle_baseEffect);
+    // ninthSingle.amount = parseFloat(parsedData.ninthSingle_amount);
+    // ninthSingle.baseEffect = parseFloat(parsedData.ninthSingle_baseEffect);
+    // tenthSingle.amount = parseFloat(parsedData.tenthSingle_amount);
+    // tenthSingle.baseEffect = parseFloat(parsedData.tenthSingle_baseEffect);

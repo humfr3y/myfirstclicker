@@ -99,7 +99,7 @@ const checkCoin = document.getElementById('auto-buy3-checkbox')
 //     }
 //     return gain, money;
 // }
-function checking() {
-  console.log(completion)
-  console.log(onecheck)
-}
+// function checking() {
+//   console.log(completion)
+//   console.log(onecheck)
+// }

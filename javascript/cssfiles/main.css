@@ -60,17 +60,17 @@ hr {
 }
 
 #coinsCount {
-    text-align: center;
-    align-items: center;
-    color:#ffd900;
-    font-size: 30px;
+    color: white;
     margin: 5px;
     margin-top: 15px;
-    text-shadow: 0 0 5px rgb(255, 217, 0);
     white-space: nowrap;
     margin-bottom: 15px;
-    display: flex;
-    justify-content: center;
+}
+
+gt {
+  color: #ffd900;
+  text-shadow: 0 0 5px rgb(255, 217, 0);
+  font-size: 30px;
 }
 
 #coinsGain {
@@ -100,7 +100,7 @@ hr {
 }
 
 #loadingScreen {
-  background-image: url("images/loadingscreen.jpg");
+  background-image: url("images/loadingscreen010.jpg");
   background-repeat: no-repeat;
   width: 100%;
   height: 101%;
@@ -109,7 +109,7 @@ hr {
   background-size: cover;
 }
 
-#coinGain:active {
+#coinGain:active, #shardsClick:active {
     transform: scale(0.95); 
 }
 
@@ -158,7 +158,7 @@ hr {
   }
 
 .topVars {
-  width: 350px;
+  width: 33%;
 }
 
 #coinGet {
@@ -176,7 +176,7 @@ hr {
   align-items: center;
 }
 
-.myMessage {
+.myMessage, .shardCountPerClick, .superCoinText, .spiritText {
   position: absolute; 
   display: flex; 
   padding: 5px;
@@ -189,12 +189,22 @@ hr {
   user-select: none;
 }
 
-.myMessage.hide {
+.shardCountPerClick {
+  text-shadow: 1px 1px rgb(138, 255, 249), -1px -1px rgb(138, 255, 249), 1px -1px rgb(138, 255, 249), -1px 1px rgb(138, 255, 249);
+}
+.superCoinText {
+  text-shadow: 1px 1px rgb(255, 174, 0), -1px -1px rgb(255, 174, 0), 1px -1px rgb(255, 174, 0), -1px 1px rgb(255, 174, 0);
+}
+.spiritText {
+  text-shadow: 1px 1px rgb(202, 255, 237), -1px -1px rgb(202, 255, 237), 1px -1px rgb(202, 255, 237), -1px 1px rgb(202, 255, 237);
+}
+
+.myMessage.hide, .shardCountPerClick.hide, .superCoinText.hide, .spiritText.hide {
   opacity: 0;
   transform: translateY(-50px);
 }
 
-.myMessage.show {
+.myMessage.show, .shardCountPerClick.show, .superCoinText.show, .spiritText.show {
   right: 0;
   opacity: 1;
   transition: top 1s ease-in-out, opacity 1s ease-in-out;
@@ -263,7 +273,8 @@ hr {
 
 .whiteText {
   color: white;
-  font-size: 20px;
+  font-size: 15px;
+  text-align: center;
 }
 
 .multiplierString {
@@ -307,6 +318,14 @@ hr {
   width: 50%;
   font-size: 12px;
   background-image: radial-gradient(#15fa01, #040000 170%);
+}
+#progress-bar-text {
+  font-size: 10px;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  display: flex;
+  justify-content: center;
 }
 #shopDiv {
   display: flex;
@@ -428,13 +447,16 @@ hr {
 }
 #superCount {
   text-align: center;
-  align-items: center;
-  color:rgb(255, 174, 0);
-  font-size: 30px;
+  color: white;
   margin: 5px;
   margin-top: 15px;
-  text-shadow: 0 0 5px rgb(255, 174, 0);
   width:100%;
+  font-size: 15px;
+}
+st {
+  font-size: 30px;
+  color:rgb(255, 174, 0);
+  text-shadow: 0 0 5px rgb(255, 174, 0);
 }
 #overdriveTab {
   display: flex;
@@ -449,12 +471,13 @@ hr {
   display: flex;
   justify-content: center;
   border-bottom: white 1px solid;
+  height:15%;
 }
 #overdriveType1Name {
   margin: 0 auto;
 }
 #overdriveType1Div{
-  height:80%;
+  height:85%;
 }
 #overdriveType1ProgressBarBase{
   background-color: #111111;
@@ -463,6 +486,7 @@ hr {
     align-items: center;
     text-align: center;
     cursor:pointer;
+    
 }
 #overdriveType1ProgressBar{
   height: 100%;
@@ -473,17 +497,37 @@ hr {
   color: white;
   pointer-events: none;
   cursor: default;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -200%);
+  display: flex;
+  width: 800px;
+  justify-content: center;
+  z-index: 1000
+}
+
+#overdriveType1ProgressBarActive {
+  position: absolute;
+  background-color: #FFFFFF77;
+  pointer-events: none;
+  cursor: default;
+  display: flex;
+  width: 800px;
+  justify-content: center;
+  z-index: 2000;
+  height: 101px;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0;
 }
 
 #crystalCount {
   text-align: center;
-  color:aqua;
+  color: white;
   margin: 0 auto;
-  text-shadow: 0 0 5px aqua;
+  font-size: 13px;
+}
+
+ct {
+  color:aqua;
   font-size: 20px;
+  text-shadow: 0 0 5px aqua;
 }
 
 #doPrestige {
@@ -492,7 +536,7 @@ hr {
   background-color: black;
   color: aqua;
   font-size: 12px;
-  width: 200px;
+  width: 50%;
   height: 70px;
   text-align: center;
   transition:  0.2s ease-in-out;
@@ -518,8 +562,225 @@ hr {
 
 }
 
+.prestigeButton {
+  color: aqua;
+  border-color: aqua;
+}
+
+.prestigeButton:hover {
+  background-color: rgba(0, 255, 255, 0.144);
+}
+
+#prestigeSingleUpgrades {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+}
+#prestigeBuyableUpgrades {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.pSURow {
+  display: flex;
+  flex-direction: column;
+}
+
+#threeRowMilestones{
+  display: flex;
+}
+
+.milestone {
+  border: 3px #212121 solid;
+  background-color: rgb(151, 151, 151);
+  color: black;
+  width: 300px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  flex-direction: column;
+  text-align: center;
+}
+
+#milestonesTab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#horizontalMilestones {
+  display: flex;
+}
+
+.horizontalMilestone {
+  width: 452.5px;
+}
+
+.prestigeMilestone {
+  border-color: rgb(56, 55, 55);
+  background-color: rgb(74, 74, 74);
+}
+
+.prestigeMilestone.completed {
+  border-color: rgb(0, 120, 120);
+  background-color: rgb(0, 188, 188);
+}
+
+.centeredDiv {
+  display:flex;
+  justify-content: center;
+}
+
+#shardsTab {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#shardsClick {
+  background-color: #ff000000;
+  width: 180px;
+  height: 180px;
+  border: none;
+  cursor: pointer;
+  transition: background-image 0.2s ease-in-out;
+  background-image: url('/javascript/cssfiles/images/shardoff2.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+}
+
+#shardsClick:hover {
+  background-image: url('/javascript/cssfiles/images/shard.png');
+}
+
+#shardsCountText {
+  color: white
+}
+
+shn {
+  color: rgb(138, 255, 249);
+  font-size: 30px;
+  text-shadow: 0 0 5px rgb(138, 255, 249);
+}
+
+#breakCrystal {
+  flex-direction: column;
+  align-items: center;
+}
+
+#howMuchCrystalsInput {
+  width: 50%;
+  margin: 10px 0px;
+}
+
+#submitBreak {
+  font-family: Poly;
+  width: 25%;
+  height: 25px;
+}
+
+#doBreakCrystal {
+  border: rgb(106, 253, 246) solid 2px;
+  width: 300px;
+  height: 50px;
+  font-size: 16px;
+  margin: 10px 0px;
+}
+
+#doBreakCrystal:hover {
+  background-color: rgb(106, 253, 246);
+  color: black;
+}
+
+.shardSinglesRow {
+  display: flex;
+  justify-content: center
+}
+
+.shardUnlockableBase {
+  border: rgb(106, 253, 246) 1px solid;
+  border-radius: 3px; 
+  background-color: #111111;
+  width: 600px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  cursor:pointer;
+  margin: 5px;
+}
+
+.shardUnlockable {
+  height: 100%;
+  background-image: url('/javascript/cssfiles/images/shardspb.png');
+  background-size: auto 100%;
+}
+
+.shardUnlockableText {
+  position: absolute;
+  color: white;
+  pointer-events: none;
+  cursor: default;
+  display: flex;
+  justify-content: center;
+  width: 600px;
+  text-shadow: 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+}
+
+#shardUnlockableBase3, #shardUnlockableBase4 {
+  height: 100px;
+}
+
+spn {
+  color: rgb(202, 255, 237);
+  font-size: 30px;
+  text-shadow: 0 0 5px rgb(202, 255, 237);
+}
 
 @media screen and (max-width: 600px) {
+  span, gt, pbn, st, ct, p, input, label, select, footer {
+    font-size: 50% !important;
+  }
+
+  button {
+    font-size: 30% !important;
+  }
+
+  .tabButton {
+    width: 20%;
+    height: 20px;
+    margin-right: 2px;
+  }
+
+  #topValues {
+    height: 50px
+  }
+
+  .settingButton {
+    width: 40%;
+    height: 30px
+  }
+
+  .titleTab {
+    font-size: 100% !important;
+  }
+  #overdriveType1 {
+    height: 60px;
+    width: 300px;
+  }
+  #overdriveType1Ghost {
+    width: 300px
+  }
+
+  #overdriveType1ProgressBarActive{
+    height: 54px
+  }
+  
   #coinGain, #umultiplierBoost, #upowerBoost {
       /* Здесь можно установить максимальную ширину для кнопки */
       max-width: 50%; /* Или другое значение */
@@ -531,6 +792,7 @@ hr {
 }
   #mainSettings {
     width: 35px;
+    margin-top: -120px
   }
   .shopButton {
     font-size: 9px;
@@ -541,4 +803,39 @@ hr {
   #shopDiv {
     width: 90%
   }
+  .ach {
+    width: 35px;
+    height: 35px;
+    font-size: 70%
+  }
+  .tooltip {
+    width: 90px
+  }
+  .upgradeButton, .milestone {
+    width: 110px !important;
+  }
+  .milestone {
+    width: 140px !important;
+    font-size: 50%
+  }
+  .automationContainer {
+    width: 120px;
+  }
+  #superCount {
+    font-size: 50% !important;
+  }
+  gt, pbn, st, ct {
+    font-size: 13px !important
+  }
+  #coinsCount {
+    margin-bottom: 5px;
+  }
+  #multiplierStats {
+    width: 200px;
+  }
+  .arrow,
+  .arrow::before {
+    width: 6px;
+    height: 6px;
+}
 }

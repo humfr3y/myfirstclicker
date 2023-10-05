@@ -45,13 +45,17 @@
   width: 70px;
   text-align: center;
   border-color: white;
+  border-style: solid;
   margin-right: 0px;
+}
+.maxBuy:hover{
+  background-color:  rgb(34, 34, 34);
 }
 .upgradeButton:active:enabled {
     transform: scale(0.95); 
 }
 .upgradeButton:disabled{
-    background-color: rgb(46, 45, 45);
+    background-color: rgb(65, 65, 65);
 }
 .upgradeButton:disabled:hover{
     background-color: rgb(255, 63, 63);
@@ -69,75 +73,44 @@
  }
  .singleButton{
     background-color: #000000;
-    border-color: #1226ff;
+    border-color: #2536ff;
     color: rgb(255, 255, 255);
 }
 .singleButton:hover:enabled{
-     background-color: #1226ff;
-     box-shadow: 0 0 10px #1226ff;
-     color: black;
- }
- .singleButton.purchased {
-    background-color: #1226ff;
+    background-color: #2536ff;
+    box-shadow: 0 0 10px #2536ff;
     color: black;
 }
-#automationScreen {
-    display: flex;
-    justify-content: center;
+.singleButton.purchased {
+    background-color: #2536ff;
+    color: black;
 }
-#auto-buy1-container {
-    border: 3px solid rgb(255, 231, 94);
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 250px;
-    width: 200px;
-    margin-right: 20px;
-  }
-  #auto-buy2-container {
-    border: 3px solid rgb(255, 231, 94);
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 250px;
-    width: 200px;
-    margin-right: 20px
-  }
-  #auto-buy3-container {
-    border: 3px solid rgb(255, 231, 94);
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 250px;
-    width: 200px;
-    margin-right: 20px
-  }
-  #auto-buy1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  #auto-buy2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  #auto-buy3 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-.autobuy4-6 {
-    color: gold;
-    text-align: center;
-    margin-bottom: 10px;
+
+.prestigeSingleButton{
+  background-color: #000000;
+  border-color: rgb(0, 212, 212);
+  color: rgb(255, 255, 255);
 }
+.prestigeSingleButton:hover:enabled {
+  background-color: rgb(0, 212, 212);
+  box-shadow: 0 0 10px rgb(0, 212, 212);
+  color: black;
+}
+.prestigeSingleButton.purchased {
+  background-color: rgb(0, 212, 212);
+  color: black;
+}
+.prestigeBuyableButton{
+  background-color: #000000;
+  border-color: rgb(0, 151, 151);
+  color: rgb(255, 255, 255);
+}
+.prestigeBuyableButton:hover:enabled {
+  background-color: rgb(0, 151, 151);
+  box-shadow: 0 0 10px rgb(0, 151, 151);
+  color: black;
+}
+
 
 #umultiplierBoost {
   border-color:cadetblue;
@@ -164,5 +137,30 @@
 #upowerBoost:hover:enabled{
   background-color: palevioletred;
   box-shadow: 0 0 10px palevioletred;
+  color: black;
+}
+
+.shardBuyableButton {
+  border-color: rgb(138, 255, 249);
+}
+
+.shardBuyableButton:hover:enabled {
+  background-color: rgb(138, 255, 249);
+  box-shadow: 0 0 10px rgb(138, 255, 249);
+  color: black;
+}
+
+.shardSingleButton {
+  border-color: rgb(111, 202, 199);
+}
+
+.shardSingleButton:hover:enabled {
+  background-color: rgb(111, 202, 199);
+  box-shadow: 0 0 10px rgb(111, 202, 199);
+  color: black;
+}
+
+.shardSingleButton.purchased {
+  background-color: rgb(111, 202, 199);
   color: black;
 }
