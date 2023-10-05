@@ -121,12 +121,14 @@ overdriveType1ProgressBarBase.addEventListener("click", function() {
         }, 500)
         overdriveType1Activate = setInterval(()=> {
             if (money >= overdriveType1.price){
-                money -= overdriveType1.price;
-                overdriveType1.percent += 0.033;
+                let sub = money/100
+                overdriveType1.consumed += sub
+                money -= sub
+                overdriveType1.percent = Math.log10(overdriveType1.consumed)
                 overdriveType1.percent = Math.min(overdriveType1.percent, 100)
-                overdriveType1.effect = 1+Math.pow(2, overdriveType1.percent/2.33)/8
+                overdriveType1.effect = 1+Math.pow(2, overdriveType1.percent/2.5)/9
                 achRow1.completion[18] ? overdriveType1.effect *= 1.1 : overdriveType1.effect
-                overdriveType1.price = 100+Math.pow(10, overdriveType1.percent)/20*2;
+                overdriveType1.price = 1000+Math.pow(10, overdriveType1.percent)/20*2;
             }
         }, 50)
     }
@@ -251,7 +253,6 @@ function limits(variable, min, max) {
 }
 
 function getCoinPerSec() {
-    overdriveType1.effect = 1+Math.pow(2, overdriveType1.percent/2.33)/8
     randomNumber(0, (2000/(1+fourthShopBuyableEffect)/prestigeSinglesEffects[2][0]/spiritEffects[1])) == 0 ? (superCoins++, totalSuperCoins++) : superCoins;
     superCoins = Math.round(superCoins)
     umultiplier = Math.pow(baseUmult, umultipliercount)
@@ -274,7 +275,7 @@ function getCoinPerSec() {
     fourthBuyable.amount >= 1 ? gainPerSecond *= fourthBuyableEffect : gainPerSecond = gainPerSecond
     achRow1.completion[4] ? gainPerSecond *= (1+0.0001*clickCount) : gainPerSecond = gainPerSecond
     firstSingle.amount == 1 ? gainPerSecond *= firstSingleEffect : gainPerSecond = gainPerSecond
-    gainPerSecond = softCap(gainPerSecond, 1e13, prestigeSinglesEffects[10])
+    gainPerSecond = softCap(gainPerSecond, 1e13, prestigeSinglesEffects[10][1])
     gainPerSecond /= 20.0
 
     gainPerClick = 1
@@ -284,7 +285,7 @@ function getCoinPerSec() {
     secondSingle.amount == 1 ? gainPerClick *= midasFormula : gainPerClick = gainPerClick
     gainPerClick *= gain
     gainPerClick = Math.pow(gainPerClick, fifthBuyableEffect)
-    gainPerClick = softCap(gainPerClick, 1e13, prestigeSinglesEffects[10])
+    gainPerClick = softCap(gainPerClick, 1e13, prestigeSinglesEffects[10][0])
     money = money+gainPerSecond;
     total = total+gainPerSecond;
     umultiplierCost = 100 + (50 * umultipliercount)
@@ -323,7 +324,7 @@ function getCoin() {
         if (superCoinChance == 0) {
         superCoins++, totalSuperCoins++
         }
-        spiritChance = randomNumber(0, 100)
+        spiritChance = randomNumber(0, 80)
         spiritChance == 0 ? spirits++ : spirits
         gainPerClick = 1
         gainPerClick *= Math.pow(2, thirdBuyable.baseEffect) 
@@ -332,7 +333,7 @@ function getCoin() {
         secondSingle.amount == 1 ? gainPerClick *= midasFormula : gainPerClick = gainPerClick
         gainPerClick *= gain
         gainPerClick = Math.pow(gainPerClick, fifthBuyableEffect)
-        gainPerClick = softCap(gainPerClick, 1e13, prestigeSinglesEffects[10])
+        gainPerClick = softCap(gainPerClick, 1e13, prestigeSinglesEffects[10][0])
         clicksPerSecond++
         coinGains.addEventListener("keydown", function(event) {
         if (event.key === "Enter") {

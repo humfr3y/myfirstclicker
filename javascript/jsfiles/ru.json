@@ -104,7 +104,7 @@
     "fourthPrestigeSingle": "<ut> Сверкающий У-множитель </ut> <br> Базовый бонус У-множителей увеличивается до 2.5 (2.0 -> 2.5) <br> {{fourthPrestigeSinglePrice}}",
     "fifthPrestigeSingle": "<ut> Подарок От Никого </ut> <br> Начинает У-множители, У-силители и Престижи с 1 каждым купленным улучшением. <br> {{fifthPrestigeSinglePrice}}",
     "sixthPrestigeSingle": "<ut> Драгоценный Икс </ut> <br> Базовый эффект Множителя увеличивается до 1.075 (1.05 -> 1.075) <br> {{sixthPrestigeSinglePrice}}",
-    "seventhPrestigeSingle": "<ut> Кристаллическая Карта </ut> <br> Пост-100 предел Кэшбека исчезает <br> {{seventhPrestigeSinglePrice}}",
+    "seventhPrestigeSingle": "<ut> Кристаллическая Карта </ut> <br> Пост-100 предел Кэшбека заменяется ослаблением на ^0.5 <br> {{seventhPrestigeSinglePrice}}",
     "eighthPrestigeSingle": "<ut> Мощное Усиление </ut> <br> Базовый бонус У-силителей увеличивается до 1.05 (1.045 -> 1.05) <br> {{eighthPrestigeSinglePrice}}",
     "ninthPrestigeSingle": "<ut> Песочные Часы </ut> <br> Начинает Престижи с х{{multi}} доходом α-монет, который в течении {{time}} минут уменьшается <br> {{ninthPrestigeSinglePrice}}",
     "tenthPrestigeSingle": "<ut> Анти-Песочные Часы </ut> <br> Доход α-монет увеличивается спустя время в текущем Престиже <br> {{tenthPrestigeSinglePrice}}",
