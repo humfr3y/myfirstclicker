@@ -185,7 +185,7 @@ for (const [index, singleName] of singleNames.entries()) {
         singleU7.innerHTML = i18next.t('seventhSingle', {isCapped: notCapped, seventhSingleEffect: formatBoost(seventhSingleEffect), seventhSinglePrice: seventhSingle.priceText});
     }
 
-    if (ninthSingleEffect == 1.5) {
+    if (ninthSingleEffect == 1.25) {
         singleU9.innerHTML = i18next.t('ninthSingle', {isCapped: capped, ninthSingleEffect: formatPower(ninthSingleEffect), ninthSinglePrice: ninthSingle.priceText});
     }
     else {
@@ -361,8 +361,8 @@ for (const [index, singleName] of singleNames.entries()) {
     postE13coinsSoftcapClickStats.innerHTML =  i18next.t('postE13CoinSoftcap')
     postE13coinsSoftcapSecondStats.innerHTML =  i18next.t('postE13CoinSoftcap')
 
-    postE13coinsSoftcapClickStatsEffect.innerHTML = '^'+prestigeSinglesEffects[10]
-    postE13coinsSoftcapSecondStatsEffect.innerHTML = '^'+prestigeSinglesEffects[10]
+    postE13coinsSoftcapClickStatsEffect.innerHTML = '^'+prestigeSinglesEffects[10][0]
+    postE13coinsSoftcapSecondStatsEffect.innerHTML = '^'+prestigeSinglesEffects[10][1]
 
     postE15SoftcapGainStats.innerHTML = i18next.t('postE15CoinSoftcap')
 

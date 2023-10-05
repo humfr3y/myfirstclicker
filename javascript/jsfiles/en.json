@@ -104,7 +104,7 @@
     "fourthPrestigeSingle": "<ut> Sparkling U-Multiplier </ut> <br> Base effect of U-Multipliers is increased to 2.5 (2.0 -> 2.5) <br> {{fourthPrestigeSinglePrice}}",
     "fifthPrestigeSingle": "<ut> Gift From Nobody </ut> <br> Starts U-Multipliers, U-Powers, and Prestiges with 1 each purchased upgrade. <br> {{fifthPrestigeSinglePrice}}",
     "sixthPrestigeSingle": "<ut> Precious X </ut> <br> Base effect of Multiplier is increased to 1.075 (1.05 -> 1.075) <br> {{sixthPrestigeSinglePrice}}",
-    "seventhPrestigeSingle": "<ut> Crystal Card </ut> <br> Post-100 Cashback hardcap disappears <br> {{seventhPrestigeSinglePrice}}",
+    "seventhPrestigeSingle": "<ut> Crystal Card </ut> <br> Post-100 Cashback hardcap swaps to ^0.5 softcap <br> {{seventhPrestigeSinglePrice}}",
     "eighthPrestigeSingle": "<ut> Powerful Boost </ut> <br> Base bonus of U-Power is increased to 1.05 (1.045 -> 1.05) <br> {{eighthPrestigeSinglePrice}}",
     "ninthPrestigeSingle": "<ut> Hourglass </ut> <br> Start Prestiges with x{{multi}} α-coin gain, which decreases over {{time}} minutes <br> {{ninthPrestigeSinglePrice}}",
     "tenthPrestigeSingle": "<ut> Anti-Hourglass </ut> <br> α-сoin gain increases overtime in current Prestige <br> {{tenthPrestigeSinglePrice}}",
@@ -182,7 +182,7 @@
     "requirementText": "Reset at X U-multipliers",
 
     "shardCount": "You have <shn>{{shards}}</shn> shards, which boosts α-coin gain by +<shn>{{percent}}</shn>%",
-    "shardsPerSec": "You're {{shards}} gaining per second",
+    "shardsPerSec": "You're getting {{shards}} shards per second",
 
     "doBreakCrystal": "Break crystals",
     "breakCrystalTitle": "How much crystals do you want to break?",

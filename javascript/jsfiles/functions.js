@@ -12,6 +12,8 @@ function updateTick() {
     checkMaxShop()
     checkCrystalsTemp()
     checkSpiritualEvent()
+    overdriveType1.effect = 1+Math.pow(2, overdriveType1.percent/2.5)/9
+    achRow1.completion[18] ? overdriveType1.effect *= 1.1 : overdriveType1.effect
 }
 
 function checkSpiritualEvent() {
@@ -22,10 +24,10 @@ function checkSpiritualEvent() {
     if (isSpiritualEvent) {
     spiritualEvent.style.display = 'flex'
     noEvent.style.display = 'none'
-    spiritEffects[0] = 1+(spirits/111)
+    spiritEffects[0] = 1+(spirits/120)
     spiritEffects[1] = 1+(spirits/495)
-    spiritEffects[2] = 1+(spirits/120)
-    spiritEffects[3] = 1+(spirits/99)
+    spiritEffects[2] = 1+(spirits/150)
+    spiritEffects[3] = 1+(spirits/111)
     }
     else {
     spiritualEvent.style.display = 'none'
@@ -142,7 +144,7 @@ function statsPerClickUpdate() { //multi breakdown click
     else {
         postE13SoftcapClick.style.display = 'flex'
     }
-    summ = softCap(summ, 1e13, prestigeSinglesEffects[10])
+    summ = softCap(summ, 1e13, prestigeSinglesEffects[10][0])
     summaryClickStatsEffect.innerHTML = "x" + formatBoost(summ)
 }
 
@@ -171,7 +173,7 @@ function statsPerSecondUpdate() {
     else {
         postE13SoftcapSecond.style.display = 'flex'
     }
-    summ = softCap(summ, 1e13, prestigeSinglesEffects[10])
+    summ = softCap(summ, 1e13, prestigeSinglesEffects[10][1])
     summarySecondStatsEffect.innerHTML = "x" + formatBoost(summ)
 }
 

@@ -44,7 +44,7 @@ var firstBuyable = {
     price: 10,
     basePrice: 10,
     updateText: document.getElementById('buyableU1'),
-    power: 1.095
+    power: 1.099
 }
 var thirdBuyable = {
     amount: 0,
@@ -60,7 +60,7 @@ var fourthBuyable = {
     price: 1000,
     basePrice: 1000,
     updateText: document.getElementById('buyableU4'),
-    power: 1.75
+    power: 1.85
 }
 var fifthBuyable = {
     amount: 0,
@@ -68,7 +68,7 @@ var fifthBuyable = {
     price: 5000,
     basePrice: 5000,
     updateText: document.getElementById('buyableU5'),
-    power: 1.85
+    power: 1.8
 }
 var firstSingle = {
     amount: 0,
@@ -182,7 +182,8 @@ var firstShopSingle = {
 var overdriveType1 = {
     percent: 0,
     effect: 1,
-    price: 100
+    price: 100,
+    consumed: 0
 }
 var firstPrestigeBuyable = {
     amount: 0,
@@ -299,14 +300,14 @@ var firstShardBuyable = {
     price: 1000,
     amount: 0,
     basePrice: 1000,
-    power: 3.5,
+    power: 3.2,
     updateText: document.getElementById('shBuyableU1'),
 }
 var secondShardBuyable = {
     price: 1000,
     amount: 0,
     basePrice: 1000,
-    power: 3.99,
+    power: 4.2,
     updateText: document.getElementById('shBuyableU2'),
 }
 var thirdShardBuyable = {
@@ -513,24 +514,25 @@ function checkUpgradesText () {
     secondBuyableEffect = secondBuyable.baseEffect * fourthSingleEffect
     thirdBuyableEffect = Math.pow(2, thirdBuyable.baseEffect)
     fifthBuyableEffect = 1+fifthBuyable.baseEffect/1000
-    firstSingleEffect = 1-firstSingle.baseEffect+(Math.pow((firstSingle.baseEffect*(Math.log10(total+10)/1.4)), ninthSingleEffect))
+    firstSingleEffect = 1-firstSingle.baseEffect+(Math.pow((firstSingle.baseEffect*(1+(Math.log10(1e15+10)/2.33))), ninthSingleEffect))
     secondSingleEffect = 1 - secondSingle.baseEffect + (secondSingle.baseEffect*midasFormula)
     thirdSingleEffect = 1 - thirdSingle.baseEffect + (thirdSingle.baseEffect*2)
-    fourthSingleEffect = Math.pow(fourthSingle.baseEffect +(fourthSingle.baseEffect*(Math.pow((Math.log10(firstBuyable.amount+10)/1.5), 2))), fourthSingle.amount)
-    fifthSingleEffect = 1 - fifthSingle.baseEffect + (fifthSingle.baseEffect*(Math.pow(Math.log10(fourthBuyable.amount+10), 1.15)))
+    fourthSingleEffect = Math.pow(fourthSingle.baseEffect +(fourthSingle.baseEffect*(Math.pow((Math.log10(firstBuyable.amount+10)/2), 1.8))), fourthSingle.amount)
+    fifthSingleEffect = 1 - fifthSingle.baseEffect + (fifthSingle.baseEffect*(Math.pow(Math.log10(fourthBuyable.amount+10), 1.2)))
     fourthBuyableEffect = Math.pow(prestigeSinglesEffects[5], fourthBuyable.amount) * fifthSingleEffect
-    sixthSingleEffect = 1-sixthSingle.baseEffect+(sixthSingle.baseEffect*(Math.log10(gainPerClick+10)/1.07))
+    sixthSingleEffect = 1-sixthSingle.baseEffect+(sixthSingle.baseEffect*(Math.log10(gainPerClick+10)/1.337))
     var sevEff = 1 - seventhSingle.baseEffect+ (Math.pow((1 + 0.000138*gameTimer), achRow1.completion[6])*seventhSingle.baseEffect*(1+ (Math.log(amountsOfUpgrades+10))))
     seventhSingleEffect = sevEff
-    eighthSingleEffect = Math.pow((Math.pow((achCount-1) * 40, 0.2)), eighthSingle.amount)
+    eighthSingleEffect = Math.pow((Math.pow((achCount-1) * 40, 0.3)), eighthSingle.amount)
     ninthSingleEffect = 1 - ninthSingle.baseEffect +(ninthSingle.baseEffect*(1 + (gameTimer/360000)))
-    tenthSingleEffect = Math.pow(1.5, tenthSingle.baseEffect)
-    midasFormula = Math.log1p(Math.pow(Math.pow(clickCount, 1.5), midasPower))
+    tenthSingleEffect = Math.pow(1.4, tenthSingle.baseEffect)
+    midasFormula = Math.log1p(Math.pow(Math.pow(clickCount, 2), midasPower))
     if (prestigeSinglesEffects[6] == 0) {
     seventhSingleEffect = Math.min(sevEff, 100)
     }
+    else seventhSingleEffect = softCap(seventhSingleEffect, 100, 0.5)
 
-    ninthSingleEffect = Math.min(ninthSingleEffect, 1.5)
+    ninthSingleEffect = Math.min(ninthSingleEffect, 1.25)
 
     achRow1.completion[5] ? secondBuyableEffect *= 1.1 : secondBuyableEffect = secondBuyableEffect
     achRow1.completion[8] ? midasPower = 1.175 : midasPower = 1.125
@@ -547,10 +549,10 @@ function checkUpgradesText () {
     secondShardBuyableEffect = Math.pow(3, secondShardBuyable.amount)*secondShardSingleEffect
     thirdShardBuyableEffect[0] = Math.pow(2, thirdShardBuyable.amount)
     thirdShardBuyableEffect[1] = Math.pow(1.75, thirdShardBuyable.amount)
-    firstShardSingleEffect = Math.pow(1 + Math.log10(shards+10), firstShardSingle.amount)
-    secondShardSingleEffect = Math.pow(1 + Math.pow(brokenCrystals, 0.19), secondShardSingle.amount)
-    thirdShardSingleEffect = Math.pow(1 + Math.pow(crystals, 0.31), thirdShardSingle.amount)
-    fourthShardSingleEffect = Math.pow(Math.log10(Math.log10(shards+10)+10), fourthShardSingle.amount) 
+    firstShardSingleEffect = Math.pow(1 + Math.log10(shards+10), firstShardSingle.amount)/1.2
+    secondShardSingleEffect = Math.pow(1 + Math.pow(brokenCrystals, 0.175), secondShardSingle.amount)
+    thirdShardSingleEffect = Math.pow(1 + Math.pow(crystals, 0.3), thirdShardSingle.amount)
+    fourthShardSingleEffect = Math.pow(Math.log10(Math.log10(shards+10)+10), fourthShardSingle.amount)/2
     fifthShardSingleEffect = 1, sixthShardSingleEffect = 1
 
     priceReset(firstShardBuyable)
@@ -575,7 +577,7 @@ function checkPrestigeMilestone(id, count, index) {
 
 }
 
-var prestigeSinglesEffects = [10, 1, [1, 1], 2, 0, 1.05, 0, 0.045, 1, 1, 0.5, 0, [0, 0]]
+var prestigeSinglesEffects = [10, 1, [1, 1], 2, 0, 1.05, 0, 0.045, 1, 1, [0.4, 0.5], 0, [0, 0]]
 var prestigeMilestonesEffects = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
 function prestigeSingleEffect() {
     const prestigeSingleBoolean = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
@@ -601,7 +603,8 @@ function prestigeSingleEffect() {
     }
     else prestigeSingleBoolean[8] ? prestigeSinglesEffects[8] = Math.max(10*(1-(0.01/6.6666666667)*prestigeTimer), 1) : prestigeSinglesEffects[8]
     prestigeSingleBoolean[9] ? prestigeSinglesEffects[9] = Math.log10(prestigeTimer+10) : prestigeSinglesEffects[9]
-    prestigeSingleBoolean[10] ? prestigeSinglesEffects[10] = 0.55 : prestigeSinglesEffects[10]
+    prestigeSingleBoolean[10] ? prestigeSinglesEffects[10][0] = 0.45 : prestigeSinglesEffects[10][0]
+    prestigeSingleBoolean[10] ? prestigeSinglesEffects[10][1] = 0.55 : prestigeSinglesEffects[10][1]
     prestigeSingleBoolean[11] ? prestigeSinglesEffects[11] = 10 : prestigeSinglesEffects[11]
     prestigeSingleBoolean[12] ? prestigeSinglesEffects[12][0] = 1 : prestigeSinglesEffects[12][0]
     prestigeSingleBoolean[13] ? prestigeSinglesEffects[12][0] = 2 : prestigeSinglesEffects[12][0]
