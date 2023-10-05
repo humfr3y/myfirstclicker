@@ -251,7 +251,7 @@ function limits(variable, min, max) {
 }
 
 function getCoinPerSec() {
-    overdriveType1.effect = 1+Math.pow(2, overdriveType1.percent/2.5)/15
+    overdriveType1.effect = 1+Math.pow(2, overdriveType1.percent/2.33)/8
     randomNumber(0, (2000/(1+fourthShopBuyableEffect)/prestigeSinglesEffects[2][0]/spiritEffects[1])) == 0 ? (superCoins++, totalSuperCoins++) : superCoins;
     superCoins = Math.round(superCoins)
     umultiplier = Math.pow(baseUmult, umultipliercount)
