@@ -194,7 +194,7 @@
 
     "firstShardBuyable": "<ut> Кристалльная Рукавица ({{amount}})</ut> <br> Удваивает Осколки за нажатия <br> Эффект: x{{effect}} <br> Стоимость: {{price}} осколков",
     "secondShardBuyable": "<ut> Усиление Генератора ({{amount}})</ut> <br> Утраивает Осколки в секунду <br> Эффект: x{{effect}} <br> Стоимость: {{price}} осколков",
-    "thirdShardBuyable": "<ut> Мощная Дробилка ({{amount}})</ut> <br> Увеличивает в 2 раза минимальные и в 1.5 максимальные Осколки за Разбиение <br> Эффект: x{{effect1}} к мин. и x{{effect2}} к макс. <br> Стоимость: {{price}} осколков",
+    "thirdShardBuyable": "<ut> Мощная Дробилка ({{amount}})</ut> <br> Увеличивает в 2 раза минимальные и в 1.75 максимальные Осколки за Разбиение <br> Эффект: x{{effect1}} к мин. и x{{effect2}} к макс. <br> Стоимость: {{price}} осколков",
 
     "firstShardSingle": "<ut> Переработка </ut> <br> Увеличивает Кристаллы за Престиж в зависимости от Осколков <br> Эффект: x{{firstShardSingleEffect}} <br> {{firstShardSinglePrice}}",
     "secondShardSingle": "<ut> Кэширование </ut> <br> Увеличивает эффекты покупаемых улучшений Осколков 1 и 2 в зависимости от количества разбитых Кристаллов <br> Эффект: x{{secondShardSingleEffect}} <br> {{secondShardSinglePrice}}",

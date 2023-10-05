@@ -194,7 +194,7 @@
 
     "firstShardBuyable": "<ut> Crystal Gauntlet ({{amount}})</ut> <br> Doubles Shards per click <br> Effect: x{{effect}} <br> Cost: {{price}} shards",
     "secondShardBuyable": "<ut> Generator Boost ({{amount}})</ut> <br> Triples Shards per second <br> Effect: x{{effect}} <br> Cost: {{price}} shards",
-    "thirdShardBuyable": "<ut> Powerful Crusher ({{amount}})</ut> <br> Increases 2 times the minimum and 1.5 times the maximum Shards per Break <br> Effect: x{{effect1}} for min and x{{effect2}} for max <br> Cost: {{price}} shards",
+    "thirdShardBuyable": "<ut> Powerful Crusher ({{amount}})</ut> <br> Increases 2 times the minimum and 1.75 times the maximum Shards per Break <br> Effect: x{{effect1}} for min and x{{effect2}} for max <br> Cost: {{price}} shards",
 
     "firstShardSingle": "<ut> Recycling </ut> <br> Increases Crystals gain based on Shards <br> Effect: x{{firstShardSingleEffect}} <br> {{firstShardSinglePrice}}" ,
     "secondShardSingle": "<ut> Caching </ut> <br> Increases the effects of purchased 1st and 2nd Shard upgrades based on broken Crystals <br> Effect: x{{secondShardSingleEffect}} <br> {{secondShardSinglePrice}}",

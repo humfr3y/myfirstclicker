@@ -40,7 +40,7 @@ let autoPrestigeTime = '', autoPrestigeCoins = ''
 let whichPrestigeMode = 'time', prestigeConditionTime = 3600, prestigeConditionCoins = 1e15
 let prestigeCountText = '', bulkBuyText = ''
 let shards = 0, brokenCrystals = 0, brokenCrystalsTemp = 0, shardsPerClick = 0, shardsPerSecond = 0, shardsTemp = 0, shardsEffect = 0, offlineShardsTemp = 1
-let shardChanceMinimum = 1, shardChanceMaximum = 100
+let shardChanceMinimum = 1, shardChanceMaximum = 50
 let getShardsPerSecond
 let offlineShardsGain = ''
 let mutedAudio = false
@@ -375,7 +375,7 @@ function getShardPerSec() {
     
     achRow1.completion[19] ? shardsEffect *= 1+prestigeCount/100 : shardsEffect
     shardChanceMinimum = thirdShardBuyableEffect[0]
-    shardChanceMaximum = 100*thirdShardBuyableEffect[1]
+    shardChanceMaximum = 50*thirdShardBuyableEffect[1]
 }
 
 function selectTab(argument, isFlex) {
