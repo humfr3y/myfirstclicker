@@ -17,6 +17,7 @@ function updateTick() {
 }
 
 function reloadPage() {
+    doHardReset()
     location.reload()
 }
 
