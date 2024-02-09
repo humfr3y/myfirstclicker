@@ -59,6 +59,7 @@ function doPrestigeReset(){
         }
         doReset()
         getCoinPerSecond = setInterval(getCoinPerSec, 50)
+        checkCrystalsTemp()
         crystals += crystalsTemp
         totalCrystals += crystalsTemp
         prestigeCount += 1 * prestigeCountMultiplier
@@ -69,6 +70,7 @@ function doPrestigeReset(){
         overdriveType1.percent = 0
         overdriveType1.effect = 1
         overdriveType1.price = 1000
+        overdriveType1.consumed = 0
         if (prestigeTimer < fastestPrestigeTimer) {
             fastestPrestigeSeconds = prestigeSeconds
             fastestPrestigeMinutes = prestigeMinutes
@@ -76,6 +78,8 @@ function doPrestigeReset(){
             fastestPrestigeDays = prestigeDays
             fastestPrestigeTimer = prestigeTimer
         }
+        fastestPrestigeSeconds = Math.max(fastestPrestigeSeconds, 0.05)
+        fastestPrestigeTimer = Math.max(fastestPrestigeTimer, 0.05)
         shards += prestigeSinglesEffects[11]
         if (didMaxBuy == false){
             noMaxBuyPrestiges = 60 / (prestigeTimer+0.05)

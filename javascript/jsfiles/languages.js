@@ -329,7 +329,7 @@ for (const [index, singleName] of singleNames.entries()) {
     else fastestPrestigeMinutesText = i18next.t('fastestPrestigeMinutesText', {fastestPrestigeMinutesText: fastestPrestigeMinutes});
     fastestPrestigeTime.innerHTML = i18next.t('fastestPrestigeTime', {fastestPrestigeDaysTextBool: fastestPrestigeDaysText, fastestPrestigeHoursTextBool: fastestPrestigeHoursText, fastestPrestigeMinutesTextBool: fastestPrestigeMinutesText, fastestPrestigeSecondsText: formatNumber4(fastestPrestigeSeconds)});
     let offlineCrystalsFormula 
-    achRow1.completion[11] ? offlineCrystalsFormula = 60/(43200/secondPrestigeBuyableEffect) : offlineCrystalsFormula = 0
+    achRow1.completion[11] ? offlineCrystalsFormula = 60/(7200/secondPrestigeBuyableEffect) : offlineCrystalsFormula = 0
     achRow1.completion[17] ? offlineCrystalsFormula *= 4 : offlineCrystalsFormula
     offlineCrystalsFormula *= firstPrestigeBuyableEffect
     offlineCrystalsFormula *= firstShardSingleEffect

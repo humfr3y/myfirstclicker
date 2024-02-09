@@ -521,7 +521,8 @@ function checkUpgradesText () {
     fifthSingleEffect = 1 - fifthSingle.baseEffect + (fifthSingle.baseEffect*(Math.pow(Math.log10(fourthBuyable.amount+10), 1.2)))
     fourthBuyableEffect = Math.pow(prestigeSinglesEffects[5], fourthBuyable.amount) * fifthSingleEffect
     sixthSingleEffect = 1-sixthSingle.baseEffect+(sixthSingle.baseEffect*(Math.log10(gainPerClick+10)/1.337))
-    var sevEff = 1 - seventhSingle.baseEffect+ (Math.pow((1 + 0.000138*gameTimer), achRow1.completion[6])*seventhSingle.baseEffect*(1+ (Math.log(amountsOfUpgrades+10))))
+    var sevEff
+    seventhSingle.amount == 1 ? sevEff = Math.pow(1 + (0.2 * gameTimer/3600), achRow1.completion[6]) + Math.pow(amountsOfUpgrades+10, 0.9)/4.4 : sevEff = 1
     seventhSingleEffect = sevEff
     eighthSingleEffect = Math.pow((Math.pow((achCount-1) * 40, 0.3)), eighthSingle.amount)
     ninthSingleEffect = 1 - ninthSingle.baseEffect +(ninthSingle.baseEffect*(1 + (gameTimer/360000)))
@@ -552,7 +553,7 @@ function checkUpgradesText () {
     firstShardSingleEffect = Math.pow(1 + Math.log10(shards+10), firstShardSingle.amount)/1.2
     secondShardSingleEffect = Math.pow(1 + Math.pow(brokenCrystals, 0.175), secondShardSingle.amount)
     thirdShardSingleEffect = Math.pow(1 + Math.pow(crystals, 0.3), thirdShardSingle.amount)
-    fourthShardSingleEffect = Math.pow(Math.log10(Math.log10(shards+10)+10), fourthShardSingle.amount)/2
+    fourthShardSingleEffect = Math.pow(1 + Math.log10(Math.log10(shards+10)+10)/5, fourthShardSingle.amount)
     fifthShardSingleEffect = 1, sixthShardSingleEffect = 1
 
     priceReset(firstShardBuyable)

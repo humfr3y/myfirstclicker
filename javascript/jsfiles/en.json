@@ -58,7 +58,7 @@
     "autoSave": "Autosaving: {{autoSaverTimer}}s",
 
     "resetConfirm": "Do you really want reset the game?",
-    "oopsNaNed": "Oops, you've got NaNed and your save got corrupted, would you like to do hard reset?",
+    "oopsNaNed": "Oops, you've got NaNed and your save got corrupted, would you like to refresh the page?",
     "yes": "Yes",
     "no": "No",
 
@@ -96,7 +96,7 @@
     "tenthSinglePriceText": "Cost: {{tenthSinglePrice}} α-coins",
 
     "firstPrestigeBuyable": "<ut> Brilliant Doubler ({{firstPrestigeBuyableAmount}})</ut> <br> Doubles crystals per Prestige <br> Effect: x{{firstPrestigeBuyableEffect}} <br> Cost: {{firstPrestigeBuyablePrice}} crystals",
-    "secondPrestigeBuyable": "<ut> Gem Investment ({{secondPrestigeBuyableAmount}})</ut> <br> Reduces time of passive crystals gain <br> Effect: /{{secondPrestigeBuyableEffect}} <br> Cost: {{secondPrestigeBuyablePrice}} crystals",
+    "secondPrestigeBuyable": "<ut> Gem Investment ({{secondPrestigeBuyableAmount}})</ut> <br> Reduces time of offline crystals gain <br> Effect: /{{secondPrestigeBuyableEffect}} <br> Cost: {{secondPrestigeBuyablePrice}} crystals",
 
     "firstPrestigeSingle": "<ut> Money Pillow </ut> <br> Start U-Multipliers, U-Powers, Prestiges with 1000 α-coins<br> {{firstPrestigeSinglePrice}}",
     "secondPrestigeSingle": "<ut> Activity 2.0 </ut> <br> Increases exponent of α-coin gain based on spent time<br> {{secondPrestigeSinglePrice}}",
@@ -228,12 +228,12 @@
     "achievement14Desc": "<ut> Breakin da wall! (14) </ut> <br> <br> Do U-Multiplier.",
     "achievement15Desc": "<ut> Master clicker (15) </ut> <br> <br> Make 1000 clicks. <br> <br> <it> Reward: Every click increases CPS by +0.01%. Also unlocks \"Max all\" button.</it>",
     "achievement16Desc": "<ut> Hellish productivity (16) </ut> <br> <br> Make Productivity effect 6666% <br> <br> <it> Reward: Increase base effect of Productivity to 1.1.</it>",
-    "achievement17Desc": "<ut> Time to sleep! (17) </ut> <br> <br> Spend 1000 seconds in game. <br> <br> <it> Reward: Every minute increases Cashback effect by х(1.05*hours).</it>",
+    "achievement17Desc": "<ut> Time to sleep! (17) </ut> <br> <br> Spend 1000 seconds in game. <br> <br> <it> Reward: Increases Cashback effect by х0.2*hours.</it>",
     "achievement18Desc": "<ut> Another breakin da wall (18) </ut> <br> <br> Do U-Power.",
     "achievement19Desc": "<ut> Million multiplier (19) </ut> <br><br> Reach x1e6 multiplier of Doubler. <br><br> <it> Reward: Makes Midas Cursor formula better.</it>",
     "achievement20Desc": "<ut> Final stretch? (20) </ut> <br> <br> Buy all upgrades. <br> <br> <it> Reward: Unlock Prestige.</it>",
     "achievement21Desc": "<ut> I was waiting for you... (21) </ut> <br> <br> Become Prestige.",
-    "achievement22Desc": "<ut> I wish I escape this infinity offline production coding (22) </ut> <br> <br> Spend 3 days in a game. <br> <br><it> Reward: Offline generation of crystals every 12 hours.</it>",
+    "achievement22Desc": "<ut> I wish I escape this infinity offline production coding (22) </ut> <br> <br> Spend 3 days in a game. <br> <br><it> Reward: Offline generation of crystals every 2 hours.</it>",
     "achievement23Desc": "<ut> Who the hell needs those crystals? (23) </ut> <br> <br> Break 100 crystals.",
     "achievement24Desc": "<ut> Maybe I need just to bypass the wall? (24) </ut> <br> <br> Do Prestige without U-power resets. <br> <br> <it> Reward: Base requirement for U-power decreased by 10.</it>",
     "achievement25Desc": "<ut> U-multimultiplier (25) </ut> <br> <br>Get 10 U-multipliers.",
@@ -308,7 +308,7 @@
 
     "aboutGameTitle": "About game",
 
-    "aboutGame": "<ut> Digital God 0.10. Prestige Update 2.0. Part 1. Shards.</ut> <br> Developed by Humfrey. <br> <br> Digital God was inspired by such awesome games: Antimatter Dimensions, Synergism, Prestige Tree. <br> <br> Thanks everyone for playing!<br>",
+    "aboutGame": "<ut> Digital God 0.10.1. Prestige Update 2.0. Part 1. Shards.</ut> <br> Developed by Humfrey. <br> <br> Digital God was inspired by such awesome games: Antimatter Dimensions, Synergism, Prestige Tree. <br> <br> Thanks everyone for playing!<br>",
     "galaxyClickText": "Rate game on galaxy.click",
     "discordText": "Join to discord server",
     "telegramChatText": "Join to telegram chat (russian)",

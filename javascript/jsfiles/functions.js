@@ -16,6 +16,10 @@ function updateTick() {
     achRow1.completion[18] ? overdriveType1.effect *= 1.1 : overdriveType1.effect
 }
 
+function reloadPage() {
+    location.reload()
+}
+
 function checkSpiritualEvent() {
     if (limits(dayOfMonth, 5, 12) && (currentMonth == 10)) {
         isSpiritualEvent = true
@@ -24,10 +28,10 @@ function checkSpiritualEvent() {
     if (isSpiritualEvent) {
     spiritualEvent.style.display = 'flex'
     noEvent.style.display = 'none'
-    spiritEffects[0] = 1+(spirits/120)
-    spiritEffects[1] = 1+(spirits/495)
-    spiritEffects[2] = 1+(spirits/150)
-    spiritEffects[3] = 1+(spirits/111)
+    spiritEffects[0] = 1+(spirits/333)
+    spiritEffects[1] = 1+(spirits/3333)
+    firstPrestigeBuyable.amount >= 1 ? spiritEffects[2] = 1+(spirits/500) : spiritEffects[2] = 1
+    spiritEffects[3] = 1+(spirits/250)
     }
     else {
     spiritualEvent.style.display = 'none'
@@ -40,6 +44,7 @@ function checkCrystalsTemp() {
     achRow1.completion[17] ? crystalsTemp *= 4 : crystalsTemp
     crystalsTemp *= firstShardSingleEffect
     crystalsTemp *= spiritEffects[2]
+
     if (prestigeMilestonesEffects[14]) {
         prestigeCountMultiplier = Math.floor(Math.log10(money+10)-14)
     }
@@ -269,11 +274,12 @@ function offlineGainDev(time) {
     }
     else superCoinsTemp = 0
     if (achRow1.completion[11]) {
-        offlineCrystalsTemp = time/(43200/secondPrestigeBuyableEffect)
+        offlineCrystalsTemp = time/(7200/secondPrestigeBuyableEffect)
         achRow1.completion[17] ? offlineCrystalsTemp *= 4 : offlineCrystalsTemp
         offlineCrystalsTemp *= firstShardSingleEffect
         offlineCrystalsTemp *= firstPrestigeBuyableEffect
         crystals += offlineCrystalsTemp
+        totalCrystals += offlineCrystalsTemp
         }
     if (prestigeMilestonesEffects[15]){
         offlinePrestigesTemp = (time/60)*(fastestNoMaxBuyPrestiges/20)

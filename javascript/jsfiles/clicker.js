@@ -725,11 +725,12 @@ function offlineGain() {
     }
     else superCoinsTemp = 0
     if (achRow1.completion[11]) {
-        offlineCrystalsTemp = timeDifference/(43200/secondPrestigeBuyableEffect)
+        offlineCrystalsTemp = timeDifference/(7200/secondPrestigeBuyableEffect)
         achRow1.completion[17] ? offlineCrystalsTemp *= 4 : offlineCrystalsTemp
         offlineCrystalsTemp *= firstShardSingleEffect
         offlineCrystalsTemp *= firstPrestigeBuyableEffect
         crystals += offlineCrystalsTemp
+        totalCrystals += offlineCrystalsTemp
         }
     if (prestigeMilestonesEffects[15]){
         offlinePrestigesTemp = (timeDifference/60)*(fastestNoMaxBuyPrestiges/20)

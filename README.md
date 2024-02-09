@@ -1,4 +1,4 @@
-# My 1st Clicker
+# DIGITAL GOD BETA VERSION
 
 It's a very basic clicker which i did with a low js knowledge and zero html knowlegde.
 It's my very first project which i did myself (and second at all).
