@@ -1,4 +1,4 @@
-var version = "0.10"
+let version = ["0.9", "0.10", "0.10.1"]
 function singleUpgradePurchasedRemove () {
     var singleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
     for (var i = 0; i < singleArray.length; i++){
@@ -204,7 +204,6 @@ var currentLanguage = 'en'
 
 function savingTheGame() {
     datasave = {
-        version,
         select_selectedIndex: select.selectedIndex,
         gainPerSecondSave,
         lastOnlineTime: lastOnlineTime-0,
@@ -325,6 +324,7 @@ function savingTheGame() {
     datasave.overdriveType1_percent = overdriveType1.percent;
     datasave.overdriveType1_effect = overdriveType1.effect;
     datasave.overdriveType1_price = overdriveType1.price;
+    datasave.overdriveType1_consumed = overdriveType1.consumed;
     
     return datasave;
 }
@@ -369,9 +369,7 @@ function loadingTheGame() {
     upower = parseFloat(parsedData.upower);
     upowercount = parseFloat(parsedData.upowercount);
 
-    if (parsedData.firstShopBuyable_amount != null) {
-        version = parsedData.version;
-
+    if (version[0] == "0.9") {
         const shopBuyableCount = ["first","second","third","fourth"];
         for (let i of shopBuyableCount) {
         window[i+"ShopBuyable"].amount = parseFloat(parsedData[i+"ShopBuyable_amount"]);
@@ -385,6 +383,7 @@ function loadingTheGame() {
         overdriveType1.percent = parseFloat(parsedData.overdriveType1_percent);
         overdriveType1.effect = parseFloat(parsedData.overdriveType1_effect);
         overdriveType1.price = parseFloat(parsedData.overdriveType1_price);
+        
         gameDays = parseFloat(parsedData.gameDays);
         dailyTimer = parseFloat(parsedData.dailyTimer);
         dailySeconds = parseFloat(parsedData.dailySeconds);
@@ -402,7 +401,7 @@ function loadingTheGame() {
     const prestigeBuyableCount = ["first","second", "third"];
     const shardBars = ['shardUnlockablePerSecond', 'shardUnlockableClick', 'shardUnlockableBuyables', 'shardUnlockableSingles']
 
-    if (version == "0.10") {
+    if (version[1] == "0.10") {
         prestigeCount = parseFloat(parsedData.prestigeCount);
         crystals = parseFloat(parsedData.crystals);
         totalCrystals = parseFloat(parsedData.totalCrystals);
@@ -490,6 +489,9 @@ function loadingTheGame() {
         }
 
     }
+    if (version[2] == "0.10.1") {
+        overdriveType1.consumed = parseFloat(parsedData.overdriveType1_consumed);
+    }
     else {
         for (let i of prestigeSingleCount) {
             window[i+"PrestigeSingle"].amount = 0
@@ -506,10 +508,10 @@ function loadingTheGame() {
         noResets = false
         fastestPrestigeTimer = 1e69
         spirits = 0
+        overdriveType1.consumed = 0
         for (let i = 10; i < 20; i++)
         achRow1.completion[i] = false
         }
-    version = "0.10"
 }
 }
 
