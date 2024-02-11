@@ -1,4 +1,8 @@
 function updateTick() {
+    if (isNaN(overdriveType1.consumed)){
+        overdriveType1.consumed = 0
+        console.log("gasdgads")
+    }
     disabledUpgrades()
     getShardPerSec()
     addSecond()
