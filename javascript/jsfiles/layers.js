@@ -51,8 +51,9 @@ function doUpower () {
 function doPrestigeReset(){
     if (prestigeMilestonesEffects[14]) {
         prestigeCountMultiplier = Math.floor(Math.log10(money+10)-14)
+        console.log(prestigeCountMultiplier + " pSM")
     }
-    else prestigeCountMultiplier = 1
+    else prestigeCountMultiplier = 1; console.log(prestigeCountMultiplier + " pSM = 1")
     if (money >= 1e15){
         if (upowercount == prestigeSinglesEffects[12][1]) {
             noResets = true
@@ -62,7 +63,9 @@ function doPrestigeReset(){
         checkCrystalsTemp()
         crystals += crystalsTemp
         totalCrystals += crystalsTemp
+        console.log(prestigeCount + "+ 1 *" + prestigeCountMultiplier + " = " + (prestigeCount + 1 * prestigeCountMultiplier))
         prestigeCount += 1 * prestigeCountMultiplier
+        console.log(prestigeCount + " pS")
         upower = 1
         umultiplier = 1
         upowercount = prestigeSinglesEffects[12][1]

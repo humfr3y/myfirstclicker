@@ -550,7 +550,7 @@ function checkUpgradesText () {
     secondShardBuyableEffect = Math.pow(3, secondShardBuyable.amount)*secondShardSingleEffect
     thirdShardBuyableEffect[0] = Math.pow(2, thirdShardBuyable.amount)
     thirdShardBuyableEffect[1] = Math.pow(1.75, thirdShardBuyable.amount)
-    firstShardSingleEffect = Math.pow(1 + Math.log10(shards+10), firstShardSingle.amount)/1.2
+    firstShardSingleEffect = Math.pow(1 + Math.log10(shards+10)/1.2, firstShardSingle.amount)
     secondShardSingleEffect = Math.pow(1 + Math.pow(brokenCrystals, 0.175), secondShardSingle.amount)
     thirdShardSingleEffect = Math.pow(1 + Math.pow(crystals, 0.3), thirdShardSingle.amount)
     fourthShardSingleEffect = Math.pow(1 + Math.log10(Math.log10(shards+10)+10)/5, fourthShardSingle.amount)

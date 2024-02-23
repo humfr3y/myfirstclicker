@@ -1,7 +1,6 @@
 function updateTick() {
     if (isNaN(overdriveType1.consumed)){
         overdriveType1.consumed = 0
-        console.log("gasdgads")
     }
     disabledUpgrades()
     getShardPerSec()
@@ -50,12 +49,13 @@ function checkCrystalsTemp() {
     crystalsTemp *= firstShardSingleEffect
     crystalsTemp *= spiritEffects[2]
 
-    if (prestigeMilestonesEffects[14]) {
-        prestigeCountMultiplier = Math.floor(Math.log10(money+10)-14)
-    }
-    else {
-        prestigeCountMultiplier = 1 
-    }
+    // if (prestigeMilestonesEffects[14]) {
+    //     prestigeCountMultiplier = Math.floor(Math.log10(money+10)-14)
+    //     console.log ("checkcrystals psm = " + prestigeCountMultiplier)
+    // }
+    // else {
+    //     prestigeCountMultiplier = 1 
+    // }
 }
 
 function hidePiece(condition, idOfPiece, idOfPiecePercent, summary) {
