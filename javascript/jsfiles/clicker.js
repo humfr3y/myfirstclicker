@@ -717,6 +717,7 @@ function whatsYourCurrentTime2 () {
 function offlineGain() {
     timeDifference = (currentOnlineTime - lastOnlineTime)/1000
     timeDifference = Math.min(1000000, timeDifference)
+    timeDifference <= 0 ? timeDifference = 1 : timeDifference
     checkUpgradesText()
     prestigeSingleEffect()
 
