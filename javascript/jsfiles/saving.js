@@ -1,4 +1,4 @@
-let version = ["0.9", "0.10", "0.10.1"]
+let version
 function singleUpgradePurchasedRemove () {
     var singleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
     for (var i = 0; i < singleArray.length; i++){
@@ -32,7 +32,7 @@ function saveGame () {
         (achRow1.completion).push(false);
     }
     localStorage.setItem('completion', JSON.stringify(achRow1.completion))
-    while (loreBoolean.length < 8) {
+    while (loreBoolean.length < 9) {
         loreBoolean.push(false);
     }
     localStorage.setItem('chapters', JSON.stringify(loreBoolean))
@@ -51,6 +51,8 @@ function loadGame() {
         achievementGottenRemove ()
         singleUpgradePurchasedRemove ()
         loadingTheGame();
+        areYouInChallenge()
+        checkCompletedChallenges()
         singleUpgradePurchased ()
         const achCompletions = localStorage.getItem('completion')
         const loreChapters = localStorage.getItem('chapters')
@@ -72,6 +74,7 @@ function loadGame() {
         offlineGainTime()
         loadAutomations()
         changeInputValue()
+        version = ["0.9", "0.10", "0.10.1", "0.11"]
         convertingTime(gameSeconds, gameMinutes, gameHours, gameDays, 'game')
         changeFonts2(optionValue)
         autoSaverTimer = 0
@@ -90,11 +93,12 @@ var autoSaverTimer = 0
 var autoSaveTime
 
 function autoSaveThis () {
-    if (autoSaving == 'yes')
+    if (autoSaving == 'yes' && !(isNaN(money) || isNaN(crystals) || isNaN(shards) || isNaN(total)))
         {
             saveGame()
         }
-        if (isNaN(money)) openWindow('gotNaNed', false)
+        if (isNaN(money) || isNaN(crystals) || isNaN(shards) || isNaN(total)) 
+        openWindow('gotNaNed', false)
     }
 
 function doHardReset () {
@@ -162,6 +166,8 @@ function importing(base64) {
     achievementGottenRemove ()
     singleUpgradePurchasedRemove ()
     loadingTheGame()
+    areYouInChallenge()
+    checkCompletedChallenges()
     for (let i = 0; i < loreBoolean.length; i++){
         checkLoreShorter(loreBoolean, i)
     }
@@ -179,6 +185,7 @@ function importing(base64) {
     autoSaverTimer = 0
     clearInterval(autoSaveTime)
     notify(importNotify);
+    version = ["0.9", "0.10", "0.10.1", "0.11"]
     location.reload()
 }
 
@@ -228,6 +235,10 @@ function savingTheGame() {
         gameMinutes,
         gameHours,
         gameDays,
+        realSeconds,
+        realMinutes,
+        realHours,
+        realDays,
         prestigeSeconds,
         prestigeMinutes,
         prestigeHours,
@@ -265,14 +276,16 @@ function savingTheGame() {
         brokenCrystals,
         mutedAudio,
         isMuted,
-        spirits
+        spirits,
+        challengeStartedID,
+        virusCoins,
     };
     
     const buyablesAndSingles = [
         'firstBuyable', 'secondBuyable', 'thirdBuyable', 'fourthBuyable', 'fifthBuyable',
         'firstSingle', 'secondSingle', 'thirdSingle', 'fourthSingle', 'fifthSingle',
         'sixthSingle', 'seventhSingle', 'eighthSingle', 'ninthSingle', 'tenthSingle',
-        'firstShopBuyable', 'secondShopBuyable', 'thirdShopBuyable', 'fourthShopBuyable',
+        'firstShopBuyable', 'secondShopBuyable', 'thirdShopBuyable', 'fourthShopBuyable', 'fifthShopBuyable', 'sixthShopBuyable', 'seventhShopBuyable',
         'firstShopSingle',
         'firstPrestigeSingle', 'secondPrestigeSingle', 'thirdPrestigeSingle', 'fourthPrestigeSingle',
         'fifthPrestigeSingle', 'sixthPrestigeSingle', 'seventhPrestigeSingle', 'eighthPrestigeSingle',
@@ -281,6 +294,7 @@ function savingTheGame() {
         'firstPrestigeBuyable', 'secondPrestigeBuyable',
         'firstShardBuyable', 'secondShardBuyable', 'thirdShardBuyable',
         'firstShardSingle', 'secondShardSingle', 'thirdShardSingle', 'fourthShardSingle', 'fifthShardSingle', 'sixthShardSingle',
+        'firstShopItem', 'secondShopItem', 'thirdShopItem', 'fourthShopItem'
     ];
 
     const intervals = [
@@ -303,6 +317,8 @@ function savingTheGame() {
         datasave[`${i}_checked`] = document.getElementById(i).checked
     }
 
+    datasave.restartChallenge_checked = restartChallenge.checked
+
     for (const i of intervals) {
         datasave[`${i}_time`] = window[i].time;
         datasave[`${i}_price`] = window[i].price;
@@ -316,8 +332,11 @@ function savingTheGame() {
         if (window[item].hasOwnProperty('baseEffect') && !(item.includes('ShardSingle'))) {
             datasave[`${item}_baseEffect`] = window[item].baseEffect;
         }
-        if (window[item].hasOwnProperty('price') && !(item.includes('ShardSingle'))) {
+        if (window[item].hasOwnProperty('price') && !(item.includes('ShardSingle')) && !(item.includes('Item'))) {
             datasave[`${item}_price`] = window[item].price;
+        }
+        if (window[item].hasOwnProperty('used')) {
+            datasave[`${item}_used`] = window[item].used;
         }
     }
     
@@ -325,7 +344,35 @@ function savingTheGame() {
     datasave.overdriveType1_effect = overdriveType1.effect;
     datasave.overdriveType1_price = overdriveType1.price;
     datasave.overdriveType1_consumed = overdriveType1.consumed;
-    
+
+    datasave.challengesCompleted = challengesCompleted;
+
+    datasave.versions = JSON.stringify(version)
+
+    datasave.challengeCompleted = JSON.stringify(challengeCompleted)
+
+    datasave.progressBarGoals = JSON.stringify(progressBarGoals)
+
+    datasave.codeChecks = JSON.stringify(codeChecks)
+
+    datasave.shopBulkBuy_value = shopBulkBuyInput.value
+
+    const tripleEventCoins = ['pinkCoin', 'greenCoin', 'blueCoin', 'greyCoin']
+
+    for (const i of tripleEventCoins) {
+        if (i !== 'greyCoin') {
+            datasave[`${i}_currency`] = window[i].currency
+            datasave[`${i}_amount`] = window[i].amount
+            datasave[`${i}_totalAmount`] = window[i].totalAmount
+            datasave[`${i}_price`] = window[i].price
+            datasave[`${i}_boost`] = window[i].boost
+        }
+        else {
+            datasave[`${i}_effect`] = window[i].effect
+            datasave[`${i}_price`] = window[i].price
+        }
+    }
+
     return datasave;
 }
 
@@ -369,6 +416,8 @@ function loadingTheGame() {
     upower = parseFloat(parsedData.upower);
     upowercount = parseFloat(parsedData.upowercount);
 
+    parsedData.versions == undefined ? version = ["0.9", "0.10", "0.10.1"] : version = JSON.parse(parsedData.versions)
+
     if (version[0] == "0.9") {
         const shopBuyableCount = ["first","second","third","fourth"];
         for (let i of shopBuyableCount) {
@@ -401,7 +450,7 @@ function loadingTheGame() {
     const prestigeBuyableCount = ["first","second", "third"];
     const shardBars = ['shardUnlockablePerSecond', 'shardUnlockableClick', 'shardUnlockableBuyables', 'shardUnlockableSingles']
 
-    if (version[1] == "0.10") {
+    if (version[1] === "0.10") {
         prestigeCount = parseFloat(parsedData.prestigeCount);
         crystals = parseFloat(parsedData.crystals);
         totalCrystals = parseFloat(parsedData.totalCrystals);
@@ -492,26 +541,51 @@ function loadingTheGame() {
     if (version[2] == "0.10.1") {
         overdriveType1.consumed = parseFloat(parsedData.overdriveType1_consumed);
     }
-    else {
-        for (let i of prestigeSingleCount) {
-            window[i+"PrestigeSingle"].amount = 0
-            }
-        for (const i of shardBars) {
-            window[i].percent = 0
-            window[i].consumedShards = 0
-            }
-        brokenCrystals = 0
-        shards = 0
-        prestigeCount = 0
-        crystals = 0
-        totalCrystals = 0
-        noResets = false
-        fastestPrestigeTimer = 1e69
-        spirits = 0
-        overdriveType1.consumed = 0
-        for (let i = 10; i < 20; i++)
-        achRow1.completion[i] = false
+    if (version[3] == "0.11") {
+        challengeStartedID = parseFloat(parsedData.challengeStartedID)
+        parsedData.challengeCompleted == undefined ? challengeCompleted = [false, false, false, false, false, false, false, false, false, false, false, false] : challengeCompleted = JSON.parse(parsedData.challengeCompleted)
+        parsedData.progressBarGoals == undefined ? progressBarGoals = [false, false, false] : progressBarGoals = JSON.parse(parsedData.progressBarGoals)
+        parsedData.codeChecks == undefined ? codeChecks = [false, false, false, false, false] : codeChecks = JSON.parse(parsedData.codeChecks)
+        
+        challengesCompleted = parseFloat(parsedData.challengesCompleted)
+        restartChallenge.checked = parsedData.restartChallenge_checked
+
+        realDays = parseFloat(parsedData.realDays)
+        realHours = parseFloat(parsedData.realHours)
+        realMinutes = parseFloat(parsedData.realMinutes)
+        realSeconds = parseFloat(parsedData.realSeconds)
+
+        virusCoins = parseFloat(parsedData.virusCoins)
+
+        const shopBuyableCount = ["fifth","sixth","seventh"];
+        for (let i of shopBuyableCount) {
+        window[i+"ShopBuyable"].amount = parseFloat(parsedData[i+"ShopBuyable_amount"]);
+        window[i+"ShopBuyable"].price = parseFloat(parsedData[i+"ShopBuyable_price"]);
         }
+        shopBulkBuyInput.value = parsedData.shopBulkBuy_value
+
+        const shopItemCount = ["first","second","third","fourth"];
+        for (let i of shopItemCount) {
+            window[i+"ShopItem"].amount = parseFloat(parsedData[i+"ShopItem_amount"]);
+            window[i+"ShopItem"].used = parseFloat(parsedData[i+"ShopItem_used"]);
+            }
+
+        const tripleEventCoins = ['pinkCoin', 'greenCoin', 'blueCoin', 'greyCoin']
+
+        for (const i of tripleEventCoins) {
+            if (i !== 'greyCoin') {
+                window[i].currency = parseFloat(parsedData[`${i}_currency`])
+                window[i].amount = parseFloat(parsedData[`${i}_amount`])
+                window[i].totalAmount = parseFloat(parsedData[`${i}_totalAmount`])
+                window[i].price = parseFloat(parsedData[`${i}_price`])
+                window[i].boost = parseFloat(parsedData[`${i}_boost`])
+            }
+            else {
+                window[i].effect = parseFloat(parsedData[`${i}_effect`])
+                window[i].price = parseFloat(parsedData[`${i}_price`])
+            }
+        }
+    }
 }
 }
 

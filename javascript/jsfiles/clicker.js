@@ -18,8 +18,10 @@ let timeDifference = currentOnlineTime - lastOnlineTime
 let superCoins = 0, totalSuperCoins = 0, superCoinsTemp;
 let optionValue = "option1"
 let overdriveType1Activate, overdriveType1Bool = false, overdriveType1Price = 0
-let codeIsFalse, codeIsTrue, codeIsUsed, code1Reward, code2Reward;
-let code1Check = false, code2Check = false
+let codeIsFalse, codeIsTrue, codeIsUsed;
+let codeChecks = [false, false, false, false, false]
+let codeRewards = ['', '', '', '', '']
+let codes = ['digitalgod', 'shirakamifubuki', 'suisei', 'koyori', 'manilovefauna']
 let code, codeReward
 let superCoinsTemp2 = 0
 let gainPerClickTitle, gainPerSecondTitle, gainTitle, superCoinsChanceTitle, crystalsMultiplierTitle
@@ -27,8 +29,9 @@ let multIdentifier = 0
 let resetTitle, NaNedTitle
 let dailyIsTrue, dailyIsFalse
 let dailySeconds = 0, dailyMinutes = 0, dailyHours = 0, dailyTimer = 0;
-let gameHours = 0, gameMinutes = 0, gameSeconds = 0, gameTimer = 0, gameDays = 0, gameSecondsTemp = 1, gameTimerTemp = 1
+let gameHours = 0, gameMinutes = 0, gameSeconds = 0, gameTimer = 0, gameDays = 0, gameSecondsTemp = 1, gameTimerTemp = 1, realSecondsTemp = 1, realTimerTemp = 1
 let prestigeSeconds = 0, prestigeMinutes = 0, prestigeHours = 0, prestigeDays = 0, prestigeTimer = 0, prestigeSecondsTemp = 1, prestigeTimerTemp = 1, umultiplierTimer = 0, upowerTimer = 0
+let realTimer = 0, realSeconds = 0, realMinutes = 0, realHours = 0, realDays = 0
 let fastestPrestigeSeconds = 0, fastestPrestigeMinutes = 0, fastestPrestigeHours = 0, fastestPrestigeDays = 0, fastestPrestigeTimer = 1e69
 let fastestPrestigeDaysText, fastestPrestigeHoursText, fastestPrestigeMinutesText
 let offlineCrystalsTemp = 0, offlineCrystalsGain
@@ -46,10 +49,20 @@ let offlineShardsGain = ''
 let mutedAudio = false
 let spirits = 0, spiritEffects = [1, 1, 1, 1]
 let dayOfMonth = new Date().getDate(), currentMonth = new Date().getMonth() + 1;
-let isSpiritualEvent = false
+let isSpiritualEvent = false, isTriplePowerEvent = false
 let progressBarTitles = ['Престиж: ', 'Испытания Монет: ']
 let progressBarCurrencies = ['монеты']
 const mediaQuery = window.matchMedia('screen and (max-width: 600px)');
+let challengeActivated = [false, false, false, false, false, false, false, false, false, false, false, false]
+let challengeActivate = false
+let virusCoins = 1
+let challengeStartedID = 0
+let challengeCompleted = [false, false, false, false, false, false, false, false, false, false, false, false]
+let challengesCompleted = 0
+let itemNames = ['Бесплатный У-множитель', 'Бесплатный У-силитель', 'Ускорение Времени', 'Ускорение Времени +']
+let useNotify, notUseNotify, notUseNotify2, notUseNotify3
+let reqDivider = 1
+let progressBarGoals = [false, false, false]
 
 
 function randomNumber (min, max) {
@@ -58,7 +71,9 @@ function randomNumber (min, max) {
 
 function addSecond() {
     gameTimer += 0.05
+    realTimer += 0.05
     gameSeconds += 0.05
+    realSeconds += 0.05
     prestigeSeconds += 0.05
     prestigeTimer += 0.05
     umultiplierTimer += 0.05
@@ -70,18 +85,27 @@ function addSecond() {
     dailySeconds <= 0 ? dailySeconds = 0 : dailySeconds -= 0.05
     convertingTime(gameSeconds, gameMinutes, gameHours, gameDays, 'game');
     convertingTime(prestigeSeconds, prestigeMinutes, prestigeHours, prestigeDays, 'prestige');
+    convertingTime(realSeconds, realMinutes, realHours, realDays, 'real');
     whatsYourCurrentTime2()
     whatsYourCurrentTime() 
 }
 
 setInterval(()=>{
-    if (totalCrystals == 0) {
+    if (!progressBarGoals[0] || challengeActivate) {
         progress.style.width = Math.min(Math.log(money)/Math.log(1e15)*100, 100)  + "%"
         percent.innerHTML = progressBarTitles[0] + ": " + formatNumber2(money) + "/1e15 " + progressBarCurrencies[0] + " (" + Math.min(findRatio(money, 1e15), 100) + "%)"
     }
+    else if (!progressBarGoals[1]) {
+        progress.style.width = Math.min(Math.log(money)/Math.log(1e25)*100, 100)  + "%"
+        percent.innerHTML = progressBarTitles[1] + ": " + formatNumber2(money) + "/1e25 " + progressBarCurrencies[0] + " (" + Math.min(findRatio(money, 1e25), 100) + "%)"
+    }
+    else if (!progressBarGoals[2]) {
+        progress.style.width = Math.min(Math.log(money)/Math.log(1e50)*100, 100)  + "%"
+        percent.innerHTML = progressBarTitles[2] + ": " + formatNumber2(money) + "/1e50 " + progressBarCurrencies[0] + " (" + Math.min(findRatio(money, 1e50), 100) + "%)"
+    }
     else {
-        progress.style.width = Math.min(Math.log(money)/Math.log(1e30)*100, 100)  + "%"
-        percent.innerHTML = progressBarTitles[1] + ": " + formatNumber2(money) + "/1e30 " + progressBarCurrencies[0] + " (" + Math.min(findRatio(money, 1e30), 100) + "%)"
+        progress.style.width = Math.min(Math.log(money)/Math.log(1e308)*100, 100)  + "%"
+        percent.innerHTML = "GG" + ": " + formatNumber2(money) + "/1.79e308 " + progressBarCurrencies[0] + " (" + Math.min(findRatio(money, 1e308), 100) + "%)"
     }
     if (mediaQuery.matches) {
         overdriveType1ProgressBarActive.style.width = (overdriveType1.percent*3) + "px"
@@ -126,7 +150,7 @@ overdriveType1ProgressBarBase.addEventListener("click", function() {
                 money -= sub
                 overdriveType1.percent = Math.log10(overdriveType1.consumed)
                 overdriveType1.percent = Math.min(overdriveType1.percent, 100)
-                overdriveType1.effect = 1+Math.pow(2, overdriveType1.percent/2.5)/9
+                overdriveType1.effect = (1+Math.pow(2, overdriveType1.percent/2.5)/9)-0.11
                 achRow1.completion[18] ? overdriveType1.effect *= 1.1 : overdriveType1.effect
                 overdriveType1.price = 1000+Math.pow(10, overdriveType1.percent)/20*2;
             }
@@ -139,41 +163,72 @@ overdriveType1ProgressBarBase.addEventListener("click", function() {
 
 function fillTheProgressBar(shardUnlockable) {
     let subPerTick = shardUnlockable.price/500
-    shardUnlockable.bool ? shardUnlockable.bool = false : shardUnlockable.bool = true
-    if (shardUnlockable.bool){
         shardUnlockable.interval = setInterval(()=> {
             if (shards >= subPerTick){
-                shards -= subPerTick
-                shardUnlockable.consumedShards += subPerTick
-                shardUnlockable.percent += 0.2;
+                shards -= subPerTick*(1+shardUnlockable.percent/20)
+                shardUnlockable.consumedShards += subPerTick*(1+shardUnlockable.percent/20)
+                shardUnlockable.percent += 0.2*(1+shardUnlockable.percent/20);
                 shardUnlockable.percent = Math.min(shardUnlockable.percent, 100)
+                if (shardUnlockable.percent == 100) {
+                    shards += shardUnlockable.consumedShards - shardUnlockable.price
+                }
             }
         }, 50)
-    }
-    else clearInterval(shardUnlockable.interval)
 }
 
-shardUnlockableBase1.addEventListener("click", () => {
+shardUnlockableBase1.addEventListener("mousedown", () => {
     fillTheProgressBar(shardUnlockablePerSecond)
 })
 
-shardUnlockableBase2.addEventListener("click", () => {
+shardUnlockableBase1.addEventListener("mouseup", () => {
+    clearInterval(shardUnlockablePerSecond.interval)
+})
+
+shardUnlockableBase1.addEventListener("mouseleave", () => {
+    clearInterval(shardUnlockablePerSecond.interval)
+})
+
+shardUnlockableBase2.addEventListener("mousedown", () => {
     fillTheProgressBar(shardUnlockableClick)
 })
 
-shardUnlockableBase3.addEventListener("click", () => {
+shardUnlockableBase2.addEventListener("mouseup", () => {
+    clearInterval(shardUnlockableClick.interval)
+})
+
+shardUnlockableBase2.addEventListener("mouseleave", () => {
+    clearInterval(shardUnlockableClick.interval)
+})
+
+shardUnlockableBase3.addEventListener("mousedown", () => {
     fillTheProgressBar(shardUnlockableBuyables)
 })
 
-shardUnlockableBase4.addEventListener("click", () => {
+shardUnlockableBase3.addEventListener("mouseup", () => {
+    clearInterval(shardUnlockableBuyables.interval)
+})
+
+shardUnlockableBase3.addEventListener("mouseleave", () => {
+    clearInterval(shardUnlockableBuyables.interval)
+})
+
+shardUnlockableBase4.addEventListener("mousedown", () => {
     fillTheProgressBar(shardUnlockableSingles)
+})
+
+shardUnlockableBase4.addEventListener("mouseup", () => {
+    clearInterval(shardUnlockableSingles.interval)
+})
+
+shardUnlockableBase4.addEventListener("mouseleave", () => {
+    clearInterval(shardUnlockableSingles.interval)
 })
 
 
 function convertingTime(seconds, minutes, hours, days, type) {
     seconds = Math.round(seconds)
     let minutesTemp, hoursTemp, daysTemp
-    const boolGame = (type == 'game'), boolPrestige = (type == 'prestige') 
+    const boolGame = (type == 'game'), boolPrestige = (type == 'prestige'), boolReal = (type == 'real')
     if (seconds >= 60) {
             minutesTemp = Math.floor(seconds / 60)
             seconds = Math.round(((seconds / 60) - minutesTemp) * 60)
@@ -185,6 +240,10 @@ function convertingTime(seconds, minutes, hours, days, type) {
             else if (boolPrestige) {
                 prestigeSeconds = seconds
                 prestigeMinutes = minutes
+            }
+            else if (boolReal) {
+                realSeconds = seconds
+                realMinutes = minutes
             }
         }
     if (minutes >= 60) {
@@ -199,6 +258,10 @@ function convertingTime(seconds, minutes, hours, days, type) {
                 prestigeMinutes = minutes
                 prestigeHours = hours
             }
+            else if (boolReal) {
+                realHours = hours
+                realMinutes = minutes
+            }
             }
     if (hours >= 24) {
             daysTemp = Math.floor(hours / 24) //100/24 = 4
@@ -211,6 +274,10 @@ function convertingTime(seconds, minutes, hours, days, type) {
             else if (boolPrestige) {
                 prestigeHours = hours
                 prestigeDays = days
+            }
+            else if (boolReal) {
+                realHours = hours
+                realDays = days
             }
             }
 }
@@ -259,6 +326,7 @@ function getCoinPerSec() {
     upower = 1 + baseUpow*upowercount
     const gainMultiplierArray = [1+thirdShopBuyableEffect, overdriveType1.effect, achievementBonus, seventhSingleEffect, umultiplier, prestigeSinglesEffects[8], prestigeSinglesEffects[9], 1+shardsEffect, spiritEffects[0]]
     const gainPerSecondArray = [1+secondShopBuyableEffect, sixthSingleEffect, gain]
+
     gain = 1+thirdSingle.baseEffect
     for (let i = 0; i < gainMultiplierArray.length; i++) {
         gain *= gainMultiplierArray[i]
@@ -266,36 +334,82 @@ function getCoinPerSec() {
     achRow1.completion[17] ? gain *= 4 : gain
     gain = Math.pow(gain, upower)
     gain = Math.pow(gain, prestigeSinglesEffects[1])
+    !challengeActivate && challengeCompleted[0] ? gain = Math.pow(gain, 1.1) : gain
 
     gain = softCap(gain, 1e15, 0.5)
+
     gainPerSecond = firstBuyableEffect
     for (let i = 0; i < gainPerSecondArray.length; i++) {
         gainPerSecond *= gainPerSecondArray[i]
     }
-    fourthBuyable.amount >= 1 ? gainPerSecond *= fourthBuyableEffect : gainPerSecond = gainPerSecond
-    achRow1.completion[4] ? gainPerSecond *= (1+0.0001*clickCount) : gainPerSecond = gainPerSecond
-    firstSingle.amount == 1 ? gainPerSecond *= firstSingleEffect : gainPerSecond = gainPerSecond
-    gainPerSecond = softCap(gainPerSecond, 1e13, prestigeSinglesEffects[10][1])
+    fourthBuyable.amount >= 1 ? gainPerSecond *= fourthBuyableEffect : gainPerSecond
+    achRow1.completion[4] ? gainPerSecond *= (1+0.0001*clickCount) : gainPerSecond
+    firstSingle.amount == 1 ? gainPerSecond *= firstSingleEffect : gainPerSecond
+    !challengeActivate && challengeCompleted[7] ? gainPerSecond *= prestigeTimer : gainPerSecond
+    !challengeActivate && challengeCompleted[2] ? gainPerSecond = Math.pow(gainPerSecond, 1+(Math.log(prestigeCount)/111)) : gainPerSecond
+
+    if (challengeActivate) {
+        challengeActivated[3] ? gainPerSecond = Math.sqrt(gainPerSecond) : gainPerSecond
+        if (challengeActivated[6]){
+            gainPerSecond = Math.pow(gainPerSecond, 1-amountsOfUpgrades/50)
+            if (amountsOfUpgrades > 50) {
+                gainPerSecond = 0
+            }
+        }
+        challengeActivated[7] ? virusCoins *= 1.065 : virusCoins = 1
+        virusCoins >= 1e100 ? virusCoins = 1e100 : virusCoins
+        
+        
+        if (challengeActivated[11]) {
+            gainPerSecond = Math.pow(gainPerSecond, 0.01)
+            gainPerSecond = gainPerSecond * umultiplier
+            gainPerSecond = Math.pow(gainPerSecond, upower)
+        }
+    }
+
+    gainPerSecond /= virusCoins
+
+    if (challengeActivated[8]) {
+        gainPerSecond = softCap(gainPerSecond, 1e8, prestigeSinglesEffects[10][1])
+        gainPerSecond = softCap(gainPerSecond, 1e8, prestigeSinglesEffects[10][1])
+    }
+    else {
+        if (!challengeActivate && challengeCompleted[8]) gainPerSecond = softCap(gainPerSecond, 1e13*Math.pow(totalSuperCoins, 1.2), prestigeSinglesEffects[10][1]) 
+        else gainPerSecond = softCap(gainPerSecond, 1e13, prestigeSinglesEffects[10][1])
+    }
+
+    getCoinPerClick()
     gainPerSecond /= 20.0
 
-    gainPerClick = 1
-    gainPerClick *= Math.pow(2, thirdBuyable.baseEffect) 
-    gainPerClick *= 1+firstShopBuyableEffect
-    eighthSingle.amount == 1 ? gainPerClick *= eighthSingleEffect : gainPerClick = gainPerClick
-    secondSingle.amount == 1 ? gainPerClick *= midasFormula : gainPerClick = gainPerClick
-    gainPerClick *= gain
-    gainPerClick = Math.pow(gainPerClick, fifthBuyableEffect)
-    gainPerClick = softCap(gainPerClick, 1e13, prestigeSinglesEffects[10][0])
+    challengeActivated[2] ? gainPerSecond = 0 : gainPerSecond
+
+
     money = money+gainPerSecond;
     total = total+gainPerSecond;
-    umultiplierCost = 100 + (50 * umultipliercount)
-    upowerCost = 250 + (100 * upowercount)
-    umultiplierBulkCost = Math.floor((firstBuyable.amount-(umultiplierCost-50))/50) //(SI's - prev umulti cost) / scaling -> floored number
+
+    if (money >= 1e25) progressBarGoals[1] = true
+    if (money >= 1e50) progressBarGoals[2] = true
+
+    if (challengeActivate && money >= 1e15) {
+        money = 1e15
+    }
+    if (!challengeActivate && challengeCompleted[11]) {
+        umultipliercount >= 20 ? umultiplierCost = (100 + (40 * umultipliercount))*(1+((umultipliercount-19)/50)) : umultiplierCost = 100 + (40 * umultipliercount)
+        upowercount >= 10 ? upowerCost = (250 + (80 * upowercount))*(1+((upowercount-9)/15)) : upowerCost = 250 + (80 * upowercount)
+        
+    }
+    else  {
+        umultipliercount >= 20 ? umultiplierCost = (100 + (50 * umultipliercount)) * (1+((umultipliercount-19)/50)) : umultiplierCost = 100 + (50 * umultipliercount)
+        upowercount >= 10 ? upowerCost = (250 + (100 * upowercount)) * (1+((upowercount-9)/15)) : upowerCost = 250 + (100 * upowercount)
+    }
     if (achRow1.completion[13]) {
         upowerCost = upowerCost - (10 * (1+upowercount))
-        upowerBulkCost = Math.floor((firstBuyable.amount-(upowerCost-90))/90)
     }
-    else upowerBulkCost = Math.floor((firstBuyable.amount-(upowerCost-100))/100)
+    
+    if (challengeActivated[11]) {
+        umultiplierCost = 9 + Math.pow((5 * umultipliercount), umultipliercount/11)
+        upowerCost = 24+ Math.pow((10 * upowercount), upowercount/20)
+    }
     if (achRow1.completion[9]) doPrestige.style.display = 'block'
     else doPrestige.style.display = 'none'
     if (totalCrystals >= 1) {
@@ -314,26 +428,23 @@ function getCoinPerSec() {
         offlinePrestigeFarm.style.display = 'none'
         prestigeHelpDiv.style.display = 'none'
     }
+    if (progressBarGoals[1]) {
+        challengeHelpDiv.style.display = 'block'
+        challengeSelect.style.display = 'block'
+    }
 }
 let superCoinChance, spiritChance
 
 function getCoin() {
     if (clicksPerSecond < 10) {
-        clickCount++
-        superCoinChance = randomNumber(0, (100/(1+fourthShopBuyableEffect)/prestigeSinglesEffects[2][0]/spiritEffects[1]))
+        clickCount++; prestigeClicks++; blueCoin.currency++;
+        superCoinChance = randomNumber(0, (100/(1+fourthShopBuyableEffect)/prestigeSinglesEffects[2][0]/spiritEffects[1]/(1+blueCoin.effect)))
         if (superCoinChance == 0) {
         superCoins++, totalSuperCoins++
         }
-        spiritChance = randomNumber(0, 80)
-        spiritChance == 0 ? spirits++ : spirits
-        gainPerClick = 1
-        gainPerClick *= Math.pow(2, thirdBuyable.baseEffect) 
-        gainPerClick *= 1+firstShopBuyableEffect
-        eighthSingle.amount == 1 ? gainPerClick *= eighthSingleEffect : gainPerClick = gainPerClick
-        secondSingle.amount == 1 ? gainPerClick *= midasFormula : gainPerClick = gainPerClick
-        gainPerClick *= gain
-        gainPerClick = Math.pow(gainPerClick, fifthBuyableEffect)
-        gainPerClick = softCap(gainPerClick, 1e13, prestigeSinglesEffects[10][0])
+        // spiritChance = randomNumber(0, 80)
+        // spiritChance == 0 ? spirits++ : spirits
+        getCoinPerClick();
         clicksPerSecond++
         coinGains.addEventListener("keydown", function(event) {
         if (event.key === "Enter") {
@@ -348,6 +459,93 @@ setInterval(() => {
     clicksPerSecond = 0
 }, 1000);
 
+function getCoinPerClick() {
+    gainPerClick = 1;
+    gainPerClick *= Math.pow(2, thirdBuyable.baseEffect);
+    gainPerClick *= 1 + firstShopBuyableEffect;
+    eighthSingle.amount == 1 ? gainPerClick *= eighthSingleEffect : gainPerClick = gainPerClick;
+    secondSingle.amount == 1 ? gainPerClick *= midasFormula : gainPerClick = gainPerClick;
+    gainPerClick *= gain;
+    challengeActivated[2] ? gainPerClick /= umultiplier * 1000000 : gainPerClick;
+    challengeActivated[3] || challengeActivated[5] ? gainPerClick = Math.sqrt(gainPerClick) : gainPerClick;
+    challengeActivated[5] ? gainPerClick = gainPerClick * Math.pow(1 + amountsOfUpgrades, Math.pow(1.00185, prestigeClicks)) : gainPerClick;
+    !challengeActivate && challengeCompleted[5] ? gainPerClick = gainPerClick * Math.pow(1.99, challengesCompleted) : gainPerClick;
+    if (challengeActivated[11]) {
+        gainPerClick = Math.pow(gainPerClick, 0.01);
+        gainPerClick = gainPerClick * umultiplier;
+        gainPerClick = Math.pow(gainPerClick, upower);
+    }
+    if (challengeActivated[6]) {
+        gainPerClick = Math.pow(gainPerClick, 1 - amountsOfUpgrades / 50);
+        if (amountsOfUpgrades > 50) {
+            gainPerClick = 0;
+        }
+    }
+    gainPerClick = Math.pow(gainPerClick, fifthBuyableEffect);
+    gainPerClick /= virusCoins;
+    if (challengeActivated[8]) {
+        gainPerClick = softCap(gainPerClick, 1e8, prestigeSinglesEffects[10][0]);
+        gainPerClick = softCap(gainPerClick, 1e8, prestigeSinglesEffects[10][0]);
+    }
+    else {
+        if (!challengeActivate && challengeCompleted[8]) gainPerClick = softCap(gainPerClick, 1e13 * Math.pow(totalSuperCoins, 1.2), prestigeSinglesEffects[10][0]);
+        else gainPerClick = softCap(gainPerClick, 1e13, prestigeSinglesEffects[10][0]);
+    }
+}
+
+function startChallenge(number) {
+    restartChallenge.checked && number == 'exit' ? number = challengeStartedID+'' : number
+    if (number != 'exit') {
+        challengeStartedID = parseInt(number)
+    }
+    exitChallenge.style.display = "inline-block"
+    virusCoins = 1
+    for (let i = 0; i < challengeActivated.length; i++) {
+        challengeActivated[i] = false
+    }
+    harshUmulti.style.display = "none"
+    if (number == 'exit') {
+        if (!restartChallenge.checked) {
+            exitChallenge.style.display = "none"
+            upowercount = prestigeSinglesEffects[12][1]
+            umultipliercount = prestigeSinglesEffects[12][0]
+            challengeStartedID = 0
+        }
+    }
+    else {
+        challengeActivated[challengeStartedID-1] = true
+        if (challengeStartedID == 5 || challengeStartedID == 7) {
+            harshUmulti.style.display = "block"
+        }
+    }
+    checkChallenge()
+    doReset()
+    doHarsherReset()
+    getCoinPerSecond = setInterval(getCoinPerSec, 50)
+}
+
+function checkChallenge() {
+    for (let i = 0; i < challengeActivated.length; i++) {
+        if (challengeActivated[i] == true) {
+            challengeActivate = true
+            break;
+        }
+        else challengeActivate = false
+    }
+}
+
+function areYouInChallenge() {
+    harshUmulti.style.display = "none"
+    if (challengeStartedID > 0 && challengeStartedID <= 12) {
+        challengeActivated[challengeStartedID-1] = true
+        exitChallenge.style.display = "inline-block"
+        if (challengeStartedID == 5 || challengeStartedID == 7) {
+            harshUmulti.style.display = "block"
+        }
+    }
+    checkChallenge()
+}
+
 function getShardPerClick() {
     if (clicksPerSecond < 10 && shardUnlockableClick.percent == 100) {
         clickCount++
@@ -358,7 +556,10 @@ function getShardPerClick() {
                 }})
         shardsPerClick = 1
         shardsPerClick *= firstShardBuyableEffect
+        shardsPerClick *= 1+fifthShopBuyableEffect
+        shardsPerClick *= 1+greenCoin.effect
         shards += shardsPerClick
+        
     }
 }
 
@@ -367,20 +568,44 @@ function getShardPerSec() {
         shardsPerSecond = 1
         shardsPerSecond *= secondShardBuyableEffect
         shardsPerSecond *= spiritEffects[3]
+        shardsPerSecond *= 1+fifthShopBuyableEffect
+        shardsPerSecond *= 1+greenCoin.effect
         shardsPerSecond /= 20
+        
         shards += shardsPerSecond
     }
     shardsEffect = shards/100
     shardsEffect = Math.pow(shardsEffect, fourthShardSingleEffect)
-    shardsEffect = softCap(shardsEffect, 1e7, 0.3)
-    
     achRow1.completion[19] ? shardsEffect *= 1+prestigeCount/100 : shardsEffect
+    shardsEffect = softCap(shardsEffect, 1e7, 0.5)
+    let challengeReward7N = Math.log2(shards)
+    isNaN(challengeReward7N) ? challengeReward7N = 1 : challengeReward7N
+    !challengeActivate && challengeCompleted[6] ? shardsEffect *= challengeReward7N : shardsEffect
+    
+    if (challengeActivate) {
+        shardsEffect = Math.sqrt(shardsEffect)
+    }
+    if (challengeActivated[1]) {
+        shardsEffect = -0.99
+    }
+    if (challengeActivated[4] || challengeActivated[5]  || challengeActivated[6]) {
+        shardsEffect = Math.sqrt(shardsEffect)
+    }
+    if (challengeActivated[7]) {
+        shardsEffect = Math.pow(shardsEffect, 0.25)
+    }
+    if (challengeActivated[11]) {
+        shardsEffect = Math.pow(shardsEffect, 0.02)
+    }
+    if (challengeActivated[9]) {
+        shardsEffect = 0
+    }
     shardChanceMinimum = thirdShardBuyableEffect[0]
     shardChanceMaximum = 50*thirdShardBuyableEffect[1]
 }
 
 function selectTab(argument, isFlex) {
-    const tabsToHide = ['mainTab', 'prestigeTab', 'infoTab', 'settingsTab', 'achTab', 'eventTab', 'shopTab']
+    const tabsToHide = ['mainTab', 'prestigeTab', 'infoTab', 'settingsTab', 'achTab', 'eventTab', 'shopTab', 'challengeTab']
     for (const tabId of tabsToHide) {
         const tab = document.getElementById(tabId);
         if (tab) {
@@ -428,13 +653,19 @@ function showStats(multId) {
 }
 
 function checkBuyableDisabledUpgrade (x, y) {
-    money >= x.price ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
+    if (challengeActivated[5] || (challengeActivated[9] && amountsOfUpgrades >= 25) || challengeActivated[10]) {
+        document.getElementById(y).disabled = true
+    }
+    else money >= x.price ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
 }
 function checkShopBuyableDisabledUpgrade (x, y, z) {
     superCoins >= Math.round(x.price) || x.amount == z ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
 }
 function checkSingleDisabledUpgrade (x, y) {
-    money >= x.price || x.amount == 1 ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
+    if (challengeActivated[0] || (challengeActivated[9] && amountsOfUpgrades >= 25)  || challengeActivated[10]) {
+        document.getElementById(y).disabled = true
+    }
+    else money >= x.price || x.amount == 1 ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
 }
 function checkShopSingleDisabledUpgrade (x, y) {
     superCoins >= Math.round(x.price) || x.amount == 1 ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
@@ -493,10 +724,6 @@ function disabledUpgrades(){
         }
         m = 0
     }
-    checkShopBuyableDisabledUpgrade(firstShopBuyable, 'shopBuyableU1', 100)
-    checkShopBuyableDisabledUpgrade(secondShopBuyable, 'shopBuyableU2', 100)
-    checkShopBuyableDisabledUpgrade(thirdShopBuyable, 'shopBuyableU3', 100)
-    checkShopBuyableDisabledUpgrade(fourthShopBuyable, 'shopBuyableU4', 100)
     checkShopSingleDisabledUpgrade(firstShopSingle, 'shopSingleU1')
     firstBuyable.amount >= umultiplierCost ? document.getElementById('umultiplierBoost').disabled = false : document.getElementById('umultiplierBoost').disabled = true;
     (firstBuyable.amount >= upowerCost) && (umultipliercount >= 4) ? document.getElementById('upowerBoost').disabled = false : document.getElementById('upowerBoost').disabled = true
@@ -512,17 +739,17 @@ function notify(notiString, notiColor, notiWidth) {
     notification.style.backgroundColor = notiColor;
     notification.style.width = notiWidth;
     document.body.appendChild(notification);
-  
+
     setTimeout(() => {
-      notification.classList.add('show');
-      setTimeout(() => {
+    notification.classList.add('show');
+    setTimeout(() => {
         notification.classList.remove('show');
         setTimeout(() => {
-          notification.remove();
-        }, 1500); // подождать завершения анимации исчезновения
+        notification.remove();
+        }, 1800); // подождать завершения анимации исчезновения
       }, 1700); // показывать уведомление 5 секунд
-    }, );
-  }
+    }, 100);
+}
 
 
 
@@ -558,8 +785,17 @@ function openWindow(arg, isFlex) {
     else openedWindow.style.display = "flex"
     if (arg == 'hardReset' || arg == 'gotNaNed') {
         confirmationButtons.style.display = "flex";windowTitleDiv.style.display = 'block' 
-        if (arg == 'hardReset') {windowTitle2.innerHTML = resetTitle}
-        else if (arg == 'gotNaNed') {windowTitle2.innerHTML = NaNedTitle}
+        yesHR.style.display = "none"; yesRP.style.display = "none"
+        if (arg == 'hardReset') {
+        windowTitle2.style.fontSize = '24px'; 
+        windowTitle2.innerHTML = resetTitle; 
+        yesHR.style.display = "block"
+        }
+        else if (arg == 'gotNaNed') {
+            windowTitle2.style.fontSize = '14px';
+            windowTitle2.innerHTML = NaNedTitle
+            yesRP.style.display = "block"
+        }
 }
     else if (arg == 'code') {whichCode.style.display = "block"; windowTitle2.innerHTML = ''; windowTitleDiv.style.display = 'none'}
     else if (arg == 'daily') {dailyDesc.style.display = "block"; windowTitle2.innerHTML = ''; windowTitleDiv.style.display = 'none'}
@@ -727,15 +963,15 @@ function offlineGain() {
     else superCoinsTemp = 0
     if (achRow1.completion[11]) {
         offlineCrystalsTemp = timeDifference/(7200/secondPrestigeBuyableEffect)
-        achRow1.completion[17] ? offlineCrystalsTemp *= 4 : offlineCrystalsTemp
-        offlineCrystalsTemp *= firstShardSingleEffect
-        offlineCrystalsTemp *= firstPrestigeBuyableEffect
+        checkCrystalsTemp()
+        offlineCrystalsTemp *= crystalsTemp
         crystals += offlineCrystalsTemp
         totalCrystals += offlineCrystalsTemp
         }
     if (prestigeMilestonesEffects[15]){
         offlinePrestigesTemp = (timeDifference/60)*(fastestNoMaxBuyPrestiges/20)
         prestigeCount += offlinePrestigesTemp
+        pinkCoin.currency += (timeDifference/60)
         }
     if (shardUnlockablePerSecond.percent == 100) {
         getShardPerSec()
@@ -762,10 +998,14 @@ function offlineGain() {
     gameTimerTemp = timeDifference
     prestigeSecondsTemp = timeDifference
     prestigeTimerTemp = timeDifference
+    realSecondsTemp = timeDifference
+    realTimerTemp = timeDifference
     gameSeconds += gameSecondsTemp
     gameTimer += gameTimerTemp
     prestigeSeconds += prestigeSecondsTemp
     prestigeTimer += prestigeTimerTemp
+    realSeconds += realSecondsTemp
+    realTimer += realTimerTemp
     umultiplierTimer += timeDifference
     upowerTimer += timeDifference
 }
@@ -775,6 +1015,7 @@ function offlineGain() {
 function offlineGainTime() {
     convertingTime(gameSeconds, gameMinutes, gameHours, gameDays, 'game')
     convertingTime(prestigeSeconds, prestigeMinutes, prestigeHours, prestigeDays, 'prestige')
+    convertingTime(realSeconds, realMinutes, realHours, realDays, 'real')
     whatsYourCurrentTime()
 }
 
@@ -784,11 +1025,13 @@ document.addEventListener("visibilitychange", function() {
     clearInterval(autosaver)
     clearInterval(autoSaveTime)
     clearInterval(getCoinPerSecond)
+    clearInterval(addTheSecond)
     offlineGain();
     autoSaverTimer = 0
     autosaver = setInterval(autoSaveThis, 30000); //таймер
     everythingInterval = setInterval(updateTick, 50)
     getCoinPerSecond = setInterval(getCoinPerSec, 50)
+    addTheSecond = setInterval(addSecond, 50)
     saveGame()
     if (optionValue == 'option7' && !mutedAudio) {
         audio.play()
@@ -802,6 +1045,8 @@ document.addEventListener("visibilitychange", function() {
         clearInterval(autosaver)
         clearInterval(autoSaveTime)
         clearInterval(getCoinPerSecond)
+        clearInterval(addTheSecond)
+        whatsYourCurrentTime2()
         if (optionValue == 'option7' && !mutedAudio) {
             audio.pause()
         }
@@ -946,41 +1191,6 @@ function muteTheAudio() {
 //     // }
 // }
 
-codeInput.addEventListener("keydown", function(event) {
-    if (event.key == "Enter") {
-        readCode();
-    }
-});
-
-
-function readCode () {
-    if (code == 'digitalgod'){
-        if (code1Check == false) {
-            code1Check = true
-            superCoins += 69
-            totalSuperCoins += 69
-            codeReward = code1Reward
-            whichCode.innerHTML = codeIsTrue
-        } 
-        else {
-        whichCode.innerHTML = codeIsUsed
-        }
-    }
-    else if (code == 'shirakamifubuki' && isSpiritualEvent) {
-        if (code2Check == false) {
-            code2Check = true
-            spirits += 55
-            codeReward = code2Reward
-            whichCode.innerHTML = codeIsTrue
-        }
-        else {
-        whichCode.innerHTML = codeIsUsed
-        }
-    }
-    else whichCode.innerHTML = codeIsFalse
-    openWindow('code', true)
-}
-
 function getDaily() {
     if (dailySeconds == 0 && dailyMinutes == 0 && dailyHours == 0){
         superCoins += superCoinsTemp2
@@ -1023,7 +1233,7 @@ gmailButton.addEventListener('click', function() {
 });
 
 discordButton.addEventListener('click', function() {
-    window.open('https://discord.gg/jdnnX2Vq5Q', '_blank');
+    window.open('https://discord.gg/WdbaQC4nuM', '_blank');
 });
 
 telegramChatButton.addEventListener('click', function() {
@@ -1054,6 +1264,7 @@ versionDiv.addEventListener('touchmove', (event) => {
 
 
 const achEls = document.querySelectorAll('.ach');
+const shopButtons = document.querySelectorAll('.shopButton');
 
 function show(tooltip, popperInstance) {
   // Make the tooltip visible
@@ -1097,3 +1308,26 @@ hideEvents.forEach((event) => {
     achEl.addEventListener(event, () => hide(tooltip));
   });
 }
+
+for (const shopButton of shopButtons) {
+    const tooltip = document.getElementById('tooltip-' + shopButton.id);
+    const popperInstance = Popper.createPopper(shopButton, tooltip, {
+        modifiers: [
+        {
+            name: 'offset',
+            options: {
+            offset: [0, 8],
+            },
+        },
+        ],
+        placement: 'top',
+    });
+    
+    showEvents.forEach((event) => {
+        shopButton.addEventListener(event, () => show(tooltip, popperInstance));
+    });
+    
+    hideEvents.forEach((event) => {
+        shopButton.addEventListener(event, () => hide(tooltip));
+      });
+    }

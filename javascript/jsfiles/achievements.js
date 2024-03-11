@@ -5,7 +5,7 @@ var achRowCount = 0
 var achFullRow1 = 0, achFullRow2 = 0
 var achRow1 = {
     condition: [
-        1, 1000, 2.01, 1, 1000, 666, 1000, 1, 1e6, 1,
+        1, 1000, 2.01, 1, 1000, 66.6, 1000, 1, 1e6, 1,
         1, 3, 100, true, 10, 100, 10, 16, 25, true
     ],
     completion: [

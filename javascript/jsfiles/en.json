@@ -4,6 +4,7 @@
 
     "pbtitle1": "Prestige",
     "pbtitle2": "Coin Challenges",
+    "pbtitle3": "Super Crystals",
 
     "pbcurrency1": "α-coins",
 
@@ -35,6 +36,7 @@
     "milestonesButton": "Milestones",
     "automationButton": "Automation",
     "shardsButton": "Shards",
+    "challengeButton": "Challenges",
 
     "settingsTitle": "Settings",
 
@@ -67,11 +69,12 @@
 
     "maxBuy": "Buy Max",
 
-    "firstBuyable": "<ut>Small Investment ({{firstBuyableAmount}})</ut> <br> Increase the α-coins per second <br> Currently: +{{firstBuyableEffect}} <br> Cost: {{firstBuyablePrice}} α-coins",
-    "secondBuyable": "<ut>Productivity ({{secondBuyableAmount}})</ut> <br> Increase Small Investment effect <br> Currently: +{{secondBuyableEffect}}% <br> Cost: {{secondBuyablePrice}} α-coins",
-    "thirdBuyable": "<ut> Doubler ({{thirdBuyableAmount}})</ut> <br> Multiply the α-coins per click by 2 <br> Currently: x{{thirdBuyableEffect}} <br> Cost: {{thirdBuyablePrice}} α-coins",
-    "fourthBuyable": "<ut> Multiplier ({{fourthBuyableAmount}})</ut> <br> Multiply the α-coins per second by {{effect}} <br> Currently: x{{fourthBuyableEffect}} <br> Cost: {{fourthBuyablePrice}} α-coins",
-    "fifthBuyable": "<ut> Alpha Power ({{fifthBuyableAmount}})</ut> <br> Increase the power of α-coins per click <br> Currently: ^{{fifthBuyableEffect}} <br> Cost: {{fifthBuyablePrice}} α-coins",
+    "firstBuyable": "<ut>Small Investment ({{firstBuyableAmount}}) [+{{x}}]</ut> <br> Increase the α-coins per second <br> Currently: +{{firstBuyableEffect}} <br> Cost: {{firstBuyablePrice}} α-coins",
+    "firstBuyable2": "<ut>Small Investment ({{firstBuyableAmount}}+{{firstBuyableFreeAmount}}) [+{{x}}]</ut> <br> Increase the α-coins per second <br> Currently: +{{firstBuyableEffect}} <br> Cost: {{firstBuyablePrice}} α-coins",
+    "secondBuyable": "<ut>Productivity ({{secondBuyableAmount}}) [+{{x}}]</ut> <br> Increase Small Investment effect <br> Currently: +{{secondBuyableEffect}}% <br> Cost: {{secondBuyablePrice}} α-coins",
+    "thirdBuyable": "<ut> Doubler ({{thirdBuyableAmount}}) [+{{x}}]</ut> <br> Multiply the α-coins per click by 2 <br> Currently: x{{thirdBuyableEffect}} <br> Cost: {{thirdBuyablePrice}} α-coins",
+    "fourthBuyable": "<ut> Multiplier ({{fourthBuyableAmount}}) [+{{x}}]</ut> <br> Multiply the α-coins per second by {{effect}} <br> Currently: x{{fourthBuyableEffect}} <br> Cost: {{fourthBuyablePrice}} α-coins",
+    "fifthBuyable": "<ut> Alpha Power ({{fifthBuyableAmount}}) [+{{x}}]</ut> <br> Increase the power of α-coins per click <br> Currently: ^{{fifthBuyableEffect}} <br> Cost: {{fifthBuyablePrice}} α-coins",
 
     "firstSingle": "<ut> Rich Fame </ut> <br> Increase the α-coins per second based on total α-coins <br> Currently: x{{firstSingleEffect}} <br>  {{firstSinglePrice}}",
     "secondSingle": "<ut> Midas Cursor </ut> <br> Increase the α-coins per click based on total clicks <br> Currently: x{{secondSingleEffect}} <br> {{secondSinglePrice}}",
@@ -227,7 +230,7 @@
     "achievement13Desc": "<ut> I'm calling a police! No, I do! (13) </ut> <br> <br> Make α-coins per click x2.01 more than α-coins per second.",
     "achievement14Desc": "<ut> Breakin da wall! (14) </ut> <br> <br> Do U-Multiplier.",
     "achievement15Desc": "<ut> Master clicker (15) </ut> <br> <br> Make 1000 clicks. <br> <br> <it> Reward: Every click increases CPS by +0.01%. Also unlocks \"Max all\" button.</it>",
-    "achievement16Desc": "<ut> Hellish productivity (16) </ut> <br> <br> Make Productivity effect 6666% <br> <br> <it> Reward: Increase base effect of Productivity to 1.1.</it>",
+    "achievement16Desc": "<ut> Hellish productivity (16) </ut> <br> <br> Make Productivity effect 666% <br> <br> <it> Reward: Increase base effect of Productivity to 1.1.</it>",
     "achievement17Desc": "<ut> Time to sleep! (17) </ut> <br> <br> Spend 1000 seconds in game. <br> <br> <it> Reward: Increases Cashback effect by х0.2*hours.</it>",
     "achievement18Desc": "<ut> Another breakin da wall (18) </ut> <br> <br> Do U-Power.",
     "achievement19Desc": "<ut> Million multiplier (19) </ut> <br><br> Reach x1e6 multiplier of Doubler. <br><br> <it> Reward: Makes Midas Cursor formula better.</it>",
@@ -250,9 +253,10 @@
     "totalCrystals": "Total you collected {{totalCrystals}} Crystals.",
     "totalPrestiges": "Total you became Prestige {{prestiges}} times.",
     "gameTime": "You have played for {{gameDaysText}} days, {{gameHoursText}} hours, {{gameMinutesText}} minutes and {{gameSecondsText}} seconds.",
+    "realTime": "You have played real {{w}} days, {{x}} hours, {{y}} minutes and {{z}} seconds.",
     "prestigeTime": "You've been in this Prestige for {{prestigeDaysText}} days, {{prestigeHoursText}} hours, {{prestigeMinutesText}} minutes and {{prestigeSecondsText}} seconds.",
     "fastestPrestigeTime": "Your fastest Prestige took{{fastestPrestigeDaysTextBool}}{{fastestPrestigeHoursTextBool}}{{fastestPrestigeMinutesTextBool}} {{fastestPrestigeSecondsText}} seconds.",
-    "offlinePrestigesStats": "You're gaining {{prestiges}} Prestiges/min и {{crystals}} Crystals/min while offline.",
+    "offlinePrestigesStats": "You're gaining {{prestiges}} Prestiges/min and {{crystals}} Crystals/min while offline.",
 
     "fastestPrestigeDaysText": " {{fastestPrestigeDaysText}} days,",
     "fastestPrestigeHoursText": " {{fastestPrestigeHoursText}} hours,",
@@ -270,13 +274,14 @@
     "superCoinsChanceTitle": "Super-coin chance",
     "crystalsGainTitle": "Crystals",
 
-    "postE13CoinSoftcap": "Post-e13 softcap: ",
-    "postE15CoinSoftcap": "Post-e15 softcap: ",
+    "postE13CoinSoftcap": "Post-{{x}} softcap: ",
+    "postE15CoinSoftcap": "Post-1e15 softcap: ",
 
     "doublerName": "Doubler: ",
     "midasCursorName": "Midas Cursor: ",
     "rewardName": "Reward For Feats: ",
     "goldenGloveName": "Golden Glove: ",
+    "challenge6Name": "Challenge 6 reward: ",
     "gainName": "Gain: ",
     "alphaPowerName": "Alpha Power: ",
 
@@ -286,6 +291,8 @@
     "negativeAlphaName": "Negative Alpha Particle: ",
     "achievement15Name": "Achievement 15: ",
     "goldenClockName": "Golden Clock: ",
+    "challenge8Name": "Challenge 8 reward: ",
+    "challenge3Name": "Challenge 3 reward: ",
     
     "doublerPlusName": "Doubler+: ",
     "cashBack": "Cashback: ",
@@ -299,41 +306,79 @@
     "umultiplierName": "U-multiplier: ",
     "upowerName": "U-power: ",
     "pse2Name": "Activity 2.0: ",
+    "challenge1Name": "Challenge 1 reward: ",
 
     "luckyCloverName": "Lucky Clover",
     "charismaName": "Charisma",
 
     "brilliantDoublerName": "Brillian Doubler",
     "recyclingName": "Recycling",
+    "challenge10Name": "Challenge 10 reward: ",
+    "crystalBoostName": "Crystal Boost: ",
 
     "aboutGameTitle": "About game",
 
-    "aboutGame": "<ut> Digital God 0.10.1. Prestige Update 2.0. Part 1. Shards.</ut> <br> Developed by Humfrey. <br> <br> Digital God was inspired by such awesome games: Antimatter Dimensions, Synergism, Prestige Tree. <br> <br> Thanks everyone for playing!<br>",
+    "aboutGame": "<ut> Digital God 0.11. Challenge Time.</ut> <br> Developed by Humfrey. <br> Icons were drawn by galvares#0000. <br> <br> Digital God was inspired by such awesome games: Antimatter Dimensions, Synergism, Prestige Tree. <br> <br> Thanks everyone for playing!<br>",
     "galaxyClickText": "Rate game on galaxy.click",
     "discordText": "Join to discord server",
     "telegramChatText": "Join to telegram chat (russian)",
     "telegramChannelText": "Join to telegram channel (russian)",
     "gmailText": "Send e-mail",
 
-    "shopTitle": "Super-shop",
-    "shopDesc": "Welcome to the Super-shop! Spend priceless Super Coins for exclusive items which improves your progress even more! Also you can respec BUYABLE items and get your Super Coins back.",
+    "shopTitle": "Supershop",
+    "shopDesc": "Welcome to Supershop! You can spend unique Super Coins for items from other dimensions only here! <br> Their power allows save them between Prestiges, but you can respec Buyables anytime too! <br> Sadly, you are too weak to respec Singles and Items.",
     "superCoinCount": "You have <st>{{supercoins}}</st> super coins",
     "shopTitle2": "Upgrades",
     "respecShop": "Respec",
 
-    "firstShopBuyable": "<ut>Golden Glove ({{fshbAmount}}/100)</ut> <br> Increase α-coins per click <br> Effect: +{{fshbEffect}}% <br> {{fshbPrice}}",
-    "secondShopBuyable": "<ut>Golden Clock ({{sshbAmount}}/100)</ut> <br> Increase α-coins per second <br> Effect: +{{sshbEffect}}% <br> {{sshbPrice}}",
-    "thirdShopBuyable": "<ut>Golden Key ({{tshbAmount}}/100)</ut> <br> Increase α-coin gain <br> Effect: +{{tshbEffect}}% <br> {{tshbPrice}}",
-    "fourthShopBuyable": "<ut>Lucky Clover ({{foshbAmount}}/100)</ut> <br> Increase the Super-coin chance <br> Effect: +{{foshbEffect}}% <br> {{foshbPrice}}",
+    "firstShopBuyable": "<ut>Golden Glove ({{fshbAmount}}/100) [+{{w}}]</ut> <br> Increase α-coins per click <br> Effect: +{{fshbEffect}}% <br> {{fshbPrice}}",
+    "secondShopBuyable": "<ut>Golden Watch ({{sshbAmount}}/100) [+{{w}}]</ut> <br> Increase α-coins per second <br> Effect: +{{sshbEffect}}% <br> {{sshbPrice}}",
+    "thirdShopBuyable": "<ut>Golden Key ({{tshbAmount}}/100) [+{{w}}]</ut> <br> Increase α-coin gain <br> Effect: +{{tshbEffect}}% <br> {{tshbPrice}}",
+    "fourthShopBuyable": "<ut>Clover ({{foshbAmount}}/100) [+{{w}}]</ut> <br> Increase the Super Coin chance <br> Effect: +{{foshbEffect}}% <br> {{foshbPrice}}",
+    "fifthShopBuyable": "<ut>Shard Rain ({{x}}/50) [+{{w}}]</ut> <br> Increase Shards gain <br> Effect: +{{y}}% <br> {{z}}",
+    "sixthShopBuyable": "<ut>Crystal Booster ({{x}}/25) [+{{w}}]</ut> <br> Increase Crystals gain <br> Effect: +{{y}}% <br> {{z}}",
+    "seventhShopBuyable": "<ut>Credit Card ({{x}}/5) [+{{w}}]</ut> <br> Increase daily reward (minimum and maximum) <br> Effect: +{{y}}% <br> {{z}}",
 
     "firstShopSingle": "<ut>Broken Speedometer</ut> <br> Unlock Overdrive <br> {{fshsPrice}}",
+
+    "firstShopItem": "<ut>Free U-multiplier ({{x}}/{{y}})</ut> <br> Gives +1 U-multiplier <br> {{z}}",
+    "secondShopItem": "<ut>Free U-power ({{x}}/{{y}})</ut> <br> Gives +1 U-power <br> {{z}}",
+    "thirdShopItem": "<ut>Time Accelerator ({{x}}/{{y}})</ut> <br> Gives instantly 1 minute worth gain <br> {{z}}",
+    "fourthShopItem": "<ut>Time Accelerator+ ({{x}}/{{y}})</ut> <br> Gives instantly 10 minutes worth gain <br> {{z}}",
+
+    "shopItemPriceText": "Cost: {{x}} super coins",
 
     "firstShopBuyablePriceText": "Cost: {{fshbPrice}} super coins",
     "secondShopBuyablePriceText": "Cost: {{sshbPrice}} super coins",
     "thirdShopBuyablePriceText": "Cost: {{tshbPrice}} super coins",
     "fourthShopBuyablePriceText": "Cost: {{foshbPrice}} super coins",
+    "fifthShopBuyablePriceText": "Cost: {{x}} super coins",
+    "sixthShopBuyablePriceText": "Cost: {{x}} super coins",
+    "seventhShopBuyablePriceText": "Cost: {{x}} super coins",
 
     "firstShopSinglePriceText": "Cost: {{fshsPrice}} super coins",
+
+    "firstShopBuyableTitle": "Golden Glove",
+    "secondShopBuyableTitle": "Golden Watch",
+    "thirdShopBuyableTitle": "Golden Key",
+    "fourthShopBuyableTitle": "Clover",
+    "fifthShopBuyableTitle": "Shard Rain",
+    "sixthShopBuyableTitle": "Crystal Booster",
+    "seventhShopBuyableTitle": "Credit Card",
+
+    "firstShopSingleTitle": "Broken Speedometer",
+
+    "shopItemTitle1": "Free U-multiplier",
+    "shopItemTitle2": "Free U-power",
+    "shopItemTitle3": "Time Accelerator",
+    "shopItemTitle4": "Time Accelerator+",
+
+    "useTitle": "Use",
+
+    "bulkBuy": "Bulk buy amount",
+    "buy10": "Buy 10",
+    "buyMax": "Buy max",
+    "resetBulkBuy": "Reset",
 
     "offlineGainTitle": "Welcome back!",
     "offlineGain": "You have been offline for {{timeDifference}} seconds. <br> Here is what you earned while you were offline: <br> +{{moneyTemp}} α-coins. <br> +{{superCoinsTemp}} super coins. <br>{{offlineCrystalsTempText}} <br> {{offlinePrestigesTempText}} <br> {{offlineShardsTempText}}",
@@ -349,6 +394,10 @@
     "resetGameNotification": "Game reseted!",
     "achievementGameNotification": "You've got an achievement: ",
     "loreGameNotification": "You have unlocked new chapter in dailybook!",
+    "useItemNotification": "You have used ",
+    "dontHaveItemNotification": "You dont have ",
+    "limitItemNotification": "You reached limit in ",
+    "limitItemNotification2": " at Prestige!",
 
     "startDescription": "Choose version number above to check it's changelog.",
     "changeLogTitleText": "Changelog",
@@ -361,7 +410,7 @@
 
     "codeInput": "Enter code",
 
-    "codeIsTrue": "Code \"{{code}}\" is correct! <br> You've got +{{codeReward}}",
+    "codeIsTrue": "Code \"{{code}}\" is correct! <br> You've got {{codeReward}}",
     "codeIsFalse": "Code \"{{code}}\" is wrong!",
     "codeIsUsed": "Code \"{{code}}\" is already has been used!",
 
@@ -370,8 +419,11 @@
     "dailyIsTrue": "You've got +{{superCoinsTemp2}} super coins! <br> Come back again in 24 hours.",
     "dailyIsFalse": "Reward will be available in {{dailyHours}}:{{dailyMinutes}}:{{dailySeconds}}",
 
-    "code1Reward": "69 super coins",
-    "code2Reward": "55 spirits",
+    "codeReward1": "69 super coins",
+    "codeReward2": "55 spirits",
+    "codeReward3": "Free U-multiplier",
+    "codeReward4": "Free U-power",
+    "codeReward5": "Time Accelerator+",
 
     "version00": "<b>18.12.2022 | My 1st Clicker 0.0. Null Update (Codename: NULL):</b><br>- NEW MECHANIC! You need to clicking on the button for gaining α-coins.<br>- NEW 2 UPGRADES! First increases α-coin per click by 1, second increases bonus of first one by 10%.<br>- Some bugs like you sometimes cant get bonus from 2nd upgrade. Idk why.<br><br>[Dev comment]<br>This is a first game made by me from scratch, and i spent for it a some time. Well it's actually my second game, but that first made it's just mod.Idk if i want to continue it.",
     "version01": "<b>19.12.2022 | My 1st clicker 0.1. Graphic Update (Codename: BUTTON):</b><br>- Game has beautiful α-coin icon instead of depressed button.<br>- Upgrades buttons became a little better.<br>- A little decreasing of cost formula for upgrades.<br><br>[Dev comment]<br>Well i continued it and i did something good even with zero html and css skills, it's really impressive and i really should learn them both later.<br>There a really much things which i should do, and which i dont know how to do. Also i tried to add icons for buttons but when you buying upgrades it disappears, i should to link it somehow...",
@@ -389,6 +441,8 @@
     "version091": "<b>24.08.2023 | Digital God 0.9.1:</b><br>Interface changes:<br>- Slightly changed location of buttons in hard reset window.<br>- Slightly changed and fixed when text of coins per second gone beyond the line.<br>Feature changes:<br>- Added a window if your coins suddenly got NaNed with a suggestion to reset the game :).<br>- Rewritten code for windows and tab selection.<br>- Fixed a bug when it was possible to \"click\" on a coin in Firefox while holding Enter.<br>- Added limit on clicks per second (10) to prevent autoclicker.<br>- Fixed a bug where it was impossible to buy upgrades even if it was available.",
     "version092": "<b>25.08.2023 | Digital God 0.9.2:</b><br>Interface changes:<br>- Adaptation for mobile devices. Changed some details in the interface specifically for phones and made it possible to view the changelog or \"How to play\".<br>- Bugfix: coin count text was not centered.<br>- The coin has a circle button shape instead of a square.<br>- Bugfix: Overdrive tab didn't show. <br>Changes in game features:<br>- Added links to E-mail, Telegram chat, Telegram channel and Discord server in \"About the game\", join it!<br>- Bugfix: when text didn't update in \"Buy All\" button.",
     "version010": "<b>05.10.2023 | Digital God 0.10. Prestige Update 2.0. Part 1. Shards:</b><br>Interface changes:<br>- News tab has been returned. Now this is Events tab.<br>- Statistics have been updated for Prestige .<br>- Improved adaptation for mobile devices.<br>- Top panel has been slightly changed.<br>- When receiving a Super Coin for pressing, “+1” will be displayed.<br>- Names of achievements are displayed on  achievements themselves.<br>- Names of 4th and 5th Single Upgrades have been changed.<br>- Style of currency amounts has been changed from fully colored to only-amount colored.<br>- Buttons for unavailable upgrades and Single Upgrades have become brighter.<br>- Overdrive text no longer appears outside the bar.<br>- When overdrive is turned on, it shimmers white.<br>- Fixed text where in some places Super-Coins and Super Coins were written differently. Also added α letter to coins.<br>- Fixed the position of footer with hotkeys.<br>- Fixed a bug where arrows for achievement tooltips didn't appear.<br>Feature changes:<br>- NEW EVENT SYSTEM! Now game will have in-game events and the first one starts on October 5th and will last until October 12th.<br>- Added new code in honor of shirakamifubuki.<br>- Added 10 new achievements.<br>- Added diary pages for Post-Prestige.<br>- Added pages \"How to play?\" for Post-Prestige.<br>- Added 2 new multiplier statistics: chance of Super Coins and Crystals.<br>- The Progress bar has been redesigned, now it has one more goal, name of goals and the text no longer jumps.<br>- \"Overdrive\" page in \"How to play?\" was rewritten.<br>- Coins for clicks are calculated automatically.<br>- Offline production is calculated in a new way and has limit of 1,000,000 seconds.<br>- Game time is calculated every 50ms instead of 1 second.<br>- Added a button to mute the music.<br>- Fixed a bug that incorrectly calculated the chance of Super Coins.<br>Changes in gameplay:<br>- PRESTIGE! Reset everything to unlock new features! Requires 1e15 coins!<br>- PRESTIGE UPGRADES! Spend new prestige currency - Crystals for one of 18 upgrades to speed up your progress!<br>- MILESTONES! Reach a certain number of Prestige resets to make the game progress easier!<br>- AUTOMATION! Automate upgrade purchases or resets!<br>- SHARDS! Increase your coin gain by breaking Crystals or collecting something from them!<br>- Prices and scalings for Buyable Upgrades have been increased.<br>- Prices for Single Upgrades have been increased.<br>- Added softcap for coin gain at 1e15.<br>- Activity 1.0 hardcap decreased to ^1.5.<br>- The Overdrive formula has been changed, the effect is reduced but the growth is significantly increased.",
+    "version0101": "<b>09.02.2024 | Digital God 0.10.1</b><br>Bug fixes:<br>- Some bugs were fixed and Crystals were NaN'ed and it was impossible to get them with Prestige.< br><b>10.02.2024 | Digital God 0.10.1.1</b><br>Bug fixes:<br>- Overdrive was not saved after reloading page.<br><b>11.02.2024 | Digital God 0.10.1.2 </b><br>Bug fixes:<br>- Overdrive NaN'ed the game.<br><b>23/02.2024 | Digital God 0.10.1.3</b><br>Bug fixes:<br>- 100th Prestige brought you back to 92.<br>- 0 Crystals per Prestige when you unlock Single Shard Upgrades.<br><b>03.03.2024 | Digital God 0.10.1.4</b><br>Bug fixes:<br>- A negative number of Shards subsequently NaN'ed game.",
+    "version011": "<b>11.03.2024 | Digital God 0.11. Challenge Time.</b><br>Interface changes:<br>- COMPLETE REWORK OF SUPERSHOP! Each upgrade now has icon, thanks to galvares. To see details of upgrade, hover over it (hold on the mobile). Be careful, clicking will trigger a purchase!<br>- The text update on the Prestige button has returned.<br>- The text in Supershops tab has been rewritten.<br>- There is a counter for Coin and Super shop Upgrades, which shows how many upgrade you will get with bulk buy.<br>- Added text that determines what world you are in.<br>- Notifications have been slightly improved.<br>Feature changes:<br>- CHALLENGES! Prestiges have become too easy? It's time to make them more difficult! 12 Challenges with different conditions and unique rewards await you after reaching 1e25 coins!<br>- ITEMS! A new type of goods in Super shop that can be used at any time! Unlocked after 11th Challenge.<br>- NEW EVENT From 12.03 to 23.03 you have opportunity to experience three auras that will help you progress, but you will need to sacrifice something. Don't forget to use the code suisei, I think there are more codes here :).<br>- 3 new Super shop Upgrades that can be unlocked after 11th Challenge.<br>- Added bulk buy in the Super shop.<br>- Pouring Shards now works when hold on progress bar.<br>- Added a real time counter. It will be from scratch.<br>Gameplay changes:<br>- The first break of Crystals gives a guaranteed 100 Shards.<br>- Added scaling for U-multipliers and U-powers (more details in the Softcaps tab in \"How to play?\").<br>- Offline Prestige slightly reduced.<br>- Increased scaling of Gem Investment (which divides the time of offline crystals, according to koyori).<br>- manilovefauna.<br>Bug fixes:<br>- Offline gain did not work when tab was hidden.<br>- It was possible to break -1 Crystal.",
 
     "chapter1Name": "Beginning",
     "chapter2Name": "Upgrades",
@@ -398,6 +452,7 @@
     "chapter6Name": "P. Upgrades",
     "chapter7Name": "Shards",
     "chapter8Name": "Automation",
+    "chapter9Name": "Challenges",
 
     "chapter1": "<b> July 10, 2175. </b> <br> Who... am... I and... what is this place? <br> You dont remember anything. <br> I feel... feel something looking at me. <br> That \"something\" probably wants me to pick up those coins. <br> They had <b>Alpha</b> icon, I don't see anything except them. <br> I don't like it... <br> I think I have no choice...",
     "chapter2": "<b> July 11, 2175. </b> <br> Next day... <br> I've collected enough coins for buying something called <b>Upgrades</b>. <br> They're really became helpful, because I started to gaining more coins. <br> Anyway I hope it's not end and something more hides behind them.",
@@ -407,6 +462,7 @@
     "chapter6": "<b>August 1, 2175. </b><br>After waking up once again...<br>In this unknown world,<br>I found something resembling a Crystal...<br>And something appeared too... they introduced themselves as <ut>Prestige Upgrades</ut><br>There were so many of them, but with my Crystal I could afford three...<br>I made my choice, though I doubt it will help me recover again...<br>I lost everything. All upgrades, all U-Multipliers, and all U-Powers.<br>But I have faith, faith that I will pass this Prestige faster!",
     "chapter7": "<b>August 11, 2175. </b><br>Unfortunately, no miracle happened...<br>This Prestige turned out to be faster, but I still spent a lot of energy on it...<br>However, the reward didn't take long to come.<br>I gained access to <ut>Shards</ut><br>Perhaps, to obtain them, I need to break this Crystal...<br>Is it worth 8 days of my life? Well, I don't think it's something I should be thinking about right now.<br>Getting out of here is what matters, and I'll do whatever it takes.",
     "chapter8": "<b>August 19, 2175. </b><br>After another Prestige reset, luck finally smiled upon me.<br>Not far from here, I found a pile of metal, and I couldn't figure out why I needed it for a long time.<br>Someone wants me to put it in the right way.<br>So I spent several days thinking about it...<br>And realized that the best way to use it would be to automate the monotonous progress in this world.<br>I called it the <ut>Automation</ut> revolution.<br>However, to start this machine, I had to spend this Crystal...<br>Crystals here must be very valuable, I regret breaking the second one... Even they started producing more coins tho.",
+    "chapter9": "<b>October 29, 2175. </b><br>The days became fast and...<br> I didn't notice how two months already passed<br>Crystals and Shards grew like a bamboo due to Automation< br>And suddenly my progress began to slow down very much...<br>I tried to do everything: charge Overdrive, buy Shard upgrades, but...<br>It was all in vain... <br>But when I collected 1e25 coins... I discovered a new button above me...<br>\"Time to prove that you are worthy of <ut>Challenges</ut>...\"",
 
     "help1Name": "Beginning",
     "help2Name": "Tabs",
@@ -418,6 +474,9 @@
     "help8Name": "Prestige",
     "help9Name": "Shards",
     "help10Name": "Automation",
+    "help11Name": "Challenges",
+    "help12Name": "Items",
+    "help13Name": "Softcaps",
 
     "help1": "Welcome to Digital God! Here you will find exciting and interesting adventure, where you, the main character, wake up in unknow world, where there is no one except you. Your goal is reveal all secrets of this world. Alpha-coins is gonna help you through this adventure, but they're seems suspicious for you. <br> <br> You can get Alpha-coins in two ways: Active and Passive.<br><br><ut>Active</ut> it's a way to get α-coins by clicking on α-coin icon in center of the screen. At beginning you'll get only one α-coin, but you can increase gain by buying upgrades, which you'll find at bottom. <br><br><ut>Passive</ut> gain of α-coins is alternative way. You can leave the game, close, or even turn off the computer, you'll still gain the same amount of α-coins! To start getting α-coins passively or \"per second\" (actually every 50ms) you need to buy first upgrade \"Small Investment\". You have enough α-coins for it. Later you can buy them more ane more, and then increase the gain by other upgrades! <br><br>Besides upgrades there is another α-coin multipliers. To learn more about them check other tabs. Good luck and have fun!",
     "help2": "Game has different tabs where you can read the information or do some action.<br><br><ut>Settings</ut> - tab, where you can change the game. <br> It's divided into tree subtabs: <ut>Saving</ut>, <ut>Graphic</ut>, <ut>Other</ut>.  <br> <ut>Saving</ut> - there you can do manual save/loading, change autosaving settings or import/export to file.<br> <ut>Graphic</ut> will allow to change the game looking <br> <ut>Other</ut> actually it doesn't have settings, but different information like changelog.<br><br><ut>Clicker</ut> - main tab. It does have two subtabs: <ut>Coins</ut> - there you can click on the α-coin and buy upgrades, and <ut>Overdrive</ut>, which will unlock later (check. Overdrive page) <br><br><ut>Achievements</ut> - it does show achievements, their requirements. which rewards they're give and total bonus based on their count.<br><br><ut>Information</ut> - does have three subtabs: <ut>Statistics</ut> - shows game time, count of different resources and some things, <ut>Multipliers</ut> - shows what and how much boosts the gain of different resources. <ut>About game</ut> - information about game, it's devs and thanks.",
@@ -429,12 +488,77 @@
     "help8": "<ut>Prestige</ut> - the first full layer of prestige. <br><br>To do Prestige, you need a minimum of 1e15 α-coins. It resets all α-coins, upgrades, U-multiplier and U-powers. <br>In return, you will receive a new currency - <ut>Crystals</ut>. They don't anything, but you can use them to buy new Prestige Upgrades, break them into Shards, or upgrade automation.<br><br>After the first reset, you will unlock a new tab, \"Prestige\" as well as 4 sub-tabs: Prestige Upgrades, Milestones, Automation, and Shards.<br><br><ut>Prestige Upgrades.</ut> There are a total of 18 upgrades, there is two types of them: 16 single upgrades and 2 buyable ones. They differ slightly from α-coin upgrades in that they mostly have static effects and don't reset on Prestiges.<br><ut>Milestones</ut>. Every one require a certain number of Prestige resets and has various rewards to speed up your game progress.<br><ut>Automation</ut>. It helps automate the gameplay by buying upgrades or doing resets at some intervals.<br><ut>Shards</ut>. Increases α-coin gain by breaking Crystals and accumulating Shards.",
     "help9": "<ut>Shards</ut> - some kind of mini incremental game with its own clicker and generator, but you must collect them from Shards, which you can currently obtain only by breaking Crystals.<br>Shards also increase α-coin gain based on their amount.<br><br><ut>Breaking Crystals</ut> is the way to get Shards by destroying X amount of Crystals, which you specify in the corresponding window. Each Crystal can give from 1 to 100 Shards (value increases).<br><ut>Clicker and Shard Generator</ut> are unlocked when you pour 1000 Shards into each slot. They provide 1 Shard per click/second, and the value can be further increased.<br><ut>Buyable and Single Shard Upgrades</ut> are unlocked when you pour 10,000 and 100,000 Shards into each slot, respectively. There are only 3 Buyable upgrades, and they increase Shard gain from various factors. Single upgrades, on the other hand, provide different effects.",
     "help10": "<ut>Automation</ut> - a new tab in Prestige that allows you to automate buying of upgrades or resets.<br><br>There are a total of 5 automations in the game that you can unlock in milestones. At first time, they will have a long interval, but you can reduce it by a certain percentage using Crystals. After reducing the interval to the minimum possible (50 ms), you will unlock additional features (if you have it's milestone), such as bulk buy of upgrades and setting your own interval or conditions for resets.<br><br><it>Note: For setting time values, seconds are used. So if you want to specify a value in milliseconds, use numbers like 0.05 (50 ms) or 0 (=50 ms).</it>",
+    "help11": "<ut>Challenges</ut> are a type of Prestige, with special conditions for completing them.<br><br> Challenges unlock when you reach 1e25 coins. <br> <br> They represent Prestiges (so everything reset as soon as you enter them) which have both unique and general conditions. To complete it you need to collect 1e15 coins.<br> If you manage to completed Challenges, you will be given a unique reward that can speed up your progress and reach new heights, and some will even discover something new.<br> General conditions include:<br> - Effect of Shards ^0.5.<br> - Rewards for Challenges do not work in Challenges.<br> - Items do not work in Challenges. <br><br> <it>Note: By \"Effect of Shards ^0.5\" in unique conditions I mean that their effect will be even lower, that is ^0.25</it>",
+    "help12":"<ut>Items</ut> are goods in Supershop that can be purchased and then used at any time.<br><br> They unlock when completing Challenge 11 and now there are 4 of them. You can find out more details in Supershop.<br> <br> Each item has a usage limit at a certain Prestige which is equal to purchase limit in shop.<br> You cannot use Items in Challenges.<br> They are always bought and used strictly in 1 at a time, regardless from Bulk Buy. You will see a notification if you successfully used them or something went wrong.<br> They are also expensive in their own way, so use them wisely, and also do not forget to look in the changelog, maybe there is a gift, who knows :). ",
+    "help13": "<ut>Softcaps and Scalings</ut> - decreases gain or sharp scaling in price when reaching a certain point.<br><br> <ut>Softcaps</ut> mainly concern the effect or generation of something. They are often expressed as a decrease in power (^0.25 for example) and affect the effect only that comes after certain point <it> (effect = point* effect^softcap)</it><br> <ut>Scaling</ut> relate to prices for Upgrades, when upon reaching a point they begin to grow exponentially (so, scaling increases along with the price) <it>(price = (base_price^amount)*(formula*amount))</it><br> <ut>Hardcaps</ut> is a special type of Softcaps that stops effect from growing when point is reached.<br> <br> Softcaps start at:<br> - {{x}} coins per second - ^{{y}} <br> - {{x}} coins per click - ^{{z}}<br> - 1e15 gain - ^0.5<br> - 1e7 shards effect - ^0.5<br> - x100 Cashback effect if there is a Crystal Card - ^0.5, if not then Hardcap = x100.<br> - ^1.250 effect of Activity 1.0 reaches its Hardcap.<br> <br> Scalings start at: <br> - 20 U-multiplier the price additional increases by (1+((\"U-multipliers\"-19)/50))<br> - 10 U-power, the price additionally increases by (1+((\"U-power\"-9)/ 15))",
 
     "noEvent": "There are no events in the game right now, come back later",
-
     "spiritualEventTitle": "Welcome to Spiritual Event!",
     "spiritualEventDesc": "This world has been overrun by an unknown energy, something like that only fox spirits could emit hundreds of years ago, and now your clicks produce Spirits that gives various effects!",
     "spiritualEventCurrency": "You have <spn>{{spirits}}</spn> spirits, that provide the following effects:",
     "spiritualEventEffects": "x{{effect1}} α-coin gain<br>x{{effect2}} chance of Super Coins<br>x{{effect3}} Crystals gain<br>x{{effect4}} Shards per second<br> Daily Super Coins are also doubled during the event period",
-    "spiritualEventTime": "The event is available from 10/05/2023 00:00 to 10/12/2023 23:59"
+    "spiritualEventTime": "The event is available from 10/05/2023 00:00 to 10/12/2023 23:59",
+
+    "triplePowerEventTitle": "Welcome to Triple Power event!",
+    "triplePowerEventDesc": "Something strange began to happen in Digital World and at far distance an Altar lit up in which three colors shone brightly: <br>Pink, emitting a certain feeling that wants to make your brain work at 110%; <br> Green, emitting such warmth that it penetrates your soul and seems to warm it; <br> Blue, the emission of which forcing to waste all energy to the last drop. <br>It seems that you need sacrifice something to them, and maybe the Altar will reward you.",
+    "triplePowerEventCurrency1": "You have total <pn>{{x}}</pn> Pink Coins, which increase Crystal gain by +<pn>{{y}}%</pn>.",
+    "triplePowerEventCurrency2": "You have total <gn>{{x}}</gn> Green Coins, which increase Shards generation by +<gn>{{y}}%</gn>.",
+    "triplePowerEventCurrency3": "You have total <bn>{{x}}</bn> Blue Coins, which increase Super Coins chance by +<bn>{{y}}%</bn>.",
+
+    "pinkSacrifice": "Sacrifice {{y}} Prestige Resets for Pink Coin.<br> You have {{x}} Prestiges.",
+    "greenSacrifice": "Sacrifice {{y}} hours of Prestige for Green Coin.<br> You have {{x}} hours of Prestige.",
+    "blueSacrifice": "Sacrifice {{y}} clicks for Blue Coin.<br> You have {{x}} clicks.",
+
+    "pinkUpgrade": "Increase Pink Coin effect by 10% <br> Cost: {{x}} Pink Coins <br> You have {{y}} Pink Coins",
+    "greenUpgrade": "Increase Green Coin effect by 10% <br> Cost: {{x}} Green Coins <br> You have {{y}} Green Coins.",
+    "blueUpgrade": "Increase Blue Coin effect by 10% <br> Cost: {{x}} Blue Coins <br> You have {{y}} Blue Coins.",
+    "greyUpgrade": "Decrease sacrifice requirements by 10% <br> Cost: {{x}} All Coins <br> You have {{y}} All Coins",
+
+    "triplePowerEventTime": "The event is available from 03/15/2024 00:00 to 03/23/2024 23:59",
+
+    "challengeTabDesc": "Welcome to Challenges, you need to do Prestige with several conditions. <br> Every Challenge has unique reward, which you will get, as you collect 1e15 coins inside it. <br> Besides special conditions, they have also general conditions like: Shards effect ^0.5, Challenge rewards don't work.<br> If you found out Challenge was too difficult for you, you can leave it, and try again in any time. Good luck!",
+
+    "exitChallenge": "Leave",
+
+    "challengeCondition2": "Shards decreasing coin gain by -99%",
+    "challengeCondition7": "Gain decreased by -{{x}}%",
+    "challengeCondition8": "Virus coins divide coin gain by /{{x}}",
+    "challengeCondition10": "You have {{x}} upgrades left",
+
+    "challengeTitle": "Challenge {{x}}",
+
+    "challengeStart": "Start",
+    "challengeCompleted": "Completed",
+    "challengeGoal": "Goal: Do Prestige.",
+
+    "challengeDeactivated": "You are in Digital World (Challenge is not activated)",
+    "challengeActivated": "You are in Challenge №{{x}}",
+
+    "restartTheChallenge": "Restart Challenge",
+
+    "challengeConditionText1": "Condition: All Single Upgrades disabled.",
+    "challengeConditionText2": "Condition: Shards decrease coin gain.",
+    "challengeConditionText3": "Condition: Gain per second disabled, U-Multipliers divide gain by 1000000 times.",
+    "challengeConditionText4": "Condition: Coin gain decreased by ^0.5.",
+    "challengeConditionText5": "Condition: Every purchase increases other buyable upgrades price, like you buy them. Shards effect ^0.5.",
+    "challengeConditionText6": "Condition: Buyable upgrades disabled. Clicks decay Single Upgrades price and increase click gain. Shards effect ^0.5.",
+    "challengeConditionText7": "Condition: Every purchase decreases gain by 2%.",
+    "challengeConditionText8": "Condition: Gain per second generates Virus Coins which divide your gain. Shard effect ^0.25.",
+    "challengeConditionText9": "Condition: Softcap starts from 1e9 coins and doubles effect.",
+    "challengeConditionText10": "Condition: You can buy only 25 upgrades. Shards effect ^0.5.",
+    "challengeConditionText11": "Condition: All upgrades disabled. Good luck.",
+    "challengeConditionText12": "Condition: Shards effect ^0.01, Coin gain ^0.01, U-multipliers and U-power became cheaper, their scaling decreased, and they are not affected by conditions.",
+
+    "challengeReward1": "Reward: Coin gain increases by ^1.1.",
+    "challengeReward2": "Reward: Crystal Overload gives x1000000 Shards based on Crystals.",
+    "challengeReward3": "Reward: Prestiges boost gain per second. Effect: ^{{x}}.",
+    "challengeReward4": "Reward: Achievements gives free Small Investments. Effect: +{{x}}.",
+    "challengeReward5": "Reward: Upgrades price slightly decreased. Effect: ^{{x}}.",
+    "challengeReward6": "Reward: Completed Challenges increases gain per click. Effect: x{{x}}.",
+    "challengeReward7": "Reward: Shards increases coin gain more by Log2(Shards). Effect: x{{x}}.",
+    "challengeReward8": "Reward: Gain per second increases over time in current Prestige. Effect: x{{x}}.",
+    "challengeReward9": "Reward: Super Coins pushes Post-e13 softcap requirement further. Effect: Softcap starts from {{x}}.",
+    "challengeReward10": "Reward: Amount of upgrades increases Crystals gain. Effect: x{{x}}",
+    "challengeReward11": "Reward: Unlock new items in Supershop.",
+    "challengeReward12": "Reward: Decreases U-multiplier's scaling to 40, and U-power's to 80."
 }

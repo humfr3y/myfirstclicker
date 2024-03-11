@@ -34,6 +34,8 @@
     cursor: pointer;
 }
 
+
+
 @media screen and (max-width: 600px) {
   .upgradeButton {
       font-size: 8.5px
@@ -126,6 +128,20 @@
   color: black;
 }
 
+#uMultiDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+#harshUmulti {
+  white-space: break-spaces;
+  position: absolute;
+  align-items: center;
+  margin-top: 95px;
+  width: 175px;
+  height: 40px;
+}
+
 #upowerBoost {
   border-color:palevioletred;
 }
@@ -163,4 +179,52 @@
 .shardSingleButton.purchased {
   background-color: rgb(111, 202, 199);
   color: black;
+}
+
+.pinkButton {
+  background-color: rgb(191, 34, 99);
+  color: white;
+  border-color: rgb(163, 27, 81);
+  width: 150px;
+  height: 75px;
+}
+
+.pinkButton:hover {
+  box-shadow: 0 0 10px rgb(191, 34, 99);
+}
+
+.greenButton {
+  background-color: rgb(32, 178, 29);
+  color: white;
+  border-color: rgb(38, 192, 35);
+  width: 150px;
+  height: 75px;
+}
+
+.greenButton:hover {
+  box-shadow: 0 0 10px rgb(32, 178, 29);
+}
+
+.blueButton {
+  background-color: rgb(34, 116, 183);
+  color: white;
+  border-color: rgb(30, 122, 197);
+  width: 150px;
+  height: 75px;
+}
+
+.blueButton:hover {
+  box-shadow: 0 0 10px rgb(34, 116, 183);
+}
+
+.greyButton {
+  background-color: rgb(82, 82, 82);
+  color: white;
+  border-color: rgb(75, 75, 75);
+  width: 380px;
+  height: 50px;
+}
+
+.greyButton:hover {
+  box-shadow: 0 0 10px rgb(82, 82, 82);
 }

@@ -33,17 +33,23 @@
       <div id="coinGet" class="topVars">
         <span id="coinsCount"></span>
         <span id="coinsGain"></span>
+        <div id="worldText">
+          <span class="whiteText" id="youAreInXWorld" style="font-size:12px">Вы в Цифровом Мире (Испытание не активировано)</span>
+          <button onclick="startChallenge('exit')" id="exitChallenge" class="tabButton">Выйти</button>
+        </div>
       </div>
       <div id="prestigeGet" class="topVars">
         <span id="crystalCount" style="display: none">У вас 10 кристаллов</span>
         <button onclick="doPrestigeReset(this)" id="doPrestige" style="display: none">Выполнить престиж</button>
       </div>
     </div>
+
     <hr>
     <div id="topButtons">
         <button onclick="selectTab(eventTab, false)" id= "eventSelect" class="tabButton">Новости</button>
         <button onclick="selectTab(settingsTab, false)" id= "settingsSelect" class="tabButton">Настройки</button>
         <button onclick="selectTab(mainTab, false)" id= "mainSelect" class="tabButton">Кликер</button>
+        <button onclick="selectTab(challengeTab, true)" id= "challengeSelect" class="tabButton" style="display:none">Испытания</button>
         <button onclick="selectTab(prestigeTab, false)" id= "prestigeSelect" class="tabButton prestigeButton" style="display:none">Престиж</button>
         <button onclick="selectTab(achTab, false)" id= "achSelect" class="tabButton">Достижения</button>
         <button onclick="selectTab(infoTab, false)" id= "infoSelect" class="tabButton">Информация</button>
@@ -63,6 +69,25 @@
       </span>
       <footer id="spiritualEventTime" class="statsSlot">Событие действует с 05.10.2023 00:00 по 12.10.2023 23:59</footer>
     </div>
+      <div id="triplePowerEvent" style="display:none">
+        <p id="triplePowerEventTitle" class="titleTab">Добро пожаловать на Событие Тройной Силы!</p>
+      <span id="triplePowerEventDesc" class="statsSlot">В Цифровом Мире начало происходить что-то странное и вдалеке загорелся Алтарь в котором ярко сияли три цвета: <br>Розовый излучающий некое чувство, которое хочет заставить работать ваш мозг на 110%; <br> Зелёный, излучающий такое тепло, что оно пробирается сквозь вашу душу, и как будто греет её; <br> Синий, излучение которого заставляло тратить всю энергию до последней капли. <br>Кажется, вы им должны что-то принести в жертву, и может Алтарь вас наградит. </span>
+      <span id="triplePowerEventCurrency1" class="whiteText" style="font-size: 18px">У вас <pn>8</pn> Розовых Монет, которые увеличивают Кристаллы на <pn>40%</pn>. </span>
+      <span id="triplePowerEventCurrency2" class="whiteText" style="font-size: 18px">У вас <gn>4</gn> Зелёных Монет, которые увеличивают генерацию Осколков на <gn>80%</gn>. </span>
+      <span id="triplePowerEventCurrency3" class="whiteText" style="font-size: 18px">У вас <bn>2</bn> Синих Монет, которые увеличивают шанс Супер Монет на <bn>10%</bn>. </span>
+      <div id="sacrificeButtons" style="margin-top: 15px">
+        <button id="sacrificePink" class="upgradeButton pinkButton" onclick="sacrifice(pinkCoin)">Пожертвовать 1000 сбросов Престижа для Розовой монеты</button>
+        <button id="sacrificeGreen" class="upgradeButton greenButton" onclick="sacrifice(greenCoin)">Пожертвовать 10 часов Престижа для Зелёной монеты</button>
+        <button id="sacrificeBlue" class="upgradeButton blueButton" onclick="sacrifice(blueCoin)"> Пожертвовать 10000 нажатий для Синей монеты</button>
+      </div>
+      <div id="tripleEventUpgradeButtons">
+        <button id="upgradePink" class="upgradeButton pinkButton" onclick="buyTripleEventUpgrade(pinkCoin)">Увеличивает бонус Розовых Монет на 10% <br> Стоимость: 3 Розовые Монеты</button>
+        <button id="upgradeGreen" class="upgradeButton greenButton"onclick="buyTripleEventUpgrade(greenCoin)">Увеличивает бонус Зелёных Монет на 10% <br> Стоимость: 3 Зелёных Монеты</button>
+        <button id="upgradeBlue" class="upgradeButton blueButton"onclick="buyTripleEventUpgrade(blueCoin)">Увеличивает бонус Синих Монет на 10% <br> Стоимость 3: Синих Монеты</button>
+      </div>
+      <button id="upgradeGrey" onclick="buyTripleEventGreyUpgrade()" class="upgradeButton greyButton">Уменьшить требования на 10% <br> Стоимость: 3 всех монет</button>
+      <footer id="triplePowerEventTime" class="statsSlot">Событие действует с 15.03.2024 00:00 по 23.03.2024 23:59</footer>
+      </div>
     <p id="noEvent" class="titleTab" style="display:none">There is no event right now</p>
   </div>
     <div id="settingsTab" style="display:none">
@@ -161,6 +186,8 @@
             <button onclick="showChangelog(desc091)" class="versionButton">0.9.1</button>
             <button onclick="showChangelog(desc092)" class="versionButton">0.9.2</button>
             <button onclick="showChangelog(desc010)" class="versionButton">0.10</button>
+            <button onclick="showChangelog(desc0101)" class="versionButton">0.10.1.x</button>
+            <button onclick="showChangelog(desc011)" class="versionButton">0.11</button>
           </div>
         <div id="versionDiv" class="windowDesc">
           <p id="versionDescription">Choose version</p>
@@ -180,6 +207,7 @@
             <button onclick="showStory(chapter6)" id="chapter6Tab" class="versionButton loreChapter">Улучшения Престижа</button>
             <button onclick="showStory(chapter7)" id="chapter7Tab" class="versionButton loreChapter">Осколки</button>
             <button onclick="showStory(chapter8)" id="chapter8Tab" class="versionButton loreChapter">Автоматизация</button>
+            <button onclick="showStory(chapter9)" id="chapter9Tab" class="versionButton loreChapter">Испытания</button>
           </div>
           <div id="chapterDiv" class="windowDesc">
             <p id="chapterDescription">Choose chapter</p>
@@ -200,10 +228,14 @@
             <button onclick="showHelpPage(help5, helpName5)" id="helpTab5" class="versionButton versionButtonVertical">У-силители</button>
             <button onclick="showHelpPage(help6, helpName6)" id="helpTab6" class="versionButton versionButtonVertical">Супер-монеты</button>
             <button onclick="showHelpPage(help7, helpName7)" id="helpTab7" class="versionButton versionButtonVertical">Овердрайв</button>
+            <button onclick="showHelpPage(help13, helpName13)" id="helpTab13" class="versionButton versionButtonVertical">Ослабления</button>
             <div id="prestigeHelpDiv" style="display:none">
               <button onclick="showHelpPage(help8, helpName8)" id="helpTab8" class="versionButton versionButtonVertical">Престиж</button>
               <button onclick="showHelpPage(help9, helpName9)" id="helpTab9" class="versionButton versionButtonVertical">Осколки</button>
               <button onclick="showHelpPage(help10, helpName10)" id="helpTab10" class="versionButton versionButtonVertical">Автоматизация</button>
+            <div id="challengeHelpDiv" style="display:none">
+              <button onclick="showHelpPage(help11, helpName11)" id="helpTab11" class="versionButton versionButtonVertical">Испытания</button>
+              <button onclick="showHelpPage(help12, helpName12)" id="helpTab12" class="versionButton versionButtonVertical">Предметы</button></div>
             </div>
           </div>
           <div id="line"></div>
@@ -221,8 +253,12 @@
     <div id="mainSettings">
       <button onclick="maxOrNo(this)" id="maxOrNoUpgrades">Купить один</button>
     </div>
+    <span class="statsSlot" id="challengeCondition">Вирусные монеты делят доход на /100</span>
     <div id="getCoinLine">
-      <button onclick="doUmulti(this)" id = "umultiplierBoost" class="upgradeButton"><ut>У-множитель (0)</ut> <br> Сбросьте всё и получите х2 к доходу монет! <br> Для след. сброса требуется 100 Небольших Инвестиций</button>
+      <div id="uMultiDiv">
+        <button onclick="doUmulti(this)" id = "umultiplierBoost" class="upgradeButton"><ut>У-множитель (0)</ut> <br> Сбросьте всё и получите х2 к доходу монет! <br> Для след. сброса требуется 100 Небольших Инвестиций</button>
+        <button onclick="doHarshUmulti()" id="harshUmulti" class="tabButton" style="display:none">Вернуться на У-множитель назад</button> 
+      </div>
         <button onclick="getCoin()" id = "coinGain" class="coinCss"><img src="javascript/cssfiles/images/CoinOff.png" style="width:0px" alt="" class="coinImage"></button>
       <button onclick="doUpower(this)" id = "upowerBoost" class="upgradeButton"><ut>У-множитель (0)</ut> <br> Сбросьте всё с У-множителями и получите +0.1 к силе дохода монет! <br> Для след. сброса требуется 250 Небольших Инвестиций и 4 У-множителя</button>
     </div>
@@ -270,6 +306,121 @@
       </div>
     </div>
     </div>  
+    <div id="challengeTab" style="display:none">
+      <span id="challengeTabDesc" class="smallDesc">Добро пожаловать в Испытания, здесь вы должны достигнуть Престижа с различными условиями. <br>
+      Каждое испытание обладает уникальной наградой, которую вы получите, если достигнете 1е15 монет внутри Испытания. <br>
+      Помимо особенных условий, они также имеют общие условия: эффект Осколков ^0.5, награды за Испытания не работают. <br>
+      Если Испытание показалось вам слишком трудным, вы можете выйти из него, и продолжить в любое время. 
+      </span>
+      <div> 
+        <span class="whiteText" id="restartTheChallenge"> Начинать Испытания заново</span> 
+        <input type="checkbox" id="restartChallenge">
+      </div>
+      <div id="challenges">
+      <div class="challengeRow">
+        <div class="challengePair">
+        <div class="challengeDiv">
+          <p class="challengeTitle" id="challenge1Title">Испытание 1</p>
+          <span class="challengeDesc challengeCond statsSlot" id="challenge1Desc">Условие: Все единичные улучшения Монет отключены.</span>
+          <span class="challengeDesc challengeGoal statsSlot" id="challenge1Goal">Цель: Выполнить Престиж.</span>
+          <button onclick="startChallenge('1')" class="challengeStart tabButton" id="challenge1Start">Начать</button>
+          <span class="challengeDesc challengeReward statsSlot" id="challenge1Reward">Награда: Общий множитель дохода монет увеличивается на ^1.1.</span>
+        </div>
+        <div class="challengeDiv">
+          <p class="challengeTitle" id="challenge2Title">Испытание 2</p>
+          <span class="challengeDesc challengeCond statsSlot" id="challenge2Desc">Условие: Осколки снижают доход монет.</span>
+          <span class="challengeDesc challengeGoal statsSlot" id="challenge2Goal">Цель: Выполнить Престиж.</span>
+          <button onclick="startChallenge('2')" class="challengeStart tabButton" id="challenge2Start">Начать</button>
+          <span class="challengeDesc challengeReward statsSlot" id="challenge2Reward">Награда: Кристалльная Перегрузка даёт x1000000 осколков от нынешнего количества кристаллов.</span>
+        </div>
+      </div>
+      <div class="challengePair">
+        <div class="challengeDiv">
+          <p class="challengeTitle" id="challenge3Title">Испытание 3</p>
+          <span class="challengeDesc challengeCond statsSlot" id="challenge3Desc">Условие: Монеты в секунду отключены, У-множители деляет доход в х1000000 раз.</span>
+          <span class="challengeDesc challengeGoal statsSlot" id="challenge3Goal">Цель: Выполнить Престиж.</span>
+          <button onclick="startChallenge('3')" class="challengeStart tabButton" id="challenge3Start">Начать</button>
+          <span class="challengeDesc challengeReward statsSlot" id="challenge3Reward">Награда: Количество престижей усиливает монеты за секунду.</span>
+        </div>
+        <div class="challengeDiv">
+          <p class="challengeTitle" id="challenge4Title">Испытание 4</p>
+          <span class="challengeDesc challengeCond statsSlot" id="challenge4Desc">Условие: Доход монет снижен до ^0.5.</span>
+          <span class="challengeDesc challengeGoal statsSlot" id="challenge4Goal">Цель: Выполнить Престиж.</span>
+          <button onclick="startChallenge('4')" class="challengeStart tabButton" id="challenge4Start">Начать</button>
+          <span class="challengeDesc challengeReward statsSlot" id="challenge4Reward">Награда: Достижения дают дополнительные Небольшие Инвестиции</span>
+        </div>
+      </div>
+      </div>
+      <div class="challengeRow">
+        <div class="challengePair">
+        <div class="challengeDiv">
+          <p class="challengeTitle" id="challenge1Title">Испытание 5</p>
+          <span class="challengeDesc challengeCond statsSlot" id="challenge5Desc">Условие: Каждая покупка улучшения увеличивает цену других как будто ты их купил, эффект осколков ^0.5.</span>
+          <span class="challengeDesc challengeGoal statsSlot" id="challenge5Goal">Цель: Выполнить Престиж.</span>
+          <button onclick="startChallenge('5')" class="challengeStart tabButton" id="challenge5Start">Начать</button>
+          <span class="challengeDesc challengeReward statsSlot" id="challenge5Reward">Награда: Цена улучшений слегка снижена.</span>
+        </div>
+        <div class="challengeDiv">
+          <p class="challengeTitle" id="challenge6Title">Испытание 6</p>
+          <span class="challengeDesc challengeCond statsSlot" id="challenge6Desc">Условие: Покупаемые улучшения отключены. Нажатия уменьшают цены единичных улучшений и увеличивают доход за нажатие. Эффект от осколков ^0.5. </span>
+          <span class="challengeDesc challengeGoal statsSlot" id="challenge6Goal">Цель: Выполнить Престиж.</span>
+          <button onclick="startChallenge('6')" class="challengeStart tabButton" id="challenge6Start">Начать</button>
+          <span class="challengeDesc challengeReward statsSlot" id="challenge6Reward">Награда: Пройденные испытания увеличивают доход от нажатий.</span>
+        </div>
+      </div>
+      <div class="challengePair">
+        <div class="challengeDiv">
+          <p class="challengeTitle" id="challenge7Title">Испытание 7</p>
+          <span class="challengeDesc challengeCond statsSlot" id="challenge7Desc">Условие: Каждая покупка снижает доход на 2%. </span>
+          <span class="challengeDesc challengeGoal statsSlot" id="challenge7Goal">Цель: Выполнить Престиж.</span>
+          <button onclick="startChallenge('7')" class="challengeStart tabButton" id="challenge7Start">Начать</button>
+          <span class="challengeDesc challengeReward statsSlot" id="challenge7Reward">Награда: Осколки увеличивают доход за пределами Пост-е7 ослабления на xLog2(Осколки) </span>
+        </div>
+        <div class="challengeDiv">
+          <p class="challengeTitle" id="challenge8Title">Испытание 8</p>
+          <span class="challengeDesc challengeCond statsSlot" id="challenge8Desc">Условие: Доход в секунду также генерирует Вирусные монеты, которые делят доход монет, эффект осколков ^0.25.</span>
+          <span class="challengeDesc challengeGoal statsSlot" id="challenge8Goal">Цель: Выполнить Престиж.</span>
+          <button onclick="startChallenge('8')" class="challengeStart tabButton" id="challenge8Start">Начать</button>
+          <span class="challengeDesc challengeReward statsSlot" id="challenge8Reward">Награда: Доход в секунду увеличивается спустя время в текущем Престиже.</span>
+        </div>
+      </div>
+    </div>
+      <div class="challengeRow">
+        <div class="challengePair">
+        <div class="challengeDiv">
+          <p class="challengeTitle" id="challenge1Title">Испытание 9</p>
+          <span class="challengeDesc challengeCond statsSlot" id="challenge9Desc">Условие: Ослабление начинается на 1е9 монет и удваивает эффект</span>
+          <span class="challengeDesc challengeGoal statsSlot" id="challenge9Goal">Цель: Выполнить Престиж.</span>
+          <button onclick="startChallenge('9')" class="challengeStart tabButton" id="challenge9Start">Начать</button>
+          <span class="challengeDesc challengeReward statsSlot" id="challenge9Reward">Награда: Пост-е13 Ослабление отталкивается в зависимости от всего Супер-монет</span>
+        </div>
+        <div class="challengeDiv">
+          <p class="challengeTitle" id="challenge10Title">Испытание 10</p>
+          <span class="challengeDesc challengeCond statsSlot" id="challenge10Desc">Условие: Эффект осколков ^0.5, у вас есть возможность купить только 25 улучшений.</span>
+          <span class="challengeDesc challengeGoal statsSlot" id="challenge10Goal">Цель: Выполнить Престиж.</span>
+          <button onclick="startChallenge('10')" class="challengeStart tabButton" id="challenge10Start">Начать</button>
+          <span class="challengeDesc challengeReward statsSlot" id="challenge10Reward">Награда: Престижи дают больше кристаллов в зависимости от количества улучшений.</span>
+        </div>
+      </div>
+      <div class="challengePair">
+        <div class="challengeDiv">
+          <p class="challengeTitle" id="challenge11Title">Испытание 11</p>
+          <span class="challengeDesc challengeCond statsSlot" id="challenge11Desc">Условие: Улучшений нет.</span>
+          <span class="challengeDesc challengeGoal statsSlot" id="challenge11Goal">Цель: Выполнить Престиж.</span>
+          <button onclick="startChallenge('11')" class="challengeStart tabButton" id="challenge11Start">Начать</button>
+          <span class="challengeDesc challengeReward statsSlot" id="challenge11Reward">Награда: Разблокировать новые товары в магазине.</span>
+        </div>
+        <div class="challengeDiv">
+          <p class="challengeTitle" id="challenge12Title">Испытание 12</p>
+          <span class="challengeDesc challengeCond statsSlot" id="challenge12Desc">Условие: Эффект осколков ^0.01, доход монет ^0.01, У-множители и У-силители стали дешевле и не могут быть ослаблены.</span>
+          <span class="challengeDesc challengeGoal statsSlot" id="challenge12Goal">Цель: Выполнить Престиж.</span>
+          <button onclick="startChallenge('12')" class="challengeStart tabButton" id="challenge12Start">Начать</button>
+          <span class="challengeDesc challengeReward statsSlot" id="challenge12Reward">Награда: Уменьшает увеличение цены У-множителей до 40 и У-силителей до 80.</span>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
     <div id="prestigeTab" style="display:none">
       <div id="prestigeSubButtons">
         <button onclick="selectSubTab(upgradesTab, false, 'prestige')" id="upgradesSelect" class="tabButton subButton prestigeButton">Улучшения</button>
@@ -643,6 +794,7 @@
       <p id="totalCoins" class="statsSlot">TOTAL COINS</p> 
       <p id="totalSuperCoinsStats" class="statsSlot">TOTAL SUPER COINS</p>
       <p id="gameTime" class="statsSlot">GAME TIME</p> 
+      <p id="realTime" class="statsSlot">REAL TIME</p> 
       <div id="prestigeSection" style="display: none">
         <br>
         <p id="totalCrystalsStats" class="statsSlot" >TOTAL CRYSTALS</p>
@@ -694,6 +846,10 @@
             <span id="goldenGloveStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
           </div>
           <div class="multiplierString" display="flex">
+            <span id="challenge6Stats" class="whiteText" style="margin-left: 30px;">Общий доход</span>
+            <span id="challenge6StatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
             <span id="gainStats" class="whiteText" style="margin-left: 30px;">Общий доход</span>
             <span id="gainStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
           </div>
@@ -739,9 +895,18 @@
             <span id="achievement15StatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
           </div>
           <div class="multiplierString" display="flex">
+            <span id="challenge8Stats" class="whiteText" style="margin-left: 30px;">Испытание 8</span>
+            <span id="challenge8StatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
             <span id="gain2Stats" class="whiteText" style="margin-left: 30px;">Общий доход</span>
             <span id="gain2StatsEffect" class="whiteText" style="margin-right: 30px;">^1.021</span>
           </div>
+          <div class="multiplierString" display="flex">
+            <span id="challenge3Stats" class="whiteText" style="margin-left: 30px;">Испытание 3</span>
+            <span id="challenge3StatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+
           <div id="postE13SoftcapSecond" class="multiplierString" display="flex">
             <span id="postE13coinsSoftcapSecondStats" class="whiteText" style="margin-left: 30px;">Пост-е13 Софткап</span>
             <span id="postE13coinsSoftcapSecondStatsEffect" class="whiteText" style="margin-right: 30px;">^0.5</span>
@@ -801,6 +966,10 @@
             <span id="activity2Stats" class="whiteText" style="margin-left: 30px;">Осколки</span>
             <span id="activity2StatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
           </div>
+          <div class="multiplierString" display="flex">
+            <span id="challenge1Stats" class="whiteText" style="margin-left: 30px;">Испытание 1</span>
+            <span id="challenge1StatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
           <div id="postE15SoftcapGain" class="multiplierString" display="flex">
             <span id="postE15SoftcapGainStats" class="whiteText" style="margin-left: 30px;">Пост-е15 Софткап</span>
             <span id="postE15SoftcapGainStatsEffect" class="whiteText" style="margin-right: 30px;">^0.5</span>
@@ -839,6 +1008,14 @@
             <span id="recyclingStats" class="whiteText" style="margin-left: 30px;">Удвоитель</span>
             <span id="recyclingStatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
           </div>
+          <div class="multiplierString" display="flex">
+            <span id="challenge10Stats" class="whiteText" style="margin-left: 30px;">Испытание 10</span>
+            <span id="challenge10StatsEffect" class="whiteText" style="margin-right: 30px;">x1.37</span>
+          </div>
+          <div class="multiplierString" display="flex">
+            <span id="crystalBoostStats" class="whiteText" style="margin-left: 30px;">Кристаллический Усилитель</span>
+            <span id="crystalBoostStatsEffect" class="whiteText" style="margin-right: 30px ;">x1.37</span>
+          </div>
             <div class="multiplierString footer" display="flex">
               <span id="summaryCrystalStats" class="whiteText" style="margin-left: 30px;">Общий множитель</span>
               <span id="summaryCrystalStatsEffect" class="whiteText" style="margin-right: 30px;">1.37x</span>
@@ -859,6 +1036,9 @@
         </div>
         <div id="goldenGlovePiece" class="graphicPiece" style="background-image: radial-gradient(rgb(255, 174, 0), black 210%)">
           <span id="goldenGlovePiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="challenge6Piece" class="graphicPiece" style="background-image: radial-gradient(rgb(127, 210, 136), black 210%)">
+          <span id="challenge6PiecePercent" class="whiteText pieceText">0%</span>
         </div>
         <div id="gainClickPiece" class="graphicPiece" style="background-image: radial-gradient(gold, black 210%)">
           <span id="gainClickPiecePercent" class="whiteText pieceText">0%</span>
@@ -886,8 +1066,14 @@
         <div id="achievement15Piece" class="graphicPiece" style="background-image: radial-gradient(lightsteelblue, black 210%)">
           <span id="achievement15PiecePercent" class="whiteText pieceText">0%</span>
         </div>
+        <div id="challenge8Piece" class="graphicPiece" style="background-image: radial-gradient(rgb(127, 210, 136), black 210%)">
+          <span id="challenge8PiecePercent" class="whiteText pieceText">0%</span>
+        </div>
         <div id="gainSecondPiece" class="graphicPiece" style="background-image: radial-gradient(gold, black 210%)">
           <span id="gainSecondPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="challenge3Piece" class="graphicPiece" style="background-image: radial-gradient(rgb(127, 210, 136), black 210%)">
+          <span id="challenge3PiecePercent" class="whiteText pieceText">0%</span>
         </div>
       </div>
       <div id="gainGraphic" class="gainGraphic" style="display: none">
@@ -927,6 +1113,9 @@
         <div id="activity2Piece" class="graphicPiece" style="background-image: radial-gradient(rgb(0, 212, 212), black 210%)">
           <span id="activity2PiecePercent" class="whiteText pieceText">0%</span>
         </div>
+        <div id="challenge1Piece" class="graphicPiece" style="background-image: radial-gradient(rgb(127, 210, 136), black 210%)">
+          <span id="challenge1PiecePercent" class="whiteText pieceText">0%</span>
+        </div>
       </div>
       <div id="superCoinsChanceGraphic" class="gainGraphic" style="display: none">
         <div id="luckyCloverPiece" class="graphicPiece" style="background-image: radial-gradient(rgb(255, 174, 0), black 210%)">
@@ -946,6 +1135,12 @@
         <div id="recyclingPiece" class="graphicPiece" style="background-image: radial-gradient(rgb(111, 202, 199), black 210%)">
           <span id="recyclingPiecePercent" class="whiteText pieceText">0%</span>
         </div>
+        <div id="challenge10Piece" class="graphicPiece" style="background-image: radial-gradient(rgb(127, 210, 136), black 210%)">
+          <span id="challenge10PiecePercent" class="whiteText pieceText">0%</span>
+        </div>
+        <div id="crystalBoostPiece" class="graphicPiece" style="background-image: radial-gradient(rgb(255, 174, 0), black 210%)">
+          <span id="crystalBoostPiecePercent" class="whiteText pieceText">0%</span>
+        </div>
       </div>
     </div>
     </div>
@@ -953,54 +1148,166 @@
       <div style="display: flex; justify-content:center">
         <p id="superCount" class="titleTab">У вас 10 Супер-монет</p>
       </div>
-      <p id="shopDesc" class="statsSlot">Здесь вы можете купить дополнительные улучшения, чтобы ускорить прогресс. Вы можете сбросить свои покупки и вернуть свои Супер-монеты, но единичные улучшения не сбросятся.</p>
-      <div id="shopDiv2">
-        <div id="shopTitleDiv">
-          <p id="shopTitle" class="whiteText">Улучшения</p>
-        </div>
-      <div id="shopDiv">
-        <div id="leftShopArrowDiv" class="shopArrowDiv"style=" display: none">
-          <button onclick="nextShopPage('left')" id="leftShopArrow" class="shopArrow" >
-            <span class="whiteText" style="cursor: default;">←</span>
-          </button>
-        </div>
-        <div id="shoppingDiv">
-          <div id="firstShopRow" class="shopRow">
-            <button onclick="buyShopBuyable(firstShopBuyable, 100)" id="shopBuyableU1" class="shopButton">Золотая перчатка <br> Увеличивает монеты за нажатия<br> Эффект: +2% <br> Стоимость: 2 Супер-монет</button>
-            <button onclick="buyShopBuyable(secondShopBuyable, 100)" id="shopBuyableU2" class="shopButton">Золотые часы <br> Увеличивает монеты за секунду<br> Эффект: +2% <br> Стоимость: 2 Супер-монет</button>
-            <button onclick="buyShopBuyable(thirdShopBuyable, 100)" id="shopBuyableU3" class="shopButton">Золотой ключ <br> Увеличивает доход монет <br> Эффект: +2% <br> Стоимость: 2 Супер-монет</button>
-            <button onclick="buyShopBuyable(fourthShopBuyable, 100)" id="shopBuyableU4" class="shopButton">Супер-клевер <br> Увеличивает шанс получения Супер-монет<br> Эффект: +10% <br> Стоимость: 20 Супер-монет</button>
+      <p id="shopDesc" class="smallDesc">Здесь вы можете купить дополнительные улучшения, чтобы ускорить прогресс. Вы можете сбросить свои покупки и вернуть свои Супер-монеты, но единичные улучшения не сбросятся.</p>
+      <div id="wholeShopDiv">
+        <div>
+          <div id="shopDiv2">
+            <div id="shopTitleDiv">
+              <p id="shopTitle" class="whiteText">Улучшения</p>
+            </div>
+          <div id="shopDiv">
+            <div id="leftShopArrowDiv" class="shopArrowDiv"style=" display: none">
+              <button onclick="nextShopPage('left')" id="leftShopArrow" class="shopArrow" >
+                <span class="whiteText" style="cursor: default;">←</span>
+              </button>
+            </div>
+            <div id="shoppingDiv">
+              <div id="firstShopRow" class="shopRow">
+                <div class="shopContainer">
+                  <button id="shopBuyableU1" onclick="buyShopBuyable(firstShopBuyable)" class="shopButton"></button>
+                  <div id="tooltip-shopBuyableU1" class="tooltip" role="tooltip">
+                    <span id="tooltipShopBuyableU1" class="tooltipShop"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopBuyableU1Title">Золотая перчатка</span>
+                  <span id="shopBuyableU1Req">10 С-монет</span>
+                </div>
+                <div class="shopContainer">
+                  <button id="shopBuyableU2" class="shopButton" onclick="buyShopBuyable(secondShopBuyable)"></button>
+                  <div id="tooltip-shopBuyableU2" class="tooltip" role="tooltip">
+                    <span id="tooltipShopBuyableU2" class="tooltipShop"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopBuyableU2Title">Золотые часы</span>
+                  <span id="shopBuyableU2Req">66/100</span>
+                </div>
+                <div class="shopContainer">
+                  <button id="shopBuyableU3" class="shopButton" onclick="buyShopBuyable(thirdShopBuyable)"></button>
+                  <div id="tooltip-shopBuyableU3" class="tooltip" role="tooltip">
+                    <span id="tooltipShopBuyableU3" class="tooltipShop"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopBuyableU3Title">Золотой ключ</span>
+                  <span id="shopBuyableU3Req">3/100</span>
+                </div>
+                <div class="shopContainer">
+                  <button id="shopBuyableU4" class="shopButton" onclick="buyShopBuyable(fourthShopBuyable)"></button>
+                  <div id="tooltip-shopBuyableU4" class="tooltip" role="tooltip">
+                    <span id="tooltipShopBuyableU4" class="tooltipShop"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopBuyableU4Title">Клевер</span>
+                  <span id="shopBuyableU4Req">77/100</span>
+                </div>
+                <div id="post11challenge" style="display: none">
+                <div class="shopContainer">
+                  <button id="shopBuyableU5" class="shopButton" onclick="buyShopBuyable(fifthShopBuyable)"></button>
+                  <div id="tooltip-shopBuyableU5" class="tooltip" role="tooltip">
+                    <span id="tooltipShopBuyableU5" class="tooltipShop"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopBuyableU5Title">Осколочный дождь</span>
+                  <span id="shopBuyableU5Req">0/50</span>
+                </div>
+                <div class="shopContainer">
+                  <button id="shopBuyableU6" class="shopButton" onclick="buyShopBuyable(sixthShopBuyable)"></button>
+                  <div id="tooltip-shopBuyableU6" class="tooltip" role="tooltip">
+                    <span id="tooltipShopBuyableU6" class="tooltipShop"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopBuyableU6Title">Золотая кирка</span>
+                  <span id="shopBuyableU6Req">0/25</span>
+                </div>
+                <div class="shopContainer">
+                  <button id="shopBuyableU7" class="shopButton" onclick="buyShopBuyable(seventhShopBuyable)"></button>
+                  <div id="tooltip-shopBuyableU7" class="tooltip" role="tooltip">
+                    <span id="tooltipShopBuyableU7" class="tooltipShop"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopBuyableU7Title">Ежедневник</span>
+                  <span id="shopBuyableU7Req">0/5</span>
+                </div>
+              </div>
+              </div>
+              <hr style="margin: 0">
+              <div id="secondShopRow" class="shopRow">
+                <div class="shopContainer">
+                  <button id="shopSingleU1" class="shopButton" onclick="buyShopSingle(firstShopSingle, 1, 'overdriveSelect')"></button>
+                  <div id="tooltip-shopSingleU1" class="tooltip" role="tooltip">
+                    <span id="tooltipShopSingleU1" class="tooltipShop"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopSingleU1Title">Сломанный спидометр</span>
+                  <span id="shopSingleU1Req">0/1</span>
+                </div>
+              </div>
+              <hr style="margin: 0">
+              <div id=thirdShopRow class="shopRow">
+                <div id="post11challenge2">
+                <div class="shopContainer">
+                  <button id="shopItem1" class="shopButton shopItemButton" onclick="buyShopItem(firstShopItem)"></button>
+                  <button id="useShopItem1" class="useButton" onclick="useShopItem(firstShopItem, 1)"></button>
+                  <div id="tooltip-shopItem1" class="tooltip" role="tooltip">
+                    <span id="tooltipshopItem1" class="tooltipShop"><ut> Бесплатный У-множитель </ut> <br> <br> Даёт +1 к У-множителям.</span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopItem1Title">Бесплатный У-множитель</span>
+                  <span id="shopItem1Req">0/5</span>
+                </div>
+                <div class="shopContainer">
+                  <button id="shopItem2" class="shopButton shopItemButton" onclick="buyShopItem(secondShopItem)"></button>
+                  <button id="useShopItem2" class="useButton" onclick="useShopItem(secondShopItem, 2)"></button>
+                  <div id="tooltip-shopItem2" class="tooltip" role="tooltip">
+                    <span id="tooltipshopItem2" class="tooltipShop"><ut> Бесплатный У-силитель </ut> <br> <br> Даёт +1 к У-силителям.</span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopItem2Title">Бесплатный У-множитель</span>
+                  <span id="shopItem2Req">0/3</span>
+                </div>
+                <div class="shopContainer">
+                  <button id="shopItem3" class="shopButton shopItemButton" onclick="buyShopItem(thirdShopItem)"></button>
+                  <button id="useShopItem3" class="useButton" onclick="useShopItem(thirdShopItem, 3)"></button>
+                  <div id="tooltip-shopItem3" class="tooltip" role="tooltip">
+                    <span id="tooltipshopItem3" class="tooltipShop"><ut> Ускорение времени</ut> <br> <br> Приносит мгновенный доход за 1 минуту.</span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopItem3Title">Ускорение времени</span>
+                  <span id="shopItem3Req">0/10</span>
+                </div>
+                <div class="shopContainer">
+                  <button id="shopItem4" class="shopButton shopItemButton" onclick="buyShopItem(fourthShopItem)"></button>
+                  <button id="useShopItem4" class="useButton" onclick="useShopItem(fourthShopItem, 4)">Исп.</button>
+                  <div id="tooltip-shopItem4" class="tooltip" role="tooltip">
+                    <span id="tooltipshopItem4" class="tooltipShop"><ut> Ускорение времени + </ut> <br> <br> Приносит мгновенный доход за 10 минут.</span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopItem4Title">Ускорение времени +</span>
+                  <span id="shopItem4Req">0/3</span>
+                </div>
+                </div>
+              </div>
+            </div>
+    
+            <!-- <div id="rightShopArrowDiv" class="shopArrowDiv">
+              <button onclick="nextShopPage('right')" id="rightShopArrow" class="shopArrow">
+                <span class="whiteText" style="cursor: default;">→</span>
+              </button>
+            </div> -->
           </div>
-          <div id="firstItemRow" class="shopRow" style="display: none">
-            <!-- <button class="shopButton"></button>
-            <button class="shopButton"></button>
-            <button class="shopButton"></button>
-            <button class="shopButton"></button>
-            <button class="shopButton"></button> -->
-          </div>
-          <hr style="margin: 0">
-          <div id=secondShopRow class="shopRow">
-            <button onclick="buyShopSingle(firstShopSingle, 1, 'overdriveSelect')" id="shopSingleU1" class="shopButton">Оведрайв <br> Разблокировать Овердрайв <br>Стоимость: 100 Супер-монет</button>
-          </div>
-          <div id="secondItemRow" class="shopRow" style="display: none">
-            <!-- <button class="shopButton"></button>
-            <button class="shopButton"></button>
-            <button class="shopButton"></button>
-            <button class="shopButton"></button>
-            <button class="shopButton"></button> -->
+    
+        </div>
+          
+          <div id="bottomDiv">
+            <button id="respecShop" onclick="respecBuyables()" class="shopBottomButton">Сбросить</button>
           </div>
         </div>
-
-        <div id="rightShopArrowDiv" class="shopArrowDiv">
-          <button onclick="nextShopPage('right')" id="rightShopArrow" class="shopArrow">
-            <span class="whiteText" style="cursor: default;">→</span>
-          </button>
+        <div id="bulkShopBuy">
+          <span id="bulkBuyAmount"> Количество покупок </span>
+          <input id="shopBulkBuyInput" type="text">
+          <button id="bulkBuy10" onclick="changeInputValue2('10')" class="bulkShopBuyButton">Купить 10</button>
+          <button id="bulkBuyMax" onclick="changeInputValue2('1000')" class="bulkShopBuyButton">Купить макс.</button>
+          <button id="bulkBuyClear" onclick="changeInputValue2('1')" class="bulkShopBuyButton">Сбросить</button>
         </div>
-      </div>
-
-    </div>
-      <div id="bottomDiv">
-        <button id="respecShop" onclick="respecBuyables()" class="shopBottomButton">Сбросить</button>
       </div>
     </div>
         <div id="myPopupBackdrop2" class="myPopupBackdrop"></div>
@@ -1014,6 +1321,7 @@
         </div>
         </div>
 
+
         <div id="window" class="gameWindow confirmationWindow centerText">
           <div id="windowTitleDiv" class="titleDivClass">
             <span id="windowTitle2" class="windowTitle">Вы точно хотите сбросить игру?</span>
@@ -1021,7 +1329,8 @@
             <button onclick="hidePopup()" id="closeWindow2" class="closeWindow confClose"></button>
 
             <div id="confirmationButtons" class="windowDesc" style="display: none">
-              <button onclick="reloadPage()" id="yes" class="tabButton">Да</button>
+              <button onclick="reloadPage()" id="yesHR" class="tabButton">Да</button>
+              <button onclick="reloadPage2()" id="yesRP" class="tabButton">Да</button>
               <button onclick="hidePopup()" id="no" class="tabButton">Нет</button>
             </div>
             <span id="whichCode" class="windowDesc" style="display: none">КОД</span>
@@ -1034,7 +1343,7 @@
               <button onclick="submitTheBreak(this)" id="submitBreak" class="tabButton"></button>
             </div>
             <span id="brokeCrystals" class="windowDesc" style="display: none">СКОЛЬКО ОСКОЛКОВ ПОЛУЧЕНО</span>
-            <span id="falseBrokeCrystals" class="windowDesc" style="display: none"></span>ОСКОЛКОВ НЕ ПОЛУЧЕНО</span>
+            <span id="falseBrokeCrystals" class="windowDesc" style="display: none"></span></span>
             </div>
         </div>
 
@@ -1070,11 +1379,12 @@
     loadNotify = 'Game loaded!'
       window.onload = loadGame();
       window.onload = whatsYourCurrentTime();
-    let autosaver, everythingInterval
+    let autosaver, everythingInterval, addTheSecond
     function intervaling (){
       autosaver = setInterval(autoSaveThis, 30000);  
       everythingInterval = setInterval(updateTick, 50) 
       getCoinPerSecond =  setInterval(getCoinPerSec, 50)
+      addTheSecond = setInterval(addSecond, 50)
     }
     window.onload = intervaling()
     function showOfflineGain() {
@@ -1087,9 +1397,7 @@
     offlineShowTime.style.textAlign = "center"
     
     }
-    // if (timeDifference > 10) {
-      window.onload = showOfflineGain()
-          // }
+    window.onload = showOfflineGain()
     backdrop2.addEventListener("click", hidePopup);
     // console.log(gainPerSecond)
     
@@ -1115,6 +1423,8 @@
     rewardPiece.addEventListener("mouseleave", () => {hoverColorInverse("rewardForFeats")})
     goldenGlovePiece.addEventListener("mouseenter", () => {hoverColor("goldenGlove")})
     goldenGlovePiece.addEventListener("mouseleave", () => {hoverColorInverse("goldenGlove")})
+    challenge6Piece.addEventListener("mouseenter", () => {hoverColor("challenge6")})
+    challenge6Piece.addEventListener("mouseleave", () => {hoverColorInverse("challenge6")})
     gainClickPiece.addEventListener("mouseenter", () => {hoverColor("gain")})
     gainClickPiece.addEventListener("mouseleave", () => {hoverColorInverse("gain")})
     alphaPowerPiece.addEventListener("mouseenter", () => {hoverColor("alphaPower")})
@@ -1132,8 +1442,12 @@
     achievement15Piece.addEventListener("mouseleave", () => {hoverColorInverse("achievement15")})
     goldenClockPiece.addEventListener("mouseenter", () => {hoverColor("goldenClock")})
     goldenClockPiece.addEventListener("mouseleave", () => {hoverColorInverse("goldenClock")})
+    challenge8Piece.addEventListener("mouseenter", () => {hoverColor("challenge8")})
+    challenge8Piece.addEventListener("mouseleave", () => {hoverColorInverse("challenge8")})
     gainSecondPiece.addEventListener("mouseenter", () => {hoverColor("gain2")})
     gainSecondPiece.addEventListener("mouseleave", () => {hoverColorInverse("gain2")})
+    challenge3Piece.addEventListener("mouseenter", () => {hoverColor("challenge3")})
+    challenge3Piece.addEventListener("mouseleave", () => {hoverColorInverse("challenge3")})
 
     doublerPlusPiece.addEventListener("mouseenter", () => {hoverColor("doublerPlus")})
     doublerPlusPiece.addEventListener("mouseleave", () => {hoverColorInverse("doublerPlus")})
@@ -1157,6 +1471,8 @@
     umultiplierPiece.addEventListener("mouseleave", () => {hoverColorInverse("umultiplier")})
     upowerPiece.addEventListener("mouseenter", () => {hoverColor("upower")})
     upowerPiece.addEventListener("mouseleave", () => {hoverColorInverse("upower")})
+    challenge1Piece.addEventListener("mouseenter", () => {hoverColor("challenge1")})
+    challenge1Piece.addEventListener("mouseleave", () => {hoverColorInverse("challenge1")})
     activity2Piece.addEventListener("mouseenter", () => {hoverColor("activity2")})
     activity2Piece.addEventListener("mouseleave", () => {hoverColorInverse("activity2")})
 
@@ -1171,6 +1487,10 @@
     brilliantDoublerPiece.addEventListener("mouseleave", () => {hoverColorInverse("brilliantDoubler")})
     recyclingPiece.addEventListener("mouseenter", () => {hoverColor("recycling")})
     recyclingPiece.addEventListener("mouseleave", () => {hoverColorInverse("recycling")})
+    challenge10Piece.addEventListener("mouseenter", () => {hoverColor("challenge10")})
+    challenge10Piece.addEventListener("mouseleave", () => {hoverColorInverse("challenge10")})
+    crystalBoostPiece.addEventListener("mouseenter", () => {hoverColor("crystalBoost")})
+    crystalBoostPiece.addEventListener("mouseleave", () => {hoverColorInverse("crystalBoost")})
 
     </script>
     

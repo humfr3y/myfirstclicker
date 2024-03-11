@@ -3,9 +3,11 @@ let amountOfPrestigeUpgrades = 0
 let singleCheckbox = document.getElementById('autoSingleUpgradeCheckbox'), buyableCheckbox = document.getElementById('autoBuyableUpgradeCheckbox'), umultiplierCheckbox = document.getElementById('autoUmultiplierCheckbox'), upowerCheckbox = document.getElementById('autoUpowerCheckbox'), prestigeCheckbox = document.getElementById('autoPrestigeCheckbox') 
 let autoSetIntervals = ['', '', '', '', '']
 let firstAutoPrestigeInputValue, secondAutoPrestigeInputValue
+let challengeReward5 = 1
 autoUmultiInput.value = 0
 autoUpowerInput.value = 0
 autoUpowerInput2.value = 0
+shopBulkBuyInput.value = 1
 {
 var singleInterval = {
     time: 2000,
@@ -36,7 +38,9 @@ var secondBuyable = {
     price: 100,
     basePrice: 100,
     updateText: document.getElementById('buyableU2'),
-    power: 1.3
+    power: 1.3,
+    bulkAmount: 1,
+    bulkPrice: 1
 }    
 var firstBuyable = {
     amount: 0,
@@ -44,7 +48,10 @@ var firstBuyable = {
     price: 10,
     basePrice: 10,
     updateText: document.getElementById('buyableU1'),
-    power: 1.099
+    power: 1.099,
+    freeAmount: 0,
+    bulkAmount: 1,
+    bulkPrice: 1
 }
 var thirdBuyable = {
     amount: 0,
@@ -52,7 +59,9 @@ var thirdBuyable = {
     price: 500,
     basePrice: 500,
     updateText: document.getElementById('buyableU3'),
-    power: 9.33
+    power: 9.33,
+    bulkAmount: 1,
+    bulkPrice: 1
 }
 var fourthBuyable = {
     amount: 0,
@@ -60,7 +69,9 @@ var fourthBuyable = {
     price: 1000,
     basePrice: 1000,
     updateText: document.getElementById('buyableU4'),
-    power: 1.85
+    power: 1.85,
+    bulkAmount: 1,
+    bulkPrice: 1
 }
 var fifthBuyable = {
     amount: 0,
@@ -68,7 +79,9 @@ var fifthBuyable = {
     price: 5000,
     basePrice: 5000,
     updateText: document.getElementById('buyableU5'),
-    power: 1.8
+    power: 1.8,
+    bulkAmount: 1,
+    bulkPrice: 1
 }
 var firstSingle = {
     amount: 0,
@@ -147,7 +160,10 @@ var firstShopBuyable = {
     price: 1.3,
     power: 1.05,
     getEl: document.getElementById('shopBuyableU1'),
-    priceText: " "
+    priceText: " ",
+    max: 100,
+    bulkAmount: 1,
+    bulkPrice: 1,
 }
 var secondShopBuyable = {
     amount: 0,
@@ -155,7 +171,10 @@ var secondShopBuyable = {
     price: 1.3,
     power: 1.05,
     getEl: document.getElementById('shopBuyableU2'),
-    priceText: " "
+    priceText: " ",
+    max: 100,
+    bulkAmount: 1,
+    bulkPrice: 1,
 }
 var thirdShopBuyable = {
     amount: 0,
@@ -163,7 +182,10 @@ var thirdShopBuyable = {
     price: 1.4,
     power: 1.055,
     getEl: document.getElementById('shopBuyableU3'),
-    priceText: " "
+    priceText: " ",
+    max: 100,
+    bulkAmount: 1,
+    bulkPrice: 1,
 }
 var fourthShopBuyable = {
     amount: 0,
@@ -171,7 +193,75 @@ var fourthShopBuyable = {
     price: 1.5,
     power: 1.06,
     getEl: document.getElementById('shopBuyableU4'),
-    priceText: " "
+    priceText: " ",
+    max: 100,
+    bulkAmount: 1,
+    bulkPrice: 1,
+}
+var fifthShopBuyable = {
+    amount: 0,
+    baseprice: 5,
+    price: 5,
+    power: 1.08,
+    getEl: document.getElementById('shopBuyableU5'),
+    priceText: " ",
+    max: 50,
+    bulkAmount: 1,
+    bulkPrice: 1,
+}
+var sixthShopBuyable = {
+    amount: 0,
+    baseprice: 10,
+    price: 10,
+    power: 1.2,
+    getEl: document.getElementById('shopBuyableU6'),
+    priceText: " ",
+    max: 25,
+    bulkAmount: 1,
+    bulkPrice: 1,
+}
+var seventhShopBuyable = {
+    amount: 0,
+    baseprice: 25,
+    price: 25,
+    power: 2,
+    getEl: document.getElementById('shopBuyableU7'),
+    priceText: " ",
+    max: 5,
+    bulkAmount: 1,
+    bulkPrice: 1,
+}
+var firstShopItem = {
+    amount: 0,
+    price: 75,
+    getEl: document.getElementById('shopItem1'),
+    priceText: " ",
+    max: 5,
+    used: 0,
+}
+var secondShopItem = {
+    amount: 0,
+    price: 200,
+    getEl: document.getElementById('shopItem2'),
+    priceText: " ",
+    max: 3,
+    used: 0,
+}
+var thirdShopItem = {
+    amount: 0,
+    price: 30,
+    getEl: document.getElementById('shopItem3'),
+    priceText: " ",
+    max: 10,
+    used: 0,
+}
+var fourthShopItem = {
+    amount: 0,
+    price: 230,
+    getEl: document.getElementById('shopItem4'),
+    priceText: " ",
+    max: 3,
+    used: 0,
 }
 var firstShopSingle = {
     amount: 0,
@@ -197,7 +287,7 @@ var secondPrestigeBuyable = {
     price: 20,
     basePrice: 20,
     updateText: document.getElementById('pBuyableU2'),
-    power: 20
+    power: 30
 }
 var firstPrestigeSingle = {
     amount: 0,
@@ -381,22 +471,65 @@ var shardUnlockableSingles = {
     consumedShards: 0,
     price: 100000,
 }
+var pinkCoin = {
+    currency: 0,
+    amount: 0,
+    totalAmount: 0,
+    price: 1,
+    requirement: 3000,
+    effect: 1,
+    boost: 1,
+}
+var greenCoin = {
+    currency: 0,
+    amount: 0,
+    totalAmount: 0,
+    price: 1,
+    requirement: 10,
+    effect: 1,
+    boost: 1,
+}
+var blueCoin = {
+    currency: 0,
+    amount: 0,
+    totalAmount: 0,
+    price: 1,
+    requirement: 5000,
+    effect: 1,
+    boost: 1,
+}
+var greyCoin = {
+    amount: 0,
+    effect: 0,
+    price: 1
+}
+
 function buyBuyableUpgrade(buyable, isAutoBuy) {
-    buyable.amount != 0 ? buyable.price = Math.round(buyable.basePrice*Math.pow(buyable.power, buyable.amount)) : buyable.price = buyable.basePrice;
+    buyable.amount != 0 ? buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount), challengeReward5)) : buyable.price = buyable.basePrice;
     if (!maxOrNoVar || isAutoBuy) {
         if (money >= buyable.price) {
-            buyable.amount++; 
-            money -= buyable.price; 
-            buyable.baseEffect++;
-            buyable.price = Math.round(buyable.basePrice*Math.pow(buyable.power, buyable.amount))
+            if ((!(challengeActivated[9] && amountsOfUpgrades >= 25)) && !challengeActivated[10]) {
+                buyable.amount++; 
+                money -= buyable.price; 
+                buyable.baseEffect++;
+                if (!challengeActivated[4]) buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount), challengeReward5))
+                else buyable.price = Math.round(buyable.basePrice*Math.pow(buyable.power, amountsOfUpgrades))
+            }
         }
     }
     else {
-        while (money >= buyable.price) {
+        while (money >= buyable.price && !(challengeActivated[9] && amountsOfUpgrades >= 25) && !challengeActivated[10]) {
             buyable.amount++; 
             money -= buyable.price; 
             buyable.baseEffect++;
-            buyable.price = Math.round(buyable.basePrice*Math.pow(buyable.power, buyable.amount))
+            if (!challengeActivated[4]) buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount), challengeReward5))
+            else buyable.price = Math.round(buyable.basePrice*Math.pow(buyable.power, amountsOfUpgrades))
+            amountsOfUpgrades = firstBuyable.amount + secondBuyable.amount + thirdBuyable.amount + fourthBuyable.amount + fifthBuyable.amount
+            const singleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
+            for (let i = 0; i < singleArray.length; i++) {
+                if (singleArray[i].amount == 1)
+                amountsOfUpgrades++
+            }
         }
     }
 }
@@ -411,12 +544,19 @@ function buySingleUpgrade(single) {
     }
 }
 
-function buyShopBuyable(item, max) {
-    if (superCoins >= Math.round(item.price) && item.amount != max) {
-        item.amount++;
-        superCoins -= Math.round(item.price);
-        spentSuperCoins += Math.round(item.price);
+function buyShopBuyable(item) {
+    if (superCoins >= Math.round(item.price) && item.amount != item.max) {
+        item.amount += item.bulkAmount
+        superCoins -= Math.round(item.bulkPrice);
+        spentSuperCoins += Math.round(item.bulkPrice);
         item.price = Math.round(item.baseprice*Math.pow(item.power, item.amount))
+    }
+}
+
+function buyShopItem(item) {
+    if (superCoins >= Math.round(item.price) && item.amount != item.max) {
+        item.amount ++
+        superCoins -= Math.round(item.price);
     }
 }
 
@@ -437,16 +577,70 @@ function checkShopSingle (unlockableCondition, unlockableID){ //unlockableCondit
 }
 
 function respecBuyables() {
-    firstShopBuyable.amount = 0
-    firstShopBuyable.price = firstShopBuyable.baseprice
-    secondShopBuyable.amount = 0
-    secondShopBuyable.price = secondShopBuyable.baseprice
-    thirdShopBuyable.amount = 0
-    thirdShopBuyable.price = thirdShopBuyable.baseprice
-    fourthShopBuyable.amount = 0
-    fourthShopBuyable.price = fourthShopBuyable.baseprice
+    resetShopBuyable(firstShopBuyable)
+    resetShopBuyable(secondShopBuyable)
+    resetShopBuyable(thirdShopBuyable)
+    resetShopBuyable(fourthShopBuyable)
+    resetShopBuyable(fifthShopBuyable)
+    resetShopBuyable(sixthShopBuyable)
+    resetShopBuyable(seventhShopBuyable)
     superCoins += spentSuperCoins
     spentSuperCoins = 0
+}
+
+function bulkBuyBuyable(buyable) {
+    let bulkPrice = 0, moneyCheck = money, temp = 0
+    for (let i = 0; i < 9999; i++) {
+        if (maxOrNoVar) {
+            if (moneyCheck >= Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount+i), challengeReward5))) {
+                buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount+i), challengeReward5))
+                bulkPrice += buyable.price
+                moneyCheck -= buyable.price
+                temp++
+            }
+            else break
+        }
+        else {
+            buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount+i), challengeReward5))
+            bulkPrice = buyable.price
+            if (money >= bulkPrice) temp = 1
+            else temp = 0
+            break
+        }
+    }
+    buyable.bulkAmount = temp
+    buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount), challengeReward5))
+    if (bulkPrice == 0) {
+        buyable.bulkPrice = buyable.price
+        buyable.bulkAmount = 0
+    }
+    else {
+        buyable.bulkPrice = bulkPrice
+    }
+}
+
+function bulkBuyShopBuyable(item) {
+    let x = shopBulkBuy, y = item.max-item.amount, z = 0; //x = 25, y = 100-86=14, z = 0 (real bulk)
+    isNaN(x) ? x = 1 : x
+    x < y ? z = x : z = y //25 < 14 ? z = 25 (true) : z = 14 (false), it's false so z = 14
+    let bulkPrice = 0, superCoinsCheck = superCoins, temp = 0
+    for (let i = 0; i < z; i++) {
+        if (superCoinsCheck >= Math.round(item.baseprice*Math.pow(item.power, item.amount+i))) {
+            item.price = Math.round(item.baseprice*Math.pow(item.power, item.amount+i))
+            bulkPrice += item.price
+            superCoinsCheck -= item.price
+            temp++
+        }
+        else break
+    }
+    item.bulkAmount = temp
+    item.price = Math.round(item.baseprice*Math.pow(item.power, item.amount))
+    bulkPrice != 0 ? item.bulkPrice = bulkPrice : item.bulkPrice = item.price
+}
+
+function resetShopBuyable(buyable){
+    buyable.amount = 0
+    buyable.price = buyable.baseprice
 }
 
 function buyPrestigeBuyable (buyable) {
@@ -484,7 +678,7 @@ function buyShardSingle(single) {
         single.priceText = ''
     }
 }
-
+let shopBulkBuy = parseInt(shopBulkBuyInput.value)
 var amountsOfUpgrades = firstBuyable.amount + secondBuyable.amount + thirdBuyable.amount + fourthBuyable.amount + fifthBuyable.amount 
 var secondBuyableEffect = secondBuyable.baseEffect * Math.pow(Math.pow(Math.log(firstBuyable.amount+10), 2), fourthSingle.amount)
 var firstBuyableEffect = firstBuyable.baseEffect * (1+(secondBuyableEffect/10))
@@ -503,21 +697,28 @@ var ninthSingleEffect = 1 - ninthSingle.baseEffect +(ninthSingle.baseEffect*(1 +
 var tenthSingleEffect = Math.pow(1.5, tenthSingle.baseEffect)
 var midasPower = 1.125
 var midasFormula = Math.log1p(Math.pow(Math.pow(clickCount, 1.5), midasPower))
-var firstShopBuyableEffect = 0, secondShopBuyableEffect = 0, thirdShopBuyableEffect = 0, fourthShopBuyableEffect = 0
+var firstShopBuyableEffect = 0, secondShopBuyableEffect = 0, thirdShopBuyableEffect = 0, fourthShopBuyableEffect = 0, fifthShopBuyableEffect = 0, sixthShopBuyableEffect = 0, seventhShopBuyableEffect = 0
 var firstPrestigeBuyableEffect, secondPrestigeBuyableEffect
 var firstShardBuyableEffect = 1, secondShardBuyableEffect = 1, thirdShardBuyableEffect = [0, 0]
 var firstShardSingleEffect = 1, secondShardSingleEffect = 1, thirdShardSingleEffect = 1, fourthShardSingleEffect = 1, fifthShardSingleEffect = 1, sixthShardSingleEffect = 1
 
 function checkUpgradesText () {
-    amountsOfUpgrades = firstBuyable.amount + secondBuyable.amount + thirdBuyable.amount + fourthBuyable.amount + fifthBuyable.amount 
-    firstBuyableEffect = firstBuyable.baseEffect * (1+(secondBuyableEffect/10))
+    shopBulkBuy = parseInt(shopBulkBuyInput.value)
+    amountsOfUpgrades = firstBuyable.amount + secondBuyable.amount + thirdBuyable.amount + fourthBuyable.amount + fifthBuyable.amount + firstBuyable.freeAmount
+    const singleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
+            for (let i = 0; i < singleArray.length; i++) {
+                if (singleArray[i].amount == 1)
+                amountsOfUpgrades++
+            }
+    challengeCompleted[3] && !challengeActivate ? firstBuyable.freeAmount = Math.pow(1.43, achCount) : firstBuyable.freeAmount = 0
+    firstBuyableEffect = firstBuyable.baseEffect+firstBuyable.freeAmount * (1+(secondBuyableEffect/10))
     secondBuyableEffect = secondBuyable.baseEffect * fourthSingleEffect
     thirdBuyableEffect = Math.pow(2, thirdBuyable.baseEffect)
     fifthBuyableEffect = 1+fifthBuyable.baseEffect/1000
     firstSingleEffect = 1-firstSingle.baseEffect+(Math.pow((firstSingle.baseEffect*(1+(Math.log10(1e15+10)/2.33))), ninthSingleEffect))
     secondSingleEffect = 1 - secondSingle.baseEffect + (secondSingle.baseEffect*midasFormula)
     thirdSingleEffect = 1 - thirdSingle.baseEffect + (thirdSingle.baseEffect*2)
-    fourthSingleEffect = Math.pow(fourthSingle.baseEffect +(fourthSingle.baseEffect*(Math.pow((Math.log10(firstBuyable.amount+10)/2), 1.8))), fourthSingle.amount)
+    fourthSingleEffect = Math.pow(fourthSingle.baseEffect +(fourthSingle.baseEffect*(Math.pow((Math.log10(firstBuyable.amount+firstBuyable.freeAmount+10)/2), 1.8))), fourthSingle.amount)
     fifthSingleEffect = 1 - fifthSingle.baseEffect + (fifthSingle.baseEffect*(Math.pow(Math.log10(fourthBuyable.amount+10), 1.2)))
     fourthBuyableEffect = Math.pow(prestigeSinglesEffects[5], fourthBuyable.amount) * fifthSingleEffect
     sixthSingleEffect = 1-sixthSingle.baseEffect+(sixthSingle.baseEffect*(Math.log10(gainPerClick+10)/1.337))
@@ -542,6 +743,17 @@ function checkUpgradesText () {
     secondShopBuyableEffect = secondShopBuyable.amount/50
     thirdShopBuyableEffect = thirdShopBuyable.amount/66.66666
     fourthShopBuyableEffect = fourthShopBuyable.amount/100
+    fifthShopBuyableEffect = fifthShopBuyable.amount/2.5
+    sixthShopBuyableEffect = sixthShopBuyable.amount/25
+    seventhShopBuyableEffect = seventhShopBuyable.amount/5
+
+    bulkBuyShopBuyable(firstShopBuyable)
+    bulkBuyShopBuyable(secondShopBuyable)
+    bulkBuyShopBuyable(thirdShopBuyable)
+    bulkBuyShopBuyable(fourthShopBuyable)
+    bulkBuyShopBuyable(fifthShopBuyable)
+    bulkBuyShopBuyable(sixthShopBuyable)
+    bulkBuyShopBuyable(seventhShopBuyable)
 
     firstPrestigeBuyableEffect = Math.pow(2, firstPrestigeBuyable.amount)
     secondPrestigeBuyableEffect = Math.pow(3, secondPrestigeBuyable.amount)
@@ -556,9 +768,67 @@ function checkUpgradesText () {
     fourthShardSingleEffect = Math.pow(1 + Math.log10(Math.log10(shards+10)+10)/5, fourthShardSingle.amount)
     fifthShardSingleEffect = 1, sixthShardSingleEffect = 1
 
+    !challengeActivate && challengeCompleted[4] ? challengeReward5 = 0.9 : challengeReward5 = 1
+
     priceReset(firstShardBuyable)
     priceReset(secondShardBuyable)
     priceReset(thirdShardBuyable)
+
+    bulkBuyBuyable(firstBuyable)
+    bulkBuyBuyable(secondBuyable)
+    bulkBuyBuyable(thirdBuyable)
+    bulkBuyBuyable(fourthBuyable)
+    bulkBuyBuyable(fifthBuyable)
+
+    priceUpdate(firstBuyable) 
+    priceUpdate(secondBuyable) 
+    priceUpdate(thirdBuyable) 
+    priceUpdate(fourthBuyable) 
+    priceUpdate(fifthBuyable) 
+
+    firstSingle.price = 1e5
+    secondSingle.price = 3e6
+    thirdSingle.price = 5e6
+    fourthSingle.price = 2.5e7
+    fifthSingle.price = 6.5e8
+    sixthSingle.price = 5e9
+    seventhSingle.price = 5e10
+    eighthSingle.price = 7e11
+    ninthSingle.price = 2e12
+    tenthSingle.price = 1e13
+
+    pinkCoin.effect = (pinkCoin.totalAmount/25)*pinkCoin.boost
+    greenCoin.effect = (greenCoin.totalAmount/5)*greenCoin.boost
+    blueCoin.effect = (blueCoin.totalAmount/30)*blueCoin.boost
+
+    pinkCoin.requirement = 3000
+    greenCoin.requirement = 10
+    blueCoin.requirement = 5000
+
+    pinkCoin.requirement = Math.round(pinkCoin.requirement-pinkCoin.requirement/10*greyCoin.effect)
+    greenCoin.requirement = Math.round(greenCoin.requirement-greenCoin.requirement/10*greyCoin.effect)
+    blueCoin.requirement = Math.round(blueCoin.requirement-blueCoin.requirement/10*greyCoin.effect)
+
+    greyCoin.amount = Math.min(pinkCoin.amount, greenCoin.amount, blueCoin.amount)
+
+    if (challengeActivated[4]) {
+        const singleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
+        for (let i = 0; i < singleArray.length; i++){
+            singleArray[i].price = singleArray[i].price * Math.pow(10, amountsOfUpgrades)
+        }
+    }
+
+    if (challengeActivated[5]) {
+        const singleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
+            for (let i = 0; i < singleArray.length; i++){
+                singleArray[i].price = singleArray[i].price / Math.pow(Math.log10(10+prestigeClicks), Math.log10(10+prestigeClicks*prestigeClicks))
+            }
+    }
+}
+
+function priceUpdate(buyable) {
+    if (!challengeActivated[4]) buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount), challengeReward5))
+    else buyable.price = Math.round(buyable.basePrice*Math.pow(buyable.power, amountsOfUpgrades))
 }
 
 function priceReset(buyable) {
@@ -630,30 +900,6 @@ function prestigeSingleEffect() {
 }
 
 
-
-function checkMaxShop () {
-    if (firstShopBuyable.amount == 100) {
-        firstShopBuyable.getEl.classList.add('purchased')
-    }
-    else firstShopBuyable.getEl.classList.remove('purchased')
-    if (secondShopBuyable.amount == 100) {
-        secondShopBuyable.getEl.classList.add('purchased')
-    }
-    else secondShopBuyable.getEl.classList.remove('purchased')
-    if (thirdShopBuyable.amount == 100) {
-        thirdShopBuyable.getEl.classList.add('purchased')
-    }
-    else thirdShopBuyable.getEl.classList.remove('purchased')
-    if (fourthShopBuyable.amount == 100) {
-        fourthShopBuyable.getEl.classList.add('purchased')
-    }
-    else fourthShopBuyable.getEl.classList.remove('purchased')
-    if (firstShopSingle.amount == 1) {
-        firstShopSingle.getEl.classList.add('purchased')
-    }
-    else firstShopSingle.getEl.classList.remove('purchased')
-}
-
 function singleUpgradePurchased () {
     const singleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
     for (let i = 0; i < singleArray.length; i++){
@@ -685,10 +931,12 @@ function maxBuyAll () {
     let singleArray2 = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
     let buyableArray = [firstBuyable, secondBuyable, thirdBuyable, fourthBuyable, fifthBuyable]
     for (let i = 0; i < singleArray2.length; i++) {
-        while (money >= singleArray2[i].price && singleArray2[i].amount != 1) buySingleUpgrade(singleArray2[i])
+        while (money >= singleArray2[i].price && singleArray2[i].amount != 1 && !challengeActivated[0] && !(challengeActivated[9] && amountsOfUpgrades >= 25) && !challengeActivated[10]) {
+            buySingleUpgrade(singleArray2[i])
+        }
     }
     let minimal = Math.min(firstBuyable.price, secondBuyable.price, thirdBuyable.price, fourthBuyable.price, fifthBuyable.price);
-    while (money >= minimal) {
+    while (money >= minimal && !challengeActivated[5] && !(challengeActivated[9] && amountsOfUpgrades >= 25) && !challengeActivated[10]) {
         for (let i = 0; i < buyableArray.length; i++) {
             buyBuyableUpgrade(buyableArray[i]);
             minimal = Math.min(firstBuyable.price, secondBuyable.price, thirdBuyable.price, fourthBuyable.price, fifthBuyable.price);
@@ -737,7 +985,7 @@ function maxOrNo () {
 function autoBuySingle() {
     let singleArray2 = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
     for (let i = 0; i<singleArray2.length; i++) {
-        if (singleArray2[i].amount == 0) {
+        if (singleArray2[i].amount == 0 && !challengeActivated[0] && !(challengeActivated[9] && amountsOfUpgrades >= 25) && !challengeActivated[10]) {
             buySingleUpgrade(singleArray2[i])
             break;
         }
@@ -982,6 +1230,9 @@ function breakTheCrystal() {
     if (brokenCrystalsTemp < 1e6) {
         for (let i = 0; i < brokenCrystalsTemp; i++) {
             shardsTemp += randomNumber(shardChanceMinimum, shardChanceMaximum)
+            if (shards == 0) {
+                shardsTemp = 100
+            }
         }
     }
     else shardsTemp = ((shardChanceMinimum+shardChanceMaximum)/2)*brokenCrystalsTemp
@@ -991,7 +1242,7 @@ function breakTheCrystal() {
 
 function submitTheBreak() {
     let valueTemp = parseFloat(howMuchCrystalsInput.value)
-    if ((howMuchCrystalsInput.value).includes('%') && valueTemp <= 100 || (!(howMuchCrystalsInput.value).includes('%') && valueTemp <= crystals)) {
+    if (((howMuchCrystalsInput.value).includes('%') && valueTemp <= 100 || (!(howMuchCrystalsInput.value).includes('%') && valueTemp <= crystals)) && !(howMuchCrystalsInput.value).includes('-')) {
         openWindow('submit', true)
         breakTheCrystal()
     }

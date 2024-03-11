@@ -144,8 +144,9 @@ it {
     background-color: rgba(255, 0, 0, 0.338);
 }
 
-#spiritualEvent {
+#spiritualEvent, #triplePowerEvent {
     flex-direction: column;
+    align-items: center;
 }
 
 #automationTab {
@@ -215,4 +216,78 @@ input:focus {
 
 input {
     font-family: 'Poly';
+}
+
+.challengeDiv {
+    border: white 2px solid;
+    border-radius: 10px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+    height: 170px;
+}
+
+#challengeTab {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.challengeRow {
+    flex-direction: row;
+    display:flex;
+    justify-content: center;
+}
+
+.challengeTitle {
+    font-weight: bold;
+    margin: 10px;
+}
+
+button {
+    cursor:pointer;
+}
+
+.challengeStart {
+    margin: 0;
+}
+
+#worldText {
+    display: block;
+    margin-top: 7px;
+    white-space: nowrap;
+}
+
+#exitChallenge {
+    width: 75px; 
+    height: 20px; 
+    display: none
+}
+
+.challengeDesc {
+    font-size: 11px !important
+}
+
+#challengeCondition {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+
+#challenges {
+    width: 90%
+}
+
+.smallDesc{
+    color: rgb(120 120 120);
+    font-size: 12px;
+    margin: 5px;
+    text-align: center;
 }
