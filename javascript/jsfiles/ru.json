@@ -141,6 +141,8 @@
     "notCapped": "Эффект",
     "capped": "Предел",
 
+    "harshUmulti": "Вернуться на У-множитель назад",
+
     "overdriveType1Name": "Овердрайв 1",
     "overdriveType1Progress": "{{overdrivePercent}}% <br> Эффект: x{{overdriveEffect}} к доходу α-монет <br> Стоимость: {{overdrivePrice}} α-монет",
 
