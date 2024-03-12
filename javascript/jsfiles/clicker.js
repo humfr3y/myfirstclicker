@@ -151,7 +151,7 @@ overdriveType1ProgressBarBase.addEventListener("click", function() {
                 money -= sub
                 overdriveType1.percent = Math.log10(overdriveType1.consumed)
                 overdriveType1.percent = Math.min(overdriveType1.percent, 100)
-                overdriveType1.effect = (1+Math.pow(2, overdriveType1.percent/2.5)/9)-0.11
+                overdriveType1.effect = (1+Math.pow(2, overdriveType1.percent/2.5)/9)
                 achRow1.completion[18] ? overdriveType1.effect *= 1.1 : overdriveType1.effect
                 overdriveType1.price = 1000+Math.pow(10, overdriveType1.percent)/20*2;
             }
