@@ -76,6 +76,16 @@ function doPrestigeReset(){
     }
     else prestigeCountMultiplier = 1; 
     if (money >= 1e15){
+        if (challengeActivate) {
+            challengeCompleted[challengeStartedID-1] == false ? challengesCompleted++ : challengesCompleted
+            challengeCompleted[challengeStartedID-1] = true
+            window[`challenge${challengeStartedID}Start`].innerHTML = 'Пройден'
+            window[`challenge${challengeStartedID}Start`].style.backgroundColor = '#3dde3d'
+        }
+        if (!restartChallenge.checked)
+        for (let i = 0; i < challengeActivated.length; i++) {
+            challengeActivated[i] = false
+        }
         if (challengeActivate) startChallenge('exit')
         if (upowercount == prestigeSinglesEffects[12][1]) {
             noResets = true
@@ -122,17 +132,7 @@ function doPrestigeReset(){
 
         didMaxBuy = false
         
-        if (challengeActivate) {
-            challengeCompleted[challengeStartedID-1] == false ? challengesCompleted++ : challengesCompleted
-            challengeCompleted[challengeStartedID-1] = true
-            window[`challenge${challengeStartedID}Start`].innerHTML = 'Пройден'
-            window[`challenge${challengeStartedID}Start`].style.backgroundColor = '#3dde3d'
-            
-        }
-        if (!restartChallenge.checked)
-        for (let i = 0; i < challengeActivated.length; i++) {
-            challengeActivated[i] = false
-        }
+
 
     }
 }
