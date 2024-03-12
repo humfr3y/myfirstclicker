@@ -591,8 +591,8 @@ function respecBuyables() {
 function bulkBuyBuyable(buyable) {
     let bulkPrice = 0, moneyCheck = money, temp = 0
     for (let i = 0; i < 9999; i++) {
+        let element = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount+i), challengeReward5))
         if (maxOrNoVar) {
-            let element = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount+i), challengeReward5))
             if (challengeActivated[4]) {
                 element = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, amountsOfUpgrades+i), challengeReward5))
             }
