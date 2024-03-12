@@ -141,6 +141,8 @@
     "notCapped": "Currently",
     "capped": "Capped",
 
+    "harshUmulti": "Decrease U-multiplier by 1",
+
     "overdriveType1Name": "Overdrive Type 1",
     "overdriveType1Progress": "{{overdrivePercent}}% <br> Effect: x{{overdriveEffect}} to α-coin gain <br> Cost: {{overdrivePrice}} α-coins",
 
