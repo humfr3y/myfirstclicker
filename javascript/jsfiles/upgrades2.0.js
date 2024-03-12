@@ -592,8 +592,12 @@ function bulkBuyBuyable(buyable) {
     let bulkPrice = 0, moneyCheck = money, temp = 0
     for (let i = 0; i < 9999; i++) {
         if (maxOrNoVar) {
-            if (moneyCheck >= Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount+i), challengeReward5))) {
-                buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount+i), challengeReward5))
+            let element = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount+i), challengeReward5))
+            if (challengeActivated[4]) {
+                element = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, amountsOfUpgrades+i), challengeReward5))
+            }
+            if (moneyCheck >= element) {
+                buyable.price = element
                 bulkPrice += buyable.price
                 moneyCheck -= buyable.price
                 temp++
@@ -601,7 +605,7 @@ function bulkBuyBuyable(buyable) {
             else break
         }
         else {
-            buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount+i), challengeReward5))
+            buyable.price = element
             bulkPrice = buyable.price
             if (money >= bulkPrice) temp = 1
             else temp = 0
@@ -609,7 +613,7 @@ function bulkBuyBuyable(buyable) {
         }
     }
     buyable.bulkAmount = temp
-    buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount), challengeReward5))
+    challengeActivated[4] ? buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, amountsOfUpgrades), challengeReward5)) : buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount), challengeReward5))
     if (bulkPrice == 0) {
         buyable.bulkPrice = buyable.price
         buyable.bulkAmount = 0
@@ -618,7 +622,6 @@ function bulkBuyBuyable(buyable) {
         buyable.bulkPrice = bulkPrice
     }
 }
-
 function bulkBuyShopBuyable(item) {
     let x = shopBulkBuy, y = item.max-item.amount, z = 0; //x = 25, y = 100-86=14, z = 0 (real bulk)
     isNaN(x) ? x = 1 : x
