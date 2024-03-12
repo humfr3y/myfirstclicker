@@ -21,6 +21,8 @@ try {
     progressBarTitles[2] = i18next.t('pbtitle3');
 
     progressBarCurrencies[0] = i18next.t('pbcurrency1');
+
+    harshUmulti.innerHTML = i18next.t('harshUmulti');
     
     eventSelect.innerHTML = i18next.t('eventButton');
     settingsSelect.innerHTML = i18next.t('settingsButton');
