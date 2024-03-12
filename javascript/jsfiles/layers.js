@@ -76,9 +76,11 @@ function doPrestigeReset(){
     }
     else prestigeCountMultiplier = 1; 
     if (money >= 1e15){
+        if (challengeActivate) startChallenge('exit')
         if (upowercount == prestigeSinglesEffects[12][1]) {
             noResets = true
         }
+        greenCoin.currency = 0
         doReset()
         getCoinPerSecond = setInterval(getCoinPerSec, 50)
         checkCrystalsTemp()
@@ -132,7 +134,6 @@ function doPrestigeReset(){
             challengeActivated[i] = false
         }
 
-        startChallenge('exit')
     }
 }
 
