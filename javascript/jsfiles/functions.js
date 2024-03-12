@@ -21,7 +21,6 @@ function updateTick() {
     achRow1.completion[18] ? overdriveType1.effect *= 1.1 : overdriveType1.effect
     challengeCompleted[10] ? post11challenge.style.display = 'flex' : post11challenge.style.display = 'none'
     challengeCompleted[10] ? post11challenge2.style.display = 'flex' : post11challenge2.style.display = 'none'
-    greenCoin.currency += 0.0000139
 }
 
 function reloadPage() {
@@ -443,7 +442,7 @@ function offlineGainDev(time) {
         money += moneyTemp
         total += moneyTemp
     }, 300);
-
+    greenCoin.currency += time*0.000028
     gameSecondsTemp = time
     gameTimerTemp = time
     prestigeSecondsTemp = time

@@ -253,8 +253,6 @@ function savingTheGame() {
         dailyHours,
         currentLanguage,
         optionValue,
-        code1Check,
-        code2Check,
         umultiplier,
         umultipliercount,
         upower,
@@ -438,7 +436,6 @@ function loadingTheGame() {
         dailySeconds = parseFloat(parsedData.dailySeconds);
         dailyMinutes = parseFloat(parsedData.dailyMinutes);
         dailyHours = parseFloat(parsedData.dailyHours);
-        code1Check = parsedData.code1Check
         select.selectedIndex = parseFloat(parsedData.select_selectedIndex)
         superCoins = parseFloat(parsedData.superCoins)
         totalSuperCoins = parseFloat(parsedData.totalSuperCoins)
@@ -492,8 +489,6 @@ function loadingTheGame() {
         isMuted = parsedData.isMuted
 
         if (parsedData.spirits != null) spirits = parseFloat(parsedData.spirits)
-
-        code2Check = parsedData.code2Check
 
         for (let i = 0; i < 2; i++) {
         window[prestigeBuyableCount[i]+"PrestigeBuyable"].amount = parseFloat(parsedData[prestigeBuyableCount[i]+"PrestigeBuyable_amount"]);

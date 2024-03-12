@@ -77,6 +77,7 @@ function addSecond() {
     prestigeSeconds += 0.05
     prestigeTimer += 0.05
     umultiplierTimer += 0.05
+    greenCoin.currency += 0.0000139
     upowerTimer += 0.05
     prestigeSeconds = Math.max(0, prestigeSeconds)
     prestigeTimer = Math.max(0, prestigeTimer)
@@ -994,6 +995,7 @@ function offlineGain() {
         total += moneyTemp
     }, 300);
 
+    greenCoin.currency += timeDifference*0.000028
     gameSecondsTemp = timeDifference
     gameTimerTemp = timeDifference
     prestigeSecondsTemp = timeDifference

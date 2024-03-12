@@ -711,7 +711,7 @@ function checkUpgradesText () {
                 amountsOfUpgrades++
             }
     challengeCompleted[3] && !challengeActivate ? firstBuyable.freeAmount = Math.pow(1.43, achCount) : firstBuyable.freeAmount = 0
-    firstBuyableEffect = firstBuyable.baseEffect+firstBuyable.freeAmount * (1+(secondBuyableEffect/10))
+    firstBuyableEffect = (firstBuyable.baseEffect+firstBuyable.freeAmount) * (1+(secondBuyableEffect/10))
     secondBuyableEffect = secondBuyable.baseEffect * fourthSingleEffect
     thirdBuyableEffect = Math.pow(2, thirdBuyable.baseEffect)
     fifthBuyableEffect = 1+fifthBuyable.baseEffect/1000
