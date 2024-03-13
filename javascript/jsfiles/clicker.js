@@ -578,7 +578,8 @@ function getShardPerSec() {
     shardsEffect = shards/100
     shardsEffect = Math.pow(shardsEffect, fourthShardSingleEffect)
     achRow1.completion[19] ? shardsEffect *= 1+prestigeCount/100 : shardsEffect
-    shardsEffect = softCap(shardsEffect, 1e7, 0.5)
+    shardsEffect = softCap(shardsEffect, 1e7, 0.55)
+    shardsEffect = softCap(shardsEffect, 1e15, 0.5)
     let challengeReward7N = Math.log2(shards)
     isNaN(challengeReward7N) ? challengeReward7N = 1 : challengeReward7N
     !challengeActivate && challengeCompleted[6] ? shardsEffect *= challengeReward7N : shardsEffect
