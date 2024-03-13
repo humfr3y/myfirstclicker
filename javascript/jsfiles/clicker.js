@@ -995,7 +995,7 @@ function offlineGain() {
         total += moneyTemp
     }, 300);
 
-    greenCoin.currency += timeDifference*0.000028
+    greenCoin.currency += timeDifference*0.00028
     gameSecondsTemp = timeDifference
     gameTimerTemp = timeDifference
     prestigeSecondsTemp = timeDifference
