@@ -476,7 +476,7 @@ var pinkCoin = {
     amount: 0,
     totalAmount: 0,
     price: 1,
-    requirement: 3000,
+    requirement: 5000,
     effect: 1,
     boost: 1,
 }
@@ -494,7 +494,7 @@ var blueCoin = {
     amount: 0,
     totalAmount: 0,
     price: 1,
-    requirement: 5000,
+    requirement: 7500,
     effect: 1,
     boost: 1,
 }
@@ -800,9 +800,9 @@ function checkUpgradesText () {
     ninthSingle.price = 2e12
     tenthSingle.price = 1e13
 
-    pinkCoin.effect = (pinkCoin.totalAmount/25)*pinkCoin.boost
+    pinkCoin.effect = (pinkCoin.totalAmount/40)*pinkCoin.boost
     greenCoin.effect = (greenCoin.totalAmount/5)*greenCoin.boost
-    blueCoin.effect = (blueCoin.totalAmount/30)*blueCoin.boost
+    blueCoin.effect = (blueCoin.totalAmount/50)*blueCoin.boost
 
     pinkCoin.requirement = 3000
     greenCoin.requirement = 10
