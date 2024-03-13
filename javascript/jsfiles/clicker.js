@@ -170,6 +170,7 @@ function fillTheProgressBar(shardUnlockable) {
                 shardUnlockable.consumedShards += subPerTick*(1+shardUnlockable.percent/20)
                 shardUnlockable.percent += 0.2*(1+shardUnlockable.percent/20);
                 shardUnlockable.percent = Math.min(shardUnlockable.percent, 100)
+                shards < 0 ? shards = 0 : shards
                 if (shardUnlockable.percent == 100) {
                     shards += shardUnlockable.consumedShards - shardUnlockable.price
                 }
