@@ -189,6 +189,17 @@ shardUnlockableBase1.addEventListener("mouseup", () => {
 shardUnlockableBase1.addEventListener("mouseleave", () => {
     clearInterval(shardUnlockablePerSecond.interval)
 })
+shardUnlockableBase1.addEventListener("touchstart", () => {
+    fillTheProgressBar(shardUnlockablePerSecond);
+});
+
+shardUnlockableBase1.addEventListener("touchend", () => {
+    clearInterval(shardUnlockablePerSecond.interval);
+});
+
+shardUnlockableBase1.addEventListener("touchcancel", () => {
+    clearInterval(shardUnlockablePerSecond.interval);
+});
 
 shardUnlockableBase2.addEventListener("mousedown", () => {
     fillTheProgressBar(shardUnlockableClick)
@@ -201,6 +212,18 @@ shardUnlockableBase2.addEventListener("mouseup", () => {
 shardUnlockableBase2.addEventListener("mouseleave", () => {
     clearInterval(shardUnlockableClick.interval)
 })
+shardUnlockableBase2.addEventListener("touchstart", () => {
+    fillTheProgressBar(shardUnlockablePerSecond);
+});
+
+shardUnlockableBase2.addEventListener("touchend", () => {
+    clearInterval(shardUnlockablePerSecond.interval);
+});
+
+shardUnlockableBase2.addEventListener("touchcancel", () => {
+    clearInterval(shardUnlockablePerSecond.interval);
+});
+
 
 shardUnlockableBase3.addEventListener("mousedown", () => {
     fillTheProgressBar(shardUnlockableBuyables)
@@ -213,6 +236,18 @@ shardUnlockableBase3.addEventListener("mouseup", () => {
 shardUnlockableBase3.addEventListener("mouseleave", () => {
     clearInterval(shardUnlockableBuyables.interval)
 })
+shardUnlockableBase3.addEventListener("touchstart", () => {
+    fillTheProgressBar(shardUnlockablePerSecond);
+});
+
+shardUnlockableBase3.addEventListener("touchend", () => {
+    clearInterval(shardUnlockablePerSecond.interval);
+});
+
+shardUnlockableBase3.addEventListener("touchcancel", () => {
+    clearInterval(shardUnlockablePerSecond.interval);
+});
+
 
 shardUnlockableBase4.addEventListener("mousedown", () => {
     fillTheProgressBar(shardUnlockableSingles)
@@ -225,6 +260,18 @@ shardUnlockableBase4.addEventListener("mouseup", () => {
 shardUnlockableBase4.addEventListener("mouseleave", () => {
     clearInterval(shardUnlockableSingles.interval)
 })
+shardUnlockableBase4.addEventListener("touchstart", () => {
+    fillTheProgressBar(shardUnlockablePerSecond);
+});
+
+shardUnlockableBase4.addEventListener("touchend", () => {
+    clearInterval(shardUnlockablePerSecond.interval);
+});
+
+shardUnlockableBase4.addEventListener("touchcancel", () => {
+    clearInterval(shardUnlockablePerSecond.interval);
+});
+
 
 
 function convertingTime(seconds, minutes, hours, days, type) {
