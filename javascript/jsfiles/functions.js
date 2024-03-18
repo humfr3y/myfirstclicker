@@ -88,7 +88,7 @@ function buyTripleEventUpgrade(type) {
 }
 
 function buyTripleEventGreyUpgrade() {
-    if (greyCoin.amount >= greyCoin.price && greyCoin.effect <= 5) {
+    if (greyCoin.amount >= greyCoin.price && greyCoin.effect <= 4) {
         greyCoin.amount -= greyCoin.price
         pinkCoin.amount -= greyCoin.price
         greenCoin.amount -= greyCoin.price
@@ -96,7 +96,7 @@ function buyTripleEventGreyUpgrade() {
         greyCoin.effect += 1
         greyCoin.price++
     }
-    if (greyCoin.effect > 5) greyCoin.price = 999
+    if (greyCoin.effect >= 5) greyCoin.price = 999
 }
 
 function checkCompletedChallenges() {
