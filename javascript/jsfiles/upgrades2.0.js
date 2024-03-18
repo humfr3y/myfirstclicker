@@ -808,6 +808,8 @@ function checkUpgradesText () {
     greenCoin.requirement = 10
     blueCoin.requirement = 7500
 
+if (greyCoin.effect >= 5) greyCoin.price = 999
+
     pinkCoin.requirement = Math.round(pinkCoin.requirement-pinkCoin.requirement/10*greyCoin.effect)
     greenCoin.requirement = Math.round(greenCoin.requirement-greenCoin.requirement/10*greyCoin.effect)
     blueCoin.requirement = Math.round(blueCoin.requirement-blueCoin.requirement/10*greyCoin.effect)
