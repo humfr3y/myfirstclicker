@@ -998,6 +998,7 @@ function autoBuySingle() {
 }
 
 function autoBuyBuyable () {
+    if (!challengeActivated[5]) {
     for (let i = 0; i < buyableInterval.effect; i++) {
     buyBuyableUpgrade(firstBuyable, true)
     buyBuyableUpgrade(secondBuyable, true)
@@ -1005,6 +1006,7 @@ function autoBuyBuyable () {
     buyBuyableUpgrade(fourthBuyable, true)
     buyBuyableUpgrade(fifthBuyable, true)
     }
+}
 }
 
 function decreaseInterval(type, divider, string) {
