@@ -163,7 +163,9 @@ function doHarsherReset() { //for challenges
 }
 
 function doHarshUmulti() {
+if (umultipliercount > 0) {
     umultipliercount--
+}
     doReset()
     umultiplier = Math.pow(baseUmult, umultipliercount)
     getCoinPerSecond = setInterval(getCoinPerSec, 50)
