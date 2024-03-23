@@ -77,7 +77,7 @@ function addSecond() {
     prestigeSeconds += 0.05
     prestigeTimer += 0.05
     umultiplierTimer += 0.05
-    greenCoin.currency += 0.0000139
+    if (isTriplePowerEvent) greenCoin.currency += 0.0000139
     upowerTimer += 0.05
     prestigeSeconds = Math.max(0, prestigeSeconds)
     prestigeTimer = Math.max(0, prestigeTimer)
@@ -486,7 +486,8 @@ let superCoinChance, spiritChance
 
 function getCoin() {
     if (clicksPerSecond < 10) {
-        clickCount++; prestigeClicks++; blueCoin.currency++;
+        clickCount++; prestigeClicks++; 
+        if (isTriplePowerEvent) blueCoin.currency++;
         superCoinChance = randomNumber(0, (100/(1+fourthShopBuyableEffect)/prestigeSinglesEffects[2][0]/spiritEffects[1]/(1+blueCoin.effect)))
         if (superCoinChance == 0) {
         superCoins++, totalSuperCoins++
@@ -1021,7 +1022,7 @@ function offlineGain() {
     if (prestigeMilestonesEffects[15]){
         offlinePrestigesTemp = (timeDifference/60)*(fastestNoMaxBuyPrestiges/20)
         prestigeCount += offlinePrestigesTemp
-        pinkCoin.currency += (timeDifference/60)
+        if (isTriplePowerEvent) pinkCoin.currency += (timeDifference/60)
         }
     if (shardUnlockablePerSecond.percent == 100) {
         getShardPerSec()
@@ -1044,7 +1045,7 @@ function offlineGain() {
         total += moneyTemp
     }, 300);
 
-    greenCoin.currency += timeDifference*0.00028
+    if (isTriplePowerEvent) greenCoin.currency += timeDifference*0.00028
     gameSecondsTemp = timeDifference
     gameTimerTemp = timeDifference
     prestigeSecondsTemp = timeDifference
