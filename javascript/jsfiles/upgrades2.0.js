@@ -799,7 +799,7 @@ function checkUpgradesText () {
     eighthSingle.price = 7e11
     ninthSingle.price = 2e12
     tenthSingle.price = 1e13
-
+    checkTriplePowerEvent()
     if (isTriplePowerEvent) {
         pinkCoin.effect = (pinkCoin.totalAmount/40)*pinkCoin.boost
         greenCoin.effect = (greenCoin.totalAmount/5)*greenCoin.boost
