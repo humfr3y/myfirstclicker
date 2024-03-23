@@ -800,21 +800,35 @@ function checkUpgradesText () {
     ninthSingle.price = 2e12
     tenthSingle.price = 1e13
 
-    pinkCoin.effect = (pinkCoin.totalAmount/40)*pinkCoin.boost
-    greenCoin.effect = (greenCoin.totalAmount/5)*greenCoin.boost
-    blueCoin.effect = (blueCoin.totalAmount/50)*blueCoin.boost
+    if (isTriplePowerEvent) {
+        pinkCoin.effect = (pinkCoin.totalAmount/40)*pinkCoin.boost
+        greenCoin.effect = (greenCoin.totalAmount/5)*greenCoin.boost
+        blueCoin.effect = (blueCoin.totalAmount/50)*blueCoin.boost
 
-    pinkCoin.requirement = 5000
-    greenCoin.requirement = 10
-    blueCoin.requirement = 7500
+        pinkCoin.requirement = 5000
+        greenCoin.requirement = 10
+        blueCoin.requirement = 7500
 
-if (greyCoin.effect >= 5) greyCoin.price = 999
+    if (greyCoin.effect >= 5) greyCoin.price = 999
 
-    pinkCoin.requirement = Math.round(pinkCoin.requirement-pinkCoin.requirement/10*greyCoin.effect)
-    greenCoin.requirement = Math.round(greenCoin.requirement-greenCoin.requirement/10*greyCoin.effect)
-    blueCoin.requirement = Math.round(blueCoin.requirement-blueCoin.requirement/10*greyCoin.effect)
+        pinkCoin.requirement = Math.round(pinkCoin.requirement-pinkCoin.requirement/10*greyCoin.effect)
+        greenCoin.requirement = Math.round(greenCoin.requirement-greenCoin.requirement/10*greyCoin.effect)
+        blueCoin.requirement = Math.round(blueCoin.requirement-blueCoin.requirement/10*greyCoin.effect)
 
-    greyCoin.amount = Math.min(pinkCoin.amount, greenCoin.amount, blueCoin.amount)
+        greyCoin.amount = Math.min(pinkCoin.amount, greenCoin.amount, blueCoin.amount)
+    }
+    else  {
+        pinkCoin.currency = 0
+        greenCoin.currency = 0
+        blueCoin.currency = 0
+        pinkCoin.totalAmount = 0
+        greenCoin.totalAmount = 0
+        blueCoin.totalAmount = 0
+        pinkCoin.amount = 0
+        greenCoin.amount = 0
+        blueCoin.amount = 0
+        greyCoin.amount = 0
+    }
 
     if (challengeActivated[4]) {
         const singleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
