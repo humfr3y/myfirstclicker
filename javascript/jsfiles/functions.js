@@ -442,7 +442,7 @@ function offlineGainDev(time) {
         money += moneyTemp
         total += moneyTemp
     }, 300);
-    greenCoin.currency += time*0.000028
+    if (isTriplePowerEvent) greenCoin.currency += time*0.000028
     gameSecondsTemp = time
     gameTimerTemp = time
     prestigeSecondsTemp = time
