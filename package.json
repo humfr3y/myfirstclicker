@@ -2,6 +2,8 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "@types/i18next": "^13.0.0",
-    "i18next": "^22.5.0"
+    "i18next": "^22.5.0",
+    "lodash": "^4.17.21",
+    "npm": "^10.5.2"
   }
 }

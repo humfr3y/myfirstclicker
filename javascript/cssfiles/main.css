@@ -35,19 +35,19 @@ html{
 
 #mainSettings {
   position: absolute;
-  margin-top: -74px;
-  width: 70px;
+  margin-top: -78px;
+  display: flex;
 }
 
 hr {
   color:white;
 }
 
-#maxOrNoUpgrades {
+#maxOrNoUpgrades, #modernizeButton {
   background-color: #060606;
   border:#ffffff solid 1.6px;
   color: white;
-  width: 60px;
+  width: 50px;
   height: 50px;
   font-size: 12px;
   border-bottom-right-radius: 5px;
@@ -58,6 +58,12 @@ hr {
 
 #maxOrNoUpgrades:hover {
   background-color: #494949;
+}
+
+#modernizeButton {
+  background-image: url('images/modernize.webp');
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 #coinsCount {
@@ -101,7 +107,7 @@ gt {
 }
 
 #loadingScreen {
-  background-image: url("images/loadingscreen011.webp");
+  background-image: url("images/loadingscreen012.jpg");
   background-repeat: no-repeat;
   width: 100%;
   height: 101%;
@@ -177,7 +183,7 @@ gt {
   align-items: center;
 }
 
-.myMessage, .shardCountPerClick, .superCoinText, .spiritText {
+.myMessage, .shardCountPerClick, .superCoinText, .spiritText, .criticalClick {
   position: absolute; 
   display: flex; 
   padding: 5px;
@@ -195,17 +201,22 @@ gt {
 }
 .superCoinText {
   text-shadow: 1px 1px rgb(255, 174, 0), -1px -1px rgb(255, 174, 0), 1px -1px rgb(255, 174, 0), -1px 1px rgb(255, 174, 0);
+  z-index: 100000;
 }
 .spiritText {
   text-shadow: 1px 1px rgb(202, 255, 237), -1px -1px rgb(202, 255, 237), 1px -1px rgb(202, 255, 237), -1px 1px rgb(202, 255, 237);
 }
+.criticalClick {
+  text-shadow: 1px 1px rgb(255, 0, 0), -1px -1px rgb(255, 0, 0), 1px -1px rgb(255, 0, 0), -1px 1px rgb(255, 0, 0);
+  z-index: 99999;
+}
 
-.myMessage.hide, .shardCountPerClick.hide, .superCoinText.hide, .spiritText.hide {
+.myMessage.hide, .shardCountPerClick.hide, .superCoinText.hide, .spiritText.hide, .criticalClick.hide {
   opacity: 0;
   transform: translateY(-50px);
 }
 
-.myMessage.show, .shardCountPerClick.show, .superCoinText.show, .spiritText.show {
+.myMessage.show, .shardCountPerClick.show, .superCoinText.show, .spiritText.show, .criticalClick.show {
   right: 0;
   opacity: 1;
   transition: top 1s ease-in-out, opacity 1s ease-in-out;
@@ -254,7 +265,8 @@ gt {
 
 .multiplierChooser {
   width: 100%;
-  font-size: 12px;
+  font-size: 11px;
+  height: 36px;
 }
 
 #multiplierStats {
@@ -276,6 +288,10 @@ gt {
   color: white;
   font-size: 15px;
   text-align: center;
+}
+
+#infoTab .whiteText {
+  font-size: 14px;
 }
 
 .multiplierString {
@@ -307,7 +323,7 @@ gt {
 
 .progress-bar-base{
   width:100%;
-  height:10px;
+  height:13px;
   background-color: gray;
   overflow: hidden;
 }
@@ -389,7 +405,7 @@ gt {
   background-color: rgb(62, 62, 62)
 }
 
-.shopButton {
+.shopButton, .mineralButton {
   background-color: #060606;
   color: rgb(255, 174, 0);
   border: rgb(235, 160, 0) 1px solid;
@@ -532,25 +548,28 @@ st {
 #overdriveTab {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
-#overdriveType1 {
+.overdriveType {
   width: 800px;
   height: 120px;
   border: white 1px solid;
+  margin: 20px;
 }
-#overdriveType1Title {
+.overdriveTypeTitle {
   display: flex;
   justify-content: center;
   border-bottom: white 1px solid;
   height:15%;
 }
-#overdriveType1Name {
+.overdriveTypeName {
   margin: 0 auto;
 }
-#overdriveType1Div{
+.overdriveTypeDiv{
   height:85%;
 }
-#overdriveType1ProgressBarBase{
+.overdriveTypeProgressBarBase{
   background-color: #111111;
     height: 99%;
     display: flex;
@@ -563,7 +582,11 @@ st {
   height: 100%;
   background-image:radial-gradient( gold, black 210%);
 }
-#overdriveType1Ghost {
+#overdriveType2ProgressBar{
+  height: 100%;
+  background-image:radial-gradient( rgb(0, 242, 255), black 210%);
+}
+.overdriveTypeGhost {
   position: absolute;
   color: white;
   pointer-events: none;
@@ -574,7 +597,7 @@ st {
   z-index: 1000
 }
 
-#overdriveType1ProgressBarActive {
+.overdriveTypeProgressBarActive {
   position: absolute;
   background-color: #FFFFFF77;
   pointer-events: none;
@@ -831,6 +854,12 @@ bn {
   text-shadow: 0 0 5px rgb(108, 189, 255);
 }
 
+rn {
+  color: rgb(45, 202, 210);
+  font-size: 30px;
+  text-shadow: 0 0 5px rgb(45, 202, 210);
+}
+
 #shopBuyableU1 {
   background-image: url('images/goldengloves.png')
 }
@@ -852,8 +881,22 @@ bn {
 #shopBuyableU7 {
   background-image: url('images/creditcard.png')
 }
+#shopBuyableU8 {
+  background-image: url('images/cursorwhitepercent.bmp')
+}
+#shopBuyableU9 {
+  background-image: url('images/cursorredX.bmp')
+}
 #shopSingleU1 {
   background-image: url('images/brokenspeedometer.webp');
+  background-position: -0.5px -0.5px;
+}
+#shopSingleU2 {
+  background-image: url('images/crystalactualspeedometer.webp');
+  background-position: -0.5px -0.5px;
+}
+#shopSingleU3 {
+  background-image: url('images/modernize.webp');
   background-position: -0.5px -0.5px;
 }
 #shopItem1 {
@@ -870,14 +913,146 @@ bn {
 #shopItem4 {
   background-image: url('images/Tw10m.bmp');
 }
+#mineral1 {
+  background-image: url('images/opalfinished.webp');
+}
+#mineral2 {
+  background-image: url('images/topazfinished.webp');
+}
+#mineral3 {
+  background-image: url('images/jadeshiny.webp');
+  background-position: -1px -1px;
+}
 
 .challengePair {
   display: flex;
   flex-direction: row;
 }
 
+#superCrystalsTab, #superCrystalUpgrades{
+  margin-top: 30px;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+#superCrystalCount {
+  font-size: 18px;
+}
+
+#superCrystalBarBase {
+  width: 250px;
+  height: 300px;
+}
+
+#superCrystalGen {
+  height: 350px;
+}
+
+scn {
+  color: rgb(0, 180, 212);
+  font-size: 30px;
+  text-shadow: 0 0 5px rgb(0, 180, 212);
+}
+
+#superCrystalBarBase{
+  background-image:url('/javascript/cssfiles/images/supercrystaloff.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  align-items: center;
+  text-align: center;
+  cursor:pointer;
+  height: 300px
+}
+#superCrystalBar{
+  background-image:url('/javascript/cssfiles/images/supercrystalon.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  clip-path: inset(100% 0 0 0); 
+}
+#superCrystalBarGhost {
+  position: absolute;
+  color: white;
+  pointer-events: none;
+  cursor: default;
+  display: flex;
+  width: 250px;
+  justify-content: center;
+  z-index: 10000;
+  height: 300px;
+  margin-top: 140px;
+}
+.superCrystalUpgradesRow {
+  display: flex;
+}
+
+#mineralsTab, #mineralsCountDiv, .mineralContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+#mineralsDiv {
+  display: flex;
+  flex-direction: row;
+}
+
+.mineralContainer {
+  width: 300px;
+  height: 200px;
+}
+
+.mineralButton {
+  border-color: rgb(45, 202, 210)
+}
+
+#generateRunes {
+  margin: 0;
+  border-color: rgb(45, 202, 210);
+  width: 175px;
+  height: 60px;
+  margin-bottom: 50px;
+}
+
+#generateRunes:hover{
+  background-color: rgb(45, 202, 210);
+  box-shadow: 0 0 10px rgb(45, 202, 210);
+  color: black;
+}
+
+super {
+  color: rgb(255, 174, 0);
+  text-shadow: 0 0 5px rgb(255, 174, 0);
+  pointer-events: none;
+  user-select: none;
+}
+table {
+  border-spacing: 0; 
+}
+th {
+  color: white;
+  border:white 1px solid;
+  width: 150px;
+  font-weight: normal;
+  font-size: 13px;
+  padding: 2px;
+  height: 17.5px;
+}
+
+#welcomeToDigitalGod {
+  font-size: 17px;
+}
+
+#recentPrestigesTab {
+  flex-direction: column;
+    align-items: center;
+}
 
 @media screen and (max-width: 600px) {
+
+  
   span, gt, pbn, st, ct, p, input, label, select, footer {
     font-size: 50% !important;
   }
@@ -926,29 +1101,29 @@ bn {
   .titleTab {
     font-size: 100% !important;
   }
-  #overdriveType1 {
+  #overdriveType1, #overdriveType2 {
     height: 60px;
     width: 300px;
   }
-  #overdriveType1Ghost {
+  #overdriveType1Ghost, #overdriveType2Ghost {
     width: 300px
   }
 
-  #overdriveType1ProgressBarActive{
+  #overdriveType1ProgressBarActive, #overdriveType2ProgressBarActive{
     height: 54px
   }
   
-  #coinGain, #umultiplierBoost, #upowerBoost {
-      max-width: 50%;
-  }
-  #maxOrNoUpgrades {
+  #maxOrNoUpgrades, #modernizeButton {
     width: 30px;
     height: 30px;
     font-size: 9px;
+    background-size: cover;
+    margin: 2px;
+    border-radius: 5px;
 }
   #mainSettings {
-    width: 35px;
-    margin-top: -84px
+    width: 80px;
+    margin-top: -50px
   }
   .shopButton {
     font-size: 9px;
@@ -968,7 +1143,8 @@ bn {
     width: 90px
   }
   .upgradeButton, .milestone {
-    width: 110px !important;
+    width: 90px !important;
+    font-size: 7px !important;
   }
   .milestone {
     width: 140px !important;
@@ -1003,8 +1179,8 @@ bn {
   .versionButtonVertical{
     height: 20px !important;
   }
-  #helpPageChooser {
-    height: 425px
+  .multiplierChooser {
+    height: 35px !important;
   }
   #wholeShopDiv {
     transform: scale(0.6);
@@ -1032,5 +1208,18 @@ bn {
   }
   .challengeRow {
     flex-direction: column;
+  }
+  #superCrystalsTab {
+    flex-direction: column;
+    align-items: center;
+  }
+  .mineralContainer {
+    width: 150px
+  }
+  #harshUmulti {
+    width: 90px !important
+  }
+  #exitChallenge {
+    width: 50px
   }
 }

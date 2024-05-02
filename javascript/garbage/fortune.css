@@ -1,8 +1,0 @@
-#fortuneTab {
-    color :rgb(248, 152, 245); 
-    border-Color: rgb(248, 152, 245); 
-}
-#fortuneTab:hover {
-    background-color: rgb(248, 152, 245); 
-    color:black;
-}

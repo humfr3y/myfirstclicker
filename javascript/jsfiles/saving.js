@@ -1,136 +1,146 @@
-let version
-function singleUpgradePurchasedRemove () {
-    var singleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
-    for (var i = 0; i < singleArray.length; i++){
-        singleArray[i].updateText.classList.remove('purchased')
-    }
-}
-
-function achievementGottenRemove () {
-    for (var i = 0; i < 10; i++){
-        var element = document.getElementsByClassName("ach")[i]
-        element.classList.remove("green");
-        element.classList.remove("greenborder");
-    }
-}
-
 function autoSaveGame(){
-    autoSaving == 'yes' ? autoSaving = 'no' : autoSaving = 'yes'
+    player.settings.auto_save == true ? player.settings.auto_save = false : player.settings.auto_save = true
 }
-
-let datasave
-var gainPerSecondSave
 
 function saveGame () { 
-    gainPerSecondSave = gainPerSecond * 20
-    whatsYourCurrentTime()
-    savingTheGame(); //образуем переменную с кучей других переменных
-    autoSaverTimer = 0
-    notify(saveNotify);
-    let stringifiedData = JSON.stringify(datasave); //превратим в строчку
-    while ((achRow1.completion).length < 20) {
-        (achRow1.completion).push(false);
+    if (isNaN(player.coin.currency)) {
+        openWindow('gotNaNed', false)
+    } 
+    else {
+        MISC.auto_save_timer = 0
+        notify(text.notification.save, 'limegreen');
+        let stringifiedData = JSON.stringify(player); //превратим в строчку
+        localStorage.setItem('player', stringifiedData);
     }
-    localStorage.setItem('completion', JSON.stringify(achRow1.completion))
-    while (loreBoolean.length < 9) {
-        loreBoolean.push(false);
-    }
-    localStorage.setItem('chapters', JSON.stringify(loreBoolean))
-    // сохранить в LocalStorage по ключу коунтдата
-    localStorage.setItem('datasaving', stringifiedData);
-    if (isNaN(money)) openWindow('gotNaNed', false)
-    
 }
-var loadNotify
-var saveNotify
-var exportNotify
-var importNotify
-var hardNotify
 
+function updateNestedProperties(targetObj, sourceObj) {
+    for (const key in sourceObj) {
+        if (sourceObj.hasOwnProperty(key)) {
+            if (typeof sourceObj[key] == 'object' && sourceObj[key] !== null) {
+                if (!targetObj[key]) {
+                    targetObj[key] = {};
+                }
+                updateNestedProperties(targetObj[key], sourceObj[key]);
+                } else {
+                    targetObj[key] = sourceObj[key];
+                }
+        }
+    }
+}
+// && storedData == null
 function loadGame() {
-        achievementGottenRemove ()
-        singleUpgradePurchasedRemove ()
-        loadingTheGame();
-        areYouInChallenge()
-        checkCompletedChallenges()
-        singleUpgradePurchased ()
-        const achCompletions = localStorage.getItem('completion')
-        const loreChapters = localStorage.getItem('chapters')
-        if (achCompletions != null){
-            achRow1.completion = JSON.parse(achCompletions).map(Boolean);
+        let storedData = localStorage.getItem('player'); //спарсим его обратно объект
+        let parsedData = ''
+        if (localStorage.getItem('datasave') != null && storedData == null) {
+            convert_save()
+            updateNestedProperties(player, newData);
+        } 
+        else {
+            parsedData = JSON.parse(storedData);
+            updateNestedProperties(player, parsedData)
         }
-        if (loreChapters != null){
-            loreBoolean = JSON.parse(loreChapters).map(Boolean);
-            for (let i = 0; i < loreBoolean.length; i++){
-                checkLoreShorter(loreBoolean, i)
+        GAIN.offline_gain()
+        if (isNaN(player.coin.currency)) {
+            player.coin.currency = 10
+        }
+        if (isNaN(player.coin.total_currency)) {
+            player.coin.total_currency = 10
+        }
+        if (isNaN(player.prestige.currency)) {
+            player.prestige.total_currency = 0
+            player.prestige.currency = 0
+        }
+        setTimeout(()=>{
+            notify(text.notification.load, 'limegreen')        
+            showChangelog(text.changelog.start)
+            showStory(text.chapter.start)
+            showHelpPage(text.help.start, text.empty)
+        }, 3000);
+        resetDailyReward()
+        if (!player.got_daily_reward) setTimeout(()=>{notify(text.notification.dailyRewardRestart, 'mediumspringgreen')}, 5000)
+        if (player.coin.total_currency == 10) {
+            let userLang = navigator.language || navigator.userLanguage
+            if (userLang == 'ru' || userLang == 'ru-RU') {
+                player.settings.currentLanguage = 'ru'
             }
+            else player.settings.currentLanguage = 'en'
+            openWindow('welcome', false)
+            player.time.savedTime = Date.now()
+        }
+        player.offline_gain.time = MISC.offline(),
+        player.offline_gain.coin = GAIN.coin.offline(), 
+        player.offline_gain.supercoin = GAIN.supercoin.offline(), 
+        player.offline_gain.crystal  = ACHS.has(22) ? GAIN.crystal.offline() : 0, 
+        player.offline_gain.prestige = MILESTONES.has(16) ? GAIN.prestige.offline() : 0,
+        player.offline_gain.shard = UNL.shard.second.unl() ? GAIN.shard.offline() : 0,
 
+        player.offline_gain.daily = GAIN.supercoin.daily.reward()
+
+        changeFonts2(player.settings.font)
+        changeFont.value = player.settings.font
+        shopBulkBuyInput.value = player.settings.shop_bulkbuy
+
+        autoUmultiInput.value = player.automation.conditions.umultiplier
+        autoUpowerInput.value = player.automation.conditions.upower.time
+        autoUpowerInput2.value = player.automation.conditions.upower.x_of_umulti
+
+        if (player.automation.checkbox.single == true) {
+            autoSingleUpgradeCheckbox.checked = true
+            MISC.automation.single.interval = setInterval(()=>{AUTO.single.charge()}, 50)
         }
-        checkShopSingle (firstShopSingle.amount, 'overdriveSelect')
-        achCompletionsChecker()
-        getCoinPerSec()
-        whatsYourCurrentTime2()
-        offlineGain()
-        offlineGainTime()
-        loadAutomations()
-        changeInputValue()
-        version = ["0.9", "0.10", "0.10.1", "0.11"]
-        convertingTime(gameSeconds, gameMinutes, gameHours, gameDays, 'game')
-        changeFonts2(optionValue)
-        autoSaverTimer = 0
-        clearInterval(autoSaveTime)
-        if (isNaN(money)) {
-            money = 10;
+        if (player.automation.checkbox.buyable == true) {
+            autoBuyableUpgradeCheckbox.checked = true
+            MISC.automation.buyable.interval = setInterval(()=>{AUTO.buyable.charge()}, 50)
         }
-        if (isNaN(total)) {
-            total = 10;
+        if (player.automation.checkbox.umultiplier == true) {
+            autoUmultiplierCheckbox.checked = true
+            MISC.automation.umultiplier.interval = setInterval(()=>{AUTO.umultiplier.charge()}, 50)
         }
-        gainPerSecondSave = gainPerSecond * 20
-        notify(loadNotify);
+        if (player.automation.checkbox.upower == true) {
+            autoUpowerCheckbox.checked = true
+            MISC.automation.upower.interval = setInterval(()=>{AUTO.upower.charge()}, 50)
+        }
+        if (player.automation.checkbox.prestige == true) {
+            autoPrestigeCheckbox.checked = true
+            MISC.automation.prestige.interval = setInterval(()=>{AUTO.prestige.charge()}, 50)
+        }
+        player.settings.modernization_activated = false
 }
 
-var autoSaverTimer = 0
-var autoSaveTime
+function resetDailyReward() {
+    const currentDate2 = new Date();
+    const millisecondsCurrentDay = currentDate2.getTime();
+    if (millisecondsCurrentDay > player.time.next_daily) { //86390 > 86400 - false ||||| 87000 > 86400 -> 87000 > 172800
+        const currentDate = new Date();
+        nextDay = new Date(currentDate);
+        nextDay.setDate(nextDay.getDate() + 1);
+        nextDay.setHours(0, 0, 0, 0);
+        player.time.next_daily = nextDay.getTime();
+        player.got_daily_reward = false;
+    }
+}
 
-function autoSaveThis () {
-    if (autoSaving == 'yes' && !(isNaN(money) || isNaN(crystals) || isNaN(shards) || isNaN(total)))
+function autoSaveThis() {
+    if (player.settings.auto_save == true && !(isNaN(player.coin.currency) || isNaN(player.prestige.currency) || isNaN(player.shard.currency) || isNaN(player.coin.total_currency)))
         {
             saveGame()
+            MISC.auto_save_timer = 0
         }
-        if (isNaN(money) || isNaN(crystals) || isNaN(shards) || isNaN(total)) 
+        if (isNaN(player.coin.currency) || isNaN(player.prestige.currency) || isNaN(player.shard.currency) || isNaN(player.coin.total_currency)) 
         openWindow('gotNaNed', false)
     }
 
 function doHardReset () {
-            autoSaving = 'yes';
-            maxOrNoVar = false
-            achievementBonus = 1
-            achBonus = document.getElementById('achBonus')
-            upgradeReset();
-            whatsYourCurrentTime()
-            clearInterval(autoSaveTime)
-            saveGame();
-            var hardNotifyColor
-            hardNotifyColor = "red";
-            notify(hardNotify, hardNotifyColor);
-            singleUpgradePurchasedRemove()
-            achievementGottenRemove()
-            localStorage.clear()
-            location.reload()
+            notify(text.notification.hard, "red");
+            localStorage.removeItem('player');
+            location.reload() //сделать чтобы страница НЕ загружала через лоад
 }
 
 function exportSave() {
-    gainPerSecondSave = gainPerSecond * 20;
-    whatsYourCurrentTime();
-    savingTheGame(); 
-    notify(exportNotify);
-    let exportedData = JSON.stringify(datasave); //превратим в строчку
-    let exportedData2 = JSON.stringify(achRow1.completion)
-    let exportedData3 = JSON.stringify(loreBoolean)
-    let base641 = btoa(exportedData); // кодируем строку в base64
-    let base642 = btoa(exportedData2); // кодируем строку в base64
-    let base643 = btoa(exportedData3); // кодируем строку в base64
-    var base64 = `${base641}|${base642}|${base643}`
+    notify(text.notification.export, 'limegreen');
+    let exportedData = JSON.stringify(player); //превратим в строчку
+    let base64 = btoa(exportedData); // кодируем строку в base64
     navigator.clipboard.writeText(base64)
     
     let today = new Date();
@@ -151,45 +161,24 @@ function importSave() {
 }
 
 function importing(base64) {
-    const [base64DataSave, base64Completion, base64Chapters] = base64.split("|");
-    const importedData1 = atob(base64DataSave);
-    const importedData2 = atob(base64Completion);
-    if (base64Chapters != null){
-        var importedData3 = atob(base64Chapters)
-            localStorage.setItem('chapters', importedData3);
-            loreBoolean = JSON.parse(localStorage.getItem('chapters')).map(Boolean);
+    if (base64.includes('|')) {
+        const [base64DataSave, base64Completion, base64Chapters] = base64.split("|");
+        const importedData1 = atob(base64DataSave);
+        localStorage.setItem('datasave', importedData1);
+            convert_save()
+            updateNestedProperties(player, newData);
     }
-    localStorage.setItem('datasaving', importedData1);
-    localStorage.setItem('completion', importedData2);
-    achRow1.completion = JSON.parse(localStorage.getItem('completion')).map(Boolean);
-
-    achievementGottenRemove ()
-    singleUpgradePurchasedRemove ()
-    loadingTheGame()
-    areYouInChallenge()
-    checkCompletedChallenges()
-    for (let i = 0; i < loreBoolean.length; i++){
-        checkLoreShorter(loreBoolean, i)
+    else {
+        const importedData = atob(base64);
+        const parsedData = JSON.parse(importedData)
+        updateNestedProperties(player, parsedData)
     }
-    singleUpgradePurchased ()
-    checkShopSingle (firstShopSingle.amount, 'overdriveSelect')
-    achCompletionsChecker()
-    getCoinPerSec()
-    whatsYourCurrentTime2()
-    offlineGain()
-    offlineGainTime()
-    loadAutomations()
-    changeInputValue()
-    convertingTime(gameSeconds, gameMinutes, gameHours, gameDays, 'game')
-    changeFonts2(optionValue)
-    autoSaverTimer = 0
-    clearInterval(autoSaveTime)
-    notify(importNotify);
-    version = ["0.9", "0.10", "0.10.1", "0.11"]
+    saveGame()
+    notify(text.notification.import, 'limegreen');
     location.reload()
 }
 
-
+//import from file, should be like this!
 var fileUpload = document.getElementById('file-upload');
 var fileName = document.querySelector('.file-name');
 
@@ -207,444 +196,657 @@ fileUpload.addEventListener('change', function(base64) {
     reader.readAsText(file);
     fileUpload.value = null;
 });
-var currentLanguage = 'en'
-
-function savingTheGame() {
-    datasave = {
-        select_selectedIndex: select.selectedIndex,
-        gainPerSecondSave,
-        lastOnlineTime: lastOnlineTime-0,
-        money,
-        total,
-        superCoins,
-        totalSuperCoins,
-        spentSuperCoins,
-        crystals,
-        totalCrystals,
-        prestigeCount,
-        autoSaving,
-        maxOrNoVar,
-        gainPerSecond,
-        gainPerClick,
-        clickCount,
-        gameTimer,
-        prestigeTimer,
-        fastestPrestigeTimer,
-        amountsOfUpgrades,
-        gameSeconds,
-        gameMinutes,
-        gameHours,
-        gameDays,
-        realSeconds,
-        realMinutes,
-        realHours,
-        realDays,
-        prestigeSeconds,
-        prestigeMinutes,
-        prestigeHours,
-        prestigeDays,
-        fastestPrestigeSeconds,
-        fastestPrestigeMinutes,
-        fastestPrestigeHours,
-        fastestPrestigeDays,
-        dailyTimer,
-        dailySeconds,
-        dailyMinutes,
-        dailyHours,
-        currentLanguage,
-        optionValue,
-        umultiplier,
-        umultipliercount,
-        upower,
-        upowercount,
-        achFullRow1,
-        achFullRow2, 
-        amountOfPrestigeUpgrades,
-        fastestNoMaxBuyPrestiges,
-        prestigeConditionCoins: parseFloat(prestigeConditionCoins),
-        prestigeConditionTime: parseFloat(prestigeConditionTime),
-        whichPrestigeMode,
-        umultiplierTimer,
-        upowerTimer,
-        autoUmultiInput_value: autoUmultiInput.value,
-        autoUpowerInput_value: autoUpowerInput.value,
-        autoUpowerInput2_value: autoUpowerInput2.value,
-        shards,
-        shardsPerSecond,
-        brokenCrystals,
-        mutedAudio,
-        isMuted,
-        spirits,
-        challengeStartedID,
-        virusCoins,
-    };
-    
-    const buyablesAndSingles = [
-        'firstBuyable', 'secondBuyable', 'thirdBuyable', 'fourthBuyable', 'fifthBuyable',
-        'firstSingle', 'secondSingle', 'thirdSingle', 'fourthSingle', 'fifthSingle',
-        'sixthSingle', 'seventhSingle', 'eighthSingle', 'ninthSingle', 'tenthSingle',
-        'firstShopBuyable', 'secondShopBuyable', 'thirdShopBuyable', 'fourthShopBuyable', 'fifthShopBuyable', 'sixthShopBuyable', 'seventhShopBuyable',
-        'firstShopSingle',
-        'firstPrestigeSingle', 'secondPrestigeSingle', 'thirdPrestigeSingle', 'fourthPrestigeSingle',
-        'fifthPrestigeSingle', 'sixthPrestigeSingle', 'seventhPrestigeSingle', 'eighthPrestigeSingle',
-        'ninthPrestigeSingle', 'tenthPrestigeSingle', 'eleventhPrestigeSingle', 'twelfthPrestigeSingle',
-        'thirteenthPrestigeSingle', 'fourteenthPrestigeSingle', 'fifteenthPrestigeSingle', 'sixteenthPrestigeSingle',
-        'firstPrestigeBuyable', 'secondPrestigeBuyable',
-        'firstShardBuyable', 'secondShardBuyable', 'thirdShardBuyable',
-        'firstShardSingle', 'secondShardSingle', 'thirdShardSingle', 'fourthShardSingle', 'fifthShardSingle', 'sixthShardSingle',
-        'firstShopItem', 'secondShopItem', 'thirdShopItem', 'fourthShopItem'
-    ];
-
-    const intervals = [
-        'singleInterval', 'buyableInterval', 'umultiplierInterval', 'upowerInterval', 'prestigeInterval'
-    ]
-
-    const checkmarks = [
-        'autoSingleUpgradeCheckbox', 'autoBuyableUpgradeCheckbox', 'autoUmultiplierCheckbox', 'autoUpowerCheckbox', 'autoPrestigeCheckbox'
-    ]
-
-    const shardBars = ['shardUnlockablePerSecond', 'shardUnlockableClick', 'shardUnlockableBuyables', 'shardUnlockableSingles']
-
-    for (const i of shardBars) {
-        datasave[`${i}_percent`] = window[i].percent
-        datasave[`${i}_consumedShards`] = window[i].consumedShards
-    }
-
-
-    for (const i of checkmarks) {
-        datasave[`${i}_checked`] = document.getElementById(i).checked
-    }
-
-    datasave.restartChallenge_checked = restartChallenge.checked
-
-    for (const i of intervals) {
-        datasave[`${i}_time`] = window[i].time;
-        datasave[`${i}_price`] = window[i].price;
-        if (window[i].hasOwnProperty('effect')) {
-            datasave[`${i}_effect`] = window[i].effect;
-        }
-    }
-    
-    for (const item of buyablesAndSingles) {
-        datasave[`${item}_amount`] = window[item].amount;
-        if (window[item].hasOwnProperty('baseEffect') && !(item.includes('ShardSingle'))) {
-            datasave[`${item}_baseEffect`] = window[item].baseEffect;
-        }
-        if (window[item].hasOwnProperty('price') && !(item.includes('ShardSingle')) && !(item.includes('Item'))) {
-            datasave[`${item}_price`] = window[item].price;
-        }
-        if (window[item].hasOwnProperty('used')) {
-            datasave[`${item}_used`] = window[item].used;
-        }
-    }
-    
-    datasave.overdriveType1_percent = overdriveType1.percent;
-    datasave.overdriveType1_effect = overdriveType1.effect;
-    datasave.overdriveType1_price = overdriveType1.price;
-    datasave.overdriveType1_consumed = overdriveType1.consumed;
-
-    datasave.challengesCompleted = challengesCompleted;
-
-    datasave.versions = JSON.stringify(version)
-
-    datasave.challengeCompleted = JSON.stringify(challengeCompleted)
-
-    datasave.progressBarGoals = JSON.stringify(progressBarGoals)
-
-    datasave.codeChecks = JSON.stringify(codeChecks)
-
-    datasave.shopBulkBuy_value = shopBulkBuyInput.value
-
-    const tripleEventCoins = ['pinkCoin', 'greenCoin', 'blueCoin', 'greyCoin']
-
-    for (const i of tripleEventCoins) {
-        if (i !== 'greyCoin') {
-            datasave[`${i}_currency`] = window[i].currency
-            datasave[`${i}_amount`] = window[i].amount
-            datasave[`${i}_totalAmount`] = window[i].totalAmount
-            datasave[`${i}_price`] = window[i].price
-            datasave[`${i}_boost`] = window[i].boost
-        }
-        else {
-            datasave[`${i}_effect`] = window[i].effect
-            datasave[`${i}_price`] = window[i].price
-        }
-    }
-
-    return datasave;
-}
-
-function loadingTheGame() {
-    let storedData = localStorage.getItem('datasaving'); //спарсим его обратно объект
-    let parsedData = JSON.parse(storedData);
-
-    if (parsedData != null) {
-    gainPerSecondSave = parseFloat(parsedData.gainPerSecondSave)
-    lastOnlineTime = parseFloat(parsedData.lastOnlineTime)
-    gainPerSecond = parseFloat(parsedData.gainPerSecond)
-    money = parseFloat(parsedData.money);
-    autoSaving = parsedData.autoSaving;
-    total = parseFloat(parsedData.total);
-    gainPerSecond = parseFloat(parsedData.gainPerSecond);
-    gainPerClick = parseFloat(parsedData.gainPerClick);
-    currentLanguage = parsedData.currentLanguage;
-    maxOrNoVar = parsedData.maxOrNoVar;
-    amountsOfUpgrades = parseFloat(parsedData.amountsOfUpgrades);
-    clickCount = parseFloat(parsedData.clickCount);
-    gameTimer = parseFloat(parsedData.gameTimer);
-    gameSeconds = parseFloat(parsedData.gameSeconds);
-    gameMinutes = parseFloat(parsedData.gameMinutes);
-    gameHours = parseFloat(parsedData.gameHours);
-
-    const buyableCount = ["first","second","third","fourth","fifth"];
-    for (let i of buyableCount) {
-    window[i+"Buyable"].amount = parseFloat(parsedData[i+"Buyable_amount"]);
-    window[i+"Buyable"].baseEffect = parseFloat(parsedData[i+"Buyable_baseEffect"]);
-    window[i+"Buyable"].price = parseFloat(parsedData[i+"Buyable_price"]);
-    }
-
-    const singleCount = ["first","second","third","fourth","fifth","sixth","seventh","eighth","ninth","tenth"];
-    for (let i of singleCount) {
-    window[i+"Single"].amount = parseFloat(parsedData[i+"Single_amount"]);
-    window[i+"Single"].baseEffect = parseFloat(parsedData[i+"Single_baseEffect"]);
-    }
-
-    umultiplier = parseFloat(parsedData.umultiplier);
-    umultipliercount = parseFloat(parsedData.umultipliercount);
-    upower = parseFloat(parsedData.upower);
-    upowercount = parseFloat(parsedData.upowercount);
-
-    parsedData.versions == undefined ? version = ["0.9", "0.10", "0.10.1"] : version = JSON.parse(parsedData.versions)
-
-    if (version[0] == "0.9") {
-        const shopBuyableCount = ["first","second","third","fourth"];
-        for (let i of shopBuyableCount) {
-        window[i+"ShopBuyable"].amount = parseFloat(parsedData[i+"ShopBuyable_amount"]);
-        window[i+"ShopBuyable"].price = parseFloat(parsedData[i+"ShopBuyable_price"]);
-        }
-        const shopSingleCount = ["first"];
-        for (let i of shopSingleCount) {
-        window[i+"ShopSingle"].amount = parseFloat(parsedData[i+"ShopSingle_amount"]);
-        window[i+"ShopSingle"].price = parseFloat(parsedData[i+"ShopSingle_price"]);
-        }
-        overdriveType1.percent = parseFloat(parsedData.overdriveType1_percent);
-        overdriveType1.effect = parseFloat(parsedData.overdriveType1_effect);
-        overdriveType1.price = parseFloat(parsedData.overdriveType1_price);
+let newData = {}
+function convert_save() {
+    if (localStorage.getItem('datasave') != null) {
+        let parsedData = JSON.parse(localStorage.getItem('datasave')) //make parsedData as object
+        newData = {
+            clicks: {
+                real: parsedData.clickCount != undefined ? parsedData.clickCount : 0,
+                simulated: parsedData.clickCount != undefined ? parsedData.clickCount : 0,
+                critical: 0,
+                prestige: 0
+            },
+            achievements: [],
+            achievement_rows: [],
+            progressBarGoals: [0],
+            umultipliers: 0,
+            upowers: 0,
+            coin: {
+                upgrades: {
+                    1: 0,
+                    2: 0,
+                    3: 0,
+                    4: 0,
+                    5: 0
+                },
+                singleUpgrades: [],
+                superUpgrades: [],
+                currency: 10,
+                total_currency: 10,
+            },
+            supercoin: {
+                currency: 0,
+                total_currency: 0,
+                spent_currency: 0,
+            },
+            prestige: {
+                upgrades: {
+                    1: 0,
+                    2: 0
+                },
+                singleUpgrades: [],
+                milestones: [],
+                currency: parsedData.crystals != undefined ? parsedData.crystals : 0,
+                total_currency: 0,
+                broken_currency: parsedData.brokenCrystals,
+                resets: 0,
+                prestigeTable: {
+                    0: {
+                        crystals: '',
+                        prestiges: '',
+                        time: {
+                            game: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            },
+                            real: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            }
+                        }
+                    },
+                    1: {
+                        crystals: '',
+                        prestiges: '',
+                        time: {
+                            game: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            },
+                            real: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            }
+                        }
+                    },
+                    2: {
+                        crystals: '',
+                        prestiges: '',
+                        time: {
+                            game: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            },
+                            real: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            }
+                        }
+                    },
+                    3: {
+                        crystals: '',
+                        prestiges: '',
+                        time: {
+                            game: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            },
+                            real: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            }
+                        }
+                    },
+                    4: {
+                        crystals: '',
+                        prestiges: '',
+                        time: {
+                            game: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            },
+                            real: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            }
+                        }
+                    },
+                    5: {
+                        crystals: '',
+                        prestiges: '',
+                        time: {
+                            game: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            },
+                            real: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            }
+                        }
+                    },
+                    6: {
+                        crystals: '',
+                        prestiges: '',
+                        time: {
+                            game: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            },
+                            real: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            }
+                        }
+                    },
+                    7: {
+                        crystals: '',
+                        prestiges: '',
+                        time: {
+                            game: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            },
+                            real: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            }
+                        }
+                    },
+                    8: {
+                        crystals: '',
+                        prestiges: '',
+                        time: {
+                            game: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            },
+                            real: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            }
+                        }
+                    },
+                    9: {
+                        crystals: '',
+                        prestiges: '',
+                        time: {
+                            game: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            },
+                            real: {
+                                days: '',
+                                hours: '',
+                                minutes: '',
+                                seconds: '', 
+                                timer: ''
+                            }
+                        }
+                    },
+                },
+                table_resets: 1
+            },
+            shard: {
+                upgrades: {
+                    1: 0,
+                    2: 0,
+                    3: 0
+                },
+                singleUpgrades: [],
+                currency: 0,
+                unlockables: [],
+                consumed: {
+                    click: 0,
+                    second: 0,
+                    buyables: 0,
+                    singles: 0,
+                }
+            },
+            shop: {
+                upgrades: {
+                    1: 0,
+                    2: 0,
+                    3: 0,
+                    4: 0,
+                    5: 0
+                },
+                permanentUpgrades: {
+                    1: 0,
+                    2: 0,
+                    3: 0,
+                    4: 0,
+                },
+                unlockables: [],
+                items: {
+                    amount: {
+                        1: 0,
+                        2: 0,
+                        3: 0,
+                        4: 0
+                    },
+                    used: {
+                        1: 0,
+                        2: 0,
+                        3: 0,
+                        4: 0
+                    }
+                }
+            },
+            supercrystal: {
+                upgrades: [],
+                currency: 0,
+                total_currency: 0,
+                consumedShards: 0,
+            },
+            rune: {
+                currency: 0,
+                total_currency: 0,
+            },
+            minerals: {
+                1: 0,
+                2: 0,
+                3: 0
+            },
+            time: {
+                savedTime: Date.now(), //lastOnlineTime
+                currentTime: 0,
+                game: {
+                    total: {
+                        seconds: 0, 
+                        minutes: 0, 
+                        hours: 0,
+                        days: 0,
+                        timer: 0, 
+                    },
+                    prestige: {
+                        seconds: 0, 
+                        minutes: 0, 
+                        hours: 0,
+                        days: 0,
+                        timer: 0, 
+                    },
+                    fastestPrestige: {
+                        seconds: 0, 
+                        minutes: 0, 
+                        hours: 0,
+                        days: 0,
+                        timer: 1e69, 
+                    }
+                },
+                real: {
+                    total: {
+                        seconds: 0, 
+                        minutes: 0, 
+                        hours: 0,
+                        days: 0,
+                        timer: 0, 
+                    },
+                    prestige: {
+                        seconds: 0, 
+                        minutes: 0, 
+                        hours: 0,
+                        days: 0,
+                        timer: 0, 
+                    },
+                    fastestPrestige: {
+                        seconds: 0, 
+                        minutes: 0, 
+                        hours: 0,
+                        days: 0,
+                        timer: 1e69, 
+                    },
+                    daily: {
+                        seconds: 0, 
+                        minutes: 0, 
+                        hours: 0,
+                        timer: 0,
+                    }
+                },
+                next_daily: 0,
+                umultiplier: 0,
+                upower: 0,
         
-        gameDays = parseFloat(parsedData.gameDays);
-        dailyTimer = parseFloat(parsedData.dailyTimer);
-        dailySeconds = parseFloat(parsedData.dailySeconds);
-        dailyMinutes = parseFloat(parsedData.dailyMinutes);
-        dailyHours = parseFloat(parsedData.dailyHours);
-        select.selectedIndex = parseFloat(parsedData.select_selectedIndex)
-        superCoins = parseFloat(parsedData.superCoins)
-        totalSuperCoins = parseFloat(parsedData.totalSuperCoins)
-        spentSuperCoins = parseFloat(parsedData.spentSuperCoins)
-        optionValue = parsedData.optionValue;
-    }
-
-    const prestigeSingleCount = ["first","second","third","fourth","fifth","sixth","seventh","eighth","ninth","tenth","eleventh","twelfth","thirteenth","fourteenth","fifteenth","sixteenth"];
-    const prestigeBuyableCount = ["first","second", "third"];
-    const shardBars = ['shardUnlockablePerSecond', 'shardUnlockableClick', 'shardUnlockableBuyables', 'shardUnlockableSingles']
-
-    if (version[1] === "0.10") {
-        prestigeCount = parseFloat(parsedData.prestigeCount);
-        crystals = parseFloat(parsedData.crystals);
-        totalCrystals = parseFloat(parsedData.totalCrystals);
-
-        prestigeSeconds = parseFloat(parsedData.prestigeSeconds);
-        prestigeMinutes = parseFloat(parsedData.prestigeMinutes);
-        prestigeHours = parseFloat(parsedData.prestigeHours);
-        prestigeDays = parseFloat(parsedData.prestigeDays);
-
-        fastestPrestigeSeconds = parseFloat(parsedData.fastestPrestigeSeconds);
-        fastestPrestigeMinutes = parseFloat(parsedData.fastestPrestigeMinutes);
-        fastestPrestigeHours = parseFloat(parsedData.fastestPrestigeHours);
-        fastestPrestigeDays = parseFloat(parsedData.fastestPrestigeDays);
-
-        prestigeTimer = parseFloat(parsedData.prestigeTimer);
-        fastestPrestigeTimer = parseFloat(parsedData.fastestPrestigeTimer);
-        fastestNoMaxBuyPrestiges = parseFloat(parsedData.fastestNoMaxBuyPrestiges);
-
-        achFullRow1 = parseFloat(parsedData.achFullRow1)
-        achFullRow2 = parseFloat(parsedData.achFullRow2)
-
-        prestigeConditionCoins = parseFloat(parsedData.prestigeConditionCoins)
-        prestigeConditionTime = parseFloat(parsedData.prestigeConditionTime)
-        whichPrestigeMode = parsedData.whichPrestigeMode
-
-        umultiplierTimer = parseFloat(parsedData.umultiplierTimer);
-        upowerTimer = parseFloat(parsedData.upowerTimer);
-
-        amountOfPrestigeUpgrades = parseFloat(parsedData.amountOfPrestigeUpgrades)
-        autoUmultiInput.value = parseFloat(parsedData.autoUmultiInput_value)
-        autoUpowerInput.value = parseFloat(parsedData.autoUpowerInput_value)
-        autoUpowerInput2.value = parseFloat(parsedData.autoUpowerInput2_value)
-
-        shards = parseFloat(parsedData.shards)
-        shardsPerSecond = parseFloat(parsedData.shardsPerSecond)
-        brokenCrystals = parseFloat(parsedData.brokenCrystals)
-
-        mutedAudio = parsedData.mutedAudio
-        isMuted = parsedData.isMuted
-
-        if (parsedData.spirits != null) spirits = parseFloat(parsedData.spirits)
-
-        for (let i = 0; i < 2; i++) {
-        window[prestigeBuyableCount[i]+"PrestigeBuyable"].amount = parseFloat(parsedData[prestigeBuyableCount[i]+"PrestigeBuyable_amount"]);
-        window[prestigeBuyableCount[i]+"PrestigeBuyable"].price = parseFloat(parsedData[prestigeBuyableCount[i]+"PrestigeBuyable_price"]);
-        }
-
-        for (let i of prestigeSingleCount) {
-        window[i+"PrestigeSingle"].amount = parseFloat(parsedData[i+"PrestigeSingle_amount"]);
-        }
-
-        for (let i of prestigeBuyableCount) {
-            window[i+"ShardBuyable"].amount = parseFloat(parsedData[i+"ShardBuyable_amount"]);
-            window[i+"ShardBuyable"].price = parseFloat(parsedData[i+"ShardBuyable_price"]);
-        }
-
-        for (let i = 0; i < 6; i++) {
-            window[prestigeSingleCount[i]+"ShardSingle"].amount = parseFloat(parsedData[prestigeSingleCount[i]+"ShardSingle_amount"]);
-        }
-
-        const intervalsCount = [
-            'singleInterval', 'buyableInterval', 'umultiplierInterval', 'upowerInterval', 'prestigeInterval'
-        ]
-
-        for (let i of intervalsCount) {
-            window[i].price = parseFloat(parsedData[i+"_price"]);
-            window[i].time = parseFloat(parsedData[i+"_time"]);
+            },
+            challenge: {
+                completed: [],
+                activated: 0,
+                time: {
+                    1: {
+                        days: 999,
+                        hours: 99,
+                        minutes: 59,
+                        seconds: 59, 
+                        timer: 99999
+                    },
+                    2: {
+                        days: 999,
+                        hours: 99,
+                        minutes: 59,
+                        seconds: 59, 
+                        timer: 99999
+                    },
+                    3: {
+                        days: 999,
+                        hours: 99,
+                        minutes: 59,
+                        seconds: 59, 
+                        timer: 99999
+                    },
+                    4: {
+                        days: 999,
+                        hours: 99,
+                        minutes: 59,
+                        seconds: 59, 
+                        timer: 99999
+                    },
+                    5: {
+                        days: 999,
+                        hours: 99,
+                        minutes: 59,
+                        seconds: 59, 
+                        timer: 99999
+                    },
+                    6: {
+                        days: 999,
+                        hours: 99,
+                        minutes: 59,
+                        seconds: 59, 
+                        timer: 99999
+                    },
+                    7: {
+                        days: 999,
+                        hours: 99,
+                        minutes: 59,
+                        seconds: 59, 
+                        timer: 99999
+                    },
+                    8: {
+                        days: 999,
+                        hours: 99,
+                        minutes: 59,
+                        seconds: 59, 
+                        timer: 99999
+                    },
+                    9: {
+                        days: 999,
+                        hours: 99,
+                        minutes: 59,
+                        seconds: 59, 
+                        timer: 99999
+                    },
+                    10: {
+                        days: 999,
+                        hours: 99,
+                        minutes: 59,
+                        seconds: 59, 
+                        timer: 99999
+                    },
+                    11: {
+                        days: 999,
+                        hours: 99,
+                        minutes: 59,
+                        seconds: 59, 
+                        timer: 99999
+                    },
+                    12: {
+                        days: 999,
+                        hours: 99,
+                        minutes: 59,
+                        seconds: 59, 
+                        timer: 99999
+                    },
+                }
+            },
+            tabs: {
+                main: [],
+                settings_sub: [],
+                clicker_sub: [],
+                info_sub: [],
+                prestige_sub: [],
+                multi_breakdown_sub: [],
+            },
+            settings: {
+                currentLanguage: parsedData.currentLanguage != undefined ? parsedData.currentLanguage : 'en',
+                auto_save: true,
+                mutedAudio: false,
+                shop_bulkbuy: 1,
+                font: 'option1',
+                buy_max_activate: false,
+                modernization_activated: false,
+                loreBoolean: [],
+                event: {
+                    spiritual: false,
+                    triplePower: false
+                },
+                whichPrestigeMode: 'time'
+            },
+            automation: {
+                checkbox: {
+                single: false, 
+                buyable: false, 
+                umultiplier: false, 
+                upower: false, 
+                prestige: false
+                },
+                setIntervals: {
+                    single: '', 
+                    buyable: '', 
+                    umultiplier: '', 
+                    upower: '', 
+                    prestige: ''
+                },
+                upgrades: {
+                    single: parsedData.singleInterval_price != undefined ? Math.log2(parsedData.singleInterval_price) : 0, 
+                    buyable: parsedData.buyableInterval_price != undefined ? Math.log2(parsedData.buyableInterval_price) : 0, 
+                    umultiplier: parsedData.umultiplierInterval_price != undefined ? Math.log2(parsedData.umultiplierInterval_price) : 0, 
+                    upower: parsedData.upowerInterval_price != undefined ? Math.log2(parsedData.upowerInterval_price) : 0, 
+                    prestige: parsedData.prestigeInterval_price != undefined ? Math.log2(parsedData.prestigeInterval_price) : 0
+                },
+                conditions: {
+                    umultiplier: 0,
+                    upower: {
+                        time: 0,
+                        x_of_umulti: 0,
+                    },
+                    prestige: {
+                        time: 3600,
+                        coins: 1e15
+                    }
+                }
+            },
+            got_daily_reward: false,
+            code: {
+                activated: [],
+                name: ['digitalgod', 'shirakamifubuki', 'suisei', 'koyori', 'manilovefauna', 'revolution', 'supercoin'],
+            },
+            overdrive: {
+                consumed: {
+                    type1: 0,
+                    type2: 0
+                }
+            },
+            offline_gain: {
+                time: '',
+                coin: '',
+                supercoin: '',
+                crystal: '',
+                prestige: '',
+                shard: ''
             }
+        }
 
-        buyableInterval.effect = parseFloat(parsedData.buyableInterval_effect);
+        parsedData.firstBuyable_amount != undefined ? newData.coin.upgrades[1] = parsedData.firstBuyable_amount : 0
+        parsedData.secondBuyable_amount != undefined ? newData.coin.upgrades[2] = parsedData.secondBuyable_amount : 0
+        parsedData.thirdBuyable_amount != undefined ? newData.coin.upgrades[3] = parsedData.thirdBuyable_amount : 0
+        parsedData.fourthBuyable_amount != undefined ? newData.coin.upgrades[4] = parsedData.fourthBuyable_amount : 0
+        parsedData.fifthBuyable_amount != undefined ? newData.coin.upgrades[5] = parsedData.fifthBuyable_amount : 0
 
-        const checkmarks = [
-            'autoSingleUpgradeCheckbox', 'autoBuyableUpgradeCheckbox', 'autoUmultiplierCheckbox', 'autoUpowerCheckbox', 'autoPrestigeCheckbox'
-            ]
+        parsedData.firstSingle_amount != undefined && parsedData.firstSingle_amount == 1 ? newData.coin.singleUpgrades.push(11) : ''
+        parsedData.secondSingle_amount != undefined && parsedData.secondSingle_amount == 1 ? newData.coin.singleUpgrades.push(12) : ''
+        parsedData.thirdSingle_amount != undefined && parsedData.thirdSingle_amount == 1 ? newData.coin.singleUpgrades.push(13) : ''
+        parsedData.fourthSingle_amount != undefined && parsedData.fourthSingle_amount == 1 ? newData.coin.singleUpgrades.push(14) : ''
+        parsedData.fifthSingle_amount != undefined && parsedData.fifthSingle_amount == 1 ? newData.coin.singleUpgrades.push(15) : ''
+        parsedData.sixthSingle_amount != undefined && parsedData.sixthSingle_amount == 1 ? newData.coin.singleUpgrades.push(21) : ''
+        parsedData.seventhSingle_amount != undefined && parsedData.seventhSingle_amount == 1 ? newData.coin.singleUpgrades.push(22) : ''
+        parsedData.eighthSingle_amount != undefined && parsedData.eighthSingle_amount == 1 ? newData.coin.singleUpgrades.push(23) : ''
+        parsedData.ninthSingle_amount != undefined && parsedData.ninthSingle_amount == 1 ? newData.coin.singleUpgrades.push(24) : ''
+        parsedData.tenthSingle_amount != undefined && parsedData.tenthSingle_amount == 1 ? newData.coin.singleUpgrades.push(25) : ''
+
+        parsedData.firstPrestigeBuyable_amount != undefined ? newData.prestige.upgrades[1] = parsedData.firstPrestigeBuyable_amount : 0
+        parsedData.secondPrestigeBuyable_amount != undefined ? newData.prestige.upgrades[2] = parsedData.secondPrestigeBuyable_amount : 0
+
+        parsedData.firstPrestigeSingle_amount != undefined && parsedData.firstPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(11) : ''
+        parsedData.secondPrestigeSingle_amount != undefined && parsedData.secondPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(12) : ''
+        parsedData.thirdPrestigeSingle_amount != undefined && parsedData.thirdPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(13) : ''
+        parsedData.fourthPrestigeSingle_amount != undefined && parsedData.fourthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(14) : ''
+        parsedData.fifthPrestigeSingle_amount != undefined && parsedData.fifthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(21) : ''
+        parsedData.sixthPrestigeSingle_amount != undefined && parsedData.sixthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(22) : ''
+        parsedData.seventhPrestigeSingle_amount != undefined && parsedData.seventhPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(23) : ''
+        parsedData.eighthPrestigeSingle_amount != undefined && parsedData.eighthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(24) : ''
+        parsedData.ninthPrestigeSingle_amount != undefined && parsedData.ninthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(31) : ''
+        parsedData.tenthPrestigeSingle_amount != undefined && parsedData.tenthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(32) : ''
+        parsedData.eleventhPrestigeSingle_amount != undefined && parsedData.eleventhPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(33) : ''
+        parsedData.twelfthPrestigeSingle_amount != undefined && parsedData.twelfthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(34) : ''
+        parsedData.thirteenthPrestigeSingle_amount != undefined && parsedData.thirteenthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(41) : ''
+        parsedData.fourteenthPrestigeSingle_amount != undefined && parsedData.fourteenthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(42) : ''
+        parsedData.fifteenthPrestigeSingle_amount != undefined && parsedData.fifteenthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(43) : ''
+        parsedData.sixteenthPrestigeSingle_amount != undefined && parsedData.sixteenthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(44) : ''
+
+        parsedData.firstShardBuyable_amount != undefined ? newData.shard.upgrades[1] = parsedData.firstShardBuyable_amount : 0
+        parsedData.secondShardBuyable_amount != undefined ? newData.shard.upgrades[2] = parsedData.secondShardBuyable_amount : 0
+        parsedData.thirdShardBuyable_amount != undefined ? newData.shard.upgrades[3] = parsedData.thirdShardBuyable_amount : 0
+
+        parsedData.firstShardSingle_amount != undefined && parsedData.firstShardSingle_amount == 1 ? newData.shard.singleUpgrades.push(11) : ''
+        parsedData.secondShardSingle_amount != undefined && parsedData.secondShardSingle_amount == 1 ? newData.shard.singleUpgrades.push(12) : ''
+        parsedData.thirdShardSingle_amount != undefined && parsedData.thirdShardSingle_amount == 1 ? newData.shard.singleUpgrades.push(13) : ''
+        parsedData.fourthShardSingle_amount != undefined && parsedData.fourthShardSingle_amount == 1 ? newData.shard.singleUpgrades.push(21) : ''
+        parsedData.fifthShardSingle_amount != undefined && parsedData.fifthShardSingle_amount == 1 ? newData.shard.singleUpgrades.push(22) : ''
+        parsedData.sixthShardSingle_amount != undefined && parsedData.sixthShardSingle_amount == 1 ? newData.shard.singleUpgrades.push(23) : ''
+
+        parsedData.firstShopBuyable_amount != undefined ? newData.shop.upgrades[1] = parsedData.firstShopBuyable_amount : 0
+        parsedData.secondShopBuyable_amount != undefined ? newData.shop.upgrades[2] = parsedData.secondShopBuyable_amount : 0
+        parsedData.thirdShopBuyable_amount != undefined ? newData.shop.upgrades[3] = parsedData.thirdShopBuyable_amount : 0
+        parsedData.fourthShopBuyable_amount != undefined ? newData.shop.upgrades[4] = parsedData.fourthShopBuyable_amount : 0
+        parsedData.fifthShopBuyable_amount != undefined ? newData.shop.upgrades[5] = parsedData.fifthShopBuyable_amount : 0
+
+        parsedData.sixthShopBuyable_amount != undefined ? newData.shop.permanentUpgrades[1] = parsedData.sixthShopBuyable_amount : 0
+        parsedData.seventhShopBuyable_amount != undefined ? newData.shop.permanentUpgrades[2] = parsedData.seventhShopBuyable_amount : 0
+
+        parsedData.firstShopItem_used != undefined ? newData.shop.items.used[1] = parsedData.firstShopItem_used : 0
+        parsedData.firstShopItem_amount != undefined ? newData.shop.items.amount[1] = parsedData.firstShopItem_amount : 0
+        parsedData.secondShopItem_used != undefined ? newData.shop.items.used[2] = parsedData.secondShopItem_used : 0
+        parsedData.secondShopItem_amount != undefined ? newData.shop.items.amount[2] = parsedData.secondShopItem_amount : 0
+        parsedData.thirdShopItem_used != undefined ? newData.shop.items.used[3] = parsedData.thirdShopItem_used : 0
+        parsedData.thirdShopItem_amount != undefined ? newData.shop.items.amount[3] = parsedData.thirdShopItem_amount : 0
+        parsedData.fourthShopItem_used != undefined ? newData.shop.items.used[4] = parsedData.fourthShopItem_used : 0
+        parsedData.fourthShopItem_amount != undefined ? newData.shop.items.amount[4] = parsedData.fourthShopItem_amount : 0
+
+        parsedData.gameTimer != undefined ? newData.time.game.total.timer = parsedData.gameTimer : 0
+        parsedData.gameTimer != undefined ? newData.time.real.total.timer = parsedData.gameTimer : 0
+
+        parsedData.lastOnlineTime != undefined ? newData.time.savedTime = parsedData.lastOnlineTime : 0
+
+        parsedData.money != undefined ? newData.coin.currency = parsedData.money : 0
         
-        for (let i of checkmarks) {
-            document.getElementById(i).checked = parsedData[`${i}_checked`]
-        }
+        parsedData.optionValue != undefined ? newData.settings.font = parsedData.optionValue : 0
 
-        for (const i of shardBars) {
-            window[i].percent = parseFloat(parsedData[i+"_percent"])
-            window[i].consumedShards =  parseFloat(parsedData[i+"_consumedShards"])
-        }
+        parsedData.overdriveType1_consumed != undefined ? newData.overdrive.consumed.type1 = parsedData.overdriveType1_consumed : 0
 
-    }
-    if (version[2] == "0.10.1") {
-        overdriveType1.consumed = parseFloat(parsedData.overdriveType1_consumed);
-    }
-    if (version[3] == "0.11") {
-        challengeStartedID = parseFloat(parsedData.challengeStartedID)
-        parsedData.challengeCompleted == undefined ? challengeCompleted = [false, false, false, false, false, false, false, false, false, false, false, false] : challengeCompleted = JSON.parse(parsedData.challengeCompleted)
-        parsedData.progressBarGoals == undefined ? progressBarGoals = [false, false, false] : progressBarGoals = JSON.parse(parsedData.progressBarGoals)
-        parsedData.codeChecks == undefined ? codeChecks = [false, false, false, false, false] : codeChecks = JSON.parse(parsedData.codeChecks)
-        
-        challengesCompleted = parseFloat(parsedData.challengesCompleted)
-        restartChallenge.checked = parsedData.restartChallenge_checked
+        parsedData.prestigeCount != undefined ? newData.prestige.resets = parsedData.prestigeCount : 0
 
-        realDays = parseFloat(parsedData.realDays)
-        realHours = parseFloat(parsedData.realHours)
-        realMinutes = parseFloat(parsedData.realMinutes)
-        realSeconds = parseFloat(parsedData.realSeconds)
+        parsedData.prestigeTimer != undefined ? newData.time.real.prestige.timer = parsedData.prestigeTimer : 0
+        parsedData.prestigeTimer != undefined ? newData.time.game.prestige.timer = parsedData.prestigeTimer : 0
 
-        virusCoins = parseFloat(parsedData.virusCoins)
+        parsedData.shards != undefined ? newData.shard.currency = parsedData.shards : 0
 
-        const shopBuyableCount = ["fifth","sixth","seventh"];
-        for (let i of shopBuyableCount) {
-        window[i+"ShopBuyable"].amount = parseFloat(parsedData[i+"ShopBuyable_amount"]);
-        window[i+"ShopBuyable"].price = parseFloat(parsedData[i+"ShopBuyable_price"]);
-        }
-        shopBulkBuyInput.value = parsedData.shopBulkBuy_value
+        parsedData.shardUnlockablePerSecond_consumedShards != undefined ? newData.shard.consumed.second = parsedData.shardUnlockablePerSecond_consumedShards : 0
+        parsedData.shardUnlockableClick_consumedShards != undefined ? newData.shard.consumed.click = parsedData.shardUnlockableClick_consumedShards : 0
+        parsedData.shardUnlockableSingles_consumedShards != undefined ? newData.shard.consumed.singles = parsedData.shardUnlockableSingles_consumedShards : 0
+        parsedData.shardUnlockableBuyables_consumedShards != undefined ? newData.shard.consumed.buyables = parsedData.shardUnlockableBuyables_consumedShards : 0
 
-        const shopItemCount = ["first","second","third","fourth"];
-        for (let i of shopItemCount) {
-            window[i+"ShopItem"].amount = parseFloat(parsedData[i+"ShopItem_amount"]);
-            window[i+"ShopItem"].used = parseFloat(parsedData[i+"ShopItem_used"]);
-            }
+        newData.shard.consumed.second == 1000 ? newData.shard.unlockables.push(1) : ''
+        newData.shard.consumed.click == 1000 ? newData.shard.unlockables.push(2) : ''
+        newData.shard.consumed.buyables == 10000 ?newData.shard.unlockables.push(3) : ''
+        newData.shard.consumed.singles == 100000 ? newData.shard.unlockables.push(4) : ''
 
-        const tripleEventCoins = ['pinkCoin', 'greenCoin', 'blueCoin', 'greyCoin']
+        parsedData.spentSuperCoins != undefined ? newData.supercoin.spent_currency = parsedData.spentSuperCoins : 0
+        parsedData.superCoins != undefined ? newData.supercoin.currency = parsedData.superCoins : 0
+        parsedData.totalSuperCoins != undefined ? newData.supercoin.total_currency = parsedData.totalSuperCoins : 0
 
-        for (const i of tripleEventCoins) {
-            if (i !== 'greyCoin') {
-                window[i].currency = parseFloat(parsedData[`${i}_currency`])
-                window[i].amount = parseFloat(parsedData[`${i}_amount`])
-                window[i].totalAmount = parseFloat(parsedData[`${i}_totalAmount`])
-                window[i].price = parseFloat(parsedData[`${i}_price`])
-                window[i].boost = parseFloat(parsedData[`${i}_boost`])
-            }
-            else {
-                window[i].effect = parseFloat(parsedData[`${i}_effect`])
-                window[i].price = parseFloat(parsedData[`${i}_price`])
+        parsedData.total != undefined ? newData.coin.total_currency = parsedData.total : 0
+        parsedData.totalCrystals != undefined ? newData.prestige.total_currency = parsedData.totalCrystals : 0
+
+        parsedData.umultiplierTimer != undefined ? newData.time.umultiplier = parsedData.umultiplierTimer : 0
+        parsedData.upowerTimer != undefined ? newData.time.upower = parsedData.upowerTimer : 0
+        parsedData.umultipliercount != undefined ? newData.umultipliers = parsedData.umultipliercount : 0
+        parsedData.upowercount != undefined ? newData.upowers = parsedData.upowercount : 0
+
+        let challenge = JSON.parse(parsedData.challengeCompleted)
+        for (let i = 0; i < 12; i++){
+            if (challenge[i] == true) {
+                newData.challenge.completed.push(i+1)
             }
         }
-    }
-}
-}
 
-function upgradeReset() {
-    let arrayReset = [secondBuyable, firstBuyable, thirdBuyable, fourthBuyable, fifthBuyable]
-    for (let i = 0; i < arrayReset.length; i++){
-        arrayReset[i].amount = 0
-        arrayReset[i].baseEffect = 0
-    }
-    firstBuyable.price = 10
-    secondBuyable.price = 100
-    thirdBuyable.price = 500
-    fourthBuyable.price = 1000
-    fifthBuyable.price = 5000
-}
-
-function singlesReset() {
-    let arrayReset = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
-    for (let i = 0; i < arrayReset.length; i++){
-        arrayReset[i].amount = 0
-        arrayReset[i].baseEffect = 0
-    }
-    firstSingle.price = 1e5
-    secondSingle.price = 3e6
-    thirdSingle.price = 5e6
-    fourthSingle.price = 2.5e7
-    fifthSingle.price = 6.5e8
-    sixthSingle.price = 5e9
-    seventhSingle.price = 5e10
-    eighthSingle.price = 7e11
-    ninthSingle.price = 2e12
-    tenthSingle.price = 1e13
-}
-
-function loadAutomations() {
-    for (let i = 0; i < autoSetIntervals.length; i++) {
-        clearInterval(autoSetIntervals[i]);
-        autoSetIntervals[i] = ''
-    }
-    if (singleCheckbox.checked) { 
-        autoSetIntervals[0] = setInterval(autoBuySingle, singleInterval.time); 
-    }
-    if (buyableCheckbox.checked) { 
-        autoSetIntervals[1] = setInterval(autoBuyBuyable, buyableInterval.time); 
-    }
-    if (umultiplierCheckbox.checked) {
-        if (umultiplierInterval.time != 50) {
-            autoSetIntervals[2] = setInterval(doUmulti, umultiplierInterval.time);
-        } else {
-            uMultiReautomate()
-        }
-    }
-    if (upowerCheckbox.checked) {
-        if (upowerInterval.time != 50) {
-            autoSetIntervals[3] = setInterval(doUpower, upowerInterval.time);
-        } else {
-            uPowerReautomate()
-        }
-    }
-    if (prestigeCheckbox.checked) {
-        if ((!prestigeMilestonesEffects[13]) || prestigeInterval.time != 50) {
-            autoSetIntervals[4] = setInterval(doPrestigeReset, prestigeInterval.time);
-        } else {
-            reautomate()
-        }
+        localStorage.removeItem('datasave');
     }
 }
