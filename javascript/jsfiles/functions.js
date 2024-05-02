@@ -184,9 +184,9 @@ function generateRune() {
 
 function createMineral(x) {
     if (player.shard.currency >= UPGS.minerals[x].cost2() && player.rune.currency >= UPGS.minerals[x].cost1()) {
-        player.minerals[x]++
         player.rune.currency -= UPGS.minerals[x].cost1()
         player.shard.currency -= UPGS.minerals[x].cost2()
+        player.minerals[x]++
     }
 }
 
