@@ -82,11 +82,8 @@ const LAYERS = {
             if (player.coin.currency < 1e15) return 1
             if (!ACHS.has(21)) ACHS.unl(21)
             let temp = 0
-            if (player.prestige.singleUpgrades.includes(41)) temp = 1
-            if (player.prestige.singleUpgrades.includes(42)) temp = 2
-            if (player.prestige.singleUpgrades.includes(43)) temp = 3
-            if (player.prestige.singleUpgrades.includes(44)) temp = 4
-            if (player.umultipliers == temp) {
+            if (player.prestige.singleUpgrades.includes(44)) temp = 1
+            if (player.upowers == temp) {
                 if (!ACHS.has(24)) ACHS.unl(24)
             }
 
