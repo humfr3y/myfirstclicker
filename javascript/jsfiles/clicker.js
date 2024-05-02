@@ -655,49 +655,49 @@ const UNL = {
             name: 'shard_unlockable_second',
             type: 'flex',
             element: document.getElementById('shardsPerSecondText'),
-            req() { return UNL.shard.second.percent() == 100 }
+            req() { return UNL.shard.second.unl() }
         },
         31: {
             name: 'shard_unlockable_second',
             type: 'none',
             element: document.getElementById('shardUnlockableBase1'),
-            req() { return UNL.shard.second.percent() == 100 }
+            req() { return UNL.shard.second.unl() }
         },
         32: {
             name: 'shard_unlockable_click',
             type: 'flex',
             element: document.getElementById('shardsClick'),
-            req() { return UNL.shard.click.percent() == 100 }
+            req() { return UNL.shard.click.unl() }
         },
         33: {
             name: 'shard_unlockable_click',
             type: 'none',
             element: document.getElementById('shardUnlockableBase2'),
-            req() { return UNL.shard.click.percent() == 100 }
+            req() { return UNL.shard.click.unl() }
         },
         34: {
             name: 'shard_unlockable_buyable',
             type: 'flex',
             element: document.getElementById('shardBuyables'),
-            req() { return UNL.shard.buyables.percent() == 100 }
+            req() { return UNL.shard.buyables.unl() }
         },
         35: {
             name: 'shard_unlockable_buyable',
             type: 'none',
             element: document.getElementById('shardUnlockableBase3'),
-            req() { return UNL.shard.buyables.percent() == 100 }
+            req() { return UNL.shard.buyables.unl() }
         },
         36: {
             name: 'shard_unlockable_single',
             type: 'flex',
             element: document.getElementById('shardSingles'),
-            req() { return UNL.shard.singles.percent() == 100 }
+            req() { return UNL.shard.singles.unl() }
         },
         37: {
             name: 'shard_unlockable_single',
             type: 'none',
             element: document.getElementById('shardUnlockableBase4'),
-            req() { return UNL.shard.singles.percent() == 100 }
+            req() { return UNL.shard.singles.unl()}
         },
         38: {
             name: 'auto_single_upgrade',
