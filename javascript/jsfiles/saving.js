@@ -33,10 +33,12 @@ function loadGame() {
         let storedData = localStorage.getItem('player'); //спарсим его обратно объект
         let parsedData = ''
         if (localStorage.getItem('datasave') != null && storedData == null) {
+            console.log('CONVERT ')
             convert_save()
             updateNestedProperties(player, newData);
         } 
         else {
+            console.log('NOT CONVERT ')
             parsedData = JSON.parse(storedData);
             updateNestedProperties(player, parsedData)
         }
