@@ -32,13 +32,11 @@ function updateNestedProperties(targetObj, sourceObj) {
 function loadGame() {
         let storedData = localStorage.getItem('player'); //спарсим его обратно объект
         let parsedData = ''
-        if (localStorage.getItem('datasave') != null && storedData == null) {
-            console.log('CONVERT ')
+        if (localStorage.getItem('datasaving') != null && storedData == null) {
             convert_save()
             updateNestedProperties(player, newData);
         } 
         else {
-            console.log('NOT CONVERT ')
             parsedData = JSON.parse(storedData);
             updateNestedProperties(player, parsedData)
         }
@@ -166,7 +164,7 @@ function importing(base64) {
     if (base64.includes('|')) {
         const [base64DataSave, base64Completion, base64Chapters] = base64.split("|");
         const importedData1 = atob(base64DataSave);
-        localStorage.setItem('datasave', importedData1);
+        localStorage.setItem('datasaving', importedData1);
             convert_save()
             updateNestedProperties(player, newData);
     }
@@ -200,8 +198,8 @@ fileUpload.addEventListener('change', function(base64) {
 });
 let newData = {}
 function convert_save() {
-    if (localStorage.getItem('datasave') != null) {
-        let parsedData = JSON.parse(localStorage.getItem('datasave')) //make parsedData as object
+    if (localStorage.getItem('datasaving') != null) {
+        let parsedData = JSON.parse(localStorage.getItem('datasaving')) //make parsedData as object
         newData = {
             clicks: {
                 real: parsedData.clickCount != undefined ? parsedData.clickCount : 0,
@@ -849,6 +847,6 @@ function convert_save() {
             }
         }
 
-        localStorage.removeItem('datasave');
+        localStorage.removeItem('datasaving');
     }
 }
