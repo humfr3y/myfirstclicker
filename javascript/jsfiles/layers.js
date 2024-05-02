@@ -126,11 +126,11 @@ const LAYERS = {
             player.prestige.table_resets < 10 ? player.prestige.table_resets++ : player.prestige.table_resets
 
             player.umultipliers = 0, player.upowers = 0
-            if (!player.challenge.activated == 0) {
+            if (player.challenge.activated == 0) {
                 if (player.prestige.singleUpgrades.includes(41)) player.umultipliers = 1
                 if (player.prestige.singleUpgrades.includes(42)) player.umultipliers = 2
                 if (player.prestige.singleUpgrades.includes(43)) player.umultipliers = 3
-                if (player.prestige.singleUpgrades.includes(44)) player.umultipliers = 4; player.upowers = 1
+                if (player.prestige.singleUpgrades.includes(44)) {player.umultipliers = 4; player.upowers = 1}
             }
             
             if (ACHS.has(40)) {
