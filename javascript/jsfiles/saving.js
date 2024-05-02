@@ -824,10 +824,10 @@ function convert_save() {
         parsedData.shardUnlockableSingles_consumedShards != undefined ? newData.shard.consumed.singles = parsedData.shardUnlockableSingles_consumedShards : 0
         parsedData.shardUnlockableBuyables_consumedShards != undefined ? newData.shard.consumed.buyables = parsedData.shardUnlockableBuyables_consumedShards : 0
 
-        newData.shard.consumed.second == 1000 ? newData.shard.unlockables.push(1) : ''
-        newData.shard.consumed.click == 1000 ? newData.shard.unlockables.push(2) : ''
-        newData.shard.consumed.buyables == 10000 ?newData.shard.unlockables.push(3) : ''
-        newData.shard.consumed.singles == 100000 ? newData.shard.unlockables.push(4) : ''
+        newData.shard.consumed.second >= 1000 ? newData.shard.unlockables.push(1) : ''
+        newData.shard.consumed.click >= 1000 ? newData.shard.unlockables.push(2) : ''
+        newData.shard.consumed.buyables >= 10000 ?newData.shard.unlockables.push(3) : ''
+        newData.shard.consumed.singles >= 100000 ? newData.shard.unlockables.push(4) : ''
 
         parsedData.spentSuperCoins != undefined ? newData.supercoin.spent_currency = parsedData.spentSuperCoins : 0
         parsedData.superCoins != undefined ? newData.supercoin.currency = parsedData.superCoins : 0
@@ -847,6 +847,9 @@ function convert_save() {
                 newData.challenge.completed.push(i+1)
             }
         }
+
+        newData.coin.superUpgrades = [0]
+        newData.supercrystal.upgrades = [0]
 
         localStorage.removeItem('datasaving');
     }
