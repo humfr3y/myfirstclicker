@@ -28,12 +28,11 @@
     height: 90px;
     text-align: center;
     font-family: "Poly";
-    transition:  0.2s ease-in-out;
+    transition:  0.5s ease-in-out;
     margin-right:10px;
     margin-bottom: 10px;
     cursor: pointer;
 }
-
 
 
 @media screen and (max-width: 600px) {
@@ -57,11 +56,11 @@
     transform: scale(0.95); 
 }
 .upgradeButton:disabled{
-    background-color: rgb(65, 65, 65);
+    background-color: rgb(65, 65, 65) !important; 
 }
 .upgradeButton:disabled:hover{
-    background-color: rgb(255, 63, 63);
-    color: black;
+    background-color: rgb(255, 63, 63)  !important;
+    color: black  !important;
 }
 .buyableButton{
     background-color: #000000;
@@ -69,11 +68,11 @@
     color: rgb(255, 255, 255);
 }
 .buyableButton:hover:enabled{
-     background-color: #23e019;
-     box-shadow: 0 0 10px #23e019;
-     color: black;
- }
- .singleButton{
+    background-color: #23e019;
+    box-shadow: 0 0 10px #23e019;
+    color: black;
+}
+.singleButton{
     background-color: #000000;
     border-color: #2536ff;
     color: rgb(255, 255, 255);
@@ -87,7 +86,23 @@
     background-color: #2536ff;
     color: black;
 }
-
+.coinUpgradeButton.superPurchased {
+  background-color: rgb(255, 174, 0);
+  color: black;
+  border-color: rgb(255, 174, 0);
+}
+.coinUpgradeButton.superPurchasedBuyable {
+  background-color: rgb(0, 0, 0);
+  border-color: rgb(255, 174, 0);
+}
+.coinUpgradeButton.superPurchasedBuyable:hover:enabled, .coinUpgradeButton.superPurchased:hover:enabled  {
+  background-color: rgb(255, 174, 0);
+  color: rgb(0, 0, 0);
+  box-shadow: 0 0 10px rgb(255, 174, 0);
+}
+.coinUpgradeButton.superPurchasedBuyable:hover:enabled super, .coinUpgradeButton.superPurchased:hover:enabled super, .coinUpgradeButton.superPurchased super {
+  color: rgb(0, 0, 0);
+}
 .prestigeSingleButton{
   background-color: #000000;
   border-color: rgb(0, 212, 212);
@@ -227,4 +242,22 @@
 
 .greyButton:hover {
   box-shadow: 0 0 10px rgb(82, 82, 82);
+}
+
+.superCrystalUpgradeButton {
+  background-color: #000000;
+  border-color: rgb(0, 180, 212);
+  color: rgb(255, 255, 255);
+  width: 160px;
+  height: 85px;
+}
+
+.superCrystalUpgradeButton:hover:enabled{
+  background-color: rgb(0, 180, 212);
+  box-shadow: 0 0 10px rgb(0, 180, 212);
+  color: black;
+}
+.superCrystalUpgradeButton.purchased {
+  background-color: rgb(0, 180, 212);
+  color: black;
 }

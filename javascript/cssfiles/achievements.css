@@ -132,6 +132,37 @@
     background-image: url("images/ach30.jpg");
 }
 
+#ach31 {
+    background-image: url("images/ach31.jpg");
+}
+#ach32 {
+    background-image: url("images/ach32.jpg");
+}
+#ach33 {
+    background-image: url("images/ach33.jpg");
+}
+#ach34 {
+    background-image: url("images/ach34.jpg");
+}
+#ach35 {
+    background-image: url("images/ach35.jpg");
+}
+#ach36 {
+    background-image: url("images/ach36.jpg");
+}
+#ach37 {
+    background-image: url("images/ach37.jpg");
+}
+#ach38 {
+    background-image: url("images/ach38.jpg");
+}
+#ach39 {
+    background-image: url("images/ach39.jpg");
+}
+#ach40 {
+    background-image: url("images/ach40.jpg");
+}
+
 
 #tooltip {
     /* ... */
@@ -148,5 +179,6 @@
     color: white;
     text-shadow: 0.75px 0.75px #000000, -0.75px -0.75px #000000, 0.75px -0.75px #000000, -0.75px 0.75px #000000;
     text-align: center;
-    z-index: 9999
+    z-index: 9999;
+    pointer-events: none;
 }

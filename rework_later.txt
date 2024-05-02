@@ -1,0 +1,61 @@
+function checkSpiritualEvent() {
+    if (limits(dayOfMonth, 5, 12) && (currentMonth == 10)) {
+        isSpiritualEvent = true
+    }
+    else isSpiritualEvent = false
+    if (isSpiritualEvent) {
+    spiritualEvent.style.display = 'flex'
+    noEvent.style.display = 'none'
+    spiritEffects[0] = 1+(spirits/333)
+    spiritEffects[1] = 1+(spirits/3333)
+    firstPrestigeBuyable.amount >= 1 ? spiritEffects[2] = 1+(spirits/500) : spiritEffects[2] = 1
+    spiritEffects[3] = 1+(spirits/250)
+    }
+    else {
+    spiritualEvent.style.display = 'none'
+    noEvent.style.display = 'block'
+    } 
+}
+
+function checkTriplePowerEvent() {
+    if (limits(dayOfMonth, 8, 23) && (currentMonth == 3)) {
+        isTriplePowerEvent = true
+    }
+    else isTriplePowerEvent = false
+    if (isTriplePowerEvent) {
+    triplePowerEvent.style.display = 'flex'
+    noEvent.style.display = 'none'
+    }
+    else {
+    triplePowerEvent.style.display = 'none'
+    noEvent.style.display = 'block'
+    } 
+}
+
+function sacrifice(type) {
+    if (type.currency >= type.requirement) {
+        type.amount++
+        type.totalAmount++
+        type.currency -= type.requirement
+    }
+}
+
+function buyTripleEventUpgrade(type) {
+    if (type.amount >= type.price) {
+        type.amount -= type.price
+        type.boost += 0.1
+        type.price++
+    }
+}
+
+function buyTripleEventGreyUpgrade() {
+    if (greyCoin.amount >= greyCoin.price && greyCoin.effect <= 5) {
+        greyCoin.amount -= greyCoin.price
+        pinkCoin.amount -= greyCoin.price
+        greenCoin.amount -= greyCoin.price
+        blueCoin.amount -= greyCoin.price
+        greyCoin.effect += 1
+        greyCoin.price++
+    }
+    if (greyCoin.effect > 5) greyCoin.price = 999
+}

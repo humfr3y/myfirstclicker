@@ -1,200 +1,277 @@
-let umultiplier = 1
-let umultipliercount = 0
-let upower = 1
-let upowercount = 0
-let baseUmult = prestigeSinglesEffects[3], baseUpow = prestigeSinglesEffects[7]
-let umultipliertext = document.getElementById('umultiplier')
-let upowertext = document.getElementById('upower')
-let prestigeCount = 0, crystals = 0, crystalsTemp = 1, totalCrystals = 0
-let noResets = false
-let umultiplierCost = 100 + (50 * umultipliercount)
-let upowerCost = 250 + (100 * upowercount)
-let noMaxBuyPrestiges = 0, fastestNoMaxBuyPrestiges = 0, prestigeCountMultiplier = 1, prestigeCountMultiplier2 = 1
-// let umultiplierBulkCost = Math.floor((firstBuyable.amount-(umultiplierCost-50))/50) //(SI's - prev umulti cost) / scaling -> floored number
-// let upowerBulkCost = Math.floor((firstBuyable.amount-(umultiplierCost-100))/100)
-let prestigeClicks = 0
-
-function doUmulti () {
-    if (firstBuyable.amount >= umultiplierCost){
-        if (!prestigeMilestonesEffects[11]) {
-            umultipliercount++
-        }
-        else {
-            while (firstBuyable.amount >= umultiplierCost) {
-                umultipliercount++
-                if (!challengeActivate && challengeCompleted[11]) {
-                    umultipliercount >= 20 ? umultiplierCost = (100 + (40 * umultipliercount)) * (1+((umultipliercount-19)/50)) : umultiplierCost = 100 + (40 * umultipliercount)
+const LAYERS = {
+    umultiplier: {
+        doReset() {
+            if (player.coin.upgrades[1] < this.cost()) return 1
+                if (!MILESTONES.has(12) || player.challenge.activated != 0) {
+                    player.umultipliers++
                 }
-                else  {
-                    umultipliercount >= 20 ? umultiplierCost = (100 + (50 * umultipliercount)) * (1+((umultipliercount-19)/50)) : umultiplierCost = 100 + (50 * umultipliercount)
+                else {
+                    while (player.coin.upgrades[1] >= this.cost()) {
+                        player.umultipliers++
+                    }
                 }
-                if (challengeActivated[11]) break
+                if (!MILESTONES.has(19) || !player.challenge.activated == 0) {
+                    LAYERS.doReset()
+                }
+                MISC.automation.umultiplier.charged = false
+                AUTO.umultiplier.time = MISC.automation.umultiplier.activateTime()
+                player.time.umultiplier = 0
+        },
+        cost() {
+            let cost = 1
+            if (player.challenge.activated == 0 && player.challenge.completed.includes(12))
+            player.umultipliers >= 20 ? cost = (100 + (40 * player.umultipliers)) * (1+((player.umultipliers-19)/50)) : cost = 100 + (40 * player.umultipliers)
+            else player.umultipliers >= 20 ? cost = (100 + (50 * player.umultipliers)) * (1+((player.umultipliers-19)/50)) : cost = 100 + (50 * player.umultipliers)
+            if (player.challenge.activated == 12) cost = 9 + Math.pow((5 * player.umultipliers), player.umultipliers/11)
+            return cost
+        },
+        doForcedReset() {
+            if (player.umultipliers == 0) return 1
+            player.umultipliers--
+            LAYERS.doReset()
+            if (MISC.automation.umultiplier.charged) {
+                MISC.automation.umultiplier.charged = false
+                AUTO.umultiplier.time = MISC.automation.umultiplier.activateTime()
             }
+            player.time.umultiplier = 0
+        },
+        disable(x = this.cost(), y = document.getElementById('umultiplierBoost')) {
+                player.coin.upgrades[1] >= x ? y.disabled = false : y.disabled = true
         }
-        doReset()
-        umultiplier = Math.pow(baseUmult, umultipliercount)
-        getCoinPerSecond = setInterval(getCoinPerSec, 50)
-        umultiplierTimer = 0
-    }
-}
-
-
-function doUpower () {
-    if ((firstBuyable.amount >= upowerCost) && (umultipliercount >= 4)){
-
-        if (!prestigeMilestonesEffects[12]) {
-            upowercount++
-        }
-        else {
-            while (firstBuyable.amount >= upowerCost) {
-                upowercount++
-                if (!challengeActivate && challengeCompleted[11]) {
-                    upowercount >= 10 ? upowerCost = (250 + (80 * upowercount)) * (1+((upowercount-9)/15)) : upowerCost = 250 + (80 * upowercount)
-                }
-                else  {
-                    upowercount >= 10 ? upowerCost = (250 + (100 * upowercount)) * (1+((upowercount-9)/15)) : upowerCost = 250 + (100 * upowercount)
-                }
-                if (achRow1.completion[13]) {
-                    upowerCost = upowerCost - (10 * (1+upowercount))
-                }
-                if (challengeActivated[11]) break
+    },
+    upower: {
+        doReset() {
+            if (player.coin.upgrades[1] < this.cost() || player.umultipliers < 4) return 1
+            if (!MILESTONES.has(13) || player.challenge.activated != 0) {
+                player.upowers++
             }
+            else {
+                while (player.coin.upgrades[1] >= this.cost()) {
+                    player.upowers++
+                }
+            }
+            if (!MILESTONES.has(20) || !player.challenge.activated == 0) {
+                LAYERS.doReset()
+            }
+            player.umultipliers = 0
+            if (player.prestige.singleUpgrades.includes(41) && player.challenge.activated == 0) player.umultipliers = 1
+            if (player.prestige.singleUpgrades.includes(42) && player.challenge.activated == 0) player.umultipliers = 2
+            if (player.prestige.singleUpgrades.includes(43) && player.challenge.activated == 0) player.umultipliers = 3
+            if (player.prestige.singleUpgrades.includes(44) && player.challenge.activated == 0) player.umultipliers = 4
+            if (MISC.automation.upower.charged) {
+                MISC.automation.upower.charged = false
+                AUTO.upower.time = MISC.automation.upower.activateTime()
+            }
+            player.time.upower = 0
+        },
+        cost() {
+            let cost = 1
+            if (player.challenge.activated == 0 && player.challenge.completed.includes(12))
+            player.upowers >= 10 ? cost = (250 + (80 * player.upowers)) * (1+((player.upowers-9)/7.5)) : cost = 250 + (80 * player.upowers)
+            else player.upowers >= 10 ? cost = (250 + (100 * player.upowers)) * (1+((player.upowers-9)/7.5)) : cost = 250 + (100 * player.upowers)
+            if (ACHS.has(24)) cost -= 10*(player.upowers)
+            if (player.challenge.activated == 12) cost = 24 + Math.pow((10 * player.upowers), player.upowers/20)
+            return cost
+        },
+        disable(x = this.cost(), y = document.getElementById('upowerBoost'), z = player.umultipliers) {
+            player.coin.upgrades[1] >= x && z >= 4 ? y.disabled = false : y.disabled = true
         }
-        doReset()
-        upower = 1 + baseUpow*upowercount
-        umultiplier = 1
-        if (!challengeActivate) umultipliercount = prestigeSinglesEffects[12][0]
-        else umultipliercount = 0
-        getCoinPerSecond = setInterval(getCoinPerSec, 50)
-        upowerTimer = 0
-    }
-}
+    },
+    prestige: {
+        doReset() {
+            if (player.coin.currency < 1e15) return 1
+            if (!ACHS.has(21)) ACHS.unl(21)
+            let temp = 0
+            if (player.prestige.singleUpgrades.includes(41)) temp = 1
+            if (player.prestige.singleUpgrades.includes(42)) temp = 2
+            if (player.prestige.singleUpgrades.includes(43)) temp = 3
+            if (player.prestige.singleUpgrades.includes(44)) temp = 4
+            if (player.umultipliers == temp) {
+                if (!ACHS.has(24)) ACHS.unl(24)
+            }
 
-function doPrestigeReset(){
-    if (prestigeMilestonesEffects[14]) {
-        prestigeCountMultiplier = Math.floor(Math.log10(money+10)-14)
-    }
-    else prestigeCountMultiplier = 1; 
-    if (money >= 1e15){
-        if (upowercount == prestigeSinglesEffects[12][1]) {
-            noResets = true
-        }
-        doReset()
-        getCoinPerSecond = setInterval(getCoinPerSec, 50)
-        checkCrystalsTemp()
-        progressBarGoals[0] = true
-        crystals += crystalsTemp
-        totalCrystals += crystalsTemp
-        prestigeCount += 1 * prestigeCountMultiplier
-        pinkCoin.currency++
-        upower = 1
-        umultiplier = 1
-        upowercount = prestigeSinglesEffects[12][1]
-        umultipliercount = prestigeSinglesEffects[12][0]
-        overdriveType1.percent = 0
-        overdriveType1.effect = 1
-        overdriveType1.price = 1000
-        overdriveType1.consumed = 0
-        if (prestigeTimer < fastestPrestigeTimer) {
-            fastestPrestigeSeconds = prestigeSeconds
-            fastestPrestigeMinutes = prestigeMinutes
-            fastestPrestigeHours = prestigeHours
-            fastestPrestigeDays = prestigeDays
-            fastestPrestigeTimer = prestigeTimer
-        }
-        fastestPrestigeSeconds = Math.max(fastestPrestigeSeconds, 0.05)
-        fastestPrestigeTimer = Math.max(fastestPrestigeTimer, 0.05)
-        !challengeActivate && challengeCompleted[1] ? shards += prestigeSinglesEffects[11]*(1000000*crystals) : shards += prestigeSinglesEffects[11]
-        if (didMaxBuy == false){
-            noMaxBuyPrestiges = 60 / (prestigeTimer+0.05)
-            prestigeMilestonesEffects[14] ? noMaxBuyPrestiges *= prestigeCountMultiplier : noMaxBuyPrestiges // prestiges per min
-        }
-        if (noMaxBuyPrestiges > fastestNoMaxBuyPrestiges) {
-            fastestNoMaxBuyPrestiges = noMaxBuyPrestiges
-        }
-        prestigeSeconds = 0
-        prestigeMinutes = 0
-        prestigeHours = 0
-        prestigeDays = 0
-        prestigeTimer = 0
+            player.prestige.currency += GAIN.crystal.reset()
+            player.prestige.total_currency += GAIN.crystal.reset()
+            player.prestige.resets += GAIN.prestige.reset()
 
-        didMaxBuy = false
-        
-        if (challengeActivate) {
-            challengeCompleted[challengeStartedID-1] == false ? challengesCompleted++ : challengesCompleted
-            challengeCompleted[challengeStartedID-1] = true
-            window[`challenge${challengeStartedID}Start`].innerHTML = 'Пройден'
-            window[`challenge${challengeStartedID}Start`].style.backgroundColor = '#3dde3d'
+            PROGRESS.add(1)
+    
+            for (let i = 1; i < player.prestige.table_resets; i++){
+                const k = player.prestige.table_resets-i, j = k-1
+                player.prestige.prestigeTable[k].prestiges = player.prestige.prestigeTable[j].prestiges
+                player.prestige.prestigeTable[k].crystals = player.prestige.prestigeTable[j].crystals
+                player.prestige.prestigeTable[k].time.game.timer = player.prestige.prestigeTable[j].time.game.timer
+                player.prestige.prestigeTable[k].time.game.seconds = player.prestige.prestigeTable[j].time.game.seconds
+                player.prestige.prestigeTable[k].time.game.minutes = player.prestige.prestigeTable[j].time.game.minutes
+                player.prestige.prestigeTable[k].time.game.hours = player.prestige.prestigeTable[j].time.game.hours
+                player.prestige.prestigeTable[k].time.game.days = player.prestige.prestigeTable[j].time.game.days
+
+                player.prestige.prestigeTable[k].time.real.timer = player.prestige.prestigeTable[j].time.real.timer
+                player.prestige.prestigeTable[k].time.real.seconds = player.prestige.prestigeTable[j].time.real.seconds
+                player.prestige.prestigeTable[k].time.real.minutes = player.prestige.prestigeTable[j].time.real.minutes
+                player.prestige.prestigeTable[k].time.real.hours = player.prestige.prestigeTable[j].time.real.hours
+                player.prestige.prestigeTable[k].time.game.days = player.prestige.prestigeTable[j].time.game.days
+            }
+            player.prestige.prestigeTable[0].prestiges = GAIN.prestige.reset()
+            player.prestige.prestigeTable[0].crystals = GAIN.crystal.reset()
+            player.prestige.prestigeTable[0].time.game.timer = player.time.game.prestige.timer
+            player.prestige.prestigeTable[0].time.game.seconds = player.prestige.prestigeTable[0].time.game.timer % 60 //39
+            player.prestige.prestigeTable[0].time.game.minutes = (player.prestige.prestigeTable[0].time.game.timer / 60) % 60
+            player.prestige.prestigeTable[0].time.game.hours = (player.prestige.prestigeTable[0].time.game.timer / 3600) % 24
+            player.prestige.prestigeTable[0].time.game.days = player.prestige.prestigeTable[0].time.game.timer / 86400
+
+            player.prestige.prestigeTable[0].time.real.timer = player.time.real.prestige.timer
+            player.prestige.prestigeTable[0].time.real.seconds = player.prestige.prestigeTable[0].time.real.timer % 60 //39
+            player.prestige.prestigeTable[0].time.real.minutes = (player.prestige.prestigeTable[0].time.real.timer / 60) % 60
+            player.prestige.prestigeTable[0].time.real.hours = (player.prestige.prestigeTable[0].time.real.timer / 3600) % 24
+            player.prestige.prestigeTable[0].time.game.days = player.prestige.prestigeTable[0].time.game.timer / 86400
+    
+            player.prestige.table_resets < 10 ? player.prestige.table_resets++ : player.prestige.table_resets
+
+            player.umultipliers = 0, player.upowers = 0
+            if (!player.challenge.activated == 0) {
+                if (player.prestige.singleUpgrades.includes(41)) player.umultipliers = 1
+                if (player.prestige.singleUpgrades.includes(42)) player.umultipliers = 2
+                if (player.prestige.singleUpgrades.includes(43)) player.umultipliers = 3
+                if (player.prestige.singleUpgrades.includes(44)) player.umultipliers = 4; player.upowers = 1
+            }
             
-        }
-        if (!restartChallenge.checked)
-        for (let i = 0; i < challengeActivated.length; i++) {
-            challengeActivated[i] = false
-        }
+            if (ACHS.has(40)) {
+                player.overdrive.consumed.type1 = Math.sqrt(player.overdrive.consumed.type1)
+            }
+            else {
+                player.overdrive.consumed.type1 = 0
+            }
+            if (player.time.real.prestige.timer < player.time.real.fastestPrestige.timer) {
+                player.time.real.fastestPrestige.timer = player.time.real.prestige.timer
+                player.time.real.fastestPrestige.timer = Math.max(player.time.real.fastestPrestige.timer, 0.05)
+                player.time.real.fastestPrestige.seconds = player.time.real.fastestPrestige.timer % 60 //39
+                player.time.real.fastestPrestige.minutes = (player.time.real.fastestPrestige.timer / 60) % 60
+                player.time.real.fastestPrestige.hours = (player.time.real.fastestPrestige.timer / 3600) % 24
+                player.time.real.fastestPrestige.days = player.time.real.fastestPrestige.timer / 86400
+            }
 
-        startChallenge('exit')
+            if (player.time.game.prestige.timer < player.time.game.fastestPrestige.timer) {
+                player.time.game.fastestPrestige.timer = player.time.game.prestige.timer
+                player.time.game.fastestPrestige.timer = Math.max(player.time.game.fastestPrestige.timer, 0.05)
+                player.time.game.fastestPrestige.seconds = player.time.game.fastestPrestige.timer % 60 //39
+                player.time.game.fastestPrestige.minutes = (player.time.game.fastestPrestige.timer / 60) % 60
+                player.time.game.fastestPrestige.hours = (player.time.game.fastestPrestige.timer / 3600) % 24
+                player.time.game.fastestPrestige.days = player.time.game.fastestPrestige.timer / 86400
+            }
+
+            if (player.prestige.singleUpgrades.includes(33) ) 
+                if (player.challenge.activated == 0 && player.challenge.completed.includes(2)) 
+                    player.shard.currency += 10 * 1000000*player.prestige.currency
+                else player.shard.currency += 10
+
+                if (!player.challenge.activated == 0) { //challenge completion
+                    if (!player.challenge.completed.includes(player.challenge.activated)){
+                        player.challenge.completed.push(player.challenge.activated)
+                    } 
+                    if (player.challenge.time[player.challenge.activated].timer >= player.time.real.prestige.timer) {
+                        player.challenge.time[player.challenge.activated].timer = player.time.real.prestige.timer
+    
+                        player.challenge.time[player.challenge.activated].seconds = player.challenge.time[player.challenge.activated].timer % 60 //39
+                        player.challenge.time[player.challenge.activated].minutes = (player.challenge.time[player.challenge.activated].timer / 60) % 60
+                        player.challenge.time[player.challenge.activated].hours = (player.challenge.time[player.challenge.activated].timer / 3600) % 24
+                        player.challenge.time[player.challenge.activated].days = player.challenge.time[player.challenge.activated].timer / 86400
+                    }
+                    if (player.challenge.activated == 9 && MISC.amount_of_upgrades.coin() == 0) if (!ACHS.has(38)) ACHS.unl(38)
+                    startChallenge(13)
+                }
+    
+            if (!restartChallenge.checked) player.challenge.activated = 0
+
+            if (MISC.automation.prestige.charged) {
+                MISC.automation.prestige.charged = false
+                AUTO.prestige.time = MISC.automation.prestige.activateTime()
+            }
+
+            
+            player.time.game.prestige.timer = 0
+            player.time.real.prestige.timer = 0
+
+            for (let i = 1; i <= 4; i++){
+                player.shop.items.used[i] = 0
+            }
+
+            LAYERS.doReset()
+        },
+        cost() { return 1e15 }
+    },
+    doForcedReset() {
+        player.overdrive.consumed.type1 = 0
+        player.umultipliers = 0
+        player.upowers = 0
+        player.coin.currency = 10
+    
+        player.clicks.prestige = 0
+    
+        for (let i = 1; i <= 4; i++){
+            player.shop.items.used[i] = 0
+        }
+    },
+    reset_time() {
+        player.time.game.prestige.timer = 0
+        player.time.real.prestige.timer = 0// do after Date.now()
+    },
+    doReset() {
+        player.coin.currency = 10
+        if (player.challenge.activated == 0) {
+            if (player.prestige.singleUpgrades.includes(11)) player.coin.currency = 1000
+            if (MILESTONES.has(7)) player.coin.currency = 1e6
+            if (MILESTONES.has(17)) player.coin.currency = 1e9
+        }
+        for (let i = 1; i <= 5; i++){
+            player.prestige.singleUpgrades.includes(21) && player.challenge.activated == 0 ? player.coin.upgrades[i] = 1 : player.coin.upgrades[i] = 0
+        }
+        if (!(player.challenge.activated == 0 && MILESTONES.has(9))) player.coin.singleUpgrades = []
     }
 }
 
-function doHarsherReset() { //for challenges
-    overdriveType1.percent = 0
-    overdriveType1.effect = 1
-    overdriveType1.price = 1000
-    overdriveType1.consumed = 0
-    upower = 1
-    umultiplier = 1
-    upowercount = 0
-    umultipliercount = 0
-    money = 10
-
-    prestigeSeconds = 0
-    prestigeMinutes = 0
-    prestigeHours = 0
-    prestigeDays = 0
-    prestigeTimer = 0
-
-    prestigeClicks = 0
-
-    firstShopItem.used = 0
-    secondShopItem.used = 0
-    thirdShopItem.used = 0
-    fourthShopItem.used = 0
-}
-
-function doHarshUmulti() {
-    umultipliercount--
-    doReset()
-    umultiplier = Math.pow(baseUmult, umultipliercount)
-    getCoinPerSecond = setInterval(getCoinPerSec, 50)
-    umultiplierTimer = 0
-}
-
-function doReset(){
-    clearInterval(getCoinPerSecond)
-    whatsYourCurrentTime()
-    prestigeMilestonesEffects[6] && !challengeActivate ? money = 1e6 : money = prestigeSinglesEffects[0]
-    challengeActivate ? money = 10 : money
-    gain = 1;
-    gainPerClick = 1;
-    gainPerSecond = 0;
-    gainPerSecondSave = 0
-    upgradeReset();
-    if (prestigeMilestonesEffects[8] === false || challengeActivate) {
-        singleUpgradePurchasedRemove()
-        singlesReset()
-    }
-    const buyablesArray = [firstBuyable, secondBuyable, thirdBuyable, fourthBuyable, fifthBuyable]
-    if (!challengeActivate) {
-        for (let i = 0; i < buyablesArray.length; i++){
-            buyablesArray[i].amount = prestigeSinglesEffects[4]
-            buyablesArray[i].baseEffect = prestigeSinglesEffects[4]
-            buyablesArray[i].amount != 0 ? buyablesArray[i].price = Math.round(buyablesArray[i].basePrice*Math.pow(buyablesArray[i].power, buyablesArray[i].amount)) : buyablesArray[i].price = buyablesArray[i].basePrice;
+const MILESTONES = {
+    unl(id) {
+        if (!player.prestige.milestones.includes(id)) {
+            player.prestige.milestones.push(id)
         }
+    },
+    has(id) { return player.prestige.milestones.includes(id) },
+    milestones: 20,
+    checkMilestones() {
+        for (let m = 1; m < this.milestones; m++) {
+            if (this.conditions[m] !== undefined ? this.conditions[m]() : false) this.unl(m)
+            let element = document.getElementById(`pMilestone${m}`)
+            if (this.has(m)) element.classList.add('completed')
+            else element.classList.remove('completed')
+        }
+    },
+    conditions: {
+        1() { return player.prestige.resets >= 1},
+        2() { return player.prestige.resets >= 2},
+        3() { return player.prestige.resets >= 3},
+        4() { return player.prestige.resets >= 4},
+        5() { return player.prestige.resets >= 5},
+        6() { return player.prestige.resets >= 10},
+        7() { return player.prestige.resets >= 15},
+        8() { return player.prestige.resets >= 20},
+        9() { return player.prestige.resets >= 25},
+        10() { return player.prestige.resets >= 30},
+        11() { return player.prestige.resets >= 40},
+        12() { return player.prestige.resets >= 50},
+        13() { return player.prestige.resets >= 60},
+        14() { return player.prestige.resets >= 75},
+        15() { return player.prestige.resets >= 100},
+        16() { return player.prestige.resets >= 1000},
+        17() { return player.prestige.resets >= 1e6},
+        18() { return player.prestige.resets >= 1e7},
+        19() { return player.prestige.resets >= 1e10},
+        20() { return player.prestige.resets >= 1e25},
     }
 }
 
 document.addEventListener("keydown", function(event) {
-    if ((event.key == "P" || event.key == "p" || event.key == "з" || event.key == "З") && totalCrystals >= 1) {
-    doPrestigeReset();
+    if ((event.key == "P" || event.key == "p" || event.key == "з" || event.key == "З") && player.prestige.total_currency >= 1) {
+    LAYERS.prestige.doReset();
     }
 });

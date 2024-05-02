@@ -1,0 +1,3005 @@
+buyable: {
+            coin: {
+                second: {
+                    amount: 0,
+                    price: 100,
+                    basePrice: 100,
+                    updateText: document.getElementById('buyableU2'),
+                    power: 1.3,
+                    bulkAmount: 1,
+                    bulkPrice: 1,
+                    superamount: 0,
+                    superprice: 750,
+                    superPriceText: "",
+                    superEffect: 0,
+                    superEffectText: '',
+                },
+                first: {
+                    amount: 0,
+                    price: 10,
+                    basePrice: 10,
+                    updateText: document.getElementById('buyableU1'),
+                    power: 1.099,
+                    freeAmount: 0,
+                    bulkAmount: 1,
+                    bulkPrice: 1,
+                    superamount: 0,
+                    superprice: 500,
+                    superPriceText: "",
+                    superEffect: 0,
+                    superEffectText: '',
+                },
+                third: {
+                    amount: 0,
+                    price: 500,
+                    basePrice: 500,
+                    updateText: document.getElementById('buyableU3'),
+                    power: 9.33,
+                    bulkAmount: 1,
+                    bulkPrice: 1,
+                    superamount: 0,
+                    superprice: 1000,
+                    superPriceText: "",
+                    superEffect: 0,
+                    superEffectText: '',
+                },
+                fourth: {
+                    amount: 0,
+                    price: 1000,
+                    basePrice: 1000,
+                    updateText: document.getElementById('buyableU4'),
+                    power: 1.85,
+                    bulkAmount: 1,
+                    bulkPrice: 1,
+                    superamount: 0,
+                    superprice: 1250,
+                    superPriceText: "",
+                    superEffect: 0,
+                    superEffectText: '',
+                    freeAmount: 0
+                },
+                fifth: {
+                    amount: 0,
+                    price: 5000,
+                    basePrice: 5000,
+                    updateText: document.getElementById('buyableU5'),
+                    power: 1.8,
+                    bulkAmount: 1,
+                    bulkPrice: 1,
+                    superamount: 0,
+                    superprice: 1500,
+                    superPriceText: "",
+                    superEffect: 0,
+                    superEffectText: '',
+                }
+            },
+            shop: {
+                first: {
+                    amount: 0,
+                    baseprice: 1.3,
+                    price: 1.3,
+                    power: 1.05,
+                    getEl: document.getElementById('shopBuyableU1'),
+                    priceText: " ",
+                    max: 100,
+                    bulkAmount: 1,
+                    bulkPrice: 1,
+                },
+                second: {
+                    amount: 0,
+                    baseprice: 1.3,
+                    price: 1.3,
+                    power: 1.05,
+                    getEl: document.getElementById('shopBuyableU2'),
+                    priceText: " ",
+                    max: 100,
+                    bulkAmount: 1,
+                    bulkPrice: 1,
+                },
+                third: {
+                    amount: 0,
+                    baseprice: 1.4,
+                    price: 1.4,
+                    power: 1.055,
+                    getEl: document.getElementById('shopBuyableU3'),
+                    priceText: " ",
+                    max: 100,
+                    bulkAmount: 1,
+                    bulkPrice: 1,
+                },
+                fourth: {
+                    amount: 0,
+                    baseprice: 1.5,
+                    price: 1.5,
+                    power: 1.055,
+                    getEl: document.getElementById('shopBuyableU4'),
+                    priceText: " ",
+                    max: 100,
+                    bulkAmount: 1,
+                    bulkPrice: 1,
+                },
+                fifth: {
+                    amount: 0,
+                    baseprice: 5,
+                    price: 5,
+                    power: 1.075,
+                    getEl: document.getElementById('shopBuyableU5'),
+                    priceText: " ",
+                    max: 50,
+                    bulkAmount: 1,
+                    bulkPrice: 1,
+                },
+                sixth: {
+                    amount: 0,
+                    baseprice: 10,
+                    price: 10,
+                    power: 1.175,
+                    getEl: document.getElementById('shopBuyableU6'),
+                    priceText: " ",
+                    max: 25,
+                    bulkAmount: 1,
+                    bulkPrice: 1,
+                },
+                seventh: {
+                    amount: 0,
+                    baseprice: 25,
+                    price: 25,
+                    power: 2,
+                    getEl: document.getElementById('shopBuyableU7'),
+                    priceText: " ",
+                    max: 5,
+                    bulkAmount: 1,
+                    bulkPrice: 1,
+                },
+                eighth: {
+                    amount: 0,
+                    baseprice: 10,
+                    price: 10,
+                    power: 1.11,
+                    getEl: document.getElementById('shopBuyableU8'),
+                    priceText: " ",
+                    max: 100,
+                    bulkAmount: 1,
+                    bulkPrice: 1,
+                },
+                ninth: {
+                    amount: 0,
+                    baseprice: 5,
+                    price: 5,
+                    power: 1.125,
+                    getEl: document.getElementById('shopBuyableU9'),
+                    priceText: " ",
+                    max: 100,
+                    bulkAmount: 1,
+                    bulkPrice: 1,
+                }
+            },
+            prestige: {
+                first: {
+                    amount: 0,
+                    price: 10,
+                    basePrice: 10,
+                    updateText: document.getElementById('pBuyableU1'),
+                    power: 10
+                },
+                second: {
+                    amount: 0,
+                    price: 20,
+                    basePrice: 20,
+                    updateText: document.getElementById('pBuyableU2'),
+                    power: 30
+                }
+            },
+            shard: {
+                first: {
+                    price: 1000,
+                    amount: 0,
+                    basePrice: 1000,
+                    power: 3.35,
+                    updateText: document.getElementById('shBuyableU1'),
+                },
+                second:{
+                    price: 1000,
+                    amount: 0,
+                    basePrice: 1000,
+                    power: 4.35,
+                    updateText: document.getElementById('shBuyableU2'),
+                },
+                third: {
+                    price: 5000,
+                    amount: 0,
+                    basePrice: 1000,
+                    power: 10,
+                    updateText: document.getElementById('shBuyableU3'),
+                }
+            }
+        },
+
+        single: {
+            coin: {
+                first: {
+                    amount: 0,
+                    
+                    price: 100000,
+                    updateText: document.getElementById('singleU1'),
+                    priceText: "<br> Стоимость: 25000 α-монет",
+                    superamount: 0,
+                    superprice: 2000,
+                    superPriceText: "",
+                    superEffect: 0,
+                    superEffectText: '',
+                },
+                second: {
+                    amount: 0,
+                    
+                    price: 3e6,
+                    updateText: document.getElementById('singleU2'),
+                    priceText: "<br> Стоимость: 250000 α-монет",
+                    superamount: 0,
+                    superprice: 2500,
+                    superPriceText: "",
+                    superEffect: 0,
+                    superEffectText: '',
+                },
+                third: {
+                    amount: 0,
+                    
+                    price: 5e6,
+                    updateText: document.getElementById('singleU3'),
+                    priceText: "<br> Стоимость: 1e6 α-монет",
+                    superamount: 0,
+                    superprice: 5000,
+                    superPriceText: "",
+                    superEffect: 0,
+                    superEffectText: '',
+                },
+                fourth: {
+                    amount: 0,
+                    
+                    price: 2.5e7,
+                    updateText: document.getElementById('singleU4'),
+                    priceText: "<br> Стоимость: 5e6 α-монет",
+                    superamount: 0,
+                    superprice: 7500,
+                    superPriceText: "",
+                    superEffect: 0,
+                    superEffectText: '',
+                },
+                fifth: {
+                    amount: 0,
+                    
+                    price: 6.5e8,
+                    updateText: document.getElementById('singleU5'),
+                    priceText: "<br> Стоимость: 2.5e7 α-монет",
+                    superamount: 0,
+                    superprice: 10000,
+                    superPriceText: "",
+                    superEffect: 0,
+                    superEffectText: '',
+                },
+                sixth: {
+                    amount: 0,
+                    
+                    price: 5e9,
+                    updateText: document.getElementById('singleU6'),
+                    priceText: "<br> Стоимость: 7.77e7 α-монет",
+                    superamount: 0,
+                    superprice: 15000,
+                    superPriceText: "",
+                    superEffect: 0,
+                    superEffectText: '',
+                },
+                seventh: {
+                    amount: 0,
+                    
+                    price: 5e10,
+                    updateText: document.getElementById('singleU7'),
+                    priceText: "<br> Стоимость: 1.5e8 α-монет",
+                    superamount: 0,
+                    superprice: 25000,
+                    superPriceText: "",
+                    superEffect: 1,
+                    superEffectText: '',
+                },
+                eighth: {
+                    amount: 0,
+                    
+                    price: 7e11,
+                    updateText: document.getElementById('singleU8'),
+                    priceText: "<br> Стоимость: 1e10 α-монет",
+                    superamount: 0,
+                    superprice: 50000,
+                    superPriceText: "",
+                    superEffect: 0,
+                    superEffectText: '',
+                },
+                ninth: {
+                    amount: 0,
+                    
+                    price: 2e12,
+                    updateText: document.getElementById('singleU9'),
+                    priceText: "<br> Стоимость: 1.11e11 α-монет",
+                    superamount: 0,
+                    superprice: 100000,
+                    superPriceText: "",
+                    superEffect: 1,
+                    superEffectText: '',
+                },
+                tenth: {
+                    amount: 0,
+                    
+                    price: 1e13,
+                    updateText: document.getElementById('singleU10'),
+                    priceText: "<br> Стоимость: 2e12 α-монет",
+                    superamount: 0,
+                    superprice: 250000,
+                    superPriceText: "",
+                    superEffect: 0,
+                    superEffectText: '',
+                }
+            },
+            shop: {
+                first: {
+                    amount: 0,
+                    price: 100,
+                    getEl: document.getElementById('shopSingleU1'),
+                    priceText: " "
+                },
+                second: {
+                    amount: 0,
+                    price: 2000,
+                    getEl: document.getElementById('shopSingleU2'),
+                    priceText: " "
+                },
+                third: {
+                    amount: 0,
+                    price: 2500,
+                    getEl: document.getElementById('shopSingleU3'),
+                    priceText: " "
+                }
+            },
+            prestige: {
+                first: {
+                    amount: 0,
+                    price: 1,
+                    updateText: document.getElementById('pSingleU1'),
+                    priceText: ""
+                },
+                second: {
+                    amount: 0,
+                    price: 2,
+                    updateText: document.getElementById('pSingleU2'),
+                    priceText: ""
+                },
+                third: {
+                    amount: 0,
+                    price: 2,
+                    updateText: document.getElementById('pSingleU3'),
+                    priceText: ""
+                },
+                fourth: {
+                    amount: 0,
+                    price: 3,
+                    updateText: document.getElementById('pSingleU4'),
+                    priceText: ""
+                },
+                fifth: {
+                    amount: 0,
+                    price: 1,
+                    updateText: document.getElementById('pSingleU5'),
+                    priceText: ""
+                },
+                sixth: {
+                    amount: 0,
+                    price: 2,
+                    updateText: document.getElementById('pSingleU6'),
+                    priceText: ""
+                },
+                seventh: {
+                    amount: 0,
+                    price: 3,
+                    updateText: document.getElementById('pSingleU7'),
+                    priceText: ""
+                },
+                eighth: {
+                    amount: 0,
+                    price: 5,
+                    updateText: document.getElementById('pSingleU8'),
+                    priceText: ""
+                },
+                ninth: {
+                    amount: 0,
+                    price: 1,
+                    updateText: document.getElementById('pSingleU9'),
+                    priceText: ""
+                },
+                tenth: {
+                    amount: 0,
+                    price: 2,
+                    updateText: document.getElementById('pSingleU10'),
+                    priceText: ""
+                },
+                eleventh: {
+                    amount: 0,
+                    price: 3,
+                    updateText: document.getElementById('pSingleU11'),
+                    priceText: ""
+                },
+                twelfth: {
+                    amount: 0,
+                    price: 5,
+                    updateText: document.getElementById('pSingleU12'),
+                    priceText: ""
+                },
+                thirteenth: {
+                    amount: 0,
+                    price: 10,
+                    updateText: document.getElementById('pSingleU13'),
+                    priceText: ""
+                },
+                fourteenth: {
+                    amount: 0,
+                    price: 100,
+                    updateText: document.getElementById('pSingleU14'),
+                    priceText: ""
+                },
+                fifteenth: {
+                    amount: 0,
+                    price: 1000,
+                    updateText: document.getElementById('pSingleU15'),
+                    priceText: ""
+                },
+                sixteenth: {
+                    amount: 0,
+                    price: 10000,
+                    updateText: document.getElementById('pSingleU16'),
+                    priceText: ""
+                }
+            },
+            shard: {
+                first: {
+                    price: 100000,
+                    amount: 0,
+                    updateText: document.getElementById('shSingleU1'),
+                    priceText: 'g'
+                },
+                second: {
+                    price: 1e6,
+                    amount: 0,
+                    updateText: document.getElementById('shSingleU2'),
+                    priceText: 'g'
+                },
+                third: {
+                    price: 1e8,
+                    amount: 0,
+                    updateText: document.getElementById('shSingleU3'),
+                    priceText: 'g'
+                },
+                fourth: {
+                    price: 1e12,
+                    amount: 0,
+                    updateText: document.getElementById('shSingleU4'),
+                    priceText: 'g'
+                },
+                fifth: {
+                    price: 1e100,
+                    amount: 0,
+                    updateText: document.getElementById('shSingleU5'),
+                    priceText: 'g'
+                },
+                sixth: {
+                    price: 1e308,
+                    amount: 0,
+                    updateText: document.getElementById('shSingleU6'),
+                    priceText: 'g'
+                }
+            },
+            superCrystal:{
+                first: {
+                    amount: 0,
+                    effect: 2,
+                    updateText: document.getElementById('sCSingleU1'),
+                },
+                second: {
+                    amount: 0,
+                    effect: 3,
+                    updateText: document.getElementById('sCSingleU2'),
+                },
+                third: {
+                    amount: 0,
+                    effect: 2,
+                    updateText: document.getElementById('sCSingleU3'),
+                },
+                fourth: {
+                    amount: 0,
+                    effect: 2,
+                    updateText: document.getElementById('sCSingleU4'),
+                },
+                fifth: {
+                    amount: 0,
+                    effect: 10,
+                    updateText: document.getElementById('sCSingleU5'),
+                },
+                sixth: {
+                    amount: 0,
+                    effect: 1e3,
+                    updateText: document.getElementById('sCSingleU6'),
+                },
+                seventh: {
+                    amount: 0,
+                    effect: 5,
+                    updateText: document.getElementById('sCSingleU7'),
+                },
+                eighth: {
+                    amount: 0,
+                    effect: 1,
+                    updateText: document.getElementById('sCSingleU8'),
+                },
+                ninth: {
+                    amount: 0,
+                    effect: 1,
+                    updateText: document.getElementById('sCSingleU9'),
+                }
+            }
+        },
+
+        upgrades: {
+        item: {
+            first: {
+                amount: 0,
+                price: 75,
+                getEl: document.getElementById('shopItem1'),
+                priceText: " ",
+                max: 5,
+                used: 0,
+            },
+            second: {
+                amount: 0,
+                price: 200,
+                getEl: document.getElementById('shopItem2'),
+                priceText: " ",
+                max: 3,
+                used: 0,
+            },
+            third: {
+                amount: 0,
+                price: 30,
+                getEl: document.getElementById('shopItem3'),
+                priceText: " ",
+                max: 10,
+                used: 0,
+            },
+            fourth: {
+                amount: 0,
+                price: 230,
+                getEl: document.getElementById('shopItem4'),
+                priceText: " ",
+                max: 3,
+                used: 0,
+            }
+        }
+    },
+
+    effect: {
+        buyable: {
+            coin: {
+                second: 0,
+                first: 0,
+                third: 0,
+                fourth: 0,
+                fifth: 0,
+            },
+            shop: {
+                first: 0,
+                second: 0,
+                third: 0,
+                fourth: 0,
+                fifth: 0,
+                sixth: 0,
+                seventh:0,
+                eighth: 0,
+                ninth: 0
+            },
+            prestige: {
+                first: 0,
+                second: 0,
+            },
+            shard: {
+                first: 0,
+                second: 0,
+                third: 0,
+            }
+        },
+        single: {
+            coin: {
+                first: 0,
+                second: 0,
+                third: 0,
+                fourth: 0,
+                fifth: 0,
+                sixth: 0,
+                seventh: 0,
+                eighth: 0,
+                ninth: 0,
+                tenth: 0
+            },
+            shard: {
+                first: 0,
+                second: 0,
+                third: 0,
+                fourth: 0,
+                fifth: 0,
+                sixth: 0,
+            }
+        },
+        misc: {
+            // midasFormula: Math.log1p(Math.pow(Math.pow(simulation.clicksAmount, 1.5), 1.125)),
+            // midasFormula2: Math.log1p(Math.pow(Math.pow(clickCount, 2), 1.125)),
+            superamounts: 0
+        }
+    },
+
+    minerals: {
+        first: {
+            amount: 0,
+            price: 0,
+            effect1: 0,
+            effect2: 0,
+            effect3: 0,
+        },
+        second: {
+            amount: 0,
+            price: 0,
+            effect1: 0,
+            effect2: 0,
+            effect3: 0,
+        },
+        third: {
+            amount: 0,
+            price: 0,
+            effect1: 0,
+            effect2: 0,
+            effect3: 0,
+        }
+    },
+
+    achievement: {
+        completion: [
+            false, false, false, false, false, false, false, false, false, false,
+            false, false, false, false, false, false, false, false, false, false,
+            false, false, false, false, false, false, false, false, false, false
+        ],
+        name: [
+            '"Без ходуль"', '"Первая тысяча"', '"Я вызываю полицию! Нет, я!"', '"Есть пробитие!"', '"Мастер-кликер"', '"Адская продуктивность"', '"Пора спать!"', '"Снова стена и снова пробитие!"', '"Миллионный множитель"', '"Финишная прямая?"',
+            '1placeholder1', '2placeholder2', '3placeholder3', '4placeholder4', '5placeholder5', '6placeholder6', '7placeholder7', '8placeholder8', '9placeholder9', '10placeholder10',
+            '1placeholder1', '2placeholder2', '3placeholder3', '4placeholder4', '5placeholder5', '6placeholder6', '7placeholder7', '8placeholder8', '9placeholder9', '10placeholder10'
+        ],
+        specialVariables: [
+            false, false
+        ],
+        completedRows: [false, false, false],
+        full: {
+            first: 0,
+            second: 0,
+            third: 0
+        },
+        count: 0,
+        rowCount: 0,
+        achievementBonus: [1, 1, 1],
+        bonus: document.getElementById('achBonus'),
+        notification: {
+            color: "yellow",
+            width: "350px",
+            text: '' //achNotify
+        }
+    }
+
+
+
+    let pinkCoin = {
+    currency: 0,
+    amount: 0,
+    totalAmount: 0,
+    price: 1,
+    requirement: 3000,
+    effect: 1,
+    boost: 1,
+}
+let greenCoin = {
+    currency: 0,
+    amount: 0,
+    totalAmount: 0,
+    price: 1,
+    requirement: 10,
+    effect: 1,
+    boost: 1,
+}
+let blueCoin = {
+    currency: 0,
+    amount: 0,
+    totalAmount: 0,
+    price: 1,
+    requirement: 5000,
+    effect: 1,
+    boost: 1,
+}
+let greyCoin = {
+    amount: 0,
+    effect: 0,
+    price: 1
+}
+
+// var secondBuyableEffect, firstBuyableEffect, thirdBuyableEffect, fourthBuyableEffect, fifthBuyableEffect 
+// var firstSingleEffect
+// var secondSingleEffect
+// var thirdSingleEffect
+// var fourthSingleEffect
+// var fifthSingleEffect
+// var sixthSingleEffect
+// var seventhSingleEffect
+// var eighthSingleEffect
+// var ninthSingleEffect
+// var tenthSingleEffect
+// var firstShopBuyableEffect = 0, secondShopBuyableEffect = 0, thirdShopBuyableEffect = 0, fourthShopBuyableEffect = 0, fifthShopBuyableEffect = 0, sixthShopBuyableEffect = 0, seventhShopBuyableEffect = 0, eighthShopBuyableEffect = 0, ninthShopBuyableEffect = 0
+// var firstPrestigeBuyableEffect = 0, secondPrestigeBuyableEffect = 0
+// var firstShardBuyableEffect = 1, secondShardBuyableEffect = 1, thirdShardBuyableEffect = [0, 0]
+// var firstShardSingleEffect = 1, secondShardSingleEffect = 1, thirdShardSingleEffect = 1, fourthShardSingleEffect = 1, fifthShardSingleEffect = 1, sixthShardSingleEffect = 1
+
+function checkUpgradesText () {
+    shopBulkBuy = parseInt(shopBulkBuyInput.value)
+
+    // challengeCompleted[3] && !challengeActivate ? firstBuyable.freeAmount = Math.pow(1.43, achCount) : firstBuyable.freeAmount = 0
+    // firstBuyable.freeAmount += secondMineral.effect3
+    // challengeActivated[6] || challengeActivated[9]  ? amountsOfUpgrades = firstBuyable.amount + secondBuyable.amount + thirdBuyable.amount + fourthBuyable.amount + fifthBuyable.amount : amountsOfUpgrades = firstBuyable.amount + secondBuyable.amount + thirdBuyable.amount + fourthBuyable.amount + fifthBuyable.amount + firstBuyable.freeAmount + fourthBuyable.freeAmount
+    // // const singleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
+    // for (let i = 0; i < singleArray.length; i++) {
+    //     if (singleArray[i].amount == 1)
+    //     amountsOfUpgrades++
+    // }
+    // firstBuyableEffect = (firstBuyable.baseEffect+firstBuyable.freeAmount) * (1+(secondBuyableEffect/10))
+    // secondBuyableEffect = secondBuyable.baseEffect * fourthSingleEffect
+    // thirdBuyableEffect = Math.pow(2, thirdBuyable.baseEffect)
+    // fifthBuyableEffect = 1+fifthBuyable.baseEffect/1000
+    // firstSingleEffect = 1-firstSingle.baseEffect+(Math.pow((firstSingle.baseEffect*(1+(Math.log10(total+10)/2.33))), ninthSingleEffect))
+    // secondSingleEffect = 1 - secondSingle.baseEffect + (secondSingle.baseEffect*midasFormula)
+    // thirdSingleEffect = 1 - thirdSingle.baseEffect + (thirdSingle.baseEffect*2)
+    // fourthSingleEffect = Math.pow(fourthSingle.baseEffect +(fourthSingle.baseEffect*(Math.pow((Math.log10(firstBuyable.amount+firstBuyable.freeAmount+10)/2), 1.8))), fourthSingle.amount)
+    // fifthSingleEffect = 1 - fifthSingle.baseEffect + (fifthSingle.baseEffect*(Math.pow(Math.log10(fourthBuyable.amount+10), 1.2)))
+    // fourthBuyableEffect = Math.pow(prestigeSinglesEffects[5], fourthBuyable.amount+fourthBuyable.freeAmount) * fifthSingleEffect
+    // sixthSingleEffect = 1-sixthSingle.baseEffect+(sixthSingle.baseEffect*(Math.log10(gainPerClick+10)/1.337))
+    // var sevEff
+    // seventhSingle.amount == 1 ? sevEff = Math.pow(1 + (0.2 * gameTimer/3600), achRow1.completion[6]) + Math.pow(amountsOfUpgrades+10, 0.9)/4.4 : sevEff = 1
+    // seventhSingleEffect = sevEff
+    // eighthSingleEffect = Math.pow((Math.pow((achCount-1) * 40, 0.3)), eighthSingle.amount)
+    // ninthSingleEffect = 1 - ninthSingle.baseEffect +(ninthSingle.baseEffect*(1 + (gameTimer/360000)))
+    // tenthSingleEffect = Math.pow(1.4, tenthSingle.baseEffect)
+
+    // midasFormula = Math.log1p(Math.pow(Math.pow(simulation.clicksAmount, 2), midasPower))
+    // midasFormula2 = Math.log1p(Math.pow(Math.pow(clickCount, 2), midasPower))
+
+    // if (prestigeSinglesEffects[6] == 0) {
+    // seventhSingleEffect = Math.min(sevEff, 100)
+    // }
+    // else seventhSingleEffect = softCap(seventhSingleEffect, 100*seventhSingle.superEffect, 0.5)
+
+    // ninthSingleEffect = Math.min(ninthSingleEffect, 1.25*ninthSingle.superEffect)
+
+    // achRow1.completion[5] ? secondBuyableEffect *= 1.1 : secondBuyableEffect = secondBuyableEffect
+    // achRow1.completion[8] ? midasPower = 1.175 : midasPower = 1.125
+
+    // firstShopBuyableEffect = firstShopBuyable.amount/50
+    // secondShopBuyableEffect = secondShopBuyable.amount/50
+    // thirdShopBuyableEffect = thirdShopBuyable.amount/66.66666
+    // fourthShopBuyableEffect = fourthShopBuyable.amount/100
+    // fifthShopBuyableEffect = fifthShopBuyable.amount/2.5
+    // sixthShopBuyableEffect = sixthShopBuyable.amount/25
+    // seventhShopBuyableEffect = seventhShopBuyable.amount/5
+    // eighthShopBuyableEffect = eighthShopBuyable.amount/50
+    // ninthShopBuyableEffect = ninthShopBuyable.amount/10
+
+    // bulkBuyShopBuyable(firstShopBuyable)
+    // bulkBuyShopBuyable(secondShopBuyable)
+    // bulkBuyShopBuyable(thirdShopBuyable)
+    // bulkBuyShopBuyable(fourthShopBuyable)
+    // bulkBuyShopBuyable(fifthShopBuyable)
+    // bulkBuyShopBuyable(sixthShopBuyable)
+    // bulkBuyShopBuyable(seventhShopBuyable)
+    // bulkBuyShopBuyable(eighthShopBuyable)
+    // bulkBuyShopBuyable(ninthShopBuyable)
+
+    // firstPrestigeBuyableEffect = Math.pow(2, firstPrestigeBuyable.amount)
+    // secondPrestigeBuyableEffect = Math.pow(3, secondPrestigeBuyable.amount)
+
+    // firstShardBuyableEffect = Math.pow(2, firstShardBuyable.amount)*secondShardSingleEffect
+    // secondShardBuyableEffect = Math.pow(3, secondShardBuyable.amount)*secondShardSingleEffect
+    // thirdShardBuyableEffect[0] = Math.pow(2, thirdShardBuyable.amount)
+    // thirdShardBuyableEffect[1] = Math.pow(1.75, thirdShardBuyable.amount)
+    // firstShardSingleEffect = Math.pow(1 + Math.log10(shards+10)/1.2, firstShardSingle.amount)
+    // secondShardSingleEffect = Math.pow(1 + Math.pow(brokenCrystals, 0.175), secondShardSingle.amount)
+    // thirdShardSingleEffect = Math.pow(1 + Math.pow(crystals, 0.3), thirdShardSingle.amount)
+    // fourthShardSingleEffect = Math.pow(1 + (Math.log10(Math.log10(shards+10)+10)/9), fourthShardSingle.amount)
+    // fifthShardSingleEffect = 1, sixthShardSingleEffect = 1
+
+    // !challengeActivate && challengeCompleted[4] ? challengeReward5 = 0.9 : challengeReward5 = 1
+
+    // priceReset(firstShardBuyable)
+    // priceReset(secondShardBuyable)
+    // priceReset(thirdShardBuyable)
+
+    // bulkBuyBuyable(firstBuyable)
+    // bulkBuyBuyable(secondBuyable)
+    // bulkBuyBuyable(thirdBuyable)
+    // bulkBuyBuyable(fourthBuyable)
+    // bulkBuyBuyable(fifthBuyable)
+
+    // priceUpdate(firstBuyable) 
+    // priceUpdate(secondBuyable) 
+    // priceUpdate(thirdBuyable) 
+    // priceUpdate(fourthBuyable) 
+    // priceUpdate(fifthBuyable) 
+
+    // firstSingle.price = 1e5
+    // secondSingle.price = 3e6
+    // thirdSingle.price = 5e6
+    // fourthSingle.price = 2.5e7
+    // fifthSingle.price = 6.5e8
+    // sixthSingle.price = 5e9
+    // seventhSingle.price = 5e10
+    // eighthSingle.price = 7e11
+    // ninthSingle.price = 2e12
+    // tenthSingle.price = 1e13
+
+    // pinkCoin.effect = (pinkCoin.totalAmount/25)*pinkCoin.boost
+    // greenCoin.effect = (greenCoin.totalAmount/5)*greenCoin.boost
+    // blueCoin.effect = (blueCoin.totalAmount/30)*blueCoin.boost
+
+    // pinkCoin.requirement = 3000
+    // greenCoin.requirement = 10
+    // blueCoin.requirement = 5000
+
+    // pinkCoin.requirement = Math.round(pinkCoin.requirement-pinkCoin.requirement/10*greyCoin.effect)
+    // greenCoin.requirement = Math.round(greenCoin.requirement-greenCoin.requirement/10*greyCoin.effect)
+    // blueCoin.requirement = Math.round(blueCoin.requirement-blueCoin.requirement/10*greyCoin.effect)
+
+    // greyCoin.amount = Math.min(pinkCoin.amount, greenCoin.amount, blueCoin.amount)
+
+    //superamounts = firstBuyable.superamount + secondBuyable.superamount + thirdBuyable.superamount + fourthBuyable.superamount + fifthBuyable.superamount + firstSingle.superamount + secondSingle.superamount + thirdSingle.superamount + fourthSingle.superamount + fifthSingle.superamount + sixthSingle.superamount + seventhSingle.superamount + eighthSingle.superamount + ninthSingle.superamount + tenthSingle.superamount
+
+    //simulation.multiplier = 1, critical.chance = 1, critical.gain = 2
+
+    // simulation.multiplier *= Math.pow(thirdSuperCrystalSingle.effect, thirdSuperCrystalSingle.amount)
+
+    // critical.chance += fourthSuperCrystalSingle.effect*fourthSuperCrystalSingle.amount
+    // critical.chance += eighthShopBuyableEffect
+    // critical.chance *= firstMineral.effect1
+
+    // critical.gain *= Math.pow(fifthSuperCrystalSingle.effect/2, fifthSuperCrystalSingle.amount)
+    // critical.gain *= 1+ninthShopBuyableEffect
+    // critical.gain *= firstMineral.effect2
+
+    // ninthSuperCrystalSingle.effect = Math.pow(10, superCrystal.total)
+
+    // superCrystal.price = (1e21 * Math.pow(1000, superCrystal.total))/thirdMineral.effect3
+
+    // rune.price = 1e12*Math.pow(10, rune.total)
+
+    // firstMineral.price = 1e25*Math.pow(100, firstMineral.amount)
+    // secondMineral.price = 1e25*Math.pow(100, secondMineral.amount)
+    // thirdMineral.price = 1e25*Math.pow(100, thirdMineral.amount)
+
+    // firstMineral.effect1 = 1 + firstMineral.amount/12.5
+    // firstMineral.effect2 = 1 + firstMineral.amount/2
+    // firstMineral.effect3 = 1 + firstMineral.amount/15
+
+    // secondMineral.effect1 = 1 + Math.pow(secondMineral.amount*9, 3)
+    // secondMineral.effect2 = Math.pow(43, secondMineral.amount/1.5) 
+    // secondMineral.effect3 = Math.pow(secondMineral.amount*13, 2)
+
+    // thirdMineral.effect1 = Math.pow(1.75, thirdMineral.amount/1.105)
+    // thirdMineral.effect2 = Math.pow(3, thirdMineral.amount/1.4)
+    // thirdMineral.effect3 = Math.pow(2, thirdMineral.amount/2.1)
+
+    // if (challengeActivated[4]) {
+    //     const singleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
+    //     for (let i = 0; i < singleArray.length; i++){
+    //         singleArray[i].price = singleArray[i].price * Math.pow(10, amountsOfUpgrades)
+    //     }
+    // }
+
+    // if (challengeActivated[5]) {
+    //     const singleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
+    //         for (let i = 0; i < singleArray.length; i++){
+    //             singleArray[i].price = singleArray[i].price / Math.pow(Math.log10(10+prestigeClicks), Math.log10(10+prestigeClicks*prestigeClicks))
+    //         }
+    // }
+    // superCoinChanceFormula = (1+fourthShopBuyableEffect)*prestigeSinglesEffects[2][0]*Math.pow(firstSuperCrystalSingle.effect, firstSuperCrystalSingle.amount)*firstMineral.effect3+(1*achRow1.completion[26])
+
+//*spiritEffects[1]*(1+blueCoin.effect)
+
+    // firstBuyable.amount && secondBuyable.superamount? firstBuyable.superEffect = 3*firstBuyable.amount * firstBuyable.superamount : firstBuyable.superEffect = 0
+    // firstBuyable.freeAmount += firstBuyable.superEffect
+
+    // const secondBuyableBaseEffect = secondBuyableEffect
+    // secondBuyable.amount && secondBuyable.superamount ? secondBuyable.superEffect = Math.log(secondBuyableBaseEffect+1) : secondBuyable.superEffect = 1
+    // secondBuyableEffect *= secondBuyable.superEffect 
+
+    // thirdBuyable.amount && thirdBuyable.superamount ? thirdBuyable.superEffect = 1+Math.log2(thirdBuyable.amount+1) : thirdBuyable.superEffect = 1
+    // critical.gain *= thirdBuyable.superEffect
+
+    // fourthBuyable.amount && fourthBuyable.superamount ? fourthBuyable.superEffect = Math.pow(1.075, umultipliercount) : fourthBuyable.superEffect = 1
+    // fourthBuyableEffect *= fourthBuyable.superEffect
+
+    // fifthBuyable.amount && fifthBuyable.superamount ? fifthBuyable.superEffect = fifthBuyableEffect : fifthBuyable.superEffect = 1
+    // critical.chance = Math.pow(critical.chance, fifthBuyable.superEffect)
+
+    // firstSingle.amount && firstSingle.superamount ? firstSingle.superEffect = 1+(Math.log10(player.coin.currency+10)/1.33) : firstSingle.superEffect = 1
+    // firstSingleEffect *= firstSingle.superEffect
+
+    // secondSingle.amount && secondSingle.superamount ? secondSingle.superEffect = midasFormula2 : secondSingle.superEffect = 1
+    // secondSingleEffect *= secondSingle.superEffect
+
+    // thirdSingle.amount && thirdSingle.superamount ? thirdSingle.superEffect = 2 : thirdSingle.superEffect = 1
+    // superCoinChanceFormula *= thirdSingle.superEffect
+
+    // fourthSingle.amount && fourthSingle.superamount ? fourthSingle.superEffect = 1+Math.pow((Math.log10(secondBuyable.amount+10)/2), 1.8) : fourthSingle.superEffect = 1
+    // fourthSingleEffect *= fourthSingle.superEffect
+
+    // fifthSingle.amount && fifthSingle.superamount ? fifthSingle.superEffect = fifthSingleEffect*10 : fifthSingle.superEffect = 0
+    // fourthBuyable.freeAmount = fifthSingle.superEffect
+
+    // sixthSingle.amount && sixthSingle.superamount ? sixthSingle.superEffect = critical.gain : sixthSingle.superEffect = 1
+    // sixthSingleEffect *= sixthSingle.superEffect
+
+    // seventhSingle.amount && seventhSingle.superamount ? seventhSingle.superEffect = 10000 : seventhSingle.superEffect = 1
+
+    // eighthSingle.amount && firstSingle.superamount ? eighthSingle.superEffect = 1+achRowCount/2 : eighthSingle.superEffect = 1
+    // eighthSingleEffect = Math.pow(eighthSingleEffect, eighthSingle.superEffect)
+
+    // ninthSingle.amount && ninthSingle.superamount ? ninthSingle.superEffect = 2 : ninthSingle.superEffect = 1
+    // tenthSingle.amount && tenthSingle.superamount ? tenthSingle.superEffect = 1 : tenthSingle.superEffect = 0
+}
+
+// function priceUpdate(buyable) {
+//     if (!challengeActivated[4]) buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount), challengeReward5))
+//     else buyable.price = Math.round(buyable.basePrice*Math.pow(buyable.power, amountsOfUpgrades))
+// }
+
+// function priceReset(buyable) {
+//     buyable.price = Math.round(buyable.basePrice*Math.pow(buyable.power, buyable.amount)/thirdShardSingleEffect)
+// }
+
+// function breakTheCrystal() {
+//     let valueTemp = parseFloat(howMuchCrystalsInput.value)
+//     let temp
+//     shardsTemp = 0
+//     if ((howMuchCrystalsInput.value).includes('%')){
+//         temp = crystals - (crystals * (valueTemp / 100))
+//         brokenCrystalsTemp = crystals - temp
+//         crystals = Math.floor(temp)
+//     }
+//     else {
+//         brokenCrystalsTemp = valueTemp
+//         crystals -= valueTemp
+//     }
+//     if (brokenCrystalsTemp < 1e6) {
+//         for (let i = 0; i < brokenCrystalsTemp; i++) {
+//             shardsTemp += randomNumber(shardChanceMinimum, shardChanceMaximum)
+//             if (shards == 0) {
+//                 shardsTemp = 100
+//             }
+//         }
+//     }
+//     else shardsTemp = ((shardChanceMinimum+shardChanceMaximum)/2)*brokenCrystalsTemp
+//     shardsTemp *= Math.pow(ninthSuperCrystalSingle.effect, ninthSuperCrystalSingle.amount)
+//     shards += shardsTemp
+//     brokenCrystals += brokenCrystalsTemp
+// }
+// var prestigeSinglesEffects = [10, 1, [1, 1], 2, 0, 1.05, 0, 0.045, 1, 1, [0.4, 0.5], 0, [0, 0]]
+// var prestigeMilestonesEffects = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+// function prestigeSingleEffect() {
+//     const prestigeSingleBoolean = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+//     const prestigeSingleNames = [firstPrestigeSingle, secondPrestigeSingle, thirdPrestigeSingle, fourthPrestigeSingle,
+//     fifthPrestigeSingle, sixthPrestigeSingle, seventhPrestigeSingle, eighthPrestigeSingle,
+//     ninthPrestigeSingle, tenthPrestigeSingle, eleventhPrestigeSingle, twelfthPrestigeSingle,
+//     thirteenthPrestigeSingle, fourteenthPrestigeSingle, fifteenthPrestigeSingle, sixteenthPrestigeSingle]
+//     const milestoneGoals = [1,2,3,4,5,10,15,20,25,30,40,50,60,75,100,1000,1e6,1e7,1e10,1e25]
+    // for (let i = 0; i < prestigeSingleNames.length; i++) {
+    //     if (prestigeSingleNames[i].amount === 1) prestigeSingleBoolean[i] = true
+    // }
+    // prestigeSingleBoolean[0] ? prestigeSinglesEffects[0] = 1000 : prestigeSinglesEffects[0]
+    // prestigeSingleBoolean[1] ? prestigeSinglesEffects[1] = Math.pow(Math.log10(gameTimer+10), 0.01): prestigeSinglesEffects[1]
+    // prestigeSingleBoolean[2] ? prestigeSinglesEffects[2][0] = 1.5 : prestigeSinglesEffects[2][0]
+    // prestigeSingleBoolean[2] ? prestigeSinglesEffects[2][1] = 2 : prestigeSinglesEffects[2][1]
+    // prestigeSingleBoolean[3] ? prestigeSinglesEffects[3] = 2.5 : prestigeSinglesEffects[3]
+    // prestigeSingleBoolean[4] ? prestigeSinglesEffects[4] = 1 : prestigeSinglesEffects[4]
+    // prestigeSingleBoolean[5] ? prestigeSinglesEffects[5] = 1.075 : prestigeSinglesEffects[5]
+    // prestigeSingleBoolean[6] ? prestigeSinglesEffects[6] = 1 : prestigeSinglesEffects[6]
+    // prestigeSingleBoolean[7] ? prestigeSinglesEffects[7] = 0.05 : prestigeSinglesEffects[7]
+    // if (!achRow1.completion[16]){
+    //     prestigeSingleBoolean[8] ? prestigeSinglesEffects[8] = Math.max(2*(1-(0.01/6)*prestigeTimer), 1) : prestigeSinglesEffects[8]
+    // }
+    // else prestigeSingleBoolean[8] ? prestigeSinglesEffects[8] = Math.max(10*(1-(0.01/6.6666666667)*prestigeTimer), 1) : prestigeSinglesEffects[8]
+    // prestigeSingleBoolean[9] ? prestigeSinglesEffects[9] = Math.log10(prestigeTimer+10) : prestigeSinglesEffects[9]
+    // prestigeSingleBoolean[10] ? prestigeSinglesEffects[10][0] = 0.45 : prestigeSinglesEffects[10][0]
+    // prestigeSingleBoolean[10] ? prestigeSinglesEffects[10][1] = 0.55 : prestigeSinglesEffects[10][1]
+    // prestigeSingleBoolean[11] ? prestigeSinglesEffects[11] = 10 : prestigeSinglesEffects[11]
+    // prestigeSingleBoolean[12] ? prestigeSinglesEffects[12][0] = 1 : prestigeSinglesEffects[12][0]
+    // prestigeSingleBoolean[13] ? prestigeSinglesEffects[12][0] = 2 : prestigeSinglesEffects[12][0]
+    // prestigeSingleBoolean[14] ? prestigeSinglesEffects[12][0] = 3 : prestigeSinglesEffects[12][0]
+    // prestigeSingleBoolean[15] ? prestigeSinglesEffects[12][0] = 4 : prestigeSinglesEffects[12][0]
+    // prestigeSingleBoolean[15] ? prestigeSinglesEffects[12][1] = 1 : prestigeSinglesEffects[12][1]
+    
+    // baseUmult = prestigeSinglesEffects[3]
+    // baseUpow = prestigeSinglesEffects[7]
+
+    // for (let i = 1; i < milestoneGoals.length+1; i++) {
+    //     checkPrestigeMilestone(`pMilestone${i}`, milestoneGoals[i-1], i-1)
+    // }
+    // if (prestigeMilestonesEffects[9]) {
+    //     prestigeSpecialRow.style.display = 'flex'
+    // }
+//     prestigeMilestonesEffects[1] ? singleAutomationContainer.style.display = 'flex' : singleAutomationContainer.style.display = 'none'
+//     prestigeMilestonesEffects[2] ? buyableAutomationContainer.style.display = 'flex' : buyableAutomationContainer.style.display = 'none'
+//     prestigeMilestonesEffects[3] ? umultiplierAutomationContainer.style.display = 'flex' : umultiplierAutomationContainer.style.display = 'none'
+//     prestigeMilestonesEffects[4] ? upowerAutomationContainer.style.display = 'flex' : upowerAutomationContainer.style.display = 'none'
+//     prestigeMilestonesEffects[7] ? prestigeAutomationContainer.style.display = 'flex' : prestigeAutomationContainer.style.display = 'none'
+// }
+
+
+// setInterval(achievementChecker, 100)
+// function achievementChecker() {
+//     const conditionArray = [
+//         firstBuyable.amount >= 1, player.coin.currency >= 1000, gainPerClick >= gainPerSecond * 20 * 2.01 && gainPerSecond > 0, umultipliercount >= 1, clickCount >= 1000, secondBuyableEffect >= 66.6, gameTimer >= 1000, upowercount >= 1, Math.pow(2, thirdBuyable.baseEffect) >= 1e6, tenthSingle.amount >= 1,
+
+//         prestigeCount >= 1, gameDays >= 3, brokenCrystals >= 100, noResets == true, umultipliercount >= 10, shardUnlockablePerSecond.percent == 100 && shardUnlockableClick.percent == 100, fastestPrestigeTimer <= 10, amountOfPrestigeUpgrades >= 16, overdriveType1.percent >= 25, prestigeMilestonesEffects[15] == true,
+
+//         challengeActivate == true, superCrystal.amount >= 1, firstMineral.amount >= 1 && secondMineral.amount >= 1 && thirdMineral.amount >= 1, challengeTime[0][3] + challengeTime[1][3] + challengeTime[2][3] + challengeTime[3][3] + challengeTime[4][3] + challengeTime[5][3] + challengeTime[6][3] + challengeTime[7][3] + challengeTime[8][3] + challengeTime[9][3] + challengeTime[10][3] <= 60, superamounts >= 1, challengeTime[11][3] <= 60, achRow1.specialVariables[1] == true, achRow1.specialVariables[0] == true, gainPerClick >= 4.20e69, overdriveType1.percent == 100
+//     ]
+//     for (let i = 0; i < 30; i++){
+//         formula = Math.floor(i/10)+1
+//         if (conditionArray[i] && !achRow1.completion[i])
+//         {
+//             achNotification(i);
+//             window[`achFullRow${formula}`]++
+//         }
+//     }
+
+    // achCount != 0 ? achievementBonus[0] = Math.pow((1+(achCount * 0.65 + achRowCount * 7.625)), Math.pow(1.5, tenthSingle.amount)) : achievementBonus[0] = 1
+    // achCount != 0 ? achievementBonus[1] = Math.pow(Math.pow((1+(achCount * 0.4 + achRowCount * 1.5)), Math.pow(1.5, tenthSingle.amount)), tenthSingle.superamount) : achievementBonus[1] = 1
+    // achCount != 0 ? achievementBonus[2] =Math.pow(Math.pow((1+(achCount * 1.2 + achRowCount * 11.99)), Math.pow(1.5, tenthSingle.amount)), tenthSingle.superamount) : achievementBonus[2] = 1
+        // achRow1.completion[4] == true ? maxbuy.style.display = 'block' : maxbuy.style.display = 'none' 
+    // achRow1.completion[4] == true ? maxOrNoUpgrades.style.display = 'block' : maxOrNoUpgrades.style.display = 'none'; 
+
+        // const variablesToParse = [
+    // //float
+    // { name: 'gainPerSecondSave', key: 'gainPerSecondSave', type: 'float' },
+    // { name: 'lastOnlineTime', key: 'lastOnlineTime', type: 'float' },
+    // { name: 'gainPerSecond', key: 'gainPerSecond', type: 'float' },
+    // { name: 'money', key: 'money', type: 'float' },
+    // { name: 'total', key: 'total', type: 'float' },
+    // { name: 'gainPerSecond', key: 'gainPerSecond', type: 'float' },
+    // { name: 'gainPerClick', key: 'gainPerClick', type: 'float' },
+    // { name: 'amountsOfUpgrades', key: 'amountsOfUpgrades', type: 'float' },
+    // { name: 'clickCount', key: 'clickCount', type: 'float' },
+    // { name: 'gameTimer', key: 'gameTimer', type: 'float' },
+    // { name: 'gameSeconds', key: 'gameSeconds', type: 'float' },
+    // { name: 'gameMinutes', key: 'gameMinutes', type: 'float' },
+    // { name: 'gameHours', key: 'gameHours', type: 'float' },
+    // { name: 'umultiplier', key: 'umultiplier', type: 'float' },
+    // { name: 'umultipliercount', key: 'umultipliercount', type: 'float' },
+    // { name: 'upower', key: 'upower', type: 'float' },
+    // { name: 'upowercount', key: 'upowercount', type: 'float' },
+    // { name: 'prestigeCount', key: 'prestigeCount', type: 'float' },
+    // { name: 'crystals', key: 'crystals', type: 'float' },
+    // { name: 'totalCrystals', key: 'totalCrystals', type: 'float' },
+    // { name: 'prestigeSeconds', key: 'prestigeSeconds', type: 'float' },
+    // { name: 'prestigeMinutes', key: 'prestigeMinutes', type: 'float' },
+    // { name: 'prestigeHours', key: 'prestigeHours', type: 'float' },
+    // { name: 'prestigeDays', key: 'prestigeDays', type: 'float' },
+    // { name: 'fastestPrestigeSeconds', key: 'fastestPrestigeSeconds', type: 'float' },
+    // { name: 'fastestPrestigeMinutes', key: 'fastestPrestigeMinutes', type: 'float' },
+    // { name: 'fastestPrestigeHours', key: 'fastestPrestigeHours', type: 'float' },
+    // { name: 'fastestPrestigeDays', key: 'fastestPrestigeDays', type: 'float' },
+    // { name: 'prestigeTimer', key: 'prestigeTimer', type: 'float' },
+    // { name: 'fastestPrestigeTimer', key: 'fastestPrestigeTimer', type: 'float' },
+    // { name: 'fastestNoMaxBuyPrestiges', key: 'fastestNoMaxBuyPrestiges', type: 'float' },
+    // { name: 'achFullRow1', key: 'achFullRow1', type: 'float' },
+    // { name: 'achFullRow2', key: 'achFullRow2', type: 'float' },
+    // { name: 'prestigeConditionCoins', key: 'prestigeConditionCoins', type: 'float' },
+    // { name: 'prestigeConditionTime', key: 'prestigeConditionTime', type: 'float' },
+    // { name: 'umultiplierTimer', key: 'umultiplierTimer', type: 'float' },
+    // { name: 'upowerTimer', key: 'upowerTimer', type: 'float' },
+    // { name: 'amountOfPrestigeUpgrades', key: 'amountOfPrestigeUpgrades', type: 'float' },
+    // { name: 'shards', key: 'shards', type: 'float' },
+    // { name: 'shardsPerSecond', key: 'shardsPerSecond', type: 'float' },
+    // { name: 'brokenCrystals', key: 'brokenCrystals', type: 'float' },
+    // { name: 'spirits', key: 'spirits', type: 'float' },
+    // { name: 'overdriveType1.percent', key: 'overdriveType1_percent', type: 'float' },
+    // { name: 'overdriveType1.effect', key: 'overdriveType1_effect', type: 'float' },
+    // { name: 'overdriveType1.price', key: 'overdriveType1_price', type: 'float' },
+    // { name: 'overdriveType1.consumed', key: 'overdriveType1_consumed', type: 'float' },
+    // { name: 'overdriveType2.percent', key: 'overdriveType2_percent', type: 'float' },
+    // { name: 'overdriveType2.effect', key: 'overdriveType2_effect', type: 'float' },
+    // { name: 'overdriveType2.price', key: 'overdriveType2_price', type: 'float' },
+    // { name: 'overdriveType2.consumed', key: 'overdriveType2_consumed', type: 'float' },
+    // { name: 'rune.amount', key: 'rune_amount', type: 'float' },
+    // { name: 'rune.total', key: 'rune_total', type: 'float' },
+    // { name: 'realDays', key: 'realDays', type: 'float' },
+    // { name: 'realHours', key: 'realHours', type: 'float' },
+    // { name: 'realMinutes', key: 'realMinutes', type: 'float' },
+    // { name: 'realSeconds', key: 'realSeconds', type: 'float' },
+    // { name: 'realTimer', key: 'realTimer', type: 'float' },
+    // { name: 'virusCoins', key: 'virusCoins', type: 'float' },
+    // { name: 'challengeStartedID', key: 'challengeStartedID', type: 'float' },
+    // { name: 'challengesCompleted', key: 'challengesCompleted', type: 'float' },
+    // { name: 'buyableInterval.effect', key: 'buyableInterval_effect', type: 'float' },
+    // { name: 'gameDays', key: 'gameDays', type: 'float' },
+    // { name: 'dailyTimer', key: 'dailyTimer', type: 'float' },
+    // { name: 'dailySeconds', key: 'dailySeconds', type: 'float' },
+    // { name: 'dailyMinutes', key: 'dailyMinutes', type: 'float' },
+    // { name: 'dailyHours', key: 'dailyHours', type: 'float' },
+    // { name: 'select.selectedIndex', key: 'select_selectedIndex', type: 'float' },
+    // { name: 'superCoins', key: 'superCoins', type: 'float' },
+    // { name: 'totalSuperCoins', key: 'totalSuperCoins', type: 'float' },
+    // { name: 'spentSuperCoins', key: 'spentSuperCoins', type: 'float' },
+    // { name: 'autoUmultiInput.value', key: 'autoUmultiInput_value', type: 'float' },
+    // { name: 'autoUpowerInput.value', key: 'autoUpowerInput_value', type: 'float' },
+    // { name: 'autoUpowerInput2.value', key: 'autoUpowerInput2_value', type: 'float' },
+    // { name: 'millisecondsNextDay', key: 'millisecondsNextDay', type: 'float' },
+    // { name: 'prestigeTableResets', key: 'prestigeTableResets', type: 'float' },
+    // { name: 'superCrystal.price', key: 'superCrystal_price', type: 'float' },
+    // { name: 'superCrystal.amount', key: 'superCrystal_amount', type: 'float' },
+    // { name: 'superCrystal.consumedShards', key: 'superCrystal_consumedShards', type: 'float' },
+    // { name: 'superCrystal.total', key: 'superCrystal_total', type: 'float' },
+    // { name: 'simulation.totalAmount', key: 'simulation_amount', type: 'float' },
+    // { name: 'critical.totalAmount', key: 'critical_amount', type: 'float' },
+    // // bool
+    // { name: 'maxOrNoVar', key: 'maxOrNoVar', type: 'bool' },
+    // { name: 'autoSingleUpgradeCheckbox.checked', key: 'autoSingleUpgradeCheckbox_checked', type: 'bool' },
+    // { name: 'autoBuyableUpgradeCheckbox.checked', key: 'autoBuyableUpgradeCheckbox_checked', type: 'bool' },
+    // { name: 'autoUmultiplierCheckbox.checked', key: 'autoUmultiplierCheckbox_checked', type: 'bool' },
+    // { name: 'autoUpowerCheckbox.checked', key: 'autoUpowerCheckbox_checked', type: 'bool' },
+    // { name: 'autoPrestigeCheckbox.checked', key: 'autoPrestigeCheckbox_checked', type: 'bool' },
+    // { name: 'restartChallenge.checked', key: 'restartChallenge_checked', type: 'bool' },
+    // //string
+    // { name: 'currentLanguage', key: 'currentLanguage', type: 'string' },
+    // { name: 'optionValue', key: 'optionValue', type: 'string' },
+    // { name: 'whichPrestigeMode', key: 'whichPrestigeMode', type: 'string' },
+    // { name: 'shopBulkBuy.value', key: 'shopBulkBuy_value', type: 'string' },
+    // //objects
+    // { name: 'firstBuyable', key: 'firstBuyable', type: 'object' },
+    // { name: 'secondBuyable', key: 'secondBuyable', type: 'object' },
+    // { name: 'thirdBuyable', key: 'thirdBuyable', type: 'object' },
+    // { name: 'fourthBuyable', key: 'fourthBuyable', type: 'object' },
+    // { name: 'fifthBuyable', key: 'fifthBuyable', type: 'object' },
+
+    // { name: 'firstSingle', key: 'firstSingle', type: 'object' },
+    // { name: 'secondSingle', key: 'secondSingle', type: 'object' },
+    // { name: 'thirdSingle', key: 'thirdSingle', type: 'object' },
+    // { name: 'fourthSingle', key: 'fourthSingle', type: 'object' },
+    // { name: 'fifthSingle', key: 'fifthSingle', type: 'object' },
+    // { name: 'sixthSingle', key: 'sixthSingle', type: 'object' },
+    // { name: 'seventhSingle', key: 'seventhSingle', type: 'object' },
+    // { name: 'eighthSingle', key: 'eighthSingle', type: 'object' },
+    // { name: 'ninthSingle', key: 'ninthSingle', type: 'object' },
+    // { name: 'tenthSingle', key: 'tenthSingle', type: 'object' },
+
+    // { name: 'challengeCompleted', key: 'challengeCompleted' },
+    // { name: 'shopBuyableCount', key: 'shopBuyableCount' },
+    // { name: 'shopItemCount', key: 'shopItemCount' },
+    // { name: 'tripleEventCoins', key: 'tripleEventCoins' },
+    // { name: 'superCrystalUpgradesCount', key: 'superCrystalUpgradesCount' },
+    // { name: 'prestigeTable', key: 'prestigeTable' },
+    // { name: 'mineralCount', key: 'mineralCount' },
+    // { name: 'buyableCount', key: 'buyableCount' },
+    // { name: 'singleCount', key: 'singleCount' },
+    // { name: 'progressBarGoals', key: 'progressBarGoals' },
+    // { name: 'codeChecks', key: 'codeChecks' },
+// ];
+//     for (const variable of variablesToParse) {
+//         if (parsedData.hasOwnProperty(variable.key) && (variable.name).includes('money')) {
+//             player[variable.name] = parseFloat(parsedData[variable.key])
+//         }
+        // if (parsedData.hasOwnProperty(variable.key+"_amount") && (variable.type).includes('object')) {
+        //     window[variable.name].amount = parseFloat(parsedData[variable.key+"_amount"]);
+        //     window[variable.name].baseEffect = parseFloat(parsedData[variable.key+"_baseEffect"]);
+        //     if ((variable.name).includes("Buyable")) {
+        //         window[variable.name].price = parseFloat(parsedData[variable.key+"_price"])
+        //     }
+        // }
+        // else if (parsedData.hasOwnProperty(variable.key)) {
+        //     if ((variable.type == 'float')) {
+        //         console.log("float key: " + parseFloat(parsedData[variable.key]))
+        //         (window[variable.name]) = parseFloat(parsedData[variable.key])
+        //         console.log("float value: " + window[variable.name] + " of " + variable.name)
+        //         console.log(window[variable.name])
+        //         console.log(variable.name)
+        //     }
+        //     else if ((variable.type == 'bool') || (variable.type == 'string')) {
+        //         window[variable.name] = parsedData[variable.key];
+        //     }
+        // }
+    }
+
+    // if (parsedData != null) {
+    // // gainPerSecondSave = parseFloat(parsedData.gainPerSecondSave)
+    // // lastOnlineTime = parseFloat(parsedData.lastOnlineTime)
+    // // gainPerSecond = parseFloat(parsedData.gainPerSecond)
+    // // player.coins = parseFloat(parsedData.player.coins);
+    // // autoSaving = parsedData.autoSaving;
+    // // total = parseFloat(parsedData.total);
+    // // gainPerSecond = parseFloat(parsedData.gainPerSecond);
+    // // gainPerClick = parseFloat(parsedData.gainPerClick);
+    // // currentLanguage = parsedData.currentLanguage;
+    // // maxOrNoVar = parsedData.maxOrNoVar;
+    // // amountsOfUpgrades = parseFloat(parsedData.amountsOfUpgrades);
+    // // clickCount = parseFloat(parsedData.clickCount);
+    // // gameTimer = parseFloat(parsedData.gameTimer);
+    // // gameSeconds = parseFloat(parsedData.gameSeconds);
+    // // gameMinutes = parseFloat(parsedData.gameMinutes);
+    // // gameHours = parseFloat(parsedData.gameHours);
+
+    // const buyableCount = ["first","second","third","fourth","fifth"];
+    // for (let i of buyableCount) {
+    // window[i+"Buyable"].amount = parseFloat(parsedData[i+"Buyable_amount"]);
+    // window[i+"Buyable"].baseEffect = parseFloat(parsedData[i+"Buyable_baseEffect"]);
+    // window[i+"Buyable"].price = parseFloat(parsedData[i+"Buyable_price"]);
+    // }
+
+    // const singleCount = ["first","second","third","fourth","fifth","sixth","seventh","eighth","ninth","tenth"];
+    // for (let i of singleCount) {
+    // window[i+"Single"].amount = parseFloat(parsedData[i+"Single_amount"]);
+    // window[i+"Single"].baseEffect = parseFloat(parsedData[i+"Single_baseEffect"]);
+    // }
+
+    // // umultiplier = parseFloat(parsedData.umultiplier);
+    // // umultipliercount = parseFloat(parsedData.umultipliercount);
+    // // upower = parseFloat(parsedData.upower);
+    // // upowercount = parseFloat(parsedData.upowercount);
+
+    // parsedData.versions == undefined ? version = ["0.9", "0.10", "0.10.1"] : version = JSON.parse(parsedData.versions)
+
+    // if (version[0] == "0.9") {
+    //     const shopBuyableCount = ["first","second","third","fourth"];
+    //     for (let i of shopBuyableCount) {
+    //     window[i+"ShopBuyable"].amount = parseFloat(parsedData[i+"ShopBuyable_amount"]);
+    //     window[i+"ShopBuyable"].price = parseFloat(parsedData[i+"ShopBuyable_price"]);
+    //     }
+    //     const shopSingleCount = ["first"];
+    //     for (let i of shopSingleCount) {
+    //     window[i+"ShopSingle"].amount = parseFloat(parsedData[i+"ShopSingle_amount"]);
+    //     window[i+"ShopSingle"].price = parseFloat(parsedData[i+"ShopSingle_price"]);
+    //     }
+    //     // overdriveType1.percent = parseFloat(parsedData.overdriveType1_percent);
+    //     // overdriveType1.effect = parseFloat(parsedData.overdriveType1_effect);
+    //     // overdriveType1.price = parseFloat(parsedData.overdriveType1_price);
+        
+    //     // gameDays = parseFloat(parsedData.gameDays);
+    //     // dailyTimer = parseFloat(parsedData.dailyTimer);
+    //     // dailySeconds = parseFloat(parsedData.dailySeconds);
+    //     // dailyMinutes = parseFloat(parsedData.dailyMinutes);
+    //     // dailyHours = parseFloat(parsedData.dailyHours);
+    //     // select.selectedIndex = parseFloat(parsedData.select_selectedIndex)
+    //     // superCoins = parseFloat(parsedData.superCoins)
+    //     // totalSuperCoins = parseFloat(parsedData.totalSuperCoins)
+    //     // spentSuperCoins = parseFloat(parsedData.spentSuperCoins)
+    //     optionValue = parsedData.optionValue;
+    // }
+
+    // const prestigeSingleCount = ["first","second","third","fourth","fifth","sixth","seventh","eighth","ninth","tenth","eleventh","twelfth","thirteenth","fourteenth","fifteenth","sixteenth"];
+    // const prestigeBuyableCount = ["first","second", "third"];
+    // const shardBars = ['shardUnlockablePerSecond', 'shardUnlockableClick', 'shardUnlockableBuyables', 'shardUnlockableSingles']
+
+    // if (version[1] === "0.10") {
+    //     // prestigeCount = parseFloat(parsedData.prestigeCount);
+    //     // crystals = parseFloat(parsedData.crystals);
+    //     // totalCrystals = parseFloat(parsedData.totalCrystals);
+
+    //     // prestigeSeconds = parseFloat(parsedData.prestigeSeconds);
+    //     // prestigeMinutes = parseFloat(parsedData.prestigeMinutes);
+    //     // prestigeHours = parseFloat(parsedData.prestigeHours);
+    //     // prestigeDays = parseFloat(parsedData.prestigeDays);
+
+    //     // fastestPrestigeSeconds = parseFloat(parsedData.fastestPrestigeSeconds);
+    //     // fastestPrestigeMinutes = parseFloat(parsedData.fastestPrestigeMinutes);
+    //     // fastestPrestigeHours = parseFloat(parsedData.fastestPrestigeHours);
+    //     // fastestPrestigeDays = parseFloat(parsedData.fastestPrestigeDays);
+
+    //     // prestigeTimer = parseFloat(parsedData.prestigeTimer);
+    //     // fastestPrestigeTimer = parseFloat(parsedData.fastestPrestigeTimer);
+    //     // fastestNoMaxBuyPrestiges = parseFloat(parsedData.fastestNoMaxBuyPrestiges);
+
+    //     // achFullRow1 = parseFloat(parsedData.achFullRow1)
+    //     // achFullRow2 = parseFloat(parsedData.achFullRow2)
+
+    //     // prestigeConditionCoins = parseFloat(parsedData.prestigeConditionCoins)
+    //     // prestigeConditionTime = parseFloat(parsedData.prestigeConditionTime)
+    //     whichPrestigeMode = parsedData.whichPrestigeMode
+
+    //     // umultiplierTimer = parseFloat(parsedData.umultiplierTimer);
+    //     // upowerTimer = parseFloat(parsedData.upowerTimer);
+
+    //     // amountOfPrestigeUpgrades = parseFloat(parsedData.amountOfPrestigeUpgrades)
+    //     // autoUmultiInput.value = parseFloat(parsedData.autoUmultiInput_value)
+    //     // autoUpowerInput.value = parseFloat(parsedData.autoUpowerInput_value)
+    //     // autoUpowerInput2.value = parseFloat(parsedData.autoUpowerInput2_value)
+
+    //     // shards = parseFloat(parsedData.shards)
+    //     // shardsPerSecond = parseFloat(parsedData.shardsPerSecond)
+    //     // brokenCrystals = parseFloat(parsedData.brokenCrystals)
+
+    //     mutedAudio = parsedData.mutedAudio
+    //     isMuted = parsedData.isMuted
+
+    //     // if (parsedData.spirits != null) spirits = parseFloat(parsedData.spirits)
+
+    //     for (let i = 0; i < 2; i++) {
+    //     window[prestigeBuyableCount[i]+"PrestigeBuyable"].amount = parseFloat(parsedData[prestigeBuyableCount[i]+"PrestigeBuyable_amount"]);
+    //     window[prestigeBuyableCount[i]+"PrestigeBuyable"].price = parseFloat(parsedData[prestigeBuyableCount[i]+"PrestigeBuyable_price"]);
+    //     }
+
+    //     for (let i of prestigeSingleCount) {
+    //     window[i+"PrestigeSingle"].amount = parseFloat(parsedData[i+"PrestigeSingle_amount"]);
+    //     }
+
+    //     for (let i of prestigeBuyableCount) {
+    //         window[i+"ShardBuyable"].amount = parseFloat(parsedData[i+"ShardBuyable_amount"]);
+    //         window[i+"ShardBuyable"].price = parseFloat(parsedData[i+"ShardBuyable_price"]);
+    //     }
+
+    //     for (let i = 0; i < 6; i++) {
+    //         window[prestigeSingleCount[i]+"ShardSingle"].amount = parseFloat(parsedData[prestigeSingleCount[i]+"ShardSingle_amount"]);
+    //     }
+
+    //     const intervalsCount = [
+    //         'singleInterval', 'buyableInterval', 'umultiplierInterval', 'upowerInterval', 'prestigeInterval'
+    //     ]
+
+    //     for (let i of intervalsCount) {
+    //         window[i].price = parseFloat(parsedData[i+"_price"]);
+    //         window[i].time = parseFloat(parsedData[i+"_time"]);
+    //         }
+
+    //     // buyableInterval.effect = parseFloat(parsedData.buyableInterval_effect);
+
+    //     const checkmarks = [
+    //         'autoSingleUpgradeCheckbox', 'autoBuyableUpgradeCheckbox', 'autoUmultiplierCheckbox', 'autoUpowerCheckbox', 'autoPrestigeCheckbox'
+    //         ]
+        
+    //     for (let i of checkmarks) {
+    //         document.getElementById(i).checked = parsedData[`${i}_checked`]
+    //     }
+
+    //     for (const i of shardBars) {
+    //         window[i].percent = parseFloat(parsedData[i+"_percent"])
+    //         window[i].consumedShards =  parseFloat(parsedData[i+"_consumedShards"])
+    //     }
+
+    // }
+    // // if (version[2] == "0.10.1") {
+    // //     // overdriveType1.consumed = parseFloat(parsedData.overdriveType1_consumed);
+    // // }
+    // if (version[3] == "0.11") {
+    //     // challengeStartedID = parseFloat(parsedData.challengeStartedID)
+    //     parsedData.challengeCompleted == undefined ? challengeCompleted = [false, false, false, false, false, false, false, false, false, false, false, false] : challengeCompleted = JSON.parse(parsedData.challengeCompleted)
+    //     parsedData.progressBarGoals == undefined ? progressBarGoals = [false, false, false] : progressBarGoals = JSON.parse(parsedData.progressBarGoals)
+    //     parsedData.codeChecks == undefined ? codeChecks = [false, false, false, false, false] : codeChecks = JSON.parse(parsedData.codeChecks)
+        
+    //     // challengesCompleted = parseFloat(parsedData.challengesCompleted)
+    //     // restartChallenge.checked = parsedData.restartChallenge_checked
+
+    //     // realDays = parseFloat(parsedData.realDays)
+    //     // realHours = parseFloat(parsedData.realHours)
+    //     // realMinutes = parseFloat(parsedData.realMinutes)
+    //     // realSeconds = parseFloat(parsedData.realSeconds)
+
+    //     // virusCoins = parseFloat(parsedData.virusCoins)
+
+    //     const shopBuyableCount = ["fifth","sixth","seventh"];
+    //     for (let i of shopBuyableCount) {
+    //     window[i+"ShopBuyable"].amount = parseFloat(parsedData[i+"ShopBuyable_amount"]);
+    //     window[i+"ShopBuyable"].price = parseFloat(parsedData[i+"ShopBuyable_price"]);
+    //     }
+    //     // shopBulkBuyInput.value = parsedData.shopBulkBuy_value
+
+    //     const shopItemCount = ["first","second","third","fourth"];
+    //     for (let i of shopItemCount) {
+    //         window[i+"ShopItem"].amount = parseFloat(parsedData[i+"ShopItem_amount"]);
+    //         window[i+"ShopItem"].used = parseFloat(parsedData[i+"ShopItem_used"]);
+    //         }
+
+    //     // const tripleEventCoins = ['pinkCoin', 'greenCoin', 'blueCoin', 'greyCoin']
+
+    //     // for (const i of tripleEventCoins) {
+    //     //     if (i !== 'greyCoin') {
+    //     //         window[i].currency = parseFloat(parsedData[`${i}_currency`])
+    //     //         window[i].amount = parseFloat(parsedData[`${i}_amount`])
+    //     //         window[i].totalAmount = parseFloat(parsedData[`${i}_totalAmount`])
+    //     //         window[i].price = parseFloat(parsedData[`${i}_price`])
+    //     //         window[i].boost = parseFloat(parsedData[`${i}_boost`])
+    //     //     }
+    //     //     else {
+    //     //         window[i].effect = parseFloat(parsedData[`${i}_effect`])
+    //     //         window[i].price = parseFloat(parsedData[`${i}_price`])
+    //     //     }
+    //     // }
+    // }
+    // if (version[4] == "0.12") {
+    //     const superCrystalUpgradesCount = ["first","second","third","fourth","fifth","sixth","seventh","eighth","ninth"]
+    //     for (let i of superCrystalUpgradesCount) {
+    //         window[i+"SuperCrystalSingle"].amount = parseFloat(parsedData[i+"SuperCrystalSingle_amount"]);
+    //     }
+    //     gotDailyReward = parsedData.gotDailyReward
+    //     // millisecondsNextDay = parsedData.millisecondsNextDay
+
+    //     parsedData.challengeTime == undefined ? challengeTime = [[99,59,59, 99999], [99,59,59,99999], [99,59,59,99999], [99,59,59,99999], [99,59,59,99999], [99,59,59,99999], [99,59,59,99999], [99,59,59,99999], [99,59,59,99999], [99,59,59,99999], [99,59,59,99999], [99,59,59,99999]] : challengeTime = JSON.parse(parsedData.challengeTime)
+    //     parsedData.prestigeTable == undefined ? prestigeTable = [['','',['','','',''],['','','','']],['','',['','','',''],['','','','']],['','',['','','',''],['','','','']],['','',['','','',''],['','','','']],['','',['','','',''],['','','','']],['','',['','','',''],['','','','']],['','',['','','',''],['','','','']],['','',['','','',''],['','','','']],['','',['','','',''],['','','','']],['','',['','','',''],['','','','']]] : prestigeTable = JSON.parse(parsedData.prestigeTable)
+
+    //     // prestigeTableResets = parseFloat(parsedData.prestigeTableResets)
+        
+    //     // superCrystal.price = parseFloat(parsedData.superCrystal_price)
+    //     // superCrystal.amount = parseFloat(parsedData.superCrystal_amount)
+    //     // superCrystal.consumedShards = parseFloat(parsedData.superCrystal_consumedShards)
+    //     // superCrystal.total = parseFloat(parsedData.superCrystal_total)
+
+    //     // simulation.clicksAmount = parseFloat(parsedData.simulation_amount)
+    //     // critical.totalAmount = parseFloat(parsedData.critical_amount)
+
+    //     // overdriveType2.percent = parseFloat(parsedData.overdriveType2_percent);
+    //     // overdriveType2.effect = parseFloat(parsedData.overdriveType2_effect);
+    //     // overdriveType2.price = parseFloat(parsedData.overdriveType2_price);
+    //     // overdriveType2.consumed = parseFloat(parsedData.overdriveType2_consumed);
+
+    //     // rune.amount = parseFloat(parsedData.rune_amount);
+    //     // rune.total = parseFloat(parsedData.rune_total);
+
+    //     const shopSingleCount = ["second", "third"];
+    //     for (let i of shopSingleCount) {
+    //     window[i+"ShopSingle"].amount = parseFloat(parsedData[i+"ShopSingle_amount"]);
+    //     window[i+"ShopSingle"].price = parseFloat(parsedData[i+"ShopSingle_price"]);
+    //     }
+    //     const shopBuyableCount = ["eighth","ninth"];
+    //     for (let i of shopBuyableCount) {
+    //     window[i+"ShopBuyable"].amount = parseFloat(parsedData[i+"ShopBuyable_amount"]);
+    //     window[i+"ShopBuyable"].price = parseFloat(parsedData[i+"ShopBuyable_price"]);
+    //     }
+
+    //     const mineralCount = ["first","second","third"];
+    //     for (let i of mineralCount) {
+    //     window[i+"Mineral"].amount = parseFloat(parsedData[i+"Mineral_amount"]);
+    //     window[i+"Mineral"].effect1 = parseFloat(parsedData[i+"Mineral_effect1"]);
+    //     window[i+"Mineral"].effect2 = parseFloat(parsedData[i+"Mineral_effect2"]);
+    //     window[i+"Mineral"].effect3 = parseFloat(parsedData[i+"Mineral_effect3"]);
+    //     }
+
+    //     const buyableCount = ["first","second","third","fourth","fifth"];
+    //     for (let i of buyableCount) {
+    //     window[i+"Buyable"].superamount = parseFloat(parsedData[i+"Buyable_superamount"]);
+    //     }
+
+    //     const singleCount = ["first","second","third","fourth","fifth","sixth","seventh","eighth","ninth","tenth"];
+    //     for (let i of singleCount) {
+    //     window[i+"Single"].superamount = parseFloat(parsedData[i+"Single_superamount"]);
+    //     }
+    //     }
+    // if (simulation.clicksAmount < clickCount) simulation.clicksAmount = clickCount
+// }
+}
+
+// function upgradeReset() {
+//     let arrayReset = [secondBuyable, firstBuyable, thirdBuyable, fourthBuyable, fifthBuyable]
+//     for (let i = 0; i < arrayReset.length; i++){
+//         arrayReset[i].amount = 0
+//         arrayReset[i].baseEffect = 0
+//     }
+//     firstBuyable.price = 10
+//     secondBuyable.price = 100
+//     thirdBuyable.price = 500
+//     fourthBuyable.price = 1000
+//     fifthBuyable.price = 5000
+// }
+
+// function singlesReset() {
+//     let arrayReset = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
+//     for (let i = 0; i < arrayReset.length; i++){
+//         arrayReset[i].amount = 0
+//         arrayReset[i].baseEffect = 0
+//     }
+//     firstSingle.price = 1e5
+//     secondSingle.price = 3e6
+//     thirdSingle.price = 5e6
+//     fourthSingle.price = 2.5e7
+//     fifthSingle.price = 6.5e8
+//     sixthSingle.price = 5e9
+//     seventhSingle.price = 5e10
+//     eighthSingle.price = 7e11
+//     ninthSingle.price = 2e12
+//     tenthSingle.price = 1e13
+// }
+
+function loadAutomations() {
+    for (let i = 0; i < autoSetIntervals.length; i++) {
+        clearInterval(autoSetIntervals[i]);
+        autoSetIntervals[i] = ''
+    }
+    if (singleCheckbox.checked) { 
+        autoSetIntervals[0] = setInterval(autoBuySingle, singleInterval.time); 
+    }
+    if (buyableCheckbox.checked) { 
+        autoSetIntervals[1] = setInterval(autoBuyBuyable, buyableInterval.time); 
+    }
+    if (umultiplierCheckbox.checked) {
+        if (umultiplierInterval.time != 50) {
+            autoSetIntervals[2] = setInterval(doUmulti, umultiplierInterval.time);
+        } else {
+            uMultiReautomate()
+        }
+    }
+    if (upowerCheckbox.checked) {
+        if (upowerInterval.time != 50) {
+            autoSetIntervals[3] = setInterval(doUpower, upowerInterval.time);
+        } else {
+            uPowerReautomate()
+        }
+    }
+    if (prestigeCheckbox.checked) {
+        if ((!prestigeMilestonesEffects[13]) || prestigeInterval.time != 50) {
+            autoSetIntervals[4] = setInterval(doPrestigeReset, prestigeInterval.time);
+        } else {
+            reautomate()
+        }
+    }
+}
+
+datasave = {
+    //     select_selectedIndex: select.selectedIndex,
+    //     gainPerSecondSave,
+    //     lastOnlineTime: lastOnlineTime-0,
+    //     money: player.coins,
+    //     total,
+    //     superCoins,
+    //     totalSuperCoins,
+    //     spentSuperCoins,
+    //     crystals,
+    //     totalCrystals,
+    //     prestigeCount,
+    //     autoSaving,
+    //     maxOrNoVar,
+    //     gainPerSecond,
+    //     gainPerClick,
+    //     clickCount,
+    //     gameTimer,
+    //     prestigeTimer,
+    //     fastestPrestigeTimer,
+    //     amountsOfUpgrades,
+    //     gameSeconds,
+    //     gameMinutes,
+    //     gameHours,
+    //     gameDays,
+    //     realSeconds,
+    //     realMinutes,
+    //     realHours,
+    //     realDays,
+    //     prestigeSeconds,
+    //     prestigeMinutes,
+    //     prestigeHours,
+    //     prestigeDays,
+    //     fastestPrestigeSeconds,
+    //     fastestPrestigeMinutes,
+    //     fastestPrestigeHours,
+    //     fastestPrestigeDays,
+    //     dailyTimer,
+    //     dailySeconds,
+    //     dailyMinutes,
+    //     dailyHours,
+    //     currentLanguage,
+    //     optionValue,
+    //     umultiplier,
+    //     umultipliercount,
+    //     upower,
+    //     upowercount,
+    //     achFullRow1,
+    //     achFullRow2, 
+    //     amountOfPrestigeUpgrades,
+    //     fastestNoMaxBuyPrestiges,
+    //     prestigeConditionCoins: parseFloat(prestigeConditionCoins),
+    //     prestigeConditionTime: parseFloat(prestigeConditionTime),
+    //     whichPrestigeMode,
+    //     umultiplierTimer,
+    //     upowerTimer,
+    //     autoUmultiInput_value: autoUmultiInput.value,
+    //     autoUpowerInput_value: autoUpowerInput.value,
+    //     autoUpowerInput2_value: autoUpowerInput2.value,
+    //     shards,
+    //     shardsPerSecond,
+    //     brokenCrystals,
+    //     mutedAudio,
+    //     isMuted,
+    //     spirits,
+    //     challengeStartedID,
+    //     virusCoins,
+    //     prestigeTableResets,
+    //     gotDailyReward,
+    //     millisecondsNextDay,
+    // };
+    
+    // const buyablesAndSingles = [
+    //     'firstBuyable', 'secondBuyable', 'thirdBuyable', 'fourthBuyable', 'fifthBuyable',
+    //     'firstSingle', 'secondSingle', 'thirdSingle', 'fourthSingle', 'fifthSingle',
+    //     'sixthSingle', 'seventhSingle', 'eighthSingle', 'ninthSingle', 'tenthSingle',
+    //     'firstShopBuyable', 'secondShopBuyable', 'thirdShopBuyable', 'fourthShopBuyable', 'fifthShopBuyable', 'sixthShopBuyable', 'seventhShopBuyable','eighthShopBuyable','ninthShopBuyable',
+    //     'firstShopSingle','secondShopSingle','thirdShopSingle',
+    //     'firstPrestigeSingle', 'secondPrestigeSingle', 'thirdPrestigeSingle', 'fourthPrestigeSingle',
+    //     'fifthPrestigeSingle', 'sixthPrestigeSingle', 'seventhPrestigeSingle', 'eighthPrestigeSingle',
+    //     'ninthPrestigeSingle', 'tenthPrestigeSingle', 'eleventhPrestigeSingle', 'twelfthPrestigeSingle',
+    //     'thirteenthPrestigeSingle', 'fourteenthPrestigeSingle', 'fifteenthPrestigeSingle', 'sixteenthPrestigeSingle',
+    //     'firstPrestigeBuyable', 'secondPrestigeBuyable',
+    //     'firstShardBuyable', 'secondShardBuyable', 'thirdShardBuyable',
+    //     'firstShardSingle', 'secondShardSingle', 'thirdShardSingle', 'fourthShardSingle', 'fifthShardSingle', 'sixthShardSingle',
+    //     'firstShopItem', 'secondShopItem', 'thirdShopItem', 'fourthShopItem',
+    //     'firstSuperCrystalSingle', 'secondSuperCrystalSingle', 'thirdSuperCrystalSingle', 'fourthSuperCrystalSingle', 'fifthSuperCrystalSingle', 'sixthSuperCrystalSingle', 'seventhSuperCrystalSingle', 'eighthSuperCrystalSingle', 'ninthSuperCrystalSingle', 
+    //     'firstMineral', 'secondMineral', 'thirdMineral'
+    // ];
+
+    // const intervals = [
+    //     'singleInterval', 'buyableInterval', 'umultiplierInterval', 'upowerInterval', 'prestigeInterval'
+    // ]
+
+    // const checkmarks = [
+    //     'autoSingleUpgradeCheckbox', 'autoBuyableUpgradeCheckbox', 'autoUmultiplierCheckbox', 'autoUpowerCheckbox', 'autoPrestigeCheckbox'
+    // ]
+
+    // const shardBars = ['shardUnlockablePerSecond', 'shardUnlockableClick', 'shardUnlockableBuyables', 'shardUnlockableSingles']
+
+    // for (const i of shardBars) {
+    //     datasave[`${i}_percent`] = window[i].percent
+    //     datasave[`${i}_consumedShards`] = window[i].consumedShards
+    // }
+
+
+    // for (const i of checkmarks) {
+    //     datasave[`${i}_checked`] = document.getElementById(i).checked
+    // }
+
+    // datasave.restartChallenge_checked = restartChallenge.checked
+
+    // for (const i of intervals) {
+    //     datasave[`${i}_time`] = window[i].time;
+    //     datasave[`${i}_price`] = window[i].price;
+    //     if (window[i].hasOwnProperty('effect')) {
+    //         datasave[`${i}_effect`] = window[i].effect;
+    //     }
+    // }
+    
+    // for (const item of buyablesAndSingles) {
+    //     datasave[`${item}_amount`] = window[item].amount;
+    //     if (window[item].hasOwnProperty('baseEffect') && !(item.includes('ShardSingle'))) {
+    //         datasave[`${item}_baseEffect`] = window[item].baseEffect;
+    //     }
+    //     if (window[item].hasOwnProperty('price') && !(item.includes('ShardSingle')) && !(item.includes('Item'))) {
+    //         datasave[`${item}_price`] = window[item].price;
+    //     }
+    //     if (window[item].hasOwnProperty('used')) {
+    //         datasave[`${item}_used`] = window[item].used;
+    //     }
+    //     if (item.includes('Mineral')) {
+    //         datasave[`${item}_effect1`] = window[item].effect1;
+    //         datasave[`${item}_effect2`] = window[item].effect2;
+    //         datasave[`${item}_effect3`] = window[item].effect3;
+    //     }
+    //     if (window[item].hasOwnProperty('superamount')) {
+    //         datasave[`${item}_superamount`] = window[item].superamount;
+    //     }
+    // }
+    
+    // datasave.overdriveType1_percent = overdriveType1.percent;
+    // datasave.overdriveType1_effect = overdriveType1.effect;
+    // datasave.overdriveType1_price = overdriveType1.price;
+    // datasave.overdriveType1_consumed = overdriveType1.consumed;
+
+    // datasave.overdriveType2_percent = overdriveType2.percent;
+    // datasave.overdriveType2_effect = overdriveType2.effect;
+    // datasave.overdriveType2_price = overdriveType2.price;
+    // datasave.overdriveType2_consumed = overdriveType2.consumed;
+
+    // datasave.rune_amount = rune.amount
+    // datasave.rune_total = rune.total
+
+    // datasave.challengesCompleted = challengesCompleted;
+
+    // datasave.versions = JSON.stringify(version)
+
+    // datasave.challengeCompleted = JSON.stringify(challengeCompleted)
+
+    // datasave.progressBarGoals = JSON.stringify(progressBarGoals)
+
+    // datasave.codeChecks = JSON.stringify(codeChecks)
+
+    // datasave.challengeTime = JSON.stringify(challengeTime)
+
+    // datasave.prestigeTable = JSON.stringify(prestigeTable)
+
+    // datasave.shopBulkBuy_value = shopBulkBuyInput.value
+
+    // datasave.superCrystal_price = superCrystal.price
+    // datasave.superCrystal_amount = superCrystal.amount
+    // datasave.superCrystal_consumedShards = superCrystal.consumedShards
+    // datasave.superCrystal_total = superCrystal.total
+
+    // datasave.simulation_amount = simulation.clicksAmount
+
+    // datasave.critical_amount = critical.totalAmount
+
+    // const tripleEventCoins = ['pinkCoin', 'greenCoin', 'blueCoin', 'greyCoin']
+
+    // for (const i of tripleEventCoins) {
+    //     if (i !== 'greyCoin') {
+    //         datasave[`${i}_currency`] = window[i].currency
+    //         datasave[`${i}_amount`] = window[i].amount
+    //         datasave[`${i}_totalAmount`] = window[i].totalAmount
+    //         datasave[`${i}_price`] = window[i].price
+    //         datasave[`${i}_boost`] = window[i].boost
+    //     }
+    //     else {
+    //         datasave[`${i}_effect`] = window[i].effect
+    //         datasave[`${i}_price`] = window[i].price
+    //     }
+    // }
+
+    // return datasave;
+
+    // function doUmulti () {
+//     if (firstBuyable.amount >= umultiplierCost){
+//         if (!prestigeMilestonesEffects[11]) {
+//             umultipliercount++
+//         }
+//         else {
+//             while (firstBuyable.amount >= umultiplierCost) {
+//                 umultipliercount++
+//                 if (!challengeActivate && challengeCompleted[11]) {
+//                     umultipliercount >= 20 ? umultiplierCost = (100 + (40 * umultipliercount)) * (1+((umultipliercount-19)/50)) : umultiplierCost = 100 + (40 * umultipliercount)
+//                 }
+//                 else  {
+//                     umultipliercount >= 20 ? umultiplierCost = (100 + (50 * umultipliercount)) * (1+((umultipliercount-19)/50)) : umultiplierCost = 100 + (50 * umultipliercount)
+//                 }
+//                 if (challengeActivated[11]) break
+//             }
+//         }
+//         if (!prestigeMilestonesEffects[18] || challengeActivate) {
+//             doReset()
+//             getCoinPerSecond = setInterval(getCoinPerSec, 50)
+//         }
+//         umultiplier = Math.pow(baseUmult, umultipliercount)
+//         umultiplierTimer = 0
+//     }
+// }
+
+
+// function doUpower () {
+//     if ((firstBuyable.amount >= upowerCost) && (umultipliercount >= 4)){
+
+//         if (!prestigeMilestonesEffects[12]) {
+//             upowercount++
+//         }
+//         else {
+//             while (firstBuyable.amount >= upowerCost) {
+//                 upowercount++
+//                 if (!challengeActivate && challengeCompleted[11]) {
+//                     upowercount >= 10 ? upowerCost = (250 + (80 * upowercount)) * (1+((upowercount-9)/7.5)) : upowerCost = 250 + (80 * upowercount)
+//                 }
+//                 else  {
+//                     upowercount >= 10 ? upowerCost = (250 + (100 * upowercount)) * (1+((upowercount-9)/7.5)) : upowerCost = 250 + (100 * upowercount)
+//                 }
+//                 if (achRow1.completion[13]) {
+//                     upowerCost = upowerCost - (10 * (1+upowercount))
+//                 }
+//                 if (challengeActivated[11]) break
+//             }
+//         }
+//         if (!prestigeMilestonesEffects[19] || challengeActivate) {
+//             doReset()
+//             getCoinPerSecond = setInterval(getCoinPerSec, 50)
+//             umultiplier = 1
+//             if (!challengeActivate) umultipliercount = prestigeSinglesEffects[12][0]
+//             else umultipliercount = 0
+//         }
+//         upower = 1 + baseUpow*upowercount
+//         upowerTimer = 0
+//     }
+// }
+
+// function doPrestigeReset(){
+//     if (player.coin.currency >= 1e15){
+//         if (upowercount == prestigeSinglesEffects[12][1]) {
+//             noResets = true
+//         }
+
+//         if (challengeActivate) { //challenge completion
+//             challengeCompleted[challengeStartedID-1] == false ? challengesCompleted++ : challengesCompleted
+//             challengeCompleted[challengeStartedID-1] = true
+//             window[`challenge${challengeStartedID}Start`].innerHTML = 'Пройден'
+//             window[`challenge${challengeStartedID}Start`].style.backgroundColor = '#3dde3d'
+//             if (challengeTime[challengeStartedID-1][3] >= prestigeTimer) {
+//                 challengeTime[challengeStartedID-1][0] = prestigeHours
+//                 challengeTime[challengeStartedID-1][1] = prestigeMinutes
+//                 challengeTime[challengeStartedID-1][2] = prestigeSeconds
+//                 challengeTime[challengeStartedID-1][3] = prestigeTimer
+//             }
+//             if (challengeStartedID == 9 && amountsOfUpgrades == 0) achRow1.specialVariables[0] == true
+//         }
+
+//         if (challengeActivate) startChallenge('exit')
+
+//         checkPrestigesTemp()
+//         checkCrystalsTemp()
+//         progressBarGoals[0] = true
+//         crystals += crystalsTemp
+//         totalCrystals += crystalsTemp
+//         prestigeCount += 1 * prestigeCountMultiplier
+//         doReset()
+//         getCoinPerSecond = setInterval(getCoinPerSec, 50)
+
+//         for (let i = 1; i < prestigeTableResets; i++){
+//                 prestigeTable[prestigeTableResets-i][0] = prestigeTable[prestigeTableResets-i-1][0]
+//                 prestigeTable[prestigeTableResets-i][1] = prestigeTable[prestigeTableResets-i-1][1]
+//                 prestigeTable[prestigeTableResets-i][2][0] = prestigeTable[prestigeTableResets-i-1][2][0]
+//                 prestigeTable[prestigeTableResets-i][2][1] = prestigeTable[prestigeTableResets-i-1][2][1]
+//                 prestigeTable[prestigeTableResets-i][2][2] = prestigeTable[prestigeTableResets-i-1][2][2]
+//                 prestigeTable[prestigeTableResets-i][2][3] = prestigeTable[prestigeTableResets-i-1][2][3]
+//                 prestigeTable[prestigeTableResets-i][3][0] = prestigeTable[prestigeTableResets-i-1][3][0]
+//                 prestigeTable[prestigeTableResets-i][3][1] = prestigeTable[prestigeTableResets-i-1][3][1]
+//                 prestigeTable[prestigeTableResets-i][3][2] = prestigeTable[prestigeTableResets-i-1][3][2]
+//                 prestigeTable[prestigeTableResets-i][3][3] = prestigeTable[prestigeTableResets-i-1][3][3]
+//         }
+//         prestigeTable[0][0] = prestigeCountMultiplier
+//         prestigeTable[0][1] = crystalsTemp
+//         prestigeTable[0][2][0] = prestigeHours
+//         prestigeTable[0][2][1] = prestigeMinutes
+//         prestigeTable[0][2][2] = prestigeSeconds
+//         prestigeTable[0][2][3] = prestigeTimer
+//         prestigeTable[0][3][0] = prestigeRealHours
+//         prestigeTable[0][3][1] = prestigeRealMinutes
+//         prestigeTable[0][3][2] = prestigeRealSeconds
+//         prestigeTable[0][3][3] = prestigeRealTimer
+
+//         prestigeTableResets < 10 ? prestigeTableResets++ : prestigeTableResets
+        
+//         pinkCoin.currency++
+//         upower = 1
+//         umultiplier = 1
+//         upowercount = prestigeSinglesEffects[12][1]
+//         umultipliercount = prestigeSinglesEffects[12][0]
+//         if (achRow1.completion[29]) {
+//             overdriveType1.percent /= 2
+//             overdriveType1.consumed = Math.sqrt(overdriveType1.consumed)
+//             overdriveType1.effect = 1+Math.pow(2, overdriveType1.percent/2.5)/9 
+//             overdriveType1.price = 1000+Math.pow(10, overdriveType1.percent)/20*2
+//         }
+//         else {
+//             overdriveType1.percent = 0
+//             overdriveType1.consumed = 0
+//             overdriveType1.effect = 1
+//             overdriveType1.price = 1000
+//         }
+//         if (prestigeTimer < fastestPrestigeTimer) {
+//             fastestPrestigeSeconds = prestigeSeconds
+//             fastestPrestigeMinutes = prestigeMinutes
+//             fastestPrestigeHours = prestigeHours
+//             fastestPrestigeDays = prestigeDays
+//             fastestPrestigeTimer = prestigeTimer
+//         }
+//         fastestPrestigeSeconds = Math.max(fastestPrestigeSeconds, 0.05)
+//         fastestPrestigeTimer = Math.max(fastestPrestigeTimer, 0.05)
+//         !challengeActivate && challengeCompleted[1] ? shards += prestigeSinglesEffects[11]*(1000000*crystals) : shards += prestigeSinglesEffects[11]
+//         if (didMaxBuy == false){
+//             noMaxBuyPrestiges = 60 / (prestigeTimer+0.05)
+//             prestigeMilestonesEffects[14] ? noMaxBuyPrestiges *= prestigeCountMultiplier : noMaxBuyPrestiges // prestiges per min
+//         }
+//         if (noMaxBuyPrestiges > fastestNoMaxBuyPrestiges) {
+//             fastestNoMaxBuyPrestiges = noMaxBuyPrestiges
+//         }
+
+
+//         didMaxBuy = false
+
+//         if (!restartChallenge.checked)
+//         for (let i = 0; i < challengeActivated.length; i++) {
+//             challengeActivated[i] = false
+//         }
+
+//         prestigeSeconds = 0
+//         prestigeMinutes = 0
+//         prestigeHours = 0
+//         prestigeDays = 0
+//         prestigeTimer = 0
+//         prestigeRealSeconds = 0
+//         prestigeRealMinutes = 0
+//         prestigeRealHours = 0
+//         prestigeRealTimer = 0
+//     }
+// }
+
+// function doHarsherReset() { //for challenges
+//     overdriveType1.percent = 0
+//     overdriveType1.effect = 1
+//     overdriveType1.price = 1000
+//     overdriveType1.consumed = 0
+//     upower = 1
+//     umultiplier = 1
+//     upowercount = 0
+//     umultipliercount = 0
+//     player.coin.currency = 10
+
+//     prestigeSeconds = 0
+//     prestigeMinutes = 0
+//     prestigeHours = 0
+//     prestigeDays = 0
+//     prestigeTimer = 0
+
+//     prestigeClicks = 0
+
+//     firstShopItem.used = 0
+//     secondShopItem.used = 0
+//     thirdShopItem.used = 0
+//     fourthShopItem.used = 0
+// }
+
+// function doHarshUmulti() {
+//     umultipliercount--
+//     doReset()
+//     umultiplier = Math.pow(baseUmult, umultipliercount)
+//     getCoinPerSecond = setInterval(getCoinPerSec, 50)
+//     umultiplierTimer = 0
+// }
+
+// function doReset(){
+//     clearInterval(getCoinPerSecond)
+//     whatsYourCurrentTime()
+//     prestigeMilestonesEffects[6] && !challengeActivate ? player.coin.currency = 1e6 : player.coin.currency = prestigeSinglesEffects[0]
+//     prestigeMilestonesEffects[16] && !challengeActivate ? player.coin.currency = 1e9 : player.coin.currency = prestigeSinglesEffects[0]
+//     challengeActivate ? player.coin.currency = 10 : player.coin.currency
+//     gain = 1;
+//     gainPerClick = 1;
+//     gainPerSecond = 0;
+//     gainPerSecondSave = 0
+//     upgradeReset();
+//     if (prestigeMilestonesEffects[8] === false || challengeActivate) {
+//         singleUpgradePurchasedRemove()
+//         singlesReset()
+//     }
+//     const buyablesArray = [firstBuyable, secondBuyable, thirdBuyable, fourthBuyable, fifthBuyable]
+//     if (!challengeActivate) {
+//         for (let i = 0; i < buyablesArray.length; i++){
+//             buyablesArray[i].amount = prestigeSinglesEffects[4]
+//             buyablesArray[i].baseEffect = prestigeSinglesEffects[4]
+//             buyablesArray[i].amount != 0 ? buyablesArray[i].price = Math.round(buyablesArray[i].basePrice*Math.pow(buyablesArray[i].power, buyablesArray[i].amount)) : buyablesArray[i].price = buyablesArray[i].basePrice;
+//         }
+//     }
+// }
+
+    while ((achRow1.completion).length < 20) {
+        (achRow1.completion).push(false);
+    }
+    while ((progressBarGoals).length < 5) {
+        (progressBarGoals).push(false);
+    }
+    
+    localStorage.setItem('completion', JSON.stringify(achRow1.completion))
+    while (loreBoolean.length < 11) {
+        loreBoolean.push(false);
+    }
+    localStorage.setItem('chapters', JSON.stringify(loreBoolean))
+    // сохранить в LocalStorage по ключу коунтдата
+
+
+            const achCompletions = localStorage.getItem('completion')
+        const loreChapters = localStorage.getItem('chapters')
+        if (achCompletions != null){
+            achRow1.completion = JSON.parse(achCompletions).map(Boolean);
+        }
+        if (loreChapters != null){
+            loreBoolean = JSON.parse(loreChapters).map(Boolean);
+            for (let i = 0; i < loreBoolean.length; i++){
+                checkLoreShorter(loreBoolean, i)
+            }
+        }
+        checkShopSingle (firstShopSingle.amount, 'overdriveSelect')
+        checkShopSingle (secondShopSingle.amount, 'overdriveType2')
+
+        let maxBuyBool = false
+function buyBuyableUpgrade(buyable, isAutoBuy) {
+    singleUpgradePurchased()
+    
+    else {
+        buyable.amount != 0 ? buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount), challengeReward5)) : buyable.price = buyable.basePrice;
+        if ((!maxOrNoVar && !isAutoBuy) && !maxBuyBool) {
+            if (player.coins >= buyable.price) {
+                if ((!(challengeActivated[9] && amountsOfUpgrades >= 25)) && !challengeActivated[10]) {
+                    buyable.amount++; 
+                    player.coins -= buyable.price; 
+                    buyable.baseEffect++;
+                    if (!challengeActivated[4]) buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount), challengeReward5))
+                    else buyable.price = Math.round(buyable.basePrice*Math.pow(buyable.power, amountsOfUpgrades))
+                }
+            }
+        }
+        else {
+            // while (player.coins >= buyable.price && !(challengeActivated[9] && amountsOfUpgrades >= 25) && !challengeActivated[10]) {
+                isAutoBuy ? bulkBuyBuyable(buyable, true) : bulkBuyBuyable(buyable, false) 
+                if (player.coins >= buyable.bulkPrice) {
+                if ((!(challengeActivated[9] && amountsOfUpgrades >= 25)) && !challengeActivated[10]){
+                isAutoBuy ? buyable.bulkAmount = Math.min(buyableInterval.effect, buyable.bulkAmount) : buyable.bulkAmount
+                buyable.amount += buyable.bulkAmount
+                player.coins -= buyable.bulkPrice; 
+                buyable.baseEffect += buyable.bulkAmount
+                isAutoBuy ? bulkBuyBuyable(buyable, true) : bulkBuyBuyable(buyable, false) 
+                if (!challengeActivated[4]) buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount), challengeReward5))
+                else buyable.price = Math.round(buyable.basePrice*Math.pow(buyable.power, amountsOfUpgrades))
+                // amountsOfUpgrades = firstBuyable.amount + secondBuyable.amount + thirdBuyable.amount + fourthBuyable.amount + fifthBuyable.amount
+                // const singleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
+                // for (let i = 0; i < singleArray.length; i++) {
+                //     if (singleArray[i].amount == 1)
+                //     amountsOfUpgrades++
+                // }
+                }
+            }
+        }
+    }
+}
+
+function buyShopBuyable(item) {
+    if (superCoins >= Math.round(item.price) && item.amount != item.max) {
+        item.amount += item.bulkAmount
+        superCoins -= Math.round(item.bulkPrice);
+        spentSuperCoins += Math.round(item.bulkPrice);
+        item.price = Math.round(item.baseprice*Math.pow(item.power, item.amount))
+    }
+}
+
+function buyShopItem(item) {
+    if (superCoins >= Math.round(item.price) && item.amount != item.max) {
+        item.amount ++
+        superCoins -= Math.round(item.price);
+    }
+}
+
+function buyShopSingle(item, max, unlockableID) {
+    if (superCoins >= Math.round(item.price) && item.amount != max) {
+        item.amount++;
+        checkShopSingle(item.amount, unlockableID)
+        superCoins -= Math.round(item.price);
+    }
+}
+
+function checkShopSingle (unlockableCondition, unlockableID){ //unlockableCondition means xSingle.amount
+    let unlockable = document.getElementById(unlockableID)
+    if (unlockableCondition >= 1) {
+        unlockable.style.display = 'block'
+    }
+    else unlockable.style.display = 'none'
+}
+
+function bulkBuyBuyable(buyable, isAutoBuy) {
+    let bulkPrice = 0, moneyCheck = player.coins, temp = 0
+    for (let i = 0; i < 9999; i++) {
+        let element = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount+i), challengeReward5))
+        if (challengeActivated[4]) {
+            element = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, amountsOfUpgrades+i), challengeReward5))
+        }
+        if (maxOrNoVar || isAutoBuy) {
+            if (moneyCheck >= element) {
+                if (isAutoBuy && (i == buyableInterval.effect)) break
+                buyable.price = element
+                bulkPrice += buyable.price
+                moneyCheck -= buyable.price
+                temp++
+            }
+            else break
+        }
+        else {
+            buyable.price = element
+            bulkPrice = buyable.price
+            if (player.coins >= bulkPrice) temp = 1
+            else temp = 0
+            break
+        }
+    }
+    buyable.bulkAmount = temp
+    challengeActivated[4] ? buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, amountsOfUpgrades), challengeReward5)) : buyable.price = Math.round(Math.pow(buyable.basePrice*Math.pow(buyable.power, buyable.amount), challengeReward5))
+    if (bulkPrice == 0) {
+        buyable.bulkPrice = buyable.price
+        buyable.bulkAmount = 0
+    }
+    else {
+        buyable.bulkPrice = bulkPrice
+    }
+}
+
+function bulkBuyShopBuyable(item) {
+    let x = shopBulkBuy, y = item.max-item.amount, z = 0; //x = 25, y = 100-86=14, z = 0 (real bulk)
+    isNaN(x) ? x = 1 : x
+    x < y ? z = x : z = y //25 < 14 ? z = 25 (true) : z = 14 (false), it's false so z = 14
+    let bulkPrice = 0, superCoinsCheck = superCoins, temp = 0
+    for (let i = 0; i < z; i++) {
+        if (superCoinsCheck >= Math.round(item.baseprice*Math.pow(item.power, item.amount+i))) {
+            item.price = Math.round(item.baseprice*Math.pow(item.power, item.amount+i))
+            bulkPrice += item.price
+            superCoinsCheck -= item.price
+            temp++
+        }
+        else break
+    }
+    item.bulkAmount = temp
+    item.price = Math.round(item.baseprice*Math.pow(item.power, item.amount))
+    bulkPrice != 0 ? item.bulkPrice = bulkPrice : item.bulkPrice = item.price
+}
+
+
+function getCoinPerSec() {
+    secondMineral.effect2 = Math.pow(43, secondMineral.amount/1.5) 
+    superCoins = Math.round(superCoins)
+    umultiplier = Math.pow(baseUmult, umultipliercount)
+    upower = 1 + baseUpow*upowercount
+    const gainMultiplierArray = [1+thirdShopBuyableEffect, overdriveType1.effect, achievementBonus[0], seventhSingleEffect, umultiplier, prestigeSinglesEffects[8], prestigeSinglesEffects[9], 1+shardsEffect]
+    const gainPerSecondArray = [1+secondShopBuyableEffect, sixthSingleEffect, gain]
+
+    gain = 1+thirdSingle.baseEffect
+    for (let i = 0; i < gainMultiplierArray.length; i++) {
+        gain *= gainMultiplierArray[i]
+    }
+    achRow1.completion[17] ? gain *= 4 : gain
+    gain *= secondMineral.effect1
+    gain = Math.pow(gain, upower)
+    gain = Math.pow(gain, prestigeSinglesEffects[1])
+    !challengeActivate && challengeCompleted[0] ? gain = Math.pow(gain, 1.1) : gain
+
+    gain = softCap(gain, 1e15, 0.5)
+
+    gainPerSecond = firstBuyableEffect
+    for (let i = 0; i < gainPerSecondArray.length; i++) {
+        gainPerSecond *= gainPerSecondArray[i]
+    }
+    fourthBuyable.amount >= 1 ? gainPerSecond *= fourthBuyableEffect : gainPerSecond
+    achRow1.completion[4] ? gainPerSecond *= (1+0.0001*simulation.clicksAmount) : gainPerSecond
+    firstSingle.amount == 1 ? gainPerSecond *= firstSingleEffect : gainPerSecond
+    !challengeActivate && challengeCompleted[7] ? gainPerSecond *= 1+prestigeTimer : gainPerSecond
+    !challengeActivate && challengeCompleted[2] ? gainPerSecond = Math.pow(gainPerSecond, 1+(Math.log(prestigeCount)/222)) : gainPerSecond
+
+    if (challengeActivate) {
+        challengeActivated[3] ? gainPerSecond = Math.sqrt(gainPerSecond) : gainPerSecond
+        if (challengeActivated[6]){
+            gainPerSecond = Math.pow(gainPerSecond, 1-amountsOfUpgrades/50)
+            if (amountsOfUpgrades > 50) {
+                gainPerSecond = 0
+            }
+        }
+        challengeActivated[7] ? virusCoins *= 1.065 : virusCoins = 1
+        virusCoins >= 1e100 ? virusCoins = 1e100 : virusCoins
+        
+        
+        if (challengeActivated[11]) {
+            gainPerSecond = Math.pow(gainPerSecond, 0.01)
+            gainPerSecond = gainPerSecond * umultiplier
+            gainPerSecond = Math.pow(gainPerSecond, upower)
+        }
+    }
+
+    gainPerSecond /= virusCoins
+
+    if (challengeActivated[8]) {
+        gainPerSecond = softCap(gainPerSecond, 1e8, prestigeSinglesEffects[10][1])
+        gainPerSecond = softCap(gainPerSecond, 1e8, prestigeSinglesEffects[10][1])
+    }
+    else {
+        if (!challengeActivate && challengeCompleted[8]) gainPerSecond = softCap(gainPerSecond, 1e13*Math.pow(totalSuperCoins, 1.2)*secondMineral.effect2, prestigeSinglesEffects[10][1]) 
+        else gainPerSecond = softCap(gainPerSecond, 1e13*secondMineral.effect2, prestigeSinglesEffects[10][1])
+    }
+
+    getCoinPerClick()
+    gainPerSecond /= 20.0
+
+    challengeActivated[2] ? gainPerSecond = 0 : gainPerSecond
+
+    player.coin.currency = player.coin.currency+gainPerSecond;
+    total = total+gainPerSecond;
+
+    if (player.coin.currency >= 1e25) progressBarGoals[1] = true
+    if (player.coin.currency >= 1e50) progressBarGoals[2] = true
+    if (prestigeCount >= 1e7) progressBarGoals[3] = true
+    if (player.coin.currency >= 1e100) progressBarGoals[4] = true
+
+    if (challengeActivate && player.coin.currency >= 1e15) {
+        player.coin.currency = 1e15
+    }
+    if (!challengeActivate && challengeCompleted[11]) {
+        umultipliercount >= 20 ? umultiplierCost = (100 + (40 * umultipliercount))*(1+((umultipliercount-19)/50)) : umultiplierCost = 100 + (40 * umultipliercount)
+        upowercount >= 10 ? upowerCost = (250 + (80 * upowercount))*(1+((upowercount-9)/7.5)) : upowerCost = 250 + (80 * upowercount)
+        
+    }
+    else  {
+        umultipliercount >= 20 ? umultiplierCost = (100 + (50 * umultipliercount)) * (1+((umultipliercount-19)/50)) : umultiplierCost = 100 + (50 * umultipliercount)
+        upowercount >= 10 ? upowerCost = (250 + (100 * upowercount)) * (1+((upowercount-9)/7.5)) : upowerCost = 250 + (100 * upowercount)
+    }
+    if (achRow1.completion[13]) {
+        upowerCost = upowerCost - (10 * (1+upowercount))
+    }
+    
+    if (challengeActivated[11]) {
+        umultiplierCost = 9 + Math.pow((5 * umultipliercount), umultipliercount/11)
+        upowerCost = 24+ Math.pow((10 * upowercount), upowercount/20)
+    }
+}
+let superCoinChance, spiritChance, criticalClickChance
+let superCoinChanceFormula
+    
+
+    function getCoinPerClick() {
+    secondMineral.effect2 = Math.pow(43, secondMineral.amount/1.5) 
+    gainPerClick = 1;
+    gainPerClick *= Math.pow(2, thirdBuyable.baseEffect);
+    gainPerClick *= 1 + firstShopBuyableEffect;
+    eighthSingle.amount == 1 ? gainPerClick *= eighthSingleEffect : gainPerClick = gainPerClick;
+    secondSingle.amount == 1 ? gainPerClick *= midasFormula : gainPerClick = gainPerClick;
+    secondSingle.superamount == 1 ? gainPerClick *= midasFormula2 : gainPerClick = gainPerClick;
+    gainPerClick *= gain;
+    challengeActivated[2] ? gainPerClick /= umultiplier * 1000000 : gainPerClick;
+    challengeActivated[3] || challengeActivated[5] ? gainPerClick = Math.sqrt(gainPerClick) : gainPerClick;
+    challengeActivated[5] ? gainPerClick = gainPerClick * Math.pow(1 + amountsOfUpgrades, Math.pow(1.00185, prestigeClicks)) : gainPerClick;
+    !challengeActivate && challengeCompleted[5] ? gainPerClick = gainPerClick * Math.pow(1.99, challengesCompleted) : gainPerClick;
+    if (challengeActivated[11]) {
+        gainPerClick = Math.pow(gainPerClick, 0.01);
+        gainPerClick = gainPerClick * umultiplier;
+        gainPerClick = Math.pow(gainPerClick, upower);
+    }
+    if (challengeActivated[6]) {
+        gainPerClick = Math.pow(gainPerClick, 1 - amountsOfUpgrades / 50);
+        if (amountsOfUpgrades > 50) {
+            gainPerClick = 0;
+        }
+    }
+    gainPerClick = Math.pow(gainPerClick, fifthBuyableEffect);
+    gainPerClick /= virusCoins;
+    if (challengeActivated[8]) {
+        gainPerClick = softCap(gainPerClick, 1e8, prestigeSinglesEffects[10][0]);
+        gainPerClick = softCap(gainPerClick, 1e8, prestigeSinglesEffects[10][0]);
+    }
+    
+    else {
+        if (!challengeActivate && challengeCompleted[8]) gainPerClick = softCap(gainPerClick, 1e13 * Math.pow(totalSuperCoins, 1.2)*secondMineral.effect2, prestigeSinglesEffects[10][0]);
+        else gainPerClick = softCap(gainPerClick, 1e13*secondMineral.effect2, prestigeSinglesEffects[10][0]);
+    }
+}
+function shardPerClickCalc() {
+    shardsPerClick = 1
+    shardsPerClick *= firstShardBuyableEffect
+    shardsPerClick *= 1+fifthShopBuyableEffect
+    // shardsPerClick *= 1+greenCoin.effect
+    shardsPerClick *= Math.pow(ninthSuperCrystalSingle.effect, ninthSuperCrystalSingle.amount)
+}
+
+function getShardPerSec() {
+    if (shardUnlockablePerSecond.percent == 100) {
+        shardsPerSecond = 1
+        shardsPerSecond *= secondShardBuyableEffect
+        // shardsPerSecond *= spiritEffects[3]
+        shardsPerSecond *= 1+fifthShopBuyableEffect
+        // shardsPerSecond *= 1+greenCoin.effect
+        shardsPerSecond *= thirdMineral.effect2
+        shardsPerSecond *= Math.pow(1.337, achRow1.completion[28])
+        shardsPerSecond *= achievementBonus[2]
+        shardsPerSecond /= 20
+        
+        shards += shardsPerSecond
+    }
+    shardsEffect = shards/100
+    achRow1.completion[19] ? shardsEffect *= 1+Math.pow(prestigeCount, 0.5) : shardsEffect
+    shardsEffect = Math.pow(shardsEffect, fourthShardSingleEffect)
+    shardsEffect = softCap(shardsEffect, (1e7*Math.pow(sixthSuperCrystalSingle.effect, sixthSuperCrystalSingle.amount)), 0.5)
+    let challengeReward7N = Math.log2(shards)
+    isNaN(challengeReward7N) ? challengeReward7N = 1 : challengeReward7N
+    !challengeActivate && challengeCompleted[6] ? shardsEffect *= challengeReward7N : shardsEffect
+    
+    if (challengeActivate) {
+        shardsEffect = Math.sqrt(shardsEffect)
+    }
+    if (challengeActivated[1]) {
+        shardsEffect = -0.99
+    }
+    if (challengeActivated[4] || challengeActivated[5]  || challengeActivated[6]) {
+        shardsEffect = Math.sqrt(shardsEffect)
+    }
+    if (challengeActivated[7]) {
+        shardsEffect = Math.pow(shardsEffect, 0.25)
+    }
+    if (challengeActivated[11]) {
+        shardsEffect = Math.pow(shardsEffect, 0.02)
+    }
+    if (challengeActivated[9]) {
+        shardsEffect = 0
+    }
+    shardChanceMinimum = thirdShardBuyableEffect[0]
+    shardChanceMaximum = 50*thirdShardBuyableEffect[1]
+}
+
+function checkBuyableDisabledUpgrade (x, y) {
+    if (modernizeActivated) {
+        superCoins >= x.superprice || x.superamount == 1 ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
+    }
+    else{
+        if (challengeActivated[5] || (challengeActivated[9] && amountsOfUpgrades >= 25) || challengeActivated[10]) {
+            document.getElementById(y).disabled = true
+        }
+        else player.coin.currency >= x.price ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
+    }
+}
+function checkShopBuyableDisabledUpgrade (x, y, z) {
+    superCoins >= Math.round(x.price) || x.amount == z ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
+}
+function checkSingleDisabledUpgrade (x, y) {
+    if (modernizeActivated) {
+        superCoins >= x.superprice || x.superamount == 1 ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
+    }
+    else {
+        if (challengeActivated[0] || (challengeActivated[9] && amountsOfUpgrades >= 25)  || challengeActivated[10]) {
+            document.getElementById(y).disabled = true
+        }
+        else player.coin.currency >= x.price || x.amount == 1 ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
+    }
+}
+function checkShopSingleDisabledUpgrade (x, y) {
+    superCoins >= Math.round(x.price) || x.amount == 1 ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
+}
+function checkPrestigeBuyableDisabledUpgrade (x, y, z) {
+    crystals >= x.price && x.amount <= z ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
+}
+function checkPrestigeSingleDisabledUpgrade (x, y, z) {
+    if ((crystals >= x.price || x.amount == 1) && (z == 1)) {
+    document.getElementById(y).disabled = false
+    }
+    else document.getElementById(y).disabled = true
+}
+function checkShardBuyableDisabledUpgrade (x, y) {
+    shards >= x.price ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
+}
+function checkShardSingleDisabledUpgrade (x, y) {
+    shards >= x.price || x.amount == 1 ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
+}
+function checkSuperCrystalSingleDisabledUpgrade (x, y) {
+    superCrystal.amount >= 1 || x.amount == 1 ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
+}
+function disabledUpgrades(){
+    const buyableUpgrades = [firstBuyable, secondBuyable, thirdBuyable, fourthBuyable, fifthBuyable];
+    const singleUpgrades = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle];
+    const prestigeSingleUpgrades = [
+        [firstPrestigeSingle, secondPrestigeSingle, thirdPrestigeSingle, fourthPrestigeSingle],
+        [fifthPrestigeSingle, sixthPrestigeSingle, seventhPrestigeSingle, eighthPrestigeSingle],
+        [ninthPrestigeSingle, tenthPrestigeSingle, eleventhPrestigeSingle, twelfthPrestigeSingle],
+        [thirteenthPrestigeSingle, fourteenthPrestigeSingle, fifteenthPrestigeSingle, sixteenthPrestigeSingle]];
+    const shardsBuyableUpgrades = [firstShardBuyable, secondShardBuyable, thirdShardBuyable];
+    const shardsSingleUpgrades = [firstShardSingle, secondShardSingle, thirdShardSingle, fourthShardSingle, fifthShardSingle, sixthShardSingle];
+    const superCrystalSingleUpgrades = [firstSuperCrystalSingle, secondSuperCrystalSingle, thirdSuperCrystalSingle, fourthSuperCrystalSingle, fifthSuperCrystalSingle, sixthSuperCrystalSingle, seventhSuperCrystalSingle, eighthSuperCrystalSingle, ninthSuperCrystalSingle];
+    for (let i = 0; i < buyableUpgrades.length; i++) {
+        checkBuyableDisabledUpgrade(buyableUpgrades[i], 'buyableU' + (i + 1));
+    }
+    for (let i = 0; i < singleUpgrades.length; i++) {
+        checkSingleDisabledUpgrade(singleUpgrades[i], 'singleU' + (i + 1));
+    }
+    checkPrestigeBuyableDisabledUpgrade(firstPrestigeBuyable, 'pBuyableU1', 9999);
+    checkPrestigeBuyableDisabledUpgrade(secondPrestigeBuyable, 'pBuyableU2', 4);
+    secondPrestigeBuyable.amount >= 5 ? secondPrestigeBuyable.amount = 5 : secondPrestigeBuyable.amount
+    for (let i = 0; i < shardsBuyableUpgrades.length; i++) {
+        checkShardBuyableDisabledUpgrade(shardsBuyableUpgrades[i], 'shBuyableU' + (i + 1));
+    }
+    for (let i = 0; i < shardsSingleUpgrades.length; i++) {
+        checkShardSingleDisabledUpgrade(shardsSingleUpgrades[i], 'shSingleU' + (i + 1));
+        }
+    for (let i = 0; i < superCrystalSingleUpgrades.length; i++) {
+        checkSuperCrystalSingleDisabledUpgrade(superCrystalSingleUpgrades[i], 'sCSingleU' + (i + 1));
+        }
+    let j = 0, m = 0
+    for (let i = 0; i < 4; i++) {
+        for (let k = 0; k < 4; k++) {
+            let variable = {
+                amount: 1
+            }
+            if (k > 0) variable = prestigeSingleUpgrades[i][m]
+            checkPrestigeSingleDisabledUpgrade(prestigeSingleUpgrades[i][k], 'pSingleU' + (j + 1), variable.amount);
+            if (k > 0) m++
+            j++
+        }
+        m = 0
+    }
+    checkShopSingleDisabledUpgrade(firstShopSingle, 'shopSingleU1')
+    checkShopSingleDisabledUpgrade(secondShopSingle, 'shopSingleU2')
+    firstBuyable.amount >= umultiplierCost ? document.getElementById('umultiplierBoost').disabled = false : document.getElementById('umultiplierBoost').disabled = true;
+    (firstBuyable.amount >= upowerCost) && (umultipliercount >= 4) ? document.getElementById('upowerBoost').disabled = false : document.getElementById('upowerBoost').disabled = true
+    }
+
+        // coinGains.addEventListener("click", function(event) {
+    //     if (spiritChance == 0 && isSpiritualEvent) {
+    //         const spiritText = document.createElement('div');
+            
+    //         var x = event.clientX;
+    //         var y = event.clientY;
+                
+    //         spiritText.style.left = (x - 20) + "px";
+    //         spiritText.style.top = (y) + "px";
+                
+    //         spiritText.classList.add('spiritText');
+    //         spiritText.innerHTML = ("+1");
+    //         document.body.appendChild(spiritText);
+                
+    //             setTimeout(() => {
+    //                 spiritText.classList.add('show');
+    //                 setTimeout(() => {
+    //                     spiritText.classList.remove('show');
+    //                     spiritText.classList.add('hide')
+    //                 setTimeout(() => {
+    //                     spiritText.remove();
+    //                     }, 500); // подождать завершения анимации исчезновения
+    //                 }, 0); // показывать уведомление 5 секунд
+    //             },0 );
+    //         }})
+
+    function resetConfirmationOpen(){
+    // popup4.style.display = "block"
+    myPopupBackdrop1.style.display = "flex";
+}
+
+function offlineGain() {
+    timeDifference = (currentOnlineTime - lastOnlineTime)/1000
+    timeDifference = Math.min(1000000, timeDifference)
+    timeDifference <= 0 ? timeDifference = 1 : timeDifference
+    timeDifference *= Math.pow(seventhSuperCrystalSingle.effect, seventhSuperCrystalSingle.amount)
+    checkUpgradesText()
+    prestigeSingleEffect()
+
+    if (timeDifference >= (1000/(1+(fourthShopBuyableEffect)/prestigeSinglesEffects[2][1]/spiritEffects[1]))) {
+        superCoinsTemp = timeDifference/(1000/(1+fourthShopBuyableEffect)/prestigeSinglesEffects[2][1]/spiritEffects[1])
+    }
+    else superCoinsTemp = 0
+    if (achRow1.completion[11]) {
+        offlineCrystalsTemp = timeDifference/(7200/secondPrestigeBuyableEffect)
+        checkCrystalsTemp()
+        offlineCrystalsTemp *= crystalsTemp
+        crystals += offlineCrystalsTemp
+        totalCrystals += offlineCrystalsTemp
+        }
+    if (prestigeMilestonesEffects[15]){
+        offlinePrestigesTemp = (timeDifference/60)*(fastestNoMaxBuyPrestiges/20)
+        offlinePrestigesTemp *= Math.pow(1 + superamounts/100, achRow1.completion[24])
+        prestigeCount += offlinePrestigesTemp
+        pinkCoin.currency += (timeDifference/60)
+        }
+    if (shardUnlockablePerSecond.percent == 100) {
+        getShardPerSec()
+        offlineShardsTemp = shardsPerSecond * 20 * timeDifference
+        shards += offlineShardsTemp
+        }
+    convertingDailyTime()
+    superCoins += superCoinsTemp
+    totalSuperCoins += superCoinsTemp
+    setTimeout(() => {
+        getCoinPerSec()
+        moneyTemp = gainPerSecond * 20 * timeDifference
+        moneyTemp = Math.max(0, moneyTemp)  
+        player.coin.currency += moneyTemp
+        total += moneyTemp
+    }, 300);
+
+    // greenCoin.currency += timeDifference*0.000028
+    gameSeconds += timeDifference
+    gameTimer += timeDifference
+    prestigeSeconds += timeDifference
+    prestigeTimer += timeDifference
+    realSeconds += timeDifference/Math.pow(seventhSuperCrystalSingle.effect, seventhSuperCrystalSingle.amount)
+    prestigeRealTimer += timeDifference/Math.pow(seventhSuperCrystalSingle.effect, seventhSuperCrystalSingle.amount)
+    prestigeRealSeconds += timeDifference/Math.pow(seventhSuperCrystalSingle.effect, seventhSuperCrystalSingle.amount)
+    realTimer += timeDifference/Math.pow(seventhSuperCrystalSingle.effect, seventhSuperCrystalSingle.amount)
+    umultiplierTimer += timeDifference
+    upowerTimer += timeDifference
+}
+
+function readCode () {
+    // let id = 0
+    // for (let i = 0; i < codes.length; i++) {
+    //     if (code === codes[i]){
+    //         id = i+1
+    //         break//найти инпут
+    //     }
+    // }
+    // if (!codeChecks[id-1] && id != 0) {
+    //     if (id == 1){
+    //         superCoins += 69
+    //         totalSuperCoins += 69
+    //     } 
+    //     if (!codeChecks[id-1]) {
+    //         codeChecks[id-1] = true
+    //     }
+    //     if (id == 0 || (id == 2 && !isSpiritualEvent) || ((id == 3 || id == 4 || id == 5) && !isTriplePowerEvent)) {
+    //         whichCode.innerHTML = codeIsFalse
+    //         codeChecks[id-1] = false
+    //     } 
+    //     else {
+    //         if (id == 2) {
+    //             spirits += 55
+    //         }
+    //         if (id == 3) {
+    //             firstShopItem.amount++
+    //         }
+    //         if (id == 3) {
+    //             secondShopItem.amount++
+    //         }
+    //         if (id == 3) {
+    //             fourthShopItem.amount++
+    //         }
+            // loadTranslations()
+            // codeReward = codeRewards[id-1]
+            // loadTranslations()
+            // whichCode.innerHTML = codeIsTrue
+    //     }
+    // }
+    // else if (id != 0) whichCode.innerHTML = codeIsUsed
+    // else whichCode.innerHTML = codeIsFalse
+    openWindow('code', true)
+}
+
+// function loadTrrr() {
+//     coinsCount.innerHTML = i18next.t('moneyCount', { money: player.coin.currency >= 1e6 ? formatNumber(player.coin.currency) : 666}, { 'interpolation': {'escapeValue': false} });
+//     coinsGain.innerHTML = i18next.t('moneyPerSec', { gainPerSec: i18next.t('moneyCount', { money: player.coin.currency >= 1e6 ? formatNumber(player.coin.currency) : 666}, { 'interpolation': {'escapeValue': false} })});
+
+// }
+// setInterval(() => {
+//     loadTrrr()
+// }, 50);
+
+        // achievementGottenRemove ()
+        // singleUpgradePurchasedRemove ()
+        // areYouInChallenge()
+        // checkCompletedChallenges()
+        // singleUpgradePurchased ()
+        // achCompletionsChecker()
+        // getCoinPerSec()
+        // whatsYourCurrentTime2()
+        // offlineGain()
+        // offlineGainTime()
+        // loadAutomations()
+        // changeInputValue()
+        // changeFonts2(optionValue)
+        // clearInterval(autoSaveTime)
+
+        if (!modernizeActivated) {
+        if (challengeCompleted[3]) {
+            if (firstBuyable.superamount == 0)
+            buyableU1.innerHTML = i18next.t('firstBuyable2', {amount: formatNumber(player), x: formatNumber(firstBuyable.bulkAmount), firstBuyableFreeAmount: formatNumber(firstBuyable.freeAmount), firstBuyableEffect: formatNumber(firstBuyableEffect), firstBuyablePrice: formatNumber(firstBuyable.bulkPrice)});
+            else buyableU1.innerHTML = i18next.t('firstBuyable2Super', {firstBuyableAmount: formatNumber(firstBuyable.amount), x: formatNumber(firstBuyable.bulkAmount), z: formatNumber(firstBuyable.superEffect), firstBuyableFreeAmount: formatNumber(firstBuyable.freeAmount), firstBuyableEffect: formatNumber(firstBuyableEffect), firstBuyablePrice: formatNumber(firstBuyable.bulkPrice)});
+        }
+        else {
+            if (firstBuyable.superamount == 0)
+            buyableU1.innerHTML = i18next.t('firstBuyable', {firstBuyableAmount: formatNumber(firstBuyable.amount), x: formatNumber(firstBuyable.bulkAmount), firstBuyableEffect: formatNumber(firstBuyableEffect), firstBuyablePrice: formatNumber(firstBuyable.bulkPrice)});
+            else buyableU1.innerHTML = i18next.t('firstBuyableSuper', {firstBuyableAmount: formatNumber(firstBuyable.amount), x: formatNumber(firstBuyable.bulkAmount), z: formatNumber(firstBuyable.superEffect), firstBuyableEffect: formatNumber(firstBuyableEffect), firstBuyablePrice: formatNumber(firstBuyable.bulkPrice)});
+        }
+        if (secondBuyable.superamount == 0) buyableU2.innerHTML = i18next.t('secondBuyable', {secondBuyableAmount: formatNumber(secondBuyable.amount), x: formatNumber(secondBuyable.bulkAmount), secondBuyableEffect: formatNumber(secondBuyableEffect*10), secondBuyablePrice: formatNumber(secondBuyable.bulkPrice)});
+        else buyableU2.innerHTML = i18next.t('secondBuyableSuper', {secondBuyableAmount: formatNumber(secondBuyable.amount), x: formatNumber(secondBuyable.bulkAmount), z: formatBoost(secondBuyable.superEffect), secondBuyableEffect: formatNumber(secondBuyableEffect*10), secondBuyablePrice: formatNumber(secondBuyable.bulkPrice)});
+
+        if (thirdBuyable.superamount == 0) buyableU3.innerHTML = i18next.t('thirdBuyable', {thirdBuyableAmount: formatNumber(thirdBuyable.amount), x: formatNumber(thirdBuyable.bulkAmount), thirdBuyableEffect: formatBoost(thirdBuyableEffect), thirdBuyablePrice: formatNumber(thirdBuyable.bulkPrice)});
+        else buyableU3.innerHTML = i18next.t('thirdBuyableSuper', {thirdBuyableAmount: formatNumber(thirdBuyable.amount), x: formatNumber(thirdBuyable.bulkAmount), z: formatBoost(thirdBuyable.superEffect), thirdBuyableEffect: formatBoost(thirdBuyableEffect), thirdBuyablePrice: formatNumber(thirdBuyable.bulkPrice)});
+
+        if (fifthSingle.superamount) {
+            if (fourthBuyable.superamount == 0) buyableU4.innerHTML = i18next.t('fourthBuyable2', {effect: prestigeSinglesEffects[5], fourthBuyableAmount: formatNumber(fourthBuyable.amount), x: formatNumber(fourthBuyable.bulkAmount), fourthBuyableFreeAmount: formatNumber(fourthBuyable.freeAmount), fourthBuyableEffect: formatBoost(fourthBuyableEffect), fourthBuyablePrice: formatNumber(fourthBuyable.bulkPrice)});
+            else buyableU4.innerHTML = i18next.t('fourthBuyable2Super', {effect: prestigeSinglesEffects[5], fourthBuyableAmount: formatNumber(fourthBuyable.amount), x: formatNumber(fourthBuyable.bulkAmount), z: formatBoost(fourthBuyable.superEffect), fourthBuyableFreeAmount: formatNumber(fourthBuyable.freeAmount), fourthBuyableEffect: formatBoost(fourthBuyableEffect), fourthBuyablePrice: formatNumber(fourthBuyable.bulkPrice)});
+        }
+        else {
+            if (fourthBuyable.superamount == 0) buyableU4.innerHTML = i18next.t('fourthBuyable', {effect: prestigeSinglesEffects[5], fourthBuyableAmount: formatNumber(fourthBuyable.amount), x: formatNumber(fourthBuyable.bulkAmount), fourthBuyableEffect: formatBoost(fourthBuyableEffect), fourthBuyablePrice: formatNumber(fourthBuyable.bulkPrice)});
+            else buyableU4.innerHTML = i18next.t('fourthBuyableSuper', {effect: prestigeSinglesEffects[5], fourthBuyableAmount: formatNumber(fourthBuyable.amount), x: formatNumber(fourthBuyable.bulkAmount), z: formatBoost(fourthBuyable.superEffect), fourthBuyableEffect: formatBoost(fourthBuyableEffect), fourthBuyablePrice: formatNumber(fourthBuyable.bulkPrice)});
+        }
+
+        
+        if (fifthBuyable.superamount == 0) buyableU5.innerHTML = i18next.t('fifthBuyable', {fifthBuyableAmount: formatNumber(fifthBuyable.amount), x: formatNumber(fifthBuyable.bulkAmount), fifthBuyableEffect: formatPower(fifthBuyableEffect), fifthBuyablePrice: formatNumber(fifthBuyable.bulkPrice)});
+        else buyableU5.innerHTML = i18next.t('fifthBuyableSuper', {fifthBuyableAmount: formatNumber(fifthBuyable.amount), x: formatNumber(fifthBuyable.bulkAmount), z: formatPower(fifthBuyable.superEffect), fifthBuyableEffect: formatPower(fifthBuyableEffect), fifthBuyablePrice: formatNumber(fifthBuyable.bulkPrice)});
+}
+
+for (const [index, singleName] of singleNames.entries()) {
+    const single = window[singleName];
+    const singleElement = singleElements[index];
+    const singleTooltip = singleTooltips[index]
+    const effectKey = `${singleName}Effect`;
+    const priceTextKey = `${singleName}PriceText`;
+    const priceKey = `${singleName}Price`;
+    const singleSuper = `${singleName}Super`
+    const singleTooltipName = `${singleName}Tooltip`
+
+
+    const singleEffect = window[effectKey];
+
+    if (singleName.includes("Prestige")) { //prestige upgrade
+        singleElement.innerHTML = i18next.t(singleName, {
+            [priceKey]: single.priceText
+        });
+    } else if (!singleName.includes("Buyable")) {
+    singleElement.innerHTML = i18next.t(singleName, {
+        [effectKey]: formatBoost(singleEffect),
+        [priceKey]: single.priceText
+    });
+
+    if (singleName.includes("Single") && (!singleName.includes("Prestige") && !singleName.includes("Shard"))) {
+        if (single.superamount == 0)
+        singleElement.innerHTML = i18next.t(singleName, {
+            [effectKey]: formatBoost(singleEffect),
+            [priceKey]: single.priceText
+        })
+        else singleElement.innerHTML = i18next.t(singleSuper, {
+            [effectKey]: formatBoost(singleEffect),
+            z: formatBoost(single.superEffect),
+            [priceKey]: single.priceText
+        })
+    }
+
+
+    if (singleName.includes('fourthShardSingle') || singleName.includes('fifthShardSingle')) {
+        singleElement.innerHTML = i18next.t(singleName, {
+            [effectKey]: formatPower(singleEffect),
+            [priceKey]: single.priceText
+        });
+    }
+
+    if ((!singleName.includes("Prestige") || !singleName.includes("Shard")) && modernizeActivated) { //super upgrade price
+        singleElement.innerHTML = i18next.t(singleName, {
+            [priceKey]: single.priceText
+        });
+    }
+}
+
+    if (singleName.includes("Buyable") || (singleName.includes("Single") && (!singleName.includes("Prestige") && !singleName.includes("Shard")))) { //tooltip for super
+        const tooltip = window[singleTooltip]
+        tooltip.innerHTML = i18next.t(singleTooltipName, {
+            x: formatBoost(single.superEffect),
+        })
+    }
+
+    if (single.amount === 0 && !singleName.includes("Buyable")) {
+        single.priceText = i18next.t(priceTextKey, { [priceKey]: formatNumber(single.price) });
+    } 
+    else if (modernizeActivated && !singleName.includes("Prestige") && !singleName.includes("Shard")) {
+        const superPrice = 'super' + priceTextKey
+        const superSingle = 'super' + singleName
+        single.superamount === 0 ? single.superPriceText = i18next.t(superPrice, {x: formatNumber(single.superprice)}) : single.superPriceText = ''
+        singleElement.innerHTML = i18next.t(superSingle, {
+            x: single.superPriceText
+        })
+    }
+    else if (!singleName.includes("Buyable")){
+        single.priceText = "";
+    }
+}
+
+    // spiritualEventCurrency.innerHTML = i18next.t('spiritualEventCurrency', {spirits: formatNumber(spirits)});
+    // spiritualEventEffects.innerHTML = i18next.t('spiritualEventEffects', {effect1: formatBoost(spiritEffects[0]), effect2: formatBoost(spiritEffects[1]), effect3: formatBoost(spiritEffects[2]), effect4: formatBoost(spiritEffects[3])});
+    // spiritualEventTime.innerHTML = i18next.t('spiritualEventTime');
+
+    // triplePowerEventCurrency1.innerHTML = i18next.t('triplePowerEventCurrency1', {x: formatNumber(pinkCoin.totalAmount), y: formatPercent(pinkCoin.effect)});
+    // triplePowerEventCurrency2.innerHTML = i18next.t('triplePowerEventCurrency2', {x: formatNumber(greenCoin.totalAmount), y: formatPercent(greenCoin.effect)});
+    // triplePowerEventCurrency3.innerHTML = i18next.t('triplePowerEventCurrency3', {x: formatNumber(blueCoin.totalAmount), y: formatPercent(blueCoin.effect)});
+
+    // sacrificePink.innerHTML = i18next.t('pinkSacrifice', {y: formatNumber(pinkCoin.requirement), x: formatNumber(pinkCoin.currency)});
+    // sacrificeGreen.innerHTML = i18next.t('greenSacrifice', {y: formatNumber(greenCoin.requirement), x: formatNumber(greenCoin.currency)});
+    // sacrificeBlue.innerHTML = i18next.t('blueSacrifice', {y: formatNumber(blueCoin.requirement), x: formatNumber(blueCoin.currency)});
+
+    // upgradePink.innerHTML = i18next.t('pinkUpgrade', {x: formatNumber(pinkCoin.price), y: formatNumber(pinkCoin.amount)});
+    // upgradeGreen.innerHTML = i18next.t('greenUpgrade', {x: formatNumber(greenCoin.price), y: formatNumber(greenCoin.amount)})
+    // upgradeBlue.innerHTML = i18next.t('blueUpgrade', {x: formatNumber(blueCoin.price), y: formatNumber(blueCoin.amount)})
+
+    // upgradeGrey.innerHTML = i18next.t('greyUpgrade', {x: formatNumber(greyCoin.price), y: formatNumber(greyCoin.amount)})
+
+
+for (let i = 0; i < 5; i++) {
+        // if (intervalArray[i].time == 50) {
+        //     automationUpgradesArray[i].style.display = 'none'
+        // }
+        // else automationUpgradesArray[i].style.display = 'block'
+        // if (intervalArray[4].time == 50 && prestigeMilestonesEffects[13]) {
+        //     prestigeModeDiv.style.display = 'flex'
+        //     prestigeACInterval.style.display = 'none'
+        // }
+        // else {
+        //     prestigeModeDiv.style.display = 'none' 
+        //     prestigeACInterval.style.display = 'block'
+        // }
+        // if ((intervalArray[1].time == 50 && prestigeMilestonesEffects[5]) && buyableInterval.effect != 512) {
+        //     increaseBulkBuyButton.style.display = 'flex'
+        // }
+        // else increaseBulkBuyButton.style.display = 'none'
+        // if (intervalArray[2].time == 50) {
+        //     umultiIntervalDiv.style.display = 'flex'
+        //     umultiplierACInterval.style.display = 'none'
+        // }
+        // else {
+        //     umultiIntervalDiv.style.display = 'none'
+        //     umultiplierACInterval.style.display = 'block'
+        // }
+        // if (intervalArray[3].time == 50) {
+        //     upowerIntervalDiv.style.display = 'flex'
+        //     upowerACInterval.style.display = 'none'
+        // }
+        // else {
+        //     upowerIntervalDiv.style.display = 'none'
+        //     upowerACInterval.style.display = 'block'
+        // }
+    }
+
+        tooltipShopBuyableU6.innerHTML = i18next.t('sixthShopBuyable', {x: formatNumber(sixthShopBuyable.amount), w: formatNumber(sixthShopBuyable.bulkAmount), y: formatPercent(sixthShopBuyableEffect), z: sixthShopBuyable.priceText});
+    if (sixthShopBuyable.amount < 25) {
+        sixthShopBuyable.priceText = i18next.t('sixthShopBuyablePriceText', {x: formatNumber(sixthShopBuyable.bulkPrice)});
+    }
+    else sixthShopBuyable.priceText = ''
+
+    tooltipShopBuyableU7.innerHTML = i18next.t('seventhShopBuyable', {x: formatNumber(seventhShopBuyable.amount), w: formatNumber(seventhShopBuyable.bulkAmount), y: formatPercent(seventhShopBuyableEffect), z: seventhShopBuyable.priceText});
+    if (seventhShopBuyable.amount < 5) {
+        seventhShopBuyable.priceText = i18next.t('seventhShopBuyablePriceText', {x: formatNumber(seventhShopBuyable.bulkPrice)});
+    }
+    else seventhShopBuyable.priceText = ''
+
+    tooltipShopBuyableU8.innerHTML = i18next.t('eighthShopBuyable', {x: formatNumber(eighthShopBuyable.amount), w: formatNumber(eighthShopBuyable.bulkAmount), y: formatBoost(eighthShopBuyableEffect), z: eighthShopBuyable.priceText});
+    if (eighthShopBuyable.amount < 100) {
+        eighthShopBuyable.priceText = i18next.t('eighthShopBuyablePriceText', {x: formatNumber(eighthShopBuyable.bulkPrice)});
+    }
+    else eighthShopBuyable.priceText = ''
+
+    tooltipShopBuyableU9.innerHTML = i18next.t('ninthShopBuyable', {x: formatNumber(ninthShopBuyable.amount), w: formatNumber(ninthShopBuyable.bulkAmount), y: formatPercent(ninthShopBuyableEffect), z: ninthShopBuyable.priceText});
+    if (ninthShopBuyable.amount < 100) {
+        ninthShopBuyable.priceText = i18next.t('ninthShopBuyablePriceText', {x: formatNumber(ninthShopBuyable.bulkPrice)});
+    }
+    else ninthShopBuyable.priceText = ''
+
+        // tooltipShopSingleU1.innerHTML = i18next.t('firstShopSingle', { fshsPrice: firstShopSingle.priceText});
+    // if (firstShopSingle.amount < 1) {
+    //     firstShopSingle.priceText = i18next.t('firstShopSinglePriceText', {fshsPrice: formatNumber(firstShopSingle.price)});
+    // }
+    // else firstShopSingle.priceText = ''
+
+    // tooltipShopSingleU2.innerHTML = i18next.t('secondShopSingle', { x: secondShopSingle.priceText});
+    // if (secondShopSingle.amount < 1) {
+    //     secondShopSingle.priceText = i18next.t('secondShopSinglePriceText', {x: formatNumber(secondShopSingle.price)});
+    // }
+    // else secondShopSingle.priceText = ''
+
+    // tooltipShopSingleU3.innerHTML = i18next.t('thirdShopSingle', { x: thirdShopSingle.priceText});
+    // if (thirdShopSingle.amount < 1) {
+    //     thirdShopSingle.priceText = i18next.t('thirdShopSinglePriceText', {x: formatNumber(thirdShopSingle.price)});
+    // }
+    // else thirdShopSingle.priceText = ''
+
+        tooltipshopItem1.innerHTML = i18next.t('firstShopItem', {x: formatNumber(firstShopItem.amount), y: formatNumber(firstShopItem.max), z: firstShopItem.priceText});
+    if (firstShopItem.amount < firstShopItem.max) {
+        firstShopItem.priceText = i18next.t('shopItemPriceText', {x: formatNumber(firstShopItem.price)});
+    }
+    else firstShopItem.priceText = ''
+
+    tooltipshopItem2.innerHTML = i18next.t('secondShopItem', {x: formatNumber(secondShopItem.amount), y: formatNumber(secondShopItem.max), z: secondShopItem.priceText});
+    if (secondShopItem.amount < secondShopItem.max) {
+        secondShopItem.priceText = i18next.t('shopItemPriceText', {x: formatNumber(secondShopItem.price)});
+    }
+    else secondShopItem.priceText = ''
+
+    tooltipshopItem3.innerHTML = i18next.t('thirdShopItem', {x: formatNumber(thirdShopItem.amount), y: formatNumber(thirdShopItem.max), z: thirdShopItem.priceText});
+    if (thirdShopItem.amount < thirdShopItem.max) {
+        thirdShopItem.priceText = i18next.t('shopItemPriceText', {x: formatNumber(thirdShopItem.price)});
+    }
+    else thirdShopItem.priceText = ''
+
+    tooltipshopItem4.innerHTML = i18next.t('fourthShopItem', {x: formatNumber(fourthShopItem.amount), y: formatNumber(fourthShopItem.max), z: fourthShopItem.priceText});
+    if (fourthShopItem.amount < fourthShopItem.max) {
+        fourthShopItem.priceText = i18next.t('shopItemPriceText', {x: formatNumber(fourthShopItem.price)});
+    }
+    else fourthShopItem.priceText = ''
+
+    //если ты находишься 10 секунд в игре затем ливаешь и перезаходишь то ты получаешь ещё 10 секунд получения монет. 
+
+// document.addEventListener("visibilitychange", function() {
+//     if (!document.hidden) { // проверяем, что страница стала видимой
+//     clearInterval(everythingInterval)
+
+//     autoSaverTimer = 0
+//     saveGame()
+//     if (optionValue == 'option7' && !mutedAudio) {
+//         audio.play()
+//     }
+//     }
+// });
+
+// document.addEventListener("visibilitychange", function() {
+//     if (document.hidden) { // проверяем, что страница стала невидимой
+//         clearInterval(everythingInterval)
+//         whatsYourCurrentTime2()
+//         if (optionValue == 'option7' && !mutedAudio) {
+//             audio.pause()
+//         }
+//     }
+// });
+
+// body.style.fontSize = ''
+        // select.classList.add('smallerText')
+        // label.classList.add('smallerText')
+        // paragraphs.forEach(paragraph => {
+        //     paragraph.classList.add('smallerText');
+        // });
+        // buttons.forEach(button => {
+        //     button.classList.add('smallerText');
+        // });
+
+        function checkLore(loreBool, i, condition) {
+    if (condition >= 1 && loreBool[i] == false) {
+        loreBool[i] = true;
+        var loreNotifyColor = "mediumpurple";
+        var loreNotifyWidth = "500px";
+        var element = document.getElementsByClassName("loreChapter")[i]
+        element.classList.add("unlockedChapter")
+        setTimeout(() => {
+            notify(loreNotify, loreNotifyColor, loreNotifyWidth)
+        }, 1000);
+    }
+}
+
+// setInterval(() => {
+//     checkLore(loreBoolean, 0, player.coins-10);
+//     checkLore(loreBoolean, 1, firstSingle.amount);
+//     checkLore(loreBoolean, 2, umultipliercount);
+//     checkLore(loreBoolean, 3, upowercount);
+//     checkLore(loreBoolean, 4, totalCrystals);
+//     checkLore(loreBoolean, 5, totalCrystals-crystals-brokenCrystals); // 1-1-0 = 0 (1 c), 1-0-1 = 0 (1 bc), 1-0-0 = 1 (1 u), 2-2-0 = 0 (2 c), 2-1-1 = 0 (1 c & 1 bc), 2-0-0 = 2 (2 u)
+//     checkLore(loreBoolean, 6, brokenCrystals);
+//     checkLore(loreBoolean, 7, prestigeCount-2);
+//     checkLore(loreBoolean, 8, player.coins-1e25);
+//     checkLore(loreBoolean, 9, superCrystal.amount);
+//     checkLore(loreBoolean, 10, player.coins-1e50);
+// }, 100)
+
+function checkLoreShorter(loreBool, i) {
+    if (loreBool[i] == true) {
+        var element = document.getElementsByClassName("loreChapter")[i]
+        element.classList.add("unlockedChapter")
+    }
+}
+
+
+    // if (achFullRow1 == 10 && !achRowCompleted[0])
+    // {
+    //     let element2 = document.getElementById("firstAchievementRow");
+    //     element2.classList.add("green");
+    //     achRowCount++
+    //     achRowCompleted[0] = true
+    // }
+    // if (achFullRow2 == 10 && !achRowCompleted[1])
+    // {
+    //     let element2 = document.getElementById("secondAchievementRow");
+    //     element2.classList.add("green");
+    //     achRowCount++
+    //     achRowCompleted[1] = true
+    // }
+    // if (achFullRow3 == 10 && !achRowCompleted[2])
+    // {
+    //     let element2 = document.getElementById("thirdAchievementRow");
+    //     element2.classList.add("green");
+    //     achRowCount++
+    //     achRowCompleted[2] = true
+    // }
+
+// function achNotification(i) {
+//     achNotify += achRow1.name[i];
+//     achRow1.completion[i] = true;
+//     notify(achNotify, achNotifyColor, achNotifyWidth);
+//     achNotify = "Вы получили достижение "
+//     let element = document.getElementsByClassName("ach")[i];
+//     element.classList.add("green");
+//     element.classList.add("greenborder");
+//     achCount++
+// }
+
+// function achCompletionsChecker() {
+//     achievementBonus[0] = 1
+//     achievementBonus[1] = 1
+//     achievementBonus[2] = 1
+//     achCount = 0
+//     achFullRow1 = 0
+//     achFullRow2 = 0
+//     achFullRow3 = 0
+//     for (let i = 0; i < achRow1.completion.length; i++){
+//         let element = document.getElementsByClassName("ach")[i];
+//         if (achRow1.completion[i] == true) {
+//             element.classList.add("green");
+//             element.classList.add("greenborder");
+//             achCount++
+//         }
+//         else {
+//             element.classList.remove("green");
+//             element.classList.remove("greenborder");
+//         }
+//     }
+//     for (let i = 0; i < 10; i++) {
+//         achRow1.completion[i] ? achFullRow1++ : achFullRow1
+//     }
+//     for (let i = 10; i < 20; i++) {
+//         achRow1.completion[i] ? achFullRow2++ : achFullRow2
+//     }
+//     for (let i = 20; i < 30; i++) {
+//         achRow1.completion[i] ? achFullRow3++ : achFullRow3
+//     }
+// }
+
+
+function checkPrestigeMilestone(id, count, index) { //CSS
+    let element = document.getElementById(id)
+    if (prestigeCount >= count) {
+        element.classList.add('completed')
+        prestigeMilestonesEffects[index] = true
+    }
+    else {
+        element.classList.remove('completed')
+        prestigeMilestonesEffects[index] = false
+    }
+}
+
+function achievementGottenRemove () {
+    for (var i = 0; i < 10; i++){
+        var element = document.getElementsByClassName("ach")[i]
+        element.classList.remove("green");
+        element.classList.remove("greenborder");
+    }
+}
+
+    const singleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
+    for (let i = 0; i < singleArray.length; i++){
+        if (singleArray[i].amount == 1 && singleArray[i].superamount == 0) {singleArray[i].updateText.classList.add('purchased')}
+        else if (singleArray[i].superamount == 1 && singleArray[i].amount == 1) {singleArray[i].updateText.classList.add('superPurchased'); singleArray[i].updateText.classList.remove('superPurchasedBuyable')}
+        else if (singleArray[i].superamount == 1 && singleArray[i].amount == 0) {singleArray[i].updateText.classList.add('superPurchasedBuyable'); singleArray[i].updateText.classList.remove('superPurchased')}
+    }
+
+    function singleUpgradePurchased() {//CSS
+    const prestigeSingleArray = [firstPrestigeSingle, secondPrestigeSingle, thirdPrestigeSingle, fourthPrestigeSingle, fifthPrestigeSingle, sixthPrestigeSingle, seventhPrestigeSingle, eighthPrestigeSingle, ninthPrestigeSingle, tenthPrestigeSingle, eleventhPrestigeSingle, twelfthPrestigeSingle, thirteenthPrestigeSingle, fourteenthPrestigeSingle, fifteenthPrestigeSingle, sixteenthPrestigeSingle]
+    for (let i = 0; i < prestigeSingleArray.length; i++){
+        if (prestigeSingleArray[i].amount == 1) {prestigeSingleArray[i].updateText.classList.add('purchased')}
+        else {prestigeSingleArray[i].updateText.classList.remove('purchased')}
+    }
+
+    const shardSingleArray = [firstShardSingle, secondShardSingle, thirdShardSingle, fourthShardSingle, fifthShardSingle, sixthShardSingle]
+    for (let i = 0; i < shardSingleArray.length; i++){
+        if (shardSingleArray[i].amount == 1) {shardSingleArray[i].updateText.classList.add('purchased')}
+    }
+
+    const superCrystalSingleArray = [firstSuperCrystalSingle, secondSuperCrystalSingle, thirdSuperCrystalSingle, fourthSuperCrystalSingle, fifthSuperCrystalSingle, sixthSuperCrystalSingle, seventhSuperCrystalSingle, eighthSuperCrystalSingle, ninthSuperCrystalSingle];
+    for (let i = 0; i < superCrystalSingleArray.length; i++){
+        if (superCrystalSingleArray[i].amount == 1) superCrystalSingleArray[i].updateText.classList.add('purchased')
+    }
+
+    const buyableArray = [firstBuyable, secondBuyable, thirdBuyable, fourthBuyable, fifthBuyable]
+    for (let i = 0; i < buyableArray.length; i++){
+        if (buyableArray[i].superamount == 0) {buyableArray[i].updateText.classList.add('upgradeButton')}
+        else {buyableArray[i].updateText.classList.add('superPurchasedBuyable')}
+    }
+}
+
+function singleUpgradePurchasedRemove () {
+    var singleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle, tenthSingle]
+    for (var i = 0; i < singleArray.length; i++){
+        singleArray[i].updateText.classList.remove('purchased')
+    }
+}
+
+function superCrystalSingleUpgradePurchasedRemove(){
+    const superCrystalSingleUpgrades = [firstSuperCrystalSingle, secondSuperCrystalSingle, thirdSuperCrystalSingle, fourthSuperCrystalSingle, fifthSuperCrystalSingle, sixthSuperCrystalSingle, seventhSuperCrystalSingle, eighthSuperCrystalSingle, ninthSuperCrystalSingle];
+    for (let i = 0; i < superCrystalSingleUpgrades.length; i++){
+        superCrystalSingleUpgrades[i].updateText.classList.remove('purchased')
+    }
+}
+
+function buyPrestigeSingle(single) {
+        single.updateText.classList.add('purchased')
+    }
+
+function buyShardSingle(single) {
+        single.updateText.classList.add('purchased')
+}
+
+function buySuperCrystalSingle(single) {
+        single.updateText.classList.add('purchased')
+}
