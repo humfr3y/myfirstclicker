@@ -106,6 +106,7 @@ function loadGame() {
             MISC.automation.prestige.interval = setInterval(()=>{AUTO.prestige.charge()}, 50)
         }
         player.settings.modernization_activated = false
+        player.shard.currency < 0 ? player.shard.currency = 0 : player.shard.currency
 }
 
 function resetDailyReward() {
