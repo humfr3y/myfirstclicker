@@ -841,7 +841,7 @@ function convert_save() {
         parsedData.umultipliercount != undefined ? newData.umultipliers = parsedData.umultipliercount : 0
         parsedData.upowercount != undefined ? newData.upowers = parsedData.upowercount : 0
 
-        let challenge = JSON.parse(parsedData.challengeCompleted)
+        let challenge = parsedData.challengeCompleted != undefined ? JSON.parse(parsedData.challengeCompleted) : []
         for (let i = 0; i < 12; i++){
             if (challenge[i] == true) {
                 newData.challenge.completed.push(i+1)

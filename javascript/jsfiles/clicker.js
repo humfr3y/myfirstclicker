@@ -965,6 +965,7 @@ const MISC = {
     },
     offline(x = player.time.savedTime, y = Date.now()) {
         let time = (y-x)/1000
+        time = Math.min(time, 1e6)
         if (UPGS.supercrystal[31].unl()) time*5
         return time
     },
