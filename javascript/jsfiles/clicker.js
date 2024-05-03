@@ -345,9 +345,11 @@ const GAIN = {
     },
     offline_gain(y = MISC.offline()) {
         player.coin.currency += this.coin.offline()
+        player.coin.total_currency += this.coin.offline()
         player.shard.currency += this.shard.offline()
         player.prestige.currency += this.crystal.offline()
         player.prestige.resets += Math.floor(this.prestige.offline())
+        player.supercoin.total_currency += this.coin.offline()
         player.supercoin.currency += this.supercoin.offline()
         player.time.game.total.timer += y
         player.time.game.prestige.timer += y
@@ -358,10 +360,12 @@ const GAIN = {
     },
     offline_gain_time_warp (x) {
         player.coin.currency += this.coin.offline(undefined, x)
+        player.coin.total_currency += this.coin.offline(undefined, x)
         player.shard.currency += this.shard.offline(undefined, x)
         player.prestige.currency += this.crystal.offline(undefined, x)
         player.prestige.resets += this.prestige.offline(x)
         player.supercoin.currency += this.supercoin.offline(undefined, x)
+        player.supercoin.total_currency += this.cosupercoinin.offline(undefined, x)
         player.time.game.total.timer += x
         player.time.game.prestige.timer += x
         player.time.umultiplier += x
@@ -1045,6 +1049,7 @@ function loop() {
     if (MISC.auto_save_timer >= 30) autoSaveThis()
 
     player.coin.currency += GAIN.coin.second.effect()*time
+    player.coin.total_currency += GAIN.coin.second.effect()*time
     player.shard.currency += GAIN.shard.second()*time
 
     player.time.game.total.timer += time
