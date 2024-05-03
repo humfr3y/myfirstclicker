@@ -191,7 +191,7 @@ const UPGS = {
                 unl_super() {return player.coin.superUpgrades.includes(this.super_id)},
                 cost_super() { return 1250 },
                 effect(x=player.coin.upgrades[this.id] +  MISC.free_upgrade[this.id]()) {
-                    let base = player.prestige.singleUpgrades[22] ? 1.075 : 1.05, eff = Math.pow(base, x)
+                    let base = player.prestige.singleUpgrades.includes(22) ? 1.075 : 1.05, eff = Math.pow(base, x)
                     if (player.coin.singleUpgrades.includes(15)) eff *= UPGS.coin.singles[15].effect()
                     if (player.coin.superUpgrades.includes(14)) eff *= this.effect_super()
                     return eff
