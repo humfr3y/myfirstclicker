@@ -187,17 +187,16 @@ const GAIN = {
             return 50*UPGS.shard.buyables[3].effect().max
         },
         break_crystal(x = howMuchCrystalsInput.value) {
-            let gain = 0, temp = 0, parsed_x = parseFloat(x), broken_crystals = parsed_x
+            let gain = 0, temp = 0, parsed_x = parseInt(x), broken_crystals = parsed_x
             
             if (x.includes('%')){
-                temp = player.prestige.currency - (player.prestige.currency * (parsed_x / 100)) //200-(200*10/100) = 200-20=180
+                temp = Math.floor(player.prestige.currency - (player.prestige.currency * (parsed_x / 100))) //10 = 10 - (10*(1/100)); 10 = 10 - (0.1) = 9.9 = 9
                 broken_crystals = player.prestige.currency - temp //200-180 = 20 crystals broken
                 player.prestige.currency = Math.floor(temp) //200 => 180 crystals left
             }
             else {
                 broken_crystals = parsed_x // 130
                 player.prestige.currency -= parsed_x //200 - 130 = 70
-                console.log(parsed_x)
             }
             if (broken_crystals < 1e6) {
                 for (let i = 0; i < broken_crystals; i++) {
@@ -217,7 +216,7 @@ const GAIN = {
     },
     crystal: {
         offline(x = GAIN.crystal.reset(), y = MISC.offline(), z = ACHS.has(22)) {
-            let time = y/(7200/UPGS.prestige.buyables[2].effect()), gain = x * time
+            let time = y/(14400/UPGS.prestige.buyables[2].effect()), gain = x * time
             return z ? gain : 0
         },
         reset() {

@@ -928,7 +928,7 @@ function loadTranslations() {
         else if (player.challenge.completed.includes(id)) 
             window[`challengeTime${id}`].innerHTML = i18next.t('challengeTimeFast', {
             n: formatNumber(i+1), 
-            ms: formatPower(player.challenge.time[id].timer)
+            ms: formatNumber(player.challenge.time[id].timer*1000)
             })
         else 
             window[`challengeTime${id}`].innerHTML = i18next.t('challengeNotCompletedYet', {
@@ -956,7 +956,7 @@ function loadTranslations() {
                 s: convertToTwoDigits(player.prestige.prestigeTable[id].time.game.seconds)
             });
             else document.getElementsByClassName('gameTimeTable')[i].innerHTML = i18next.t('gameTimeTableMs', {
-                ms: formatPower(player.prestige.prestigeTable[id].time.game.timer)
+                ms: formatNumber(player.prestige.prestigeTable[id].time.game.timer*1000)
             });
         } 
         if (player.prestige.prestigeTable[id].time.real.timer != '') {
@@ -967,7 +967,7 @@ function loadTranslations() {
                 s: convertToTwoDigits(player.prestige.prestigeTable[id].time.real.seconds)
             });
             else document.getElementsByClassName('realTimeTable')[i].innerHTML = i18next.t('realTimeTableMs', {
-                ms: formatPower(player.prestige.prestigeTable[id].time.real.timer)
+                ms: formatNumber(player.prestige.prestigeTable[id].time.real.timer*1000)
             });
         } 
     }

@@ -1983,8 +1983,8 @@ howMuchCrystalsInput.addEventListener("keydown", function(event) {
 
 function submitTheBreak() {
     let temp = parseFloat(howMuchCrystalsInput.value)
-    text.broken_crystals = GAIN.shard.break_crystal(howMuchCrystalsInput.value)
     if (((howMuchCrystalsInput.value).includes('%') && temp <= 100 || (!(howMuchCrystalsInput.value).includes('%') && temp <= player.prestige.currency)) && !(howMuchCrystalsInput.value).includes('-')) {
+        text.broken_crystals = GAIN.shard.break_crystal(howMuchCrystalsInput.value)
         openWindow('submit', true)
         player.shard.currency += text.broken_crystals.gain
         player.prestige.broken_currency += text.broken_crystals.broken_crystals
