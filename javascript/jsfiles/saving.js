@@ -107,6 +107,9 @@ function loadGame() {
         }
         player.settings.modernization_activated = false
         player.shard.currency < 0 ? player.shard.currency = 0 : player.shard.currency
+        if (player.supercoin.total_currency > 1e7) {
+player.supercoin.total_currency = player.supercoin.spent_currency + player.supercoin.currency
+}
 }
 
 function resetDailyReward() {
