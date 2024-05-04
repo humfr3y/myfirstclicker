@@ -187,7 +187,7 @@ const GAIN = {
             return 50*UPGS.shard.buyables[3].effect().max
         },
         break_crystal(x = howMuchCrystalsInput.value) {
-            let gain = 0, temp = 0, parsed_x = parseInt(parseFloat(x)), broken_crystals = parsed_x
+            let gain = 0, temp = 0, parsed_x = x.includes('e') ? convert(x) : parseInt(parseFloat(x)), broken_crystals = parsed_x
             
             if (x.includes('%')){
                 temp = Math.floor(player.prestige.currency - (player.prestige.currency * (parsed_x / 100))) //10 = 10 - (10*(1/100)); 10 = 10 - (0.1) = 9.9 = 9
