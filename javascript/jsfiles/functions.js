@@ -6,7 +6,8 @@ function upgradesPurchasableCustom(currentUpgrades, currencyAmount, costPerUpgra
 
 function convert(input) {
   const [base, exponent] = input.split("e");
-  return BigInt(base) * 10n ** BigInt(exponent); // ** вместо +
+  const baseNum = parseFloat(base); // Преобразуем основание в число с плавающей точкой
+  return baseNum * 10 * parseInt(exponent, 10); 
 }
 
 function buyUpgrade(x) {
