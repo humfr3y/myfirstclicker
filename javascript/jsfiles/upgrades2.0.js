@@ -1545,7 +1545,7 @@ max *= UPGS.shard.singles[12].effect()
             element: document.getElementById('mineral1'),
             cost1() { return 1 },
             cost2(x=player.minerals[this.id]) {
-                return 1e18*Math.pow(100, x)
+                return 1e24*Math.pow(100, x)
                 },
             effect1(x=player.minerals[this.id]) {
                 let eff = 1 + x/12.5 
@@ -1565,7 +1565,7 @@ max *= UPGS.shard.singles[12].effect()
             element: document.getElementById('mineral2'),
             cost1() { return 1 },
             cost2(x=player.minerals[this.id]) {
-                return 1e18*Math.pow(100, x)
+                return 1e24*Math.pow(100, x)
                 },
             effect1(x=player.minerals[this.id]) {
                 let eff = 1 + Math.pow(x*9, 3)
@@ -1585,7 +1585,7 @@ max *= UPGS.shard.singles[12].effect()
             element: document.getElementById('mineral3'),
             cost1() { return 1 },
             cost2(x=player.minerals[this.id]) {
-                return 1e18*Math.pow(100, x)
+                return 1e24*Math.pow(100, x)
                 },
             effect1(x=player.minerals[this.id]) {
                 let eff = Math.pow(1.75, x/1.105)
