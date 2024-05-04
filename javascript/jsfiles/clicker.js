@@ -978,7 +978,7 @@ const MISC = {
     free_upgrade: {
         1() { 
             let effect = 0
-            if (player.challenge.completed.includes(4) && player.challenge.activated == 0) effect = CHALL[1].effect()
+            if (player.challenge.completed.includes(4) && player.challenge.activated == 0) effect = CHALL[4].effect()
             if (player.coin.superUpgrades.includes(11)) effect += UPGS.coin.buyables[1].effect_super()
             if (player.minerals[2]) effect += UPGS.minerals[2].effect3()
             return effect
