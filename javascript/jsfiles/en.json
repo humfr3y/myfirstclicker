@@ -88,7 +88,7 @@
     "firstBuyable": "<ut>Small Investment ({{amount}}{{free}}) [+{{bulk}}]</ut> <br> Increase the α-coins per second <br> Currently: +{{effect}}{{super_effect}}<br> Cost: {{cost}} α-coins",
     "secondBuyable": "<ut>Productivity ({{amount}}) [+{{bulk}}]</ut> <br> Increase Small Investment effect <br> Currently: +{{effect}}%{{super_effect}}<br> Cost: {{cost}} α-coins",
     "thirdBuyable": "<ut>Doubler ({{amount}}) [+{{bulk}}]</ut> <br> Multiply the α-coins per click by 2 <br> Currently: x{{effect}}{{super_effect}}<br> Cost: {{cost}} α-coins",
-    "fourthBuyable": "<ut>Multiplier ({{amount}}{{free}}) [+{{bulk}}]</ut> <br> Multiply the α-coins per second by {{effect}} <br> Currently: x{{effect}}{{super_effect}}<br> Cost: {{cost}} α-coins",
+    "fourthBuyable": "<ut>Multiplier ({{amount}}{{free}}) [+{{bulk}}]</ut> <br> Multiply the α-coins per second by {{base}} <br> Currently: x{{effect}}{{super_effect}}<br> Cost: {{cost}} α-coins",
     "fifthBuyable": "<ut>Alpha Power ({{amount}}) [+{{bulk}}]</ut> <br> Increase the power of α-coins per click <br> Currently: ^{{effect}}{{super_effect}}<br> Cost: {{cost}} α-coins",
 
     "super_cost": "<br> Cost: {{cost}} supercoins",
