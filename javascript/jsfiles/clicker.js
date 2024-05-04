@@ -159,7 +159,7 @@ const GAIN = {
                 if (player.challenge.activated !== 0) {
                     effect = Math.sqrt(effect)
 
-                    if (player.challenge.activated == 2) effect = -0.99
+                    if (player.challenge.activated == 2) effect = 0.01
                     if (player.challenge.activated == 5 || player.challenge.activated == 6 || player.challenge.activated == 7) effect = Math.sqrt(effect)
                     if (player.challenge.activated == 8) effect = Math.pow(effect, 0.25)
                     if (player.challenge.activated == 12) effect = Math.pow(effect, 0.02)
