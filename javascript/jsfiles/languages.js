@@ -602,7 +602,10 @@ function loadTranslations() {
     if (player.settings.whichPrestigeMode == 'time') autoPrestigeMode.innerHTML = text.automation.prestige_req
     if (player.settings.whichPrestigeMode == 'coins') autoPrestigeMode.innerHTML = text.automation.coin_req
 
-    shardsCountText.innerHTML = i18next.t('shardCount', {shards: formatNumber(player.shard.currency), percent: player.challenge.activated == 2 ? formatNumber(formatPercent(GAIN.shard.effect.effect()))}) : formatNumber(formatPercent(GAIN.shard.effect.effect())-100)})
+    shardsCountText.innerHTML = i18next.t('shardCount', 
+                                          {
+                                              shards: formatNumber(player.shard.currency), 
+                                              percent: player.challenge.activated == 2 ? formatNumber(formatPercent(GAIN.shard.effect.effect())) : formatNumber(formatPercent(GAIN.shard.effect.effect())-100)})
     shardsPerSecondText.innerHTML = i18next.t('shardsPerSec', {shards: formatBoost(GAIN.shard.second())})
 
     brokeCrystals.innerHTML = i18next.t('didBreakCrystal', {crystals: formatNumber(text.broken_crystals.broken_crystals), shards: formatNumber(text.broken_crystals.gain)})
