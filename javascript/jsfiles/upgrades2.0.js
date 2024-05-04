@@ -736,7 +736,7 @@ const UPGS = {
                 cost(){ return 1 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = ACHS.has(27) ? Math.max(2*(1-(0.01/6)*player.time.game.prestige.timer), 1) : Math.max(10*(1-(0.01/6.6666666667)*player.time.game.prestige.timer), 1)
+                    let eff = !ACHS.has(27) ? Math.max(2*(1-(0.01/6)*player.time.game.prestige.timer), 1) : Math.max(10*(1-(0.01/6.6666666667)*player.time.game.prestige.timer), 1)
                     return eff
                 },
             },
