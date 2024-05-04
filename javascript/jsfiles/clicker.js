@@ -467,7 +467,7 @@ const UNL = {
     },
     rune: {
         cost() {
-            return 1e8*Math.pow(10, player.rune.total_currency)
+            return 1e9*Math.pow(10, player.rune.total_currency)
         }
     },
     display: {
