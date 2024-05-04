@@ -512,7 +512,7 @@ const UPGS = {
                 cost_super() { return 100000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1 + (player.time.game.total.timer/2500000)
+                    let eff = 1 + (player.time.game.total.timer/200000)
                     eff = Math.min(eff, 1.25*this.effect_super())
                     return eff
                 },
