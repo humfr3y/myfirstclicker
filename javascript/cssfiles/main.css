@@ -749,7 +749,7 @@ ct {
 }
 
 #shardsClick:hover {
-  background-image: url('/javascript/cssfiles/images/shard.png');
+  background-image: url('/images/shard.png');
 }
 
 #shardsCountText {
