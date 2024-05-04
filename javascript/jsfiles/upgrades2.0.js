@@ -846,7 +846,7 @@ const UPGS = {
                 cost(x=player.shard.upgrades[this.id]) {
                 let cost = this.basePrice*Math.pow(this.power, x)
                 if (player.shard.singleUpgrades.includes(13)) cost /= UPGS.shard.singles[13].effect()
-                return 
+                return cost
                 },
                 effect(x=player.shard.upgrades[this.id]) {
                     let eff = Math.pow(2, x)
@@ -862,7 +862,7 @@ const UPGS = {
                 cost(x=player.shard.upgrades[this.id]) {
                 let cost = this.basePrice*Math.pow(this.power, x)
                 if (player.shard.singleUpgrades.includes(13)) cost /= UPGS.shard.singles[13].effect()
-                return 
+                return cost
                 },
                 effect(x=player.shard.upgrades[this.id]) {
                     let eff = Math.pow(3, x)
@@ -878,7 +878,7 @@ const UPGS = {
                 cost(x=player.shard.upgrades[this.id]) {
                 let cost = this.basePrice*Math.pow(this.power, x)
                 if (player.shard.singleUpgrades.includes(13)) cost /= UPGS.shard.singles[13].effect()
-                return 
+                return cost
                 },
                 effect(x=player.shard.upgrades[this.id]) {
                     let min, max
