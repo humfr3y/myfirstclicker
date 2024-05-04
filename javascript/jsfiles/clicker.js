@@ -600,19 +600,19 @@ const UNL = {
             name: 'post_ach33_permanent_1',
             type: 'flex',
             element: document.getElementsByClassName('postAch33')[0],
-            req() { return ACHS.has(32)},
+            req() { return ACHS.has(33)},
         },
         21: {
             name: 'post_ach33_permanent_2',
             type: 'flex',
             element: document.getElementsByClassName('postAch33')[1],
-            req() { return ACHS.has(32)},
+            req() { return ACHS.has(33)},
         },
         22: {
             name: 'post_ach33_unlockable',
             type: 'flex',
             element: document.getElementsByClassName('postAch33')[2],
-            req() { return ACHS.has(32)},
+            req() { return ACHS.has(33)},
         },
         23: {
             name: 'prestige_help_pages',
