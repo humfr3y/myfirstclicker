@@ -605,7 +605,7 @@ function loadTranslations() {
     shardsCountText.innerHTML = i18next.t('shardCount', 
                                           {
                                               shards: formatNumber(player.shard.currency), 
-                                              percent: player.challenge.activated == 2 ? formatNumber(formatPercent(GAIN.shard.effect.effect())) : formatNumber(formatPercent(GAIN.shard.effect.effect())-100)})
+                                              percent: player.challenge.activated == 2 ? formatNumber(formatPercent(GAIN.shard.effect.effect())*1) : formatNumber(formatPercent(GAIN.shard.effect.effect())-100)})
     shardsPerSecondText.innerHTML = i18next.t('shardsPerSec', {shards: formatBoost(GAIN.shard.second())})
 
     brokeCrystals.innerHTML = i18next.t('didBreakCrystal', {crystals: formatNumber(text.broken_crystals.broken_crystals), shards: formatNumber(text.broken_crystals.gain)})
