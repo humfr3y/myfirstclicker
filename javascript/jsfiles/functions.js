@@ -4,6 +4,13 @@ function upgradesPurchasableCustom(currentUpgrades, currencyAmount, costPerUpgra
     return totalUpgrades
 }
 
+function convert(input) {
+  const [base, exponent] = input.split("e");
+  return BigInt(base) * 10n ** BigInt(exponent); // ** вместо +
+}
+
+const result = convert("1e21");
+
 function buyUpgrade(x) {
     if (!player.settings.modernization_activated) {
         if (player.settings.buy_max_activate) {
