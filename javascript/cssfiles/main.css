@@ -742,7 +742,7 @@ ct {
   border: none;
   cursor: pointer;
   transition: background-image 0.2s ease-in-out;
-  background-image: url('/javascript/cssfiles/images/shardoff2.png');
+  background-image: url('/images/shardoff2.png');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
