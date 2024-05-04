@@ -473,7 +473,7 @@ const UNL = {
     display: {
         unl(x, y = 'none') { return this[x].req() ? (this[x].element).style.display = this[x].type : (this[x].element).style.display = y},
         check() {
-            for (let i = 1; i <= 50; i++)
+            for (let i = 1; i <= 51; i++)
             if (this[i].type != 'none') this.unl(i)
             else this.unl(i, 'flex')
         },
@@ -781,6 +781,12 @@ const UNL = {
             type: 'block',
             element: document.getElementById('overdriveType2'),
             req() { return UPGS.shop.unlockables[2].unl()}
+        },
+        51: {
+            name: 'challenge_help',
+            type: 'block',
+            element: document.getElementById('challengeHelpDiv'),
+            req() { return player.progressBarGoals.includes(2) }
         }
     }
 }
@@ -1050,7 +1056,7 @@ function loop() {
     player.settings.auto_save ? MISC.auto_save_timer += time : MISC.auto_save_timer = 0
     if (MISC.auto_save_timer >= 30) autoSaveThis()
 
-    player.coin.currency += GAIN.coin.second.effect()*time
+    player.coin.currency += player.challenge.activated != 0 && player.coin.currency >= 1e15 ? 0 : GAIN.coin.second.effect()*time
     player.coin.total_currency += GAIN.coin.second.effect()*time
     player.shard.currency += GAIN.shard.second()*time
 
