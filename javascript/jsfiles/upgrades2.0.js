@@ -845,11 +845,12 @@ const UPGS = {
                 element: document.getElementById('shBuyableU1'),
                 cost(x=player.shard.upgrades[this.id]) {
                 let cost = this.basePrice*Math.pow(this.power, x)
-                if (player.shard.singleUpgrades.includes(12)) cost /= UPGS.shard.singles[12].effect()
+                if (player.shard.singleUpgrades.includes(13)) cost /= UPGS.shard.singles[13].effect()
                 return 
                 },
                 effect(x=player.shard.upgrades[this.id]) {
                     let eff = Math.pow(2, x)
+                    if (player.shard.singleUpgrades.includes(12)) eff *= UPGS.shard.singles[12].effect()
                     return eff
                 },
             },
@@ -860,11 +861,12 @@ const UPGS = {
                 element: document.getElementById('shBuyableU2'),
                 cost(x=player.shard.upgrades[this.id]) {
                 let cost = this.basePrice*Math.pow(this.power, x)
-                if (player.shard.singleUpgrades.includes(12)) cost /= UPGS.shard.singles[12].effect()
+                if (player.shard.singleUpgrades.includes(13)) cost /= UPGS.shard.singles[13].effect()
                 return 
                 },
                 effect(x=player.shard.upgrades[this.id]) {
                     let eff = Math.pow(3, x)
+                    if (player.shard.singleUpgrades.includes(12)) eff *= UPGS.shard.singles[12].effect()
                     return eff
                 },
             },
@@ -875,13 +877,17 @@ const UPGS = {
                 element: document.getElementById('shBuyableU3'),
                 cost(x=player.shard.upgrades[this.id]) {
                 let cost = this.basePrice*Math.pow(this.power, x)
-                if (player.shard.singleUpgrades.includes(12)) cost /= UPGS.shard.singles[12].effect()
+                if (player.shard.singleUpgrades.includes(13)) cost /= UPGS.shard.singles[13].effect()
                 return 
                 },
                 effect(x=player.shard.upgrades[this.id]) {
                     let min, max
                     min = Math.pow(2, x)
                     max = Math.pow(1.75, x)
+                    if (player.shard.singleUpgrades.includes(12)) {
+min *= UPGS.shard.singles[12].effect()
+max *= UPGS.shard.singles[12].effect()
+}
                     return {
                         min,
                         max
