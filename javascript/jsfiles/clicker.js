@@ -238,7 +238,7 @@ const GAIN = {
         offline(y = MISC.offline()) {
             if (!MILESTONES.has(16)) return 0
             let gain = y/60, formula = 60/player.time.game.fastestPrestige.timer
-            if (formula) gain *= 1+formula*1.25
+            if (formula) gain *= 1+formula/2
             if (ACHS.has(35)) gain *= 1 + MISC.amount_of_upgrades.super()/100
             return gain //per y sec
         },
