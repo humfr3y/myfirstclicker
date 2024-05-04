@@ -937,7 +937,7 @@ max *= UPGS.shard.singles[12].effect()
                 id: 12, 
                 element: document.getElementById('shSingleU2'),
                 unl() {return player.shard.singleUpgrades.includes(this.id)},
-                cost(){ return 1e6 },
+                cost(){ return 1e7 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
                     let eff = 1 + Math.pow(player.prestige.broken_currency, 0.175)
@@ -948,7 +948,7 @@ max *= UPGS.shard.singles[12].effect()
                 id: 13, 
                 element: document.getElementById('shSingleU3'),
                 unl() {return player.shard.singleUpgrades.includes(this.id)},
-                cost(){ return 1e8 },
+                cost(){ return 1e9 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
                     let eff = 1 + Math.pow(player.prestige.currency, 0.3)
