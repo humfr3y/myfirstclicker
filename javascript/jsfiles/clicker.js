@@ -461,13 +461,13 @@ const UNL = {
             return Math.max(Math.min(findRatio(player.supercrystal.consumedShards, this.cost()), 100),0)
         },
         cost() {
-            return (1e15 * Math.pow(1000, player.supercrystal.total_currency))/UPGS.minerals[3].effect3()
+            return (1e21 * Math.pow(1000, player.supercrystal.total_currency))/UPGS.minerals[3].effect3()
         },
         interval: ''
     },
     rune: {
         cost() {
-            return 1e6*Math.pow(10, player.rune.total_currency)
+            return 1e8*Math.pow(10, player.rune.total_currency)
         }
     },
     display: {
