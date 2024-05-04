@@ -742,14 +742,14 @@ ct {
   border: none;
   cursor: pointer;
   transition: background-image 0.2s ease-in-out;
-  background-image: url('/images/shardoff2.png');
+  background-image: url('images/shardoff2.png');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
 }
 
 #shardsClick:hover {
-  background-image: url('/images/shard.png');
+  background-image: url('images/shard.png');
 }
 
 #shardsCountText {
@@ -955,7 +955,7 @@ scn {
 }
 
 #superCrystalBarBase{
-  background-image:url('/javascript/cssfiles/images/supercrystaloff.png');
+  background-image:url('images/supercrystaloff.png');
   background-size: contain;
   background-repeat: no-repeat;
   align-items: center;
@@ -964,7 +964,7 @@ scn {
   height: 300px
 }
 #superCrystalBar{
-  background-image:url('/javascript/cssfiles/images/supercrystalon.png');
+  background-image:url('images/supercrystalon.png');
   background-size: contain;
   background-repeat: no-repeat;
   height: 100%;
