@@ -157,7 +157,7 @@ const LAYERS = {
                 player.time.game.fastestPrestige.days = player.time.game.fastestPrestige.timer / 86400
             }
 
-            if (player.prestige.singleUpgrades.includes(33) ) 
+            if (player.prestige.singleUpgrades.includes(34) ) 
                 if (player.challenge.activated == 0 && player.challenge.completed.includes(2)) 
                     player.shard.currency += 10 * 1000000*player.prestige.currency
                 else player.shard.currency += 10
