@@ -844,7 +844,9 @@ const UPGS = {
                 basePrice: 1000,
                 element: document.getElementById('shBuyableU1'),
                 cost(x=player.shard.upgrades[this.id]) {
-                return this.basePrice*Math.pow(this.power, x)
+                let cost = this.basePrice*Math.pow(this.power, x)
+                if (player.shard.singleUpgrades.includes(12)) cost /= UPGS.shard.singles[12].effect()
+                return 
                 },
                 effect(x=player.shard.upgrades[this.id]) {
                     let eff = Math.pow(2, x)
@@ -857,7 +859,9 @@ const UPGS = {
                 basePrice: 1000,
                 element: document.getElementById('shBuyableU2'),
                 cost(x=player.shard.upgrades[this.id]) {
-                return this.basePrice*Math.pow(this.power, x)
+                let cost = this.basePrice*Math.pow(this.power, x)
+                if (player.shard.singleUpgrades.includes(12)) cost /= UPGS.shard.singles[12].effect()
+                return 
                 },
                 effect(x=player.shard.upgrades[this.id]) {
                     let eff = Math.pow(3, x)
@@ -870,7 +874,9 @@ const UPGS = {
                 basePrice: 5000,
                 element: document.getElementById('shBuyableU3'),
                 cost(x=player.shard.upgrades[this.id]) {
-                return this.basePrice*Math.pow(this.power, x)
+                let cost = this.basePrice*Math.pow(this.power, x)
+                if (player.shard.singleUpgrades.includes(12)) cost /= UPGS.shard.singles[12].effect()
+                return 
                 },
                 effect(x=player.shard.upgrades[this.id]) {
                     let min, max
