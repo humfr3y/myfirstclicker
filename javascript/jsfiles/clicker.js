@@ -12,7 +12,7 @@ const GAIN = {
                     if (player.challenge.completed.includes(6)) effect *= CHALL[6].effect()
                 }
                 else {
-                    if (player.challenge.activated == 3) effect /= GAIN.umultiplier.effect()*1000000
+                    if (player.challenge.activated == 3) effect /= GAIN.umultiplier.effect()*100000
                     if (player.challenge.activated == 4) effect = Math.sqrt(effect)
                     if (player.challenge.activated == 6) {
                         effect = Math.sqrt(effect)
@@ -68,7 +68,7 @@ const GAIN = {
                 }
                 if (player.challenge.activated == 0 && player.challenge.completed.includes(8)) effect *= CHALL[8].effect()
             
-                if (player.challenge.activated == 3) effect = 0
+                if (player.challenge.activated == 3 || player.challenge.activated == 8) effect = 0
 
                 return effect
             },
@@ -156,11 +156,11 @@ const GAIN = {
                 if (ACHS.has(30)) effect *= 1+Math.pow(player.prestige.resets, 0.3)
                 if (player.shard.singleUpgrades.includes(21)) effect = Math.pow(effect, UPGS.shard.singles[21].effect())
 
-                if (player.challenge.activated !== 0) {
-                    effect = Math.sqrt(effect)
+                if (player.challenge.activated != 0) {
+                    effect = Math.sqrt(Math.sqrt(effect))
 
                     if (player.challenge.activated == 2) effect = 0.01
-                    if (player.challenge.activated == 5 || player.challenge.activated == 6 || player.challenge.activated == 7) effect = Math.sqrt(effect)
+                    if (player.challenge.activated == 5 || player.challenge.activated == 6 || player.challenge.activated == 7 || player.challenge.activated == 10) effect = Math.sqrt(effect)
                     if (player.challenge.activated == 8) effect = Math.pow(effect, 0.25)
                     if (player.challenge.activated == 12) effect = Math.pow(effect, 0.02)
                 }
@@ -238,7 +238,7 @@ const GAIN = {
         offline(y = MISC.offline()) {
             if (!MILESTONES.has(16)) return 0
             let gain = y/60, formula = 60/player.time.game.fastestPrestige.timer
-            if (formula) gain *= 1+formula/2
+            if (formula) gain *= 1+formula/1.25
             if (ACHS.has(35)) gain *= 1 + MISC.amount_of_upgrades.super()/100
             return gain //per y sec
         },
@@ -389,7 +389,7 @@ const UNL = {
                 return Math.min(Math.log10(player.overdrive.consumed.type1+1), 100)
             },
             effect() {
-                return 1+Math.pow(2, this.percent()/2.5)/9
+                return (1+Math.pow(2, this.percent()/2.5)/9)-0.11
             },
             activate: false,
             blink: '',
@@ -400,13 +400,13 @@ const UNL = {
                 return x
             },
             cost() {
-                return 1000+Math.pow(10, this.percent()+6)
+                return 1000+Math.pow(10, this.percent()+8)
             },
             percent() {
-                return Math.min(Math.log10((player.overdrive.consumed.type2/1e6)+1), 100)
+                return Math.min(Math.log10((player.overdrive.consumed.type2/1e8)+1), 100)
             },
             effect() {
-                return Math.pow(10, this.percent()/3.5)
+                return Math.pow(10, this.percent()/4.85)
             },
             activate: false,
             blink: '',
@@ -870,7 +870,7 @@ const CHALL = {
     },
     virusCoins_gen() {
         let virusCoins = 1
-        virusCoins = Math.pow(1.065, player.time.real.prestige.timer)
+        virusCoins = Math.pow(1.115, player.time.real.prestige.timer)
         virusCoins >= 1e100 ? virusCoins = 1e100 : virusCoins // needs gametimer generation via date.now()
         return virusCoins
     }

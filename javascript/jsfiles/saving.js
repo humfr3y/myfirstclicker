@@ -15,18 +15,18 @@ function saveGame () {
 }
 
 function updateNestedProperties(targetObj, sourceObj) {
-    for (const key in sourceObj) {
-        if (sourceObj.hasOwnProperty(key)) {
-            if (typeof sourceObj[key] == 'object' && sourceObj[key] !== null) {
-                if (!targetObj[key]) {
-                    targetObj[key] = {};
-                }
-                updateNestedProperties(targetObj[key], sourceObj[key]);
-                } else {
-                    targetObj[key] = sourceObj[key];
-                }
+for (const key in sourceObj) {
+    if (sourceObj.hasOwnProperty(key)) {
+    if (typeof sourceObj[key] === 'object' && sourceObj[key] !== null && !Array.isArray(sourceObj[key])) {
+        if (!targetObj[key]) {
+        targetObj[key] = {};
         }
+        updateNestedProperties(targetObj[key], sourceObj[key]);
+    } else {
+        targetObj[key] = sourceObj[key];
     }
+    }
+}
 }
 // && storedData == null
 function loadGame() {

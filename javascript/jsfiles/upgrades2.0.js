@@ -6,7 +6,7 @@ const UPGS = {
                 if (player.coin.currency >= this[x].cost()) bool = true
                 if (player.challenge.activated == 6) bool = false
                 if (player.challenge.activated == 10) 
-                    MISC.amount_of_upgrades.coin() <= 25 ? bool : bool = false
+                    MISC.amount_of_upgrades.coin() >= 25 ? bool = false : bool
                 if (player.challenge.activated == 11) bool = false
                 return bool
             },
@@ -100,9 +100,9 @@ const UPGS = {
                     let eff = y*3
                     return eff
                 },
-                bulk(x=player.coin.currency, y=player.coin.upgrades[this.id]){
+                bulk(x=player.coin.currency, y=player.coin.upgrades[this.id], z=MISC.amount_of_upgrades.coin()){
                     let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power)
-                    if (player.challenge.activated == 10) 25-bulk < 0 ? bulk = 0 : bulk = Math.min(25-bulk, 25)
+                    if (player.challenge.activated == 10) bulk > 25 ? bulk = Math.min(25-z, 25) : bulk
                     !player.settings.buy_max_activate ? bulk = 1 : bulk
                     return bulk
                 }
@@ -139,9 +139,9 @@ const UPGS = {
                     let eff = 1+Math.log10(y+1)
                     return eff
                 },
-                bulk(x=player.coin.currency, y=player.coin.upgrades[this.id]){
+                bulk(x=player.coin.currency, y=player.coin.upgrades[this.id], z=MISC.amount_of_upgrades.coin()){
                     let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power)
-                    if (player.challenge.activated == 10) 25-bulk < 0 ? bulk = 0 : bulk = Math.min(25-bulk, 25)
+                    if (player.challenge.activated == 10) bulk > 25 ? bulk = Math.min(25-z, 25) : bulk
                     !player.settings.buy_max_activate ? bulk = 1 : bulk
                     return bulk
                 }
@@ -169,9 +169,9 @@ const UPGS = {
                     let eff = 1+Math.log2(y+1)
                     return eff
                 },
-                bulk(x=player.coin.currency, y=player.coin.upgrades[this.id]){
+                bulk(x=player.coin.currency, y=player.coin.upgrades[this.id], z=MISC.amount_of_upgrades.coin()){
                     let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power)
-                    if (player.challenge.activated == 10) 25-bulk < 0 ? bulk = 0 : bulk = Math.min(25-bulk, 25)
+                    if (player.challenge.activated == 10) bulk > 25 ? bulk = Math.min(25-z, 25) : bulk
                     !player.settings.buy_max_activate ? bulk = 1 : bulk
                     return bulk
                 }
@@ -201,9 +201,9 @@ const UPGS = {
                     let eff = Math.pow(1.075, player.umultipliers)
                     return eff
                 },
-                bulk(x=player.coin.currency, y=player.coin.upgrades[this.id]){
+                bulk(x=player.coin.currency, y=player.coin.upgrades[this.id], z=MISC.amount_of_upgrades.coin()){
                     let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power)
-                    if (player.challenge.activated == 10) 25-bulk < 0 ? bulk = 0 : bulk = Math.min(25-bulk, 25)
+                    if (player.challenge.activated == 10) bulk > 25 ? bulk = Math.min(25-z, 25) : bulk
                     !player.settings.buy_max_activate ? bulk = 1 : bulk
                     return bulk
                 }
@@ -232,9 +232,9 @@ const UPGS = {
                     let eff = this.effect()
                     return eff
                 },
-                bulk(x=player.coin.currency, y=player.coin.upgrades[this.id]){
+                bulk(x=player.coin.currency, y=player.coin.upgrades[this.id], z=MISC.amount_of_upgrades.coin()){
                     let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power)
-                    if (player.challenge.activated == 10) 25-bulk < 0 ? bulk = 0 : bulk = Math.min(25-bulk, 25)
+                    if (player.challenge.activated == 10) bulk > 25 ? bulk = Math.min(25-z, 25) : bulk
                     !player.settings.buy_max_activate ? bulk = 1 : bulk
                     return bulk
                 }
@@ -246,7 +246,7 @@ const UPGS = {
                 if (player.coin.currency >= this[x].cost() && !player.coin.singleUpgrades.includes(x)) bool = true
                 if (player.challenge.activated == 1) bool = false
                 if (player.challenge.activated == 10) 
-                    MISC.amount_of_upgrades.coin() <= 25 ? bool : bool = false
+                    MISC.amount_of_upgrades.coin() >= 25 ? bool = false : bool
                 if (player.challenge.activated == 11) bool = false
                 return bool
             },
@@ -307,7 +307,7 @@ const UPGS = {
                 cost_super() { return 2000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1+(Math.log10(player.coin.total_currency+10)/2.25)
+                    let eff = 1+(Math.log10(player.coin.total_currency+10)/3)
                     eff *= this.effect_super()
                     if (player.coin.singleUpgrades.includes(24)) eff = Math.pow(eff, UPGS.coin.singles[24].effect())
                     return eff
@@ -385,7 +385,7 @@ const UPGS = {
                 cost_super() { return 7500 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1+Math.pow(Math.log10(player.coin.upgrades[1]+10)/2.25, 1.6)
+                    let eff = 1+Math.pow(Math.log10(player.coin.upgrades[1]+10)/2.2, 1.6)
                     if (player.coin.superUpgrades.includes(24)) eff *= this.effect_super()
                     return eff
                 },
@@ -410,7 +410,7 @@ const UPGS = {
                 cost_super() { return 10000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = Math.pow(Math.log10(player.coin.upgrades[4]+10), 1.175)
+                    let eff = Math.pow(Math.log10(player.coin.upgrades[4]+10), 1.17)
                     return eff
                 },
                 effect_super(x = this.unl_super() && this.unl()) {
@@ -434,7 +434,7 @@ const UPGS = {
                 cost_super() { return 15000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = Math.log10(GAIN.coin.click.effect()+10)/1.25
+                    let eff = Math.log10(GAIN.coin.click.effect()+10)/1.2
                     if (player.coin.superUpgrades.includes(31)) eff *= this.effect_super()
                     return eff
                 },
@@ -459,8 +459,8 @@ const UPGS = {
                 cost_super() { return 25000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = Math.pow(MISC.amount_of_upgrades.coin()+10, 0.9)/3.5
-                    if (player.achievements.includes(17)) eff *= 1 + (0.2 * player.time.game.total.timer/7200)
+                    let eff = Math.pow(MISC.amount_of_upgrades.coin()+10, 0.75)/3.5
+                    if (player.achievements.includes(17)) eff *= 1 + (0.2 * player.time.game.total.timer/86400)
                     return !player.prestige.singleUpgrades.includes(23) ? Math.min(eff, 100) : softCap(eff, this.softcap_start(), 0.5)
                 },
                 effect_super(x = this.unl_super() && this.unl()) {
@@ -512,7 +512,7 @@ const UPGS = {
                 cost_super() { return 100000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1 + (player.time.game.total.timer/1000000)
+                    let eff = 1 + (player.time.game.total.timer/1200000)
                     eff = Math.min(eff, 1.25*this.effect_super())
                     return eff
                 },
@@ -659,7 +659,7 @@ const UPGS = {
                 cost(){ return 2 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = Math.pow(Math.log10(player.time.game.total.timer+10), 0.01)
+                    let eff = Math.pow(Math.log10(player.time.game.total.timer+10), 0.02)
                     return eff
                 },
             },
@@ -840,7 +840,7 @@ const UPGS = {
             },
             1: {
                 id: 1, 
-                power: 3.5,
+                power: 3.45,
                 basePrice: 1000,
                 element: document.getElementById('shBuyableU1'),
                 cost(x=player.shard.upgrades[this.id]) {
@@ -856,7 +856,7 @@ const UPGS = {
             },
             2: {
                 id: 2, 
-                power: 4.15,
+                power: 4.3,
                 basePrice: 1000,
                 element: document.getElementById('shBuyableU2'),
                 cost(x=player.shard.upgrades[this.id]) {
@@ -883,11 +883,11 @@ const UPGS = {
                 effect(x=player.shard.upgrades[this.id]) {
                     let min, max
                     min = Math.pow(2, x)
-                    max = Math.pow(1.75, x)
+                    max = Math.pow(1.9, x)
                     if (player.shard.singleUpgrades.includes(12)) {
-min *= UPGS.shard.singles[12].effect()
-max *= UPGS.shard.singles[12].effect()
-}
+                    min *= UPGS.shard.singles[12].effect()
+                    max *= UPGS.shard.singles[12].effect()
+                    }
                     return {
                         min,
                         max
@@ -926,10 +926,10 @@ max *= UPGS.shard.singles[12].effect()
                 id: 11, 
                 element: document.getElementById('shSingleU1'),
                 unl() {return player.shard.singleUpgrades.includes(this.id)},
-                cost(){ return 100000 },
+                cost(){ return 250000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1 + Math.log10(player.shard.currency+10)/1.2
+                    let eff = 1 + Math.log10(player.shard.currency+10)/2
                     return eff
                 },
             },
@@ -940,7 +940,7 @@ max *= UPGS.shard.singles[12].effect()
                 cost(){ return 1e7 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1 + Math.pow(player.prestige.broken_currency, 0.175)
+                    let eff = 1 + Math.pow(player.prestige.broken_currency, 0.16)
                     return eff
                 },
             },
@@ -948,10 +948,10 @@ max *= UPGS.shard.singles[12].effect()
                 id: 13, 
                 element: document.getElementById('shSingleU3'),
                 unl() {return player.shard.singleUpgrades.includes(this.id)},
-                cost(){ return 1e9 },
+                cost(){ return 1e10 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1 + Math.pow(player.prestige.currency, 0.3)
+                    let eff = 1 + Math.pow(player.prestige.currency, 0.24)
                     return eff
                 },
             },
@@ -959,10 +959,10 @@ max *= UPGS.shard.singles[12].effect()
                 id: 21, 
                 element: document.getElementById('shSingleU4'),
                 unl() {return player.shard.singleUpgrades.includes(this.id)},
-                cost(){ return 1e12 },
+                cost(){ return 1e15 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1 + (Math.log10(Math.log10(player.shard.currency+10)+10)/9)
+                    let eff = 1 + (Math.log10(Math.log10(player.shard.currency+10)+10)/10.5)
                     return eff
                 },
             },
@@ -1129,7 +1129,7 @@ max *= UPGS.shard.singles[12].effect()
             },
             5: {
                 id: 5, 
-                power: 1.075,
+                power: 1.07,
                 basePrice: 5,
                 maxAmount: 50,
                 element: document.getElementById('shopBuyableU5'),
@@ -1178,13 +1178,13 @@ max *= UPGS.shard.singles[12].effect()
                 id: 2, 
                 element: document.getElementById('shopSingleU2'),
                 unl() { return player.shop.unlockables.includes(this.id) },
-                cost() { return 2500 },
+                cost() { return 2000 },
             },
             3: { //super-moderniz
                 id: 3, 
                 element: document.getElementById('shopSingleU3'),
                 unl() { return player.shop.unlockables.includes(this.id) },
-                cost() { return 3500 },
+                cost() { return 2500 },
             },
         },
         permanent: {
@@ -1207,7 +1207,7 @@ max *= UPGS.shard.singles[12].effect()
             },
             1: { //crystal boost
                 id: 1, 
-                power: 1.4,
+                power: 1.25,
                 basePrice: 10,
                 maxAmount: 25,
                 element: document.getElementById('shopBuyableU6'),
@@ -1221,7 +1221,7 @@ max *= UPGS.shard.singles[12].effect()
             }, 
             2: { //credit card
                 id: 2, 
-                power: 4,
+                power: 2,
                 basePrice: 100,
                 maxAmount: 5,
                 element: document.getElementById('shopBuyableU7'),
@@ -1235,7 +1235,7 @@ max *= UPGS.shard.singles[12].effect()
             }, 
             3: { //crit chance
                 id: 3, 
-                power: 1.105,
+                power: 1.1,
                 basePrice: 10,
                 maxAmount: 100,
                 element: document.getElementById('shopBuyableU8'),
@@ -1249,7 +1249,7 @@ max *= UPGS.shard.singles[12].effect()
             }, 
             4: { //crit multi
                 id: 4, 
-                power: 1.115,
+                power: 1.1025,
                 basePrice: 5,
                 maxAmount: 100,
                 element: document.getElementById('shopBuyableU9'),
@@ -1285,7 +1285,7 @@ max *= UPGS.shard.singles[12].effect()
                 id: 1, 
                 maxAmount: 5,
                 element: document.getElementById('shopItem1'),
-                cost() { return 100 },
+                cost() { return 80 },
                 canUseItem(x=player.shop.items.amount[this.id], y=player.shop.items.used[this.id]) {
                     if (x == 0 || y == this.maxAmount || player.challenge.activated != 0) return false
                     else return true
@@ -1310,7 +1310,7 @@ max *= UPGS.shard.singles[12].effect()
                 id: 2, 
                 maxAmount: 3,
                 element: document.getElementById('shopItem2'),
-                cost() { return 300 },
+                cost() { return 250 },
                 canUseItem(x=player.shop.items.amount[this.id], y=player.shop.items.used[this.id]) {
                     if (x == 0 || y == this.maxAmount || player.challenge.activated != 0) return false
                     else return true
@@ -1335,7 +1335,7 @@ max *= UPGS.shard.singles[12].effect()
                 id: 3, 
                 maxAmount: 10,
                 element: document.getElementById('shopItem3'),
-                cost() { return 50 },
+                cost() { return 40 },
                 canUseItem(x=player.shop.items.amount[this.id], y=player.shop.items.used[this.id]) {
                     if (x == 0 || y == this.maxAmount || player.challenge.activated != 0) return false
                     else return true
@@ -1360,7 +1360,7 @@ max *= UPGS.shard.singles[12].effect()
                 id: 4, 
                 maxAmount: 3,
                 element: document.getElementById('shopItem4'),
-                cost() { return 450 },
+                cost() { return 350 },
                 canUseItem(x=player.shop.items.amount[this.id], y=player.shop.items.used[this.id]) {
                     if (x == 0 || y == this.maxAmount || player.challenge.activated != 0) return false
                     else return true
@@ -1545,10 +1545,10 @@ max *= UPGS.shard.singles[12].effect()
             element: document.getElementById('mineral1'),
             cost1() { return 1 },
             cost2(x=player.minerals[this.id]) {
-                return 1e24*Math.pow(100, x)
+                return 1e25*Math.pow(100, x)
                 },
             effect1(x=player.minerals[this.id]) {
-                let eff = 1 + x/12.5 
+                let eff = 1 + x/13
                 return eff
             },
             effect2(x=player.minerals[this.id]) {
@@ -1556,7 +1556,7 @@ max *= UPGS.shard.singles[12].effect()
                 return eff
             },
             effect3(x=player.minerals[this.id]) {
-                let eff = 1 + x/15
+                let eff = 1 + x/20
                 return eff
             },
         },
@@ -1565,18 +1565,18 @@ max *= UPGS.shard.singles[12].effect()
             element: document.getElementById('mineral2'),
             cost1() { return 1 },
             cost2(x=player.minerals[this.id]) {
-                return 1e24*Math.pow(100, x)
+                return 1e25*Math.pow(100, x)
                 },
             effect1(x=player.minerals[this.id]) {
-                let eff = 1 + Math.pow(x*9, 3)
+                let eff = 1 + Math.pow(x*8, 3)
                 return eff
             },
             effect2(x=player.minerals[this.id]) {
-                let eff = Math.pow(43, x/1.5) 
+                let eff = Math.pow(30, x/1.5) 
                 return eff
             },
             effect3(x=player.minerals[this.id]) {
-                let eff = Math.pow(x*13, 2)
+                let eff = Math.pow(x*15, 2.25)
                 return eff
             },
         },
@@ -1588,11 +1588,11 @@ max *= UPGS.shard.singles[12].effect()
                 return 1e24*Math.pow(100, x)
                 },
             effect1(x=player.minerals[this.id]) {
-                let eff = Math.pow(1.75, x/1.105)
+                let eff = Math.pow(1.75, x/1.75)
                 return eff
             },
             effect2(x=player.minerals[this.id]) {
-                let eff = Math.pow(3, x/1.4)
+                let eff = Math.pow(3, x/1.65)
                 return eff
             },
             effect3(x=player.minerals[this.id]) {
@@ -1797,30 +1797,35 @@ function decreaseInterval(type) {
         player.automation.upgrades[type]++
         if (type == 'single') {
             if (MISC.automation.single.interval != '') {
+                MISC.automation.single.interval = ''
                 clearInterval(MISC.automation.single.interval)
                 MISC.automation.single.interval = setInterval(AUTO.single.charge(), 50); 
             }
         }
         if (type == 'buyable') {
             if (MISC.automation.buyable.interval != '') {
+                MISC.automation.buyable.interval = ''
                 clearInterval(MISC.automation.buyable.interval)
                 MISC.automation.buyable.interval = setInterval(AUTO.buyable.charge(), 50); 
             }
         }       
         if (type == 'umultiplier') {
             if (MISC.automation.umultiplier.interval != '') {
+                MISC.automation.umultiplier.interval = ''
                 clearInterval(MISC.automation.umultiplier.interval)
                 MISC.automation.umultiplier.interval = setInterval(AUTO.umultiplier.charge(), 50); 
             }
         }        
         if (type == 'upower') {
             if (MISC.automation.upower.interval != '') {
+                MISC.automation.upower.interval = ''
                 clearInterval(MISC.automation.upower.interval)
                 MISC.automation.upower.interval = setInterval(AUTO.upower.charge(), 50); 
             }
         }        
         if (type == 'prestige') {
             if (MISC.automation.prestige.interval != '') {
+                MISC.automation.prestige.interval = ''
                 clearInterval(MISC.automation.prestige.interval)
                 MISC.automation.prestige.interval = setInterval(AUTO.prestige.charge(), 50); 
             }
