@@ -1206,7 +1206,7 @@ function fillTheProgressBar(type, number) {
 }
 
 function fillTheProgressBar2(type) {
-    let sub = player.supercrystal.consumedShards
+    let sub = Math.min(player.supercrystal.consumedShards, UNL[type].cost()-player.supercrystal.consumedShards)
         UNL[type].interval = setInterval(()=> {
             if (player.shard.currency >= sub){
                 sub = (player.supercrystal.consumedShards+100)
