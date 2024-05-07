@@ -15,7 +15,7 @@ const GAIN = {
                     if (player.challenge.activated == 3) effect /= GAIN.umultiplier.effect()*100000
                     if (player.challenge.activated == 4) effect = Math.sqrt(effect)
                     if (player.challenge.activated == 6) {
-                        effect = Math.sqrt(effect)
+                        effect = Math.pow(effect, 0.8)
                         effect *= Math.pow(1 + MISC.amount_of_upgrades.coin(), Math.pow(1.00185, player.clicks.prestige))
                     }
                     if (player.challenge.activated == 7) effect = MISC.amount_of_upgrades.coin() < 50 ? Math.pow(effect, 1 - MISC.amount_of_upgrades.coin() / 50) : 0
