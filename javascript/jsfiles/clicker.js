@@ -1051,7 +1051,6 @@ function loop() {
     new_date = Date.now()
     player.time.currentTime = new_date
     let time = (new_date-player.time.savedTime)/1000 //0.033, 0.05, 0.1, 0.5
-    if (time > 1) time = 1
 
     player.settings.auto_save ? MISC.auto_save_timer += time : MISC.auto_save_timer = 0
     if (MISC.auto_save_timer >= 30) autoSaveThis()
@@ -1123,7 +1122,6 @@ function loop() {
 
     player.time.savedTime = Date.now()
 }
-setInterval(loop, 50)
 
 function convert_time(type, layer) {
     let time = player.time[type][layer].timer // type - real/time, layer - total/fastest
