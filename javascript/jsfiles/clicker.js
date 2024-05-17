@@ -15,7 +15,7 @@ const GAIN = {
                     if (player.challenge.activated == 3) effect /= GAIN.umultiplier.effect()*100000
                     if (player.challenge.activated == 4) effect = Math.sqrt(effect)
                     if (player.challenge.activated == 6) {
-                        effect = Math.sqrt(effect)
+                        effect = Math.pow(effect, 0.8)
                         effect *= Math.pow(1 + MISC.amount_of_upgrades.coin(), Math.pow(1.00185, player.clicks.prestige))
                     }
                     if (player.challenge.activated == 7) effect = MISC.amount_of_upgrades.coin() < 50 ? Math.pow(effect, 1 - MISC.amount_of_upgrades.coin() / 50) : 0
@@ -1052,7 +1052,6 @@ function loop() {
     new_date = Date.now()
     player.time.currentTime = new_date
     let time = (new_date-player.time.savedTime)/1000 //0.033, 0.05, 0.1, 0.5
-    if (time > 1) time = 1
 
     player.settings.auto_save ? MISC.auto_save_timer += time : MISC.auto_save_timer = 0
     if (MISC.auto_save_timer >= player.settings.autosave_interval/1000) autoSaveThis()
@@ -1124,7 +1123,6 @@ function loop() {
 
     player.time.savedTime = Date.now()
 }
-setInterval(loop, 50)
 
 mySlider.onmouseup = function() {
     player.settings.autosave_interval = this.value; 
@@ -1211,7 +1209,7 @@ function fillTheProgressBar(type, number) {
 }
 
 function fillTheProgressBar2(type) {
-    let sub = player.supercrystal.consumedShards
+    let sub = Math.min(player.supercrystal.consumedShards, UNL[type].cost()-player.supercrystal.consumedShards)
         UNL[type].interval = setInterval(()=> {
             if (player.shard.currency >= sub){
                 sub = (player.supercrystal.consumedShards+100)

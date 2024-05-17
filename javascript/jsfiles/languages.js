@@ -1002,6 +1002,8 @@ setTimeout(() => {
     loadingScreen.style.display = 'none'
     document.documentElement.style.overflowY = 'auto'
     wholeGame.style.display = 'block'
+    player.time.savedTime = Date.now()
+    setInterval(loop, 50)
 }, 2000);
 
 window.onload = loadTranslationsFromChangeLanguage();
