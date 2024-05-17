@@ -1124,7 +1124,11 @@ function loop() {
     player.time.savedTime = Date.now()
 }
 
-mySlider.onmouseup = function() {
+// mySlider.onmouseup = function() {
+//     player.settings.autosave_interval = this.value; 
+// }
+
+mySlider.oninput = function() {
     player.settings.autosave_interval = this.value; 
 }
 
@@ -1231,145 +1235,86 @@ function fillTheProgressBar2(type) {
 shardUnlockableBase1.addEventListener("mousedown", () => {
     fillTheProgressBar('second',1)
 })
-
 shardUnlockableBase1.addEventListener("mouseup", () => {
     clearInterval(UNL.shard.second.interval)
 })
-
 shardUnlockableBase1.addEventListener("mouseleave", () => {
     clearInterval(UNL.shard.second.interval)
 })
-shardUnlockableBase1.addEventListener("touchstart", () => {
-    fillTheProgressBar(shardUnlockablePerSecond);
-});
-
-shardUnlockableBase1.addEventListener("touchend", () => {
-    clearInterval(shardUnlockablePerSecond.interval);
-});
-
-shardUnlockableBase1.addEventListener("touchcancel", () => {
-    clearInterval(shardUnlockablePerSecond.interval);
-});
 
 shardUnlockableBase1.addEventListener("touchstart", () => {
     fillTheProgressBar('second',1);
 });
-
 shardUnlockableBase1.addEventListener("touchend", () => {
     clearInterval(UNL.shard.second.interval);
 });
-
 shardUnlockableBase1.addEventListener("touchcancel", () => {
     clearInterval(UNL.shard.second.interval);
 });
+
 
 shardUnlockableBase2.addEventListener("mousedown", () => {
     fillTheProgressBar('click',2)
 })
-
 shardUnlockableBase2.addEventListener("mouseup", () => {
     clearInterval(UNL.shard.click.interval)
 })
-
 shardUnlockableBase2.addEventListener("mouseleave", () => {
     clearInterval(UNL.shard.click.interval)
 })
+
 shardUnlockableBase2.addEventListener("touchstart", () => {
-    fillTheProgressBar(shardUnlockableClick);
-});
-
-shardUnlockableBase2.addEventListener("touchend", () => {
-    clearInterval(shardUnlockableClick.interval);
-});
-
-shardUnlockableBase2.addEventListener("touchcancel", () => {
-    clearInterval(shardUnlockableClick.interval);
-});
-
-
-shardUnlockableBase1.addEventListener("touchstart", () => {
     fillTheProgressBar('click',2);
 });
-
-shardUnlockableBase1.addEventListener("touchend", () => {
+shardUnlockableBase2.addEventListener("touchend", () => {
+    clearInterval(UNL.shard.click.interval);
+});
+shardUnlockableBase2.addEventListener("touchcancel", () => {
     clearInterval(UNL.shard.click.interval);
 });
 
-shardUnlockableBase1.addEventListener("touchcancel", () => {
-    clearInterval(UNL.shard.click.interval);
-});
 
 shardUnlockableBase3.addEventListener("mousedown", () => {
     fillTheProgressBar('buyables',3)
 })
-
 shardUnlockableBase3.addEventListener("mouseup", () => {
     clearInterval(UNL.shard.buyables.interval)
 })
-
 shardUnlockableBase3.addEventListener("mouseleave", () => {
     clearInterval(UNL.shard.buyables.interval)
 })
+
 shardUnlockableBase3.addEventListener("touchstart", () => {
-    fillTheProgressBar(shardUnlockableBuyables);
-});
-
-shardUnlockableBase3.addEventListener("touchend", () => {
-    clearInterval(shardUnlockableBuyables.interval);
-});
-
-shardUnlockableBase3.addEventListener("touchcancel", () => {
-    clearInterval(shardUnlockableBuyables.interval);
-});
-
-
-shardUnlockableBase1.addEventListener("touchstart", () => {
     fillTheProgressBar('buyables',3);
 });
-
-shardUnlockableBase1.addEventListener("touchend", () => {
+shardUnlockableBase3.addEventListener("touchend", () => {
+    clearInterval(UNL.shard.buyables.interval);
+});
+shardUnlockableBase3.addEventListener("touchcancel", () => {
     clearInterval(UNL.shard.buyables.interval);
 });
 
-shardUnlockableBase1.addEventListener("touchcancel", () => {
-    clearInterval(UNL.shard.buyables.interval);
-});
 
 shardUnlockableBase4.addEventListener("mousedown", () => {
     fillTheProgressBar('singles',4)
 })
-
 shardUnlockableBase4.addEventListener("mouseup", () => {
     clearInterval(UNL.shard.singles.interval)
 })
-
 shardUnlockableBase4.addEventListener("mouseleave", () => {
     clearInterval(UNL.shard.singles.interval)
 })
-shardUnlockableBase4.addEventListener("touchstart", () => {
-    fillTheProgressBar(shardUnlockableSingles);
-});
-
-shardUnlockableBase4.addEventListener("touchend", () => {
-    clearInterval(shardUnlockableSingles.interval);
-});
-
-shardUnlockableBase4.addEventListener("touchcancel", () => {
-    clearInterval(shardUnlockableSingles.interval);
-});
-
 
 shardUnlockableBase4.addEventListener("touchstart", () => {
     fillTheProgressBar('singles',4);
 });
-
 shardUnlockableBase4.addEventListener("touchend", () => {
     clearInterval(UNL.shard.singles.interval);
 });
-
 shardUnlockableBase4.addEventListener("touchcancel", () => {
     clearInterval(UNL.shard.singles.interval);
 });
+
 
 superCrystalBarBase.addEventListener("mousedown", () => {
     fillTheProgressBar2('supercrystal')
