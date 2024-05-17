@@ -1050,6 +1050,15 @@ th {
     align-items: center;
 }
 
+#saveButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+
+
 @media screen and (max-width: 600px) {
 
   

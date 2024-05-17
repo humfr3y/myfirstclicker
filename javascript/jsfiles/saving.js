@@ -1,5 +1,10 @@
+let save_number = 1
 function autoSaveGame(){
     player.settings.auto_save == true ? player.settings.auto_save = false : player.settings.auto_save = true
+}
+
+function toggleOfflineGain() {
+    player.settings.offline == true ? player.settings.offline = false : player.settings.offline = true
 }
 
 function saveGame () { 
@@ -9,8 +14,19 @@ function saveGame () {
     else {
         MISC.auto_save_timer = 0
         notify(text.notification.save, 'limegreen');
+        localStorage.setItem('SAVE_NUMBER', JSON.stringify(save_number))
         let stringifiedData = JSON.stringify(player); //превратим в строчку
-        localStorage.setItem('player', stringifiedData);
+        switch (save_number) {
+            case 2:
+                localStorage.setItem('player2', stringifiedData);
+                break;
+            case 3: 
+                localStorage.setItem('player3', stringifiedData);
+                break;
+            default:
+                localStorage.setItem('player', stringifiedData);
+                break;
+        }
     }
 }
 
@@ -28,9 +44,27 @@ for (const key in sourceObj) {
     }
 }
 }
-// && storedData == null
+
+function chooseSave(number) {
+    save_number = number
+    localStorage.setItem('SAVE_NUMBER', JSON.stringify(save_number))
+    location.reload()
+}
+
 function loadGame() {
-        let storedData = localStorage.getItem('player'); //спарсим его обратно объект
+        let storedData = '' 
+        save_number = JSON.parse(localStorage.getItem('SAVE_NUMBER'))
+        switch (save_number) {
+            case 2:
+                storedData = localStorage.getItem('player2'); 
+                break;
+            case 3:
+                storedData = localStorage.getItem('player3'); 
+                break;
+            default:
+                storedData = localStorage.getItem('player'); 
+                break;
+        }
         let parsedData = ''
         if (localStorage.getItem('datasaving') != null && storedData == null) {
             convert_save()
@@ -68,18 +102,33 @@ function loadGame() {
             openWindow('welcome', false)
             player.time.savedTime = Date.now()
         }
-        player.offline_gain.time = MISC.offline(),
-        player.offline_gain.coin = GAIN.coin.offline(), 
-        player.offline_gain.supercoin = GAIN.supercoin.offline(), 
-        player.offline_gain.crystal  = ACHS.has(22) ? GAIN.crystal.offline() : 0, 
-        player.offline_gain.prestige = MILESTONES.has(16) ? GAIN.prestige.offline() : 0,
-        player.offline_gain.shard = UNL.shard.second.unl() ? GAIN.shard.offline() : 0,
+        if (player.settings.offline == true) {
+            player.offline_gain.time = MISC.offline()
+            player.offline_gain.coin = GAIN.coin.offline()
+            player.offline_gain.supercoin = GAIN.supercoin.offline()
+            player.offline_gain.crystal  = ACHS.has(22) ? GAIN.crystal.offline() : 0,
+            player.offline_gain.prestige = MILESTONES.has(16) ? GAIN.prestige.offline() : 0
+            player.offline_gain.shard = UNL.shard.second.unl() ? GAIN.shard.offline() : 0
+        }
+        else {
+            player.offline_gain.time = 0
+            player.offline_gain.coin = 0
+            player.offline_gain.supercoin = 0
+            player.offline_gain.crystal = 0
+            player.offline_gain.prestige = 0
+            player.offline_gain.shard = 0
+        }
 
         player.offline_gain.daily = GAIN.supercoin.daily.reward()
 
         changeFonts2(player.settings.font)
         changeFont.value = player.settings.font
+        
+        changeNotation.value = player.settings.notation
+
         shopBulkBuyInput.value = player.settings.shop_bulkbuy
+
+        mySlider.value = player.settings.autosave_interval
 
         autoUmultiInput.value = player.automation.conditions.umultiplier
         autoUpowerInput.value = player.automation.conditions.upower.time
@@ -128,7 +177,25 @@ function resetDailyReward() {
 function autoSaveThis() {
     if (player.settings.auto_save == true && !(isNaN(player.coin.currency) || isNaN(player.prestige.currency) || isNaN(player.shard.currency) || isNaN(player.coin.total_currency)))
         {
-            saveGame()
+            if (isNaN(player.coin.currency)) {
+                openWindow('gotNaNed', false)
+            } 
+            else {
+                MISC.auto_save_timer = 0
+                localStorage.setItem('SAVE_NUMBER', JSON.stringify(save_number))
+                let stringifiedData = JSON.stringify(player); //превратим в строчку
+                switch (save_number) {
+                    case 2:
+                        localStorage.setItem('player2', stringifiedData);
+                        break;
+                    case 3: 
+                        localStorage.setItem('player3', stringifiedData);
+                        break;
+                    default:
+                        localStorage.setItem('player', stringifiedData);
+                        break;
+                }
+            }
             MISC.auto_save_timer = 0
         }
         if (isNaN(player.coin.currency) || isNaN(player.prestige.currency) || isNaN(player.shard.currency) || isNaN(player.coin.total_currency)) 
@@ -137,7 +204,18 @@ function autoSaveThis() {
 
 function doHardReset () {
             notify(text.notification.hard, "red");
-            localStorage.removeItem('player');
+            save_number = JSON.parse(localStorage.getItem('SAVE_NUMBER'))
+            switch (save_number) {
+                case 2:
+                    localStorage.removeItem('player2');
+                    break;
+                case 3:
+                    localStorage.removeItem('player3');
+                    break;
+                default:
+                    localStorage.removeItem('player');
+                    break;
+            }
             location.reload() //сделать чтобы страница НЕ загружала через лоад
 }
 
@@ -177,6 +255,7 @@ function importing(base64) {
         const parsedData = JSON.parse(importedData)
         updateNestedProperties(player, parsedData)
     }
+    save_number = JSON.parse(localStorage.getItem('SAVE_NUMBER'))
     saveGame()
     notify(text.notification.import, 'limegreen');
     location.reload()

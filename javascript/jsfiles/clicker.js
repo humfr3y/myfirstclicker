@@ -979,6 +979,7 @@ const MISC = {
         let time = (y-x)/1000
         time = Math.min(time, 1e6)
         if (UPGS.supercrystal[31].unl()) time*5
+        if (player.settings.offline == false) return 0
         return time
     },
     free_upgrade: {
@@ -1054,7 +1055,7 @@ function loop() {
     if (time > 1) time = 1
 
     player.settings.auto_save ? MISC.auto_save_timer += time : MISC.auto_save_timer = 0
-    if (MISC.auto_save_timer >= 30) autoSaveThis()
+    if (MISC.auto_save_timer >= player.settings.autosave_interval/1000) autoSaveThis()
 
     player.coin.currency += player.challenge.activated != 0 && player.coin.currency >= 1e15 ? 0 : GAIN.coin.second.effect()*time
     player.coin.total_currency += GAIN.coin.second.effect()*time
@@ -1124,6 +1125,10 @@ function loop() {
     player.time.savedTime = Date.now()
 }
 setInterval(loop, 50)
+
+mySlider.onmouseup = function() {
+    player.settings.autosave_interval = this.value; 
+}
 
 function convert_time(type, layer) {
     let time = player.time[type][layer].timer // type - real/time, layer - total/fastest
@@ -1624,7 +1629,7 @@ function howToPlayOpen(){
 }
 
 function openWindow(arg, isFlex) {
-    const descsToHide = ['confirmationButtons', 'whichCode', 'dailyDesc', 'breakCrystal', 'brokeCrystals', 'falseBrokeCrystals', 'welcomeToDigitalGod']
+    const descsToHide = ['confirmationButtons', 'whichCode', 'dailyDesc', 'breakCrystal', 'brokeCrystals', 'falseBrokeCrystals', 'welcomeToDigitalGod', 'chooseSaveDiv']
     for (const descId of descsToHide) {
         const desc = document.getElementById(descId);
         if (desc) {
@@ -1653,6 +1658,7 @@ function openWindow(arg, isFlex) {
     else if (arg == 'submit') {brokeCrystals.style.display = "block"; windowTitle2.innerHTML = ''; windowTitleDiv.style.display = 'none'}
     else if (arg == 'falseSubmit') {falseBrokeCrystals.style.display = "block"; windowTitle2.innerHTML = ''; windowTitleDiv.style.display = 'none'}
     else if (arg == 'welcome') {welcomeToDigitalGod.style.display = "block"; windowTitle2.innerHTML = ''; windowTitleDiv.style.display = 'none'}
+    else if (arg == 'chooseSave') {chooseSaveDiv.style.display = "block"; windowTitle2.innerHTML = ''; windowTitleDiv.style.display = 'none'}
     myPopupBackdrop1.style.display = "flex";
 }
 
@@ -1732,6 +1738,10 @@ function changeFonts(option) {
         buttons[i].style.fontFamily = font
     }
     player.settings.font = option.value
+}
+
+function changeNotations(option){
+    player.settings.notation = option.value
 }
 
 function changeFonts2(option) {

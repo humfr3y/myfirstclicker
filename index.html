@@ -116,6 +116,11 @@
               <button onclick="exportSave(this)" id= "expSave" class="settingButton">экспорт</button>
             </div>
               <div id="thirdSaveSettingsRow" class="settingsRow">
+              <div id="slider" class="settingButton loadfile" style="flex-direction: column;">
+                <div id="autosaveSlider">Автосохранение, мс:</div>
+                <input type="range" min="100" max="60000" value="30000" class="slider" id="mySlider">
+              </div>
+              <button onclick="openWindow('chooseSave', false)" id= "chooseSaveButton" class="settingButton"></button>
               <button onclick="openWindow('hardReset', false)" id= "hardRes" class="settingButton"></button>
               </div>
               </div>
@@ -139,6 +144,17 @@
             <button id= "changingLanguage" class="settingButton">Сменить язык</button>
             <button onclick="muteTheAudio(this)" id="muteAudio" class="settingButton">Выключить звук</button>
             </div>
+          <div id="secondGraphicSettingsRow" class="settingsRow">
+            <select id="changeNotation" class="settingButton selectSetting">
+              <option value="option1" class="notaSelector">Standard</option>
+              <option value="option2" class="notaSelector">Scientific</option>
+              <option value="option3" class="notaSelector">Engineer</option>
+              <option value="option4" class="notaSelector">Logarithmic</option>
+              <option value="option5" class="notaSelector">True</option>
+              <option value="option6" class="notaSelector">Empty</option>
+              <option value="option7" class="notaSelector">Letter</option>
+            </select>
+            </div>
           </div>
     <!-- Other -->
     <div id="settingsOtherTab" style="display: none;">
@@ -156,6 +172,7 @@
           </div>
           <div id="secondOtherSettingsRow" class="settingsRow">
             <button onclick="MISC.daily_reward()" id="getDailyReward" class="settingButton">Получить ежедневную награду</button>
+            <button onclick="toggleOfflineGain()" id= "toggleOffline" class="settingButton">Автосохранение: выкл / Auto-save: off</button>
           </div>
     </div>
         <footer id="hotkeys" class="statsSlot">Hotkey</footer>
@@ -186,6 +203,7 @@
             <button onclick='showChangelog(text.changelog["0.10.1"])' class="versionButton">0.10.1.x</button>
             <button onclick='showChangelog(text.changelog["0.11"])' class="versionButton">0.11</button>
             <button onclick='showChangelog(text.changelog["0.12"])' class="versionButton">0.12</button>
+            <button onclick='showChangelog(text.changelog["0.12.1"])' class="versionButton">0.12.1</button>
           </div>
         <div id="versionDiv" class="windowDesc">
           <p id="versionDescription">Choose version</p>
@@ -1107,7 +1125,7 @@
         <button onclick="showStats(10)" id="chooseSimulation" class="versionButton versionButtonVertical multiplierChooser">Симуляция нажатий</button>
       </div>
       <div id="multiplierStats">
-        <p id="multBreakdownTitle">Монеты за нажатия</p>
+        <p id="multBreakdownTitle"></p>
         <div id="gainPerClickStats">
           <div class="multiplierString" display="flex">
             <span id="doublerStats" class="whiteText" style="margin-left: 30px;">Удвоитель</span>
@@ -1955,6 +1973,16 @@
             <span id="brokeCrystals" class="windowDesc" style="display: none">СКОЛЬКО ОСКОЛКОВ ПОЛУЧЕНО</span>
             <span id="falseBrokeCrystals" class="windowDesc" style="display: none"></span></span>
             <span id="welcomeToDigitalGod" class="windowDesc" style="display: none"></span>
+
+            <div id="chooseSaveDiv" class="windowDesc" style="display: none">
+              <span id="selectSave">СКОЛЬКО СБРОСИТЬ ТЕКСТ</span>
+              <div id="saveButtons"> 
+                <button onclick="chooseSave(1)" id="save1" class="tabButton"></button>
+                <button onclick="chooseSave(2)" id="save2" class="tabButton"></button>
+                <button onclick="chooseSave(3)" id="save3" class="tabButton"></button>
+              </div>
+              
+            </div>
             </div>
         </div>
 
@@ -1979,7 +2007,11 @@
     let options = document.getElementsByClassName("fontSelector");
     let selectedOption
 
-      window.onload = loadGame();
+    let select2 = document.getElementById("changeNotation");
+    let options2 = document.getElementsByClassName("notaSelector");
+    let selectedOption2
+
+    window.onload = loadGame();
 
     function showOfflineGain() {
     offlineGainWindow.style.display = "block";
@@ -1990,13 +2022,18 @@
     closeOfflineWindow.style.bottom = "85%"
     offlineShowTime.style.textAlign = "center"
     }
-    window.onload = showOfflineGain()
+    if (player.settings.offline == true) window.onload = showOfflineGain()
     myPopupBackdrop2.addEventListener("click", hidePopup);
     
-    select.addEventListener("change", function(){
-    selectedOption = select.options[select.selectedIndex];
-    changeFonts(selectedOption)
+    changeFont.addEventListener("change", function(){
+        selectedOption = select.options[select.selectedIndex];
+        changeFonts(selectedOption)
 })
+    changeNotation.addEventListener("change", function(){
+        selectedOption2 = select2.options[select2.selectedIndex];
+        changeNotations(selectedOption2)
+    })
+
 
   function findRatio (multiplier, multipliers){
 	return parseFloat((Math.log10(multiplier)/ Math.log10(multipliers)*100).toFixed(2))

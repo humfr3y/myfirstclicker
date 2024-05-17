@@ -468,6 +468,7 @@ let player = {
         mutedAudio: false,
         shop_bulkbuy: 1,
         font: 'option1',
+        notation: 'option1',
         buy_max_activate: false,
         modernization_activated: false,
         loreBoolean: [],
@@ -475,7 +476,9 @@ let player = {
             spiritual: false,
             triplePower: false
         },
-        whichPrestigeMode: 'time'
+        whichPrestigeMode: 'time',
+        autosave_interval: 30000,
+        offline: true
     },
     automation: {
         checkbox: {
@@ -604,7 +607,8 @@ const text = {
             "0.10.1":'',
             "0.11":'',
             "0.11.1":'',
-            "0.12":''
+            "0.12":'',
+            "0.12.1": ''
         },
         chapter: {
             start:'',

@@ -101,23 +101,156 @@ function hidePiece2(condition, idOfPiece, idOfPiecePercent, summary, temp2) {
     }
 }
 
-function formatNumber(number) { //average
-    if (number < 1000000) {
-        return number.toFixed(0);
-    } else {
-        return number.toExponential(2).replace("+","");
+function formatNumber(number, mode='number') { //average
+    switch (player.settings.notation) {
+        case 'option1':
+            if (number >= 1000) {
+                if (number < 1e33 ) {
+                    let standard = ['K','M','B','T','Qa','Qt','Sx','Sp','Oc','No','Dc']
+                    const index = Math.floor(Math.log10(number)/3)-1
+                    const formula = number/Math.pow(10, (index+1)*3)
+                    return formula.toFixed(2) + " " + standard[index]
+                }
+                else {
+                    let standard1 = ["", "Un", "Du", "Tr", "Qd", "Qt", "Sx", "Sp", "Oc", "No"]
+                    let standard2 = ["Dc", "Vg", "Tg", "Qg", "Qtg", "Sxg", "Spg", "Ocg", "Nog", "Ce"]
+                    const indexK = Math.floor(Math.log10(number/1000)/(30))-1 // k
+                    const indexI = (Math.floor(Math.log10(number)/3)-1)-(10*(indexK+1))
+                    const index = Math.floor(Math.log10(number)/3)
+                    const formula = number/Math.pow(10, index*3)
+                    return formula.toFixed(2) + " " + standard1[indexI] + standard2[indexK] 
+                }
+            }
+            else { //if less than 1000
+                switch (mode) {
+                    case 'number': return number.toFixed(0)
+                    case 'floor': return Math.floor(number).toString()
+                    case 'boost': 
+                        if (number < 100) return number.toFixed(2);
+                        else return number.toFixed(0);
+                    case 'power': 
+                        if (number < 10) return number.toFixed(3);
+                        else if (number >= 10 && number < 100) return number.toFixed(2);
+                        else return number.toFixed(0);
+                    case 'percent':
+                        number *= 100
+                        number -= 100
+                        if (number < 10) return number.toFixed(2);
+                        else return number.toFixed(0);
+                }
+            }
+            
+        case 'option2':
+                if (number >= 1000000) {
+                    return number.toExponential(2).replace("+","");
+                }
+                else if (number >= 1000 && number < 1000000) return number.toFixed(0)
+                else { //if less than 1000000
+                    switch (mode) {
+                        case 'number': return number.toFixed(0)
+                        case 'floor': return Math.floor(number).toString()
+                        case 'boost': 
+                            if (number < 100) return number.toFixed(2);
+                            else return number.toFixed(0);
+                        case 'power': 
+                            if (number < 10) return number.toFixed(3);
+                            else if (number >= 10 && number < 100) return number.toFixed(2);
+                            else return number.toFixed(0);
+                        case 'percent':
+                            number *= 100
+                            number -= 100
+                            if (number < 10) return number.toFixed(2);
+                            else return number.toFixed(0);
+                    }
+                }
+        case 'option3':
+            if (number >= 1000) {
+                for (let i = 0; i < 308; i++) {
+                    const formula = number/Math.pow(10, 3*(i+1))
+                    if (formula < 1000) {
+                        return formula.toFixed(2) + "e" + (i+1)*3
+                    }
+                }
+            }
+            else { //if less than 1000
+                switch (mode) {
+                    case 'number': return number.toFixed(0)
+                    case 'floor': return Math.floor(number).toString()
+                    case 'boost': 
+                        if (number < 100) return number.toFixed(2);
+                        else return number.toFixed(0);
+                    case 'power': 
+                        if (number < 10) return number.toFixed(3);
+                        else if (number >= 10 && number < 100) return number.toFixed(2);
+                        else return number.toFixed(0);
+                    case 'percent':
+                    number *= 100
+                    number -= 100
+                    if (number < 10) return number.toFixed(2);
+                    else return number.toFixed(0);
+                }
+            }
+        case 'option4':
+                switch (mode) {
+                    case 'percent': return "log " + Math.log10(((number*100)-100)+1).toFixed(3);
+                    default: return "log " + Math.log10(number+1).toFixed(3);
+                }
+                
+        case 'option5':
+            if (number > 0) {
+                return "TRUE"
+            } else {
+                return "FALSE"
+            }
+        case 'option6':
+            return ""
+        case 'option7':
+            if (number >= 1000) {
+                if (number < 1e81 ) {
+                    let letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"//26
+                    const index = Math.floor(Math.log10(number)/3)-1
+                    const formula = number/Math.pow(10, (index+1)*3)
+                    return formula.toFixed(2) + " " + letter[index]
+                }
+                else {
+                    let letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"//26
+                    const indexK = Math.floor(Math.log10(number/1000)/78)-1 // k
+                    const indexI = (Math.floor(Math.log10(number)/3)-1)-(26*(indexK+1))
+                    const index = Math.floor(Math.log10(number)/3)
+                    const formula = number/Math.pow(10, index*3)
+                    return formula.toFixed(2) + " " + letter[indexK] + letter[indexI] 
+                }
+            }
+            else { //if less than 1000
+                switch (mode) {
+                    case 'number': return number.toFixed(0)
+                    case 'floor': return Math.floor(number).toString()
+                    case 'boost': 
+                        if (number < 100) return number.toFixed(2);
+                        else return number.toFixed(0);
+                    case 'power': 
+                        if (number < 10) return number.toFixed(3);
+                        else if (number >= 10 && number < 100) return number.toFixed(2);
+                        else return number.toFixed(0);
+                    case 'percent':
+                        number *= 100
+                        number -= 100
+                        if (number < 10) return number.toFixed(2);
+                        else return number.toFixed(0);
+                }
+            }
     }
 }
 
-function formatNumber3(number) { //for returning into 3.99 = 3
-    if (number < 1000000) {
-        return Math.floor(number).toString()
-    } else {
-        return number.toExponential(2).replace("+","");
-    }
-}
+// function formatNumber3(number) { //for returning into 3.99 = 3
+//     if (number < 1000000) {
+//         return Math.floor(number).toString()
+//     } else {
+//         return number.toExponential(2).replace("+","");
+//     }
+// }
 
-function formatNumber4(number) { //more complicated
+function formatNumber4(number) { //more complicated unused
     if (number < 1) {
         return number.toFixed(3);
     } else if (number < 10 && number >= 1) {
@@ -311,13 +444,13 @@ function convertToTwoDigits(arg) {
 }
 
 function statsPerClickUpdate() { //multi breakdown click
-    doublerStatsEffect.innerHTML = "x" + formatBoost(UPGS.coin.buyables[3].effect())
-    midasCursorStatsEffect.innerHTML = "x" + formatBoost(UPGS.coin.singles[12].effect())
-    rewardForFeatsStatsEffect.innerHTML = "x" + formatBoost(UPGS.coin.singles[23].effect())
-    challenge6StatsEffect.innerHTML = "x" + formatBoost(CHALL[6].effect())
-    goldenGloveStatsEffect.innerHTML = "x" + formatBoost(UPGS.shop.buyables[1].effect())
-    gainStatsEffect.innerHTML = "x" + formatBoost(GAIN.coin.gain.effect())
-    alphaPowerStatsEffect.innerHTML = "^" + formatPower(UPGS.coin.buyables[5].effect())
+    doublerStatsEffect.innerHTML = "x" + formatNumber(UPGS.coin.buyables[3].effect(), 'boost')
+    midasCursorStatsEffect.innerHTML = "x" + formatNumber(UPGS.coin.singles[12].effect(), 'boost')
+    rewardForFeatsStatsEffect.innerHTML = "x" + formatNumber(UPGS.coin.singles[23].effect(), 'boost')
+    challenge6StatsEffect.innerHTML = "x" + formatNumber(CHALL[6].effect(), 'boost')
+    goldenGloveStatsEffect.innerHTML = "x" + formatNumber(UPGS.shop.buyables[1].effect(), 'boost')
+    gainStatsEffect.innerHTML = "x" + formatNumber(GAIN.coin.gain.effect(), 'boost')
+    alphaPowerStatsEffect.innerHTML = "^" + formatNumber(UPGS.coin.buyables[5].effect(), 'power')
     let gainWithoutPower = findMultiplier(Math.pow(GAIN.coin.click.no_softcap_effect(), 1 / UPGS.coin.buyables[5].effect()), UPGS.coin.buyables[5].effect())
     hidePiece(UPGS.coin.buyables[3].effect(), doublerPiece, doublerPiecePercent, GAIN.coin.click.no_softcap_effect())
     hidePiece(UPGS.coin.singles[12].effect(), midasCursorPiece, midasCursorPiecePercent, GAIN.coin.click.no_softcap_effect())
@@ -327,19 +460,19 @@ function statsPerClickUpdate() { //multi breakdown click
     hidePiece(GAIN.coin.gain.effect(), gainClickPiece, gainClickPiecePercent, GAIN.coin.click.no_softcap_effect())
     hidePiece(gainWithoutPower, alphaPowerPiece, alphaPowerPiecePercent, GAIN.coin.click.no_softcap_effect())
 
-    summaryClickStatsEffect.innerHTML = "x" + formatBoost(GAIN.coin.click.effect())
+    summaryClickStatsEffect.innerHTML = "x" + formatNumber(GAIN.coin.click.effect(), 'boost')
 }
 
 function statsPerSecondUpdate() {
     smallInvestmentStatsEffect.innerHTML = "+" + formatNumber(UPGS.coin.buyables[1].effect())
-    multiplierUpgradeStatsEffect.innerHTML = "x" + formatBoost(UPGS.coin.buyables[4].effect())
-    richFameStatsEffect.innerHTML = "x" + formatBoost(UPGS.coin.singles[11].effect())
-    negativeAlphaStatsEffect.innerHTML = "x" + formatBoost(UPGS.coin.singles[21].effect())
-    goldenClockStatsEffect.innerHTML = "x" + formatBoost(UPGS.shop.buyables[2].effect())
-    challenge8StatsEffect.innerHTML = "x" + formatBoost(player.challenge.completed.includes(8) ? CHALL[8].effect() : 1)
-    achievement15StatsEffect.innerHTML = "x" + formatBoost(Math.pow(1+0.0001*player.clicks.simulated, ACHS.has(15)))
-    gain2StatsEffect.innerHTML = "x" + formatBoost(GAIN.coin.gain.effect())
-    challenge3StatsEffect.innerHTML = "^" + formatPower(player.challenge.completed.includes(3) ? CHALL[3].effect() : 1)
+    multiplierUpgradeStatsEffect.innerHTML = "x" + formatNumber(UPGS.coin.buyables[4].effect(), 'boost')
+    richFameStatsEffect.innerHTML = "x" + formatNumber(UPGS.coin.singles[11].effect(), 'boost')
+    negativeAlphaStatsEffect.innerHTML = "x" + formatNumber(UPGS.coin.singles[21].effect(), 'boost')
+    goldenClockStatsEffect.innerHTML = "x" + formatNumber(UPGS.shop.buyables[2].effect(), 'boost')
+    challenge8StatsEffect.innerHTML = "x" + formatNumber(player.challenge.completed.includes(8) ? CHALL[8].effect() : 1, 'boost')
+    achievement15StatsEffect.innerHTML = "x" + formatNumber(Math.pow(1+0.0001*player.clicks.simulated, ACHS.has(15)), 'boost')
+    gain2StatsEffect.innerHTML = "x" + formatNumber(GAIN.coin.gain.effect(), 'boost')
+    challenge3StatsEffect.innerHTML = "^" + formatNumber(player.challenge.completed.includes(3) ? CHALL[3].effect() : 1, 'power')
     let gainWithoutPower = findMultiplier(Math.pow(GAIN.coin.second.no_softcap_effect(), 1 / player.challenge.completed.includes(3) ? CHALL[3].effect() : 1), player.challenge.completed.includes(3) ? CHALL[3].effect() : 1)
     hidePiece(UPGS.coin.buyables[1].effect(), smallInvestmentPiece, smallInvestmentPiecePercent, GAIN.coin.second.no_softcap_effect())
     hidePiece(UPGS.coin.buyables[4].effect(), multiplierPiece, multiplierPiecePercent, GAIN.coin.second.no_softcap_effect())
@@ -350,24 +483,24 @@ function statsPerSecondUpdate() {
     hidePiece(player.challenge.completed.includes(8) ? CHALL[8].effect() : 1, challenge8Piece, challenge8PiecePercent, GAIN.coin.second.no_softcap_effect())
     hidePiece(GAIN.coin.gain.effect(), gainSecondPiece, gainSecondPiecePercent, GAIN.coin.second.no_softcap_effect())
     hidePiece(gainWithoutPower, challenge3Piece, challenge3PiecePercent, GAIN.coin.second.no_softcap_effect())
-    summarySecondStatsEffect.innerHTML = "x" + formatBoost(GAIN.coin.second.effect())
+    summarySecondStatsEffect.innerHTML = "x" + formatNumber(GAIN.coin.second.effect(), 'boost')
 }
 
 function statsGainUpdate() {
-    doublerPlusStatsEffect.innerHTML = "x" + formatBoost(UPGS.coin.singles[13].effect())
-    cashBackStatsEffect.innerHTML = "x" + formatBoost(UPGS.coin.singles[22].effect())
-    goldenKeyStatsEffect.innerHTML = "x" + formatBoost(UPGS.shop.buyables[3].effect())
-    overdriveType1StatsEffect.innerHTML = "x" + formatBoost(UNL.overdrive.type1.effect())
-    achievementsStatsEffect.innerHTML = "x" + formatBoost(ACHS.effect.coin())
-    achievement28StatsEffect.innerHTML = "x" + formatBoost(Math.pow(4, player.achievements.includes(28)))
-    hourglassStatsEffect.innerHTML = "x" + formatBoost(UPGS.prestige.singles[31].effect())
-    antiHourglassStatsEffect.innerHTML = "x" + formatBoost(UPGS.prestige.singles[32].effect())
-    shardsStatsEffect.innerHTML = "x" + formatBoost(GAIN.shard.effect.effect())
-    secondMineralEffect1StatsEffect.innerHTML = "x" + formatBoost(UPGS.minerals[2].effect1())
-    umultiplierStatsEffect.innerHTML = "x" + formatBoost(GAIN.umultiplier.effect())
-    upowerStatsEffect.innerHTML = "^" + formatPower(GAIN.upower.effect())
-    activity2StatsEffect.innerHTML = "^" + formatPower(UPGS.prestige.singles[12].effect())
-    challenge1StatsEffect.innerHTML = "^" + formatPower(player.challenge.completed.includes(1) ? CHALL[1].effect() : 1)
+    doublerPlusStatsEffect.innerHTML = "x" + formatNumber(UPGS.coin.singles[13].effect(), 'boost')
+    cashBackStatsEffect.innerHTML = "x" + formatNumber(UPGS.coin.singles[22].effect(), 'boost')
+    goldenKeyStatsEffect.innerHTML = "x" + formatNumber(UPGS.shop.buyables[3].effect(), 'boost')
+    overdriveType1StatsEffect.innerHTML = "x" + formatNumber(UNL.overdrive.type1.effect(), 'boost')
+    achievementsStatsEffect.innerHTML = "x" + formatNumber(ACHS.effect.coin(), 'boost')
+    achievement28StatsEffect.innerHTML = "x" + formatNumber(Math.pow(4, player.achievements.includes(28)), 'boost')
+    hourglassStatsEffect.innerHTML = "x" + formatNumber(UPGS.prestige.singles[31].effect(), 'boost')
+    antiHourglassStatsEffect.innerHTML = "x" + formatNumber(UPGS.prestige.singles[32].effect(), 'boost')
+    shardsStatsEffect.innerHTML = "x" + formatNumber(GAIN.shard.effect.effect(), 'boost')
+    secondMineralEffect1StatsEffect.innerHTML = "x" + formatNumber(UPGS.minerals[2].effect1(), 'boost')
+    umultiplierStatsEffect.innerHTML = "x" + formatNumber(GAIN.umultiplier.effect(), 'boost')
+    upowerStatsEffect.innerHTML = "^" + formatNumber(GAIN.upower.effect(), 'power')
+    activity2StatsEffect.innerHTML = "^" + formatNumber(UPGS.prestige.singles[12].effect(), 'power')
+    challenge1StatsEffect.innerHTML = "^" + formatNumber(player.challenge.completed.includes(1) ? CHALL[1].effect() : 1, 'power')
     let gainWithoutPower1 = findMultiplier(Math.pow(GAIN.coin.gain.no_softcap_effect(), 1 / player.challenge.completed.includes(1) ? CHALL[1].effect() : 1), player.challenge.completed.includes(1) ? CHALL[1].effect() : 1)
     let temp1 = Math.pow(GAIN.coin.gain.no_softcap_effect(), 1 / player.challenge.completed.includes(1) ? CHALL[1].effect() : 1)
     let gainWithoutPower2 = findMultiplier(Math.pow(temp1, 1 / UPGS.prestige.singles[12].effect()), UPGS.prestige.singles[12].effect())
@@ -388,16 +521,16 @@ function statsGainUpdate() {
     hidePiece(gainWithoutPower2, activity2Piece, activity2PiecePercent, GAIN.coin.gain.no_softcap_effect())
     hidePiece(gainWithoutPower1, challenge1Piece, challenge1PiecePercent, GAIN.coin.gain.no_softcap_effect())
 
-    summaryGainStatsEffect.innerHTML = "x" + formatBoost(GAIN.coin.gain.effect())
+    summaryGainStatsEffect.innerHTML = "x" + formatNumber(GAIN.coin.gain.effect(), 'boost')
 }
 
 function statsSuperCoinChanceUpdate() {
-    luckyCloverStatsEffect.innerHTML = "x" + formatBoost(UPGS.shop.buyables[4].effect())
-    thirdSingleSuperEffectStatsEffect.innerHTML = "x" + formatBoost(UPGS.coin.singles[13].effect_super())
-    charismaStatsEffect.innerHTML = "x" + formatBoost(UPGS.prestige.singles[13].effect())
-    firstSuperCrystalEffectStatsEffect.innerHTML = "x" + formatBoost(Math.pow(2, UPGS.supercrystal[11].unl()))
-    firstMineralEffect3StatsEffect.innerHTML = "x" + formatBoost(UPGS.minerals[1].effect3())
-    achievement37StatsEffect.innerHTML = "+" + formatBoost(Number(ACHS.has(37)))
+    luckyCloverStatsEffect.innerHTML = "x" + formatNumber(UPGS.shop.buyables[4].effect(), 'boost')
+    thirdSingleSuperEffectStatsEffect.innerHTML = "x" + formatNumber(UPGS.coin.singles[13].effect_super(), 'boost')
+    charismaStatsEffect.innerHTML = "x" + formatNumber(UPGS.prestige.singles[13].effect(), 'boost')
+    firstSuperCrystalEffectStatsEffect.innerHTML = "x" + formatNumber(Math.pow(2, UPGS.supercrystal[11].unl()), 'boost')
+    firstMineralEffect3StatsEffect.innerHTML = "x" + formatNumber(UPGS.minerals[1].effect3(), 'boost')
+    achievement37StatsEffect.innerHTML = "+" + formatNumber(Number(ACHS.has(37)), 'boost')
 
     let ach37 = findMultiplierInAdditive(ACHS.has(37), GAIN.supercoin.chance())
     hidePiece(UPGS.shop.buyables[4].effect(), luckyCloverPiece, luckyCloverPiecePercent, GAIN.supercoin.chance())
@@ -407,19 +540,19 @@ function statsSuperCoinChanceUpdate() {
     hidePiece(UPGS.minerals[1].effect3(), firstMineralEffect3Piece, firstMineralEffect3PiecePercent, GAIN.supercoin.chance())
     hidePiece(ach37, achievement37Piece, achievement37PiecePercent, GAIN.supercoin.chance())
 
-    summarySCChanceStatsEffect.innerHTML = formatBoost(GAIN.supercoin.chance()) + "%"
+    summarySCChanceStatsEffect.innerHTML = formatNumber(GAIN.supercoin.chance(), 'boost') + "%"
 }
 
 function statsCrystalsUpdate(){
-    achievement282StatsEffect.innerHTML = "x" + formatBoost(Math.pow(4, ACHS.has(28)))
-    brilliantDoublerStatsEffect.innerHTML = "x" + formatBoost(UPGS.prestige.buyables[1].effect())
-    recyclingStatsEffect.innerHTML = "x" + formatBoost(UPGS.shard.singles[11].effect())
-    challenge10StatsEffect.innerHTML = "x" + formatBoost(player.challenge.completed.includes(10) ? CHALL[10].effect() : 1)
-    crystalBoostStatsEffect.innerHTML = "x" + formatBoost(UPGS.shop.permanent[1].effect())
-    overdrive2EffectStatsEffect.innerHTML = "x" + formatBoost(UNL.overdrive.type2.effect())
-    thirdMineralEffect1StatsEffect.innerHTML = "x" + formatBoost(UPGS.minerals[3].effect1())
-    secondSuperCrystalSingleEffectStatsEffect.innerHTML = "x" + formatBoost(Math.pow(3, UPGS.supercrystal[12].unl()))
-    achievementBonus2StatsEffect.innerHTML = "x" + formatBoost(ACHS.effect.crystal())
+    achievement282StatsEffect.innerHTML = "x" + formatNumber(Math.pow(4, ACHS.has(28)), 'boost')
+    brilliantDoublerStatsEffect.innerHTML = "x" + formatNumber(UPGS.prestige.buyables[1].effect(), 'boost')
+    recyclingStatsEffect.innerHTML = "x" + formatNumber(UPGS.shard.singles[11].effect(), 'boost')
+    challenge10StatsEffect.innerHTML = "x" + formatNumber(player.challenge.completed.includes(10) ? CHALL[10].effect() : 1, 'boost')
+    crystalBoostStatsEffect.innerHTML = "x" + formatNumber(UPGS.shop.permanent[1].effect(), 'boost')
+    overdrive2EffectStatsEffect.innerHTML = "x" + formatNumber(UNL.overdrive.type2.effect(), 'boost')
+    thirdMineralEffect1StatsEffect.innerHTML = "x" + formatNumber(UPGS.minerals[3].effect1(), 'boost')
+    secondSuperCrystalSingleEffectStatsEffect.innerHTML = "x" + formatNumber(Math.pow(3, UPGS.supercrystal[12].unl()), 'boost')
+    achievementBonus2StatsEffect.innerHTML = "x" + formatNumber(ACHS.effect.crystal(), 'boost')
     hidePiece(Math.pow(4, ACHS.has(28)), achievement282Piece, achievement282PiecePercent, GAIN.crystal.reset())
     hidePiece(UPGS.prestige.buyables[1].effect(), brilliantDoublerPiece, brilliantDoublerPiecePercent, GAIN.crystal.reset())
     hidePiece(UPGS.shard.singles[11].effect(), recyclingPiece, recyclingPiecePercent, GAIN.crystal.reset())
@@ -429,27 +562,27 @@ function statsCrystalsUpdate(){
     hidePiece(UPGS.minerals[3].effect1(), thirdMineralEffect1Piece, thirdMineralEffect1PiecePercent, GAIN.crystal.reset())
     hidePiece(Math.pow(3, UPGS.supercrystal[12].unl()), secondSuperCrystalSingleEffectPiece, secondSuperCrystalSingleEffectPiecePercent, GAIN.crystal.reset())
     hidePiece(ACHS.effect.crystal(), achievementBonus2Piece, achievementBonus2PiecePercent, GAIN.crystal.reset())
-    summaryCrystalStatsEffect.innerHTML = "x"+formatBoost(GAIN.crystal.reset())
+    summaryCrystalStatsEffect.innerHTML = "x"+formatNumber(GAIN.crystal.reset(), 'boost')
 }
 
 function statsShardsPerClickUpdate() {
-    firstShardBuyableEffectStatsEffect.innerHTML = "x" + formatBoost(UPGS.shard.buyables[1].effect())
-    fifthShopBuyableEffectStatsEffect.innerHTML = "x" + formatBoost(UPGS.shop.buyables[5].effect())
-    ninthSuperCrystalSingleEffectStatsEffect.innerHTML = "x" + formatBoost(Math.pow(UPGS.supercrystal[33].effect(), UPGS.supercrystal[33].unl()))
+    firstShardBuyableEffectStatsEffect.innerHTML = "x" + formatNumber(UPGS.shard.buyables[1].effect(), 'boost')
+    fifthShopBuyableEffectStatsEffect.innerHTML = "x" + formatNumber(UPGS.shop.buyables[5].effect(), 'boost')
+    ninthSuperCrystalSingleEffectStatsEffect.innerHTML = "x" + formatNumber(Math.pow(UPGS.supercrystal[33].effect(), UPGS.supercrystal[33].unl()), 'boost')
 
     hidePiece(UPGS.shard.buyables[1].effect(), firstShardBuyableEffectPiece, firstShardBuyableEffectPiecePercent, GAIN.shard.click())
     hidePiece(UPGS.shop.buyables[5].effect(), fifthShopBuyableEffectPiece, fifthShopBuyableEffectPiecePercent, GAIN.shard.click())
     hidePiece(Math.pow(UPGS.supercrystal[33].effect(), UPGS.supercrystal[33].unl()), ninthSuperCrystalSingleEffectPiece, ninthSuperCrystalSingleEffectPiecePercent, GAIN.shard.click())
     
-    summaryShPerClickStatsEffect.innerHTML = "x" + formatBoost(GAIN.shard.click())
+    summaryShPerClickStatsEffect.innerHTML = "x" + formatNumber(GAIN.shard.click(), 'boost')
 }
 
 function statsShardsPerSecondUpdate() {
-    secondShardBuyableEffectStatsEffect.innerHTML = "x" + formatBoost(UPGS.shard.buyables[2].effect())
-    fifthShopBuyableEffect2StatsEffect.innerHTML = "x" + formatBoost(UPGS.shop.buyables[5].effect())
-    thirdMineralEffect2StatsEffect.innerHTML = "x" + formatBoost(UPGS.minerals[3].effect2())
-    achievement39StatsEffect.innerHTML = "x" + formatBoost(Math.pow(1.337, ACHS.has(39)))
-    achievementBonus3StatsEffect.innerHTML = "x" + formatBoost(ACHS.effect.shard())
+    secondShardBuyableEffectStatsEffect.innerHTML = "x" + formatNumber(UPGS.shard.buyables[2].effect(), 'boost')
+    fifthShopBuyableEffect2StatsEffect.innerHTML = "x" + formatNumber(UPGS.shop.buyables[5].effect(), 'boost')
+    thirdMineralEffect2StatsEffect.innerHTML = "x" + formatNumber(UPGS.minerals[3].effect2(), 'boost')
+    achievement39StatsEffect.innerHTML = "x" + formatNumber(Math.pow(1.337, ACHS.has(39)), 'boost')
+    achievementBonus3StatsEffect.innerHTML = "x" + formatNumber(ACHS.effect.shard(), 'boost')
     
     hidePiece(UPGS.shard.buyables[2].effect(), secondShardBuyableEffectPiece, secondShardBuyableEffectPiecePercent, GAIN.shard.second())
     hidePiece(UPGS.shop.buyables[5].effect(), fifthShopBuyableEffect2Piece, fifthShopBuyableEffect2PiecePercent, GAIN.shard.second())
@@ -457,14 +590,14 @@ function statsShardsPerSecondUpdate() {
     hidePiece(Math.pow(1.337, ACHS.has(39)), achievement39Piece, achievement39PiecePercent, GAIN.shard.second())
     hidePiece(ACHS.effect.shard(), achievementBonus3Piece, achievementBonus3PiecePercent, GAIN.shard.second())
     
-    summaryShPerSecondStatsEffect.innerHTML = "x" + formatBoost(GAIN.shard.second())
+    summaryShPerSecondStatsEffect.innerHTML = "x" + formatNumber(GAIN.shard.second(), 'boost')
 }
 
 function statsShardsEffectUpdate() {
-    shardStatsEffect.innerHTML = "x" + formatBoost(1 + player.shard.currency / 100)
-    achievement30StatsEffect.innerHTML = "x" + formatBoost(Math.pow(1+Math.pow(player.prestige.resets, 0.3), ACHS.has(30)))
-    fourthShardSingleEffectStatsEffect.innerHTML = "^" + formatPower(UPGS.shard.singles[21].effect())
-    challengeReward7StatsEffect.innerHTML = "x" + formatBoost(player.challenge.completed.includes(7) ? CHALL[7].effect() : 1)
+    shardStatsEffect.innerHTML = "x" + formatNumber(1 + player.shard.currency / 100, 'boost')
+    achievement30StatsEffect.innerHTML = "x" + formatNumber(Math.pow(1+Math.pow(player.prestige.resets, 0.3), ACHS.has(30)), 'boost')
+    fourthShardSingleEffectStatsEffect.innerHTML = "^" + formatNumber(UPGS.shard.singles[21].effect(), 'power')
+    challengeReward7StatsEffect.innerHTML = "x" + formatNumber(player.challenge.completed.includes(7) ? CHALL[7].effect() : 1, 'boost')
 
     let gainWithoutPower = findMultiplier(Math.pow(GAIN.shard.effect.no_softcap_effect(), 1 / UPGS.shard.singles[21].effect()), UPGS.shard.singles[21].effect())
 
@@ -473,15 +606,15 @@ function statsShardsEffectUpdate() {
     hidePiece(gainWithoutPower, fourthShardSingleEffectPiece, fourthShardSingleEffectPiecePercent, GAIN.shard.effect.no_softcap_effect())
     hidePiece(player.challenge.completed.includes(7) ? CHALL[7].effect() : 1, challengeReward7Piece, challengeReward7PiecePercent, GAIN.shard.effect.no_softcap_effect())
 
-    summaryShEffectStatsEffect.innerHTML = "x" + formatBoost(GAIN.shard.effect.effect())
+    summaryShEffectStatsEffect.innerHTML = "x" + formatNumber(GAIN.shard.effect.effect(), 'boost')
 }
 
 function statsCritChanceUpdate() {
-    baseCriticalChanceEffectStatsEffect.innerHTML = "+" + formatBoost(GAIN.critical.baseChance)
-    fourthSuperCrystalSingleEffectStatsEffect.innerHTML = "+" + formatBoost(UPGS.supercrystal[21].unl() ? 2 : 0)
-    eighthShopBuyableEffectStatsEffect.innerHTML = "+" + formatBoost(UPGS.shop.permanent[3].effect())
-    firstMineralEffect1StatsEffect.innerHTML = "x" + formatBoost(UPGS.minerals[1].effect1())
-    fifthBuyableSuperEffectStatsEffect.innerHTML = "^" + formatPower(UPGS.coin.buyables[5].effect_super())
+    baseCriticalChanceEffectStatsEffect.innerHTML = "+" + formatNumber(GAIN.critical.baseChance, 'boost')
+    fourthSuperCrystalSingleEffectStatsEffect.innerHTML = "+" + formatNumber(UPGS.supercrystal[21].unl() ? 2 : 0, 'boost')
+    eighthShopBuyableEffectStatsEffect.innerHTML = "+" + formatNumber(UPGS.shop.permanent[3].effect(), 'boost')
+    firstMineralEffect1StatsEffect.innerHTML = "x" + formatNumber(UPGS.minerals[1].effect1(), 'boost')
+    fifthBuyableSuperEffectStatsEffect.innerHTML = "^" + formatNumber(UPGS.coin.buyables[5].effect_super(), 'power')
     
     let gainWithoutPower = findMultiplier(Math.pow(GAIN.critical.chance.multiplicative(), 1 / UPGS.coin.buyables[5].effect_super()), UPGS.coin.buyables[5].effect_super())
 
@@ -493,15 +626,15 @@ function statsCritChanceUpdate() {
     hidePiece2(UPGS.shop.permanent[3].effect(), eighthShopBuyableEffectPiece, eighthShopBuyableEffectPiecePercent, GAIN.critical.chance.additive(), temp2)
     hidePiece(UPGS.minerals[1].effect1(), firstMineralEffect1Piece, firstMineralEffect1PiecePercent, GAIN.critical.chance.multiplicative())
     hidePiece(gainWithoutPower, fifthBuyableSuperEffectPiece, fifthBuyableSuperEffectPiecePercent, GAIN.critical.chance.multiplicative())
-    summaryCritChanceStatsEffect.innerHTML = formatBoost(GAIN.critical.chance.multiplicative()) + "%"
+    summaryCritChanceStatsEffect.innerHTML = formatNumber(GAIN.critical.chance.multiplicative(), 'boost') + "%"
 }
 
 function statsCritMultiUpdate() {
-    baseCriticalGainEffectStatsEffect.innerHTML = "x" + formatBoost(GAIN.critical.baseMult)
-    fifthSuperCrystalSingleEffectStatsEffect.innerHTML = "x" + formatBoost(Math.pow(5, UPGS.supercrystal[22].unl()))
-    ninthShopBuyableEffectStatsEffect.innerHTML = "x" + formatBoost(UPGS.shop.permanent[4].effect())
-    firstMineralEffect2StatsEffect.innerHTML = "x" + formatBoost(UPGS.minerals[1].effect2())
-    thirdBuyableSuperEffectStatsEffect.innerHTML = "x" + formatBoost(UPGS.coin.buyables[3].effect_super())
+    baseCriticalGainEffectStatsEffect.innerHTML = "x" + formatNumber(GAIN.critical.baseMult, 'boost')
+    fifthSuperCrystalSingleEffectStatsEffect.innerHTML = "x" + formatNumber(Math.pow(5, UPGS.supercrystal[22].unl()), 'boost')
+    ninthShopBuyableEffectStatsEffect.innerHTML = "x" + formatNumber(UPGS.shop.permanent[4].effect(), 'boost')
+    firstMineralEffect2StatsEffect.innerHTML = "x" + formatNumber(UPGS.minerals[1].effect2(), 'boost')
+    thirdBuyableSuperEffectStatsEffect.innerHTML = "x" + formatNumber(UPGS.coin.buyables[3].effect_super(), 'boost')
     
     hidePiece(GAIN.critical.baseMult, baseCriticalGainEffectPiece, baseCriticalGainEffectPiecePercent, GAIN.critical.multiplier())
     hidePiece(Math.pow(5, UPGS.supercrystal[22].unl()), fifthSuperCrystalSingleEffectPiece, fifthSuperCrystalSingleEffectPiecePercent, GAIN.critical.multiplier())
@@ -509,15 +642,15 @@ function statsCritMultiUpdate() {
     hidePiece(UPGS.minerals[1].effect2(), firstMineralEffect2Piece, firstMineralEffect2PiecePercent, GAIN.critical.multiplier())
     hidePiece(UPGS.coin.buyables[3].effect_super(), thirdBuyableSuperEffectPiece, thirdBuyableSuperEffectPiecePercent, GAIN.critical.multiplier())
     
-    summaryCritMultiStatsEffect.innerHTML = "x" + formatBoost(GAIN.critical.multiplier())
+    summaryCritMultiStatsEffect.innerHTML = "x" + formatNumber(GAIN.critical.multiplier(), 'boost')
 }
 
 function statsClickSimulationUpdate() {
-    thirdSuperCrystalSingleEffectStatsEffect.innerHTML = "x" + formatBoost(Math.pow(2, UPGS.supercrystal[13].unl()))
+    thirdSuperCrystalSingleEffectStatsEffect.innerHTML = "x" + formatNumber(Math.pow(2, UPGS.supercrystal[13].unl()), 'boost')
 
     hidePiece(Math.pow(2, UPGS.supercrystal[13].unl()), thirdSuperCrystalSingleEffectPiece, thirdSuperCrystalSingleEffectPiecePercent, GAIN.simulation.multiplier())
     
-    summaryClickSimStatsEffect.innerHTML = "x" + formatBoost(GAIN.simulation.multiplier())
+    summaryClickSimStatsEffect.innerHTML = "x" + formatNumber(GAIN.simulation.multiplier(), 'boost')
 }
 
 function hoverColor(iden){
