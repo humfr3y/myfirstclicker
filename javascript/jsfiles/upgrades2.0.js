@@ -307,7 +307,7 @@ const UPGS = {
                 cost_super() { return 2000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1+(Math.log10(player.coin.total_currency+10)/3)
+                    let eff = 1+(Math.log10(player.coin.total_currency+10)/2)
                     eff *= this.effect_super()
                     if (player.coin.singleUpgrades.includes(24)) eff = Math.pow(eff, UPGS.coin.singles[24].effect())
                     return eff
@@ -385,7 +385,7 @@ const UPGS = {
                 cost_super() { return 7500 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1+Math.pow(Math.log10(player.coin.upgrades[1]+10)/2.2, 1.6)
+                    let eff = 1+Math.pow(Math.log10(player.coin.upgrades[1]+10)/2, 1.75)
                     if (player.coin.superUpgrades.includes(24)) eff *= this.effect_super()
                     return eff
                 },
@@ -410,7 +410,7 @@ const UPGS = {
                 cost_super() { return 10000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = Math.pow(Math.log10(player.coin.upgrades[4]+10), 1.17)
+                    let eff = Math.pow(Math.log10(player.coin.upgrades[4]+10), 1.3)
                     return eff
                 },
                 effect_super(x = this.unl_super() && this.unl()) {
@@ -434,7 +434,7 @@ const UPGS = {
                 cost_super() { return 15000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = Math.log10(GAIN.coin.click.effect()+10)/1.2
+                    let eff = Math.log10(GAIN.coin.click.effect()+10)/1.15
                     if (player.coin.superUpgrades.includes(31)) eff *= this.effect_super()
                     return eff
                 },
@@ -459,7 +459,7 @@ const UPGS = {
                 cost_super() { return 25000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = Math.pow(MISC.amount_of_upgrades.coin()+10, 0.75)/3.5
+                    let eff = Math.pow(MISC.amount_of_upgrades.coin()+10, 0.75)/2
                     if (player.achievements.includes(17)) eff *= 1 + (0.2 * player.time.game.total.timer/86400)
                     return !player.prestige.singleUpgrades.includes(23) ? Math.min(eff, 100) : softCap(eff, this.softcap_start(), 0.5)
                 },
@@ -598,7 +598,7 @@ const UPGS = {
             },
             2: {
                 id: 2, 
-                power: 300,
+                power: 400,
                 basePrice: 20,
                 element: document.getElementById('pBuyableU2'),
                 cost(x=player.prestige.upgrades[this.id]) {
@@ -670,7 +670,7 @@ const UPGS = {
                 cost(){ return 2 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1.5
+                    let eff = 1.75
                     return eff
                 },
             },
@@ -1545,18 +1545,18 @@ const UPGS = {
             element: document.getElementById('mineral1'),
             cost1() { return 1 },
             cost2(x=player.minerals[this.id]) {
-                return 1e25*Math.pow(100, x)
+                return 1e24*Math.pow(100, x)
                 },
             effect1(x=player.minerals[this.id]) {
-                let eff = 1 + x/13
+                let eff = 1 + x/11
                 return eff
             },
             effect2(x=player.minerals[this.id]) {
-                let eff = 1 + x/2
+                let eff = 1 + x/1.95
                 return eff
             },
             effect3(x=player.minerals[this.id]) {
-                let eff = 1 + x/20
+                let eff = 1 + x/9.33
                 return eff
             },
         },
@@ -1565,18 +1565,18 @@ const UPGS = {
             element: document.getElementById('mineral2'),
             cost1() { return 1 },
             cost2(x=player.minerals[this.id]) {
-                return 1e25*Math.pow(100, x)
+                return 1e24*Math.pow(100, x)
                 },
             effect1(x=player.minerals[this.id]) {
-                let eff = 1 + Math.pow(x*8, 3)
+                let eff = 1 + Math.pow(x*8, 2.8)
                 return eff
             },
             effect2(x=player.minerals[this.id]) {
-                let eff = Math.pow(30, x/1.5) 
+                let eff = Math.pow(30, x/1.525) 
                 return eff
             },
             effect3(x=player.minerals[this.id]) {
-                let eff = Math.pow(x*15, 2.25)
+                let eff = Math.pow(x*15, 2.215)
                 return eff
             },
         },

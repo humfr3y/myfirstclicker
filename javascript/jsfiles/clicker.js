@@ -238,7 +238,7 @@ const GAIN = {
         offline(y = MISC.offline()) {
             if (!MILESTONES.has(16)) return 0
             let gain = y/60, formula = 60/player.time.game.fastestPrestige.timer
-            if (formula) gain *= 1+formula/1.25
+            if (formula) gain *= formula * 1.66
             if (ACHS.has(35)) gain *= 1 + MISC.amount_of_upgrades.super()/100
             return gain //per y sec
         },
@@ -255,7 +255,7 @@ const GAIN = {
         chance() {
             let chance = 1
             if (player.shop.upgrades[4]) chance *= UPGS.shop.buyables[4].effect()
-            if (player.prestige.singleUpgrades.includes(13)) chance *= 1.25
+            if (player.prestige.singleUpgrades.includes(13)) chance *= 1.75
             if (player.supercrystal.upgrades.includes(11)) chance *= 1.5
             if (player.coin.superUpgrades.includes(23)) chance *= UPGS.coin.singles[13].effect_super()
             if (player.minerals[1]) chance *= UPGS.minerals[1].effect3()
