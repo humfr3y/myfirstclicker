@@ -929,7 +929,7 @@ const UPGS = {
                 cost(){ return 250000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1 + Math.log10(player.shard.currency+10)/2
+                    let eff = 1 + Math.log10(player.shard.currency+10)/1.01
                     return eff
                 },
             },
