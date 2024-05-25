@@ -1588,11 +1588,11 @@ const UPGS = {
                 return 1e24*Math.pow(100, x)
                 },
             effect1(x=player.minerals[this.id]) {
-                let eff = Math.pow(1.75, x/1.75)
+                let eff = Math.pow(2, x/1.5)
                 return eff
             },
             effect2(x=player.minerals[this.id]) {
-                let eff = Math.pow(3, x/1.65)
+                let eff = Math.pow(3, x/1.5)
                 return eff
             },
             effect3(x=player.minerals[this.id]) {
