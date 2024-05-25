@@ -216,7 +216,7 @@ const GAIN = {
     },
     crystal: {
         offline(x = GAIN.crystal.reset(), y = MISC.offline(), z = ACHS.has(22)) {
-            let time = y/(14400/UPGS.prestige.buyables[2].effect()), gain = x * time
+            let time = y/(7200/UPGS.prestige.buyables[2].effect()), gain = x * time
             return z ? gain : 0
         },
         reset() {
