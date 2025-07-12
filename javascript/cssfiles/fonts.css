@@ -34,3 +34,24 @@ body {
     font-style: normal; 
     font-weight: normal; 
 }
+
+@font-face {
+    font-family: "GTA";
+    src: url("fonts/GTA.ttf") format("truetype");
+    font-style: normal; 
+    font-weight: normal; 
+}
+
+@font-face {
+    font-family: "minecraft";
+    src: url("fonts/minecraft.ttf") format("truetype");
+    font-style: normal; 
+    font-weight: normal; 
+}
+
+@font-face {
+    font-family: "SaiyanSans";
+    src: url("fonts/SaiyanSans.ttf") format("truetype");
+    font-style: normal; 
+    font-weight: normal; 
+}

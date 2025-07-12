@@ -7,9 +7,12 @@ let player = {
     },
     achievements: [],
     achievement_rows: [],
+    shard_achievements: [],
     progressBarGoals: [0],
     umultipliers: 0,
     upowers: 0,
+    uadders: 0,
+    ureducers: 0,
     coin: {
         upgrades: {
             1: 0,
@@ -34,6 +37,16 @@ let player = {
             2: 0
         },
         singleUpgrades: [],
+        super: {
+            buyables: {
+                1: 0,
+                2: 0,
+                3: 0,
+                4: 0,
+                5: 0
+            },
+            singles: [],
+        },
         milestones: [],
         currency: 0,
         total_currency: 0,
@@ -257,6 +270,18 @@ let player = {
             second: 0,
             buyables: 0,
             singles: 0,
+        },
+        achievements: {
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0,
+            6: 0,
+            7: 0,
+            8: 0,
+            9: 0,
+            10: 0
         }
     },
     shop: {
@@ -265,13 +290,18 @@ let player = {
             2: 0,
             3: 0,
             4: 0,
-            5: 0
+            5: 0,
+            6: 0,
+            7: 0,
         },
         permanentUpgrades: {
             1: 0,
             2: 0,
             3: 0,
             4: 0,
+            5: 0,
+            6: 0,
+            7: 0,
         },
         unlockables: [],
         items: {
@@ -279,13 +309,17 @@ let player = {
                 1: 0,
                 2: 0,
                 3: 0,
-                4: 0
+                4: 0,
+                5: 0,
+                6: 0,
             },
             used: {
                 1: 0,
                 2: 0,
                 3: 0,
-                4: 0
+                4: 0,
+                5: 0,
+                6: 0,
             }
         }
     },
@@ -328,7 +362,14 @@ let player = {
                 hours: 0,
                 days: 0,
                 timer: 1e69, 
-            }
+            },
+            average: {
+                days: '',
+                hours: '',
+                minutes: '',
+                seconds: '', 
+                timer: ''
+            },
         },
         real: {
             total: {
@@ -357,12 +398,20 @@ let player = {
                 minutes: 0, 
                 hours: 0,
                 timer: 0,
-            }
+            },
+            average: {
+                days: '',
+                hours: '',
+                minutes: '',
+                seconds: '', 
+                timer: ''
+            },
         },
         next_daily: 0,
         umultiplier: 0,
         upower: 0,
-
+        uadder: 0,
+        ureducer: 0,
     },
     challenge: {
         completed: [],
@@ -467,9 +516,12 @@ let player = {
         auto_save: true,
         mutedAudio: false,
         shop_bulkbuy: 1,
+        minerals_bulkbuy: 1,
         font: 'option1',
         notation: 'option1',
         buy_max_activate: false,
+        shard_buy_max_activate: false,
+        superprestige_buy_max_activate: false,
         modernization_activated: false,
         loreBoolean: [],
         event: {
@@ -500,7 +552,8 @@ let player = {
             buyable: 0, 
             umultiplier: 0, 
             upower: 0, 
-            prestige: 0
+            prestige: 0,
+            uadder: 0,
         },
         conditions: {
             umultiplier: 0,
@@ -510,14 +563,20 @@ let player = {
             },
             prestige: {
                 time: 3600,
-                coins: 1e15
+                coins: 1e15,
+                prestige: 10000,
+                crystals: 1e50,
+            },
+            uadder: {
+                time: 0,
+                x_of_upower: 0,
             }
         }
     },
     got_daily_reward: false,
     code: {
         activated: [],
-        name: ['digitalgod', 'shirakamifubuki', 'suisei', 'koyori', 'manilovefauna', 'revolution', 'supercoin'],
+        name: ['digitalgod', 'shirakamifubuki', 'suisei', 'koyori', 'manilovefauna', 'revolution', 'supercoin', 'superprestige', 'sorry'],
     },
     overdrive: {
         consumed: {
@@ -555,7 +614,7 @@ const text = {
         },
         whichPrestigeMode: 'time',
         multiBreakdown: ['','','','','','','','','','',''],
-        itemNames: ['', '', '', ''],
+        itemNames: ['', '', '', '', '', ''],
         notification: {
             lore: '',
             load: '',
@@ -576,10 +635,12 @@ const text = {
         },
         automation: {
             prestige_req: '',
-            coin_req: ''
+            coin_req: '',
+            time_req: '',
+            crystal_req: '',
         },
         code: {
-            rewards: ['', '', '', '', '', '', ''],
+            rewards: ['', '', '', '', '', '', '', '', ''],
             reward: '',//codeReward
             used_code: '',
             wrong_code: '',
@@ -608,7 +669,8 @@ const text = {
             "0.11":'',
             "0.11.1":'',
             "0.12":'',
-            "0.12.1": ''
+            "0.12.1": '',
+            "0.13": ''
         },
         chapter: {
             start:'',
@@ -623,6 +685,10 @@ const text = {
             9:'',
             10:'',
             11:'',
+            12:'',
+            13:'',
+            14:'',
+            15:'',
         },
         helpTitle: {
             1:'',
@@ -641,6 +707,9 @@ const text = {
             14:'',
             15:'',
             16:'',
+            17:'',
+            18:'',
+            19:'',
         },
         help: {
             start:'',
@@ -660,6 +729,9 @@ const text = {
             14:'',
             15:'',
             16:'',
+            17:'',
+            18:'',
+            19:'',
         },
         empty: '',
     }

@@ -4,28 +4,14 @@ body {
     background-size: cover; 
     background-repeat: no-repeat;
     margin: 0px;
+    font-size: calc(16px * var(--font-scale));
 }
-#topButtons {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
+
+button {
+    border-width: 1px;
 }
-#statsSubButtons {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-}
-#settingSubButtons {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-}
-#mainSubButtons {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-}
-#prestigeSubButtons {
+
+#prestigeSubButtons, #mainSubButtons, #settingSubButtons, #statsSubButtons, #achSubButtons, #topButtons {
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -33,7 +19,7 @@ body {
 .titleTab {
     margin: 0 auto;
     color: white;
-    font-size: 30px;
+    font-size: calc(30px * var(--font-scale));
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px
@@ -49,7 +35,7 @@ body {
     background-color: rgb(0, 0, 0);
     text-align: center;
     font-family: "Poly"; 
-    font-size: 12px;
+    font-size: calc(12px * var(--font-scale));
     margin-bottom: 10px;
     cursor: pointer;
     margin-right: 5px;
@@ -72,13 +58,13 @@ it {
 .subButton {
     width: 95px;
     height: 20px;
-    font-size: 11px
+    font-size: calc(11px * var(--font-scale))
 }
 
 .tooltip {
     background: #000000;
     color: white;
-    font-size: 12px;
+    font-size: calc(12px * var(--font-scale));
     border-radius: 4px;
     border-color: white;
     border: 2px solid rgb(255, 255, 255);
@@ -140,7 +126,7 @@ it {
 }
 
 .tooltipUpgrade {
-    font-size: 12px;
+    font-size: calc(12px * var(--font-scale));
     padding: 10px
 }
 
@@ -182,7 +168,7 @@ it {
     color: rgb(202, 255, 248);;
     cursor:pointer;
     border-radius: 5px;
-    font-size: 12px;
+    font-size: calc(12px * var(--font-scale));
     line-height: 20px;
 }
 
@@ -203,7 +189,7 @@ it {
     background-color: #101010;
     color: rgb(202, 255, 248);
     cursor: pointer;
-    font-size: 12px;
+    font-size: calc(12px * var(--font-scale));
     border-bottom: 0px;
 }
 
@@ -213,8 +199,8 @@ it {
     color: white;
 }
 
-#autoUmultiInterval, #autoUpowerInterval, #autoUpowerInterval2 {
-    font-size: 12px;
+#autoUmultiInterval, #autoUpowerInterval, #autoUpowerInterval2, #mineralsBulkBuy, #autoUadderInterval, #autoUadderInterval2 {
+    font-size: calc(12px * var(--font-scale));
     color: white;
 }
 
@@ -280,11 +266,11 @@ button {
 }
 
 .challengeDesc {
-    font-size: 11px !important
+    font-size: calc(11px * var(--font-scale)) !important
 }
 
 #challengeCondition {
-    font-size: 12px;
+    font-size: calc(12px * var(--font-scale));
     display: flex;
     align-items: center;
 }
@@ -295,7 +281,7 @@ button {
 
 .smallDesc{
     color: rgb(120 120 120);
-    font-size: 12px;
+    font-size: calc(12px * var(--font-scale));
     margin: 5px;
     text-align: center;
 }

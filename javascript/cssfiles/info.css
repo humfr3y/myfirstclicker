@@ -1,7 +1,7 @@
 .statsSlot {
     text-align: center;
     color: rgb(120 120 120);
-    font-size: 14px;
+    font-size: calc(14px * var(--font-scale));
     margin: 5px;
     justify-content: center;
 
@@ -10,20 +10,20 @@
 #aboutGame {
     margin-top:20px;
     text-align: center;
-    font-size: 20px;
+    font-size: calc(20px * var(--font-scale));
     color: white;
 }
 
 .headerr {
     text-align: center;
     color:rgb(255, 255, 255);
-    font-size: 25px;
+    font-size: calc(25px * var(--font-scale));
     margin: 35px;
     justify-content: center;
 }
 
 .prestigeText {
-    font-size: 20px;
+    font-size: calc(20px * var(--font-scale));
     color: white;
 }
 
@@ -47,7 +47,7 @@
     background-color: #000000;
     border-radius: 3px;
     border: 2px solid;
-    font-size: 14px;
+    font-size: calc(14px * var(--font-scale));
     cursor: pointer;
     width: 300px;
     margin-bottom: 2px

@@ -33,30 +33,34 @@ html{
   scrollbar-color: #252525  #000000;
 }
 
-#mainSettings {
+.mainSettings {
   position: absolute;
-  margin-top: -78px;
+  margin-top: -73.5px;
   display: flex;
+}
+
+#coinsTab .mainSettings {
+  margin-top: -78px;
 }
 
 hr {
   color:white;
 }
 
-#maxOrNoUpgrades, #modernizeButton {
+#maxOrNoUpgrades, #modernizeButton, #maxOrNoShardUpgrades, #maxOrNoSuperprestigeUpgrades {
   background-color: #060606;
   border:#ffffff solid 1.6px;
   color: white;
   width: 50px;
   height: 50px;
-  font-size: 12px;
+  font-size: calc(12px * var(--font-scale));
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   cursor: pointer;
   font-family: poly;
 }
 
-#maxOrNoUpgrades:hover {
+#maxOrNoUpgrades:hover, #maxOrNoShardUpgrades:hover, #maxOrNoSuperprestigeUpgrades:hover {
   background-color: #494949;
 }
 
@@ -77,12 +81,12 @@ hr {
 gt {
   color: #ffd900;
   text-shadow: 0 0 5px rgb(255, 217, 0);
-  font-size: 30px;
+  font-size: calc(30px * var(--font-scale));
 }
 
 #coinsGain {
     color: #656565;
-    font-size: 15px;
+    font-size: calc(15px * var(--font-scale));
     text-align: center;
     margin: 5px;
     white-space: nowrap;
@@ -107,8 +111,9 @@ gt {
 }
 
 #loadingScreen {
-  background-image: url("images/loadingscreen012.jpg");
+  background-image: url("images/loadingscreen013.jpg");
   background-repeat: no-repeat;
+  background-size: contain;
   width: 100%;
   height: 101%;
   position: absolute;
@@ -138,7 +143,7 @@ gt {
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 15px;
+    font-size: calc(15px * var(--font-scale));
     font-weight: bold;
     color: rgb(2, 0, 0);
     opacity: 0;
@@ -238,7 +243,7 @@ gt {
 }
 
 #resetTitle {
-  font-size: 22px;
+  font-size: calc(22px * var(--font-scale));
 }
 
 #confirmationButtons {
@@ -255,7 +260,7 @@ gt {
 
 #multiplierChoose {
     width: 100px;
-    height: 400px;
+    height: 500px;
     border-color: white;
     border-width: 1px;
     border-style: solid;
@@ -265,20 +270,20 @@ gt {
 
 .multiplierChooser {
   width: 100%;
-  font-size: 11px;
+  font-size: calc(11px * var(--font-scale));
   height: 36px;
 }
 
 #multiplierStats {
     width: 500px;
-    height: 400px;
+    height: 500px;
     border: white 1px solid;
     border-radius: 0px 0px 0px 0px;
 }
 
 #multBreakdownTitle {
   text-align: center;
-  font-size: 20px;
+  font-size: calc(20px * var(--font-scale));
   font-weight: bold;
   margin: 10px;
   color: white;
@@ -286,12 +291,12 @@ gt {
 
 .whiteText {
   color: white;
-  font-size: 15px;
+  font-size: calc(15px * var(--font-scale));
   text-align: center;
 }
 
 #infoTab .whiteText {
-  font-size: 14px;
+  font-size: calc(14px * var(--font-scale));
 }
 
 .multiplierString {
@@ -318,7 +323,7 @@ gt {
 }
 
 .pieceText {
-  font-size: 16px;
+  font-size: calc(16px * var(--font-scale));
 }
 
 .progress-bar-base{
@@ -333,11 +338,11 @@ gt {
   align-items: center;
   justify-content: center;
   width: 50%;
-  font-size: 12px;
+  font-size: calc(12px * var(--font-scale));
   background-image: radial-gradient(#15fa01, #040000 170%);
 }
 #progress-bar-text {
-  font-size: 10px;
+  font-size: calc(10px * var(--font-scale));
   position: absolute;
   width: 100%;
   top: 0;
@@ -353,7 +358,7 @@ gt {
 }
 
 #shopDiv .tooltip {
-  font-size: 12px;
+  font-size: calc(12px * var(--font-scale));
   padding: 10px;
 }
 #shopTitleDiv {
@@ -414,7 +419,7 @@ gt {
   height: 48px;
   box-shadow: 0 0 1px rgb(255, 174, 0);
   cursor: pointer;
-  font-size: 11px;
+  font-size: calc(11px * var(--font-scale));
   margin: 5px;
 }
 
@@ -425,7 +430,7 @@ gt {
 
 .useButton {
   margin: 5px;
-  font-size: 11px;
+  font-size: calc(11px * var(--font-scale));
   border: rgb(235, 160, 0) 1px solid;
   background-color: #060606;
   height: 25px;
@@ -438,7 +443,7 @@ gt {
 .shopContainer {
   display: flex;
   flex-direction: column;
-  font-size: 10px;
+  font-size: calc(10px * var(--font-scale));
   color: white;
   text-align: center;
   align-items: center;
@@ -494,7 +499,7 @@ gt {
   margin: 5px;
   margin-top: 15px;
   width:100%;
-  font-size: 15px;
+  font-size: calc(15px * var(--font-scale));
 }
 
 #wholeShopDiv {
@@ -519,7 +524,7 @@ gt {
 }
 
 #bulkShopBuy span {
-  font-size: 15px;
+  font-size: calc(15px * var(--font-scale));
   height: 50px;
   display: flex;
   justify-content: center;
@@ -532,7 +537,7 @@ gt {
   width: 100%;
   height: 30px;
   color: white;
-  font-size: 12px;
+  font-size: calc(12px * var(--font-scale));
 }
 
 .bulkShopBuyButton:hover, .useButton:hover {
@@ -541,7 +546,7 @@ gt {
 }
 
 st {
-  font-size: 30px;
+  font-size: calc(30px * var(--font-scale));
   color:rgb(255, 174, 0);
   text-shadow: 0 0 5px rgb(255, 174, 0);
 }
@@ -615,12 +620,12 @@ st {
   text-align: center;
   color: white;
   margin: 0 auto;
-  font-size: 13px;
+  font-size: calc(13px * var(--font-scale));
 }
 
 ct {
   color:aqua;
-  font-size: 20px;
+  font-size: calc(20px * var(--font-scale));
   text-shadow: 0 0 5px aqua;
 }
 
@@ -629,7 +634,7 @@ ct {
   border-radius: 5px;
   background-color: black;
   color: aqua;
-  font-size: 12px;
+  font-size: calc(12px * var(--font-scale));
   width: 50%;
   height: 70px;
   text-align: center;
@@ -695,7 +700,7 @@ ct {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 12px;
+  font-size: calc(12px * var(--font-scale));
   flex-direction: column;
   text-align: center;
 }
@@ -729,12 +734,6 @@ ct {
   justify-content: center;
 }
 
-#shardsTab {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 #shardsClick {
   background-color: #ff000000;
   width: 180px;
@@ -758,7 +757,7 @@ ct {
 
 shn {
   color: rgb(138, 255, 249);
-  font-size: 30px;
+  font-size: calc(30px * var(--font-scale));
   text-shadow: 0 0 5px rgb(138, 255, 249);
 }
 
@@ -782,7 +781,7 @@ shn {
   border: rgb(106, 253, 246) solid 2px;
   width: 300px;
   height: 50px;
-  font-size: 16px;
+  font-size: calc(16px * var(--font-scale));
   margin: 10px 0px;
 }
 
@@ -830,33 +829,47 @@ shn {
   height: 100px;
 }
 
+.shardAchUnlBase {
+  width: 48%;
+  height: 70px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(16px * var(--font-scale));
+}
+
+.shardAchUnlBase:hover {
+  background-color: #252525;
+}
+
 spn {
   color: rgb(202, 255, 237);
-  font-size: 30px;
+  font-size: calc(30px * var(--font-scale));
   text-shadow: 0 0 5px rgb(202, 255, 237);
 }
 
 pn {
   color: rgb(255, 108, 211);
-  font-size: 30px;
+  font-size: calc(30px * var(--font-scale));
   text-shadow: 0 0 5px rgb(255, 108, 211);
 }
 
 gn {
   color: rgb(111, 255, 108);
-  font-size: 30px;
+  font-size: calc(30px * var(--font-scale));
   text-shadow: 0 0 5px rgb(111, 255, 108);
 }
 
 bn {
   color: rgb(108, 189, 255);
-  font-size: 30px;
+  font-size: calc(30px * var(--font-scale));
   text-shadow: 0 0 5px rgb(108, 189, 255);
 }
 
 rn {
   color: rgb(45, 202, 210);
-  font-size: 30px;
+  font-size: calc(30px * var(--font-scale));
   text-shadow: 0 0 5px rgb(45, 202, 210);
 }
 
@@ -876,42 +889,80 @@ rn {
   background-image: url('images/shardrain.png')
 }
 #shopBuyableU6 {
-  background-image: url('images/diamondpersV3.webp')
+  background-image: url('images/P.webp')
 }
 #shopBuyableU7 {
+  background-image: url('images/energymaybe10.webp')
+}
+#shopPermanentU1 {
+  background-image: url('images/diamondpersV3.webp')
+}
+#shopPermanentU2 {
   background-image: url('images/creditcard.png')
 }
-#shopBuyableU8 {
+#shopPermanentU3 {
   background-image: url('images/cursorwhitepercent.bmp')
 }
-#shopBuyableU9 {
+#shopPermanentU4 {
   background-image: url('images/cursorredX.bmp')
+}
+#shopPermanentU5 {
+  background-image: url('images/glowhand.webp')
+}
+#shopPermanentU6 {
+  background-image: url('images/lightningcrystalfinish.webp')
+}
+#shopPermanentU7 {
+  background-image: url('images/swordcrystal.webp')
 }
 #shopSingleU1 {
   background-image: url('images/brokenspeedometer.webp');
   background-position: -0.5px -0.5px;
+  image-rendering: pixelated;
 }
 #shopSingleU2 {
   background-image: url('images/crystalactualspeedometer.webp');
   background-position: -0.5px -0.5px;
+  image-rendering: pixelated;
 }
 #shopSingleU3 {
   background-image: url('images/modernize.webp');
   background-position: -0.5px -0.5px;
+  image-rendering: pixelated;
+}
+#shopSingleU4 {
+  background-image: url('images/trophy.webp');
+  background-position: -0.5px -0.5px;
+  image-rendering: pixelated;
+}
+#shopSingleU5 {
+  background-image: url('images/crystalclock.webp');
+  background-position: -0.5px -0.5px;
+  image-rendering: pixelated;
 }
 #shopItem1 {
   background-image: url('images/Uxtotallydonenow.bmp');
   background-position: -1.5px;
+  image-rendering: pixelated;
 }
 #shopItem2 {
   background-image: url('images/U1totallydonenow.bmp');
   background-position: -1.5px;
+  image-rendering: pixelated;
 }
 #shopItem3 {
   background-image: url('images/TW1m.bmp');
+  image-rendering: pixelated;
 }
 #shopItem4 {
   background-image: url('images/Tw10m.bmp');
+  image-rendering: pixelated;
+}
+#shopItem5 {
+  background-image: url('images/goldmeshok.webp');
+}
+#shopItem6 {
+  background-image: url('images/integral.webp');
 }
 #mineral1 {
   background-image: url('images/opalfinished.webp');
@@ -936,7 +987,7 @@ rn {
 }
 
 #superCrystalCount {
-  font-size: 18px;
+  font-size: calc(18px * var(--font-scale));
 }
 
 #superCrystalBarBase {
@@ -950,7 +1001,7 @@ rn {
 
 scn {
   color: rgb(0, 180, 212);
-  font-size: 30px;
+  font-size: calc(30px * var(--font-scale));
   text-shadow: 0 0 5px rgb(0, 180, 212);
 }
 
@@ -1002,24 +1053,30 @@ scn {
 .mineralContainer {
   width: 300px;
   height: 200px;
+  margin-top: 50px;
 }
 
 .mineralButton {
   border-color: rgb(45, 202, 210)
 }
 
-#generateRunes {
+#generateRunes, #generateRunesMax {
   margin: 0;
   border-color: rgb(45, 202, 210);
   width: 175px;
   height: 60px;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }
 
-#generateRunes:hover{
+#generateRunes:hover, #generateRunesMax:hover{
   background-color: rgb(45, 202, 210);
   box-shadow: 0 0 10px rgb(45, 202, 210);
   color: black;
+}
+
+#generateRunesMax{
+  height: 30px;
+  border-radius:2px;
 }
 
 super {
@@ -1036,13 +1093,13 @@ th {
   border:white 1px solid;
   width: 150px;
   font-weight: normal;
-  font-size: 13px;
+  font-size: calc(13px * var(--font-scale));
   padding: 2px;
   height: 17.5px;
 }
 
 #welcomeToDigitalGod {
-  font-size: 17px;
+  font-size: calc(17px * var(--font-scale));
 }
 
 #recentPrestigesTab {
@@ -1057,7 +1114,109 @@ th {
   margin-top: 20px;
 }
 
+#superprestigeTab {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
+#superPRow1{
+  margin-top: 100px;
+}
+
+.row {
+  display: flex;
+}
+
+.averageTable {
+  background-color: #222222;
+}
+
+#shardAchsTab {
+  flex-direction: column;
+  align-items: center;
+}
+
+.shardAchBarRow{
+  display: flex;
+  flex-direction: row;
+}
+
+.shardAchBarDiv {
+  width: 600px;
+  height: 70px;
+  border: white 2px solid;
+  border-radius: 50px;
+  margin: 20px;
+}
+
+.shardAchBarBase{
+  background-color: #111111;
+  height: 99%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border-radius: 50px;
+}
+
+.shardAchBarGhost {
+  position: absolute;
+  color: white;
+  pointer-events: none;
+  cursor: default;
+  display: flex;
+  width: 600px;
+  justify-content: center;
+  z-index: 1000;
+  font-size: calc(14px * var(--font-scale));
+}
+
+.shardAchBar{
+  height: 100%;
+  width: 100%;
+  background-image:radial-gradient( rgba(255, 255, 255, 0.505), black 210%);
+  border-radius: 50px;
+}
+
+#shardAchBar1{
+  background-image:radial-gradient( rgba(255, 221, 0, 0.505), black 210%);
+}
+
+#shardAchBar2{
+  background-image:radial-gradient( rgba(255, 174, 0, 0.505), black 210%);
+}
+
+#shardAchBar3{
+  background-image:radial-gradient( rgba(0, 255, 238, 0.505), black 210%);
+}
+
+#shardAchBar4{
+  background-image:radial-gradient( rgba(153, 255, 248, 0.505), black 210%);
+}
+
+#shardAchBar5{
+  background-image:radial-gradient( rgba(205, 205, 205, 0.505), black 210%);
+}
+
+#shardAchBar6{
+  background-image:radial-gradient( rgba(133, 133, 133, 0.505), black 210%);
+}
+
+#shardAchBar7{
+  background-image:radial-gradient( rgba(5, 208, 195, 0.505), black 210%);
+}
+
+#shardAchBar8{
+  background-image:radial-gradient( rgba(255, 255, 255, 0.505), black 210%);
+}
+
+#shardAchBar9{
+  background-image:radial-gradient( rgba(255, 0, 0, 0.505), black 210%);
+}
+
+#shardAchBar10{
+  background-image:radial-gradient( rgba(199, 255, 251, 0.505), black 210%);
+}
 
 @media screen and (max-width: 600px) {
 
@@ -1069,7 +1228,7 @@ th {
     font-size: 100% !important;
   }
   st, shn {
-    font-size: 20px !important;
+    font-size: calc(20px * var(--font-scale)) !important;
   }
   #percent {
     font-size: 75% !important;
@@ -1122,20 +1281,20 @@ th {
     height: 54px
   }
   
-  #maxOrNoUpgrades, #modernizeButton {
+  #maxOrNoUpgrades, #modernizeButton, #maxOrNoShardUpgrades, #maxOrNoSuperprestigeUpgrades {
     width: 30px;
     height: 30px;
-    font-size: 9px;
+    font-size: calc(9px * var(--font-scale));
     background-size: cover;
     margin: 2px;
     border-radius: 5px;
 }
-  #mainSettings {
+  .mainSettings {
     width: 80px;
     margin-top: -50px
   }
   .shopButton {
-    font-size: 9px;
+    font-size: calc(9px * var(--font-scale));
   }
   #shopTitleDiv {
     width: 89.35%;
@@ -1153,7 +1312,7 @@ th {
   }
   .upgradeButton, .milestone {
     width: 90px !important;
-    font-size: 7px !important;
+    font-size: calc(7px * var(--font-scale)) !important;
   }
   .milestone {
     width: 140px !important;
@@ -1201,19 +1360,19 @@ th {
   }
   #wholeShopDiv input[type='text'] {
     height: 25px;
-    font-size: 25px !important;
+    font-size: calc(25px * var(--font-scale)) !important;
   }
   #wholeShopDiv .tooltip {
     width: 200px;
   }
   .challengeTitle {
-    font-size: 14px !important;
+    font-size: calc(14px * var(--font-scale)) !important;
   }
   .challengeDesc{
-    font-size: 8px !important;
+    font-size: calc(8px * var(--font-scale)) !important;
   }
   .challengeStart{
-    font-size: 8px !important;
+    font-size: calc(8px * var(--font-scale)) !important;
   }
   .challengeRow {
     flex-direction: column;

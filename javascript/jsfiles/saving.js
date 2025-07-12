@@ -74,7 +74,7 @@ function loadGame() {
             parsedData = JSON.parse(storedData);
             updateNestedProperties(player, parsedData)
         }
-        GAIN.offline_gain()
+        // GAIN.offline_gain()
         if (isNaN(player.coin.currency)) {
             player.coin.currency = 10
         }
@@ -84,6 +84,9 @@ function loadGame() {
         if (isNaN(player.prestige.currency)) {
             player.prestige.total_currency = 0
             player.prestige.currency = 0
+        }
+        if (isNaN(player.shard.currency)) {
+            player.shard.currency = 0
         }
         setTimeout(()=>{
             notify(text.notification.load, 'limegreen')        
@@ -120,6 +123,7 @@ function loadGame() {
         }
 
         player.offline_gain.daily = GAIN.supercoin.daily.reward()
+        player.code.name = ['digitalgod', 'shirakamifubuki', 'suisei', 'koyori', 'manilovefauna', 'revolution', 'supercoin', 'superprestige', 'sorry'],
 
         changeFonts2(player.settings.font)
         changeFont.value = player.settings.font
@@ -133,6 +137,16 @@ function loadGame() {
         autoUmultiInput.value = player.automation.conditions.umultiplier
         autoUpowerInput.value = player.automation.conditions.upower.time
         autoUpowerInput2.value = player.automation.conditions.upower.x_of_umulti
+
+        autoUadderInput.value = player.automation.conditions.uadder.time
+        autoUadderInput2.value = player.automation.conditions.uadder.x_of_upower
+
+        mineralsBulkInput.value = player.settings.minerals_bulkbuy
+
+        if (player.settings.whichPrestigeMode == 'time') autoPrestigeInput.value = player.automation.conditions.prestige.time
+        else if (player.settings.whichPrestigeMode == 'prestige') autoPrestigeInput.value = player.automation.conditions.prestige.prestige
+        else if (player.settings.whichPrestigeMode == 'crystal') autoPrestigeInput.value = player.automation.conditions.prestige.crystals
+        else autoPrestigeInput.value = player.automation.conditions.prestige.coins
 
         if (player.automation.checkbox.single == true) {
             autoSingleUpgradeCheckbox.checked = true
@@ -153,6 +167,10 @@ function loadGame() {
         if (player.automation.checkbox.prestige == true) {
             autoPrestigeCheckbox.checked = true
             MISC.automation.prestige.interval = setInterval(()=>{AUTO.prestige.charge()}, 50)
+        }
+        if (player.automation.checkbox.uadder == true) {
+            autoUadderCheckbox.checked = true
+            MISC.automation.uadder.interval = setInterval(()=>{AUTO.uadder.charge()}, 50)
         }
         player.settings.modernization_activated = false
         player.shard.currency < 0 ? player.shard.currency = 0 : player.shard.currency
@@ -246,6 +264,7 @@ function importing(base64) {
     if (base64.includes('|')) {
         const [base64DataSave, base64Completion, base64Chapters] = base64.split("|");
         const importedData1 = atob(base64DataSave);
+        console.log(importedData1)
         localStorage.setItem('datasaving', importedData1);
             convert_save()
             updateNestedProperties(player, newData);
@@ -253,9 +272,12 @@ function importing(base64) {
     else {
         const importedData = atob(base64);
         const parsedData = JSON.parse(importedData)
+        console.log(importedData)
+        console.log(parsedData)
         updateNestedProperties(player, parsedData)
     }
     save_number = JSON.parse(localStorage.getItem('SAVE_NUMBER'))
+    console.log(player)
     saveGame()
     notify(text.notification.import, 'limegreen');
     location.reload()
@@ -282,540 +304,603 @@ fileUpload.addEventListener('change', function(base64) {
 let newData = {}
 function convert_save() {
     if (localStorage.getItem('datasaving') != null) {
+        console.log('CONVERTING SAVE!!!!!!!!!!!!!!!')
         let parsedData = JSON.parse(localStorage.getItem('datasaving')) //make parsedData as object
         newData = {
-            clicks: {
-                real: parsedData.clickCount != undefined ? parsedData.clickCount : 0,
-                simulated: parsedData.clickCount != undefined ? parsedData.clickCount : 0,
-                critical: 0,
-                prestige: 0
+        clicks: {
+            real: 0,
+            simulated: 0,
+            critical: 0,
+            prestige: 0
+        },
+        achievements: [],
+        achievement_rows: [],
+        shard_achievements: [],
+        progressBarGoals: [0],
+        umultipliers: 0,
+        upowers: 0,
+        uadders: 0,
+        ureducers: 0,
+        coin: {
+            upgrades: {
+                1: 0,
+                2: 0,
+                3: 0,
+                4: 0,
+                5: 0
             },
-            achievements: [],
-            achievement_rows: [],
-            progressBarGoals: [0],
-            umultipliers: 0,
-            upowers: 0,
-            coin: {
-                upgrades: {
+            singleUpgrades: [],
+            superUpgrades: [],
+            currency: 10,
+            total_currency: 10,
+        },
+        supercoin: {
+            currency: 0,
+            total_currency: 0,
+            spent_currency: 0,
+        },
+        prestige: {
+            upgrades: {
+                1: 0,
+                2: 0
+            },
+            singleUpgrades: [],
+            super: {
+                buyables: {
                     1: 0,
                     2: 0,
                     3: 0,
                     4: 0,
                     5: 0
                 },
-                singleUpgrades: [],
-                superUpgrades: [],
-                currency: 10,
-                total_currency: 10,
+                singles: [],
             },
-            supercoin: {
-                currency: 0,
-                total_currency: 0,
-                spent_currency: 0,
-            },
-            prestige: {
-                upgrades: {
-                    1: 0,
-                    2: 0
-                },
-                singleUpgrades: [],
-                milestones: [],
-                currency: parsedData.crystals != undefined ? parsedData.crystals : 0,
-                total_currency: 0,
-                broken_currency: parsedData.brokenCrystals,
-                resets: 0,
-                prestigeTable: {
-                    0: {
-                        crystals: '',
-                        prestiges: '',
-                        time: {
-                            game: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            },
-                            real: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            }
+            milestones: [],
+            currency: 0,
+            total_currency: 0,
+            broken_currency: 0,
+            resets: 0,
+            prestigeTable: {
+                0: {
+                    crystals: '',
+                    prestiges: '',
+                    time: {
+                        game: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        },
+                        real: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
                         }
-                    },
-                    1: {
-                        crystals: '',
-                        prestiges: '',
-                        time: {
-                            game: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            },
-                            real: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            }
-                        }
-                    },
-                    2: {
-                        crystals: '',
-                        prestiges: '',
-                        time: {
-                            game: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            },
-                            real: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            }
-                        }
-                    },
-                    3: {
-                        crystals: '',
-                        prestiges: '',
-                        time: {
-                            game: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            },
-                            real: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            }
-                        }
-                    },
-                    4: {
-                        crystals: '',
-                        prestiges: '',
-                        time: {
-                            game: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            },
-                            real: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            }
-                        }
-                    },
-                    5: {
-                        crystals: '',
-                        prestiges: '',
-                        time: {
-                            game: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            },
-                            real: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            }
-                        }
-                    },
-                    6: {
-                        crystals: '',
-                        prestiges: '',
-                        time: {
-                            game: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            },
-                            real: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            }
-                        }
-                    },
-                    7: {
-                        crystals: '',
-                        prestiges: '',
-                        time: {
-                            game: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            },
-                            real: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            }
-                        }
-                    },
-                    8: {
-                        crystals: '',
-                        prestiges: '',
-                        time: {
-                            game: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            },
-                            real: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            }
-                        }
-                    },
-                    9: {
-                        crystals: '',
-                        prestiges: '',
-                        time: {
-                            game: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            },
-                            real: {
-                                days: '',
-                                hours: '',
-                                minutes: '',
-                                seconds: '', 
-                                timer: ''
-                            }
-                        }
-                    },
-                },
-                table_resets: 1
-            },
-            shard: {
-                upgrades: {
-                    1: 0,
-                    2: 0,
-                    3: 0
-                },
-                singleUpgrades: [],
-                currency: 0,
-                unlockables: [],
-                consumed: {
-                    click: 0,
-                    second: 0,
-                    buyables: 0,
-                    singles: 0,
-                }
-            },
-            shop: {
-                upgrades: {
-                    1: 0,
-                    2: 0,
-                    3: 0,
-                    4: 0,
-                    5: 0
-                },
-                permanentUpgrades: {
-                    1: 0,
-                    2: 0,
-                    3: 0,
-                    4: 0,
-                },
-                unlockables: [],
-                items: {
-                    amount: {
-                        1: 0,
-                        2: 0,
-                        3: 0,
-                        4: 0
-                    },
-                    used: {
-                        1: 0,
-                        2: 0,
-                        3: 0,
-                        4: 0
                     }
-                }
+                },
+                1: {
+                    crystals: '',
+                    prestiges: '',
+                    time: {
+                        game: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        },
+                        real: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        }
+                    }
+                },
+                2: {
+                    crystals: '',
+                    prestiges: '',
+                    time: {
+                        game: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        },
+                        real: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        }
+                    }
+                },
+                3: {
+                    crystals: '',
+                    prestiges: '',
+                    time: {
+                        game: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        },
+                        real: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        }
+                    }
+                },
+                4: {
+                    crystals: '',
+                    prestiges: '',
+                    time: {
+                        game: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        },
+                        real: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        }
+                    }
+                },
+                5: {
+                    crystals: '',
+                    prestiges: '',
+                    time: {
+                        game: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        },
+                        real: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        }
+                    }
+                },
+                6: {
+                    crystals: '',
+                    prestiges: '',
+                    time: {
+                        game: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        },
+                        real: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        }
+                    }
+                },
+                7: {
+                    crystals: '',
+                    prestiges: '',
+                    time: {
+                        game: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        },
+                        real: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        }
+                    }
+                },
+                8: {
+                    crystals: '',
+                    prestiges: '',
+                    time: {
+                        game: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        },
+                        real: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        }
+                    }
+                },
+                9: {
+                    crystals: '',
+                    prestiges: '',
+                    time: {
+                        game: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        },
+                        real: {
+                            days: '',
+                            hours: '',
+                            minutes: '',
+                            seconds: '', 
+                            timer: ''
+                        }
+                    }
+                },
             },
-            supercrystal: {
-                upgrades: [],
-                currency: 0,
-                total_currency: 0,
-                consumedShards: 0,
-            },
-            rune: {
-                currency: 0,
-                total_currency: 0,
-            },
-            minerals: {
+            table_resets: 1
+        },
+        shard: {
+            upgrades: {
                 1: 0,
                 2: 0,
                 3: 0
             },
-            time: {
-                savedTime: Date.now(), //lastOnlineTime
-                currentTime: 0,
-                game: {
-                    total: {
-                        seconds: 0, 
-                        minutes: 0, 
-                        hours: 0,
-                        days: 0,
-                        timer: 0, 
-                    },
-                    prestige: {
-                        seconds: 0, 
-                        minutes: 0, 
-                        hours: 0,
-                        days: 0,
-                        timer: 0, 
-                    },
-                    fastestPrestige: {
-                        seconds: 0, 
-                        minutes: 0, 
-                        hours: 0,
-                        days: 0,
-                        timer: 1e69, 
-                    }
-                },
-                real: {
-                    total: {
-                        seconds: 0, 
-                        minutes: 0, 
-                        hours: 0,
-                        days: 0,
-                        timer: 0, 
-                    },
-                    prestige: {
-                        seconds: 0, 
-                        minutes: 0, 
-                        hours: 0,
-                        days: 0,
-                        timer: 0, 
-                    },
-                    fastestPrestige: {
-                        seconds: 0, 
-                        minutes: 0, 
-                        hours: 0,
-                        days: 0,
-                        timer: 1e69, 
-                    },
-                    daily: {
-                        seconds: 0, 
-                        minutes: 0, 
-                        hours: 0,
-                        timer: 0,
-                    }
-                },
-                next_daily: 0,
-                umultiplier: 0,
-                upower: 0,
-        
+            singleUpgrades: [],
+            currency: 0,
+            unlockables: [],
+            consumed: {
+                click: 0,
+                second: 0,
+                buyables: 0,
+                singles: 0,
             },
-            challenge: {
-                completed: [],
-                activated: 0,
-                time: {
-                    1: {
-                        days: 999,
-                        hours: 99,
-                        minutes: 59,
-                        seconds: 59, 
-                        timer: 99999
-                    },
-                    2: {
-                        days: 999,
-                        hours: 99,
-                        minutes: 59,
-                        seconds: 59, 
-                        timer: 99999
-                    },
-                    3: {
-                        days: 999,
-                        hours: 99,
-                        minutes: 59,
-                        seconds: 59, 
-                        timer: 99999
-                    },
-                    4: {
-                        days: 999,
-                        hours: 99,
-                        minutes: 59,
-                        seconds: 59, 
-                        timer: 99999
-                    },
-                    5: {
-                        days: 999,
-                        hours: 99,
-                        minutes: 59,
-                        seconds: 59, 
-                        timer: 99999
-                    },
-                    6: {
-                        days: 999,
-                        hours: 99,
-                        minutes: 59,
-                        seconds: 59, 
-                        timer: 99999
-                    },
-                    7: {
-                        days: 999,
-                        hours: 99,
-                        minutes: 59,
-                        seconds: 59, 
-                        timer: 99999
-                    },
-                    8: {
-                        days: 999,
-                        hours: 99,
-                        minutes: 59,
-                        seconds: 59, 
-                        timer: 99999
-                    },
-                    9: {
-                        days: 999,
-                        hours: 99,
-                        minutes: 59,
-                        seconds: 59, 
-                        timer: 99999
-                    },
-                    10: {
-                        days: 999,
-                        hours: 99,
-                        minutes: 59,
-                        seconds: 59, 
-                        timer: 99999
-                    },
-                    11: {
-                        days: 999,
-                        hours: 99,
-                        minutes: 59,
-                        seconds: 59, 
-                        timer: 99999
-                    },
-                    12: {
-                        days: 999,
-                        hours: 99,
-                        minutes: 59,
-                        seconds: 59, 
-                        timer: 99999
-                    },
-                }
-            },
-            tabs: {
-                main: [],
-                settings_sub: [],
-                clicker_sub: [],
-                info_sub: [],
-                prestige_sub: [],
-                multi_breakdown_sub: [],
-            },
-            settings: {
-                currentLanguage: parsedData.currentLanguage != undefined ? parsedData.currentLanguage : 'en',
-                auto_save: true,
-                mutedAudio: false,
-                shop_bulkbuy: 1,
-                font: 'option1',
-                buy_max_activate: false,
-                modernization_activated: false,
-                loreBoolean: [],
-                event: {
-                    spiritual: false,
-                    triplePower: false
-                },
-                whichPrestigeMode: 'time'
-            },
-            automation: {
-                checkbox: {
-                single: false, 
-                buyable: false, 
-                umultiplier: false, 
-                upower: false, 
-                prestige: false
-                },
-                setIntervals: {
-                    single: '', 
-                    buyable: '', 
-                    umultiplier: '', 
-                    upower: '', 
-                    prestige: ''
-                },
-                upgrades: {
-                    single: parsedData.singleInterval_price != undefined ? Math.log2(parsedData.singleInterval_price) : 0, 
-                    buyable: parsedData.buyableInterval_price != undefined ? Math.log2(parsedData.buyableInterval_price) : 0, 
-                    umultiplier: parsedData.umultiplierInterval_price != undefined ? Math.log2(parsedData.umultiplierInterval_price) : 0, 
-                    upower: parsedData.upowerInterval_price != undefined ? Math.log2(parsedData.upowerInterval_price) : 0, 
-                    prestige: parsedData.prestigeInterval_price != undefined ? Math.log2(parsedData.prestigeInterval_price) : 0
-                },
-                conditions: {
-                    umultiplier: 0,
-                    upower: {
-                        time: 0,
-                        x_of_umulti: 0,
-                    },
-                    prestige: {
-                        time: 3600,
-                        coins: 1e15
-                    }
-                }
-            },
-            got_daily_reward: false,
-            code: {
-                activated: [],
-                name: ['digitalgod', 'shirakamifubuki', 'suisei', 'koyori', 'manilovefauna', 'revolution', 'supercoin'],
-            },
-            overdrive: {
-                consumed: {
-                    type1: 0,
-                    type2: 0
-                }
-            },
-            offline_gain: {
-                time: '',
-                coin: '',
-                supercoin: '',
-                crystal: '',
-                prestige: '',
-                shard: ''
+            achievements: {
+                1: 0,
+                2: 0,
+                3: 0,
+                4: 0,
+                5: 0,
+                6: 0,
+                7: 0,
+                8: 0,
+                9: 0,
+                10: 0
             }
-        }
+        },
+        shop: {
+            upgrades: {
+                1: 0,
+                2: 0,
+                3: 0,
+                4: 0,
+                5: 0,
+                6: 0,
+                7: 0,
+            },
+            permanentUpgrades: {
+                1: 0,
+                2: 0,
+                3: 0,
+                4: 0,
+                5: 0,
+                6: 0,
+                7: 0,
+            },
+            unlockables: [],
+            items: {
+                amount: {
+                    1: 0,
+                    2: 0,
+                    3: 0,
+                    4: 0,
+                    5: 0,
+                    6: 0,
+                },
+                used: {
+                    1: 0,
+                    2: 0,
+                    3: 0,
+                    4: 0,
+                    5: 0,
+                    6: 0,
+                }
+            }
+        },
+        supercrystal: {
+            upgrades: [],
+            currency: 0,
+            total_currency: 0,
+            consumedShards: 0,
+        },
+        rune: {
+            currency: 0,
+            total_currency: 0,
+        },
+        minerals: {
+            1: 0,
+            2: 0,
+            3: 0
+        },
+        time: {
+            savedTime: Date.now(), //lastOnlineTime
+            currentTime: 0,
+            game: {
+                total: {
+                    seconds: 0, 
+                    minutes: 0, 
+                    hours: 0,
+                    days: 0,
+                    timer: 0, 
+                },
+                prestige: {
+                    seconds: 0, 
+                    minutes: 0, 
+                    hours: 0,
+                    days: 0,
+                    timer: 0, 
+                },
+                fastestPrestige: {
+                    seconds: 0, 
+                    minutes: 0, 
+                    hours: 0,
+                    days: 0,
+                    timer: 1e69, 
+                },
+                average: {
+                    days: '',
+                    hours: '',
+                    minutes: '',
+                    seconds: '', 
+                    timer: ''
+                },
+            },
+            real: {
+                total: {
+                    seconds: 0, 
+                    minutes: 0, 
+                    hours: 0,
+                    days: 0,
+                    timer: 0, 
+                },
+                prestige: {
+                    seconds: 0, 
+                    minutes: 0, 
+                    hours: 0,
+                    days: 0,
+                    timer: 0, 
+                },
+                fastestPrestige: {
+                    seconds: 0, 
+                    minutes: 0, 
+                    hours: 0,
+                    days: 0,
+                    timer: 1e69, 
+                },
+                daily: {
+                    seconds: 0, 
+                    minutes: 0, 
+                    hours: 0,
+                    timer: 0,
+                },
+                average: {
+                    days: '',
+                    hours: '',
+                    minutes: '',
+                    seconds: '', 
+                    timer: ''
+                },
+            },
+            next_daily: 0,
+            umultiplier: 0,
+            upower: 0,
+            uadder: 0,
+            ureducer: 0,
+        },
+        challenge: {
+            completed: [],
+            activated: 0,
+            time: {
+                1: {
+                    days: 999,
+                    hours: 99,
+                    minutes: 59,
+                    seconds: 59, 
+                    timer: 99999
+                },
+                2: {
+                    days: 999,
+                    hours: 99,
+                    minutes: 59,
+                    seconds: 59, 
+                    timer: 99999
+                },
+                3: {
+                    days: 999,
+                    hours: 99,
+                    minutes: 59,
+                    seconds: 59, 
+                    timer: 99999
+                },
+                4: {
+                    days: 999,
+                    hours: 99,
+                    minutes: 59,
+                    seconds: 59, 
+                    timer: 99999
+                },
+                5: {
+                    days: 999,
+                    hours: 99,
+                    minutes: 59,
+                    seconds: 59, 
+                    timer: 99999
+                },
+                6: {
+                    days: 999,
+                    hours: 99,
+                    minutes: 59,
+                    seconds: 59, 
+                    timer: 99999
+                },
+                7: {
+                    days: 999,
+                    hours: 99,
+                    minutes: 59,
+                    seconds: 59, 
+                    timer: 99999
+                },
+                8: {
+                    days: 999,
+                    hours: 99,
+                    minutes: 59,
+                    seconds: 59, 
+                    timer: 99999
+                },
+                9: {
+                    days: 999,
+                    hours: 99,
+                    minutes: 59,
+                    seconds: 59, 
+                    timer: 99999
+                },
+                10: {
+                    days: 999,
+                    hours: 99,
+                    minutes: 59,
+                    seconds: 59, 
+                    timer: 99999
+                },
+                11: {
+                    days: 999,
+                    hours: 99,
+                    minutes: 59,
+                    seconds: 59, 
+                    timer: 99999
+                },
+                12: {
+                    days: 999,
+                    hours: 99,
+                    minutes: 59,
+                    seconds: 59, 
+                    timer: 99999
+                },
+            }
+        },
+        tabs: {
+            main: [],
+            settings_sub: [],
+            clicker_sub: [],
+            info_sub: [],
+            prestige_sub: [],
+            multi_breakdown_sub: [],
+        },
+        settings: {
+            currentLanguage: 'en',
+            auto_save: true,
+            mutedAudio: false,
+            shop_bulkbuy: 1,
+            minerals_bulkbuy: 1,
+            font: 'option1',
+            notation: 'option1',
+            buy_max_activate: false,
+            shard_buy_max_activate: false,
+            superprestige_buy_max_activate: false,
+            modernization_activated: false,
+            loreBoolean: [],
+            event: {
+                spiritual: false,
+                triplePower: false
+            },
+            whichPrestigeMode: 'time',
+            autosave_interval: 30000,
+            offline: true
+        },
+        automation: {
+            checkbox: {
+            single: false, 
+            buyable: false, 
+            umultiplier: false, 
+            upower: false, 
+            prestige: false
+            },
+            setIntervals: {
+                single: '', 
+                buyable: '', 
+                umultiplier: '', 
+                upower: '', 
+                prestige: ''
+            },
+            upgrades: {
+                single: 0, 
+                buyable: 0, 
+                umultiplier: 0, 
+                upower: 0, 
+                prestige: 0,
+                uadder: 0,
+            },
+            conditions: {
+                umultiplier: 0,
+                upower: {
+                    time: 0,
+                    x_of_umulti: 0,
+                },
+                prestige: {
+                    time: 3600,
+                    coins: 1e15,
+                    prestige: 10000,
+                    crystals: 1e50,
+                },
+                uadder: {
+                    time: 0,
+                    x_of_upower: 0,
+                }
+            }
+        },
+        got_daily_reward: false,
+        code: {
+            activated: [],
+            name: ['digitalgod', 'shirakamifubuki', 'suisei', 'koyori', 'manilovefauna', 'revolution', 'supercoin', 'superprestige', 'sorry'],
+        },
+        overdrive: {
+            consumed: {
+                type1: 0,
+                type2: 0
+            }
+        },
+        offline_gain: {
+            time: 0,
+            coin: 0,
+            supercoin: 0,
+            crystal: 0,
+            prestige: 0,
+            shard: 0
+        },
+}
 
         parsedData.firstBuyable_amount != undefined ? newData.coin.upgrades[1] = parsedData.firstBuyable_amount : 0
         parsedData.secondBuyable_amount != undefined ? newData.coin.upgrades[2] = parsedData.secondBuyable_amount : 0

@@ -18,7 +18,7 @@ const LORE = {
     },
     has(id) { return player.settings.loreBoolean.includes(id) },
     checkLore(){
-        for (let c = 1; c <= 11; c++) {
+        for (let c = 1; c <= Object.keys(this.conditions).length; c++) {
             if (this.conditions[c] !== undefined ? this.conditions[c]() : false) this.unl(c)
             if (this.has(c)) {
                 element = document.getElementsByClassName("loreChapter")[c-1]
@@ -38,5 +38,9 @@ const LORE = {
         9() { return player.coin.currency > 1e25 },
         10() { return player.supercrystal.currency > 0},
         11() { return player.minerals[1] > 0 || player.minerals[2] > 0 || player.minerals[3] > 0},
+        12() { return player.shop.unlockables.includes(4)},
+        13() { return player.prestige.super.singles.includes(25) },
+        14() { return player.uadders > 0 },
+        15() { return player.ureducers > 0 },
     }
 }
