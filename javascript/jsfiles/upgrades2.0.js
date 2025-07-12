@@ -1170,7 +1170,7 @@ const UPGS = {
                 effect(x=player.shard.upgrades[this.id]) {
                     let eff = Math.pow(3, x)
                     if (player.shard.singleUpgrades.includes(12)) eff *= UPGS.shard.singles[12].effect()
-                    return 1
+                    return eff
                 },
                 bulk(x=player.shard.currency, y=player.shard.upgrades[this.id]){
                     let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power)
