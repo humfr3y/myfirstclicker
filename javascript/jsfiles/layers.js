@@ -20,10 +20,11 @@ const LAYERS = {
         cost() {
             let cost = 1
             if (player.challenge.activated == 0 && player.challenge.completed.includes(12))
-            player.umultipliers >= 20 ? cost = (100 + (40 * player.umultipliers)) * (1+((player.umultipliers-19)/50)) : cost = 100 + (40 * player.umultipliers)
-            else player.umultipliers >= 20 ? cost = (100 + (50 * player.umultipliers)) * (1+((player.umultipliers-19)/50)) : cost = 100 + (50 * player.umultipliers)
-            if (player.challenge.activated == 12) cost = 9 + Math.pow((5 * player.umultipliers), player.umultipliers/11)
-            return cost
+            player.umultipliers >= 20 + UPGS.prestige.super.singles[24].effect() ? cost = (100 + (40 * player.umultipliers)) * (1+((player.umultipliers-19-UPGS.prestige.super.singles[24].effect())/50)) : cost = 100 + (40 * player.umultipliers)
+            else player.umultipliers >= 20 +UPGS.prestige.super.singles[24].effect() ? cost = (100 + (50 * player.umultipliers)) * (1+((player.umultipliers-19-UPGS.prestige.super.singles[24].effect())/50)) : cost = 100 + (50 * player.umultipliers)
+            if (player.challenge.activated == 12) cost = 9 + Math.pow((5 * player.umultipliers), player.umultipliers/13.5)
+            cost -= GAIN.ureducer.effect()
+            return Math.max(cost, 0)
         },
         doForcedReset() {
             if (player.umultipliers == 0) return 1
@@ -67,15 +68,66 @@ const LAYERS = {
         cost() {
             let cost = 1
             if (player.challenge.activated == 0 && player.challenge.completed.includes(12))
-            player.upowers >= 10 ? cost = (250 + (80 * player.upowers)) * (1+((player.upowers-9)/7.5)) : cost = 250 + (80 * player.upowers)
-            else player.upowers >= 10 ? cost = (250 + (100 * player.upowers)) * (1+((player.upowers-9)/7.5)) : cost = 250 + (100 * player.upowers)
+            player.upowers >= 10 ? cost = (250 + (80 * player.upowers)) * (1+((player.upowers-9)/8)) : cost = 250 + (80 * player.upowers)
+            else player.upowers >= 10 ? cost = (250 + (100 * player.upowers)) * (1+((player.upowers-9)/8)) : cost = 250 + (100 * player.upowers)
             if (ACHS.has(24)) cost -= 10*(player.upowers)
-            if (player.challenge.activated == 12) cost = 24 + Math.pow((10 * player.upowers), player.upowers/20)
-            return cost
+            if (player.challenge.activated == 12) cost = 24 + Math.pow((10 * player.upowers), player.upowers/23)
+            cost -= GAIN.ureducer.effect()
+            return Math.max(cost, 0)
         },
         disable(x = this.cost(), y = document.getElementById('upowerBoost'), z = player.umultipliers) {
             player.coin.upgrades[1] >= x && z >= 4 ? y.disabled = false : y.disabled = true
-        }
+        },
+    },
+    uadder: {
+        doReset() {
+            if (player.coin.upgrades[2] < this.cost()) return 1
+            player.uadders++
+            LAYERS.doReset()
+            player.umultipliers = 0, player.upowers = 0
+            if (player.challenge.activated == 0) {
+                if (player.prestige.singleUpgrades.includes(41)) player.umultipliers = 1
+                if (player.prestige.singleUpgrades.includes(42)) player.umultipliers = 2
+                if (player.prestige.singleUpgrades.includes(43)) player.umultipliers = 3
+                if (player.prestige.singleUpgrades.includes(44)) {player.umultipliers = 4; player.upowers = 1}
+            }
+            if (MISC.automation.uadder.charged) {
+                MISC.automation.uadder.charged = false
+                AUTO.uadder.time = MISC.automation.uadder.activateTime()
+            }
+            player.time.uadder = 0
+        },
+        cost() {
+            let cost = 1
+            cost = 500 + (50 * player.uadders)
+            cost -= GAIN.ureducer.effect()
+            return Math.max(cost, 0)
+        },
+        disable(x = this.cost(), y = document.getElementById('uadderBoost'), z = player.upowers) {
+            player.coin.upgrades[2] >= x && z >= 10 ? y.disabled = false : y.disabled = true
+        },
+    },
+    ureducer: {
+        doReset() {
+            if (player.coin.upgrades[2] < this.cost()) return 1
+            player.ureducers++
+            LAYERS.doReset()
+            player.umultipliers = 0, player.upowers = 0, player.uadders = 0
+            if (player.challenge.activated == 0) {
+                if (player.prestige.singleUpgrades.includes(41)) player.umultipliers = 1
+                if (player.prestige.singleUpgrades.includes(42)) player.umultipliers = 2
+                if (player.prestige.singleUpgrades.includes(43)) player.umultipliers = 3
+                if (player.prestige.singleUpgrades.includes(44)) {player.umultipliers = 4; player.upowers = 1}
+            }
+        },
+        cost() {
+            let cost = 1
+            cost = 650 + (250 * player.ureducers)
+            return cost
+        },
+        disable(x = this.cost(), y = document.getElementById('ureducerBoost'), z = player.uadders) {
+            player.coin.upgrades[2] >= x && z >= 4 ? y.disabled = false : y.disabled = true
+        },
     },
     prestige: {
         doReset() {
@@ -85,6 +137,10 @@ const LAYERS = {
             if (player.prestige.singleUpgrades.includes(44)) temp = 1
             if (player.upowers == temp) {
                 if (!ACHS.has(24)) ACHS.unl(24)
+            }
+
+            if (player.challenge.activated == 4 && player.coin.singleUpgrades.length == 0 && player.coin.upgrades[2] == 0 && player.coin.upgrades[3] == 0 && player.coin.upgrades[4] == 0 && player.coin.upgrades[5] == 0 && player.clicks.prestige == 0 && player.coin.upgrades[1] == 1) {
+                if (!ACHS.has(47)) ACHS.unl(47)
             }
 
             player.prestige.currency += GAIN.crystal.reset()
@@ -125,7 +181,7 @@ const LAYERS = {
     
             player.prestige.table_resets < 10 ? player.prestige.table_resets++ : player.prestige.table_resets
 
-            player.umultipliers = 0, player.upowers = 0
+            player.umultipliers = 0, player.upowers = 0, player.uadders = 0, player.ureducers = 0
             if (player.challenge.activated == 0) {
                 if (player.prestige.singleUpgrades.includes(41)) player.umultipliers = 1
                 if (player.prestige.singleUpgrades.includes(42)) player.umultipliers = 2
@@ -189,8 +245,9 @@ const LAYERS = {
             player.time.game.prestige.timer = 0
             player.time.real.prestige.timer = 0
 
-            for (let i = 1; i <= 4; i++){
+            for (let i = 1; i <= 6; i++){
                 player.shop.items.used[i] = 0
+
             }
 
             LAYERS.doReset()
@@ -201,6 +258,8 @@ const LAYERS = {
         player.overdrive.consumed.type1 = 0
         player.umultipliers = 0
         player.upowers = 0
+        player.uadders = 0
+        player.ureducers = 0
         player.coin.currency = 10
     
         player.clicks.prestige = 0

@@ -42,6 +42,7 @@ try {
     shardsSelect.innerHTML = i18next.t('shardsButton');
     superCrystalsSelect.innerHTML = i18next.t('superCrystalButton');
     mineralsSelect.innerHTML = i18next.t('mineralsButton');
+    superprestigeSelect.innerHTML = i18next.t('superprestigeButton');
 
     settingsTitle.innerHTML = i18next.t('saveTitle');
     settingsTitle2.innerHTML = i18next.t('graphicTitle');
@@ -52,6 +53,9 @@ try {
     statsTitle.innerHTML = i18next.t('stastisticsTitle');
     recentPrestigesTitle.innerHTML = i18next.t('recentPrestigesTitle');
     challengesTimeTitle.innerHTML = i18next.t('challengesTimeTitle');
+
+    achievementsSelect.innerHTML = i18next.t('achButton');
+    shardAchievementsSelect.innerHTML = i18next.t('shardAchButton');
 
     impSave.innerHTML = i18next.t('importGame');
     fileUploader.innerHTML = i18next.t('importGameFromAFile');
@@ -90,13 +94,18 @@ try {
     umultiplierACTitle.innerHTML = i18next.t('umultiplierAutomationTitle')
     upowerACTitle.innerHTML = i18next.t('upowerAutomationTitle')
     prestigeACTitle.innerHTML = i18next.t('prestigeAutomationTitle')
+    uadderACTitle.innerHTML = i18next.t('uadderAutomationTitle')
 
     autoUmultiInterval.innerHTML = i18next.t('intervalText')
     autoUpowerInterval.innerHTML = i18next.t('intervalText')
     autoUpowerInterval2.innerHTML = i18next.t('requirementText')
+    autoUadderInterval.innerHTML = i18next.t('intervalText')
+    autoUadderInterval2.innerHTML = i18next.t('requirementText2')
 
-    text.automation.prestige_req = i18next.t('timePrestigeMode')
+    text.automation.time_req = i18next.t('timePrestigeMode')
     text.automation.coin_req = i18next.t('coinsPrestigeMode')
+    text.automation.prestige_req = i18next.t('prestigePrestigeMode')
+    text.automation.crystal_req = i18next.t('crystalsPrestigeMode')
 
     doBreakCrystal.innerHTML = i18next.t('doBreakCrystal')
     howMuchCrystals.innerHTML = i18next.t('breakCrystalTitle')
@@ -165,9 +174,12 @@ try {
     thirdSingleSuperEffectStats.innerHTML = i18next.t('thirdSingleSuperEffectName');
     firstSuperCrystalEffectStats.innerHTML = i18next.t('firstSuperCrystalEffectName');
     firstMineralEffect3Stats.innerHTML = i18next.t('firstMineralEffect3Name');
+    superDvorStats.innerHTML = i18next.t('superDvorName');
+    hercCursorStats.innerHTML = i18next.t('hercCursorName');
     achievement37Stats.innerHTML = i18next.t('achievement37Name');
     summarySCChanceStats.innerHTML = i18next.t('totalMultiplier');
 
+    baseCrystalStats.innerHTML = i18next.t('baseCrystalName');
     achievement282Stats.innerHTML = i18next.t('achievement28Name');
     brilliantDoublerStats.innerHTML = i18next.t('brilliantDoublerName');
     recyclingStats.innerHTML = i18next.t('recyclingName');
@@ -176,6 +188,8 @@ try {
     overdrive2EffectStats.innerHTML = i18next.t('overdrive2Name');
     thirdMineralEffect1Stats.innerHTML = i18next.t('thirdMineralEffect1Name');
     secondSuperCrystalSingleEffectStats.innerHTML = i18next.t('secondSuperCrystalSingleEffectName');
+    prestigeFameStats.innerHTML = i18next.t('prestigeFameName');
+    crystalShAchStats.innerHTML = i18next.t('crystalShAchName');
     achievementBonus2Stats.innerHTML = i18next.t('achievementBonus2Name');
     summaryCrystalStats.innerHTML = i18next.t('totalMultiplier');
 
@@ -187,6 +201,7 @@ try {
     secondShardBuyableEffectStats.innerHTML = i18next.t('secondShardBuyableEffectName');
     fifthShopBuyableEffect2Stats.innerHTML = i18next.t('fifthShopBuyableEffectStats2Name');
     thirdMineralEffect2Stats.innerHTML = i18next.t('thirdMineralEffect2Name');
+    shardShAchStats.innerHTML = i18next.t('shardShAchName');
     achievement39Stats.innerHTML = i18next.t('achievement39Name');
     achievementBonus3Stats.innerHTML = i18next.t('achievementBonus3Name');
     summaryShPerSecondStats.innerHTML = i18next.t('totalMultiplier');
@@ -202,6 +217,7 @@ try {
     fourthSuperCrystalSingleEffectStats.innerHTML = i18next.t('fourthSuperCrystalSingleEffectName');
     eighthShopBuyableEffectStats.innerHTML = i18next.t('eighthShopBuyableEffectName');
     firstMineralEffect1Stats.innerHTML = i18next.t('firstMineralEffect1Name');
+    critChShAchStats.innerHTML = i18next.t('critChShAchName');
     fifthBuyableSuperEffectStats.innerHTML = i18next.t('fifthBuyableSuperEffectName');
     summaryCritChanceStats.innerHTML = i18next.t('totalMultiplier');
     
@@ -209,6 +225,7 @@ try {
     fifthSuperCrystalSingleEffectStats.innerHTML = i18next.t('fifthSuperCrystalSingleEffectName');
     ninthShopBuyableEffectStats.innerHTML = i18next.t('ninthShopBuyableEffectName');
     firstMineralEffect2Stats.innerHTML = i18next.t('firstMineralEffect2Name');
+    critMuShAchStats.innerHTML = i18next.t('critMuShAchName');
     thirdBuyableSuperEffectStats.innerHTML = i18next.t('thirdBuyableSuperEffectName');
     summaryCritMultiStats.innerHTML = i18next.t('totalMultiplier');
 
@@ -227,19 +244,16 @@ try {
     shopDesc.innerHTML = i18next.t('shopDesc');
     shopTitle.innerHTML = i18next.t('shopTitle2');
 
-    shopBuyableU1Title.innerHTML = i18next.t('firstShopBuyableTitle');
-    shopBuyableU2Title.innerHTML = i18next.t('secondShopBuyableTitle');
-    shopBuyableU3Title.innerHTML = i18next.t('thirdShopBuyableTitle');
-    shopBuyableU4Title.innerHTML = i18next.t('fourthShopBuyableTitle');
-    shopBuyableU5Title.innerHTML = i18next.t('fifthShopBuyableTitle');
-    shopBuyableU6Title.innerHTML = i18next.t('sixthShopBuyableTitle');
-    shopBuyableU7Title.innerHTML = i18next.t('seventhShopBuyableTitle');
-    shopBuyableU8Title.innerHTML = i18next.t('eighthShopBuyableTitle');
-    shopBuyableU9Title.innerHTML = i18next.t('ninthShopBuyableTitle');
+    for (let i = 1; i <= 7; i++) {
+        window[`shopBuyableU${i}Title`].innerHTML = i18next.t(`shopBuyableTitle${i}`);
+        window[`shopPermanentU${i}Title`].innerHTML = i18next.t(`shopPermanentTitle${i}`);
+    }
 
     shopSingleU1Title.innerHTML = i18next.t('firstShopSingleTitle');
     shopSingleU2Title.innerHTML = i18next.t('secondShopSingleTitle');
     shopSingleU3Title.innerHTML = i18next.t('thirdShopSingleTitle');
+    shopSingleU4Title.innerHTML = i18next.t('fourthShopSingleTitle');
+    shopSingleU5Title.innerHTML = i18next.t('fifthShopSingleTitle');
 
     bulkBuyAmount.innerHTML = i18next.t('bulkBuy');
     bulkBuy10.innerHTML = i18next.t('buy10');
@@ -295,6 +309,7 @@ try {
     text.changelog['0.11'] = i18next.t('version011');
     text.changelog['0.12'] = i18next.t('version012');
     text.changelog['0.12.1'] = i18next.t('version0121');
+    text.changelog['0.13'] = i18next.t('version013');
 
     noEvent.innerHTML = i18next.t('noEvent');
 
@@ -354,6 +369,8 @@ function loadTranslations() {
     else doPrestige.innerHTML = i18next.t('prestigeDisabled');
 
     maxOrNoUpgrades.innerHTML = (player.settings.buy_max_activate) ? i18next.t('maxUpgradesTrue') : i18next.t('maxUpgradesFalse');
+    maxOrNoShardUpgrades.innerHTML = (player.settings.shard_buy_max_activate) ? i18next.t('maxUpgradesTrue') : i18next.t('maxUpgradesFalse');
+    maxOrNoSuperprestigeUpgrades.innerHTML = (player.settings.superprestige_buy_max_activate) ? i18next.t('maxUpgradesTrue') : i18next.t('maxUpgradesFalse');
 
     shopSelect.innerHTML = i18next.t('shopButton', {superCoins: formatNumber(player.supercoin.currency)});
     muteAudio.innerHTML = i18next.t('mutingAudio', {status: player.settings.mutedAudio});
@@ -361,12 +378,14 @@ function loadTranslations() {
     autoSavingGame.innerHTML = i18next.t('autosaveGame', {autoSave: player.settings.auto_save});
 
     autoTimer.innerHTML = i18next.t('autoSave', {autoSaverTimer: MISC.auto_save_timer.toFixed(2)});
-    umultiplierBoost.innerHTML = i18next.t('umultiplierText', {umultipliercount: formatNumber(player.umultipliers), umultiplierBase: formatNumber(GAIN.umultiplier.base(), 'boost'), umultiplier: formatNumber(GAIN.umultiplier.effect(), 'boost'), umultiplierCost: formatNumber(LAYERS.umultiplier.cost())});
-    upowerBoost.innerHTML = i18next.t('upowerText', {upowercount: formatNumber(player.upowers), upowerBase: formatNumber(GAIN.upower.base(), 'power'), upower: formatNumber(GAIN.upower.effect(), 'power'), upowerCost: formatNumber(LAYERS.upower.cost())});
+    umultiplierBoost.innerHTML = i18next.t('umultiplierText', {umultipliercount: formatNumber(player.umultipliers), free: formatNumber(MISC.free_upgrade.umultiplier(), 'boost'), umultiplierBase: formatNumber(GAIN.umultiplier.base(), 'boost'), umultiplier: formatNumber(GAIN.umultiplier.effect(), 'boost'), umultiplierCost: formatNumber(LAYERS.umultiplier.cost())});
+    upowerBoost.innerHTML = i18next.t('upowerText', {upowercount: formatNumber(player.upowers), free: formatNumber(MISC.free_upgrade.upower(), 'boost'), upowerBase: formatNumber(GAIN.upower.base(), 'power'), upower: formatNumber(GAIN.upower.effect(), 'power'), upowerCost: formatNumber(LAYERS.upower.cost())});
+    uadderBoost.innerHTML = i18next.t('uadderText', {amount: formatNumber(player.uadders), base: formatNumber(GAIN.uadder.base(), 'number'), uadder: formatNumber(GAIN.uadder.effect(), 'number'), cost: formatNumber(LAYERS.uadder.cost())});
+    ureducerBoost.innerHTML = i18next.t('ureducerText', {amount: formatNumber(player.ureducers), base: formatNumber(GAIN.ureducer.base(), 'number'), ureducer: formatNumber(GAIN.ureducer.effect(), 'number'), cost: formatNumber(LAYERS.ureducer.cost())});
 
     if (!player.settings.modernization_activated) {
         buyableU1.innerHTML = i18next.t('firstBuyable', {amount: formatNumber(player.coin.upgrades[1]), free: MISC.free_upgrade[1]() > 0 ? i18next.t('free', {free: formatNumber(MISC.free_upgrade[1]())}) : '', bulk: formatNumber(UPGS.coin.buyables[1].bulk()), effect: formatNumber(UPGS.coin.buyables[1].effect()), super_effect: player.coin.superUpgrades.includes(11) ? i18next.t('super_effect_plus', {effect: formatNumber(UPGS.coin.buyables[1].effect_super())}) : '', cost: formatNumber(UPGS.coin.buyables.bulk_cost(1))});
-        buyableU2.innerHTML = i18next.t('secondBuyable', {amount: formatNumber(player.coin.upgrades[2]), bulk: formatNumber(UPGS.coin.buyables[2].bulk()), effect: formatNumber(UPGS.coin.buyables[2].effect(), 'percent'), super_effect: player.coin.superUpgrades.includes(12) ? i18next.t('super_effect_mul', {effect: formatNumber(UPGS.coin.buyables[2].effect_super(), 'boost')}) : '', cost: formatNumber(UPGS.coin.buyables.bulk_cost(2))});
+        buyableU2.innerHTML = i18next.t('secondBuyable', {amount: formatNumber(player.coin.upgrades[2]), free: MISC.free_upgrade[2]() > 0 ? i18next.t('free', {free: formatNumber(MISC.free_upgrade[2]())}) : '', bulk: formatNumber(UPGS.coin.buyables[2].bulk()), effect: formatNumber(UPGS.coin.buyables[2].effect(), 'percent'), super_effect: player.coin.superUpgrades.includes(12) ? i18next.t('super_effect_mul', {effect: formatNumber(UPGS.coin.buyables[2].effect_super(), 'boost')}) : '', cost: formatNumber(UPGS.coin.buyables.bulk_cost(2))});
         buyableU3.innerHTML = i18next.t('thirdBuyable', {amount: formatNumber(player.coin.upgrades[3]), bulk: formatNumber(UPGS.coin.buyables[3].bulk()), effect: formatNumber(UPGS.coin.buyables[3].effect(), 'boost'), super_effect: player.coin.superUpgrades.includes(13) ? i18next.t('super_effect_mul', {effect: formatNumber(UPGS.coin.buyables[3].effect_super(), 'boost')}) : '', cost: formatNumber(UPGS.coin.buyables.bulk_cost(3))});
         buyableU4.innerHTML = i18next.t('fourthBuyable', {amount: formatNumber(player.coin.upgrades[4]), free: MISC.free_upgrade[4]() > 0 ? i18next.t('free', {free: formatNumber(MISC.free_upgrade[4]())}) : '', bulk: formatNumber(UPGS.coin.buyables[4].bulk()), base: UPGS.prestige.singles[22].unl() ? 1.075 : 1.05, effect: formatNumber(UPGS.coin.buyables[4].effect(), 'boost'), super_effect: player.coin.superUpgrades.includes(14) ? i18next.t('super_effect_mul', {effect: formatNumber(UPGS.coin.buyables[4].effect_super(), 'boost')}) : '', cost: formatNumber(UPGS.coin.buyables.bulk_cost(4))});
         buyableU5.innerHTML = i18next.t('fifthBuyable', {amount: formatNumber(player.coin.upgrades[5]), bulk: formatNumber(UPGS.coin.buyables[5].bulk()), effect: formatNumber(UPGS.coin.buyables[5].effect(), 'power'), super_effect: player.coin.superUpgrades.includes(15) ? i18next.t('super_effect_exp', {effect: formatNumber(UPGS.coin.buyables[5].effect_super(), 'power')}) : '', cost: formatNumber(UPGS.coin.buyables.bulk_cost(5))});    
@@ -474,7 +493,7 @@ function loadTranslations() {
                         effect: formatNumber(UPGS.prestige.singles[upg_id].effect(), 'power')
                     }),  
                     cost: !player.prestige.singleUpgrades.includes(upg_id) ? i18next.t('prestige_cost', {
-                        cost: formatNumber(UPGS.prestige.singles[upg_id].cost(), 'power')
+                        cost: formatNumber(UPGS.prestige.singles[upg_id].cost())
                     }) : '',
                     multi: ACHS.has(27) ? 10 : 2,
                     time: ACHS.has(27) ? 10 : 5
@@ -483,19 +502,22 @@ function loadTranslations() {
 
     shBuyableU1.innerHTML = i18next.t('firstShardBuyable', {
         amount: formatNumber(player.shard.upgrades[1]), 
+        bulk: formatNumber(UPGS.shard.buyables[1].bulk()),
         effect: formatNumber(UPGS.shard.buyables[1].effect(), 'boost'), 
-        cost: formatNumber(UPGS.shard.buyables[1].cost())
+        cost: formatNumber(UPGS.shard.buyables.bulk_cost(1))
     });
     shBuyableU2.innerHTML = i18next.t('secondShardBuyable', {
         amount: formatNumber(player.shard.upgrades[2]), 
+        bulk: formatNumber(UPGS.shard.buyables[2].bulk()),
         effect: formatNumber(UPGS.shard.buyables[2].effect(), 'boost'), 
-        cost: formatNumber(UPGS.shard.buyables[2].cost())
+        cost: formatNumber(UPGS.shard.buyables.bulk_cost(2))
     });
     shBuyableU3.innerHTML = i18next.t('thirdShardBuyable', {
         amount: formatNumber(player.shard.upgrades[3]), 
+        bulk: formatNumber(UPGS.shard.buyables[3].bulk()),
         effect1: formatNumber(UPGS.shard.buyables[3].effect().min, 'boost'), 
         effect2: formatNumber(UPGS.shard.buyables[3].effect().max, 'boost'), 
-        cost: formatNumber(UPGS.shard.buyables[3].cost())
+        cost: formatNumber(UPGS.shard.buyables.bulk_cost(3))
     });
 
     const shard_singles = [
@@ -586,6 +608,59 @@ function loadTranslations() {
 
     superCrystalCount.innerHTML = i18next.t('superCrystalAmount', {x: formatNumber(player.supercrystal.currency)})
 
+    superPBuyableU1.innerHTML = i18next.t('firstSuperPrestigeBuyable', {
+        amount: formatNumber(player.prestige.super.buyables[1]), 
+        bulk: formatNumber(UPGS.prestige.super.buyables[1].bulk()), 
+        effect: formatNumber(UPGS.prestige.super.buyables[1].effect(), 'power'), 
+        cost: formatNumber(UPGS.prestige.super.buyables.bulk_cost(1))
+    });
+    superPBuyableU2.innerHTML = i18next.t('secondSuperPrestigeBuyable', {
+        amount: formatNumber(player.prestige.super.buyables[2]), 
+        bulk: formatNumber(UPGS.prestige.super.buyables[2].bulk()), 
+        effect: formatNumber(UPGS.prestige.super.buyables[2].effect(), 'percent'), 
+        cost: formatNumber(UPGS.prestige.super.buyables.bulk_cost(2))
+    });
+    superPBuyableU3.innerHTML = i18next.t('thirdSuperPrestigeBuyable', {
+        amount: formatNumber(player.prestige.super.buyables[3]), 
+        bulk: formatNumber(UPGS.prestige.super.buyables[3].bulk()), 
+        effect: formatNumber(UPGS.prestige.super.buyables[3].effect(), 'boost'), 
+        cost: formatNumber(UPGS.prestige.super.buyables.bulk_cost(3))
+    });
+    superPBuyableU4.innerHTML = i18next.t('fourthSuperPrestigeBuyable', {
+        amount: formatNumber(player.prestige.super.buyables[4]), 
+        bulk: formatNumber(UPGS.prestige.super.buyables[4].bulk()), 
+        effect: formatNumber(UPGS.prestige.super.buyables[4].effect(), 'boost'), 
+        cost: formatNumber(UPGS.prestige.super.buyables.bulk_cost(4))
+    });
+    superPBuyableU5.innerHTML = i18next.t('fifthSuperPrestigeBuyable', {
+        amount: formatNumber(player.prestige.super.buyables[5]), 
+        bulk: formatNumber(UPGS.prestige.super.buyables[5].bulk()), 
+        effect: formatNumber(UPGS.prestige.super.buyables[5].effect(), 'power', 4), 
+        cost: formatNumber(UPGS.prestige.super.buyables.bulk_cost(5))
+    });
+
+    const superprestige_singles = [
+        superPSingleU1, superPSingleU2, superPSingleU3, superPSingleU4, superPSingleU5, 
+        superPSingleU6, superPSingleU7, superPSingleU8, superPSingleU9, superPSingleU10,
+    ];
+
+    const superprestige_singles_name = [
+        "firstSuperPrestigeSingle", "secondSuperPrestigeSingle", "thirdSuperPrestigeSingle", "fourthSuperPrestigeSingle", "fifthSuperPrestigeSingle", 
+        "sixthSuperPrestigeSingle", "seventhSuperPrestigeSingle", "eighthSuperPrestigeSingle", "ninthSuperPrestigeSingle", "unlockSuperPrestige", 
+    ];
+
+    for (let j = 1; j <= 2; j++)
+        for (let i = 1; i <= 5; i++) {
+            const id = i+((j-1)*5)-1, upg_id = j*10+i
+            superprestige_singles[id].innerHTML = i18next.t(superprestige_singles_name[id], {
+                        effect: upg_id != 14 && upg_id != 24 ? formatNumber(UPGS.prestige.super.singles[upg_id].effect(), 'boost') :
+                        formatNumber(UPGS.prestige.super.singles[upg_id].effect(), 'number'),
+                        cost: !player.prestige.super.singles.includes(upg_id) ? i18next.t('prestige_cost', {
+                        cost: formatNumber(UPGS.prestige.super.singles[upg_id].cost())
+                    }) : '',
+                })
+            }
+
     for (let i = 1; i < 21; i++) {
         const milestoneEl = document.getElementById(`pMilestone${i}`)
         const milestoneEl2 = `prestigeMilestone${i}`
@@ -597,17 +672,21 @@ function loadTranslations() {
     umultiplierACInterval.innerHTML = i18next.t('automationDesc', {interval: formatNumber(MISC.automation.umultiplier.time()/1000, 'power')});
     upowerACInterval.innerHTML = i18next.t('automationDesc', {interval: formatNumber(MISC.automation.upower.time()/1000, 'power')});
     prestigeACInterval.innerHTML = i18next.t('automationDesc', {interval: formatNumber(MISC.automation.prestige.time()/1000, 'power')});
+    uadderACInterval.innerHTML = i18next.t('automationDesc', {interval: formatNumber(MISC.automation.uadder.time()/1000, 'power')});
 
     ELS.automationUpgradesArray[0].innerHTML =  i18next.t('decreaseInterval', {percent: 40, price: formatNumber(MISC.automation.single.cost())})
     ELS.automationUpgradesArray[1].innerHTML =  i18next.t('decreaseInterval', {percent: 40, price: formatNumber(MISC.automation.buyable.cost())})
     ELS.automationUpgradesArray[2].innerHTML =  i18next.t('decreaseInterval', {percent: 40, price: formatNumber(MISC.automation.umultiplier.cost())})
     ELS.automationUpgradesArray[3].innerHTML =  i18next.t('decreaseInterval', {percent: 40, price: formatNumber(MISC.automation.upower.cost())})
     ELS.automationUpgradesArray[4].innerHTML =  i18next.t('decreaseInterval', {percent: 40, price: formatNumber(MISC.automation.prestige.cost())})
+    ELS.automationUpgradesArray[5].innerHTML =  i18next.t('decreaseInterval', {percent: 33, price: formatNumber(MISC.automation.uadder.cost())})
 
     increaseBulkBuyButton.innerHTML = i18next.t('increaseBulk', {price: formatNumber(MISC.automation.buyable.cost())})
 
-    if (player.settings.whichPrestigeMode == 'time') autoPrestigeMode.innerHTML = text.automation.prestige_req
+    if (player.settings.whichPrestigeMode == 'time') autoPrestigeMode.innerHTML = text.automation.time_req
     if (player.settings.whichPrestigeMode == 'coins') autoPrestigeMode.innerHTML = text.automation.coin_req
+    if (player.settings.whichPrestigeMode == 'prestige') autoPrestigeMode.innerHTML = text.automation.prestige_req
+    if (player.settings.whichPrestigeMode == 'crystals') autoPrestigeMode.innerHTML = text.automation.crystal_req
 
     shardsCountText.innerHTML = i18next.t('shardCount', {shards: formatNumber(player.shard.currency), percent: formatNumber(GAIN.shard.effect.effect(), 'percent')})
     shardsPerSecondText.innerHTML = i18next.t('shardsPerSec', {shards: formatNumber(GAIN.shard.second(), 'boost')})
@@ -624,7 +703,7 @@ function loadTranslations() {
         1: UPGS.coin.singles[25].unl_super() ? i18next.t('achievementsBonus1', {x: formatNumber(ACHS.effect.crystal(), 'boost')}) : '', 
         2: UPGS.coin.singles[25].unl_super() ? i18next.t('achievementsBonus2', {x: formatNumber(ACHS.effect.shard(), 'boost')}) : ''
     })
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 40; i++) {
         const achNaming = window["achName" + (i + 11)]; // Добавляем 11, чтобы начать с 11-го элемента
         const achNameKey = `achRow1.name.${i}`;
         const achNameWithoutQuotes = i18next.t(achNameKey).replace(/"/g, ''); // Удалить все кавычки из строки
@@ -697,19 +776,20 @@ function loadTranslations() {
     respecSuperCrystalSingle.innerHTML = i18next.t('respecShop');
 
     const shop_buyables = [
-        tooltipShopBuyableU1, tooltipShopBuyableU2, tooltipShopBuyableU3, tooltipShopBuyableU4, tooltipShopBuyableU5,
+        tooltipShopBuyableU1, tooltipShopBuyableU2, tooltipShopBuyableU3, tooltipShopBuyableU4, tooltipShopBuyableU5, tooltipShopBuyableU6, tooltipShopBuyableU7,
     ];
 
     const shop_buyables_name = [
-        "firstShopBuyable", "secondShopBuyable", "thirdShopBuyable", "fourthShopBuyable", "fifthShopBuyable",
+        "firstShopBuyable", "secondShopBuyable", "thirdShopBuyable", "fourthShopBuyable", "fifthShopBuyable", "sixthShopBuyable", "seventhShopBuyable",
     ];
 
-    for (let i = 0; i < 5; i++){
+    for (let i = 0; i < 7; i++){
         const id = i+1
         shop_buyables[i].innerHTML = i18next.t(shop_buyables_name[i], {
             amount: formatNumber(player.shop.upgrades[id]), 
             bulk: formatNumber(UPGS.shop.buyables[id].bulk()), 
             effect: formatNumber(UPGS.shop.buyables[id].effect(), 'percent'), 
+            next_effect: formatNumber(UPGS.shop.buyables[id].next_effect(), 'percent'),
             cost: player.shop.upgrades[id] != UPGS.shop.buyables[id].maxAmount ? i18next.t('shop_cost', {
                 cost: formatNumber(UPGS.shop.buyables.bulk_cost(id))
             }) : ''
@@ -718,41 +798,51 @@ function loadTranslations() {
     }
 
     const shop_permanents = [
-        tooltipShopBuyableU6, tooltipShopBuyableU7, tooltipShopBuyableU8, tooltipShopBuyableU9,
+        tooltipShopPermanentU1, tooltipShopPermanentU2, tooltipShopPermanentU3, tooltipShopPermanentU4, tooltipShopPermanentU5, tooltipShopPermanentU6, tooltipShopPermanentU7
     ];
 
     const shop_permanent_name = [
-        "sixthShopBuyable", "seventhShopBuyable", "eighthShopBuyable", "ninthShopBuyable",
+        "firstShopPermanent", "secondShopPermanent", "thirdShopPermanent", "fourthShopPermanent", "fifthShopPermanent", "sixthShopPermanent", "seventhShopPermanent",
     ];
 
-    for (let i = 0; i < 4; i++){
+    for (let i = 0; i < 7; i++){
         const id = i+1
-        if (id != 3) shop_permanents[i].innerHTML = i18next.t(shop_permanent_name[i], {
+        if (id != 3 && id != 6 && id != 5 && id != 7) shop_permanents[i].innerHTML = i18next.t(shop_permanent_name[i], {
             amount: formatNumber(player.shop.permanentUpgrades[id]), 
             effect: formatNumber(UPGS.shop.permanent[id].effect(), 'percent'), 
+            next_effect: formatNumber(UPGS.shop.permanent[id].next_effect(), 'percent'),
+            cost: player.shop.permanentUpgrades[id] != UPGS.shop.permanent[id].maxAmount ? i18next.t('shop_cost', {
+                cost: formatNumber(UPGS.shop.permanent[id].cost())
+            }) : ''
+        })
+        else if (id != 5 && id != 7) shop_permanents[i].innerHTML = i18next.t(shop_permanent_name[i], {
+            amount: formatNumber(player.shop.permanentUpgrades[id]), 
+            effect: formatNumber(UPGS.shop.permanent[id].effect(), 'boost'),  
+            next_effect: formatNumber(UPGS.shop.permanent[id].next_effect(), 'boost'),
             cost: player.shop.permanentUpgrades[id] != UPGS.shop.permanent[id].maxAmount ? i18next.t('shop_cost', {
                 cost: formatNumber(UPGS.shop.permanent[id].cost())
             }) : ''
         })
         else shop_permanents[i].innerHTML = i18next.t(shop_permanent_name[i], {
             amount: formatNumber(player.shop.permanentUpgrades[id]), 
-            effect: formatNumber(UPGS.shop.permanent[id].effect(), 'boost'), 
+            effect: formatNumber(UPGS.shop.permanent[id].effect()),  
+            next_effect: formatNumber(UPGS.shop.permanent[id].next_effect()),
             cost: player.shop.permanentUpgrades[id] != UPGS.shop.permanent[id].maxAmount ? i18next.t('shop_cost', {
                 cost: formatNumber(UPGS.shop.permanent[id].cost())
             }) : ''
         })
-        window[`shopBuyableU${id+5}Req`].innerHTML = formatNumber(player.shop.permanentUpgrades[id]) + '/' + UPGS.shop.permanent[id].maxAmount
+        window[`shopPermanentU${id}Req`].innerHTML = formatNumber(player.shop.permanentUpgrades[id]) + '/' + UPGS.shop.permanent[id].maxAmount
     }
 
     const shop_unlockables = [
-        tooltipShopSingleU1, tooltipShopSingleU2, tooltipShopSingleU3,
+        tooltipShopSingleU1, tooltipShopSingleU2, tooltipShopSingleU3, tooltipShopSingleU4, tooltipShopSingleU5,
     ];
 
     const shop_unlockables_name = [
-        "firstShopSingle", "secondShopSingle", "thirdShopSingle",
+        "firstShopSingle", "secondShopSingle", "thirdShopSingle", "fourthShopSingle", "fifthShopSingle",
     ];
     
-    for (let i = 0; i < 3; i++){
+    for (let i = 0; i < 5; i++){
         const id = i+1
         shop_unlockables[i].innerHTML = i18next.t(shop_unlockables_name[i], {
             cost: !player.shop.unlockables.includes(id) ? i18next.t('shop_cost', {
@@ -763,14 +853,14 @@ function loadTranslations() {
     }
 
     const shop_items = [
-        tooltipshopItem1, tooltipshopItem2, tooltipshopItem3, tooltipshopItem4,
+        tooltipshopItem1, tooltipshopItem2, tooltipshopItem3, tooltipshopItem4, tooltipshopItem5, tooltipshopItem6
     ];
 
     const shop_items_name = [
-        "firstShopItem", "secondShopItem", "thirdShopItem", "fourthShopItem",
+        "firstShopItem", "secondShopItem", "thirdShopItem", "fourthShopItem", "fifthShopItem", "sixthShopItem",
     ];
     
-    for (let i = 0; i < 4; i++){
+    for (let i = 0; i < 6; i++){
         const id = i+1
         shop_items[i].innerHTML = i18next.t(shop_items_name[i], {
             amount: player.shop.items.amount[id],
@@ -821,8 +911,8 @@ function loadTranslations() {
         dailyHours: formatNumber(player.time.real.daily.hours)
     });
 
-    for (let i = 1; i < 17; i++) {
-        if (i < 12) {
+    for (let i = 1; i < 20; i++) {
+        if (i < 16) {
             window[`chapter${i}Tab`].innerHTML = i18next.t(`chapter${i}Name`);
             text.chapter[i] = i18next.t(`chapter${i}`);
         }
@@ -881,9 +971,9 @@ function loadTranslations() {
 
     superCrystalPour.innerHTML = UNL.supercrystal.pour()+'%'
 
-    tooltipMineral1.innerHTML = i18next.t('makeMineral', {x: formatNumber(UPGS.minerals[1].cost2())});
-    tooltipMineral2.innerHTML = i18next.t('makeMineral', {x: formatNumber(UPGS.minerals[2].cost2())});
-    tooltipMineral3.innerHTML = i18next.t('makeMineral', {x: formatNumber(UPGS.minerals[3].cost2())});
+    tooltipMineral1.innerHTML = i18next.t('makeMineral', {y: formatNumber(UPGS.minerals[1].bulk().bulk1), x: formatNumber(UPGS.minerals[1].bulk().bulk2)});
+    tooltipMineral2.innerHTML = i18next.t('makeMineral', {y: formatNumber(UPGS.minerals[2].bulk().bulk1), x: formatNumber(UPGS.minerals[2].bulk().bulk2)});
+    tooltipMineral3.innerHTML = i18next.t('makeMineral', {y: formatNumber(UPGS.minerals[3].bulk().bulk1), x: formatNumber(UPGS.minerals[3].bulk().bulk2)});
 
     mineral1Desc.innerHTML = i18next.t('mineral1', {
         x: formatNumber(player.minerals[1]), 
@@ -908,6 +998,7 @@ function loadTranslations() {
     shardsCountForMinerals.innerHTML = i18next.t('shardsCountForMinerals', {x: formatNumber(player.shard.currency)})
 
     generateRunes.innerHTML = i18next.t('generateRunes', {x: formatNumber(UNL.rune.cost())})
+    generateRunesMax.innerHTML = i18next.t('generateRunesBulk', {x: formatNumber(UNL.rune.max_cost().cost), y: formatNumber(UNL.rune.max_cost().iter)})
 
     PROGRESS.name[0] = i18next.t('pbtitle1');
     PROGRESS.name[1] = i18next.t('pbtitle2');
@@ -915,13 +1006,15 @@ function loadTranslations() {
     PROGRESS.name[3] = i18next.t('pbtitle4');
     PROGRESS.name[4] = i18next.t('pbtitle5');
     PROGRESS.name[5] = i18next.t('pbtitle6');
+    PROGRESS.name[6] = i18next.t('pbtitle7');
 
     PROGRESS.currency[0] = i18next.t('pbcurrency1');
     PROGRESS.currency[1] = i18next.t('pbcurrency1');
     PROGRESS.currency[2] = i18next.t('pbcurrency1');
     PROGRESS.currency[3] = i18next.t('pbcurrency2');
-    PROGRESS.currency[4] = i18next.t('pbcurrency1');
-    PROGRESS.currency[5] = i18next.t('pbcurrency1');
+    PROGRESS.currency[4] = i18next.t('pbcurrency3');
+    PROGRESS.currency[5] = i18next.t('pbcurrency4');
+    PROGRESS.currency[6] = i18next.t('pbcurrency1');
 
     for (let i = 0; i < 12; i++){
         const id = i+1
@@ -976,11 +1069,59 @@ function loadTranslations() {
             else document.getElementsByClassName('realTimeTable')[i].innerHTML = i18next.t('realTimeTableMs', {
                 ms: formatNumber(player.prestige.prestigeTable[id].time.real.timer*1000)
             });
-        } 
+        }
+        document.getElementsByClassName('prestigesPerMinTable')[i].innerHTML = i18next.t('prestigesPerMinCountTable', {
+            x: formatNumber(player.prestige.prestigeTable[id].prestiges*60/player.prestige.prestigeTable[id].time.real.timer)
+        });
+        document.getElementsByClassName('crystalsPerMinTable')[i].innerHTML = i18next.t('crystalPerMinCountTable', {
+            x: formatNumber(player.prestige.prestigeTable[id].crystals*60/player.prestige.prestigeTable[id].time.real.timer)
+        });
     }
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 7; i++) {
         document.getElementsByClassName('tableTitle')[i].innerHTML = i18next.t(`titleTable${i+1}`);
+    }
+
+    document.getElementsByClassName('averageTable')[0].innerHTML = i18next.t(`averagePrestigesTitle`);
+    document.getElementsByClassName('averageTable')[1].innerHTML = i18next.t('prestigesCountTable', {
+        x: formatNumber(MISC.average.prestiges(), 'boost')
+    });
+    document.getElementsByClassName('averageTable')[2].innerHTML = i18next.t('crystalCountTable', {
+        x: formatNumber(MISC.average.crystals(), 'boost')
+    });
+
+    if (player.time.game.average.timer >= 1) 
+        document.getElementsByClassName('averageTable')[3].innerHTML = i18next.t('gameTimeTable', {
+            h: convertToTwoDigits(player.time.game.average.hours), 
+            m: convertToTwoDigits(player.time.game.average.minutes), 
+            s: convertToTwoDigits(player.time.game.average.seconds)
+        });
+        else document.getElementsByClassName('averageTable')[3].innerHTML = i18next.t('gameTimeTableMs', {
+            ms: formatNumber(player.time.game.average.timer*1000)
+        });
+    if (player.time.real.average.timer >= 1) 
+        document.getElementsByClassName('averageTable')[4].innerHTML = i18next.t('realTimeTable', {
+            h: convertToTwoDigits(player.time.real.average.hours), 
+            m: convertToTwoDigits(player.time.real.average.minutes), 
+            s: convertToTwoDigits(player.time.real.average.seconds)
+        });
+        else document.getElementsByClassName('averageTable')[4].innerHTML = i18next.t('realTimeTableMs', {
+            ms: formatNumber(player.time.real.average.timer*1000)
+        });
+    document.getElementsByClassName('averageTable')[5].innerHTML = i18next.t('prestigesPerMinCountTable', {
+        x: formatNumber(MISC.average.prestiges_per_min(), 'boost')
+    });
+    document.getElementsByClassName('averageTable')[6].innerHTML = i18next.t('crystalPerMinCountTable', {
+        x: formatNumber(MISC.average.crystals_per_min(), 'boost')
+    });
+
+    for (let i = 1; i <= 10; i++) {
+        document.getElementsByClassName('shardAchBarGhostProgress')[i-1].innerHTML = i18next.t(`shardAchBar${i}`, {
+            completed: formatNumber(player.shard.achievements[i]),
+            current: formatNumber(UNL.shard_achievements[i].current(), 'boost'),
+            goal: formatNumber(UNL.shard_achievements[i].goal(), 'boost'),
+            effect: formatNumber(UNL.shard_achievements[i].effect(), 'boost')
+        });
     }
 
     autosaveSlider.innerHTML = i18next.t('autoSaveSlider', {x: mySlider.value/1000 < 1 ? formatNumber(JSON.parse(mySlider.value/1000), 'boost') : formatNumber(JSON.parse(mySlider.value/1000))});
@@ -1040,9 +1181,15 @@ function checkCode(id=999) {
     case 6:
         player.shop.items.amount[3] += 5
         break;
+    case 9:
+        player.shop.items.amount[3] += 5
+        break;
     case 7:
         player.supercoin.currency += 128
         player.supercoin.total_currency += 128
+        break;
+    case 8: 
+        player.shop.items.amount[4] += 1
         break;
     default:
         return 1
@@ -1055,6 +1202,7 @@ function readCode() {
         text.code.name_of_code = codeInput.value
         if (player.code.activated.includes(codeInput.value)) {
             whichCode.innerHTML = text.code.used_code
+            
         }
         else {
             let number = checkCode(id)
@@ -1070,5 +1218,6 @@ function readCode() {
             }
         }
     }
+    else whichCode.innerHTML = text.code.wrong_code
     openWindow('code', true)
 }

@@ -86,10 +86,12 @@ const UPGS = {
                     let cost = this.basePrice*Math.pow(this.power, x)
                     if (player.challenge.activated == 5) cost = this.basePrice*Math.pow(this.power, y)
                     if (player.challenge.activated == 0 && player.challenge.completed.includes(5)) cost = Math.pow(this.basePrice*Math.pow(this.power, x), CHALL[5].effect())
+                    if (player.prestige.super.buyables[4]) cost /= UPGS.prestige.super.buyables[4].effect()
+                    if (ACHS.has(47)) cost *= 0.96
                     return cost
                 },
                 unl_super() {return player.coin.superUpgrades.includes(this.super_id)},
-                cost_super() { return 500 },
+                cost_super() { return 100 },
                 effect(x=player.coin.upgrades[this.id] + MISC.free_upgrade[this.id]()) {
                     let eff = x
                     eff *= UPGS.coin.buyables[2].effect()
@@ -117,11 +119,12 @@ const UPGS = {
                     let cost = this.basePrice*Math.pow(this.power, x)
                     if (player.challenge.activated == 5) cost = this.basePrice*Math.pow(this.power, y)
                     if (player.challenge.activated == 0 && player.challenge.completed.includes(5)) cost = Math.pow(this.basePrice*Math.pow(this.power, x), CHALL[5].effect())
+                    if (player.prestige.super.buyables[4]) cost /= UPGS.prestige.super.buyables[4].effect()
                     return cost
                 },
                 unl_super() {return player.coin.superUpgrades.includes(this.super_id)},
-                cost_super() { return 750 },
-                effect(x=player.coin.upgrades[this.id]) {
+                cost_super() { return 250 },
+                effect(x=player.coin.upgrades[this.id] + MISC.free_upgrade[this.id]()) {
                     let eff = 1+x/10
                     if (player.coin.singleUpgrades.includes(14)) eff *= UPGS.coin.singles[14].effect()
                     if (player.achievements.includes(16)) eff *= 1.1
@@ -156,10 +159,11 @@ const UPGS = {
                     let cost = this.basePrice*Math.pow(this.power, x)
                     if (player.challenge.activated == 5) cost = this.basePrice*Math.pow(this.power, y)
                     if (player.challenge.activated == 0 && player.challenge.completed.includes(5)) cost = Math.pow(this.basePrice*Math.pow(this.power, x), CHALL[5].effect())
+                    if (player.prestige.super.buyables[4]) cost /= UPGS.prestige.super.buyables[4].effect()
                     return cost
                 },
                 unl_super() {return player.coin.superUpgrades.includes(this.super_id)},
-                cost_super() { return 1000 },
+                cost_super() { return 500 },
                 effect(x=player.coin.upgrades[this.id]) {
                     let eff = Math.pow(2, x)
                     return eff
@@ -186,10 +190,11 @@ const UPGS = {
                     let cost = this.basePrice*Math.pow(this.power, x)
                     if (player.challenge.activated == 5) cost = this.basePrice*Math.pow(this.power, y)
                     if (player.challenge.activated == 0 && player.challenge.completed.includes(5)) cost = Math.pow(this.basePrice*Math.pow(this.power, x), CHALL[5].effect())
+                    if (player.prestige.super.buyables[4]) cost /= UPGS.prestige.super.buyables[4].effect()
                     return cost
                 },
                 unl_super() {return player.coin.superUpgrades.includes(this.super_id)},
-                cost_super() { return 1250 },
+                cost_super() { return 750 },
                 effect(x=player.coin.upgrades[this.id] +  MISC.free_upgrade[this.id]()) {
                     let base = player.prestige.singleUpgrades.includes(22) ? 1.075 : 1.05, eff = Math.pow(base, x)
                     if (player.coin.singleUpgrades.includes(15)) eff *= UPGS.coin.singles[15].effect()
@@ -218,13 +223,13 @@ const UPGS = {
                     let cost = this.basePrice*Math.pow(this.power, x)
                     if (player.challenge.activated == 5) cost = this.basePrice*Math.pow(this.power, y)
                     if (player.challenge.activated == 0 && player.challenge.completed.includes(5)) cost = Math.pow(this.basePrice*Math.pow(this.power, x), CHALL[5].effect())
+                    if (player.prestige.super.buyables[4]) cost /= UPGS.prestige.super.buyables[4].effect()
                     return cost
                 },
                 unl_super() {return player.coin.superUpgrades.includes(this.super_id)},
-                cost_super() { return 1500 },
+                cost_super() { return 1000 },
                 effect(x=player.coin.upgrades[this.id]) {
-                    let eff = 1+x/1000
-                    eff = softCap(eff, 1.15, 0.5)
+                    let eff = 1+x/2500
                     return eff
                 },
                 effect_super(x = this.unl_super()) {
@@ -304,10 +309,10 @@ const UPGS = {
                     return cost 
                 },
                 unl_super() {return player.coin.superUpgrades.includes(this.super_id)},
-                cost_super() { return 2000 },
+                cost_super() { return 1500 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1+(Math.log10(player.coin.total_currency+10)/2)
+                    let eff = 1+(Math.log10(player.coin.total_currency+10))
                     eff *= this.effect_super()
                     if (player.coin.singleUpgrades.includes(24)) eff = Math.pow(eff, UPGS.coin.singles[24].effect())
                     return eff
@@ -333,7 +338,7 @@ const UPGS = {
                     return cost 
                 },
                 unl_super() {return player.coin.superUpgrades.includes(this.super_id)},
-                cost_super() { return 2500 },
+                cost_super() { return 2000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
                     let eff = Math.log1p(Math.pow(Math.pow(player.clicks.simulated, 2), this.base()))
@@ -358,7 +363,7 @@ const UPGS = {
                     return cost 
                 },
                 unl_super() {return player.coin.superUpgrades.includes(this.super_id)},
-                cost_super() { return 5000 },
+                cost_super() { return 2500 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
                     let eff = 2
@@ -382,10 +387,10 @@ const UPGS = {
                     return cost 
                 },
                 unl_super() {return player.coin.superUpgrades.includes(this.super_id)},
-                cost_super() { return 7500 },
+                cost_super() { return 3000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1+Math.pow(Math.log10(player.coin.upgrades[1]+10)/2, 1.75)
+                    let eff = 1+Math.pow(Math.log10(player.coin.upgrades[1]+10)/2, 2)
                     if (player.coin.superUpgrades.includes(24)) eff *= this.effect_super()
                     return eff
                 },
@@ -407,10 +412,10 @@ const UPGS = {
                     return cost 
                 },
                 unl_super() {return player.coin.superUpgrades.includes(this.super_id)},
-                cost_super() { return 10000 },
+                cost_super() { return 4000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = Math.pow(Math.log10(player.coin.upgrades[4]+10), 1.3)
+                    let eff = Math.pow(Math.log10(player.coin.upgrades[4]+10), 1.5)
                     return eff
                 },
                 effect_super(x = this.unl_super() && this.unl()) {
@@ -431,10 +436,10 @@ const UPGS = {
                     return cost 
                 },
                 unl_super() {return player.coin.superUpgrades.includes(this.super_id)},
-                cost_super() { return 15000 },
+                cost_super() { return 5000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = Math.log10(GAIN.coin.click.effect()+10)/1.15
+                    let eff = Math.log10(GAIN.coin.click.effect()+10)*1.09
                     if (player.coin.superUpgrades.includes(31)) eff *= this.effect_super()
                     return eff
                 },
@@ -456,11 +461,12 @@ const UPGS = {
                     return cost 
                 },
                 unl_super() {return player.coin.superUpgrades.includes(this.super_id)},
-                cost_super() { return 25000 },
+                cost_super() { return 7500 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = Math.pow(MISC.amount_of_upgrades.coin()+10, 0.75)/2
+                    let eff = Math.pow(MISC.amount_of_upgrades.coin()+10, 0.8)/1.75
                     if (player.achievements.includes(17)) eff *= 1 + (0.2 * player.time.game.total.timer/86400)
+                    if (player.prestige.super.singles.includes(21)) eff *= UPGS.prestige.super.singles[21].effect()
                     return !player.prestige.singleUpgrades.includes(23) ? Math.min(eff, 100) : softCap(eff, this.softcap_start(), 0.5)
                 },
                 effect_super(x = this.unl_super() && this.unl()) {
@@ -484,7 +490,7 @@ const UPGS = {
                     return cost 
                 },
                 unl_super() {return player.coin.superUpgrades.includes(this.super_id)},
-                cost_super() { return 50000 },
+                cost_super() { return 10000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
                     let eff = Math.pow(player.achievements.length * 50, 0.4)
@@ -509,7 +515,7 @@ const UPGS = {
                     return cost 
                 },
                 unl_super() {return player.coin.superUpgrades.includes(this.super_id)},
-                cost_super() { return 100000 },
+                cost_super() { return 15000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
                     let eff = 1 + (player.time.game.total.timer/1200000)
@@ -518,7 +524,7 @@ const UPGS = {
                 },
                 effect_super(x = this.unl_super() && this.unl()) {
                     if (x == 0) return 1
-                    let eff = 2 //hardcap till 2.5 (?)
+                    let eff = 1.6 //hardcap till 2.5 (?)
                     return eff
                 },
             },
@@ -534,7 +540,7 @@ const UPGS = {
                     return cost 
                 },
                 unl_super() {return player.coin.superUpgrades.includes(this.super_id)}, //unlocks 2 ach rewards
-                cost_super() { return 250000 },
+                cost_super() { return 25000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
                     let eff = 1.5
@@ -598,7 +604,7 @@ const UPGS = {
             },
             2: {
                 id: 2, 
-                power: 400,
+                power: 500,
                 basePrice: 20,
                 element: document.getElementById('pBuyableU2'),
                 cost(x=player.prestige.upgrades[this.id]) {
@@ -660,6 +666,7 @@ const UPGS = {
                 effect(x = this.unl()) {
                     if (x == 0) return 1
                     let eff = Math.pow(Math.log10(player.time.game.total.timer+10), 0.02)
+                    if (player.shard.achievements[6]) eff *= UNL.shard_achievements[6].effect()
                     return eff
                 },
             },
@@ -670,7 +677,7 @@ const UPGS = {
                 cost(){ return 2 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1.75
+                    let eff = 1.5
                     return eff
                 },
             },
@@ -817,7 +824,284 @@ const UPGS = {
                     return eff
                 },
             },
-        }
+        },
+        super: {
+            buyables: {
+                canAfford(x) {
+                    if (player.prestige.currency >= this[x].cost()) return true
+                    return false
+                },
+                buy(x) {
+                    if (this.canAfford(x)) {
+                        player.prestige.currency -= this[x].cost()
+                        player.prestige.super.buyables[x]++
+                    }
+                },
+                buyMax() {
+                    for (let x = 1; x <= 5; x++) {
+                        this.max(x)
+                    }
+                },
+                max(x) {
+                    if (this.canAfford(x)) {
+                        let bulk = this[x].bulk()
+                            player.prestige.currency -= totalCost(bulk, this[x].cost(), this[x].power)
+                            player.prestige.super.buyables[x] += bulk
+                    }
+                },
+                bulk_cost(x) {
+                    if (this.canAfford(x)) {
+                        let bulk = this[x].bulk()
+                        return totalCost(bulk, this[x].cost(), this[x].power)
+                    }
+                    else return this[x].cost()
+                },
+                disable(x) {
+                    this.canAfford(x) ? this[x].element.disabled = false : this[x].element.disabled = true
+                },
+                checkDisable() {
+                    for (let x = 1; x <= 5; x++) {
+                        this.disable(x)
+                    }
+                },
+                1: {
+                    id: 1, 
+                    power: 10.3,
+                    basePrice: 1e13,
+                    element: document.getElementById('superPBuyableU1'),
+                    cost(x=player.prestige.super.buyables[this.id]) {
+                        let cost = this.basePrice*Math.pow(this.power, x)
+                        return cost
+                    },
+                    effect(x=player.prestige.super.buyables[this.id]) {
+                        let eff = x*0.0015
+                        eff *= UPGS.prestige.super.buyables[2].effect()
+                        return eff
+                    },
+                    bulk(x=player.prestige.currency, y=player.prestige.super.buyables[this.id]){
+                        let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power)
+                        !player.settings.superprestige_buy_max_activate ? bulk = 1 : bulk
+                        return bulk
+                    }
+                },
+                2: {
+                    id: 2, 
+                    power: 25,
+                    basePrice: 1e15,
+                    element: document.getElementById('superPBuyableU2'),
+                    cost(x=player.prestige.super.buyables[this.id]) {
+                        let cost = this.basePrice*Math.pow(this.power, x)
+                        return cost
+                    },
+                    effect(x=player.prestige.super.buyables[this.id]) {
+                        let eff = 1+x/4
+                        return eff
+                    },
+                    bulk(x=player.prestige.currency, y=player.prestige.super.buyables[this.id]){
+                        let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power)
+                        !player.settings.superprestige_buy_max_activate ? bulk = 1 : bulk
+                        return bulk
+                    }
+                },
+                3: {
+                    id: 3, 
+                    power: 80,
+                    basePrice: 5e17,
+                    element: document.getElementById('superPBuyableU3'),
+                    cost(x=player.prestige.super.buyables[this.id]) {
+                        let cost = this.basePrice*Math.pow(this.power, x)
+                        return cost
+                    },
+                    effect(x=player.prestige.super.buyables[this.id]) {
+                        let eff = Math.pow(3, x)
+                        return eff
+                    },
+                    bulk(x=player.prestige.currency, y=player.prestige.super.buyables[this.id]){
+                        let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power)
+                        !player.settings.superprestige_buy_max_activate ? bulk = 1 : bulk
+                        return bulk
+                    }
+                },
+                4: {
+                    id: 4, 
+                    power: 17,
+                    basePrice: 1e20,
+                    element: document.getElementById('superPBuyableU4'),
+                    cost(x=player.prestige.super.buyables[this.id]) {
+                        let cost = this.basePrice*Math.pow(this.power, x)
+                        return cost
+                    },
+                    effect(x=player.prestige.super.buyables[this.id]) {
+                        let eff = Math.pow(1.5, x)
+                        return eff
+                    },
+                    bulk(x=player.prestige.currency, y=player.prestige.super.buyables[this.id]){
+                        let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power)
+                        !player.settings.superprestige_buy_max_activate ? bulk = 1 : bulk
+                        return bulk
+                    }
+                },
+                5: {
+                    id: 5, 
+                    power: 1000,
+                    basePrice: 5e22,
+                    element: document.getElementById('superPBuyableU5'),
+                    cost(x=player.prestige.super.buyables[this.id]) {
+                        let cost = this.basePrice*Math.pow(this.power, x)
+                        return cost
+                    },
+                    effect(x=player.prestige.super.buyables[this.id]) {
+                        let eff = x/10000
+                        return eff
+                    },
+                    bulk(x=player.prestige.currency, y=player.prestige.super.buyables[this.id]){
+                        let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power)
+                        !player.settings.superprestige_buy_max_activate ? bulk = 1 : bulk
+                        return bulk
+                    }
+                },
+            },
+            singles: {
+                canAfford(x) {
+                    return player.prestige.currency >= this[x].cost() && !player.prestige.super.singles.includes(x)
+                },
+                buy(x) {
+                    if (this.canAfford(x)) {
+                        player.prestige.currency -= this[x].cost()
+                        player.prestige.super.singles.push(x)
+                    }
+                },
+                disable(x) {
+                    this.canAfford(x) || player.prestige.super.singles.includes(x) ? this[x].element.disabled = false : this[x].element.disabled = true
+                },
+                checkDisable() {
+                    for (let x = 1; x <= 2; x++)
+                        for (let y = 1; y <= 5; y++) {
+                            this.disable(x*10+y)
+                        }
+                },
+                checkPurchased() {
+                    for (let x = 1; x <= 2; x++)
+                        for (let y = 1; y <= 5; y++) {
+                        const id = x*10+y
+                            if (this[id].unl()) this[id].element.classList.add('purchased')
+                            else this[id].element.classList.remove('purchased')
+                        }
+                },
+                11: {
+                    id: 11, 
+                    element: document.getElementById('superPSingleU1'),
+                    unl() {return player.prestige.super.singles.includes(this.id)},
+                    cost(){ return 1e25 },
+                    effect(x = this.unl()) {
+                        if (x == 0) return 1
+                        let eff = 1+Math.log10(player.prestige.total_currency+1)/1.3
+                        return eff
+                    },
+                },
+                12: {
+                    id: 12, 
+                    element: document.getElementById('superPSingleU2'),
+                    unl() {return player.prestige.super.singles.includes(this.id)},
+                    cost(){ return 1e30 },
+                    effect(x = this.unl()) {
+                        if (x == 0) return 1
+                        let eff = 1+Math.sqrt(player.clicks.critical)/35
+                        return eff
+                    },
+                },
+                13: {
+                    id: 13,
+                    element: document.getElementById('superPSingleU3'),
+                    unl() {return player.prestige.super.singles.includes(this.id)},
+                    cost(){ return 1e35 },
+                    effect(x = this.unl()) {
+                        if (x == 0) return 1
+                        let eff = 6
+                        return eff
+                    },
+                },
+                14: {
+                    id: 14, 
+                    element: document.getElementById('superPSingleU4'),
+                    unl() {return player.prestige.super.singles.includes(this.id)},
+                    cost(){ return 1e40 },
+                    effect(x = this.unl()) {
+                        if (x == 0) return 0
+                        let eff = 1, timer = player.challenge.time[1].timer + player.challenge.time[2].timer + player.challenge.time[3].timer + player.challenge.time[4].timer + player.challenge.time[5].timer + player.challenge.time[6].timer + player.challenge.time[7].timer + player.challenge.time[8].timer + player.challenge.time[9].timer + player.challenge.time[10].timer + player.challenge.time[11].timer + player.challenge.time[12].timer
+                        eff = Math.pow(3600/timer, 0.575)
+                        return eff
+                    },
+                },
+                15: {
+                    id: 15, 
+                    element: document.getElementById('superPSingleU5'),
+                    unl() {return player.prestige.super.singles.includes(this.id)},
+                    cost(){ return 1e45 },
+                    effect(x = this.unl()) {
+                        if (x == 0) return 0
+                        let eff = MISC.free_upgrade.upower()
+                        return eff
+                    },
+                },
+                21: {
+                    id: 21, 
+                    element: document.getElementById('superPSingleU6'),
+                    unl() {return player.prestige.super.singles.includes(this.id)},
+                    cost(){ return 1e50 },
+                    effect(x = this.unl()) {
+                        if (x == 0) return 1
+                        let eff = Math.pow(1.8, player.supercrystal.total_currency)
+                        return eff
+                    },
+                },
+                22: {
+                    id: 22, 
+                    element: document.getElementById('superPSingleU7'),
+                    unl() {return player.prestige.super.singles.includes(this.id)},
+                    cost(){ return 1e60 },
+                    effect(x = this.unl()) {
+                        if (x == 0) return 1
+                        let eff = 1000
+                        return eff
+                    },
+                },
+                23: {
+                    id: 23, 
+                    element: document.getElementById('superPSingleU8'),
+                    unl() {return player.prestige.super.singles.includes(this.id)},
+                    cost(){ return 1e70 },
+                    effect(x = this.unl()) {
+                        if (x == 0) return 1
+                        let eff = 1+Math.log10(player.time.game.prestige.timer+1)/25
+                        return eff
+                    },
+                },
+                24: {
+                    id: 24, 
+                    element: document.getElementById('superPSingleU9'),
+                    unl() {return player.prestige.super.singles.includes(this.id)},
+                    cost(){ return 1e100 },
+                    effect(x = this.unl()) {
+                        if (x == 0) return 0
+                        let eff = 10
+                        return eff
+                    },
+                },
+                25: {
+                    id: 25, 
+                    element: document.getElementById('superPSingleU10'),
+                    unl() {return player.prestige.super.singles.includes(this.id)},
+                    cost(){ return 1e15 },
+                    effect(x = this.unl()) {
+                        if (x == 0) return 1
+                        let eff = 1
+                        return eff
+                    },
+                },
+            }
+        },
+
     },
     shard: {
         buyables: {
@@ -838,9 +1122,23 @@ const UPGS = {
                     this.disable(x)
                 }
             },
+            max(x) {
+                if (this.canAfford(x)) {
+                    let bulk = this[x].bulk()
+                        player.shard.currency -= totalCost(bulk, this[x].cost(), this[x].power)
+                        player.shard.upgrades[x] += bulk
+                }
+            },
+            bulk_cost(x) {
+                if (this.canAfford(x)) {
+                    let bulk = this[x].bulk()
+                    return totalCost(bulk, this[x].cost(), this[x].power)
+                }
+                else return this[x].cost()
+            },
             1: {
                 id: 1, 
-                power: 3.45,
+                power: 2.85,
                 basePrice: 1000,
                 element: document.getElementById('shBuyableU1'),
                 cost(x=player.shard.upgrades[this.id]) {
@@ -853,6 +1151,11 @@ const UPGS = {
                     if (player.shard.singleUpgrades.includes(12)) eff *= UPGS.shard.singles[12].effect()
                     return eff
                 },
+                bulk(x=player.shard.currency, y=player.shard.upgrades[this.id]){
+                    let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power)
+                    !player.settings.shard_buy_max_activate ? bulk = 1 : bulk
+                    return bulk
+                }
             },
             2: {
                 id: 2, 
@@ -869,10 +1172,15 @@ const UPGS = {
                     if (player.shard.singleUpgrades.includes(12)) eff *= UPGS.shard.singles[12].effect()
                     return eff
                 },
+                bulk(x=player.shard.currency, y=player.shard.upgrades[this.id]){
+                    let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power)
+                    !player.settings.shard_buy_max_activate ? bulk = 1 : bulk
+                    return bulk
+                }
             },
             3: {
                 id: 3, 
-                power: 10,
+                power: 20,
                 basePrice: 5000,
                 element: document.getElementById('shBuyableU3'),
                 cost(x=player.shard.upgrades[this.id]) {
@@ -885,14 +1193,19 @@ const UPGS = {
                     min = Math.pow(2, x)
                     max = Math.pow(1.9, x)
                     if (player.shard.singleUpgrades.includes(12)) {
-                    min *= UPGS.shard.singles[12].effect()
-                    max *= UPGS.shard.singles[12].effect()
+                        min *= UPGS.shard.singles[12].effect()
+                        max *= UPGS.shard.singles[12].effect()
                     }
                     return {
                         min,
                         max
                     }
                 },
+                bulk(x=player.shard.currency, y=player.shard.upgrades[this.id]){
+                    let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power)
+                    !player.settings.shard_buy_max_activate ? bulk = 1 : bulk
+                    return bulk
+                }
             },
         },
         singles: {
@@ -929,7 +1242,7 @@ const UPGS = {
                 cost(){ return 250000 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1 + Math.log10(player.shard.currency+10)/2
+                    let eff = 1 + Math.pow(Math.log10(player.shard.currency+10), 2)
                     return eff
                 },
             },
@@ -940,7 +1253,7 @@ const UPGS = {
                 cost(){ return 1e7 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1 + Math.pow(player.prestige.broken_currency, 0.16)
+                    let eff = 1 + Math.log(player.prestige.broken_currency+10)
                     return eff
                 },
             },
@@ -951,7 +1264,7 @@ const UPGS = {
                 cost(){ return 1e10 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1 + Math.pow(player.prestige.currency, 0.24)
+                    let eff = 1 + Math.log10(player.prestige.currency+1)*1.5
                     return eff
                 },
             },
@@ -962,7 +1275,8 @@ const UPGS = {
                 cost(){ return 1e15 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1 + (Math.log10(Math.log10(player.shard.currency+10)+10)/10.5)
+                    let eff = 1 + (Math.log10(Math.log10(player.shard.currency+10)+10)/9)
+                    if (ACHS.has(48)) eff *= 1.04
                     return eff
                 },
             },
@@ -973,7 +1287,7 @@ const UPGS = {
                 cost(){ return 1e100 },
                 effect(x = this.unl()) {
                     if (x == 0) return 1
-                    let eff = 1 
+                    let eff = Math.pow(player.supercrystal.currency, 0.0075)
                     return eff
                 },
             },
@@ -1025,7 +1339,7 @@ const UPGS = {
                 }
             },
             respec() {
-                    for (let x = 1; x <= 5; x++) {
+                    for (let x = 1; x <= 7; x++) {
                         this.reset(x)
                     }
                     player.supercoin.currency += player.supercoin.spent_currency
@@ -1035,7 +1349,7 @@ const UPGS = {
                 this.canAfford(x) || player.shop.upgrades[x] == this[x].maxAmount ? this[x].element.disabled = false : this[x].element.disabled = true
             },
             checkDisable() {
-                for (let x = 1; x <= 5; x++) {
+                for (let x = 1; x <= 7; x++) {
                     this.disable(x)
                 }
             },
@@ -1049,6 +1363,10 @@ const UPGS = {
                 return this.basePrice*Math.pow(this.power, x)
                 },
                 effect(x=player.shop.upgrades[this.id]) {
+                    let eff = 1+x/50
+                    return eff
+                },
+                next_effect(x=player.shop.upgrades[this.id] + this.bulk()) {
                     let eff = 1+x/50
                     return eff
                 },
@@ -1074,6 +1392,10 @@ const UPGS = {
                     let eff = 1+x/50
                     return eff
                 },
+                next_effect(x=player.shop.upgrades[this.id] + this.bulk()) {
+                    let eff = 1+x/50
+                    return eff
+                },
                 bulk(x=player.supercoin.currency, y=player.shop.upgrades[this.id]){
                     let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power) //10
                     let bulkBuyAmount = parseInt(shopBulkBuyInput.value), maxBulk = this.maxAmount-y, finalBulk = 0; //20, 100-70, 0
@@ -1093,6 +1415,10 @@ const UPGS = {
                 return this.basePrice*Math.pow(this.power, x)
                 },
                 effect(x=player.shop.upgrades[this.id]) {
+                    let eff = 1+x/66.666666
+                    return eff
+                },
+                next_effect(x=player.shop.upgrades[this.id] + this.bulk()) {
                     let eff = 1+x/66.666666
                     return eff
                 },
@@ -1118,6 +1444,10 @@ const UPGS = {
                     let eff = 1+x/100
                     return eff
                 },
+                next_effect(x=player.shop.upgrades[this.id] + this.bulk()) {
+                    let eff = 1+x/100
+                    return eff
+                },
                 bulk(x=player.supercoin.currency, y=player.shop.upgrades[this.id]){
                     let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power) //10
                     let bulkBuyAmount = parseInt(shopBulkBuyInput.value), maxBulk = this.maxAmount-y, finalBulk = 0; //20, 100-70, 0
@@ -1138,6 +1468,62 @@ const UPGS = {
                 },
                 effect(x=player.shop.upgrades[this.id]) {
                     let eff = 1+x/2.5
+                    return eff
+                },
+                next_effect(x=player.shop.upgrades[this.id] + this.bulk()) {
+                    let eff = 1+x/2.5
+                    return eff
+                },
+                bulk(x=player.supercoin.currency, y=player.shop.upgrades[this.id]){
+                    let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power) //10
+                    let bulkBuyAmount = parseInt(shopBulkBuyInput.value), maxBulk = this.maxAmount-y, finalBulk = 0; //20, 100-70, 0
+                    isNaN(bulkBuyAmount) ? bulkBuyAmount = 1 : bulkBuyAmount
+                    bulkBuyAmount < maxBulk ? finalBulk = bulkBuyAmount : finalBulk = maxBulk //20 < 30 ? z = 20 (true) : z = 10 (false), it's false so z = 10
+                    if (finalBulk < bulk) bulk = finalBulk //20 < 10
+                    return bulk
+                }
+            },
+            6: {
+                id: 6, 
+                power: 1.075,
+                basePrice: 10,
+                maxAmount: 100,
+                element: document.getElementById('shopBuyableU6'),
+                cost(x=player.shop.upgrades[this.id]) {
+                return this.basePrice*Math.pow(this.power, x)
+                },
+                effect(x=player.shop.upgrades[this.id]) {
+                    let eff = 1+x/100
+                    return eff
+                },
+                next_effect(x=player.shop.upgrades[this.id]+this.bulk()) {
+                    let eff = 1+x/100
+                    return eff
+                },
+                bulk(x=player.supercoin.currency, y=player.shop.upgrades[this.id]){
+                    let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power) //10
+                    let bulkBuyAmount = parseInt(shopBulkBuyInput.value), maxBulk = this.maxAmount-y, finalBulk = 0; //20, 100-70, 0
+                    isNaN(bulkBuyAmount) ? bulkBuyAmount = 1 : bulkBuyAmount
+                    bulkBuyAmount < maxBulk ? finalBulk = bulkBuyAmount : finalBulk = maxBulk //20 < 30 ? z = 20 (true) : z = 10 (false), it's false so z = 10
+                    if (finalBulk < bulk) bulk = finalBulk //20 < 10
+                    return bulk
+                }
+            },
+            7: {
+                id: 7, 
+                power: 1.5,
+                basePrice: 15,
+                maxAmount: 20,
+                element: document.getElementById('shopBuyableU7'),
+                cost(x=player.shop.upgrades[this.id]) {
+                return this.basePrice*Math.pow(this.power, x)
+                },
+                effect(x=player.shop.upgrades[this.id]) {
+                    let eff = 1+x/10
+                    return eff
+                },
+                next_effect(x=player.shop.upgrades[this.id] + this.bulk()) {
+                    let eff = 1+x/10
                     return eff
                 },
                 bulk(x=player.supercoin.currency, y=player.shop.upgrades[this.id]){
@@ -1164,7 +1550,7 @@ const UPGS = {
                 this.canAfford(x) || player.shop.unlockables.includes(x) ? this[x].element.disabled = false : this[x].element.disabled = true
             },
             checkDisable() {
-                for (let x = 1; x <= 3; x++) {
+                for (let x = 1; x <= 5; x++) {
                     this.disable(x)
                 }
             },
@@ -1178,13 +1564,25 @@ const UPGS = {
                 id: 2, 
                 element: document.getElementById('shopSingleU2'),
                 unl() { return player.shop.unlockables.includes(this.id) },
-                cost() { return 2000 },
+                cost() { return 1200 },
             },
             3: { //super-moderniz
                 id: 3, 
                 element: document.getElementById('shopSingleU3'),
                 unl() { return player.shop.unlockables.includes(this.id) },
-                cost() { return 2500 },
+                cost() { return 1000 },
+            },
+            4: { //trophy
+                id: 4, 
+                element: document.getElementById('shopSingleU4'),
+                unl() { return player.shop.unlockables.includes(this.id) },
+                cost() { return 1500 },
+            },
+            5: { //supercrystal watch
+                id: 5, 
+                element: document.getElementById('shopSingleU5'),
+                unl() { return player.shop.unlockables.includes(this.id) },
+                cost() { return 1000 },
             },
         },
         permanent: {
@@ -1201,7 +1599,7 @@ const UPGS = {
                 this.canAfford(x) || player.shop.permanentUpgrades[x] == this[x].maxAmount ? this[x].element.disabled = false : this[x].element.disabled = true
             },
             checkDisable() {
-                for (let x = 1; x <= 4; x++) {
+                for (let x = 1; x <= 7; x++) {
                     this.disable(x)
                 }
             },
@@ -1210,11 +1608,15 @@ const UPGS = {
                 power: 1.25,
                 basePrice: 10,
                 maxAmount: 25,
-                element: document.getElementById('shopBuyableU6'),
+                element: document.getElementById('shopPermanentU1'),
                 cost(x=player.shop.permanentUpgrades[this.id]) {
                 return this.basePrice*Math.pow(this.power, x)
                 },
                 effect(x=player.shop.permanentUpgrades[this.id]) {
+                    let eff = 1+x/25
+                    return eff
+                },
+                next_effect(x=player.shop.permanentUpgrades[this.id]+1) {
                     let eff = 1+x/25
                     return eff
                 },
@@ -1224,7 +1626,7 @@ const UPGS = {
                 power: 2,
                 basePrice: 100,
                 maxAmount: 5,
-                element: document.getElementById('shopBuyableU7'),
+                element: document.getElementById('shopPermanentU2'),
                 cost(x=player.shop.permanentUpgrades[this.id]) {
                 return this.basePrice*Math.pow(this.power, x)
                 },
@@ -1232,13 +1634,17 @@ const UPGS = {
                     let eff = 1+x/5
                     return eff
                 },
+                next_effect(x=player.shop.permanentUpgrades[this.id]+1) {
+                    let eff = 1+x/5
+                    return eff
+                },
             }, 
             3: { //crit chance
                 id: 3, 
-                power: 1.1,
+                power: 1.075,
                 basePrice: 10,
                 maxAmount: 100,
-                element: document.getElementById('shopBuyableU8'),
+                element: document.getElementById('shopPermanentU3'),
                 cost(x=player.shop.permanentUpgrades[this.id]) {
                 return this.basePrice*Math.pow(this.power, x)
                 },
@@ -1246,13 +1652,17 @@ const UPGS = {
                     let eff = x/50
                     return eff
                 },
+                next_effect(x=player.shop.permanentUpgrades[this.id]+1) {
+                    let eff = x/50
+                    return eff
+                },
             }, 
             4: { //crit multi
                 id: 4, 
-                power: 1.1025,
+                power: 1.085,
                 basePrice: 5,
                 maxAmount: 100,
-                element: document.getElementById('shopBuyableU9'),
+                element: document.getElementById('shopPermanentU4'),
                 cost(x=player.shop.permanentUpgrades[this.id]) {
                 return this.basePrice*Math.pow(this.power, x)
                 },
@@ -1260,8 +1670,67 @@ const UPGS = {
                     let eff = 1+x/10
                     return eff
                 },
+                next_effect(x=player.shop.permanentUpgrades[this.id]+1) {
+                    let eff = 1+x/10
+                    return eff
+                },
             }, 
-
+            5: { //crit multi
+                id: 5, 
+                power: 3.5,
+                basePrice: 1000,
+                maxAmount: 3,
+                element: document.getElementById('shopPermanentU5'),
+                cost(x=player.shop.permanentUpgrades[this.id]) {
+                return this.basePrice*Math.pow(this.power, x)
+                },
+                effect(x=player.shop.permanentUpgrades[this.id]) {
+                    if (x == 0) return 0
+                    let eff = Math.pow(2, x)
+                    return eff
+                },
+                next_effect(x=player.shop.permanentUpgrades[this.id]+1) {
+                    if (x == 0) return 0
+                    let eff = Math.pow(2, x)
+                    return eff
+                },
+            }, 
+            6: { //crit multi
+                id: 6, 
+                power: 1.3,
+                basePrice: 1250,
+                maxAmount: 5,
+                element: document.getElementById('shopPermanentU6'),
+                cost(x=player.shop.permanentUpgrades[this.id]) {
+                return this.basePrice*Math.pow(this.power, x)
+                },
+                effect(x=player.shop.permanentUpgrades[this.id]) {
+                    let eff = 0.5+0.05*x
+                    return eff
+                },
+                next_effect(x=player.shop.permanentUpgrades[this.id]+1) {
+                    let eff = 0.5+0.05*x
+                    return eff
+                },
+            }, 
+            7: { //crit multi
+                id: 7, 
+                power: 1.2,
+                basePrice: 1400,
+                maxAmount: 5,
+                element: document.getElementById('shopPermanentU7'),
+                cost(x=player.shop.permanentUpgrades[this.id]) {
+                return this.basePrice*Math.pow(this.power, x)
+                },
+                effect(x=player.shop.permanentUpgrades[this.id]) {
+                    let eff = 100*x
+                    return eff
+                },
+                next_effect(x=player.shop.permanentUpgrades[this.id]+1) {
+                    let eff = 100*x
+                    return eff
+                },
+            }, 
         },
         items: {
             canAfford(x) {
@@ -1277,7 +1746,7 @@ const UPGS = {
                 this.canAfford(x) || player.shop.items.amount[x] == this[x].maxAmount ? this[x].element.disabled = false : this[x].element.disabled = true
             },
             checkDisable() {
-                for (let x = 1; x <= 4; x++) {
+                for (let x = 1; x <= 6; x++) {
                     this.disable(x)
                 }
             },
@@ -1379,6 +1848,56 @@ const UPGS = {
                 },
                 effect() {
                     GAIN.offline_gain_time_warp(600)
+                }
+            }, 
+            5: { //free umulti
+                id: 5, 
+                maxAmount: 25,
+                element: document.getElementById('shopItem5'),
+                cost() { return 50 },
+                canUseItem(x=player.shop.items.amount[this.id], y=player.shop.items.used[this.id]) {
+                    if (x == 0 || y == this.maxAmount || player.challenge.activated != 0) return false
+                    else return true
+                },
+                useItem() {
+                    if (this.canUseItem()) {
+                        player.shop.items.amount[this.id]--
+                        player.shop.items.used[this.id]++
+                        this.effect()
+                        notify(text.notification.used_item + text.itemNames[this.id-1], "limegreen", "550px")
+                    }
+                    else if (player.shop.items.used[this.id] == this.maxAmount) {
+                        notify(text.notification.limit_item + this.maxAmount + " " + text.itemNames[this.id-1] + text.notification.limit_item_2, "red", "550px")
+                    }
+                    else notify(text.notification.dont_have_item + text.itemNames[this.id-1] + "!", "red", "550px")
+                },
+                effect() {
+                    player.coin.currency += player.coin.total_currency/1e25
+                }
+            }, 
+            6: { //free umulti
+                id: 6, 
+                maxAmount: 10,
+                element: document.getElementById('shopItem6'),
+                cost() { return 210 },
+                canUseItem(x=player.shop.items.amount[this.id], y=player.shop.items.used[this.id]) {
+                    if (x == 0 || y == this.maxAmount || player.challenge.activated != 0) return false
+                    else return true
+                },
+                useItem() {
+                    if (this.canUseItem()) {
+                        player.shop.items.amount[this.id]--
+                        player.shop.items.used[this.id]++
+                        this.effect()
+                        notify(text.notification.used_item + text.itemNames[this.id-1], "limegreen", "550px")
+                    }
+                    else if (player.shop.items.used[this.id] == this.maxAmount) {
+                        notify(text.notification.limit_item + this.maxAmount + " " + text.itemNames[this.id-1] + text.notification.limit_item_2, "red", "550px")
+                    }
+                    else notify(text.notification.dont_have_item + text.itemNames[this.id-1] + "!", "red", "550px")
+                },
+                effect() {
+                    return 1
                 }
             }, 
         }
@@ -1505,7 +2024,7 @@ const UPGS = {
             unl() {return player.supercrystal.upgrades.includes(this.id)},
             cost(){ return 1 },
             effect(x=player.supercrystal.total_currency) {
-                let eff = Math.pow(10, x)
+                let eff = Math.pow(5, x)
                 return eff
             }
         },
@@ -1543,61 +2062,145 @@ const UPGS = {
         1: {
             id: 1, 
             element: document.getElementById('mineral1'),
-            cost1() { return 1 },
+            cost1(x=player.minerals[this.id]) { return 1+Math.floor(x/10) },
             cost2(x=player.minerals[this.id]) {
-                return 1e24*Math.pow(100, x)
+                return 1e21*Math.pow(100, x)*(Math.pow(1000, Math.floor(x/10)))
                 },
             effect1(x=player.minerals[this.id]) {
-                let eff = 1 + x/11
+                if (x == 0) return 1
+                let eff = 1 + Math.log10(x+1)/2.25
+                if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect()
+                if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect())
                 return eff
             },
             effect2(x=player.minerals[this.id]) {
-                let eff = 1 + x/1.95
+                if (x == 0) return 1
+                let eff = 1 + x/1.3
+                if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect()
+                if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect())
                 return eff
             },
             effect3(x=player.minerals[this.id]) {
-                let eff = 1 + x/9.33
+                if (x == 0) return 1
+                let eff = 1 + Math.log10(x+1)/1.75
+                if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect()
+                if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect())
                 return eff
+            },
+            bulk(x=player.minerals[this.id]){ //20; 5; 1+1+1+1+1+2+2+2+2+2+2+2=19
+                let bulk1 = 0, bulk2 = 0, cost = Math.min(100, player.settings.minerals_bulkbuy), it1 = 0, it2 = 0
+                for (let i = 0; i < cost; i++) {
+                    bulk1 += 1+Math.floor((x+i)/10) //1+1+1+1+1
+                    it1++
+                    if (bulk1+(1+Math.floor((x+i)/10)) > player.rune.currency) break
+                }
+                for (let i = 0; i < it1; i++) {
+                    bulk2 += 1e21*Math.pow(100, (x+i))*(Math.pow(1000, Math.floor((x+i)/10))) //1+1+1+1+1
+                    it2++
+                    if (1e21*Math.pow(100, (x+i+1))*(Math.pow(1000, Math.floor((x+i+1)/10))) > player.shard.currency) break
+                }
+                let iter = Math.min(it1, it2)
+                return {
+                    bulk1,
+                    bulk2,
+                    iter
+                }
             },
         },
         2: {
             id: 2,  
             element: document.getElementById('mineral2'),
-            cost1() { return 1 },
+            cost1(x=player.minerals[this.id]) { return 1+Math.floor(x/10) },
             cost2(x=player.minerals[this.id]) {
-                return 1e24*Math.pow(100, x)
+                return 1e21*Math.pow(100, x)*(Math.pow(1000, Math.floor(x/10)))
                 },
             effect1(x=player.minerals[this.id]) {
-                let eff = 1 + Math.pow(x*8, 2.8)
+                if (x == 0) return 1
+                let eff = 1 + Math.pow(x*8, 2.5)
+                if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect()
+                if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect())
                 return eff
             },
             effect2(x=player.minerals[this.id]) {
-                let eff = Math.pow(30, x/1.525) 
+                if (x == 0) return 1
+                let eff = Math.pow(9, x/1.525)
+                if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect() 
+                if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect())
                 return eff
             },
             effect3(x=player.minerals[this.id]) {
+                if (x == 0) return 0
                 let eff = Math.pow(x*15, 2.215)
+                if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect()
+                if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect())
                 return eff
+            },
+            bulk(x=player.minerals[this.id]){ //20; 5; 1+1+1+1+1+2+2+2+2+2+2+2=19
+                let bulk1 = 0, bulk2 = 0, cost = Math.min(100, player.settings.minerals_bulkbuy), it1 = 0, it2 = 0
+                for (let i = 0; i < cost; i++) {
+                    bulk1 += 1+Math.floor((x+i)/10) //1+1+1+1+1
+                    it1++
+                    if (bulk1+(1+Math.floor((x+i)/10)) > player.rune.currency) break
+                }
+                for (let i = 0; i < it1; i++) {
+                    bulk2 += 1e21*Math.pow(100, (x+i))*(Math.pow(1000, Math.floor((x+i)/10))) //1+1+1+1+1
+                    it2++
+                    if (1e21*Math.pow(100, (x+i+1))*(Math.pow(1000, Math.floor((x+i+1)/10))) > player.shard.currency) break
+                }
+                let iter = Math.min(it1, it2)
+                return {
+                    bulk1,
+                    bulk2,
+                    iter
+                }
             },
         },
         3: {
             id: 3,  
             element: document.getElementById('mineral3'),
-            cost1() { return 1 },
+            cost1(x=player.minerals[this.id]) { return 1+Math.floor(x/10) },
             cost2(x=player.minerals[this.id]) {
-                return 1e24*Math.pow(100, x)
+                return 1e21*Math.pow(100, x)*(Math.pow(1000, Math.floor(x/10)))
                 },
             effect1(x=player.minerals[this.id]) {
-                let eff = Math.pow(1.75, x/1.75)
+                if (x == 0) return 1
+                let eff = Math.pow(2, x/1.6)
+                if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect()
+                if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect())
                 return eff
             },
             effect2(x=player.minerals[this.id]) {
-                let eff = Math.pow(3, x/1.65)
+                if (x == 0) return 1
+                let eff = Math.pow(3, x/1.5)
+                if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect()
+                if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect())
                 return eff
             },
             effect3(x=player.minerals[this.id]) {
-                let eff = Math.pow(2, x/2.1)
+                if (x == 0) return 1
+                let eff = Math.pow(2, x/3.5)
+                if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect()
+                if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect())
                 return eff
+            },
+            bulk(x=player.minerals[this.id]){ //20; 5; 1+1+1+1+1+2+2+2+2+2+2+2=19
+                let bulk1 = 0, bulk2 = 0, cost = Math.min(100, player.settings.minerals_bulkbuy), it1 = 0, it2 = 0
+                for (let i = 0; i < cost; i++) {
+                    bulk1 += 1+Math.floor((x+i)/10) //1+1+1+1+1
+                    it1++
+                    if (bulk1+(1+Math.floor((x+i)/10)) > player.rune.currency) break
+                }
+                for (let i = 0; i < it1; i++) {
+                    bulk2 += 1e21*Math.pow(100, (x+i))*(Math.pow(1000, Math.floor((x+i)/10))) //1+1+1+1+1
+                    it2++
+                    if (1e21*Math.pow(100, (x+i+1))*(Math.pow(1000, Math.floor((x+i+1)/10))) > player.shard.currency) break
+                }
+                let iter = Math.min(it1, it2)
+                return {
+                    bulk1,
+                    bulk2,
+                    iter
+                }
             },
         },
     }
@@ -1685,9 +2288,17 @@ shopBuyableU4.addEventListener("click", function(){
 shopBuyableU5.addEventListener("click", function(){
     buyShopUpgrade(5);
 })
+shopBuyableU6.addEventListener("click", function(){
+    buyShopUpgrade(6);
+})
+shopBuyableU7.addEventListener("click", function(){
+    buyShopUpgrade(7);
+})
 
-function maxOrNo() {
-    player.settings.buy_max_activate ? player.settings.buy_max_activate = false : player.settings.buy_max_activate = true
+function maxOrNo(arg) {
+    if (arg == 'coin') player.settings.buy_max_activate ? player.settings.buy_max_activate = false : player.settings.buy_max_activate = true
+    else if (arg == 'shard') player.settings.shard_buy_max_activate ? player.settings.shard_buy_max_activate = false : player.settings.shard_buy_max_activate = true
+    else if (arg == 'superprestige') player.settings.superprestige_buy_max_activate ? player.settings.superprestige_buy_max_activate = false : player.settings.superprestige_buy_max_activate = true
 }
 
 const AUTO = {
@@ -1775,20 +2386,47 @@ const AUTO = {
         activate() {
             if (MISC.automation.prestige.time() != 50 || !MILESTONES.has(14)) LAYERS.prestige.doReset() 
             else {
-        if (player.settings.whichPrestigeMode == 'time') {
-                if (player.time.real.prestige.timer >= player.automation.conditions.prestige.time) {
-                    LAYERS.prestige.doReset() 
+                if (player.settings.whichPrestigeMode == 'time') {
+                    if (player.time.real.prestige.timer >= player.automation.conditions.prestige.time) {
+                        LAYERS.prestige.doReset() 
+                    }
                 }
-            }
-            else {
-                if (player.coin.currency >= player.automation.conditions.prestige.coins) {
-                    LAYERS.prestige.doReset() 
+                else if (player.settings.whichPrestigeMode == 'coins') {
+                    if (player.coin.currency >= player.automation.conditions.prestige.coins) {
+                        LAYERS.prestige.doReset() 
+                    }
                 }
-            }
+                else if (player.settings.whichPrestigeMode == 'prestige') {
+                    if (GAIN.prestige.reset() >= player.automation.conditions.prestige.prestige) {
+                        LAYERS.prestige.doReset() 
+                    }
+                }
+                else {
+                    if (GAIN.crystal.reset() >= player.automation.conditions.prestige.crystals) {
+                        LAYERS.prestige.doReset() 
+                    }
+                }
             }
         },
         time: 0
-    }
+    },
+    uadder: {
+        charge() {
+            if (!MISC.automation.uadder.charged) {
+                if (Date.now()+0 >= this.time) MISC.automation.uadder.charged = true
+            }
+            if (MISC.automation.uadder.charged) this.activate() 
+        },
+        activate() {
+            if (MISC.automation.uadder.time() != 50) LAYERS.uadder.doReset() 
+            else {
+                if (player.time.uadder >= player.automation.conditions.uadder.time && player.upowers >= player.automation.conditions.uadder.x_of_upower) {
+                    LAYERS.uadder.doReset()
+                }
+            }
+        },
+        time: 0
+    },
 }
 // MISC.automation.single.cost()
 function decreaseInterval(type) {
@@ -1797,39 +2435,52 @@ function decreaseInterval(type) {
         player.automation.upgrades[type]++
         if (type == 'single') {
             if (MISC.automation.single.interval != '') {
-                MISC.automation.single.interval = ''
                 clearInterval(MISC.automation.single.interval)
+                MISC.automation.single.interval = ''
                 MISC.automation.single.interval = setInterval(AUTO.single.charge(), 50); 
+                AUTO.single.time = MISC.automation.single.activateTime()
             }
         }
         if (type == 'buyable') {
             if (MISC.automation.buyable.interval != '') {
-                MISC.automation.buyable.interval = ''
                 clearInterval(MISC.automation.buyable.interval)
+                MISC.automation.buyable.interval = ''
                 MISC.automation.buyable.interval = setInterval(AUTO.buyable.charge(), 50); 
+                AUTO.buyable.time = MISC.automation.buyable.activateTime()
             }
         }       
         if (type == 'umultiplier') {
             if (MISC.automation.umultiplier.interval != '') {
-                MISC.automation.umultiplier.interval = ''
                 clearInterval(MISC.automation.umultiplier.interval)
+                MISC.automation.umultiplier.interval = ''
                 MISC.automation.umultiplier.interval = setInterval(AUTO.umultiplier.charge(), 50); 
+                AUTO.umultiplier.time = MISC.automation.umultiplier.activateTime()
             }
         }        
         if (type == 'upower') {
             if (MISC.automation.upower.interval != '') {
-                MISC.automation.upower.interval = ''
                 clearInterval(MISC.automation.upower.interval)
+                MISC.automation.upower.interval = ''
                 MISC.automation.upower.interval = setInterval(AUTO.upower.charge(), 50); 
+                AUTO.upower.time = MISC.automation.upower.activateTime()
             }
         }        
         if (type == 'prestige') {
             if (MISC.automation.prestige.interval != '') {
-                MISC.automation.prestige.interval = ''
                 clearInterval(MISC.automation.prestige.interval)
+                MISC.automation.prestige.interval = ''
                 MISC.automation.prestige.interval = setInterval(AUTO.prestige.charge(), 50); 
+                AUTO.prestige.time = MISC.automation.prestige.activateTime()
             }
         }
+        if (type == 'uadder') {
+            if (MISC.automation.uadder.interval != '') {
+                clearInterval(MISC.automation.uadder.interval)
+                MISC.automation.uadder.interval = ''
+                MISC.automation.uadder.interval = setInterval(AUTO.uadder.charge(), 50); 
+                AUTO.uadder.time = MISC.automation.uadder.activateTime()
+            }
+        }  
     }
 }
 function increaseBulkBuy(type) {
@@ -1889,28 +2540,45 @@ function increaseBulkBuy(type) {
         MISC.automation.prestige.interval = ''
         player.automation.checkbox.prestige = false 
         }});
+    autoUadderCheckbox.addEventListener('change', function() {
+        if (this.checked) { 
+            MISC.automation.uadder.interval = setInterval(()=>{AUTO.uadder.charge()}, 50); 
+            player.automation.checkbox.uadder = true
+        } 
+        else { 
+        clearInterval(MISC.automation.uadder.interval)
+        MISC.automation.uadder.interval = ''
+        player.automation.checkbox.uadder = false
+        }});
 
 function changePrestigeMode() {
-    if (player.settings.whichPrestigeMode == 'time') {
+    if (player.settings.whichPrestigeMode == 'crystals') {
         autoPrestigeMode.innerHTML = text.automation.coin_req //I18
         player.settings.whichPrestigeMode = 'coins'
         autoPrestigeInput.value = player.automation.conditions.prestige.coins
     }
-    else {
-        autoPrestigeMode.innerHTML = text.automation.prestige_req //I18
+    else if (player.settings.whichPrestigeMode == 'coins') {
+        autoPrestigeMode.innerHTML = text.automation.time_req //I18
         player.settings.whichPrestigeMode = 'time'
         autoPrestigeInput.value = player.automation.conditions.prestige.time
     }
-}
-
-function changeInputValue() {
-    if (player.settings.whichPrestigeMode == 'time') autoPrestigeInput.value = player.automation.conditions.prestige.time
-    else autoPrestigeInput.value = player.automation.conditions.prestige.coins
+    else if (player.settings.whichPrestigeMode == 'time') {
+        autoPrestigeMode.innerHTML = text.automation.prestige_req //I18
+        player.settings.whichPrestigeMode = 'prestige'
+        autoPrestigeInput.value = player.automation.conditions.prestige.prestige
+    }
+    else {
+        autoPrestigeMode.innerHTML = text.automation.crystal_req //I18
+        player.settings.whichPrestigeMode = 'crystals'
+        autoPrestigeInput.value = player.automation.conditions.prestige.crystals
+    }
 }
 
 autoPrestigeInput.addEventListener("blur", ()=>{
         if (player.settings.whichPrestigeMode == 'time' && autoPrestigeInput.value !='') player.automation.conditions.prestige.time = parseFloat(autoPrestigeInput.value)
         else if (player.settings.whichPrestigeMode == 'coins' && autoPrestigeInput.value != '') player.automation.conditions.prestige.coins = parseFloat(autoPrestigeInput.value)
+        else if (player.settings.whichPrestigeMode == 'prestige' && autoPrestigeInput.value != '') player.automation.conditions.prestige.prestige = parseFloat(autoPrestigeInput.value)
+        else if (player.settings.whichPrestigeMode == 'crystals' && autoPrestigeInput.value != '') player.automation.conditions.prestige.crystals = parseFloat(autoPrestigeInput.value)
         reautomate()
     });
 
@@ -1929,6 +2597,20 @@ autoUpowerInput2.addEventListener("blur", ()=>{
     uPowerReautomate()
 });
 
+autoUadderInput.addEventListener("blur", ()=>{
+    player.automation.conditions.uadder.time = parseFloat(autoUadderInput.value)
+    uAdderReautomate()
+});
+
+autoUadderInput2.addEventListener("blur", ()=>{
+    player.automation.conditions.uadder.x_of_upower = parseFloat(autoUadderInput2.value)
+    uAdderReautomate()
+});
+
+mineralsBulkInput.addEventListener("blur", ()=>{
+    player.settings.minerals_bulkbuy = parseFloat(mineralsBulkInput.value)
+});
+
 
 function reautomate() {
         if (MISC.automation.prestige.interval != ''){
@@ -1942,8 +2624,18 @@ function reautomate() {
                         LAYERS.prestige.doReset() 
                     }
                 }
-                else {
+                else if (player.settings.whichPrestigeMode == 'coins') {
                     if (player.coin.currency >= player.automation.conditions.prestige.coins) {
+                        LAYERS.prestige.doReset() 
+                    }
+                }
+                else if (player.settings.whichPrestigeMode == 'prestige') {
+                    if (GAIN.prestige.reset() >= player.automation.conditions.prestige.prestige) {
+                        LAYERS.prestige.doReset() 
+                    }
+                }
+                else {
+                    if (GAIN.crystal.reset() >= player.automation.conditions.prestige.crystals) {
                         LAYERS.prestige.doReset() 
                     }
                 }
@@ -1989,6 +2681,25 @@ function uPowerReautomate() {
         MISC.automation.upower.interval = ''
     }
     return MISC.automation.upower.interval
+}
+
+function uAdderReautomate() {
+    if (MISC.automation.uadder.interval){
+        clearInterval(MISC.automation.uadder.interval);
+        MISC.automation.uadder.interval = ''
+    }
+    if (autoUadderCheckbox.checked) {
+        MISC.automation.uadder.interval = setInterval(()=> {
+            if (player.time.uadder >= player.automation.conditions.uadder.time && player.upowers >= player.automation.conditions.uadder.x_of_upower) {
+                LAYERS.uadder.doReset()
+            }
+        }, 50)
+    }
+    else {
+        clearInterval(MISC.automation.uadder.interval);
+        MISC.automation.uadder.interval = ''
+    }
+    return MISC.automation.uadder.interval
 }
 
 howMuchCrystalsInput.addEventListener("keydown", function(event) {

@@ -7,7 +7,7 @@ const ACHS = {
     },
     has(id) { return player.achievements.includes(id) },
     cols: 10,
-    rows: 3,
+    rows: 4,
     checkRows() {
         for (let r = 1; r <= this.rows; r++) {
             const array = []
@@ -70,12 +70,25 @@ const ACHS = {
         // 38() { return }, //happens when c9 beat without upgrades
         39() { return GAIN.coin.click.effect() >= 4.20e69},
         40() { return UNL.overdrive.type1.percent() == 100},
+
+        41() { return player.prestige.super.singles.includes(25)},
+        42() { return player.uadders >= 1 && player.ureducers >= 1 && player.umultipliers >= 1 && player.upowers >= 1},
+        43() { return UNL.shard_achievements[10].current() >= 10},
+        44() { return player.coin.superUpgrades.length == 15},
+        45() { return player.supercoin.total_currency >= 10000},
+        46() { return player.challenge.activated == 8 && player.time.real.prestige.timer >= 28800},
+        // 47() { return }, c4 without clicks and other upgrades
+        48() { return player.shard.currency >= 1e100},
+        49() { return player.prestige.resets >= 1e8},
+        50() { return (player.uadders + player.ureducers + player.umultipliers + player.upowers) >= 100},
     },
     effect: {
         coin() {
             let eff = 1
             eff += player.achievements.length * 0.15 + player.achievement_rows.length * 3.3
             if (player.coin.singleUpgrades.includes(25)) eff = Math.pow(eff, UPGS.coin.singles[25].effect())
+            if (player.prestige.super.singles.includes(22)) eff *= UPGS.prestige.super.singles[22].effect()
+            if (player.shard.achievements[5]) eff *= UNL.shard_achievements[5].effect()
             return eff
         },
         crystal() {
@@ -83,6 +96,8 @@ const ACHS = {
             let eff = 1
             eff += player.achievements.length * 0.09 + player.achievement_rows.length * 1.3
             if (player.coin.singleUpgrades.includes(25)) eff = Math.pow(eff, UPGS.coin.singles[25].effect())
+            if (player.prestige.super.singles.includes(22)) eff *= UPGS.prestige.super.singles[22].effect()
+            if (player.shard.achievements[5]) eff *= UNL.shard_achievements[5].effect()
             return eff
         },
         shard() {
@@ -90,6 +105,8 @@ const ACHS = {
             let eff = 1
             eff += player.achievements.length * 0.225 + player.achievement_rows.length * 3.5
             if (player.coin.singleUpgrades.includes(25)) eff = Math.pow(eff, UPGS.coin.singles[25].effect())
+            if (player.prestige.super.singles.includes(22)) eff *= UPGS.prestige.super.singles[22].effect()
+            if (player.shard.achievements[5]) eff *= UNL.shard_achievements[5].effect()
             return eff
             
         }

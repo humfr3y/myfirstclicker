@@ -5,9 +5,9 @@ function upgradesPurchasableCustom(currentUpgrades, currencyAmount, costPerUpgra
 }
 
 function convert(input) {
-  const [base, exponent] = input.split("e");
-  const baseNum = parseFloat(base); // Преобразуем основание в число с плавающей точкой
-  return baseNum * 10 ** parseInt(exponent, 10); 
+    const [base, exponent] = input.split("e");
+    const baseNum = parseFloat(base); // Преобразуем основание в число с плавающей точкой
+    return baseNum * 10 ** parseInt(exponent, 10); 
 }
 
 function buyUpgrade(x) {
@@ -29,6 +29,20 @@ function buySingleUpgrade(x) {
 
 function buyShopUpgrade(x) {
             UPGS.shop.buyables.max(x)
+}
+
+function buyShardUpgrade(x) {
+        if (player.settings.shard_buy_max_activate) {
+            UPGS.shard.buyables.max(x)
+        }
+        else UPGS.shard.buyables.buy(x)
+}
+
+function buySuperprestigeUpgrade(x) {
+    if (player.settings.superprestige_buy_max_activate) {
+        UPGS.prestige.super.buyables.max(x)
+    }
+    else UPGS.prestige.super.buyables.buy(x)
 }
 
 function totalCost(numUpgrades, firstCost, ratio) {
@@ -101,19 +115,23 @@ function hidePiece2(condition, idOfPiece, idOfPiecePercent, summary, temp2) {
     }
 }
 
-function formatNumber(number, mode='number') { //average
+function findSum(a=0,b=0,c=0,d=0,e=0,f=0,g=0,h=0,i=0,j=0,k=0,l=0,m=0,n=0,o=0,p=0,q=0,r=0,s=0,t=0,u=0,v=0,w=0,x=0,y=0,z=0) {
+    return a+b+c+d+e+f+g+h+i+j+k+l+m+n+o+p+q+r+s+t+u+v+w+x+y+z
+}
+
+function formatNumber(number, mode='number', x=3) { //average
     switch (player.settings.notation) {
         case 'option1':
             if (number >= 1000) {
                 if (number < 1e33 ) {
-                    let standard = ['K','M','B','T','Qa','Qt','Sx','Sp','Oc','No','Dc']
+                    let standard = player.settings.currentLanguage == 'en' ? ['K','M','B','T','Qa','Qt','Sx','Sp','Oc','No','Dc'] : ['Тыс.','Mлн','Млрд','Трлн','Квдрлн','Квнтлн','Скс','Спт','Окт','Нон','Дц']
                     const index = Math.floor(Math.log10(number)/3)-1
                     const formula = number/Math.pow(10, (index+1)*3)
                     return formula.toFixed(2) + " " + standard[index]
                 }
                 else {
-                    let standard1 = ["", "Un", "Du", "Tr", "Qd", "Qt", "Sx", "Sp", "Oc", "No"]
-                    let standard2 = ["Dc", "Vg", "Tg", "Qg", "Qtg", "Sxg", "Spg", "Ocg", "Nog", "Ce"]
+                    let standard1 = player.settings.currentLanguage == 'en' ? ["", "Un", "Du", "Tr", "Qd", "Qt", "Sx", "Sp", "Oc", "No"] : ["", "Ун", "Ду", "Тр", "Квд", "Квнт", "Скс", "Сп", "Ок", "Но"]
+                    let standard2 = player.settings.currentLanguage == 'en' ? ["Dc", "Vg", "Tg", "Qg", "Qtg", "Sxg", "Spg", "Ocg", "Nog", "Ce"] : ["Дц", "Вг", "Трг", "Квдг", "Квнтг", "Сксг", "Сптг", "Октг", "Нонг", "Цен"]
                     const indexK = Math.floor(Math.log10(number/1000)/(30))-1 // k
                     const indexI = (Math.floor(Math.log10(number)/3)-1)-(10*(indexK+1))
                     const index = Math.floor(Math.log10(number)/3)
@@ -129,7 +147,7 @@ function formatNumber(number, mode='number') { //average
                         if (number < 100) return number.toFixed(2);
                         else return number.toFixed(0);
                     case 'power': 
-                        if (number < 10) return number.toFixed(3);
+                        if (number < 10) return number.toFixed(x);
                         else if (number >= 10 && number < 100) return number.toFixed(2);
                         else return number.toFixed(0);
                     case 'percent':
@@ -153,7 +171,7 @@ function formatNumber(number, mode='number') { //average
                             if (number < 100) return number.toFixed(2);
                             else return number.toFixed(0);
                         case 'power': 
-                            if (number < 10) return number.toFixed(3);
+                            if (number < 10) return number.toFixed(x);
                             else if (number >= 10 && number < 100) return number.toFixed(2);
                             else return number.toFixed(0);
                         case 'percent':
@@ -180,7 +198,7 @@ function formatNumber(number, mode='number') { //average
                         if (number < 100) return number.toFixed(2);
                         else return number.toFixed(0);
                     case 'power': 
-                        if (number < 10) return number.toFixed(3);
+                        if (number < 10) return number.toFixed(x);
                         else if (number >= 10 && number < 100) return number.toFixed(2);
                         else return number.toFixed(0);
                     case 'percent':
@@ -206,16 +224,17 @@ function formatNumber(number, mode='number') { //average
             return ""
         case 'option7':
             if (number >= 1000) {
-                if (number < 1e81 ) {
-                    let letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"//26
+                const num = player.settings.currentLanguage == 'en' ? 26 : 31
+                if (number < Math.pow(10, (3*num)+3)) {
+                    let letter = player.settings.currentLanguage == 'en' ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ" : "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЬЭЮЯ"
                     const index = Math.floor(Math.log10(number)/3)-1
                     const formula = number/Math.pow(10, (index+1)*3)
                     return formula.toFixed(2) + " " + letter[index]
                 }
                 else {
-                    let letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"//26
-                    const indexK = Math.floor(Math.log10(number/1000)/78)-1 // k
-                    const indexI = (Math.floor(Math.log10(number)/3)-1)-(26*(indexK+1))
+                    let letter = player.settings.currentLanguage == 'en' ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ" : "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЬЭЮЯ"
+                    const indexK = Math.floor(Math.log10(number/1000)/(num*3))-1 // k
+                    const indexI = (Math.floor(Math.log10(number)/3)-1)-(num*(indexK+1))
                     const index = Math.floor(Math.log10(number)/3)
                     const formula = number/Math.pow(10, index*3)
                     return formula.toFixed(2) + " " + letter[indexK] + letter[indexI] 
@@ -229,7 +248,7 @@ function formatNumber(number, mode='number') { //average
                         if (number < 100) return number.toFixed(2);
                         else return number.toFixed(0);
                     case 'power': 
-                        if (number < 10) return number.toFixed(3);
+                        if (number < 10) return number.toFixed(x);
                         else if (number >= 10 && number < 100) return number.toFixed(2);
                         else return number.toFixed(0);
                     case 'percent':
@@ -313,19 +332,23 @@ function startChallenge(number) {
     } 
 }
 
-function generateRune() {
-    if (player.prestige.currency >= UNL.rune.cost()) {
-        player.prestige.currency -= UNL.rune.cost()
-        player.rune.currency++
-        player.rune.total_currency++
+function generateRune(number) {
+    for (let i = 0; i < number; i++) {
+        if (player.prestige.currency >= UNL.rune.cost()) {
+            player.prestige.currency -= UNL.rune.cost()
+            player.rune.currency++
+            player.rune.total_currency++
+        }
+        else break
     }
 }
 
 function createMineral(x) {
     if (player.shard.currency >= UPGS.minerals[x].cost2() && player.rune.currency >= UPGS.minerals[x].cost1()) {
-        player.rune.currency -= UPGS.minerals[x].cost1()
-        player.shard.currency -= UPGS.minerals[x].cost2()
-        player.minerals[x]++
+        let bulk = UPGS.minerals[x].bulk()
+        player.minerals[x] += bulk.iter
+        player.rune.currency -= bulk.bulk1
+        player.shard.currency -= bulk.bulk2
     }
 }
 
@@ -348,7 +371,7 @@ function respecBuyables() {
 function respecSuperCrystalSingles() {
     for (let i = 1; i <= 9; i++)
         player.supercrystal.upgrades = []
-    player.supercrystal.currency = player.supercrystal.total_currency
+    player.supercrystal.currency = player.supercrystal.total_currency-player.shard_achievements.length
     LAYERS.doReset()
     LAYERS.doForcedReset()
 }
@@ -450,15 +473,15 @@ function statsPerClickUpdate() { //multi breakdown click
     challenge6StatsEffect.innerHTML = "x" + formatNumber(CHALL[6].effect(), 'boost')
     goldenGloveStatsEffect.innerHTML = "x" + formatNumber(UPGS.shop.buyables[1].effect(), 'boost')
     gainStatsEffect.innerHTML = "x" + formatNumber(GAIN.coin.gain.effect(), 'boost')
-    alphaPowerStatsEffect.innerHTML = "^" + formatNumber(UPGS.coin.buyables[5].effect(), 'power')
-    let gainWithoutPower = findMultiplier(Math.pow(GAIN.coin.click.no_softcap_effect(), 1 / UPGS.coin.buyables[5].effect()), UPGS.coin.buyables[5].effect())
+    challenge1StatsEffect.innerHTML = "^" + formatNumber(player.challenge.completed.includes(1) ? CHALL[1].effect() : 1, 'power')
+    let gainWithoutPower = findMultiplier(Math.pow(GAIN.coin.gain.no_softcap_effect(), 1 / player.challenge.completed.includes(1) ? CHALL[1].effect() : 1), player.challenge.completed.includes(1) ? CHALL[1].effect() : 1)
     hidePiece(UPGS.coin.buyables[3].effect(), doublerPiece, doublerPiecePercent, GAIN.coin.click.no_softcap_effect())
     hidePiece(UPGS.coin.singles[12].effect(), midasCursorPiece, midasCursorPiecePercent, GAIN.coin.click.no_softcap_effect())
     hidePiece(UPGS.coin.singles[23].effect(), rewardPiece, rewardPiecePercent, GAIN.coin.click.no_softcap_effect())
     hidePiece(UPGS.shop.buyables[1].effect(), goldenGlovePiece, goldenGlovePiecePercent, GAIN.coin.click.no_softcap_effect())
     hidePiece(CHALL[6].effect(), challenge6Piece, challenge6PiecePercent, GAIN.coin.click.no_softcap_effect())
     hidePiece(GAIN.coin.gain.effect(), gainClickPiece, gainClickPiecePercent, GAIN.coin.click.no_softcap_effect())
-    hidePiece(gainWithoutPower, alphaPowerPiece, alphaPowerPiecePercent, GAIN.coin.click.no_softcap_effect())
+    hidePiece(gainWithoutPower, challenge1Piece, challenge1PiecePercent, GAIN.coin.gain.no_softcap_effect())
 
     summaryClickStatsEffect.innerHTML = "x" + formatNumber(GAIN.coin.click.effect(), 'boost')
 }
@@ -500,8 +523,8 @@ function statsGainUpdate() {
     umultiplierStatsEffect.innerHTML = "x" + formatNumber(GAIN.umultiplier.effect(), 'boost')
     upowerStatsEffect.innerHTML = "^" + formatNumber(GAIN.upower.effect(), 'power')
     activity2StatsEffect.innerHTML = "^" + formatNumber(UPGS.prestige.singles[12].effect(), 'power')
-    challenge1StatsEffect.innerHTML = "^" + formatNumber(player.challenge.completed.includes(1) ? CHALL[1].effect() : 1, 'power')
-    let gainWithoutPower1 = findMultiplier(Math.pow(GAIN.coin.gain.no_softcap_effect(), 1 / player.challenge.completed.includes(1) ? CHALL[1].effect() : 1), player.challenge.completed.includes(1) ? CHALL[1].effect() : 1)
+    alphaPowerStatsEffect.innerHTML = "^" + formatNumber(UPGS.coin.buyables[5].effect(), 'power')
+    let gainWithoutPower1 = findMultiplier(Math.pow(GAIN.coin.click.no_softcap_effect(), 1 / UPGS.coin.buyables[5].effect()), UPGS.coin.buyables[5].effect())
     let temp1 = Math.pow(GAIN.coin.gain.no_softcap_effect(), 1 / player.challenge.completed.includes(1) ? CHALL[1].effect() : 1)
     let gainWithoutPower2 = findMultiplier(Math.pow(temp1, 1 / UPGS.prestige.singles[12].effect()), UPGS.prestige.singles[12].effect())
     let temp2 = Math.pow(temp1, 1 / UPGS.prestige.singles[12].effect())
@@ -517,9 +540,10 @@ function statsGainUpdate() {
     hidePiece(GAIN.shard.effect.effect(), shardsPiece, shardsPiecePercent, GAIN.coin.gain.no_softcap_effect())
     hidePiece(UPGS.minerals[2].effect1(), secondMineralEffect1Piece, secondMineralEffect1PiecePercent, GAIN.coin.gain.no_softcap_effect())
     hidePiece(GAIN.umultiplier.effect(), umultiplierPiece, umultiplierPiecePercent, GAIN.coin.gain.no_softcap_effect())
+    hidePiece(gainWithoutPower1, alphaPowerPiece, alphaPowerPiecePercent, GAIN.coin.click.no_softcap_effect())
     hidePiece(gainWithoutPower3, upowerPiece, upowerPiecePercent, GAIN.coin.gain.no_softcap_effect())
     hidePiece(gainWithoutPower2, activity2Piece, activity2PiecePercent, GAIN.coin.gain.no_softcap_effect())
-    hidePiece(gainWithoutPower1, challenge1Piece, challenge1PiecePercent, GAIN.coin.gain.no_softcap_effect())
+
 
     summaryGainStatsEffect.innerHTML = "x" + formatNumber(GAIN.coin.gain.effect(), 'boost')
 }
@@ -530,20 +554,27 @@ function statsSuperCoinChanceUpdate() {
     charismaStatsEffect.innerHTML = "x" + formatNumber(UPGS.prestige.singles[13].effect(), 'boost')
     firstSuperCrystalEffectStatsEffect.innerHTML = "x" + formatNumber(Math.pow(2, UPGS.supercrystal[11].unl()), 'boost')
     firstMineralEffect3StatsEffect.innerHTML = "x" + formatNumber(UPGS.minerals[1].effect3(), 'boost')
+    superDvorStatsEffect.innerHTML = "x" + formatNumber(UNL.shard_achievements[2].effect(), 'boost')
+    hercCursorStatsEffect.innerHTML = "x" + formatNumber(UPGS.prestige.super.singles[12].effect(), 'boost')
     achievement37StatsEffect.innerHTML = "+" + formatNumber(Number(ACHS.has(37)), 'boost')
 
     let ach37 = findMultiplierInAdditive(ACHS.has(37), GAIN.supercoin.chance())
+
     hidePiece(UPGS.shop.buyables[4].effect(), luckyCloverPiece, luckyCloverPiecePercent, GAIN.supercoin.chance())
     hidePiece(UPGS.coin.singles[13].effect_super(), thirdSingleSuperEffectPiece, thirdSingleSuperEffectPiecePercent, GAIN.supercoin.chance())
     hidePiece(UPGS.prestige.singles[13].effect(), charismaPiece, charismaPiecePercent, GAIN.supercoin.chance())
     hidePiece(Math.pow(2, UPGS.supercrystal[11].unl()), firstSuperCrystalEffectPiece, firstSuperCrystalEffectPiecePercent, GAIN.supercoin.chance())
     hidePiece(UPGS.minerals[1].effect3(), firstMineralEffect3Piece, firstMineralEffect3PiecePercent, GAIN.supercoin.chance())
+    hidePiece(UNL.shard_achievements[2].effect(), superDvorPiece, superDvorPiecePercent, GAIN.supercoin.chance())
+    hidePiece(UPGS.prestige.super.singles[12].effect(), hercCursorPiece, hercCursorPiecePercent, GAIN.supercoin.chance())
     hidePiece(ach37, achievement37Piece, achievement37PiecePercent, GAIN.supercoin.chance())
 
     summarySCChanceStatsEffect.innerHTML = formatNumber(GAIN.supercoin.chance(), 'boost') + "%"
 }
 
 function statsCrystalsUpdate(){
+    let gain = player.prestige.super.singles.includes(25) ? Math.pow(1.35+UPGS.prestige.super.buyables[1].effect(), Math.log10((player.coin.currency+10)/1e15)) : 1
+    baseCrystalStatsEffect.innerHTML = "x" + formatNumber(gain, 'boost')
     achievement282StatsEffect.innerHTML = "x" + formatNumber(Math.pow(4, ACHS.has(28)), 'boost')
     brilliantDoublerStatsEffect.innerHTML = "x" + formatNumber(UPGS.prestige.buyables[1].effect(), 'boost')
     recyclingStatsEffect.innerHTML = "x" + formatNumber(UPGS.shard.singles[11].effect(), 'boost')
@@ -552,7 +583,10 @@ function statsCrystalsUpdate(){
     overdrive2EffectStatsEffect.innerHTML = "x" + formatNumber(UNL.overdrive.type2.effect(), 'boost')
     thirdMineralEffect1StatsEffect.innerHTML = "x" + formatNumber(UPGS.minerals[3].effect1(), 'boost')
     secondSuperCrystalSingleEffectStatsEffect.innerHTML = "x" + formatNumber(Math.pow(3, UPGS.supercrystal[12].unl()), 'boost')
+    prestigeFameStatsEffect.innerHTML = "x" + formatNumber(player.supercrystal.upgrades.includes(12) ? 3 : 1, 'boost')
+    crystalShAchStatsEffect.innerHTML = "x" + formatNumber(UNL.shard_achievements[3].effect(), 'boost')
     achievementBonus2StatsEffect.innerHTML = "x" + formatNumber(ACHS.effect.crystal(), 'boost')
+    hidePiece(gain, baseCrystalPiece, baseCrystalPiecePercent, GAIN.crystal.reset())
     hidePiece(Math.pow(4, ACHS.has(28)), achievement282Piece, achievement282PiecePercent, GAIN.crystal.reset())
     hidePiece(UPGS.prestige.buyables[1].effect(), brilliantDoublerPiece, brilliantDoublerPiecePercent, GAIN.crystal.reset())
     hidePiece(UPGS.shard.singles[11].effect(), recyclingPiece, recyclingPiecePercent, GAIN.crystal.reset())
@@ -561,6 +595,8 @@ function statsCrystalsUpdate(){
     hidePiece(UNL.overdrive.type2.effect(), overdrive2EffectPiece, overdrive2EffectPiecePercent, GAIN.crystal.reset())
     hidePiece(UPGS.minerals[3].effect1(), thirdMineralEffect1Piece, thirdMineralEffect1PiecePercent, GAIN.crystal.reset())
     hidePiece(Math.pow(3, UPGS.supercrystal[12].unl()), secondSuperCrystalSingleEffectPiece, secondSuperCrystalSingleEffectPiecePercent, GAIN.crystal.reset())
+    hidePiece(player.supercrystal.upgrades.includes(12) ? 3 : 1, prestigeFamePiece, prestigeFamePiecePercent, GAIN.crystal.reset())
+    hidePiece(UNL.shard_achievements[3].effect(), crystalShAchPiece, crystalShAchPiecePercent, GAIN.crystal.reset())
     hidePiece(ACHS.effect.crystal(), achievementBonus2Piece, achievementBonus2PiecePercent, GAIN.crystal.reset())
     summaryCrystalStatsEffect.innerHTML = "x"+formatNumber(GAIN.crystal.reset(), 'boost')
 }
@@ -581,6 +617,7 @@ function statsShardsPerSecondUpdate() {
     secondShardBuyableEffectStatsEffect.innerHTML = "x" + formatNumber(UPGS.shard.buyables[2].effect(), 'boost')
     fifthShopBuyableEffect2StatsEffect.innerHTML = "x" + formatNumber(UPGS.shop.buyables[5].effect(), 'boost')
     thirdMineralEffect2StatsEffect.innerHTML = "x" + formatNumber(UPGS.minerals[3].effect2(), 'boost')
+    shardShAchStatsEffect.innerHTML = "x" + formatNumber(UNL.shard_achievements[4].effect(), 'boost')
     achievement39StatsEffect.innerHTML = "x" + formatNumber(Math.pow(1.337, ACHS.has(39)), 'boost')
     achievementBonus3StatsEffect.innerHTML = "x" + formatNumber(ACHS.effect.shard(), 'boost')
     
@@ -588,6 +625,7 @@ function statsShardsPerSecondUpdate() {
     hidePiece(UPGS.shop.buyables[5].effect(), fifthShopBuyableEffect2Piece, fifthShopBuyableEffect2PiecePercent, GAIN.shard.second())
     hidePiece(UPGS.minerals[3].effect2(), thirdMineralEffect2Piece, thirdMineralEffect2PiecePercent, GAIN.shard.second())
     hidePiece(Math.pow(1.337, ACHS.has(39)), achievement39Piece, achievement39PiecePercent, GAIN.shard.second())
+    hidePiece(UNL.shard_achievements[4].effect(), shardShAchPiece, shardShAchPiecePercent, GAIN.shard.second())
     hidePiece(ACHS.effect.shard(), achievementBonus3Piece, achievementBonus3PiecePercent, GAIN.shard.second())
     
     summaryShPerSecondStatsEffect.innerHTML = "x" + formatNumber(GAIN.shard.second(), 'boost')
@@ -614,18 +652,23 @@ function statsCritChanceUpdate() {
     fourthSuperCrystalSingleEffectStatsEffect.innerHTML = "+" + formatNumber(UPGS.supercrystal[21].unl() ? 2 : 0, 'boost')
     eighthShopBuyableEffectStatsEffect.innerHTML = "+" + formatNumber(UPGS.shop.permanent[3].effect(), 'boost')
     firstMineralEffect1StatsEffect.innerHTML = "x" + formatNumber(UPGS.minerals[1].effect1(), 'boost')
+    critChShAchStatsEffect.innerHTML = "x" + formatNumber(UNL.shard_achievements[8].effect(), 'boost')
     fifthBuyableSuperEffectStatsEffect.innerHTML = "^" + formatNumber(UPGS.coin.buyables[5].effect_super(), 'power')
-    
     let gainWithoutPower = findMultiplier(Math.pow(GAIN.critical.chance.multiplicative(), 1 / UPGS.coin.buyables[5].effect_super()), UPGS.coin.buyables[5].effect_super())
-
-    let temp2 = 100/findRatio2(GAIN.critical.chance.additive(), GAIN.critical.chance.multiplicative())
+    
+    let add = findMultiplierInAdditive(GAIN.critical.chance.additive(), GAIN.critical.chance.multiplicative())
+    let sum = findSum(add, UPGS.minerals[1].effect1(), UNL.shard_achievements[8].effect(), gainWithoutPower)
+    let temp2 = 100/findRatio(add, sum)
 
     hidePiece(GAIN.critical.chance.additive(), criticalGraphic, criticalGraphicSpan, GAIN.critical.chance.multiplicative())
-    hidePiece2(GAIN.critical.baseChance, baseCriticalChanceEffectPiece, baseCriticalChanceEffectPiecePercent, GAIN.critical.chance.additive(), temp2)
+    hidePiece2(1, baseCriticalChanceEffectPiece, baseCriticalChanceEffectPiecePercent, GAIN.critical.chance.additive(), temp2)
     hidePiece2(UPGS.supercrystal[21].unl() ? 2 : 0, fourthSuperCrystalSingleEffectPiece, fourthSuperCrystalSingleEffectPiecePercent, GAIN.critical.chance.additive(), temp2)
     hidePiece2(UPGS.shop.permanent[3].effect(), eighthShopBuyableEffectPiece, eighthShopBuyableEffectPiecePercent, GAIN.critical.chance.additive(), temp2)
     hidePiece(UPGS.minerals[1].effect1(), firstMineralEffect1Piece, firstMineralEffect1PiecePercent, GAIN.critical.chance.multiplicative())
+    hidePiece(UNL.shard_achievements[8].effect(), critChShAchPiece, critChShAchPiecePercent, GAIN.critical.chance.multiplicative())
     hidePiece(gainWithoutPower, fifthBuyableSuperEffectPiece, fifthBuyableSuperEffectPiecePercent, GAIN.critical.chance.multiplicative())
+
+
     summaryCritChanceStatsEffect.innerHTML = formatNumber(GAIN.critical.chance.multiplicative(), 'boost') + "%"
 }
 
@@ -634,12 +677,14 @@ function statsCritMultiUpdate() {
     fifthSuperCrystalSingleEffectStatsEffect.innerHTML = "x" + formatNumber(Math.pow(5, UPGS.supercrystal[22].unl()), 'boost')
     ninthShopBuyableEffectStatsEffect.innerHTML = "x" + formatNumber(UPGS.shop.permanent[4].effect(), 'boost')
     firstMineralEffect2StatsEffect.innerHTML = "x" + formatNumber(UPGS.minerals[1].effect2(), 'boost')
+    critMuShAchStatsEffect.innerHTML = "x" + formatNumber(UNL.shard_achievements[9].effect(), 'boost')
     thirdBuyableSuperEffectStatsEffect.innerHTML = "x" + formatNumber(UPGS.coin.buyables[3].effect_super(), 'boost')
     
     hidePiece(GAIN.critical.baseMult, baseCriticalGainEffectPiece, baseCriticalGainEffectPiecePercent, GAIN.critical.multiplier())
     hidePiece(Math.pow(5, UPGS.supercrystal[22].unl()), fifthSuperCrystalSingleEffectPiece, fifthSuperCrystalSingleEffectPiecePercent, GAIN.critical.multiplier())
     hidePiece(UPGS.shop.permanent[4].effect(), ninthShopBuyableEffectPiece, ninthShopBuyableEffectPiecePercent, GAIN.critical.multiplier())
     hidePiece(UPGS.minerals[1].effect2(), firstMineralEffect2Piece, firstMineralEffect2PiecePercent, GAIN.critical.multiplier())
+    hidePiece(UNL.shard_achievements[9].effect(), critMuShAchPiece, critMuShAchPiecePercent, GAIN.critical.multiplier())
     hidePiece(UPGS.coin.buyables[3].effect_super(), thirdBuyableSuperEffectPiece, thirdBuyableSuperEffectPiecePercent, GAIN.critical.multiplier())
     
     summaryCritMultiStatsEffect.innerHTML = "x" + formatNumber(GAIN.critical.multiplier(), 'boost')
@@ -669,4 +714,11 @@ function hoverColorInverse(iden){
     let element2 = document.getElementById(effect)
     element.style.color = 'white';
     element2.style.color = 'white';
+}
+
+function unlockShardAch(x) {
+    if (player.supercrystal.currency > 0) {
+        player.supercrystal.currency--
+        player.shard_achievements.push(x)
+    }
 }

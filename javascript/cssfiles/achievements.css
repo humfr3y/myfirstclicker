@@ -1,3 +1,6 @@
+:root {
+  --font-scale: 1; /* 1 = 100%, 0.9 = 90% и т.д. */
+}
 
 .achRow {
     position: relative; /* установить позицию для контейнера */
@@ -162,8 +165,36 @@
 #ach40 {
     background-image: url("images/ach40.jpg");
 }
-
-
+#ach41 {
+    background-image: url("images/ach41.jpeg");
+}
+#ach42 {
+    background-image: url("images/ach42.jpg");
+}
+#ach43 {
+    background-image: url("images/ach43.jpeg");
+}
+#ach44 {
+    background-image: url("images/ach44.jpg");
+}
+#ach45 {
+    background-image: url("images/ach45.png");
+}
+#ach46 {
+    background-image: url("images/ach46.jpg");
+}
+#ach47 {
+    background-image: url("images/ach47.jpeg");
+}
+#ach48 {
+    background-image: url("images/ach48.jpg");
+}
+#ach49 {
+    background-image: url("images/ach49.jpg");
+}
+#ach50 {
+    background-image: url("images/ach50.jpg");
+}
 #tooltip {
     /* ... */
     display: none;
@@ -174,7 +205,7 @@
   }
 
 .achievementName {
-    font-size: 10px;
+    font-size: calc(10px * var(--font-scale));
     white-space: normal;
     color: white;
     text-shadow: 0.75px 0.75px #000000, -0.75px -0.75px #000000, 0.75px -0.75px #000000, -0.75px 0.75px #000000;
