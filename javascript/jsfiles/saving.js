@@ -74,7 +74,7 @@ function loadGame() {
             parsedData = JSON.parse(storedData);
             updateNestedProperties(player, parsedData)
         }
-        // GAIN.offline_gain()
+        GAIN.offline_gain()
         if (isNaN(player.coin.currency)) {
             player.coin.currency = 10
         }
