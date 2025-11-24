@@ -42,5 +42,7 @@ const LORE = {
         13() { return player.prestige.super.singles.includes(25) },
         14() { return player.uadders > 0 },
         15() { return player.ureducers > 0 },
+        16() { return player.fortune.total_tokens >= 1 },
+        17() { return player.balance.total_coins.plus >= 1 || player.balance.total_coins.minus >= 1},
     }
 }

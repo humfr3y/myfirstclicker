@@ -302,6 +302,7 @@ let player = {
             5: 0,
             6: 0,
             7: 0,
+            8: 0,
         },
         unlockables: [],
         items: {
@@ -327,6 +328,7 @@ let player = {
         upgrades: [],
         currency: 0,
         total_currency: 0,
+        spent_currency_on_fortune_upgrades: 0,
         consumedShards: 0,
     },
     rune: {
@@ -336,7 +338,109 @@ let player = {
     minerals: {
         1: 0,
         2: 0,
-        3: 0
+        3: 0,
+        4: 0
+    },
+    fortune: {
+        tokens: 0,
+        total_tokens: 0,
+        spent_tokens: 0,
+        daily_resets: 10,
+        converted: {
+            coins: 0,
+            crystals: 0,
+        },
+        upgrades: {
+            buyables: {
+                1: 0,
+                2: 0,
+                3: 0,
+            },
+            singles: [],
+        },
+        activatedBoosts: {
+            list: [],
+            1: {
+                activated: false,
+                effect: 0,
+                time: 0
+            },
+            2: {
+                activated: false,
+                effect: 0,
+                time: 0
+            },
+            3: {
+                activated: false,
+                effect: 0,
+                time: 0
+            },
+            4: {
+                activated: false,
+                effect: 0,
+                time: 0
+            },
+            5: {
+                activated: false,
+                effect: 0,
+                time: 0
+            },
+            6: {
+                activated: false,
+                effect: 0,
+                time: 0
+            },
+            7: {
+                activated: false,
+                effect: 0,
+                time: 0
+            },
+            8: {
+                activated: false,
+                effect: 0,
+                time: 0
+            },
+            9: {
+                activated: false,
+                effect: 0,
+                time: 0
+            },
+            10: {
+                activated: false,
+                effect: 0,
+                time: 0
+            },
+            11: {
+                activated: false,
+                effect: 0,
+                time: 0
+            },
+            12: {
+                activated: false,
+                effect: 0,
+                time: 0
+            },
+        }
+    },
+    balance: {
+        coins: {
+            plus: 0,
+            minus: 0
+        },
+        total_coins: {
+            plus: 0,
+            minus: 0,
+        },
+        neutral: 0,
+        scales_of_balance: 0,
+        upgrades: {
+            buyables: {
+                1: 0,
+                2: 0,
+                3: 0,
+            },
+            singles: []
+        }
     },
     time: {
         savedTime: Date.now(), //lastOnlineTime
@@ -600,6 +704,7 @@ const ELS = {
     chapDesc: document.getElementById("chapterDescription"),
     helpDesc: document.getElementById("helpDescription"),
     mediaQuery: window.matchMedia('screen and (max-width: 600px)'),
+    isAch60Opened: false
 }
 
 const text = {
@@ -613,7 +718,7 @@ const text = {
             false: ''
         },
         whichPrestigeMode: 'time',
-        multiBreakdown: ['','','','','','','','','','',''],
+        multiBreakdown: ['','','','','','','','','','','',''],
         itemNames: ['', '', '', '', '', ''],
         notification: {
             lore: '',
@@ -670,7 +775,8 @@ const text = {
             "0.11.1":'',
             "0.12":'',
             "0.12.1": '',
-            "0.13": ''
+            "0.13": '',
+            "0.14": '',
         },
         chapter: {
             start:'',
@@ -689,6 +795,8 @@ const text = {
             13:'',
             14:'',
             15:'',
+            16:'',
+            17:'',
         },
         helpTitle: {
             1:'',
@@ -710,6 +818,8 @@ const text = {
             17:'',
             18:'',
             19:'',
+            20:'',
+            21:'',
         },
         help: {
             start:'',
@@ -732,6 +842,8 @@ const text = {
             17:'',
             18:'',
             19:'',
+            20:'',
+            21:'',
         },
         empty: '',
     }

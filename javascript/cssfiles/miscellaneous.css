@@ -27,18 +27,18 @@ button {
 
 .tabButton {
     border-style: solid;
-    border-radius: 5px;
-    width: 105px;
-    height: 25px;
+    border-radius: 3px;
+    max-height: 30px;
+    height: 4vw;
     border-color:rgb(255, 255, 255);
     color: rgb(255, 255, 255);
     background-color: rgb(0, 0, 0);
     text-align: center;
     font-family: "Poly"; 
-    font-size: calc(12px * var(--font-scale));
+    font-size: calc(15px * var(--font-scale));
     margin-bottom: 10px;
     cursor: pointer;
-    margin-right: 5px;
+    margin-right: 0.3vw;
     white-space: nowrap;
 }
 .tabButton:hover {
@@ -56,9 +56,9 @@ it {
 }
 
 .subButton {
-    width: 95px;
-    height: 20px;
-    font-size: calc(11px * var(--font-scale))
+    max-height: 25px;
+    height: 3vw;
+    font-size: calc(13px * var(--font-scale))
 }
 
 .tooltip {
@@ -69,7 +69,8 @@ it {
     border-color: white;
     border: 2px solid rgb(255, 255, 255);
     display: none;
-    width: 180px;
+    max-width: 180px;
+    width: 30vw;
     text-align: center;
     word-wrap: break-word;
     padding: 7px;
@@ -153,8 +154,10 @@ it {
     border: 2px solid rgb(202, 255, 248);
     border-radius: 10px;
     display: flex;
-    height: 150px;
-    width: 230px;
+    max-height: 150px;
+    max-width: 230px;
+    width: 20vw;
+    height: 20vw;
     background-color: #101010;
     flex-direction: column;
     align-items: center;
@@ -172,6 +175,11 @@ it {
     line-height: 20px;
 }
 
+.automationContainer input {
+    max-width: 300px;
+    width: 80%;
+}
+
 
 .automationUpgrade:hover, #autoPrestigeMode:hover, .automationUpgrade2:hover {
     background-color: rgb(202, 255, 248);;
@@ -182,6 +190,18 @@ it {
     display:flex;
     flex-direction: row;
     margin-bottom:20px
+}
+
+#prestigeModeDiv input {
+    max-width: 300px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#prestigeModeDiv {
+    display: flex;
+    max-width: 300px;
+    width: 70%;
 }
 
 #autoPrestigeMode {
@@ -213,9 +233,11 @@ input {
 }
 
 .challengeDiv {
+    font-size: calc(16px * var(--font-scale));
     border: white 2px solid;
     border-radius: 10px;
-    width: 300px;
+    max-width: 300px;
+    width: 20vw;
     display: flex;
     flex-direction: column;
     color: white;
@@ -223,7 +245,7 @@ input {
     text-align: center;
     padding: 5px;
     margin: 5px;
-    height: 170px;
+    height: 200px;
 }
 
 #challengeTab {
@@ -245,6 +267,10 @@ input {
     margin: 10px;
 }
 
+.challengeCond {
+    height: 140px;
+}
+
 button {
     cursor:pointer;
 }
@@ -254,15 +280,20 @@ button {
 }
 
 #worldText {
-    display: block;
+    display: flex;
     margin-top: 7px;
     white-space: nowrap;
+    position: relative;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 #exitChallenge {
     width: 75px; 
     height: 20px; 
-    display: none
+    display: none;
+    margin: 5px;
 }
 
 .challengeDesc {
@@ -276,7 +307,18 @@ button {
 }
 
 #challenges {
-    width: 90%
+    display: flex;
+    flex-direction: row;
+    max-width: 1000px;
+    width: 90vw;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#challenges .challengeDiv {
+  flex: 0 1 40vw; /* do not force growth, allow shrinking, base 420px */
+  max-width: 300px;
+  box-sizing: border-box;
 }
 
 .smallDesc{

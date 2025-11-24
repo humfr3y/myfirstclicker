@@ -1,6 +1,6 @@
 .statsSlot {
     text-align: center;
-    color: rgb(120 120 120);
+    color: rgb(160, 160, 160);
     font-size: calc(14px * var(--font-scale));
     margin: 5px;
     justify-content: center;

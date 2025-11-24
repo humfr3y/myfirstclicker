@@ -20,11 +20,12 @@
 }
 .upgradeButton{
     border-style: solid;
-    border-radius: 10px;
+    border-radius: 4px;
     background-color: black;
     color: rgb(255, 255, 255);
     font-size: calc(9.75px * var(--font-scale));
-    width: 175px;
+    width: 17.5vw;
+    max-width: 175px;
     height: 90px;
     text-align: center;
     font-family: "Poly";
@@ -32,13 +33,6 @@
     margin-right:10px;
     margin-bottom: 10px;
     cursor: pointer;
-}
-
-
-@media screen and (max-width: 600px) {
-  .upgradeButton {
-      font-size: calc(8.5px * var(--font-scale));
-  }
 }
 
 .maxBuy{
@@ -262,8 +256,6 @@
   background-color: #000000;
   border-color: rgb(0, 180, 212);
   color: rgb(255, 255, 255);
-  width: 160px;
-  height: 85px;
 }
 
 .superCrystalUpgradeButton:hover:enabled{
@@ -273,5 +265,55 @@
 }
 .superCrystalUpgradeButton.purchased {
   background-color: rgb(0, 180, 212);
+  color: black;
+}
+
+.fortuneBuyableButton {
+  border-color: hotpink;
+}
+
+.fortuneBuyableButton:hover:enabled {
+  background-color: hotpink;
+  box-shadow: 0 0 10px hotpink;
+  color: black;
+}
+
+.fortuneSingleButton {
+  border-color: hotpink;
+}
+
+.fortuneSingleButton:hover:enabled {
+  background-color: hotpink;
+  box-shadow: 0 0 10px hotpink;
+  color: black;
+}
+
+.fortuneSingleButton.purchased {
+  background-color: hotpink;
+  color: black;
+}
+
+.balanceBuyableButton {
+  border-color: white;
+}
+
+.balanceBuyableButton:hover:enabled {
+  background-color: white;
+  box-shadow: 0 0 10px white;
+  color: black;
+}
+
+.balanceSingleButton {
+  border-color: white;
+}
+
+.balanceSingleButton:hover:enabled {
+  background-color: white;
+  box-shadow: 0 0 10px white;
+  color: black;
+}
+
+.balanceSingleButton.purchased {
+  background-color: white;
   color: black;
 }

@@ -8,7 +8,9 @@
     "pbtitle4": "Minerals",
     "pbtitle5": "Superprestige",
     "pbtitle6": "Fortune",
-    "pbtitle7": "Supertoilet paper",
+    "pbtitle7": "Balance",
+    "pbtitle8": "Prestige Challenges",
+    "pbtitle9": "Reflash",
 
     "pbcurrency1": "α-coins",
     "pbcurrency2": "prestiges",
@@ -51,6 +53,9 @@
     "superprestigeButton": "Superprestige",
     "achButton": "Achievements",
     "shardAchButton": "Shard Ach.",
+    "softcapsTitle": "Softcaps",
+    "fortuneButton": "Fortune",
+    "balanceButton": "Balance",
 
     "settingsTitle": "Settings",
 
@@ -170,11 +175,11 @@
     "fourthPrestigeSingle": "<ut> Sparkling U-Multiplier </ut> <br> Base effect of U-Multipliers is increased to 2.5 (2.0 -> 2.5){{cost}}",
     "fifthPrestigeSingle": "<ut> Gift From Nobody </ut> <br> Starts U-Multipliers, U-Powers, and Prestiges with 1 each purchased upgrade{{cost}}",
     "sixthPrestigeSingle": "<ut> Precious X </ut> <br> Base effect of Multiplier is increased to 1.075 (1.05 -> 1.075){{cost}}",
-    "seventhPrestigeSingle": "<ut> Crystal Card </ut> <br> Post-100 Cashback hardcap swaps to ^0.5 softcap{{cost}}",
-    "eighthPrestigeSingle": "<ut> Powerful Boost </ut> <br> Base bonus of U-Power is increased to 1.05 (1.045 -> 1.05){{cost}}",
+    "seventhPrestigeSingle": "<ut> Crystal Card </ut> <br> Cashback hardcap swaps to COIN_UPG07_SC_001 softcap{{cost}}",
+    "eighthPrestigeSingle": "<ut> Powerful Boost </ut> <br> Base bonus of U-Power is increased to 1.015 (1.01 -> 1.015){{cost}}",
     "ninthPrestigeSingle": "<ut> Hourglass </ut> <br> Start Prestiges with x{{multi}} α-coin gain, which decreases over {{time}} minutes{{cost}}",
     "tenthPrestigeSingle": "<ut> Anti-Hourglass </ut> <br> α-сoin gain increases overtime in current Prestige{{cost}}",
-    "eleventhPrestigeSingle": "<ut> Course Stabilization </ut> <br> Post-e13 α-coins softcap per click/second reduced to ^0.45/0.55 (^0.4/^0.5 -> ^0.45/^0.55){{cost}}",
+    "eleventhPrestigeSingle": "<ut> Course Stabilization </ut> <br> COIN_PSEC_SC_001 and COIN_PCLICK_SC_001 are reduced to ^0.45/0.55 (^0.4/^0.5 -> ^0.45/^0.55){{cost}}",
     "twelfthPrestigeSingle": "<ut> Crystal Overload </ut> <br> Each Prestige gives 10 Shards{{cost}}",
     "thirteenthPrestigeSingle": "<ut> Backup 1.0 </ut> <br> Starts U-Powers and Prestiges with 1 U-Multiplier{{cost}}",
     "fourteenthPrestigeSingle": "<ut> Backup 2.0 </ut> <br> Starts U-Powers and Prestiges with 2 U-Multipliers{{cost}}",
@@ -223,8 +228,8 @@
     "prestigeMilestone16": "<ut>Milestone 16</ut> Requirement: 1000 prestige <it>Reward: Enables Offline Prestige based on your Best Prestiges/min without \"Buy All\"</it>",
     "prestigeMilestone17": "<ut>Milestone 17</ut> Requirement: 1e6 prestige <it>Reward: Start Resets with 1e9 α-сoins</it>",
     "prestigeMilestone18": "<ut>Milestone 18</ut> Requirement: 1e7 prestige <it>Reward: Unlock Minerals</it>",
-    "prestigeMilestone19": "<ut>Milestone 19</ut> Requirement: 1e10 prestige <it>Reward: U-multiplier won't reset anything</it>",
-    "prestigeMilestone20": "<ut>Milestone 20</ut> Requirement: 1e25 prestige <it>Reward: U-power won't reset anything</it>",
+    "prestigeMilestone19": "<ut>Milestone 19</ut> Requirement: 1e8 prestige <it>Reward: U-multiplier won't reset anything</it>",
+    "prestigeMilestone20": "<ut>Milestone 20</ut> Requirement: 1e10 prestige <it>Reward: U-power won't reset anything</it>",
     
     "singleAutomationTitle": "Auto-Single Upgrades",
     "buyableAutomationTitle": "Auto-Buyable Upgrades",
@@ -273,7 +278,7 @@
     "secondShardSingle": "<ut> Caching </ut> <br> Increases the effects of purchased 1st and 2nd Shard upgrades based on broken Crystals{{effect}}{{cost}}",
     "thirdShardSingle": "<ut> Diamond Discount </ut> <br> Reduces the cost of Shard upgrades based on Crystals{{effect}}{{cost}}",
     "fourthShardSingle": "<ut> Prestige Fame </ut> <br> Amount of Shards increases power of their effect{{effect}}{{cost}}",
-    "fifthShardSingle": "<ut> Crystalize </ut> <br> Increases all minerals power based on Supercrystals{{effect}}{{cost}}",
+    "fifthShardSingle": "<ut> Crystalize </ut> <br> Increases all minerals power based on total Supercrystals{{effect}}{{cost}}",
     "sixthShardSingle": "<ut> ??? </ut> <br> Reduces the cost of recycling ??? ??? due to the number of total Shards{{effect}}{{cost}}",
 
     "shardUnlockable1": "<ut> Shard Generator ({{percent}}%): </ut> <br> {{consumedShards}}/{{price}}",
@@ -287,7 +292,7 @@
     "thirdSuperCrystalSingle": "<ut> System bug </ut> <br> Click simulation x2{{cost}}",
     "fourthSuperCrystalSingle": "<ut> Light Glove </ut> <br> Increases critical chance by +2% (additive){{cost}}",
     "fifthSuperCrystalSingle": "<ut> Crystal Muscles </ut> <br> Critical click gives 10 times more coins instead of two{{cost}}",
-    "sixthSuperCrystalSingle": "<ut> Big Wallet </ut> <br> Pushes Post-1e7 shards effect softcap to 1e10{{cost}}",
+    "sixthSuperCrystalSingle": "<ut> Big Wallet </ut> <br> Pushes SHARD_EFF_SC_001 from 1e7 to 1e10{{cost}}",
     "seventhSuperCrystalSingle": "<ut> Smart Watch </ut> <br> Accelerates offline time by x5 faster{{cost}}",
     "eighthSuperCrystalSingle": "<ut> Shard Arm </ut> <br> Critical click works for shards{{cost}}",
     "ninthSuperCrystalSingle": "<ut> Reverse Generation </ut> <br> Supercrystals multiply shards per click and break<br> Currently: x{{effect}}{{cost}}",
@@ -295,6 +300,14 @@
     "pourShards": "Poured Shards: {{x}}/{{y}}",
 
     "superCrystalAmount": "You have <scn>{{x}}</scn> supercrystals",
+
+    "shardAchUnlockable": [
+        "Unlock Shard Achievements for coins and supercoins <br> Cost: 1 supercrystal",
+        "Unlock Shard Achievements for crystals and shards <br> Cost: 1 supercrystal",
+        "Unlock Shard Achievements for achievements and spent days in game <br> Cost: 1 supercrystal",
+        "Unlock Shard Achievements for prestiges and clicks <br> Cost: 1 supercrystal",
+        "Unlock Shard Achievements for crit. clicks and shard achievements <br> Cost: 1 supercrystal"
+    ],
 
     "mineralsDesc": "Welcome to Minerals! Minerals have few effects and may be very useful!<br> To create Mineral you need to generate Rune with Crystals and then combine it with Shards into one of the three minerals of your choice.<br> However Rune price is growing very quickly, so use them wisely. <br> You can also respec Minerals, but you can't refund anything, but Rune price. Also respec causes prestige reset.",
     "runesCount": "You have <rn>{{x}}</rn> runes",
@@ -304,9 +317,101 @@
 
     "makeMineral": "Create mineral? <br> Cost: {{y}} runes and {{x}} shards",
 
+    "fortuneCoinsCount": "You have <pt>{{x}}</pt> Fortune Tokens",
+    "fortuneCoinsCount2": "Tokens <br> <pt>{{x}}</pt>",
+
+    "totalSupercrystalsCount": "You have a total of <scn>{{x}}</scn> Supercrystals",
+
+    "convertCoinsToFTokens": "Convert {{x}} α-coins to 1 Fortune Token",
+    "convertCrystalsToFTokens": "Convert {{x}} crystals to 1 Fortune Token",
+
+    "getRandomFortuneBoost": "Get random boost for {{s}} sec.",
+    "respecFortuneBoosts": "Respec all boosts (х{{x}} left today)",
+
     "mineral1": "<ut>Opal ({{x}})</ut> <br> Effects: <br> x{{e1}} to critical chance, <br> x{{e2}} to critical multiplier, <br> x{{e3}} to supercoins chance",
-    "mineral2": "<ut>Topaz ({{x}})</ut> <br> Effects: <br> x{{e1}} to coin gain, <br> x{{e2}} to push Post-1e13 gain per second/click softcap further, <br> +{{e3}} free Small Investments",
+    "mineral2": "<ut>Topaz ({{x}})</ut> <br> Effects: <br> x{{e1}} to coin gain, <br> x{{e2}} to push COIN_PSEC_SC_001 and COIN_PCLICK_SC_001 further, <br> +{{e3}} free Small Investments",
     "mineral3": "<ut>Jade ({{x}})</ut> <br> Effects: <br> x{{e1}} to crystal gain, <br> x{{e2}} to shards generation, <br> /{{e3}} to dividing Supercrystal cost",
+    "mineral4": "<ut>Aquamarine ({{x}})</ut> <br> Effects: <br> /{{e1}} to dividing coin upgrades cost, <br> x{{e2}} to multiplying all bonus coin upgrades, <br> -{{e3}} to reduce cost of all U-tils",
+
+    "fortuneBoost1": "<ut>Coin Blessing</ut>: Increases α-coin gain from x{{min}} to x{{max}} times<br> Effect: x{{effect}}",
+    "fortuneBoost2": "<ut>Crystal Blessing</ut>: Increases Crystal gain from x{{min}} to x{{max}} times<br> Effect: x{{effect}}",
+    "fortuneBoost3": "<ut>Shard Blessing</ut>: Increases all Shard gain from x{{min}} to x{{max}} times<br> Effect: x{{effect}}",
+
+    "fortuneBoost4": "<ut>Supercoin Blessing</ut>: Increases Supercoin chance from x{{min}} to x{{max}} times<br> Effect: x{{effect}}",
+    "fortuneBoost5": "<ut>Crit Chance Blessing</ut>: Increases critical click chance from x{{min}} to x{{max}} times<br> Effect: x{{effect}}",
+    "fortuneBoost6": "<ut>Crit Multiplier Blessing</ut>: Increases critical multiplier from x{{min}} to x{{max}} times<br> Effect: x{{effect}}",
+
+    "fortuneBoost7": "<ut>Mineral Blessing</ut>: Increases all Mineral effects from x{{min}} to x{{max}} times <br> Effect: x{{effect}}",
+    "fortuneBoost8": "<ut>Challenge Blessing</ut>: Increases all Challenge reward effects from x{{min}} to x{{max}} times <br> Effect: x{{effect}}",
+    "fortuneBoost9": "<ut>Achievement Blessing</ut>: Increases all Shard Achievement effects from x{{min}} to x{{max}} times <br> Effect: x{{effect}}",
+
+    "fortuneBoost10": "<ut>Simulation Blessing</ut>: Increases click simulation from x{{min}} to x{{max}} times<br> Effect: x{{effect}}",
+    "fortuneBoost11": "<ut>U-tils Blessing</ut>: Increases all U-tils effects from x{{min}} to x{{max}} times<br> Effect: x{{effect}}",
+    "fortuneBoost12": "<ut>Fortune Blessing</ut>: Increases all other Fortune Boost effects from x{{min}} to x{{max}} times<br> Effect: x{{effect}}",
+
+    "fortuneBuyableUpgrade1": "<ut>Cornucopia</ut> <br> Increases minimum effect of Fortune Boosts by 50% <br> Effect: +{{effect}}% <br> Cost: {{cost}} supercrystals",
+    "fortuneBuyableUpgrade2": "<ut>The Luck</ut> <br> Increases maximum effect of Fortune Boosts by 15% <br> Effect: +{{effect}}% <br> Cost: {{cost}} supercrystals",
+    "fortuneBuyableUpgrade3": "<ut>Wheel of Fortune</ut> <br> Doubles duration of Fortune Boosts <br> Effect: x{{effect}} <br> Cost: {{cost}} supercrystals",
+
+    "fortuneBoostTime": "{{s}}s",
+
+    "fortuneSingleUpgradeReq": "<br>Requirement: {{cost}} Total Supercrystals",
+
+    "fortuneSingleUpgrade1": "<ut>Prove Yourself</ut> <br> Increase achievement and completed row basic rewards {{cost}}",
+    "fortuneSingleUpgrade2": "<ut>Coin of Fate</ut> <br> Unlocks access to A-Boosts{{cost}}",
+    "fortuneSingleUpgrade3": "<ut>Drop of Luck</ut> <br> Reduces cost of Fortune Buyable Upgrades by 1 Supercrystal{{cost}}",
+    "fortuneSingleUpgrade4": "<ut>Thorny Path</ut> <br> Unlocks access to S-Boosts{{cost}}",
+    "fortuneSingleUpgrade5": "<ut>World Feast</ut> <br> Doubles Prestiges gain{{cost}}",
+    "fortuneSingleUpgrade6": "<ut>Taro Card</ut> <br> Doubles daily resets for Fortune Boosts{{cost}}",
+    "fortuneSingleUpgrade7": "<ut>Scales of Balance</ut> <br> Unlocks access to Balance{{cost}}",
+    "fortuneSingleUpgrade8": "<ut>All or Nothing</ut> <br> Unlocks access to EX-Boosts{{cost}}",
+    "fortuneSingleUpgrade9": "<ut>Time is Running Out</ut> <br> Equals chances of Fortune Boosts{{cost}}",
+
+    "convertToPlusCoin": "<ut>Exchange 1 Fortune Token for +Coin</ut>",
+    "convertToMinusCoin": "<ut>Exchange 1 Fortune Token for -Coin</ut>",
+
+    "balanceScalesCount": [
+        "Your Coins create <bt>{{SoB}}</bt> Balance Scales, which generate <nt>{{neutral}}</nt> Neutrals per second",
+        "Your Coins generate <bt>{{SoBCount}}</bt> Balance Scales per second.<br> You have <bt>{{SoB}}+{{SoB2}}</bt> Balance Scales, which generate <nt>{{neutral}}</nt> Neutrals per second"
+    ],
+
+    "neutralCount": "You have <nt>{{neutral}}</nt> neutrals",
+
+    "plusCoinChanges": [
+        "You have <bt>{{coins}}</bt> +Coins, which: {{1}}{{2}}{{3}}{{4}}",
+        "<br> ⬆ Increase coin gain by <ut>x{{effect}}</ut>, BUT reduce Crystals gain by <ut>/{{nerf}}</ut>,",
+        "<br> ⬆ Pushes COIN_GAIN_SC_001 by <ut>{{effect}}</ut>, BUT increase exponent of CRYSTAL_GAIN_SC_001 by <ut>{{nerf}}</ut>,",
+        "<br> ⬆ Divide cost of all coin upgrades by <ut>/{{effect}}</ut>, BUT increase requirements for U-tils by <ut>x{{nerf}}</ut>",
+        "<br> ⬆ Increase chance of supercoin and critical clicks by <ut>x{{effect}}</ut>, BUT it doesn't have any negative effect =)"
+    ],
+
+    "minusCoinChanges": [
+        "You have <bt>{{coins}}</bt> -Coins, which: {{1}}{{2}}{{3}}{{4}}",
+        "<br> ⬆ Increase Crystal gain by <ut>x{{effect}}</ut>, BUT reduce coin gain by <ut>/{{nerf}}</ut></ut>",
+        "<br> ⬆ Reduce exponent of CRYSTAL_GAIN_SC_001 by <ut>{{effect}}</ut>, BUT pulls COIN_GAIN_SC_001 by <ut>{{nerf}}</ut>",
+        "<br> ⬆ Divide requirements of all U-tils by <ut>/{{effect}}</ut>, BUT increase cost of all coin upgrades by <ut>x{{nerf}}</ut>",
+        "<br> ⬆ Pushes CRYSTAL_GAIN_SC_001 by <ut>{{effect}}</ut>, BUT it doesn't have any negative effect =)"
+    ],
+
+    "balanceCost": "<br>Cost: {{cost}} neutrals",
+
+    "balanceBuyableUpgrade": [
+        "<ut>Positive Mind</ut> <br> Increase positive effect of Balance Coins by 1% <br> Effect: +{{effect}}% <br> Cost: {{cost}} neutral",
+        "<ut>Fight Evil</ut> <br> Decrease negative effect of Balance Coins by -0.25% <br> Effect: -{{effect}}% <br> Cost: {{cost}} neutral",
+        "<ut>General Opinion</ut> <br> Increase Neutral production by 5% <br> Effect: +{{effect}}% <br> Cost: {{cost}} neutral"
+    ],
+
+    "balanceSingleUpgrade": [
+        "<ut>Balance Thought</ut> <br> +Coins gain additional positive and negative effects related to nerfs {{cost}}",
+        "<ut>Plus and Minus</ut> <br> -Coins gain additional positive and negative effects related to nerfs {{cost}}",
+        "<ut>Neutrality</ut> <br> Fortune Coin activates 2 Fortune Boosts {{cost}}",
+        "<ut>Positive</ut> <br> +Coins gain additional positive and negative effects related to coin upgrades {{cost}}",
+        "<ut>Negative</ut> <br> -Coins gain additional positive and negative effects related to U-tils requirements {{cost}}",
+        "<ut>Balance Power</ut> <br> +Coins and -Coins slowly generate Balance Scales {{cost}}",
+        "<ut>Extra Help</ut> <br> +Coins increase chance of supercoins and critical clicks {{cost}}",
+        "<ut>Minus Trouble</ut> <br> -Coins pushes CRYSTAL_GAIN_SC_001 {{cost}}",
+        "<ut>Mastery</ut> <br> Fortune Boosts always have maximum effect {{cost}}"
+    ],
 
     "achievementsTitle": "Achievements",
 
@@ -317,7 +422,8 @@
             "\"Without walkers\"", "\"First thousand\"", "\"I'm calling a police! No, I do!\"", "\"Breakin da wall\"", "\"Master clicker\"", "\"Hellish productivity\"", "\"Time to sleep!\"", "\"Another breakin da wall\"", "\"Million multiplier\"", "\"Final stretch?\"", 
             "\"I was waiting for you...\"","\"I wish I escape this infinity offline production coding\"","\"Who the hell needs those crystals?\"","\"Maybe I need just to bypass the wall?\"","\"U-multimultiplier\"","\"Shard palace\"","\"Is this a Prestige?\"","\"Crystal Tycoon\"","\"BRAKES FOR LOSERS\"","\"WHAT THE HELL IS KILOMETER?\"",
             "\"Let the game begin!\"", "\"Ah shard here we go again\"", "\"This is NOT game about miners\"", "\"I like the pain\"", "\"Super everything\"", "\"Why shards won't help?\"", "\"Jackpot\"", "\"I was in [REDACTED] dimension\"", "\"NICE\"", "\"Hamon OVERDRIVE\"",
-            "Adios.", "After all these years, finally I have them all!", "This is not Sparta", "Modernize yourself. Now!", "Super first 10 thousands", "Soporific virus", "Only invest!", "Be aware of many shards", "Too prestigious", "U-100"
+            "Adios.", "After all these years, finally I have them all!", "This is not Sparta", "Modernize yourself. Now!", "Super first 10 thousands", "Soporific virus", "Only invest!", "Be aware of many shards", "Too prestigious", "U-100",
+            "99% Of Gamblers Quit Before They Win Big", "The First Googol of Coins", "Yin and Yang", "INCREDIBLE POWER", "Flaming Drive", "God of Luck", "Game On", "Total Annihilation", "Prestigious Champion", "Finale"
         ]
         },
         "achievementsBonus1": ", x{{x}} for crystal multiplier",
@@ -364,6 +470,32 @@
     "achievement49Desc": "<ut> Too prestigious (49) </ut> <br> <br> Do 1e8 prestige resets.</it>",
     "achievement50Desc": "<ut> U-100 (50) </ut> <br> <br> Get in total 100 U-tils (U-multipliers, U-powers, U-adders, U-reducers) <br> <br> <it>Reward: Increase U-adder base effects by 10%.</it>",
 
+    "achievement51Desc": "<ut> 99% Of Gamblers Quit Before They Win Big (51) </ut> <br> <br> Get a Fortune Token.",
+    "achievement52Desc": "<ut> The First Googol of Coins (52) </ut> <br> <br> Get 1e100 Coins <br> <br> <it>Reward: Doubles your daily reward. </it>",
+    "achievement53Desc": "<ut> Yin and Yang (43) </ut> <br> <br> Open Balance and get 1 Balance Scale",
+    "achievement54Desc": "<ut> INCREDIBLE POWER (54) </ut> <br> <br> Get an EX Fortune Boost <br> <br> <it>Reward: Increases the maximum effects of all Fortune Boosts by 5%. </it>",
+    "achievement55Desc": "<ut> Flame Drive (55) </ut> <br> <br> Fill Overdrive II to 100% <br> <br> <it>Reward: Overdrive I no longer resets on Prestiges, except Challenges. </it>",
+    "achievement56Desc": "<ut> God of Luck (56) </ut> <br> <br> Obtain all Fortune Boosts.",
+    "achievement57Desc": "<ut> Game On (57) </ut> <br> <br> Complete the Prestige Challenge <br> <br> <it>Reward: Challange 12 has a completion counter and increase Crystal gain. </it>",
+    "achievement58Desc": "<ut> Total Annihilation (58) </ut> <br> <br> Complete Challenge 12 in under 999ms.",
+    "achievement59Desc": "<ut> Prestige Champion (59) </ut> <br> <br> Complete all Prestige Challenges in under a minute. <br> <br> <it>Reward: Increases the reward for all Prestige Challenges by 10% </it>",
+    "achievement60Desc": "<ut> Finale (60) </ut> <br> <br> Collect Infinity Coins <br> <br> <it>Reward: {{trick}}</it>",
+
+    "achievement60Tricks": [
+    "There's nothing here", "go away", "nothing", "reset game", "You don't belong here", "impossible", "world border", "game over", "emptiness", "Settings -> Reset Game", "coin multiplier x0", "777 Fortune Tokens", "hopelessness", "end game", "1.79e308 Super Coins", "Something's wrong here, right?", "There is NO reward here", "the meaning of life", "???", "epilogue", "...", "how did you beat Fortune?", "it's none of your business", "Alt+F4", "computer virus", "remove System32"
+    ],
+
+    "achievement61Desc": "<ut> Прощай (41) </ut> <br> <br> Разбить предел Престижа",
+    "achievement62Desc": "<ut> Первый Гугол монет (42) </ut> <br> <br> Получить 1е100 монет <br> <br> <it>Награда: Удваивает ежедневную награду </it>",
+    "achievement63Desc": "<ut> Инь и Ян (43) </ut> <br> <br> Открыть Баланс и получить 1 Весы Баланса <br> <br> <it>Награда:  </it>",
+    "achievement64Desc": "<ut>  (44) </ut> <br> <br>  <br> <br> <it>Награда:  </it>",
+    "achievement65Desc": "<ut>  (45) </ut> <br> <br>  <br> <br> <it>Награда:  </it>",
+    "achievement66Desc": "<ut>  (46) </ut> <br> <br>  <br> <br> <it>Награда:  </it>",
+    "achievement67Desc": "<ut>  (47) </ut> <br> <br>  <br> <br> <it>Награда:  </it>",
+    "achievement68Desc": "<ut>  (48) </ut> <br> <br>  <br> <br> <it>Награда:  </it>",
+    "achievement69Desc": "<ut>  (49) </ut> <br> <br>  <br> <br> <it>Награда:  </it>",
+    "achievement70Desc": "<ut>  (50) </ut> <br> <br>  <br> <br> <it>Награда:  </it>",
+
     "shardAchBar1": "<ut> Coin Factory ({{completed}})</ut> <br> {{current}}/{{goal}} α-coins <br> Currently: x{{effect}} to α-coin gain",
     "shardAchBar2": "<ut> Supercoin Factory ({{completed}})</ut> <br> {{current}}/{{goal}} supercoins <br> Currently: x{{effect}} to supercoin chance",
     "shardAchBar3": "<ut> Crystal Mine ({{completed}})</ut> <br> {{current}}/{{goal}} crystals <br> Currently: x{{effect}} to crystals",
@@ -401,22 +533,27 @@
     "multipliersTitle": "Multiplier Breakdown",
 
     "totalMultiplier": "Total multiplier: ",
-    
-    "mbTitle1": "Coins per click",
-    "mbTitle2": "Coins per second",
-    "mbTitle3": "Coin gain",
-    "mbTitle4": "Supercoin chance",
-    "mbTitle5": "Crystals multiplier",
-    "mbTitle6": "Shards per click",
-    "mbTitle7": "Shards per second",
-    "mbTitle8": "Shards effect",
-    "mbTitle9": "Critical chance",
-    "mbTitle10": "Critical multiplier",
-    "mbTitle11": "Click simulation",
 
-    "postE13CoinSoftcap": "Post-{{x}} softcap: ",
-    "postE15CoinSoftcap": "Post-1e15 softcap: ",
-    "postE7ShardSoftcap": "Post-1e7 softcap: ",
+    "mbTitles": [
+        "Coins per click",
+        "Coins per second",
+        "Coin gain",
+        "Supercoin chance",
+        "Crystals multiplier",
+        "Shards per click",
+        "Shards per second",
+        "Shards effect",
+        "Critical chance",
+        "Critical multiplier",
+        "Click simulation",
+        "Prestiges"
+    ],
+
+    "postE13CoinSoftcap1": "COIN_PSEC_SC_001: ",
+    "postE13CoinSoftcap2": "COIN_PCLICK_SC_001: ",
+    "postE15CoinSoftcap": "COIN_GAIN_SC_001: ",
+    "postE7ShardSoftcap": "SHARD_EFF_SC_001: ",
+    "postE50CrystalSoftcap": "CRYSTAL_GAIN_SC_001: ",
 
     "doublerName": "Doubler: ",
     "midasCursorName": "Midas Cursor: ",
@@ -449,6 +586,9 @@
     "upowerName": "U-power: ",
     "pse2Name": "Activity 2.0: ",
     "challenge1Name": "Challenge 1 reward: ",
+    "coinFactoryName": "Coin Factory: ",
+    "coinBlessingName": "Coin Blessing: ",
+    "plusCoinForCoinsName": "+Coins: ",
 
     "luckyCloverName": "Lucky Clover: ",
     "charismaName": "Charisma: ",
@@ -458,6 +598,8 @@
     "superDvorName": "Supercoin Factory: ",
     "hercCursorName": "Hercules Cursor: ",
     "achievement37Name": "Achievement 37: ",
+    "supercoinBlessingName": "Supercoin Blessing: ",
+    "plusCoinForSupercoinsName": "+Coins: ",
 
     "baseCrystalName": "Base crystals: ",
     "brilliantDoublerName": "Brillian Doubler: ",
@@ -470,10 +612,13 @@
     "prestigeFameName": "Prestige Fame: ",
     "crystalShAchName": "Crystal Mine: ",
     "achievementBonus2Name": "Achievements: ",
+    "crystalBlessingName": "Crystal Blessing: ",
+    "minusCoinForCrystalsName": "-Coins: ",
 
     "firstShardBuyableEffectName": "Crystal Gauntlet: ",
     "fifthShopBuyableEffect1Name": "Shard Rain: ",
     "ninthSuperCrystalSingleEffectName": "Reverse Generation: ",
+    "shardBlessingName": "Shard Blessing: ",
 
     "secondShardBuyableEffectName": "Generator Boost: ",
     "fifthShopBuyableEffectStats2Name": "Shard Rain: ",
@@ -493,6 +638,8 @@
     "firstMineralEffect1Name": "Opal: ",
     "critChShAchName": "Hardworker: ",
     "fifthBuyableSuperEffectName": "Super Alpha Power: ",
+    "critChanceBlessingName": "Critical chance Blessing: ",
+    "plusCoinForCritChanceName": "+Coins: ",
 
     "baseCriticalGainEffectName": "Base: ",
     "fifthSuperCrystalSingleEffectName": "Crystal Muscles: ",
@@ -500,12 +647,21 @@
     "firstMineralEffect2Name": "Opal: ",
     "critMuShAchName": "Strong Hardworker: ",
     "thirdBuyableSuperEffectName": "Super Doubler: ",
+    "critMultiplierBlessingName": "Critical multiplier Blessing: ",
 
     "thirdSuperCrystalSingleEffectName": "System Bug: ",
+    "simulationBlessingName": "Simulation Blessing: ",
+
+    "basePrestigesName": "Base prestiges: ",
+    "achievement35Name": "Achievement 35: ",
+    "thirdSuperPrestigeSingleEffectName": "Azure Cube",
+    "sixthShopBuyableEffectName": "Precious Prestige: ",
+    "prestigeShAchName": "Popularity: ",
+    "fifthFortuneSingleEffectName": "World Feast: ",
 
     "aboutGameTitle": "About game",
 
-    "aboutGame": "<ut> Digital God 0.13 Prestige Update 2.0. Part 3. Superprestige.</ut> <br> Developed by Humfrey. <br> Icons were drawn by galvares#0000. <br> <br> Digital God was inspired by such awesome games: Antimatter Dimensions, Synergism, Prestige Tree. <br> <br> Thanks everyone for playing!<br>",
+    "aboutGame": "<ut> Digital God 0.14 Fortune and Balance update.</ut> <br> Developed by Humfrey. <br> Icons were drawn by galvares#0000. <br> <br> Digital God was inspired by such awesome games: Antimatter Dimensions, Synergism, Prestige Tree. <br> <br> Thanks everyone for playing!<br>",
     "galaxyClickText": "Rate game on galaxy.click",
     "discordText": "Join to discord server",
     "telegramChatText": "Join to telegram chat (russian)",
@@ -534,19 +690,21 @@
     "fifthShopPermanent": "<ut>Midas's Touch ({{amount}}/3)</ut> <br> Critical clicks give additive supercoins<br> Currently: +{{effect}} => +{{next_effect}}{{cost}}",
     "sixthShopPermanent": "<ut>Energy Shard ({{amount}}/5)</ut> <br> Reduces shards effect softcap <br> Currently: ^{{effect}} => ^{{next_effect}}{{cost}}",
     "seventhShopPermanent": "<ut>Crystal Sword ({{amount}}/5)</ut> <br> Reduces Supercrystal cost scaling <br> Currently: -{{effect}} => -{{next_effect}}{{cost}}",
+    "eighthShopPermanent": "<ut>Fortune Ticket ({{amount}}/5)</ut> <br> Increase daily resets of Fortune Boosts by +2 <br> Эффект: +{{effect}} => +{{next_effect}}{{cost}}",
 
     "firstShopSingle": "<ut>Broken Speedometer</ut> <br> Unlock Overdrive I{{cost}}",
     "secondShopSingle": "<ut>Fragile Speedometer</ut> <br> Unlock Overdrive II{{cost}}",
     "thirdShopSingle": "<ut>Super-Machine</ut> <br> Unlock coin upgrades Super-Modernization {{cost}}",
     "fourthShopSingle": "<ut>Shard Trophy</ut> <br> Unlock Shard Achievements{{cost}}",
     "fifthShopSingle": "<ut>Supercrystal Watch</ut> <br> Smart Watch effect works with items too {{cost}}",
+    "sixthShopSingle": "<ut>Aquatic Pickaxe</ut> <br> Unlock new mineral - Aquamarine {{cost}}",
 
     "firstShopItem": "<ut>Free U-multiplier ({{amount}}/{{max}})</ut> <br> Gives +1 U-multiplier {{cost}}",
     "secondShopItem": "<ut>Free U-power ({{amount}}/{{max}})</ut> <br> Gives +1 U-power {{cost}}",
     "thirdShopItem": "<ut>Time Accelerator ({{amount}}/{{max}})</ut> <br> Gives instantly 1 minute worth gain {{cost}}",
     "fourthShopItem": "<ut>Time Accelerator+ ({{amount}}/{{max}})</ut> <br> Gives instantly 10 minutes worth gain {{cost}}",
     "fifthShopItem": "<ut>Golden Pound ({{amount}}/{{max}})</ut> <br> Gives 1e50 times less coins than gained in total{{cost}}",
-    "sixthShopItem": "<ut>Math Analysis ({{amount}}/{{max}})</ut> <br> Gives +50 Multipliers {{cost}}",
+    "sixthShopItem": "<ut>Math Analysis ({{amount}}/{{max}})</ut> <br> Gives +20 Multipliers {{cost}}",
 
     "shopBuyableTitle1": "Golden Glove",
     "shopBuyableTitle2": "Golden Watch",
@@ -563,12 +721,14 @@
     "shopPermanentTitle5": "Midas's Touch",
     "shopPermanentTitle6": "Energy Shard",
     "shopPermanentTitle7": "Crystal Sword",
+    "shopPermanentTitle8": "Fortune Ticket",
 
     "firstShopSingleTitle": "Broken Speedometer",
     "secondShopSingleTitle": "Fragile Speedometer",
     "thirdShopSingleTitle": "Super-Machine",
     "fourthShopSingleTitle": "Shard Trophy",
     "fifthShopSingleTitle": "Supercrystal Watch",
+    "sixthShopSingleTitle": "Aquatic Pickaxe",
 
     "shopItemTitle1": "Free U-multiplier",
     "shopItemTitle2": "Free U-power",
@@ -657,7 +817,7 @@
     "version012": "<b>02.05.2024 | Digital God 0.12. Supercrystals and Minerals.</b><br>Interface changes:<br>- NEW MULTIPLIERS! The game has 6 new multiplier breakdown tabs: Shards per second/click, shards effect, critical chance and multiplier, click simulation.<br>- Statistics have been updated with new data with clicks.<br>- For mobile devices, special settings in \"Coins\" tab are now located separately just below, so as not to cover \"Events\" button.<br>- Optimized notifications when loading game.<br>- Text instead of 'yes' in autosaves and sound settings is displayed as true/false.<br>- Fixed some translation errors.<br>- The super shop has 4 shelves instead of 3.<br>- Added window when loading the game for first time.<br>- The language is automatically set depending on the browser language.<br>Features changes:<br>- BIG REWRITE. Sorry that update had to be delayed until May, when at the beginning of April it was already ready, I wanted to optimize save code and finally solve problem with compatibility with older versions of saves, this led to the fact that I had to completely rewrite the game in new way, but in 3 weeks it was finished and saves became more optimized, read further for details.<br>- OPTIMIZATION AND COMPATIBILITY OF SAVES. Now problem with saves from old versions has been resolved once and for all and code has become more optimized, which makes it much easier for me to make new updates. ATTENTION! Since there was a Big Rewrite, all variables began to be named differently, but if you load/import a save from the old version, it will be converted and transfer some (80%) of data to new one and you can continue to enjoy the game. What will not be converted: Chapters and Achievements, you can unlock them again, I don't think it will be difficult.<br>- CRITICAL CLICKS! They work on coin clicks with a 1% chance and give twice as more coins, later you can increase these numbers and also be able to do critical clicks on Shards.<br>- CLICK SIMULATION! Your clicks will be doubled and maybe even tripled thanks to new feature, which can be improved by buying a special upgrade in Supercrystals tab. More <it>supercoin</it>!<br>- RECENT PRESTIGES AND CHALLENGES TIME. I have been postponing recent prestiges feature for a very long time since 0.6, and finally their time has come, you can view how long and how many crystals you received from the last 10 prestiges. You can also see how long it took you to complete a particular challenge. ATTENTION! If you completed them in 0.11, then for time you need to complete them again.<br>- 10 NEW ACHIEVEMENTS!<br>- Added other Prestige Milestones.<br>- The daily reward is reset at 00:00 your time instead of 24 hours after receiving the reward.<br>- Added notification when the Daily Reward is ready.<br>- The bug with coin gain in the background may have been fixed.<br>- Added two new codes. One of which is definitely not a <it>revolution</it>.<br>- I highlighted names of codes for English language, since it's more difficult to find them there than in Russian.<br>- Automation is restarted only after execution.<br>- Upgrades that depend on clicks now depend on GAME clicks instead of real ones.<br>Gameplay changes:<br>- SUPERCRYSTALS! Collect 1e50 coins to unlock the ability to pour Shards and get a Supercrystal! Choose one, or maybe two or even more new upgrades if you have enough of supercrystals, and if you change your mind, you can respec, but remember this will also trigger a Prestige reset.<br>- MINERALS! Upon reaching Milestone 18, you will be able to unlock Minerals, which increase gain of everything. To create them you need Runes and Shards.<br>- SUPER-MODERNIZATION! When purchasing a Super-Machine, you will be able to upgrade upgrades into Super Upgrades, which will have an additional effect, but they already cost Supercoins.<br>- OVERDRIVE 2! Unlocked by purchasing a Crystal Speedometer. Gives a multiplier to Crystals and requires Crystals themselves.<br>- NEW THINGS IN SUPERSHOP! To unlock them you need to complete some achievements.<br>Balance changes:<br>- Effects of all coin upgraedes except those that affect income per click have been reduced.<br>- Reduced effect of Achievement 30 from x(Prestiges) to x(Prestiges)^0.3.<br>- Reduced effect of Achievement 17.<br>- Increased cost for supershop upgrades, all items and Broken Speedometer from 100 to 250.<br>- Reduced effect of achievements on coins.<br>- Increased cost scaling after 10 U-boosters.<br>- Increased cost scaling for Shard upgrades.<br>- The limit has been removed from Gem Investment, but cost scaling has become very high.<br>- Reduced offline Crystals gain.<br>- Charisma no longer separately affects chance of offline supercoins.<br>- Offline gain of supercoins has increased.<br>- Achievement 16 requires 666% instead of 6666% Productivity effect.",
     "version0121": "<b>17.05.2024 | Digital God 0.12.1:</b><br>Features changes:<br>- Added 7 notations and Standard one became main instead of Scientific.<br>- Added autosave interval slider from 0.1s to 60s.<br>- Removed save notification while autosaving.<br>- Added 3 save slots (current one will be first).<br>- Added disable/enable for offline prod (including time).",
     "version013": "<b>11.07.2025 | Digital God 0.13. Superprestige. </b> <br> NEW FEATURES: <br> - SUPERPRESTIGE! Collect 1e15 crystals to unlock the ability to break Prestige barrier and get more Crystals per reset than just 1! <br> - 15 NEW SUPERPRESTIGE UPGRADES! 5 buyable and 10 single (including the Super Hammer). <br> - U-ADDERS AND U-REDUCERS! After breaking Prestige barrier, you can perform resets to get 2 new boosts: U-Adder – +1 free U-Multiplier, and U-Reducer – subtracts 100 upgrades from U-tils requirements. <br> - SHARD ACHIEVEMENTS! After purchasing Shard Trophy, you can complete mini-achievements to increase the production of all resources in game! <br> - 10 new achievements!<br> - New Shard upgrade.<br> - Added bulk purchase for Shard and Crystal upgrades.<br> - New items in Supershop.<br> - Three new fonts. <br> BUFFS: <br> - Reduced prices for Super-upgrades and Supershop items.<br> NERFS:<br> - Base effect of U-Booster reduced from 0.04 to 0.02.<br> - Slightly increased price scaling for U-Multiplier.<br> - Slightly increased price scaling for U-Booster.<br> - Minerals and Supercrystals have a sharp cost scaling starting from the 10th purchase. <br> - Reduced price scaling for Crystal Glove.<br> - Jade effects have been reduced.<br> - Increased price scaling for Gem Investment.<br> REWORKS: <br> - Alpha-Booster upgrade reworked: instead of x/1000 to coins per click, now gives x/2500 to total coin gain.<br> - Challenge 1 reward now boosts coins per click.<br> - Opal formula changed. <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> Oh hello, here is some new codes to apologize for such long update: <ut>superprestige</ut> and <ut>sorry</ut>",
-
+    "version014": "<ut>11/25/2025 | Digital God 0.14. Fortune and Balance.</ut><br>NEW FEATURES:<br>- FORTUNE! Exchange Coins or Crystals for Fortune Coins to unlock special Fortune boosts! <br>- 12 NEW FORTUNE UPGRADES! 3 buyable and 9 single.<br>- BALANCE! It's time to create balance in universe after a series of wins and loses, only neutrality and stability!<br>- 12 NEW BALANCE UPGRADES! 3 buyable and 9 single.<br>- 5 new achievements! The remaining 5 will be added in 0.15!<br>- Two new items in Supershop: Fortune Ticket and Aquatic Pickaxe.<br>- New mineral - Aquamarine.<br>CHANGES IN THE INTERFACE:<br>- New tab - Softcaps.<br>- Global change in adaptation for mobile devices. Improved flexibility for various screen resolutions.<br>- Changed style of tab and sub-tab buttons.<br>- Gray text made slightly lighter.<br>CODE CHANGES:<br>- Optimized Multiplier Breakdown code.<br>BUFFS:<br>- Increased the Overdrive 1 effect by 3 times.<br>- Reduced the requirements for Prestige Stages 19 and 20.<br>- Reduced the price of Math Analysis.<br>- Reduced costs for Energy Shard and Crystal Sword.<br>- Increased reward for Challenge 9.<br>- Increased effect of Topaz.<br>- Increased base effect of U-reducer from 100 to 500.<br>- Increased effect of Champion's Belt.<br>- Removed cost scaling of Supercrystal.<br>NERFS:<br>- Gift of Destiny gives +0.1 free U-boost instead of +0.2.<br>- Decreased base effect of the U-boost to 0.1 instead of 0.2.<br>- The effect of Math Analysis is reduced to 20 instead of 50.<br>- Decreased effect of Energy Shard.<br>- Decreased Buy limit of Math Analysis.<br>- Decreased effect of Strong Hardworker.<br>- Decreased effect of Alpha Power.<br>- Increased cost scaling of shards for buying Minerals every 10 purchases.<br>- Decreased effect of Prestige Fame.<br>- The limit for post-1e50 gain of Crystals softcap is reduced to 0.3 instead of 0.4.<br>REWORK: <br>- Changed formulas for effects of Opal.<br>- Cost scaling of U-tils has been reworked.<br>- Crystal Sword now reduces cost of Supercrystal by 10^n for each upgrade.<br>- Challenge 3 reward effect changed to increase instead of power.",
     "chapter1Name": "Beginning",
     "chapter2Name": "Upgrades",
     "chapter3Name": "U-multiplier",
@@ -673,6 +833,8 @@
     "chapter13Name": "Superprestige",
     "chapter14Name": "U-adder",
     "chapter15Name": "U-reducer and...",
+    "chapter16Name": "Fortune's Favor",
+    "chapter17Name": "Balance",
 
     "chapter1": "<b> July 10, 2175. </b> <br> Who... am... I and... what is this place? <br> You dont remember anything. <br> I feel... feel something looking at me. <br> That \"something\" probably wants me to pick up those coins. <br> They had <b>Alpha</b> icon, I don't see anything except them. <br> I don't like it... <br> I think I have no choice...",
     "chapter2": "<b> July 11, 2175. </b> <br> Next day... <br> I've collected enough coins for buying something called <b>Upgrades</b>. <br> They're really became helpful, because I started to gaining more coins. <br> Anyway I hope it's not end and something more hides behind them.",
@@ -689,6 +851,8 @@
     "chapter13": "<b> April 13, 2176. </b><br> The moment has come, I am one step closer to the mystery! <br> On the night of April 12, I forged a magic hammer from 1 quadrillion shards! <br> It allowed me to break through the invisible layer hiding a new era... the era of <ut>Super Prestige</ut>... <br> Alas, after a single strike, the hammer shattered and won't come back together. <br> However, I felt incredible power, as if I could reclaim those crystals in an instant!",
     "chapter14": "<b> April 29, 2176. </b><br> Lately, things have been going just great for me, but... <br> I hit a dead end in my progress, no matter how much time and effort I spent, I just couldn't get more Crystals <br> I thought for a long time about what I was doing wrong... <br> And then I had a brilliant idea! <br> What if I should do longer Prestiges...? <br> The result didn't take long, the very next day I saved up for <ut>U-Adder</ut>... <br> However... as always, it led to another reset... <br> Overall, I'm satisfied with the result!",
     "chapter15": "<b> May 18, 2176. </b> <br> While gathering resources, I accidentally stumbled upon a new unknown upgrade... <br> It was called <ut>U-Reducer</ut>... <br> Its essence was in yet another reset, including those very U-Adders I had been collecting for so long. <br> Of course, I had to try everything, and my progress grew several times! <br> It took me quite a while, but in a couple of days I was back to the same resources as before <br> And after these thoughts I heard... <br> <it> \"Oh, you're lucky to have reached such heights, only a few before you managed this... <br> Will you be able to overcome my challenges? Do you have enough luck?\" </it><br> After these words, I was stunned and realized... <br> I'm not alone here.",
+    "chapter16": "<b>October 21, 2176.</b> <br>Almost half a year had passed, and I heard that voice more and more often... <br> It told me that I was worthy of a certain test of Fortune, but I had no idea what that meant... <br> Until I collected enough Supercrystals... <br> Then I heard that voice clearly for the first time, which said: <br> <it> \"Congratulations, Nameless. You are one of the few who made it here. <br> You are worthy to enter my hall of <ut>Fortune</ut> and try your luck. <br> You can lose everything, or you can get rich. It all depends on you... Good luck.\" </it><br> After that, I saw a lot of machines for exchanging for some Fortune Tokens <br> The fun began... All or nothing. <br> I will definitely get out of here!",
+    "chapter17": "<b> January 5, 2177. </b> <br> This stage seemed terribly difficult to me, I thought it was better when I controlled the progress myself <br> However, recently I discovered a new stage - <ut>Balance</ut>... <br> That unpleasant voice from a certain Fortune rang out again, who was insanely happy that I passed this test... too insane. <br> A new white machine appeared in the hall, along with mysterious scales with plus and minus signs drawn on them. <br> I only saw the shadow of this individual for an instant... <br> I was horrified... It was like it had two heads... <br> It's nearby... <br> It's watching me... <br> It knows why I'm here. <br>I need to know all the answers.",
 
     "help1Name": "Beginning",
     "help2Name": "Tabs",
@@ -709,6 +873,8 @@
     "help17Name": "Shard Achievements",
     "help18Name": "Superprestige",
     "help19Name": "U-adders and U-reducers",
+    "help20Name": "Fortune",
+    "help21Name": "Balance",
 
     "help1": "Welcome to Digital God! Here you will find exciting and interesting adventure, where you, the main character, wake up in unknow world, where there is no one except you. Your goal is reveal all secrets of this world. Alpha-coins is gonna help you through this adventure, but they're seems suspicious for you. <br> <br> You can get Alpha-coins in two ways: Active and Passive.<br><br><ut>Active</ut> it's a way to get α-coins by clicking on α-coin icon in center of the screen. At beginning you'll get only one α-coin, but you can increase gain by buying upgrades, which you'll find at bottom. <br><br><ut>Passive</ut> gain of α-coins is alternative way. You can leave the game, close, or even turn off the computer, you'll still gain the same amount of α-coins! To start getting α-coins passively or \"per second\" (actually every 50ms) you need to buy first upgrade \"Small Investment\". You have enough α-coins for it. Later you can buy them more ane more, and then increase the gain by other upgrades! <br><br>Besides upgrades there is another α-coin multipliers. To learn more about them check other tabs. Good luck and have fun!",
     "help2": "Game has different tabs where you can read the information or do some action.<br><br><ut>Settings</ut> - tab, where you can change the game. <br> It's divided into tree subtabs: <ut>Saving</ut>, <ut>Graphic</ut>, <ut>Other</ut>.  <br> <ut>Saving</ut> - there you can do manual save/loading, change autosaving settings or import/export to file.<br> <ut>Graphic</ut> will allow to change the game looking <br> <ut>Other</ut> actually it doesn't have settings, but different information like changelog.<br><br><ut>Clicker</ut> - main tab. It does have two subtabs: <ut>Coins</ut> - there you can click on the α-coin and buy upgrades, and <ut>Overdrive</ut>, which will unlock later (check. Overdrive page) <br><br><ut>Achievements</ut> - it does show achievements, their requirements. which rewards they're give and total bonus based on their count.<br><br><ut>Information</ut> - does have three subtabs: <ut>Statistics</ut> - shows game time, count of different resources and some things, <ut>Multipliers</ut> - shows what and how much boosts the gain of different resources. <ut>About game</ut> - information about game, it's devs and thanks.",
@@ -729,6 +895,9 @@
     "help17": "<ut>Shard Achievements</ut> are a completely new type of achievement, different from the regular ones. Instead of a single goal, they have an infinite number of completions, and each completion grants a separate bonus to the production of a certain resource. They can be unlocked by purchasing the Shard Trophy. <br><br>There are 10 Shard Achievements in the game, each focused on obtaining all resources, and after reaching each goal you receive a small boost to the production of one resource. Achievements are not reset after Prestige or lower resets. Since this is a more powerful feature, the bonuses also work during Challenges. <br><br> Also, every pair of Shard Achievements requires 1 Super Crystal to unlock.",
     "help18": "<ut>Superprestige</ut> is an advanced Prestige layer that allows you to gain more Crystals per reset depending on your current amount of coins. Superprestige is unlocked by breaking the Prestige barrier with the Super Hammer, which costs 1e15 Crystals. <br><br>After breaking Prestige, you will be able to get \"base crystals\" instead of just 1, and finally they are multiplied by existing bonuses. \"Base Crystals\" are generated depending on your current amount of coins, so it is important to use the \"Crystals per reset\" mode in Automation. <br>After unlocking Superprestige, you will gain access to 14 new upgrades, 5 of which are buyable and 9 are single. They are not reset after Prestige, so use your Crystals wisely. You will also be able to perform U-Adder and U-Reducer resets, which will be explained in the next sections.",
     "help19": "<ut>U-Adders and U-Reducers</ut> are new mini-prestige layers that reset all previous ones (U-Adders reset U-Boosters and U-Multipliers, while U-Reducers reset U-Adders and everything below). They can be unlocked after breaking the Prestige barrier for the first time. <br><br>U-Adders reset U-Boosters and U-Multipliers in exchange for +1 bonus U-Multiplier (it gives a bonus, but does not count towards requirement scaling). After each reset, you will get +1 additional U-Multiplier to your total bonus upgrades. <br><br>Starting cost for a reset: 500 Productivity and 10 U-Boosters. The cost increases only in Productivity by the formula: <it>500+50*p</it>, where p is the number of Productivities. The U-Booster requirement always stays the same. <br> <br> U-Reducers reset U-Adders, U-Boosters, and U-Multipliers in exchange for lowering their requirements. After each reset, you will reduce the requirements for U-tiers by -100 upgrades (works only for requirements that scale, i.e. upgrades).<br><br>Starting cost for a reset: 650 Productivity and 4 U-Adders. The cost increases only in Productivity by the formula: <it>650+100*p</it>, where p is the number of Productivities. The U-Adder requirement always stays the same.<br><br>P.S. When you perform a Prestige reset, these boosts are also reset.",
+    "help20": "<ut>Fortune</ut> is a mechanic based on luck, however, it doesn't allow you to \"lose everything\" or break the game.<br><br>First, you need to spend Coins or Crystals to buy Fortune Tokens, which will activate random Fortune boosts.<br><br>There are 12 boosts in total, 3 of each rarity. Rarities can be unlocked in single Fortune upgrades and they vary as: B, A, S, EX. Their chances also vary (if you do not have \"Time is Running Out\" upgrade):<br>B - 80%<br>A - 10%<br>S - 8%<br>EX - 2%<br><br>If you don't like the boosts, they can be respecced a limited number of times per day.<br><br>To progress in Fortune further, Supercrystals are used. Purchased Fortune upgrades can be respecced at any time, and single ones only requires reaching a total number of Supercrystals.",
+    "help21": "<ut>Balance</ut> is a mechanic opposite to Fortune, essence of which is balance between positive and negative effects of new coin types: +Coins and -Coins. <br><br>+Coins often provide boosts to coin gain, while -Coins provide boosts to crystals gain. <br><br>Balance Coins can be obtained by exchanging 1 Fortune Token for any of these coins; the effect is applied instantly. <br><br>The greater your balance between Coins, the more Balance Scales you will have, which in turn generate Neutral, which can be used to purchase various Balance upgrades. In the future, it will be possible to generate Balance Scales depending on how long you maintain a coin balance.",
+
 
     "noEvent": "There are no events in the game right now, come back later",
     "spiritualEventTitle": "Welcome to Spiritual Event!",
@@ -789,13 +958,13 @@
 
     "challengeReward1": "Reward: Increase coins per click exponent by ^1.1.",
     "challengeReward2": "Reward: Crystal Overload gives x1000000 Shards based on Crystals.",
-    "challengeReward3": "Reward: Prestiges boost gain per second. Effect: ^{{x}}.",
+    "challengeReward3": "Reward: Prestiges increase gain per second. Effect: x{{x}}.",
     "challengeReward4": "Reward: Achievements gives free Small Investments. Effect: +{{x}}.",
     "challengeReward5": "Reward: Upgrades price slightly decreased. Effect: ^{{x}}.",
     "challengeReward6": "Reward: Completed Challenges increases gain per click. Effect: x{{x}}.",
     "challengeReward7": "Reward: Shards increases coin gain more by Log2(Shards). Effect: x{{x}}.",
     "challengeReward8": "Reward: Gain per second increases over time in current Prestige. Effect: x{{x}}.",
-    "challengeReward9": "Reward: Supercoins pushes Post-e13 softcap requirement further. Effect: {{x}}.",
+    "challengeReward9": "Reward: Supercoins pushes COIN_PSEC_SC_001 and COIN_PCLICK_SC_001 further. Effect: {{x}}.",
     "challengeReward10": "Reward: Amount of upgrades increases Crystals gain. Effect: x{{x}}",
     "challengeReward11": "Reward: Unlock new items in Supershop.",
     "challengeReward12": "Reward: Decreases U-multiplier's scaling to 40, and U-power's to 80.",
@@ -826,5 +995,33 @@
     "gameTimeTable": "{{h}}:{{m}}:{{s}}",
     "gameTimeTableMs": "{{ms}}ms",
     "realTimeTable": "{{h}}:{{m}}:{{s}}",
-    "realTimeTableMs": "{{ms}}ms"
+    "realTimeTableMs": "{{ms}}ms",
+
+    "softcap": "Softcap: ^{{x}}",
+    "softcaps": [
+        {
+            "codename": "COIN_UPG07_SC_001",
+            "starts": "Starts from {{x}} effect of upgrade"
+        },
+        {
+            "codename": "COIN_PSEC_SC_001",
+            "starts": "Starts from {{x}} coins per second"
+        },
+        {
+            "codename": "COIN_PCLICK_SC_001",
+            "starts": "Starts from {{x}} coins per click"
+        },
+        {
+            "codename": "COIN_GAIN_SC_001",
+            "starts": "Starts from {{x}} gain"
+        },
+        {
+            "codename": "CRYSTAL_GAIN_SC_001",
+            "starts": "Starts from {{x}} Crystals gain"
+        },
+        {
+            "codename": "SHARD_EFF_SC_001",
+            "starts": "Starts from {{x}} Shards effect"
+        }
+    ]
 }

@@ -6,27 +6,23 @@
 }
 
 .settingButton{
-    border-style: solid;
+    border: solid 1px rgb(65, 68, 207); 
     border-radius: 5px;
-    width: 160px;
-    height: 70px;
-    border-color:rgb(65, 68, 207);
+    max-width: 160px;
+    max-height: 70px;
+    width: 20vw;
+    height: 7vw;
     color: rgb(65, 68, 207);
     background-color: rgb(0, 0, 0);
     text-align: center;
-    font-family: "Poly"; 
     font-size: calc(13px * var(--font-scale));
-    transition: transform 0.1s ease-in-out;
-    transition: filter 0.2s ease-in-out;
-    vertical-align: middle;
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    margin-right: 5px;
+    transition:  0.25s ease-in-out;
 }
+
 .settingButton:active {
     transform: scale(0.98); 
 }
+
 .settingButton:hover{
     background-color: rgb(53, 55, 162);
     color: #000000;
@@ -41,25 +37,18 @@
     color:rgb(0, 0, 0);
 }
 
-
-
-
 .settingsRow {
-    margin: 0 auto;
     display: flex;
     justify-content: center;
+    gap: 10px;
     margin-bottom: 10px;
 }
-
 
 .loadfile {
     display:flex;
     justify-content: center;
     text-align: center;
     align-items: center;
-    height: 67.2px;
-    border-width: 2.2px;
-    width: 158px;
 }
 
 #file-upload {
@@ -70,7 +59,6 @@
     display: none;
 }
 
-
 .gameWindow {
     position: fixed;
     top: 50%;
@@ -78,9 +66,10 @@
     transform: translate(-50%, -50%);
     background-color: #000000;
     border: solid 3px #ffffff;
-    /* padding: 5px; */
-    width: 750px;
-    height: 550px;
+    max-width: 750px;
+    max-height: 550px;
+    width: 80vw;
+    height: 50vh;
     z-index: 9989;
     text-align: left;
     display: none;
@@ -88,21 +77,20 @@
 }
 .versionButton {
     border-style: solid;
-    width: 90px;
-    min-height: 33px;
+    width: 70px !important;
+    height: 100%;
     border-color: rgb(255, 255, 255);
     color: rgb(255, 255, 255);
     background-color: rgb(0, 0, 0);
     text-align: center;
-    font-family: "Poly";
     font-size: calc(12px * var(--font-scale));
-    cursor: pointer;
     padding: 0px;
     border-width: 1px;
-    border-block-width: 0px;
 }
 
 .versionButtonVertical {
+    height: 40px;
+    width: 100% !important;
     border-bottom-width: 1px;
     border-left-width: 0px;
     border-right-width: 1px;
@@ -112,6 +100,11 @@
 .versionButton:hover {
     color: rgb(0, 0, 0);
     background-color: rgb(255, 255, 255);
+}
+
+/* Ensure version/chapter buttons don't shrink so overflow works consistently */
+.versionButton, #versionChooser > button, #chapterChooser > button {
+    flex: 0 0 auto;
 }
 
 .myPopupBackdrop {
@@ -172,9 +165,13 @@
     border-bottom: solid 2px;
     border-color: #ffffff;
     width:100%;
-    height:6%;
+    height:10%;
     align-items: center;
     text-align: left;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap; /* keep buttons on single row so horizontal scroll appears */
+    -webkit-overflow-scrolling: touch;
 }
 
 #chapterChooser {
@@ -188,8 +185,10 @@
     align-items: center;
     text-align: left;
     overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
 }
-
 
 #versionDescription {
     margin-left: 5px;
@@ -203,7 +202,7 @@
     overflow-y: auto;
     color:white;
     margin-top:0;
-    max-height: 460px;
+    max-height: 440px;
 }
 
 .loreChapter {
@@ -284,10 +283,6 @@ footer {
     margin: 10px;
 }
 
-.selectSetting {
-    border-width: 2px;
-}
-
 .selectSetting:hover {
     background-color: black;
     color: rgb(53, 55, 162);
@@ -297,10 +292,6 @@ footer {
     transform: scale(1); 
 }
 
-.selectSetting option {
-    background-color: #000000;
-    color: rgb(65, 68, 207);
-}
 
 #inputBorder{
     border-style: solid;
@@ -333,27 +324,3 @@ footer {
     font-size: calc(23px * var(--font-scale));
     text-align: center;
 }
-
-@media screen and (max-width: 600px) {
-    .gameWindow {
-        width: 80%;
-        height: 50%;
-        left: 45%;
-    }
-    .versionButton {
-        width:100%;
-        height:100%
-    }
-    .versionButtonVertical{
-        height: 13%
-    }
-    #helpDiv {
-        max-height: 90%;
-    }
-    #versionDescription {
-        max-height: 90%;
-    }
-    .closeWindow {
-        left: 88.5%;
-    }
-  }

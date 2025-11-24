@@ -34,13 +34,8 @@ html{
 }
 
 .mainSettings {
-  position: absolute;
-  margin-top: -73.5px;
+  position: relative;
   display: flex;
-}
-
-#coinsTab .mainSettings {
-  margin-top: -78px;
 }
 
 hr {
@@ -51,13 +46,15 @@ hr {
   background-color: #060606;
   border:#ffffff solid 1.6px;
   color: white;
-  width: 50px;
-  height: 50px;
+  max-width: 50px;
+  max-height: 50px;
+  width: 5vw;
+  height: 5vw;
+  background-size: cover;
   font-size: calc(12px * var(--font-scale));
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   cursor: pointer;
-  font-family: poly;
 }
 
 #maxOrNoUpgrades:hover, #maxOrNoShardUpgrades:hover, #maxOrNoSuperprestigeUpgrades:hover {
@@ -70,12 +67,13 @@ hr {
   background-position: center;
 }
 
-#coinsCount {
+#coinsCount, #fortuneTokensCount, #fortuneTokensCount2, .currencyCount, #fortuneTokensCount3 {
     color: white;
     margin: 5px;
     margin-top: 15px;
     white-space: nowrap;
     margin-bottom: 15px;
+    font-size: calc(16px * var(--font-scale));
 }
 
 gt {
@@ -83,6 +81,25 @@ gt {
   text-shadow: 0 0 5px rgb(255, 217, 0);
   font-size: calc(30px * var(--font-scale));
 }
+
+pt {
+  color: hotpink;
+  text-shadow: 0 0 5px hotpink;
+  font-size: calc(30px * var(--font-scale));
+}
+
+bt {
+  color: white;
+  text-shadow: 0 0 5px white;
+  font-size: calc(30px * var(--font-scale));
+}
+
+nt {
+  color: rgb(190, 190, 190);
+  text-shadow: 0 0 5px rgb(190, 190, 190);
+  font-size: calc(30px * var(--font-scale));
+}
+
 
 #coinsGain {
     color: #656565;
@@ -111,7 +128,7 @@ gt {
 }
 
 #loadingScreen {
-  background-image: url("images/loadingscreen013.jpg");
+  background-image: url("images/loadingscreen014.jpg");
   background-repeat: no-repeat;
   background-size: contain;
   width: 100%;
@@ -163,7 +180,8 @@ gt {
   }
   
   #topValues {
-    height: 115px;
+    max-height: 115px;
+    height: 18vw;
     justify-content: space-between;
     margin-bottom: 10px;
     display: flex;
@@ -353,8 +371,9 @@ gt {
   display: flex;
   justify-content: center;
   flex-direction: row;
-    align-items: center;
-    width:800px;
+  align-items: center;
+  max-width:800px;
+  width: 70vw;
 }
 
 #shopDiv .tooltip {
@@ -365,7 +384,8 @@ gt {
   display: flex;
   justify-content: center;
   border: white 1px solid;
-  width: 800px;
+  max-width: 800px;
+  width: 70vw;
   border-radius: 5px 5px 0px 0px;
   height: 30px;
   align-items: center;
@@ -557,8 +577,10 @@ st {
   align-items: center;
 }
 .overdriveType {
-  width: 800px;
-  height: 120px;
+  max-width: 800px;
+  max-height: 120px;
+  width: 50vw;
+  height: 15vw;
   border: white 1px solid;
   margin: 20px;
 }
@@ -576,11 +598,11 @@ st {
 }
 .overdriveTypeProgressBarBase{
   background-color: #111111;
-    height: 99%;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    cursor:pointer;
+  height: 99%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  cursor:pointer;
     
 }
 #overdriveType1ProgressBar{
@@ -597,9 +619,15 @@ st {
   pointer-events: none;
   cursor: default;
   display: flex;
-  width: 800px;
+  max-width: 800px;
+  width: 50vw;
   justify-content: center;
-  z-index: 1000
+  z-index: 1000;
+  font-size: calc(16px * var(--font-scale));
+}
+
+#progressBarGain, #progressBarGain2 {
+  font-size: calc(18px * var(--font-scale));
 }
 
 .overdriveTypeProgressBarActive {
@@ -608,10 +636,11 @@ st {
   pointer-events: none;
   cursor: default;
   display: flex;
-  width: 800px;
+  max-width: 800px;
   justify-content: center;
   z-index: 2000;
-  height: 101px;
+  max-height: 101px;
+  height: 12.75vw;
   transition: opacity 0.5s ease-in-out;
   opacity: 0;
 }
@@ -635,8 +664,10 @@ ct {
   background-color: black;
   color: aqua;
   font-size: calc(12px * var(--font-scale));
-  width: 50%;
-  height: 70px;
+  max-width: 250px;
+  max-height: 70px;
+  width: 25vw;
+  height: 5vw;
   text-align: center;
   transition:  0.2s ease-in-out;
   cursor: pointer;
@@ -695,8 +726,10 @@ ct {
   border: 3px #212121 solid;
   background-color: rgb(151, 151, 151);
   color: black;
-  width: 300px;
-  height: 70px;
+  max-width: 300px;
+  max-height: 70px;
+  width: 30vw;
+  height: 15vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -752,7 +785,8 @@ ct {
 }
 
 #shardsCountText {
-  color: white
+  color: white;
+  text-align: center;
 }
 
 shn {
@@ -915,6 +949,9 @@ rn {
 #shopPermanentU7 {
   background-image: url('images/swordcrystal.webp')
 }
+#shopPermanentU8 {
+  background-image: url('images/fortuneTicket.png')
+}
 #shopSingleU1 {
   background-image: url('images/brokenspeedometer.webp');
   background-position: -0.5px -0.5px;
@@ -972,6 +1009,10 @@ rn {
 }
 #mineral3 {
   background-image: url('images/jadeshiny.webp');
+  background-position: -1px -1px;
+}
+#mineral4 {
+  background-image: url('images/aquamarine.png');
   background-position: -1px -1px;
 }
 
@@ -1038,6 +1079,7 @@ scn {
   display: flex;
 }
 
+
 #mineralsTab, #mineralsCountDiv, .mineralContainer {
   display: flex;
   flex-direction: column;
@@ -1045,15 +1087,21 @@ scn {
   text-align: center;
 }
 
+/* Make mineral blocks wrap to a new row when container gets narrow */
 #mineralsDiv {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap; /* allow children to wrap */
+  justify-content: center;
+  gap: 16px; /* spacing between items */
 }
 
 .mineralContainer {
-  width: 300px;
+  width: 200px;
   height: 200px;
   margin-top: 50px;
+  flex: 0 1 200px; /* allow shrinking and wrapping */
+  box-sizing: border-box;
 }
 
 .mineralButton {
@@ -1143,8 +1191,10 @@ th {
 }
 
 .shardAchBarDiv {
-  width: 600px;
-  height: 70px;
+  max-width: 600px;
+  max-height: 70px;
+  width: 42vw;
+  height: 10vw;
   border: white 2px solid;
   border-radius: 50px;
   margin: 20px;
@@ -1165,7 +1215,8 @@ th {
   pointer-events: none;
   cursor: default;
   display: flex;
-  width: 600px;
+  max-width: 600px;
+  width: 42vw;
   justify-content: center;
   z-index: 1000;
   font-size: calc(14px * var(--font-scale));
@@ -1218,176 +1269,430 @@ th {
   background-image:radial-gradient( rgba(199, 255, 251, 0.505), black 210%);
 }
 
-@media screen and (max-width: 600px) {
-
-  
-  span, gt, pbn, st, ct, p, input, label, select, footer {
-    font-size: 50% !important;
-  }
-  gt, pbn, st, ct {
-    font-size: 100% !important;
-  }
-  st, shn {
-    font-size: calc(20px * var(--font-scale)) !important;
-  }
-  #percent {
-    font-size: 75% !important;
-  }
-
-  button {
-    font-size: 30% !important;
-  }
-
-  #doPrestige {
-    width: 100px;
-    height: 30px;
-  }
-
-  #crystalCount {
-    font-size: 75%
-  }
-
-  #html {
-    width: 100%
-  }
-
-  .tabButton {
-    width: 50px;
-    height: 25px;
-    margin-right: 2px;
-  }
-
-  #topValues {
-    height: 75px
-  }
-
-  .settingButton {
-    width: 40%;
-    height: 30px
-  }
-
-  .titleTab {
-    font-size: 100% !important;
-  }
-  #overdriveType1, #overdriveType2 {
-    height: 60px;
-    width: 300px;
-  }
-  #overdriveType1Ghost, #overdriveType2Ghost {
-    width: 300px
-  }
-
-  #overdriveType1ProgressBarActive, #overdriveType2ProgressBarActive{
-    height: 54px
-  }
-  
-  #maxOrNoUpgrades, #modernizeButton, #maxOrNoShardUpgrades, #maxOrNoSuperprestigeUpgrades {
-    width: 30px;
-    height: 30px;
-    font-size: calc(9px * var(--font-scale));
-    background-size: cover;
-    margin: 2px;
-    border-radius: 5px;
+#fortuneTab {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* allow the two halves to wrap like balance */
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
 }
-  .mainSettings {
-    width: 80px;
-    margin-top: -50px
+
+#fortuneTab .sideFortune {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* prefer a 420px base so halves wrap to next row when narrow */
+  flex: 0 1 500px;
+  max-width: 500px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  height: auto; /* don't force 90vh so it can shrink on small screens */
+}
+
+#fortuneConvert {
+  position: relative;
+  width: 360px;
+  height: 360px;
+  margin: 30px 0;
+}
+
+.halfButton {
+  position: absolute;
+  width: 358px;
+  height: 356px;
+  border-radius: 50%;
+  border: 2px solid white;
+  top: 0;
+  left: 0;
+  background: transparent;
+  cursor: pointer;
+  z-index: 1;
+  transition: filter 0.2s;
+  color: black;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.halfButton.left {
+  background: radial-gradient(rgb(0, 0, 0) 45%, rgb(255, 217, 0) 100%);
+  clip-path: polygon(0 0, 180px 0, 180px 360px, 0 360px);
+  border-right: none;
+
+}
+
+.halfButton.right {
+  background: radial-gradient(rgb(0, 0, 0) 45%, rgb(0, 204, 255));
+  clip-path: polygon(180px 0, 360px 0, 360px 360px, 180px 360px);
+  border-left: none;
+  justify-content: right;
+}
+
+.halfButton:hover {
+  filter: brightness(2);
+}
+
+#whiteLine {
+  width: 2px;
+  height: 360px;
+  left: 50%;
+  background: white;
+  position: absolute;
+  z-index: 2;
+}
+
+.donut-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 72px;
+  height: 72px;
+  background: black;
+  border-radius: 50%;
+  border: 2px solid white;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  text-align: center;
+}
+
+.fortuneBoost img {
+  margin: 5px;
+}
+
+.fortuneBoost {
+  color: white;
+  font-size: calc(12px * var(--font-scale));
+  border: 1px solid white;
+  border-radius: 2px;
+  max-width: 400px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  transition:  0.5s ease-in-out;
+}
+
+.fortuneBoost.disabled {
+  color:#a1a1a1;
+}
+
+.fortuneBoostName {
+  width: 75%;
+}
+
+.rightSideElements{
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  margin-top: -8px;
+  font-weight: 900;
+  height: 100%;
+  position: relative;
+  width: 15%;
+}
+
+.fortuneBoostTime {
+  position: absolute;
+  top: 0;
+  right: 5px;
+}
+
+.fortuneBoostRarity {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  margin-left: auto;
+  font-weight: 900;
+  font-size: calc(28px * var(--font-scale));
+}
+
+.fortuneBoostRarity.B-rarity {
+  color: rgb(0, 153, 255);
+}
+.fortuneBoostRarity.A-rarity {
+  color: rgb(255, 153, 0);
+}
+.fortuneBoostRarity.S-rarity {
+  color: rgb(140, 0, 255);
+}
+.fortuneBoostRarity.EX-rarity {
+  color: rgba(255, 38, 0, 0.801);
+}
+
+img.disabled {
+  filter: drop-shadow(0 0 2px #ffffff73) drop-shadow(0 0 2px #ffffff6e) drop-shadow(0 0 2px #ffffff71) !important;
+}
+
+.fortuneBoost.B-rarity {
+  background: radial-gradient(rgb(0, 0, 0) 75%, rgb(3, 136, 177));
+}
+
+.fortuneBoost.A-rarity {
+  background: radial-gradient(rgb(0, 0, 0) 70%, rgb(187, 137, 0));
+}
+
+.fortuneBoost.S-rarity {
+  background: radial-gradient(rgb(0, 0, 0) 65%, rgb(116, 0, 211));
+}
+
+.fortuneBoost.EX-rarity {
+  background: radial-gradient(rgb(0, 0, 0) 60%, rgba(192, 38, 0, 0.801) 90%, rgba(194, 39, 0, 0.877)95%,rgba(202, 0, 0, 0.884) 100%);
+}
+
+#fortuneSelect:hover {
+  background-color: rgba(255, 105, 180, 0.13);
+}
+
+.fortuneUpgradesRow {
+  display: flex;
+}
+
+/* Balance tab: two columns that wrap on small screens */
+#balanceTab {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* Target the two halves inside the balance tab */
+#balanceTab .sideFortune {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 1 600px; /* do not force growth, allow shrinking, base 420px */
+  max-width: 600px;
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+#fortuneUpgrades {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#balanceCoinBlocks {
+  position: absolute;
+  margin-left: 40px;
+  margin-top: 137.5px;
+  
+}
+
+#balanceCoinBlocks2 {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  gap: 131.5px;
+  height: 250px;
+}
+
+.balanceCoinBlock {
+  border: 1px solid white;
+  background-color: #000000;
+  border-radius: 3px;
+  width: 65px;
+  height: 80px;
+  transition: transform 0.3s ease-in-out;
+  font-size: 9px;
+}
+
+.verticalLine {
+  height: 5px;
+  width: 1px;
+  background-color: white;
+  transition: height 0.3s ease-in-out;
+}
+
+.softcapBlock {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  background-color: #111111;
+  margin: 10px;
+}
+
+#plusCoinsDesc, #minusCoinsDesc {
+  max-width: 300px;
+  width: 45vw;
+}
+
+#balanceScalesCount {
+  text-align: center;
+}
+
+#mySlider {
+  width: 80%;
+}
+
+#autosaveSlider {
+  font-size: calc(14px * var(--font-scale));
+}
+
+.fortuneButton {
+  font-size: calc(16px * var(--font-scale)) !important;
+  height: 60px !important;
+  max-width: 200px !important;
+  width: 30vw !important;
+}
+
+.fortuneBoost {
+  font-size: calc(12px * var(--font-scale));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 1200px) {
+  span, gt, pbn, st, ct, p, input, label, select, footer, button, #autosaveSlider, .shardAchBarGhost {
+    /* font-size: 60% !important; */
+    --font-scale: 0.85;
   }
-  .shopButton {
-    font-size: calc(9px * var(--font-scale));
+  .upgradeButton, .prestigeMilestone, .fortuneBoost, .fortuneButton {
+    --font-scale: 0.9; 
+  }
+  .challengeDiv {
+    --font-scale: 1; 
+  }
+  #wholeShopDiv {
+    transform: scale(0.9);
+    /* flex-direction: column; */
+  }
+}
+
+@media (max-width: 800px) {
+  span, gt, pbn, st, ct, p, input, label, select, footer, button, #autosaveSlider, .shardAchBarGhost {
+    /* font-size: 60% !important; */
+    --font-scale: 0.8;
+  }
+  .upgradeButton, .tooltip {
+    --font-scale: 0.9; 
+  }
+  .challengeDiv {
+    --font-scale: 1; 
+  }
+  .fortuneBoost, .fortuneButton {
+    --font-scale: 0.8;
+  }
+  #superCrystalsTab {
+    flex-direction: column;
+    align-items: center;
+  }
+  #harshUmulti {
+    width: 90px !important
   }
   #shopTitleDiv {
-    width: 89.35%;
+    width: 90%;
   }
   #shopDiv {
     width: 90%
   }
-  .ach {
-    width: 35px;
-    height: 35px;
-    font-size: 70%
+  #wholeShopDiv {
+    transform: scale(0.7);
+    flex-direction: column;
+    margin-top: -50px;
   }
-  .tooltip {
-    width: 90px
-  }
-  .upgradeButton, .milestone {
-    width: 90px !important;
-    font-size: calc(7px * var(--font-scale)) !important;
-  }
-  .milestone {
-    width: 140px !important;
-    font-size: 50%
-  }
-  .automationContainer {
-    width: 120px;
-  }
-  #superCount {
-    font-size: 50% !important;
-  }
-  #coinsCount {
-    margin-bottom: 5px;
-  }
-  #multiplierStats {
+  #wholeShopDiv .tooltip {
     width: 200px;
-  }
-  .arrow,
-  .arrow::before {
-    width: 6px;
-    height: 6px;
-}
-  .progress-bar-base {
-    width: 110%
-  }
-  body {
-    overflow-x: hidden;
-  }
-  .windowDesc{
-    max-height: 390px;
-  }
-  .versionButtonVertical{
-    height: 20px !important;
+    --font-scale: 1.1;
   }
   .multiplierChooser {
     height: 35px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  span, gt, pbn, st, ct, p, input, label, select, footer, button, #autosaveSlider, .shardAchBarGhost {
+    /* font-size: 60% !important; */
+    --font-scale: 0.6;
+  }
+  .upgradeButton, .prestigeMilestone, .fortuneBoost, .fortuneButton, .tooltip {
+    --font-scale: 0.7; 
+  }
+  .challengeDiv {
+    --font-scale: 1; 
+  }
+
+  #maxOrNoUpgrades, #modernizeButton, #maxOrNoShardUpgrades, #maxOrNoSuperprestigeUpgrades {
+    border-radius: 2.5px;
+  }
+  #multiplierStats {
+    width: 200px;
   }
   #wholeShopDiv {
     transform: scale(0.6);
     flex-direction: column;
     margin-top: -150px;
   }
-  #wholeShopDiv button, #wholeShopDiv span {
-    font-size: 100% !important;
-  }
   #wholeShopDiv input[type='text'] {
     height: 25px;
-    font-size: calc(25px * var(--font-scale)) !important;
   }
   #wholeShopDiv .tooltip {
     width: 200px;
+    --font-scale: 1.2;
   }
-  .challengeTitle {
-    font-size: calc(14px * var(--font-scale)) !important;
+  .versionButtonVertical{
+    height: 30px !important;
   }
-  .challengeDesc{
-    font-size: calc(8px * var(--font-scale)) !important;
+  .windowDesc{
+    max-height: 350px;
+    --font-scale: 0.8
   }
-  .challengeStart{
-    font-size: calc(8px * var(--font-scale)) !important;
+  #versionChooser {
+    height: 7%;
   }
-  .challengeRow {
-    flex-direction: column;
+  #helpDiv {
+    max-height: 90%;
   }
-  #superCrystalsTab {
-    flex-direction: column;
-    align-items: center;
+  #versionDiv {
+    max-height: 85%;
   }
-  .mineralContainer {
-    width: 150px
-  }
-  #harshUmulti {
-    width: 90px !important
-  }
-  #exitChallenge {
-    width: 50px
+  .closeWindow {
+    left: 88.5%;
   }
 }

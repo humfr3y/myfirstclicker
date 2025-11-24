@@ -9,7 +9,7 @@ function toggleOfflineGain() {
 
 function saveGame () { 
     if (isNaN(player.coin.currency)) {
-        openWindow('gotNaNed', false)
+        // openWindow('gotNaNed', false)
     } 
     else {
         MISC.auto_save_timer = 0
@@ -189,6 +189,7 @@ function resetDailyReward() {
         nextDay.setHours(0, 0, 0, 0);
         player.time.next_daily = nextDay.getTime();
         player.got_daily_reward = false;
+        player.fortune.upgrades.singles.includes(23) ? player.fortune.daily_resets = 20 : player.fortune.daily_resets = 10
     }
 }
 
@@ -196,7 +197,7 @@ function autoSaveThis() {
     if (player.settings.auto_save == true && !(isNaN(player.coin.currency) || isNaN(player.prestige.currency) || isNaN(player.shard.currency) || isNaN(player.coin.total_currency)))
         {
             if (isNaN(player.coin.currency)) {
-                openWindow('gotNaNed', false)
+                // openWindow('gotNaNed', false)
             } 
             else {
                 MISC.auto_save_timer = 0
@@ -216,8 +217,8 @@ function autoSaveThis() {
             }
             MISC.auto_save_timer = 0
         }
-        if (isNaN(player.coin.currency) || isNaN(player.prestige.currency) || isNaN(player.shard.currency) || isNaN(player.coin.total_currency)) 
-        openWindow('gotNaNed', false)
+        // if (isNaN(player.coin.currency) || isNaN(player.prestige.currency) || isNaN(player.shard.currency) || isNaN(player.coin.total_currency)) 
+        // openWindow('gotNaNed', false)
     }
 
 function doHardReset () {

@@ -85,7 +85,9 @@ const ACHS = {
     effect: {
         coin() {
             let eff = 1
-            eff += player.achievements.length * 0.15 + player.achievement_rows.length * 3.3
+            let achRew = 0.15, achRowRew = 3.3
+            if (player.fortune.upgrades.singles.includes(11)) achRew = 0.25; achRowRew = 5.5
+            eff += player.achievements.length * achRew + player.achievement_rows.length * achRowRew
             if (player.coin.singleUpgrades.includes(25)) eff = Math.pow(eff, UPGS.coin.singles[25].effect())
             if (player.prestige.super.singles.includes(22)) eff *= UPGS.prestige.super.singles[22].effect()
             if (player.shard.achievements[5]) eff *= UNL.shard_achievements[5].effect()
@@ -94,7 +96,9 @@ const ACHS = {
         crystal() {
             if (!player.coin.superUpgrades.includes(35)) return 1
             let eff = 1
-            eff += player.achievements.length * 0.09 + player.achievement_rows.length * 1.3
+            let achRew = 0.09, achRowRew = 1.3
+            if (player.fortune.upgrades.singles.includes(11)) achRew = 0.15; achRowRew = 2
+            eff += player.achievements.length * achRew + player.achievement_rows.length * achRowRew
             if (player.coin.singleUpgrades.includes(25)) eff = Math.pow(eff, UPGS.coin.singles[25].effect())
             if (player.prestige.super.singles.includes(22)) eff *= UPGS.prestige.super.singles[22].effect()
             if (player.shard.achievements[5]) eff *= UNL.shard_achievements[5].effect()
@@ -103,7 +107,9 @@ const ACHS = {
         shard() {
             if (!player.coin.superUpgrades.includes(35)) return 1
             let eff = 1
-            eff += player.achievements.length * 0.225 + player.achievement_rows.length * 3.5
+            let achRew = 0.225, achRowRew = 3.5
+            if (player.fortune.upgrades.singles.includes(11)) achRew = 0.4; achRowRew = 6
+            eff += player.achievements.length * achRew + player.achievement_rows.length * achRowRew
             if (player.coin.singleUpgrades.includes(25)) eff = Math.pow(eff, UPGS.coin.singles[25].effect())
             if (player.prestige.super.singles.includes(22)) eff *= UPGS.prestige.super.singles[22].effect()
             if (player.shard.achievements[5]) eff *= UNL.shard_achievements[5].effect()
@@ -113,3 +119,13 @@ const ACHS = {
     }
 }
 //И после этого создай два новых кода revolution (даст 10 минут тайм варп) и supercoin (даст 128 супермонет) 
+
+function setAchievementsBg() {
+  for (let i = 11; i <= 60; i++) {
+    const el = document.getElementById(`ach${i}`);
+    if (el) {
+      el.style.backgroundImage = `url("javascript/cssfiles/images/ach${i}.jpg")`;
+    }
+  }
+}
+setAchievementsBg();
