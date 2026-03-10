@@ -20,7 +20,14 @@
     "crystalCount": "You have <ct>{{crystals}}</ct> crystals",
     "prestigeDisabled": "Collect 1е15 α-coins",
     "prestigeEnabled": "Reset everything for {{crystalsTemp}} crystals {{prestigeCountMultiplierText}}",
+    "prestigeInChallenge": "Collect {{coins}} coins to complete the Prestige Challenge",
+    "prestigeInChallengeCompleted": "Complete the Prestige Challenge",
     "prestigeCountMultiplierText": "and {{prestigeCountMultiplier}} prestiges",
+
+    "reflashCount": "You have <rt>{{reflashes}}</rt> bits",
+    "reflashDisabled": "Collect Infinity α-coins and complete Prestige Challenge 8",
+    "reflashFirst": "It's time to hard reset the world!",
+    "reflashEnabled": "Reset everything to get {{reflashesTemp}} bits",
 
     "maxUpgradesTrue": "Buy All",
     "maxUpgradesFalse": "Buy One",
@@ -56,6 +63,8 @@
     "softcapsTitle": "Softcaps",
     "fortuneButton": "Fortune",
     "balanceButton": "Balance",
+    "challengeCoinButton": "Challenges",
+    "challengePrestigeButton": "Prestige Challenges",
 
     "settingsTitle": "Settings",
 
@@ -95,7 +104,7 @@
 
     "umultiplierText": "<ut>U-multiplier ({{umultipliercount}}+{{free}})</ut> <br> Reset upgrades to give a x{{umultiplierBase}} multiplier to α-coin gain <br> Currently: x{{umultiplier}} <br> Requires: {{umultiplierCost}} Small Investments",
     "upowerText": "<ut>U-power ({{upowercount}}+{{free}})</ut> <br> Reset upgrades and U-multipliers to give a +{{upowerBase}} exponent to α-coin gain <br> Currently: ^{{upower}} <br> Requires: {{upowerCost}} Small Investments and 4 U-multiplers",
-    "uadderText": "<ut>U-adder ({{amount}})</ut> <br> Reset everything including U-powers to get +{{base}} free U-multipliers! <br> Currently: +{{uadder}} <br> Requires: {{cost}} Productivities and 10 U-powers",
+    "uadderText": "<ut>U-adder ({{amount}})</ut> <br> Reset everything including U-powers to get +{{base}} free U-multipliers! <br> Currently: +{{uadder}} <br> Requires: {{cost}} Productivities and 6 U-powers",
     "ureducerText": "<ut>U-reducer ({{amount}})</ut> <br> Reset everything including U-adders to reduce rest of U-tils requirements by {{base}}! <br> Currently: -{{ureducer}} <br> Requires: {{cost}} Productivities and 4 U-adders",
 
     "maxBuy": "Buy Max",
@@ -106,58 +115,58 @@
     "super_effect_exp": " | <super>⧋ ^{{effect}}</super>",
     "empty": "",
 
-    "firstBuyable": "<ut>Small Investment ({{amount}}{{free}}) [+{{bulk}}]</ut> <br> Increase the α-coins per second <br> Currently: +{{effect}}{{super_effect}}<br> Cost: {{cost}} α-coins",
+    "firstBuyable": "<ut>Small Investment ({{amount}}{{free}}) [+{{bulk}}]</ut> <br> Increase α-coins per second <br> Currently: +{{effect}}{{super_effect}}<br> Cost: {{cost}} α-coins",
     "secondBuyable": "<ut>Productivity ({{amount}}{{free}}) [+{{bulk}}]</ut> <br> Increase Small Investment effect <br> Currently: +{{effect}}%{{super_effect}}<br> Cost: {{cost}} α-coins",
-    "thirdBuyable": "<ut>Doubler ({{amount}}) [+{{bulk}}]</ut> <br> Multiply the α-coins per click by 2 <br> Currently: x{{effect}}{{super_effect}}<br> Cost: {{cost}} α-coins",
-    "fourthBuyable": "<ut>Multiplier ({{amount}}{{free}}) [+{{bulk}}]</ut> <br> Multiply the α-coins per second by {{base}} <br> Currently: x{{effect}}{{super_effect}}<br> Cost: {{cost}} α-coins",
-    "fifthBuyable": "<ut>Alpha Power ({{amount}}) [+{{bulk}}]</ut> <br> Increase the power of α-coins gain <br> Currently: ^{{effect}}{{super_effect}}<br> Cost: {{cost}} α-coins",
+    "thirdBuyable": "<ut>Doubler ({{amount}}) [+{{bulk}}]</ut> <br> Double α-coins per click <br> Currently: x{{effect}}{{super_effect}}<br> Cost: {{cost}} α-coins",
+    "fourthBuyable": "<ut>Multiplier ({{amount}}{{free}}) [+{{bulk}}]</ut> <br> Multiply α-coins per second by {{base}} <br> Currently: x{{effect}}{{super_effect}}<br> Cost: {{cost}} α-coins",
+    "fifthBuyable": "<ut>Wallet ({{amount}}) [+{{bulk}}]</ut> <br> Increase α-coins gain <br> Currently: +{{effect}}{{super_effect}}<br> Cost: {{cost}} α-coins",
 
     "super_cost": "<br> Cost: {{cost}} supercoins",
     "superfirstBuyable": "<ut>Super Small Investment</ut> <br> Every purchase gives 3 free upgrades{{cost}}",
-    "supersecondBuyable": "<ut>Super Productivity</ut> <br> Increases effect based on effect itself by ln(effect){{cost}}",
-    "superthirdBuyable": "<ut>Super Doubler</ut> <br> Increases critical multiplier by log2(amount){{cost}}",
-    "superfourthBuyable": "<ut>Super Multiplier</ut> <br> Increases effect based on U-multipliers{{cost}}",
-    "superfifthBuyable": "<ut>Super Alpha Power</ut> <br> Upgrade affects also critical chance{{cost}}",
+    "supersecondBuyable": "<ut>Super Productivity</ut> <br> Increase effect based on itself effect by ln(effect){{cost}}",
+    "superthirdBuyable": "<ut>Super Doubler</ut> <br> Increase critical multiplier by log2(amount){{cost}}",
+    "superfourthBuyable": "<ut>Super Multiplier</ut> <br> Increase effect based on U-multipliers{{cost}}",
+    "superfifthBuyable": "<ut>Super Wallet</ut> <br> Upgrade also multiplies coin gain{{cost}}",
 
     "single_cost": "<br> Cost: {{cost}} α-coins",
     "notCapped": "Currently",
     "capped": "Capped",
 
-    "firstSingle": "<ut> Rich Fame </ut> <br> Increase the α-coins per second based on total α-coins <br> Currently: x{{effect}}{{super_effect}}{{cost}}",
-    "secondSingle": "<ut> Midas Cursor </ut> <br> Increase the α-coins per click based on total clicks <br> Currently: x{{effect}}{{super_effect}}{{cost}}",
-    "thirdSingle": "<ut> Doubler+ </ut> <br> Doubles α-coin gain by 2 <br> Currently: x{{effect}}{{super_effect}}{{cost}}",
-    "fourthSingle": "<ut> Motivation </ut> <br> Increase Productivity effect based on Small Investment amount <br> Currently: x{{effect}}{{super_effect}}{{cost}}",
+    "firstSingle": "<ut> Rich Fame </ut> <br> Increase α-coins per second based on total α-coins <br> Currently: x{{effect}}{{super_effect}}{{cost}}",
+    "secondSingle": "<ut> Midas Cursor </ut> <br> Increase α-coins per click based on total clicks <br> Currently: x{{effect}}{{super_effect}}{{cost}}",
+    "thirdSingle": "<ut> Doubler+ </ut> <br> Doubles α-coin gain <br> Currently: x{{effect}}{{super_effect}}{{cost}}",
+    "fourthSingle": "<ut> Motivation </ut> <br> Increase Productivity effect based on Small Investments <br> Currently: x{{effect}}{{super_effect}}{{cost}}",
     "fifthSingle": "<ut> Double Multiplier </ut> <br> Multiplier amount increases their effect<br> Currently: x{{effect}}{{super_effect}}{{cost}}",
-    "sixthSingle": "<ut> Negative Alpha Particle </ut> <br> Increase the α-coins per second based on α-coins per click <br> Currently: x{{effect}}{{super_effect}}{{cost}}",
-    "seventhSingle": "<ut> Cashback </ut> <br> All purchases increase the α-coin gain<br> {{cap}}: x{{effect}}{{super_effect}}{{cost}}",
-    "eighthSingle": "<ut> Reward For Feats </ut> <br> Unlocked achievements boosts the α-coins per click <br> Currently: x{{effect}}{{super_effect}}{{cost}}",
-    "ninthSingle": "<ut> Activity 1.0 </ut> <br> Increases power of Rich Fame based on played time <br> {{cap}}: ^{{effect}}{{super_effect}}{{cost}}",
-    "tenthSingle": "<ut> Blessing </ut> <br> Increase power of achievement multipliers <br> Currently: ^{{effect}}{{super_effect}}{{cost}}",
+    "sixthSingle": "<ut> Negative Alpha Particle </ut> <br> Increase α-coins per second based on α-coins per click <br> Currently: x{{effect}}{{super_effect}}{{cost}}",
+    "seventhSingle": "<ut> Cashback </ut> <br> All purchases increase α-coin gain<br> {{cap}}: x{{effect}}{{super_effect}}{{cost}}",
+    "eighthSingle": "<ut> Reward For Feats </ut> <br> Unlocked achievements boosts α-coins per click <br> Currently: x{{effect}}{{super_effect}}{{cost}}",
+    "ninthSingle": "<ut> Activity 1.0 </ut> <br> Increase exponent of Rich Fame based on spent time <br> {{cap}}: ^{{effect}}{{super_effect}}{{cost}}",
+    "tenthSingle": "<ut> Blessing </ut> <br> Increase exponent of achievement multipliers <br> Currently: ^{{effect}}{{super_effect}}{{cost}}",
     
-    "superfirstSingle": "<ut>Super Rich Fame</ut> <br> Current coins increase upgrade effect{{cost}}",
-    "supersecondSingle": "<ut>Super Midas Cursor</ut> <br> Real clicks affects upgrade effect too <br> {{cost}}",
+    "superfirstSingle": "<ut>Super Rich Fame</ut> <br> Current α-coins increase upgrade effect{{cost}}",
+    "supersecondSingle": "<ut>Super Midas Cursor</ut> <br> Real clicks also affect upgrade effect <br> {{cost}}",
     "superthirdSingle": "<ut>Super Doubler</ut> <br> Doubles supercoins chance{{cost}}",
-    "superfourthSingle": "<ut>Super Motivation</ut> <br> Increases effect based on Productivity amount too{{cost}}",
-    "superfifthSingle": "<ut>Super Double Multiplier</ut> <br> Gives free Multipliers based on effect{{cost}}",
+    "superfourthSingle": "<ut>Super Motivation</ut> <br> Increase effect based on Productivity amount too{{cost}}",
+    "superfifthSingle": "<ut>Super Double Multiplier</ut> <br> Give free Multipliers based on effect{{cost}}",
     "supersixthSingle": "<ut>Super Negative Alpha Particle</ut> <br> Critical multiplier increases effect{{cost}}",
-    "superseventhSingle": "<ut>Super Cashback</ut> <br> Pushes softcap requirement to 1e6 {{cost}}",
+    "superseventhSingle": "<ut>Super Cashback</ut> <br> Push softcap requirement to 1e6 {{cost}}",
     "supereighthSingle": "<ut>Super Reward For Feats</ut> <br> Full rows rises effect exponent{{cost}}",
     "superninthSingle": "<ut>Super Activity 1.0</ut> <br> Hardcap is ^2.5{{cost}}",
-    "supertenthSingle": "<ut>Super Blessing</ut> <br> Achievements affects Crystals, Supercoin chance and Shards{{cost}}",
+    "supertenthSingle": "<ut>Super Blessing</ut> <br> Achievements affects Crystals and Shards{{cost}}",
 
     "firstBuyableTooltip": "Super-effect: <br> Every purchase gives 3 free upgrades: +{{x}}",
-    "secondBuyableTooltip": "Super-effect: <br> Increases effect based on effect itself: x{{x}}",
-    "thirdBuyableTooltip": " Super-effect: <br> Increases critical multiplier: x{{x}}",
-    "fourthBuyableTooltip": " Super-effect: <br> Increases effect based on U-multipliers: x{{x}}",
-    "fifthBuyableTooltip": " Super-effect: <br> Upgrade affects also critical chance: ^{{x}}",
+    "secondBuyableTooltip": "Super-effect: <br> Increase effect based on effect itself: x{{x}}",
+    "thirdBuyableTooltip": " Super-effect: <br> Increase critical multiplier: x{{x}}",
+    "fourthBuyableTooltip": " Super-effect: <br> Increase effect based on U-multipliers: x{{x}}",
+    "fifthBuyableTooltip": " Super-effect: <br> Upgrade multiplies coin gain: x{{x}}",
 
-    "firstSingleTooltip": " Super-effect: <br> Current coins increase upgrade effect: x{{x}}",
+    "firstSingleTooltip": " Super-effect: <br> Current α-coins increase upgrade effect: x{{x}}",
     "secondSingleTooltip": " Super-effect: <br> Real clicks affects upgrade effect too: x{{x}}",
     "thirdSingleTooltip": " Super-effect: <br> Doubles supercoins chance",
     "fourthSingleTooltip": " Super-effect: <br> Increases effect based on Productivity amount too: x{{x}}",
     "fifthSingleTooltip": " Super-effect: <br> Gives free Multipliers based on effect: +{{x}}",
     "sixthSingleTooltip": " Super-effect: <br> Critical multiplier increases effect: x{{x}}",
-    "seventhSingleTooltip": " Super-effect: <br> Pushes softcap requirement to 1e6",
+    "seventhSingleTooltip": " Super-effect: <br> Push softcap requirement to 1e6",
     "eighthSingleTooltip": " Super-effect: <br> Full rows rises effect exponent: ^{{x}}",
     "ninthSingleTooltip": " Super-effect: <br> Hardcap is ^2.5",
     "tenthSingleTooltip": " Super-effect: <br> Achievements affects Crystals and Shards",
@@ -661,7 +670,7 @@
 
     "aboutGameTitle": "About game",
 
-    "aboutGame": "<ut> Digital God 0.14 Fortune and Balance update.</ut> <br> Developed by Humfrey. <br> Icons were drawn by galvares#0000. <br> <br> Digital God was inspired by such awesome games: Antimatter Dimensions, Synergism, Prestige Tree. <br> <br> Thanks everyone for playing!<br>",
+    "aboutGame": "<ut> Digital God 0.15. Prestige Challenges update.</ut> <br> Developed by Humfrey. <br> Icons were drawn by galvares#0000. <br> <br> Digital God was inspired by such awesome games: Antimatter Dimensions, Synergism, Prestige Tree. <br> <br> Thanks everyone for playing!<br>",
     "galaxyClickText": "Rate game on galaxy.click",
     "discordText": "Join to discord server",
     "telegramChatText": "Join to telegram chat (russian)",
@@ -818,6 +827,7 @@
     "version0121": "<b>17.05.2024 | Digital God 0.12.1:</b><br>Features changes:<br>- Added 7 notations and Standard one became main instead of Scientific.<br>- Added autosave interval slider from 0.1s to 60s.<br>- Removed save notification while autosaving.<br>- Added 3 save slots (current one will be first).<br>- Added disable/enable for offline prod (including time).",
     "version013": "<b>11.07.2025 | Digital God 0.13. Superprestige. </b> <br> NEW FEATURES: <br> - SUPERPRESTIGE! Collect 1e15 crystals to unlock the ability to break Prestige barrier and get more Crystals per reset than just 1! <br> - 15 NEW SUPERPRESTIGE UPGRADES! 5 buyable and 10 single (including the Super Hammer). <br> - U-ADDERS AND U-REDUCERS! After breaking Prestige barrier, you can perform resets to get 2 new boosts: U-Adder – +1 free U-Multiplier, and U-Reducer – subtracts 100 upgrades from U-tils requirements. <br> - SHARD ACHIEVEMENTS! After purchasing Shard Trophy, you can complete mini-achievements to increase the production of all resources in game! <br> - 10 new achievements!<br> - New Shard upgrade.<br> - Added bulk purchase for Shard and Crystal upgrades.<br> - New items in Supershop.<br> - Three new fonts. <br> BUFFS: <br> - Reduced prices for Super-upgrades and Supershop items.<br> NERFS:<br> - Base effect of U-Booster reduced from 0.04 to 0.02.<br> - Slightly increased price scaling for U-Multiplier.<br> - Slightly increased price scaling for U-Booster.<br> - Minerals and Supercrystals have a sharp cost scaling starting from the 10th purchase. <br> - Reduced price scaling for Crystal Glove.<br> - Jade effects have been reduced.<br> - Increased price scaling for Gem Investment.<br> REWORKS: <br> - Alpha-Booster upgrade reworked: instead of x/1000 to coins per click, now gives x/2500 to total coin gain.<br> - Challenge 1 reward now boosts coins per click.<br> - Opal formula changed. <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> Oh hello, here is some new codes to apologize for such long update: <ut>superprestige</ut> and <ut>sorry</ut>",
     "version014": "<ut>11/25/2025 | Digital God 0.14. Fortune and Balance.</ut><br>NEW FEATURES:<br>- FORTUNE! Exchange Coins or Crystals for Fortune Coins to unlock special Fortune boosts! <br>- 12 NEW FORTUNE UPGRADES! 3 buyable and 9 single.<br>- BALANCE! It's time to create balance in universe after a series of wins and loses, only neutrality and stability!<br>- 12 NEW BALANCE UPGRADES! 3 buyable and 9 single.<br>- 5 new achievements! The remaining 5 will be added in 0.15!<br>- Two new items in Supershop: Fortune Ticket and Aquatic Pickaxe.<br>- New mineral - Aquamarine.<br>CHANGES IN THE INTERFACE:<br>- New tab - Softcaps.<br>- Global change in adaptation for mobile devices. Improved flexibility for various screen resolutions.<br>- Changed style of tab and sub-tab buttons.<br>- Gray text made slightly lighter.<br>CODE CHANGES:<br>- Optimized Multiplier Breakdown code.<br>BUFFS:<br>- Increased the Overdrive 1 effect by 3 times.<br>- Reduced the requirements for Prestige Stages 19 and 20.<br>- Reduced the price of Math Analysis.<br>- Reduced costs for Energy Shard and Crystal Sword.<br>- Increased reward for Challenge 9.<br>- Increased effect of Topaz.<br>- Increased base effect of U-reducer from 100 to 500.<br>- Increased effect of Champion's Belt.<br>- Removed cost scaling of Supercrystal.<br>NERFS:<br>- Gift of Destiny gives +0.1 free U-boost instead of +0.2.<br>- Decreased base effect of the U-boost to 0.1 instead of 0.2.<br>- The effect of Math Analysis is reduced to 20 instead of 50.<br>- Decreased effect of Energy Shard.<br>- Decreased Buy limit of Math Analysis.<br>- Decreased effect of Strong Hardworker.<br>- Decreased effect of Alpha Power.<br>- Increased cost scaling of shards for buying Minerals every 10 purchases.<br>- Decreased effect of Prestige Fame.<br>- The limit for post-1e50 gain of Crystals softcap is reduced to 0.3 instead of 0.4.<br>REWORK: <br>- Changed formulas for effects of Opal.<br>- Cost scaling of U-tils has been reworked.<br>- Crystal Sword now reduces cost of Supercrystal by 10^n for each upgrade.<br>- Challenge 3 reward effect changed to increase instead of power.",
+
     "chapter1Name": "Beginning",
     "chapter2Name": "Upgrades",
     "chapter3Name": "U-multiplier",
@@ -894,10 +904,9 @@
     "help16": "<ut>Super-Modernization</ut> is new way to improve old coin upgrades and thereby increase their effectiveness. To unlock, you need to buy upgrade in Supershop \"Super-Machine\" for 2500 supercoins.<br><br>After buying upgrade, you will have a button with up arrow, when you press it you can modernize upgrades to super upgrades. However, this will cost supercoins and cost increases sharply with each subsequent upgrade. <br><br>Also, for those buyables, you can only modernize once. once. After this, upgrade button will turn golden and an additional effect with a triangle will appear.<br><br>P.S. after modernize, you can hover over upgrade to find out or remember the super-effect. P.P.S. super upgrades also works in Challenges, but for this you need to buy a regular upgrade.",
     "help17": "<ut>Shard Achievements</ut> are a completely new type of achievement, different from the regular ones. Instead of a single goal, they have an infinite number of completions, and each completion grants a separate bonus to the production of a certain resource. They can be unlocked by purchasing the Shard Trophy. <br><br>There are 10 Shard Achievements in the game, each focused on obtaining all resources, and after reaching each goal you receive a small boost to the production of one resource. Achievements are not reset after Prestige or lower resets. Since this is a more powerful feature, the bonuses also work during Challenges. <br><br> Also, every pair of Shard Achievements requires 1 Super Crystal to unlock.",
     "help18": "<ut>Superprestige</ut> is an advanced Prestige layer that allows you to gain more Crystals per reset depending on your current amount of coins. Superprestige is unlocked by breaking the Prestige barrier with the Super Hammer, which costs 1e15 Crystals. <br><br>After breaking Prestige, you will be able to get \"base crystals\" instead of just 1, and finally they are multiplied by existing bonuses. \"Base Crystals\" are generated depending on your current amount of coins, so it is important to use the \"Crystals per reset\" mode in Automation. <br>After unlocking Superprestige, you will gain access to 14 new upgrades, 5 of which are buyable and 9 are single. They are not reset after Prestige, so use your Crystals wisely. You will also be able to perform U-Adder and U-Reducer resets, which will be explained in the next sections.",
-    "help19": "<ut>U-Adders and U-Reducers</ut> are new mini-prestige layers that reset all previous ones (U-Adders reset U-Boosters and U-Multipliers, while U-Reducers reset U-Adders and everything below). They can be unlocked after breaking the Prestige barrier for the first time. <br><br>U-Adders reset U-Boosters and U-Multipliers in exchange for +1 bonus U-Multiplier (it gives a bonus, but does not count towards requirement scaling). After each reset, you will get +1 additional U-Multiplier to your total bonus upgrades. <br><br>Starting cost for a reset: 500 Productivity and 10 U-Boosters. The cost increases only in Productivity by the formula: <it>500+50*p</it>, where p is the number of Productivities. The U-Booster requirement always stays the same. <br> <br> U-Reducers reset U-Adders, U-Boosters, and U-Multipliers in exchange for lowering their requirements. After each reset, you will reduce the requirements for U-tiers by -100 upgrades (works only for requirements that scale, i.e. upgrades).<br><br>Starting cost for a reset: 650 Productivity and 4 U-Adders. The cost increases only in Productivity by the formula: <it>650+100*p</it>, where p is the number of Productivities. The U-Adder requirement always stays the same.<br><br>P.S. When you perform a Prestige reset, these boosts are also reset.",
+    "help19": "<ut>U-Adders and U-Reducers</ut> are new mini-prestige layers that reset all previous ones (U-Adders reset U-Boosters and U-Multipliers, while U-Reducers reset U-Adders and everything below). They can be unlocked after breaking the Prestige barrier for the first time. <br><br>U-Adders reset U-Boosters and U-Multipliers in exchange for +1 bonus U-Multiplier (it gives a bonus, but does not count towards requirement scaling). After each reset, you will get +1 additional U-Multiplier to your total bonus upgrades. <br><br>Starting cost for a reset: 250 Productivity and 6 U-Powers. The cost increases only in Productivity by the formula: <it>500+50*p</it>, where p is the number of Productivities. The U-Booster requirement always stays the same. <br> <br> U-Reducers reset U-Adders, U-Boosters, and U-Multipliers in exchange for lowering their requirements. After each reset, you will reduce the requirements for U-tiers by -100 upgrades (works only for requirements that scale, i.e. upgrades).<br><br>Starting cost for a reset: 650 Productivity and 4 U-Adders. The cost increases only in Productivity by the formula: <it>650+100*p</it>, where p is the number of Productivities. The U-Adder requirement always stays the same.<br><br>P.S. When you perform a Prestige reset, these boosts are also reset.",
     "help20": "<ut>Fortune</ut> is a mechanic based on luck, however, it doesn't allow you to \"lose everything\" or break the game.<br><br>First, you need to spend Coins or Crystals to buy Fortune Tokens, which will activate random Fortune boosts.<br><br>There are 12 boosts in total, 3 of each rarity. Rarities can be unlocked in single Fortune upgrades and they vary as: B, A, S, EX. Their chances also vary (if you do not have \"Time is Running Out\" upgrade):<br>B - 80%<br>A - 10%<br>S - 8%<br>EX - 2%<br><br>If you don't like the boosts, they can be respecced a limited number of times per day.<br><br>To progress in Fortune further, Supercrystals are used. Purchased Fortune upgrades can be respecced at any time, and single ones only requires reaching a total number of Supercrystals.",
     "help21": "<ut>Balance</ut> is a mechanic opposite to Fortune, essence of which is balance between positive and negative effects of new coin types: +Coins and -Coins. <br><br>+Coins often provide boosts to coin gain, while -Coins provide boosts to crystals gain. <br><br>Balance Coins can be obtained by exchanging 1 Fortune Token for any of these coins; the effect is applied instantly. <br><br>The greater your balance between Coins, the more Balance Scales you will have, which in turn generate Neutral, which can be used to purchase various Balance upgrades. In the future, it will be possible to generate Balance Scales depending on how long you maintain a coin balance.",
-
 
     "noEvent": "There are no events in the game right now, come back later",
     "spiritualEventTitle": "Welcome to Spiritual Event!",
@@ -923,9 +932,10 @@
 
     "triplePowerEventTime": "The event is available from 03/15/2024 00:00 to 03/23/2024 23:59",
 
-    "challengeTabDesc": "Welcome to Challenges, you need to do Prestige with several conditions. <br> Every Challenge has unique reward, which you will get, as you collect 1e15 coins inside it. <br> Besides special conditions, they have also general conditions like: Shards effect ^0.25, Challenge rewards don't work.<br> If you found out Challenge was too difficult for you, you can leave it, and try again in any time. Good luck!",
-
     "exitChallenge": "Leave",
+
+    "challengeTabDesc": "Welcome to Challenges, you need to do Prestige with several conditions. <br> Every Challenge has unique reward, which you will get, as you collect 1e15 coins inside it. <br> Besides special conditions, they have also general conditions like: Shards effect ^0.25, Challenge rewards don't work.<br> If you found out Challenge was too difficult for you, you can leave it, and try again in any time. Good luck!",
+    "challengePTabDesc": "Welcome to Prestige Challenges! They have more conditions and difficulty than Challenges. <br> Each Challenge has one goal - to collect different amount of coins inside Prestige Challenge and do Prestige reset, in return you will receive a powerful reward. <br> In addition to individual conditions, they also have general conditions like: Shards effect ^0.1, separate coin gain ^0.5, bulk reset for U-tils disabled, Challenge rewards don't work. <br> If a Prestige Challenge seemed impossible, you should quit it and become stronger.",
 
     "challengeCondition2": "Shards decreasing coin gain by -99%",
     "challengeCondition7": "Gain decreased by -{{x}}%",
@@ -933,6 +943,7 @@
     "challengeCondition10": "You have {{x}} upgrades left",
 
     "challengeTitle": "Challenge {{x}}",
+    "challengePTitle": "Prestige Challenge {{x}}",
 
     "challengeStart": "Start",
     "challengeCompleted": "Completed",
@@ -940,6 +951,7 @@
 
     "challengeDeactivated": "You are in Digital World (Challenge is not activated)",
     "challengeActivated": "You are in Challenge №{{x}}",
+    "challengePActivated": "You are in Prestige Challenge №{{x}}",
 
     "restartTheChallenge": "Restart Challenge",
 
@@ -956,6 +968,15 @@
     "challengeConditionText11": "Condition: All upgrades disabled. Good luck.",
     "challengeConditionText12": "Condition: Shards effect ^0.01, Coin gain ^0.01, U-multipliers and U-power became cheaper, their scaling decreased, and they are not affected by conditions.",
 
+    "challengePConditionText1": "Condition: Challenge conditions 1-6 are activated simultaneously.",
+    "challengePConditionText2": "Condition: Challenge conditions 7-12 are activated simultaneously.",
+    "challengePConditionText3": "Condition: U-tils are disabled.",
+    "challengePConditionText4": "Condition: Upgrade Costs^2, U-tils cost^2, U-Reducer Effect^0.1.",
+    "challengePConditionText5": "Condition: Mineral Effects^0.1, Upgrade Effects^0.1.",
+    "challengePConditionText6": "Condition: Each U-tils reset increases price of others as if you reset them.",
+    "challengePConditionText7": "Condition: Challenge conditions 1-12 are activated simultaneously.",
+    "challengePConditionText8": "Condition: Final Prestige. Upgrade Effects^0.1, U-tils Effects^0.1, Coin Gain^0.1, Shards Effect^0.1, Critical Multiplier^0.1, Mineral Effects^0.1, Fortune Boost Effects^0.1, Balance Effects^0.1.",
+
     "challengeReward1": "Reward: Increase coins per click exponent by ^1.1.",
     "challengeReward2": "Reward: Crystal Overload gives x1000000 Shards based on Crystals.",
     "challengeReward3": "Reward: Prestiges increase gain per second. Effect: x{{x}}.",
@@ -969,11 +990,26 @@
     "challengeReward11": "Reward: Unlock new items in Supershop.",
     "challengeReward12": "Reward: Decreases U-multiplier's scaling to 40, and U-power's to 80.",
 
+    "challengePReward1": "Reward: Increases Crystal gain.",
+    "challengePReward2": "Reward: Amount of U-multipliers increase their base effect.",
+    "challengePReward3": "Reward: Unlocks U-reducer automation.",
+    "challengePReward4": "Reward: Lifetime critical clicks increase Shards gain.",
+    "challengePReward5": "Reward: All Balance Scales increase maximum effects of Fortune Boosts.",
+    "challengePReward6": "Reward: Reduce cost of Supercrystals by 1e12.",
+    "challengePReward7": "Reward: Challenge 12 has a completion counter. Each completion grants +100% coin gain and +1,000,000% coin gain inside Prestige Challenge 8.",
+    "challengePReward8": "Reward: Finale?",
+
+    "challengePGoal": "Goal: Collect {{x}} α-coins.",
+
     "challengesTimeTitle": "Challenges time",
+    "challengesPTimeTitle": "Prestige Challenges time",
 
     "challengeNotCompletedYet": "Challenge {{n}} is not completed",
     "challengeTime": "Challenge {{n}} is completed in: {{h}}:{{m}}:{{s}}",
     "challengeTimeFast": "Challenge {{n}} is completed in: {{ms}}ms",
+    "challengePNotCompletedYet": "Prestige Challenge {{n}} is not completed",
+    "challengePTime": "Prestige Challenge {{n}} is completed in: {{h}}:{{m}}:{{s}}",
+    "challengePTimeFast": "Prestige Challenge {{n}} is completed in: {{ms}}ms",
 
     "recentPrestigesTitle": "Recent prestiges",
     "averagePrestigesTitle": "Average",

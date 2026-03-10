@@ -81,6 +81,12 @@ const ACHS = {
         48() { return player.shard.currency >= 1e100},
         49() { return player.prestige.resets >= 1e8},
         50() { return (player.uadders + player.ureducers + player.umultipliers + player.upowers) >= 100},
+
+        51() { return player.fortune.tokens >= 1},
+        52() { return player.coin.total_currency >= 1e100},
+        53() { return player.balance.scales_of_balance >= 1},
+        54() { return player.fortune.activatedBoosts[10].activated || player.fortune.activatedBoosts[11].activated || player.fortune.activatedBoosts[12].activated},
+        55() { return UNL.overdrive.type2.percent() == 100}
     },
     effect: {
         coin() {
@@ -91,6 +97,7 @@ const ACHS = {
             if (player.coin.singleUpgrades.includes(25)) eff = Math.pow(eff, UPGS.coin.singles[25].effect())
             if (player.prestige.super.singles.includes(22)) eff *= UPGS.prestige.super.singles[22].effect()
             if (player.shard.achievements[5]) eff *= UNL.shard_achievements[5].effect()
+            if (player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1)
             return eff
         },
         crystal() {
@@ -102,6 +109,7 @@ const ACHS = {
             if (player.coin.singleUpgrades.includes(25)) eff = Math.pow(eff, UPGS.coin.singles[25].effect())
             if (player.prestige.super.singles.includes(22)) eff *= UPGS.prestige.super.singles[22].effect()
             if (player.shard.achievements[5]) eff *= UNL.shard_achievements[5].effect()
+            if (player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1)
             return eff
         },
         shard() {
@@ -113,6 +121,7 @@ const ACHS = {
             if (player.coin.singleUpgrades.includes(25)) eff = Math.pow(eff, UPGS.coin.singles[25].effect())
             if (player.prestige.super.singles.includes(22)) eff *= UPGS.prestige.super.singles[22].effect()
             if (player.shard.achievements[5]) eff *= UNL.shard_achievements[5].effect()
+            if (player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1)
             return eff
             
         }

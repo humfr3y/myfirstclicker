@@ -86,6 +86,9 @@ function checkCompletedChallenges() {
         if (player.challenge.completed.includes(i+1)) {
             window[`challenge${i+1}Start`].style.backgroundColor = '#3dde3d'
         }
+        if (i < 9 && player.prestige.challenge.completed.includes(i+1)) {
+            window[`pChallenge${i+1}Start`].style.backgroundColor = '#3dde3d'
+        }
     }
 }
 
@@ -397,8 +400,33 @@ function startChallenge(number, again=false) {
         LAYERS.doForcedReset()
         LAYERS.reset_time()
     }
-    else if (number == 13){
+    else if (number == 13){ //выход с челленджа вроде
         player.challenge.activated = 0
+        LAYERS.doReset()
+        LAYERS.doForcedReset()
+    } 
+}
+
+function startPChallenge(number, again=false) {
+    UPGS.fortune.boosts.respec()
+    if (again == true && restartPChallenge.checked) {
+        LAYERS.reset_time()
+        LAYERS.doReset()
+        LAYERS.doForcedReset()
+        return 0
+    }
+    if (number == 0 && restartPChallenge.checked) {
+        startPChallenge(player.prestige.challenge.activated)
+        return 0
+    }
+    else if (number != 9) {
+        player.prestige.challenge.activated = number
+        LAYERS.doReset()
+        LAYERS.doForcedReset()
+        LAYERS.reset_time()
+    }
+    else if (number == 9){
+        player.prestige.challenge.activated = 0
         LAYERS.doReset()
         LAYERS.doForcedReset()
     } 
@@ -454,6 +482,9 @@ let modernizeBlink = ''
 function modernize() {
     player.settings.modernization_activated ? player.settings.modernization_activated = false : player.settings.modernization_activated = true
     if (player.settings.modernization_activated){
+        // очищаем старый интервал перед созданием нового
+        if (modernizeBlink) clearInterval(modernizeBlink)
+        
         for (let j = 1; j <= 3; j++)
         for (let i = 0; i <= 4; i++){
             const id = i+((j-1)*5), upg_id = (j*10+i+1)-10
@@ -503,8 +534,11 @@ function modernize() {
         }, 500)
     }
     else {
-        clearInterval(modernizeBlink)
-        modernizeBlink = ''
+        // очищаем интервал при отключении
+        if (modernizeBlink) {
+            clearInterval(modernizeBlink)
+            modernizeBlink = ''
+        }
         for (let j = 1; j <= 3; j++)
             for (let i = 0; i <= 4; i++){
                 const id = i+((j-1)*5), upg_id = (j*10+i+1)-10
@@ -764,7 +798,7 @@ function statsCrystalsUpdate(){
         { effectValue: () => UNL.overdrive.type2.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'overdrive2EffectStatsEffect', pieceId: 'overdrive2EffectPiece', piecePercentId: 'overdrive2EffectPiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => UPGS.minerals[3].effect1(), effectPrefix: 'x', effectMode: 'boost', effectId: 'thirdMineralEffect1StatsEffect', pieceId: 'thirdMineralEffect1Piece', piecePercentId: 'thirdMineralEffect1PiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => Math.pow(3, UPGS.supercrystal[12].unl()), effectPrefix: 'x', effectMode: 'boost', effectId: 'secondSuperCrystalSingleEffectStatsEffect', pieceId: 'secondSuperCrystalSingleEffectPiece', piecePercentId: 'secondSuperCrystalSingleEffectPiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
-        { effectValue: () => (player.supercrystal.upgrades.includes(12) ? 3 : 1), effectPrefix: 'x', effectMode: 'boost', effectId: 'prestigeFameStatsEffect', pieceId: 'prestigeFamePiece', piecePercentId: 'prestigeFamePiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
+        { effectValue: () => UPGS.prestige.super.singles[11].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'prestigeFameStatsEffect', pieceId: 'prestigeFamePiece', piecePercentId: 'prestigeFamePiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => UNL.shard_achievements[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalShAchStatsEffect', pieceId: 'crystalShAchPiece', piecePercentId: 'crystalShAchPiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => ACHS.effect.crystal(), effectPrefix: 'x', effectMode: 'boost', effectId: 'achievementBonus2StatsEffect', pieceId: 'achievementBonus2Piece', piecePercentId: 'achievementBonus2PiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => UPGS.fortune.boosts[2].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fortuneBoostCrystalStatsEffect', pieceId: 'fortuneBoostCrystalPiece', piecePercentId: 'fortuneBoostCrystalPiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
@@ -916,13 +950,10 @@ function statsCritChanceUpdate() {
     setIf('critChShAchStatsEffect', 'x' + formatDecimal(UNL.shard_achievements[8].effect(), 'boost'))
     setIf('fortuneBoostCritChanceStatsEffect', 'x' + formatDecimal(UPGS.fortune.boosts[5].effect(), 'boost'))
     setIf('plusCoinsForCritChanceStatsEffect', 'x' + formatDecimal(MISC.balance.plusCoins.buff().chanceBuffer, 'boost'))
-    setIf('fifthBuyableSuperEffectStatsEffect', '^' + formatDecimal(UPGS.coin.buyables[5].effect_super(), 'power'))
 
     // Новая графика: используем логарифмическое взвешивание, чтобы избежать доминирования больших мультипликаторов
     const zoneAddPct = 25 // процент высоты для аддитивной зоны
     const zoneMultPct = 100 - zoneAddPct
-
-    const gainWithoutPower = findMultiplier(Math.pow(GAIN.critical.chance.multiplicative(), 1 / UPGS.coin.buyables[5].effect_super()), UPGS.coin.buyables[5].effect_super())
 
     const additiveSources = [
         { raw: 1, pid: 'baseCriticalChanceEffectPiece', ppid: 'baseCriticalChanceEffectPiecePercent' },
@@ -935,7 +966,6 @@ function statsCritChanceUpdate() {
         { raw: UNL.shard_achievements[8].effect(), pid: 'critChShAchPiece', ppid: 'critChShAchPiecePercent' },
         { raw: UPGS.fortune.boosts[5].effect(), pid: 'fortuneBoostCritChancePiece', ppid: 'fortuneBoostCritChancePiecePercent' },
         { raw: MISC.balance.plusCoins.buff().chanceBuffer, pid: 'plusCoinsForCritChancePiece', ppid: 'plusCoinsForCritChancePiecePercent' },
-        { raw: gainWithoutPower, pid: 'fifthBuyableSuperEffectPiece', ppid: 'fifthBuyableSuperEffectPiecePercent' }
     ]
 
     // Конвертация аддитивных raw -> мультипликаторы
@@ -1112,7 +1142,7 @@ function hoverColorInverse(iden){
 function unlockShardAch(x) {
     if (player.supercrystal.currency > 0) {
         player.supercrystal.currency--
-        player.shard_achievements.push(x)
+        if (!player.shard_achievements.includes(x)) player.shard_achievements.push(x)
     }
 }
 
@@ -1133,6 +1163,11 @@ function createGainPerClickUI() {
         { id: 'challenge1', title: 'Испытание 1', colorStyle: 'background-image: radial-gradient(rgb(127, 210, 136), black 210%)' }
     ]
 
+    // POSSIBLE LEAK: функция создаёт DOM-элементы и добавляет их в `statsContainer`.
+    // Если `createGainPerClickUI` вызывается повторно без очистки контейнера,
+    // это может привести к накоплению элементов в DOM и утечке памяти.
+    // Рекомендуется очищать `statsContainer` перед созданием новых строк:
+    // `statsContainer.innerHTML = ''` или удалять дочерние элементы в цикле.
     // Создаём статистические строки
     descriptors.forEach(d => {
         const row = document.createElement('div')
@@ -1795,7 +1830,6 @@ function createCritChanceUI() {
         { id: 'eighthShopBuyableEffect', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(rgb(255, 174, 0), black 210%)' },
         { id: 'firstMineralEffect1', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(rgb(45, 202, 210), black 210%)' },
         { id: 'critChShAch', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(rgb(179, 0, 0), black 210%)' },
-        { id: 'fifthBuyableSuperEffect', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(rgb(255, 174, 0), black 210%)' },
         { id: 'fortuneBoostCritChance', title: 'Альфа-Усилитель', colorStyle: 'background-image: radial-gradient(hotpink, black 210%)' },
         { id: 'plusCoinsForCritChance', title: 'Альфа-Усилитель', colorStyle: 'background-image: radial-gradient(white, black 210%)' }
     ]
@@ -2067,3 +2101,35 @@ function setupHoverHandlers() {
 
 // Вешаем обработчики сразу после генерации UI
 try { setupHoverHandlers() } catch (e) { }
+
+// Автоматическое управление состоянием выбранной вкладки
+(function(){
+    window.addEventListener('DOMContentLoaded', () => {
+        // Делегируем клики — работает для динамически созданных кнопок
+        document.addEventListener('click', function(e){
+            const btn = e.target.closest && e.target.closest('.tabButton')
+            if (!btn) return
+
+            // Игнорируем кнопки управляющие челленджами — они имеют отдельный стиль
+            if (btn.classList.contains('challengeStart')) return
+            if (btn.classList.contains('challengePStart')) return
+            if (btn.classList.contains('exitChallenge')) return
+
+            // Найдём контейнер кнопок — используем родителя кнопки
+            const parent = btn.parentElement
+            if (!parent) return
+
+            // Убираем active у всех вкладок в этом контейнере, кроме тех, что помечены как challengeStart
+            parent.querySelectorAll('.tabButton.active:not(.challengeStart)').forEach(b => b.classList.remove('active'))
+
+            // Пометим текущую как активную (текущая кнопка не имеет класс challengeStart — проверили выше)
+            btn.classList.add('active')
+
+            // Обновим атрибут aria-selected для доступности, не трогая .challengeStart кнопки
+            parent.querySelectorAll('.tabButton').forEach(b => {
+                if (b.classList.contains('challengeStart') || b.classList.contains('challengePStart') || b.classList.contains('exitChallenge')) return
+                b.setAttribute('aria-selected', b === btn ? 'true' : 'false')
+            })
+        }, false)
+    })
+})()

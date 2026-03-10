@@ -14,6 +14,17 @@ function saveGame () {
     else {
         MISC.auto_save_timer = 0
         notify(text.notification.save, 'limegreen');
+        
+        // Очистка пустых полей перед сохранением для уменьшения размера сохранения
+        if (player.offline_gain) {
+            player.offline_gain.time = ''
+            player.offline_gain.coin = ''
+            player.offline_gain.supercoin = ''
+            player.offline_gain.crystal = ''
+            player.offline_gain.prestige = ''
+            player.offline_gain.shard = ''
+        }
+        
         localStorage.setItem('SAVE_NUMBER', JSON.stringify(save_number))
         let stringifiedData = JSON.stringify(player); //превратим в строчку
         switch (save_number) {
@@ -143,33 +154,40 @@ function loadGame() {
 
         mineralsBulkInput.value = player.settings.minerals_bulkbuy
 
+        console.log(player.settings.whichPrestigeMode)
         if (player.settings.whichPrestigeMode == 'time') autoPrestigeInput.value = player.automation.conditions.prestige.time
         else if (player.settings.whichPrestigeMode == 'prestige') autoPrestigeInput.value = player.automation.conditions.prestige.prestige
-        else if (player.settings.whichPrestigeMode == 'crystal') autoPrestigeInput.value = player.automation.conditions.prestige.crystals
+        else if (player.settings.whichPrestigeMode == 'crystals') autoPrestigeInput.value = player.automation.conditions.prestige.crystals
         else autoPrestigeInput.value = player.automation.conditions.prestige.coins
 
         if (player.automation.checkbox.single == true) {
             autoSingleUpgradeCheckbox.checked = true
+            if (MISC.automation.single.interval) clearInterval(MISC.automation.single.interval)
             MISC.automation.single.interval = setInterval(()=>{AUTO.single.charge()}, 50)
         }
         if (player.automation.checkbox.buyable == true) {
             autoBuyableUpgradeCheckbox.checked = true
+            if (MISC.automation.buyable.interval) clearInterval(MISC.automation.buyable.interval)
             MISC.automation.buyable.interval = setInterval(()=>{AUTO.buyable.charge()}, 50)
         }
         if (player.automation.checkbox.umultiplier == true) {
             autoUmultiplierCheckbox.checked = true
+            if (MISC.automation.umultiplier.interval) clearInterval(MISC.automation.umultiplier.interval)
             MISC.automation.umultiplier.interval = setInterval(()=>{AUTO.umultiplier.charge()}, 50)
         }
         if (player.automation.checkbox.upower == true) {
             autoUpowerCheckbox.checked = true
+            if (MISC.automation.upower.interval) clearInterval(MISC.automation.upower.interval)
             MISC.automation.upower.interval = setInterval(()=>{AUTO.upower.charge()}, 50)
         }
         if (player.automation.checkbox.prestige == true) {
             autoPrestigeCheckbox.checked = true
+            if (MISC.automation.prestige.interval) clearInterval(MISC.automation.prestige.interval)
             MISC.automation.prestige.interval = setInterval(()=>{AUTO.prestige.charge()}, 50)
         }
         if (player.automation.checkbox.uadder == true) {
             autoUadderCheckbox.checked = true
+            if (MISC.automation.uadder.interval) clearInterval(MISC.automation.uadder.interval)
             MISC.automation.uadder.interval = setInterval(()=>{AUTO.uadder.charge()}, 50)
         }
         player.settings.modernization_activated = false
@@ -909,47 +927,47 @@ function convert_save() {
         parsedData.fourthBuyable_amount != undefined ? newData.coin.upgrades[4] = parsedData.fourthBuyable_amount : 0
         parsedData.fifthBuyable_amount != undefined ? newData.coin.upgrades[5] = parsedData.fifthBuyable_amount : 0
 
-        parsedData.firstSingle_amount != undefined && parsedData.firstSingle_amount == 1 ? newData.coin.singleUpgrades.push(11) : ''
-        parsedData.secondSingle_amount != undefined && parsedData.secondSingle_amount == 1 ? newData.coin.singleUpgrades.push(12) : ''
-        parsedData.thirdSingle_amount != undefined && parsedData.thirdSingle_amount == 1 ? newData.coin.singleUpgrades.push(13) : ''
-        parsedData.fourthSingle_amount != undefined && parsedData.fourthSingle_amount == 1 ? newData.coin.singleUpgrades.push(14) : ''
-        parsedData.fifthSingle_amount != undefined && parsedData.fifthSingle_amount == 1 ? newData.coin.singleUpgrades.push(15) : ''
-        parsedData.sixthSingle_amount != undefined && parsedData.sixthSingle_amount == 1 ? newData.coin.singleUpgrades.push(21) : ''
-        parsedData.seventhSingle_amount != undefined && parsedData.seventhSingle_amount == 1 ? newData.coin.singleUpgrades.push(22) : ''
-        parsedData.eighthSingle_amount != undefined && parsedData.eighthSingle_amount == 1 ? newData.coin.singleUpgrades.push(23) : ''
-        parsedData.ninthSingle_amount != undefined && parsedData.ninthSingle_amount == 1 ? newData.coin.singleUpgrades.push(24) : ''
-        parsedData.tenthSingle_amount != undefined && parsedData.tenthSingle_amount == 1 ? newData.coin.singleUpgrades.push(25) : ''
+        if (parsedData.firstSingle_amount != undefined && parsedData.firstSingle_amount == 1) { if (!newData.coin.singleUpgrades.includes(11)) newData.coin.singleUpgrades.push(11) }
+        if (parsedData.secondSingle_amount != undefined && parsedData.secondSingle_amount == 1) { if (!newData.coin.singleUpgrades.includes(12)) newData.coin.singleUpgrades.push(12) }
+        if (parsedData.thirdSingle_amount != undefined && parsedData.thirdSingle_amount == 1) { if (!newData.coin.singleUpgrades.includes(13)) newData.coin.singleUpgrades.push(13) }
+        if (parsedData.fourthSingle_amount != undefined && parsedData.fourthSingle_amount == 1) { if (!newData.coin.singleUpgrades.includes(14)) newData.coin.singleUpgrades.push(14) }
+        if (parsedData.fifthSingle_amount != undefined && parsedData.fifthSingle_amount == 1) { if (!newData.coin.singleUpgrades.includes(15)) newData.coin.singleUpgrades.push(15) }
+        if (parsedData.sixthSingle_amount != undefined && parsedData.sixthSingle_amount == 1) { if (!newData.coin.singleUpgrades.includes(21)) newData.coin.singleUpgrades.push(21) }
+        if (parsedData.seventhSingle_amount != undefined && parsedData.seventhSingle_amount == 1) { if (!newData.coin.singleUpgrades.includes(22)) newData.coin.singleUpgrades.push(22) }
+        if (parsedData.eighthSingle_amount != undefined && parsedData.eighthSingle_amount == 1) { if (!newData.coin.singleUpgrades.includes(23)) newData.coin.singleUpgrades.push(23) }
+        if (parsedData.ninthSingle_amount != undefined && parsedData.ninthSingle_amount == 1) { if (!newData.coin.singleUpgrades.includes(24)) newData.coin.singleUpgrades.push(24) }
+        if (parsedData.tenthSingle_amount != undefined && parsedData.tenthSingle_amount == 1) { if (!newData.coin.singleUpgrades.includes(25)) newData.coin.singleUpgrades.push(25) }
 
         parsedData.firstPrestigeBuyable_amount != undefined ? newData.prestige.upgrades[1] = parsedData.firstPrestigeBuyable_amount : 0
         parsedData.secondPrestigeBuyable_amount != undefined ? newData.prestige.upgrades[2] = parsedData.secondPrestigeBuyable_amount : 0
 
-        parsedData.firstPrestigeSingle_amount != undefined && parsedData.firstPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(11) : ''
-        parsedData.secondPrestigeSingle_amount != undefined && parsedData.secondPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(12) : ''
-        parsedData.thirdPrestigeSingle_amount != undefined && parsedData.thirdPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(13) : ''
-        parsedData.fourthPrestigeSingle_amount != undefined && parsedData.fourthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(14) : ''
-        parsedData.fifthPrestigeSingle_amount != undefined && parsedData.fifthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(21) : ''
-        parsedData.sixthPrestigeSingle_amount != undefined && parsedData.sixthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(22) : ''
-        parsedData.seventhPrestigeSingle_amount != undefined && parsedData.seventhPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(23) : ''
-        parsedData.eighthPrestigeSingle_amount != undefined && parsedData.eighthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(24) : ''
-        parsedData.ninthPrestigeSingle_amount != undefined && parsedData.ninthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(31) : ''
-        parsedData.tenthPrestigeSingle_amount != undefined && parsedData.tenthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(32) : ''
-        parsedData.eleventhPrestigeSingle_amount != undefined && parsedData.eleventhPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(33) : ''
-        parsedData.twelfthPrestigeSingle_amount != undefined && parsedData.twelfthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(34) : ''
-        parsedData.thirteenthPrestigeSingle_amount != undefined && parsedData.thirteenthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(41) : ''
-        parsedData.fourteenthPrestigeSingle_amount != undefined && parsedData.fourteenthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(42) : ''
-        parsedData.fifteenthPrestigeSingle_amount != undefined && parsedData.fifteenthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(43) : ''
-        parsedData.sixteenthPrestigeSingle_amount != undefined && parsedData.sixteenthPrestigeSingle_amount == 1 ? newData.prestige.singleUpgrades.push(44) : ''
+        if (parsedData.firstPrestigeSingle_amount != undefined && parsedData.firstPrestigeSingle_amount == 1) { if (!newData.prestige.singleUpgrades.includes(11)) newData.prestige.singleUpgrades.push(11) }
+        if (parsedData.secondPrestigeSingle_amount != undefined && parsedData.secondPrestigeSingle_amount == 1) { if (!newData.prestige.singleUpgrades.includes(12)) newData.prestige.singleUpgrades.push(12) }
+        if (parsedData.thirdPrestigeSingle_amount != undefined && parsedData.thirdPrestigeSingle_amount == 1) { if (!newData.prestige.singleUpgrades.includes(13)) newData.prestige.singleUpgrades.push(13) }
+        if (parsedData.fourthPrestigeSingle_amount != undefined && parsedData.fourthPrestigeSingle_amount == 1) { if (!newData.prestige.singleUpgrades.includes(14)) newData.prestige.singleUpgrades.push(14) }
+        if (parsedData.fifthPrestigeSingle_amount != undefined && parsedData.fifthPrestigeSingle_amount == 1) { if (!newData.prestige.singleUpgrades.includes(21)) newData.prestige.singleUpgrades.push(21) }
+        if (parsedData.sixthPrestigeSingle_amount != undefined && parsedData.sixthPrestigeSingle_amount == 1) { if (!newData.prestige.singleUpgrades.includes(22)) newData.prestige.singleUpgrades.push(22) }
+        if (parsedData.seventhPrestigeSingle_amount != undefined && parsedData.seventhPrestigeSingle_amount == 1) { if (!newData.prestige.singleUpgrades.includes(23)) newData.prestige.singleUpgrades.push(23) }
+        if (parsedData.eighthPrestigeSingle_amount != undefined && parsedData.eighthPrestigeSingle_amount == 1) { if (!newData.prestige.singleUpgrades.includes(24)) newData.prestige.singleUpgrades.push(24) }
+        if (parsedData.ninthPrestigeSingle_amount != undefined && parsedData.ninthPrestigeSingle_amount == 1) { if (!newData.prestige.singleUpgrades.includes(31)) newData.prestige.singleUpgrades.push(31) }
+        if (parsedData.tenthPrestigeSingle_amount != undefined && parsedData.tenthPrestigeSingle_amount == 1) { if (!newData.prestige.singleUpgrades.includes(32)) newData.prestige.singleUpgrades.push(32) }
+        if (parsedData.eleventhPrestigeSingle_amount != undefined && parsedData.eleventhPrestigeSingle_amount == 1) { if (!newData.prestige.singleUpgrades.includes(33)) newData.prestige.singleUpgrades.push(33) }
+        if (parsedData.twelfthPrestigeSingle_amount != undefined && parsedData.twelfthPrestigeSingle_amount == 1) { if (!newData.prestige.singleUpgrades.includes(34)) newData.prestige.singleUpgrades.push(34) }
+        if (parsedData.thirteenthPrestigeSingle_amount != undefined && parsedData.thirteenthPrestigeSingle_amount == 1) { if (!newData.prestige.singleUpgrades.includes(41)) newData.prestige.singleUpgrades.push(41) }
+        if (parsedData.fourteenthPrestigeSingle_amount != undefined && parsedData.fourteenthPrestigeSingle_amount == 1) { if (!newData.prestige.singleUpgrades.includes(42)) newData.prestige.singleUpgrades.push(42) }
+        if (parsedData.fifteenthPrestigeSingle_amount != undefined && parsedData.fifteenthPrestigeSingle_amount == 1) { if (!newData.prestige.singleUpgrades.includes(43)) newData.prestige.singleUpgrades.push(43) }
+        if (parsedData.sixteenthPrestigeSingle_amount != undefined && parsedData.sixteenthPrestigeSingle_amount == 1) { if (!newData.prestige.singleUpgrades.includes(44)) newData.prestige.singleUpgrades.push(44) }
 
         parsedData.firstShardBuyable_amount != undefined ? newData.shard.upgrades[1] = parsedData.firstShardBuyable_amount : 0
         parsedData.secondShardBuyable_amount != undefined ? newData.shard.upgrades[2] = parsedData.secondShardBuyable_amount : 0
         parsedData.thirdShardBuyable_amount != undefined ? newData.shard.upgrades[3] = parsedData.thirdShardBuyable_amount : 0
 
-        parsedData.firstShardSingle_amount != undefined && parsedData.firstShardSingle_amount == 1 ? newData.shard.singleUpgrades.push(11) : ''
-        parsedData.secondShardSingle_amount != undefined && parsedData.secondShardSingle_amount == 1 ? newData.shard.singleUpgrades.push(12) : ''
-        parsedData.thirdShardSingle_amount != undefined && parsedData.thirdShardSingle_amount == 1 ? newData.shard.singleUpgrades.push(13) : ''
-        parsedData.fourthShardSingle_amount != undefined && parsedData.fourthShardSingle_amount == 1 ? newData.shard.singleUpgrades.push(21) : ''
-        parsedData.fifthShardSingle_amount != undefined && parsedData.fifthShardSingle_amount == 1 ? newData.shard.singleUpgrades.push(22) : ''
-        parsedData.sixthShardSingle_amount != undefined && parsedData.sixthShardSingle_amount == 1 ? newData.shard.singleUpgrades.push(23) : ''
+        if (parsedData.firstShardSingle_amount != undefined && parsedData.firstShardSingle_amount == 1) { if (!newData.shard.singleUpgrades.includes(11)) newData.shard.singleUpgrades.push(11) }
+        if (parsedData.secondShardSingle_amount != undefined && parsedData.secondShardSingle_amount == 1) { if (!newData.shard.singleUpgrades.includes(12)) newData.shard.singleUpgrades.push(12) }
+        if (parsedData.thirdShardSingle_amount != undefined && parsedData.thirdShardSingle_amount == 1) { if (!newData.shard.singleUpgrades.includes(13)) newData.shard.singleUpgrades.push(13) }
+        if (parsedData.fourthShardSingle_amount != undefined && parsedData.fourthShardSingle_amount == 1) { if (!newData.shard.singleUpgrades.includes(21)) newData.shard.singleUpgrades.push(21) }
+        if (parsedData.fifthShardSingle_amount != undefined && parsedData.fifthShardSingle_amount == 1) { if (!newData.shard.singleUpgrades.includes(22)) newData.shard.singleUpgrades.push(22) }
+        if (parsedData.sixthShardSingle_amount != undefined && parsedData.sixthShardSingle_amount == 1) { if (!newData.shard.singleUpgrades.includes(23)) newData.shard.singleUpgrades.push(23) }
 
         parsedData.firstShopBuyable_amount != undefined ? newData.shop.upgrades[1] = parsedData.firstShopBuyable_amount : 0
         parsedData.secondShopBuyable_amount != undefined ? newData.shop.upgrades[2] = parsedData.secondShopBuyable_amount : 0
@@ -992,10 +1010,10 @@ function convert_save() {
         parsedData.shardUnlockableSingles_consumedShards != undefined ? newData.shard.consumed.singles = parsedData.shardUnlockableSingles_consumedShards : 0
         parsedData.shardUnlockableBuyables_consumedShards != undefined ? newData.shard.consumed.buyables = parsedData.shardUnlockableBuyables_consumedShards : 0
 
-        newData.shard.consumed.second >= 1000 ? newData.shard.unlockables.push(1) : ''
-        newData.shard.consumed.click >= 1000 ? newData.shard.unlockables.push(2) : ''
-        newData.shard.consumed.buyables >= 10000 ?newData.shard.unlockables.push(3) : ''
-        newData.shard.consumed.singles >= 100000 ? newData.shard.unlockables.push(4) : ''
+        if (newData.shard.consumed.second >= 1000) { if (!newData.shard.unlockables.includes(1)) newData.shard.unlockables.push(1) }
+        if (newData.shard.consumed.click >= 1000) { if (!newData.shard.unlockables.includes(2)) newData.shard.unlockables.push(2) }
+        if (newData.shard.consumed.buyables >= 10000) { if (!newData.shard.unlockables.includes(3)) newData.shard.unlockables.push(3) }
+        if (newData.shard.consumed.singles >= 100000) { if (!newData.shard.unlockables.includes(4)) newData.shard.unlockables.push(4) }
 
         parsedData.spentSuperCoins != undefined ? newData.supercoin.spent_currency = parsedData.spentSuperCoins : 0
         parsedData.superCoins != undefined ? newData.supercoin.currency = parsedData.superCoins : 0

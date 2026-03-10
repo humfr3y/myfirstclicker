@@ -1,4 +1,8 @@
 /*смена полоски прокрутки для хрома*/
+
+:root {
+  --reflash: #00dc00;
+}
 html::-webkit-scrollbar, #versionDiv::-webkit-scrollbar, #helpDiv::-webkit-scrollbar {
   width:8px;
 }
@@ -34,7 +38,8 @@ html{
 }
 
 .mainSettings {
-  position: relative;
+  position: absolute;
+  left: 0;
   display: flex;
 }
 
@@ -73,7 +78,7 @@ hr {
     margin-top: 15px;
     white-space: nowrap;
     margin-bottom: 15px;
-    font-size: calc(16px * var(--font-scale));
+    font-size: calc(18px * var(--font-scale));
 }
 
 gt {
@@ -117,8 +122,8 @@ nt {
     color: rgba(255, 0, 0, 0);
     display: block;
     transition: transform 0.1s ease-in-out;
-    width: 195px;
-    height: 195px;
+    width: 250px;
+    height: 250px;
     transition: background-image 0.2s ease-in-out;
     background-image: url("images/CoinOff.png");
     background-size: contain;
@@ -170,7 +175,7 @@ nt {
   
   .notification.hide {
     right: 5px; /* смещаем уведомление вправо за экран для скрытия */
-    transition: right 0.5s;
+    transition: right 0.25s;
   }
 
   .notification.show {
@@ -180,7 +185,7 @@ nt {
   }
   
   #topValues {
-    max-height: 115px;
+    max-height: 150px;
     height: 18vw;
     justify-content: space-between;
     margin-bottom: 10px;
@@ -198,7 +203,7 @@ nt {
 }
 
 #getCoinLine {
-  height: 195px;
+  height: 270px;
   justify-content: space-around;
   margin-bottom: 10px;
   display: flex;
@@ -346,7 +351,7 @@ nt {
 
 .progress-bar-base{
   width:100%;
-  height:13px;
+  height:16px;
   background-color: gray;
   overflow: hidden;
 }
@@ -360,7 +365,7 @@ nt {
   background-image: radial-gradient(#15fa01, #040000 170%);
 }
 #progress-bar-text {
-  font-size: calc(10px * var(--font-scale));
+  font-size: calc(14px * var(--font-scale));
   position: absolute;
   width: 100%;
   top: 0;
@@ -519,7 +524,7 @@ nt {
   margin: 5px;
   margin-top: 15px;
   width:100%;
-  font-size: calc(15px * var(--font-scale));
+  font-size: calc(17px * var(--font-scale));
 }
 
 #wholeShopDiv {
@@ -641,7 +646,7 @@ st {
   z-index: 2000;
   max-height: 101px;
   height: 12.75vw;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.25s ease-in-out;
   opacity: 0;
 }
 
@@ -649,7 +654,7 @@ st {
   text-align: center;
   color: white;
   margin: 0 auto;
-  font-size: calc(13px * var(--font-scale));
+  font-size: calc(15px * var(--font-scale));
 }
 
 ct {
@@ -658,14 +663,14 @@ ct {
   text-shadow: 0 0 5px aqua;
 }
 
-#doPrestige {
+#doPrestige, #doReflash {
   border-style: solid;
   border-radius: 5px;
   background-color: black;
   color: aqua;
-  font-size: calc(12px * var(--font-scale));
+  font-size: calc(13px * var(--font-scale));
   max-width: 250px;
-  max-height: 70px;
+  max-height: 90px;
   width: 25vw;
   height: 5vw;
   text-align: center;
@@ -678,18 +683,27 @@ ct {
   align-items: center;
 }
 
+#doReflash, .reflashButton {
+  color: var(--reflash);
+  border-color: var(--reflash);
+}
+
 #doPrestige:hover {
   background-color: aqua;
   color:black;
 }
 
-#prestigeGet {
+#doReflash:hover {
+  background-color: var(--reflash);
+  color:black;
+}
+
+#prestigeGet, #reflashGet {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 5px;
     justify-content: space-around;
-
 }
 
 .prestigeButton {
@@ -700,6 +714,53 @@ ct {
 .prestigeButton:hover {
   background-color: rgba(0, 255, 255, 0.144);
 }
+
+.reflashButton:hover {
+  background-color: rgba(0, 220, 0, 0.144);
+}
+
+.fortuneButton2 {
+  color: hotpink;
+  border-color: hotpink;
+}
+
+/* Specific active styles for special-colored tab buttons */
+.tabButton.prestigeButton.active,
+.tabButton.prestigeButton[aria-selected="true"] {
+  /* make the aqua color the background and use dark text */
+  background-color: rgba(0, 255, 255, 1);
+  color: black;
+  border-color: rgba(0, 255, 255, 1);
+}
+.tabButton.prestigeButton.active:hover,
+.tabButton.prestigeButton[aria-selected="true"]:hover {
+  background-color: rgba(0, 255, 255, 0.9);
+}
+
+.tabButton.fortuneButton2.active,
+.tabButton.fortuneButton2[aria-selected="true"] {
+  /* use a stronger pink for fortune active */
+  background-color: rgb(255, 105, 180);
+  color: black;
+  border-color: rgb(255, 105, 180);
+}
+.tabButton.fortuneButton2.active:hover,
+.tabButton.fortuneButton2[aria-selected="true"]:hover {
+  background-color: rgba(255, 105, 180, 0.9);
+}
+
+.tabButton#eventSelect.active,
+.tabButton#eventSelect[aria-selected="true"] {
+  /* use a stronger pink for fortune active */
+  background-color: red;
+  color: black;
+  border-color: red;
+}
+.tabButton#eventSelect.active:hover,
+.tabButton#eventSelect[aria-selected="true"]:hover {
+  background-color: rgba(255, 0, 0, 0.9);
+}
+
 
 #prestigeSingleUpgrades {
   display: flex;
@@ -1097,10 +1158,10 @@ scn {
 }
 
 .mineralContainer {
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   margin-top: 50px;
-  flex: 0 1 200px; /* allow shrinking and wrapping */
+  flex: 0 1 300px; /* allow shrinking and wrapping */
   box-sizing: border-box;
 }
 
@@ -1274,7 +1335,7 @@ th {
   flex-direction: row;
   flex-wrap: wrap; /* allow the two halves to wrap like balance */
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 16px;
 }
 
@@ -1283,8 +1344,8 @@ th {
   flex-direction: column;
   align-items: center;
   /* prefer a 420px base so halves wrap to next row when narrow */
-  flex: 0 1 500px;
-  max-width: 500px;
+  flex: 0 1 700px;
+  max-width: 700px;
   width: 100%;
   box-sizing: border-box;
   padding: 8px;
@@ -1374,7 +1435,7 @@ th {
   display: flex;
   align-items: center;
   pointer-events: none;
-  transition:  0.5s ease-in-out;
+  transition:  0.25s ease-in-out;
 }
 
 .fortuneBoost.disabled {
@@ -1444,10 +1505,6 @@ img.disabled {
   background: radial-gradient(rgb(0, 0, 0) 60%, rgba(192, 38, 0, 0.801) 90%, rgba(194, 39, 0, 0.877)95%,rgba(202, 0, 0, 0.884) 100%);
 }
 
-#fortuneSelect:hover {
-  background-color: rgba(255, 105, 180, 0.13);
-}
-
 .fortuneUpgradesRow {
   display: flex;
 }
@@ -1458,7 +1515,7 @@ img.disabled {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 16px;
 }
 
@@ -1520,7 +1577,7 @@ img.disabled {
 }
 
 #plusCoinsDesc, #minusCoinsDesc {
-  max-width: 300px;
+  max-width: 350px;
   width: 45vw;
 }
 

@@ -11,7 +11,7 @@ button {
     border-width: 1px;
 }
 
-#prestigeSubButtons, #mainSubButtons, #settingSubButtons, #statsSubButtons, #achSubButtons, #topButtons {
+#prestigeSubButtons, #mainSubButtons, #settingSubButtons, #statsSubButtons, #achSubButtons, #topButtons, #challengeSubButtons {
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -28,14 +28,14 @@ button {
 .tabButton {
     border-style: solid;
     border-radius: 3px;
-    max-height: 30px;
+    max-height: 35px;
     height: 4vw;
     border-color:rgb(255, 255, 255);
     color: rgb(255, 255, 255);
     background-color: rgb(0, 0, 0);
     text-align: center;
     font-family: "Poly"; 
-    font-size: calc(15px * var(--font-scale));
+    font-size: calc(18px * var(--font-scale));
     margin-bottom: 10px;
     cursor: pointer;
     margin-right: 0.3vw;
@@ -43,6 +43,21 @@ button {
 }
 .tabButton:hover {
     background-color: rgb(62, 62, 62)
+}
+.tabButton::before {
+    color: black !important;
+}
+
+/* Active/selected tab: swap background and text colors */
+.tabButton.active,
+.tabButton[aria-selected="true"] {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border-color: rgb(0, 0, 0);
+}
+.tabButton.active:hover,
+.tabButton[aria-selected="true"]:hover {
+    background-color: rgb(230, 230, 230);
 }
 
 ut { /*title of upgrade */
@@ -56,9 +71,10 @@ it {
 }
 
 .subButton {
-    max-height: 25px;
+    opacity: 0.85;
+    max-height: 30px;
     height: 3vw;
-    font-size: calc(13px * var(--font-scale))
+    font-size: calc(16px * var(--font-scale))
 }
 
 .tooltip {
@@ -232,12 +248,12 @@ input {
     font-family: 'Poly';
 }
 
-.challengeDiv {
-    font-size: calc(16px * var(--font-scale));
+.challengeDiv, .challengePDiv {
+    font-size: calc(20px * var(--font-scale));
     border: white 2px solid;
     border-radius: 10px;
-    max-width: 300px;
-    width: 20vw;
+    max-width: 390px;
+    width: 15vw;
     display: flex;
     flex-direction: column;
     color: white;
@@ -245,7 +261,21 @@ input {
     text-align: center;
     padding: 5px;
     margin: 5px;
-    height: 200px;
+    height: 250px;
+}
+
+#challenges, #prestigeChallenges {
+    display: flex;
+    flex-direction: row;
+    max-width: 1800px;
+    width: 90vw;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#challenges .challengeDiv, #prestigeChallenges .challengePDiv {
+  flex: 0 1 20vw; /* do not force growth, allow shrinking, base 420px */
+  box-sizing: border-box;
 }
 
 #challengeTab {
@@ -262,12 +292,12 @@ input {
     justify-content: center;
 }
 
-.challengeTitle {
+.challengeTitle, .challengePTitle {
     font-weight: bold;
     margin: 10px;
 }
 
-.challengeCond {
+.challengeCond, .challengePCond {
     height: 140px;
 }
 
@@ -275,29 +305,35 @@ button {
     cursor:pointer;
 }
 
-.challengeStart {
+.challengeStart, .challengePstart {
     margin: 0;
+}
+
+#worldTextDiv {
+    height: 120px;
+    display: flex;
+    align-items: end;
 }
 
 #worldText {
     display: flex;
     margin-top: 7px;
     white-space: nowrap;
-    position: relative;
+    width: 100%;
     text-align: center;
     justify-content: center;
     align-items: center;
 }
 
-#exitChallenge {
-    width: 75px; 
-    height: 20px; 
+#exitChallenge, #exitPChallenge {
     display: none;
+    font-size: calc(14px * var(--font-scale)) !important;
     margin: 5px;
+    height: 20px;
 }
 
 .challengeDesc {
-    font-size: calc(11px * var(--font-scale)) !important
+    font-size: calc(13px * var(--font-scale)) !important
 }
 
 #challengeCondition {
@@ -306,24 +342,9 @@ button {
     align-items: center;
 }
 
-#challenges {
-    display: flex;
-    flex-direction: row;
-    max-width: 1000px;
-    width: 90vw;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-#challenges .challengeDiv {
-  flex: 0 1 40vw; /* do not force growth, allow shrinking, base 420px */
-  max-width: 300px;
-  box-sizing: border-box;
-}
-
 .smallDesc{
-    color: rgb(120 120 120);
-    font-size: calc(12px * var(--font-scale));
+    color: rgb(130 130 130);
+    font-size: calc(14px * var(--font-scale));
     margin: 5px;
     text-align: center;
 }

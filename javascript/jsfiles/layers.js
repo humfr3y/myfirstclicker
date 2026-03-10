@@ -2,7 +2,7 @@ const LAYERS = {
     umultiplier: {
         doReset() {
             if (player.coin.upgrades[1] < this.cost()) return 1
-                if (!MILESTONES.has(12) || player.challenge.activated != 0) {
+                if (!MILESTONES.has(12) || player.challenge.activated != 0 || player.prestige.challenge.activated != 0) {
                     player.umultipliers++
                 }
                 else {
@@ -10,7 +10,7 @@ const LAYERS = {
                         player.umultipliers++
                     }
                 }
-                if (!MILESTONES.has(19) || !player.challenge.activated == 0) {
+                if (!MILESTONES.has(19) || !player.challenge.activated == 0 || !player.prestige.challenge.activated == 0 || player.prestige.challenge.activated != 0) {
                     LAYERS.doReset()
                 }
                 MISC.automation.umultiplier.charged = false
@@ -18,16 +18,18 @@ const LAYERS = {
                 player.time.umultiplier = 0
         },
         cost() {
-            let cost = 1
+            let cost = 1, scaler = player.prestige.challenge.activated == 6 ? MISC.amount_of_upgrades.utils() : player.umultipliers
             if (player.challenge.activated == 0 && player.challenge.completed.includes(12))
-            player.umultipliers >= 20 + UPGS.prestige.super.singles[24].effect() ? cost = Math.pow((100 + (40 * player.umultipliers)), 1 + (player.umultipliers - 19 - UPGS.prestige.super.singles[24].effect())/65) : cost = 100 + (40 * player.umultipliers)
-            else player.umultipliers >= 20 + UPGS.prestige.super.singles[24].effect() ? cost = Math.pow((100 + (50 * player.umultipliers)), 1 + (player.umultipliers - 19 - UPGS.prestige.super.singles[24].effect())/65) : cost = 100 + (50 * player.umultipliers)
-            if (player.challenge.activated == 12) cost = 9 + Math.pow((5 * player.umultipliers), player.umultipliers/13.5)
+            scaler >= 20 + UPGS.prestige.super.singles[24].effect() ? cost = Math.pow((100 + (40 * scaler)), 1 + (scaler - 19 - UPGS.prestige.super.singles[24].effect())/80) : cost = 100 + (40 * scaler)
+            else scaler >= 20 + UPGS.prestige.super.singles[24].effect() ? cost = Math.pow((100 + (50 * scaler)), 1 + (scaler - 19 - UPGS.prestige.super.singles[24].effect())/80) : cost = 100 + (50 * scaler)
+            if (player.challenge.activated == 12 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) cost = 9 + Math.pow((5 * scaler), scaler/13.5)
             if (player.balance.upgrades.singles.includes(22)) cost /= MISC.balance.minusCoins.buff().utilsCostReducer
             if (player.balance.upgrades.singles.includes(21)) cost *= MISC.balance.plusCoins.nerf().utilsCostIncreaser
             cost -= GAIN.ureducer.effect()
             if (player.minerals[4]) cost -= UPGS.minerals[4].effect3()
-            return Math.max(cost, 0)
+            cost = Math.max(cost, 0)
+            if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
+            return cost
         },
         doForcedReset() {
             if (player.umultipliers == 0) return 1
@@ -40,13 +42,13 @@ const LAYERS = {
             player.time.umultiplier = 0
         },
         disable(x = this.cost(), y = document.getElementById('umultiplierBoost')) {
-                player.coin.upgrades[1] >= x ? y.disabled = false : y.disabled = true
+            player.coin.upgrades[1] >= x && player.prestige.challenge.activated != 3 ? y.disabled = false : y.disabled = true
         }
     },
     upower: {
         doReset() {
             if (player.coin.upgrades[1] < this.cost() || player.umultipliers < 4) return 1
-            if (!MILESTONES.has(13) || player.challenge.activated != 0) {
+            if (!MILESTONES.has(13) || player.challenge.activated != 0 || player.prestige.challenge.activated != 0) {
                 player.upowers++
             }
             else {
@@ -54,7 +56,7 @@ const LAYERS = {
                     player.upowers++
                 }
             }
-            if (!MILESTONES.has(20) || !player.challenge.activated == 0) {
+            if (!MILESTONES.has(20) || !player.challenge.activated == 0 || player.prestige.challenge.activated != 0) {
                 LAYERS.doReset()
             }
             player.umultipliers = 0
@@ -69,20 +71,22 @@ const LAYERS = {
             player.time.upower = 0
         },
         cost() {
-            let cost = 1
+            let cost = 1, scaler = player.prestige.challenge.activated == 6 ? MISC.amount_of_upgrades.utils() : player.upowers
             if (player.challenge.activated == 0 && player.challenge.completed.includes(12))
-            player.upowers >= 10 ? cost = Math.pow((250 + (80 * player.upowers)), 1 + (player.upowers-9)/65) : cost = 250 + (80 * player.upowers)
-            else player.upowers >= 10 ? cost = Math.pow((250 + (100 * player.upowers)), 1 + (player.upowers-9)/65) : cost = 250 + (100 * player.upowers)
+            scaler >= 10 ? cost = Math.pow((250 + (130 * scaler)), 1 + (scaler-9)/50) : cost = 250 + (130 * scaler)
+            else scaler >= 10 ? cost = Math.pow((250 + (150 * scaler)), 1 + (scaler-9)/50) : cost = 250 + (150 * scaler)
             if (ACHS.has(24)) cost -= 10*(player.upowers)
-            if (player.challenge.activated == 12) cost = 24 + Math.pow((10 * player.upowers), player.upowers/23)
+            if (player.challenge.activated == 12 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) cost = 24 + Math.pow((10 * scaler), scaler/23)
             if (player.balance.upgrades.singles.includes(22)) cost /= MISC.balance.minusCoins.buff().utilsCostReducer
             if (player.balance.upgrades.singles.includes(21)) cost *= MISC.balance.plusCoins.nerf().utilsCostIncreaser
             if (player.minerals[4]) cost -= UPGS.minerals[4].effect3()
             cost -= GAIN.ureducer.effect()
-            return Math.max(cost, 0)
+            cost = Math.max(cost, 0)
+            if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
+            return cost
         },
         disable(x = this.cost(), y = document.getElementById('upowerBoost'), z = player.umultipliers) {
-            player.coin.upgrades[1] >= x && z >= 4 ? y.disabled = false : y.disabled = true
+            (player.coin.upgrades[1] >= x && z >= 4) && player.prestige.challenge.activated != 3 ? y.disabled = false : y.disabled = true
         },
     },
     uadder: {
@@ -104,16 +108,18 @@ const LAYERS = {
             player.time.uadder = 0
         },
         cost() {
-            let cost = 1
-            player.uadders >= 10 ? cost = Math.pow((250 + (80 * player.uadders)), 1 + (player.uadders-9)/65) : cost = 250 + (80 * player.uadders)
+            let cost = 1, scaler = player.prestige.challenge.activated == 6 ? MISC.amount_of_upgrades.utils() : player.uadders
+            scaler >= 10 ? cost = Math.pow((250 + (80 * scaler)), 1 + (scaler-9)/60) : cost = 250 + (80 * scaler)
             if (player.balance.upgrades.singles.includes(22)) cost /= MISC.balance.minusCoins.buff().utilsCostReducer
             if (player.balance.upgrades.singles.includes(21)) cost *= MISC.balance.plusCoins.nerf().utilsCostIncreaser
             if (player.minerals[4]) cost -= UPGS.minerals[4].effect3()
             cost -= GAIN.ureducer.effect()
-            return Math.max(cost, 0)
+            cost = Math.max(cost, 0)
+            if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
+            return cost
         },
         disable(x = this.cost(), y = document.getElementById('uadderBoost'), z = player.upowers) {
-            player.coin.upgrades[2] >= x && z >= 10 ? y.disabled = false : y.disabled = true
+            (player.coin.upgrades[2] >= x && z >= 6) && player.prestige.challenge.activated != 3 ? y.disabled = false : y.disabled = true
         },
     },
     ureducer: {
@@ -130,19 +136,21 @@ const LAYERS = {
             }
         },
         cost() {
-            let cost = 1
-            player.ureducers >= 10 ? cost = Math.pow((650 + (250 * player.ureducers)), 1 + (player.ureducers-9)/65) : cost = 650 + (250 * player.ureducers)
+            let cost = 1, scaler = player.prestige.challenge.activated == 6 ? MISC.amount_of_upgrades.utils() : player.ureducers
+            scaler >= 10 ? cost = Math.pow((650 + (250 * scaler)), 1 + (scaler-9)/60) : cost = 650 + (250 * scaler)
             if (player.balance.upgrades.singles.includes(22)) cost /= MISC.balance.minusCoins.buff().utilsCostReducer
             if (player.balance.upgrades.singles.includes(21)) cost *= MISC.balance.plusCoins.nerf().utilsCostIncreaser
+            if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
             return cost
         },
         disable(x = this.cost(), y = document.getElementById('ureducerBoost'), z = player.uadders) {
-            player.coin.upgrades[2] >= x && z >= 4 ? y.disabled = false : y.disabled = true
+            (player.coin.upgrades[2] >= x && z >= 4) && player.prestige.challenge.activated != 3 ? y.disabled = false : y.disabled = true
         },
     },
     prestige: {
         doReset() {
             if (player.coin.currency < 1e15) return 1
+            if (player.prestige.challenge.activated != 0 && player.coin.currency < PRES_CHALL.goals[player.prestige.challenge.activated]) return 1
             if (!ACHS.has(21)) ACHS.unl(21)
             let temp = 0
             if (player.prestige.singleUpgrades.includes(44)) temp = 1
@@ -240,10 +248,28 @@ const LAYERS = {
                         player.challenge.time[player.challenge.activated].days = player.challenge.time[player.challenge.activated].timer / 86400
                     }
                     if (player.challenge.activated == 9 && MISC.amount_of_upgrades.coin() == 0) if (!ACHS.has(38)) ACHS.unl(38)
+                    if (player.challenge.activated == 12 && PRES_CHALLENGE[7].completed()) player.challenge.time[12].times_completed++
                     startChallenge(13, true)
+                }
+
+                if (!player.prestige.challenge.activated == 0) { //challenge completion
+                    if (!player.prestige.challenge.completed.includes(player.prestige.challenge.activated)){
+                        player.prestige.challenge.completed.push(player.prestige.challenge.activated)
+                    } 
+                    if (player.prestige.challenge.time[player.prestige.challenge.activated].timer >= player.time.real.prestige.timer) {
+                        player.prestige.challenge.time[player.prestige.challenge.activated].timer = player.time.real.prestige.timer
+    
+                        player.prestige.challenge.time[player.prestige.challenge.activated].seconds = player.prestige.challenge.time[player.prestige.challenge.activated].timer % 60 //39
+                        player.prestige.challenge.time[player.prestige.challenge.activated].minutes = (player.prestige.challenge.time[player.prestige.challenge.activated].timer / 60) % 60
+                        player.prestige.challenge.time[player.prestige.challenge.activated].hours = (player.prestige.challenge.time[player.prestige.challenge.activated].timer / 3600) % 24
+                        player.prestige.challenge.time[player.prestige.challenge.activated].days = player.prestige.challenge.time[player.prestige.challenge.activated].timer / 86400
+                    }
+                    if (!ACHS.has(57)) ACHS.unl(57)
+                    startPChallenge(9, true)
                 }
     
             if (!restartChallenge.checked) player.challenge.activated = 0
+            if (!restartPChallenge.checked) player.prestige.challenge.activated = 0
 
             if (MISC.automation.prestige.charged) {
                 MISC.automation.prestige.charged = false
@@ -261,7 +287,11 @@ const LAYERS = {
 
             LAYERS.doReset()
         },
-        cost() { return 1e15 }
+        cost() { 
+            let cost = 1e15
+            if (player.prestige.challenge.activated != 0) cost = PRES_CHALL.goals[player.prestige.challenge.activated]
+            return cost 
+        }
     },
     doForcedReset() {
         player.overdrive.consumed.type1 = 0
@@ -285,15 +315,15 @@ const LAYERS = {
     },
     doReset() {
         player.coin.currency = 10
-        if (player.challenge.activated == 0) {
+        if (player.challenge.activated == 0 && player.prestige.challenge.activated == 0) {
             if (player.prestige.singleUpgrades.includes(11)) player.coin.currency = 1000
             if (MILESTONES.has(7)) player.coin.currency = 1e6
             if (MILESTONES.has(17)) player.coin.currency = 1e9
         }
         for (let i = 1; i <= 5; i++){
-            player.prestige.singleUpgrades.includes(21) && player.challenge.activated == 0 ? player.coin.upgrades[i] = 1 : player.coin.upgrades[i] = 0
+            player.prestige.singleUpgrades.includes(21) && player.challenge.activated == 0 && player.prestige.challenge.activated == 0 ? player.coin.upgrades[i] = 1 : player.coin.upgrades[i] = 0
         }
-        if (!(player.challenge.activated == 0 && MILESTONES.has(9))) player.coin.singleUpgrades = []
+        if (!(player.challenge.activated == 0 && MILESTONES.has(9)) || !player.prestige.challenge.activated == 0) player.coin.singleUpgrades = []
     }
 }
 

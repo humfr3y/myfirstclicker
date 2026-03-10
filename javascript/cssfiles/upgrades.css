@@ -23,13 +23,13 @@
     border-radius: 4px;
     background-color: black;
     color: rgb(255, 255, 255);
-    font-size: calc(9.75px * var(--font-scale));
+    font-size: calc(11px * var(--font-scale));
     width: 17.5vw;
-    max-width: 175px;
-    height: 90px;
+    max-width: 210px;
+    height: 110px;
     text-align: center;
     font-family: "Poly";
-    transition:  0.5s ease-in-out;
+    transition:  0.25s ease-in-out;
     margin-right:10px;
     margin-bottom: 10px;
     cursor: pointer;

@@ -3,8 +3,8 @@ const UPGS = {
         buyables: {
             _max: 5,
             canAfford(x) {
-                if (player.challenge.activated == 6 || player.challenge.activated == 11) return false;
-                if (player.challenge.activated == 10 && MISC.amount_of_upgrades.coin() >= 25) return false;
+                if (player.challenge.activated == 6 || player.challenge.activated == 11 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) return false;
+                if ((player.challenge.activated == 10 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) && MISC.amount_of_upgrades.coin() >= 25) return false;
                 return player.coin.currency >= this[x].cost();
             },
             canAfford_super(x) {
@@ -19,7 +19,7 @@ const UPGS = {
             buy_super(x) {
                 if (this.canAfford_super(x)) {
                     player.supercoin.currency -= this[x].cost_super();
-                    player.coin.superUpgrades.push(this[x].super_id);
+                    if (!player.coin.superUpgrades.includes(this[x].super_id)) player.coin.superUpgrades.push(this[x].super_id);
                 }
             },
             buy_auto() {
@@ -73,13 +73,13 @@ const UPGS = {
             1: {
                 id: 1,
                 super_id: 11,
-                power: 1.095,
+                power: 1.1,
                 basePrice: 10,
                 element: document.getElementById('buyableU1'),
                 cost(x = player.coin.upgrades[1], y = MISC.amount_of_upgrades.coin()) {
                     let cost = this.basePrice * Math.pow(this.power, x);
-                    if (player.challenge.activated == 5) cost = this.basePrice * Math.pow(this.power, y);
-                    if (player.challenge.activated == 0 && player.challenge.completed.includes(5)) cost = Math.pow(this.basePrice * Math.pow(this.power, x), CHALL[5].effect());
+                    if (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost = this.basePrice * Math.pow(this.power, y);
+                    if (player.challenge.activated == 0 && player.challenge.completed.includes(5) && player.prestige.challenge.activated != 1) cost = Math.pow(this.basePrice * Math.pow(this.power, x), CHALL[5].effect());
                     if (player.prestige.super.buyables[4]) cost /= UPGS.prestige.super.buyables[4].effect();
                     if (ACHS.has(47)) cost *= 0.96;
                     if (player.balance.upgrades.singles.includes(21)) {
@@ -89,6 +89,7 @@ const UPGS = {
                         cost *= MISC.balance.minusCoins.nerf().upgradePriceMultiplier
                     }
                     if (player.minerals[4]) cost /= UPGS.minerals[4].effect1()
+                    if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
                     return cost;
                 },
                 unl_super() { return player.coin.superUpgrades.includes(this.super_id); },
@@ -96,6 +97,7 @@ const UPGS = {
                 effect(x = player.coin.upgrades[1] + MISC.free_upgrade[1]()) {
                     let eff = x;
                     eff *= UPGS.coin.buyables[2].effect();
+                    if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                     return eff;
                 },
                 effect_super(x = this.unl_super(), y = player.coin.upgrades[1]) {
@@ -105,7 +107,7 @@ const UPGS = {
                 },
                 bulk(x = player.coin.currency, y = player.coin.upgrades[1], z = MISC.amount_of_upgrades.coin()) {
                     let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power);
-                    if (player.challenge.activated == 10) bulk = bulk > 25 ? Math.min(25 - z, 25) : bulk;
+                    if (player.challenge.activated == 10 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) bulk = bulk > 25 ? Math.min(25 - z, 25) : bulk;
                     if (!player.settings.buy_max_activate) bulk = 1;
                     return bulk;
                 }
@@ -113,13 +115,13 @@ const UPGS = {
             2: {
                 id: 2,
                 super_id: 12,
-                power: 1.3,
+                power: 1.35,
                 basePrice: 100,
                 element: document.getElementById('buyableU2'),
                 cost(x = player.coin.upgrades[2], y = MISC.amount_of_upgrades.coin()) {
                     let cost = this.basePrice * Math.pow(this.power, x);
-                    if (player.challenge.activated == 5) cost = this.basePrice * Math.pow(this.power, y);
-                    if (player.challenge.activated == 0 && player.challenge.completed.includes(5)) cost = Math.pow(this.basePrice * Math.pow(this.power, x), CHALL[5].effect());
+                    if (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost = this.basePrice * Math.pow(this.power, y);
+                    if (player.challenge.activated == 0 && player.challenge.completed.includes(5) && player.prestige.challenge.activated != 1) cost = Math.pow(this.basePrice * Math.pow(this.power, x), CHALL[5].effect());
                     if (player.prestige.super.buyables[4]) cost /= UPGS.prestige.super.buyables[4].effect();
                     if (player.balance.upgrades.singles.includes(21)) {
                         cost /= MISC.balance.plusCoins.buff().upgradePriceDivisor
@@ -128,6 +130,7 @@ const UPGS = {
                         cost *= MISC.balance.minusCoins.nerf().upgradePriceMultiplier
                     }
                     if (player.minerals[4]) cost /= UPGS.minerals[4].effect1()
+                    if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
                     return cost;
                 },
                 unl_super() { return player.coin.superUpgrades.includes(this.super_id); },
@@ -137,6 +140,7 @@ const UPGS = {
                     if (player.coin.singleUpgrades.includes(14)) eff *= UPGS.coin.singles[14].effect();
                     if (player.achievements.includes(16)) eff *= 1.1;
                     eff *= this.effect_super();
+                    if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                     return eff;
                 },
                 effect2(x = player.coin.upgrades[2]) {
@@ -152,7 +156,7 @@ const UPGS = {
                 },
                 bulk(x = player.coin.currency, y = player.coin.upgrades[2], z = MISC.amount_of_upgrades.coin()) {
                     let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power);
-                    if (player.challenge.activated == 10) bulk = bulk > 25 ? Math.min(25 - z, 25) : bulk;
+                    if (player.challenge.activated == 10 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) bulk = bulk > 25 ? Math.min(25 - z, 25) : bulk;
                     if (!player.settings.buy_max_activate) bulk = 1;
                     return bulk;
                 }
@@ -160,13 +164,13 @@ const UPGS = {
             3: {
                 id: 3,
                 super_id: 13,
-                power: 9.33,
+                power: 9.66,
                 basePrice: 500,
                 element: document.getElementById('buyableU3'),
                 cost(x = player.coin.upgrades[3], y = MISC.amount_of_upgrades.coin()) {
                     let cost = this.basePrice * Math.pow(this.power, x);
-                    if (player.challenge.activated == 5) cost = this.basePrice * Math.pow(this.power, y);
-                    if (player.challenge.activated == 0 && player.challenge.completed.includes(5)) cost = Math.pow(this.basePrice * Math.pow(this.power, x), CHALL[5].effect());
+                    if (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost = this.basePrice * Math.pow(this.power, y);
+                    if (player.challenge.activated == 0 && player.challenge.completed.includes(5) && player.prestige.challenge.activated != 1) cost = Math.pow(this.basePrice * Math.pow(this.power, x), CHALL[5].effect());
                     if (player.prestige.super.buyables[4]) cost /= UPGS.prestige.super.buyables[4].effect();
                     if (player.balance.upgrades.singles.includes(21)) {
                         cost /= MISC.balance.plusCoins.buff().upgradePriceDivisor
@@ -175,12 +179,14 @@ const UPGS = {
                         cost *= MISC.balance.minusCoins.nerf().upgradePriceMultiplier
                     }
                     if (player.minerals[4]) cost /= UPGS.minerals[4].effect1()
+                    if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
                     return cost;
                 },
                 unl_super() { return player.coin.superUpgrades.includes(this.super_id); },
                 cost_super() { return 500; },
                 effect(x = player.coin.upgrades[3]) {
                     let eff = Math.pow(2, x);
+                    if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                     return eff;
                 },
                 effect_super(x = this.unl_super(), y = player.coin.upgrades[3]) {
@@ -190,7 +196,7 @@ const UPGS = {
                 },
                 bulk(x = player.coin.currency, y = player.coin.upgrades[3], z = MISC.amount_of_upgrades.coin()) {
                     let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power);
-                    if (player.challenge.activated == 10) bulk = bulk > 25 ? Math.min(25 - z, 25) : bulk;
+                    if (player.challenge.activated == 10 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) bulk = bulk > 25 ? Math.min(25 - z, 25) : bulk;
                     if (!player.settings.buy_max_activate) bulk = 1;
                     return bulk;
                 }
@@ -198,13 +204,13 @@ const UPGS = {
             4: {
                 id: 4,
                 super_id: 14,
-                power: 1.8,
+                power: 1.95,
                 basePrice: 1000,
                 element: document.getElementById('buyableU4'),
                 cost(x = player.coin.upgrades[4], y = MISC.amount_of_upgrades.coin()) {
                     let cost = this.basePrice * Math.pow(this.power, x);
-                    if (player.challenge.activated == 5) cost = this.basePrice * Math.pow(this.power, y);
-                    if (player.challenge.activated == 0 && player.challenge.completed.includes(5)) cost = Math.pow(this.basePrice * Math.pow(this.power, x), CHALL[5].effect());
+                    if (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost = this.basePrice * Math.pow(this.power, y);
+                    if (player.challenge.activated == 0 && player.challenge.completed.includes(5) && player.prestige.challenge.activated != 1) cost = Math.pow(this.basePrice * Math.pow(this.power, x), CHALL[5].effect());
                     if (player.prestige.super.buyables[4]) cost /= UPGS.prestige.super.buyables[4].effect();
                     if (player.balance.upgrades.singles.includes(21)) {
                         cost /= MISC.balance.plusCoins.buff().upgradePriceDivisor
@@ -213,6 +219,7 @@ const UPGS = {
                         cost *= MISC.balance.minusCoins.nerf().upgradePriceMultiplier
                     }
                     if (player.minerals[4]) cost /= UPGS.minerals[4].effect1()
+                    if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
                     return cost;
                 },
                 unl_super() { return player.coin.superUpgrades.includes(this.super_id); },
@@ -221,6 +228,7 @@ const UPGS = {
                     let base = player.prestige.singleUpgrades.includes(22) ? 1.075 : 1.05, eff = Math.pow(base, x);
                     if (player.coin.singleUpgrades.includes(15)) eff *= UPGS.coin.singles[15].effect();
                     if (player.coin.superUpgrades.includes(14)) eff *= this.effect_super();
+                    if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                     return eff;
                 },
                 effect_super(x = this.unl_super()) {
@@ -230,7 +238,7 @@ const UPGS = {
                 },
                 bulk(x = player.coin.currency, y = player.coin.upgrades[4], z = MISC.amount_of_upgrades.coin()) {
                     let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power);
-                    if (player.challenge.activated == 10) bulk = bulk > 25 ? Math.min(25 - z, 25) : bulk;
+                    if (player.challenge.activated == 10 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) bulk = bulk > 25 ? Math.min(25 - z, 25) : bulk;
                     if (!player.settings.buy_max_activate) bulk = 1;
                     return bulk;
                 }
@@ -238,13 +246,13 @@ const UPGS = {
             5: {
                 id: 5,
                 super_id: 15,
-                power: 1.8,
-                basePrice: 5000,
+                power: 15,
+                basePrice: 10000,
                 element: document.getElementById('buyableU5'),
                 cost(x = player.coin.upgrades[5], y = MISC.amount_of_upgrades.coin()) {
                     let cost = this.basePrice * Math.pow(this.power, x);
-                    if (player.challenge.activated == 5) cost = this.basePrice * Math.pow(this.power, y);
-                    if (player.challenge.activated == 0 && player.challenge.completed.includes(5)) cost = Math.pow(this.basePrice * Math.pow(this.power, x), CHALL[5].effect());
+                    if (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost = this.basePrice * Math.pow(this.power, y);
+                    if (player.challenge.activated == 0 && player.challenge.completed.includes(5) && player.prestige.challenge.activated != 1) cost = Math.pow(this.basePrice * Math.pow(this.power, x), CHALL[5].effect());
                     if (player.prestige.super.buyables[4]) cost /= UPGS.prestige.super.buyables[4].effect();
                     if (player.balance.upgrades.singles.includes(21)) {
                         cost /= MISC.balance.plusCoins.buff().upgradePriceDivisor
@@ -253,22 +261,24 @@ const UPGS = {
                         cost *= MISC.balance.minusCoins.nerf().upgradePriceMultiplier
                     }
                     if (player.minerals[4]) cost /= UPGS.minerals[4].effect1()
+                    if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
                     return cost;
                 },
                 unl_super() { return player.coin.superUpgrades.includes(this.super_id); },
                 cost_super() { return 1000; },
                 effect(x = player.coin.upgrades[5]) {
-                    let eff = 1 + x / 3500;
+                    let eff = x;
+                    if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                     return eff;
                 },
                 effect_super(x = this.unl_super()) {
                     if (x == 0) return 1;
-                    let eff = this.effect();
+                    let eff = 1 + this.effect();
                     return eff;
                 },
                 bulk(x = player.coin.currency, y = player.coin.upgrades[5], z = MISC.amount_of_upgrades.coin()) {
                     let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power);
-                    if (player.challenge.activated == 10) bulk = bulk > 25 ? Math.min(25 - z, 25) : bulk;
+                    if (player.challenge.activated == 10 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) bulk = bulk > 25 ? Math.min(25 - z, 25) : bulk;
                     if (!player.settings.buy_max_activate) bulk = 1;
                     return bulk;
                 }
@@ -278,10 +288,10 @@ const UPGS = {
             canAfford(x) {
                 let bool = false;
                 if (player.coin.currency >= this[x].cost() && !player.coin.singleUpgrades.includes(x)) bool = true;
-                if (player.challenge.activated == 1) bool = false;
-                if (player.challenge.activated == 10)
+                if (player.challenge.activated == 1 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) bool = false;
+                if (player.challenge.activated == 10 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7)
                     MISC.amount_of_upgrades.coin() >= 25 ? bool = false : bool;
-                if (player.challenge.activated == 11) bool = false;
+                if (player.challenge.activated == 11 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) bool = false;
                 return bool;
             },
             canAfford_super(x) {
@@ -290,13 +300,13 @@ const UPGS = {
             buy(x) {
                 if (this.canAfford(x)) {
                     player.coin.currency -= this[x].cost();
-                    player.coin.singleUpgrades.push(x);
+                    if (!player.coin.singleUpgrades.includes(x)) player.coin.singleUpgrades.push(x);
                 }
             },
             buy_super(x) {
                 if (this.canAfford_super(x)) {
                     player.supercoin.currency -= this[x].cost_super();
-                    player.coin.superUpgrades.push(this[x].super_id);
+                    if (!player.coin.superUpgrades.includes(this[x].super_id)) player.coin.superUpgrades.push(this[x].super_id);
                 }
             },
             disable(x) {
@@ -340,8 +350,9 @@ const UPGS = {
                 unl() { return player.coin.singleUpgrades.includes(this.id); },
                 cost() {
                     let cost = 100000;
-                    if (player.challenge.activated == 5) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
-                    if (player.challenge.activated == 6) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
+                    if (player.challenge.activated == 6 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
                     return cost;
                 },
                 unl_super() { return player.coin.superUpgrades.includes(this.super_id); },
@@ -351,6 +362,7 @@ const UPGS = {
                     let eff = 1 + (Math.log10(player.coin.total_currency + 10));
                     eff *= this.effect_super();
                     if (player.coin.singleUpgrades.includes(24)) eff = Math.pow(eff, UPGS.coin.singles[24].effect());
+                    if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                     return eff;
                 },
                 effect_super(x = this.unl_super() && this.unl()) {
@@ -369,8 +381,9 @@ const UPGS = {
                 unl() { return player.coin.singleUpgrades.includes(this.id); },
                 cost() {
                     let cost = 3e6;
-                    if (player.challenge.activated == 5) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
-                    if (player.challenge.activated == 6) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
+                    if (player.challenge.activated == 6 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
                     return cost;
                 },
                 unl_super() { return player.coin.superUpgrades.includes(this.super_id); },
@@ -379,6 +392,7 @@ const UPGS = {
                     if (x == 0) return 1;
                     let eff = Math.log1p(Math.pow(Math.pow(player.clicks.simulated, 2), this.base()));
                     eff *= this.effect_super();
+                    if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                     return eff;
                 },
                 effect_super(x = this.unl_super() && this.unl()) {
@@ -394,8 +408,9 @@ const UPGS = {
                 unl() { return player.coin.singleUpgrades.includes(this.id); },
                 cost() {
                     let cost = 5e6;
-                    if (player.challenge.activated == 5) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
-                    if (player.challenge.activated == 6) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
+                    if (player.challenge.activated == 6 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
                     return cost;
                 },
                 unl_super() { return player.coin.superUpgrades.includes(this.super_id); },
@@ -403,6 +418,7 @@ const UPGS = {
                 effect(x = this.unl()) {
                     if (x == 0) return 1;
                     let eff = 2;
+                    if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                     return eff;
                 },
                 effect_super(x = this.unl_super() && this.unl()) {
@@ -418,8 +434,9 @@ const UPGS = {
                 unl() { return player.coin.singleUpgrades.includes(this.id); },
                 cost() {
                     let cost = 2.5e7;
-                    if (player.challenge.activated == 5) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
-                    if (player.challenge.activated == 6) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
+                    if (player.challenge.activated == 6 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
                     return cost;
                 },
                 unl_super() { return player.coin.superUpgrades.includes(this.super_id); },
@@ -428,6 +445,7 @@ const UPGS = {
                     if (x == 0) return 1;
                     let eff = 1 + Math.pow(Math.log10(player.coin.upgrades[1] + 10) / 2, 2);
                     if (player.coin.superUpgrades.includes(24)) eff *= this.effect_super();
+                    if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                     return eff;
                 },
                 effect_super(x = this.unl_super() && this.unl()) {
@@ -443,8 +461,9 @@ const UPGS = {
                 unl() { return player.coin.singleUpgrades.includes(this.id); },
                 cost() {
                     let cost = 6.5e8;
-                    if (player.challenge.activated == 5) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
-                    if (player.challenge.activated == 6) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
+                    if (player.challenge.activated == 6 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
                     return cost;
                 },
                 unl_super() { return player.coin.superUpgrades.includes(this.super_id); },
@@ -452,6 +471,7 @@ const UPGS = {
                 effect(x = this.unl()) {
                     if (x == 0) return 1;
                     let eff = Math.pow(Math.log10(player.coin.upgrades[4] + 10), 1.5);
+                    if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                     return eff;
                 },
                 effect_super(x = this.unl_super() && this.unl()) {
@@ -467,8 +487,9 @@ const UPGS = {
                 unl() { return player.coin.singleUpgrades.includes(this.id); },
                 cost() {
                     let cost = 5e9;
-                    if (player.challenge.activated == 5) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
-                    if (player.challenge.activated == 6) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
+                    if (player.challenge.activated == 6 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
                     return cost;
                 },
                 unl_super() { return player.coin.superUpgrades.includes(this.super_id); },
@@ -477,6 +498,7 @@ const UPGS = {
                     if (x == 0) return 1;
                     let eff = new Decimal ((GAIN.coin.click.effect().add(10)).log10()).mul(1.09)
                     if (player.coin.superUpgrades.includes(31)) eff = eff.mul(this.effect_super());
+                    if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                     return eff;
                 },
                 effect_super(x = this.unl_super() && this.unl()) {
@@ -492,8 +514,9 @@ const UPGS = {
                 unl() { return player.coin.singleUpgrades.includes(this.id); },
                 cost() {
                     let cost = 5e10;
-                    if (player.challenge.activated == 5) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
-                    if (player.challenge.activated == 6) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
+                    if (player.challenge.activated == 6 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
                     return cost;
                 },
                 unl_super() { return player.coin.superUpgrades.includes(this.super_id); },
@@ -503,6 +526,8 @@ const UPGS = {
                     let eff = Math.pow(MISC.amount_of_upgrades.coin() + 10, 0.8) / 1.75;
                     if (player.achievements.includes(17)) eff *= 1 + (0.2 * player.time.game.total.timer / 86400);
                     if (player.prestige.super.singles.includes(21)) eff *= UPGS.prestige.super.singles[21].effect();
+                    if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
+                    
                     return !player.prestige.singleUpgrades.includes(23) ? Math.min(eff, 100) : softCap(eff, this.softcap_start(), 0.5);
                 },
                 effect_super(x = this.unl_super() && this.unl()) {
@@ -521,8 +546,9 @@ const UPGS = {
                 unl() { return player.coin.singleUpgrades.includes(this.id); },
                 cost() {
                     let cost = 7e11;
-                    if (player.challenge.activated == 5) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
-                    if (player.challenge.activated == 6) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
+                    if (player.challenge.activated == 6 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
                     return cost;
                 },
                 unl_super() { return player.coin.superUpgrades.includes(this.super_id); },
@@ -531,6 +557,7 @@ const UPGS = {
                     if (x == 0) return 1;
                     let eff = Math.pow(player.achievements.length * 50, 0.4);
                     if (player.coin.superUpgrades.includes(33)) eff = Math.pow(eff, this.effect_super());
+                    if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                     return eff;
                 },
                 effect_super(x = this.unl_super() && this.unl()) {
@@ -546,8 +573,9 @@ const UPGS = {
                 unl() { return player.coin.singleUpgrades.includes(this.id); },
                 cost() {
                     let cost = 2e12;
-                    if (player.challenge.activated == 5) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
-                    if (player.challenge.activated == 6) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
+                    if (player.challenge.activated == 6 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
                     return cost;
                 },
                 unl_super() { return player.coin.superUpgrades.includes(this.super_id); },
@@ -556,6 +584,7 @@ const UPGS = {
                     if (x == 0) return 1;
                     let eff = 1 + (player.time.game.total.timer / 1200000);
                     eff = Math.min(eff, 1.25 * this.effect_super());
+                    if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                     return eff;
                 },
                 effect_super(x = this.unl_super() && this.unl()) {
@@ -571,8 +600,9 @@ const UPGS = {
                 unl() { return player.coin.singleUpgrades.includes(this.id); },
                 cost() {
                     let cost = 1e13;
-                    if (player.challenge.activated == 5) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
-                    if (player.challenge.activated == 6) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
+                    if (player.challenge.activated == 6 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+                    if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
                     return cost;
                 },
                 unl_super() { return player.coin.superUpgrades.includes(this.super_id); }, //unlocks 2 ach rewards
@@ -580,6 +610,7 @@ const UPGS = {
                 effect(x = this.unl()) {
                     if (x == 0) return 1;
                     let eff = 1.5;
+                    if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                     return eff;
                 },
                 effect_super(x = this.unl_super() && this.unl()) {
@@ -665,7 +696,7 @@ const UPGS = {
             buy(x) {
                 if (this.canAfford(x)) {
                     player.prestige.currency -= this[x].cost();
-                    player.prestige.singleUpgrades.push(x);
+                    if (!player.prestige.singleUpgrades.includes(x)) player.prestige.singleUpgrades.push(x);
                 }
             },
             disable(x) {
@@ -907,14 +938,14 @@ const UPGS = {
                 },
                 1: {
                     id: 1,
-                    power: 10.3,
+                    power: 10.5,
                     basePrice: 1e13,
                     element: document.getElementById('superPBuyableU1'),
                     cost(x = player.prestige.super.buyables[1]) {
                         return this.basePrice * Math.pow(this.power, x);
                     },
                     effect(x = player.prestige.super.buyables[1]) {
-                        let eff = x * 0.0015;
+                        let eff = x * 0.0012;
                         eff *= UPGS.prestige.super.buyables[2].effect();
                         return eff;
                     },
@@ -926,7 +957,7 @@ const UPGS = {
                 },
                 2: {
                     id: 2,
-                    power: 25,
+                    power: 30,
                     basePrice: 1e15,
                     element: document.getElementById('superPBuyableU2'),
                     cost(x = player.prestige.super.buyables[2]) {
@@ -944,7 +975,7 @@ const UPGS = {
                 },
                 3: {
                     id: 3,
-                    power: 80,
+                    power: 100,
                     basePrice: 5e17,
                     element: document.getElementById('superPBuyableU3'),
                     cost(x = player.prestige.super.buyables[3]) {
@@ -962,7 +993,7 @@ const UPGS = {
                 },
                 4: {
                     id: 4,
-                    power: 17,
+                    power: 19,
                     basePrice: 1e20,
                     element: document.getElementById('superPBuyableU4'),
                     cost(x = player.prestige.super.buyables[4]) {
@@ -1004,7 +1035,7 @@ const UPGS = {
                 buy(x) {
                     if (this.canAfford(x)) {
                         player.prestige.currency -= this[x].cost();
-                        player.prestige.super.singles.push(x);
+                        if (!player.prestige.super.singles.includes(x)) player.prestige.super.singles.push(x);
                     }
                 },
                 disable(x) {
@@ -1068,7 +1099,7 @@ const UPGS = {
                         if (x == 0) return 0;
                         let timer = 0;
                         for (let i = 1; i <= 12; i++) timer += player.challenge.time[i].timer;
-                        let eff = Math.pow(3600 / timer, 0.8);
+                        let eff = Math.pow(3600 / timer, 0.65);
                         return eff;
                     }
                 },
@@ -1176,7 +1207,7 @@ const UPGS = {
             },
             1: {
                 id: 1,
-                power: 2.85,
+                power: 2.95,
                 basePrice: 1000,
                 element: document.getElementById('shBuyableU1'),
                 cost(x = player.shard.upgrades[1]) {
@@ -1197,7 +1228,7 @@ const UPGS = {
             },
             2: {
                 id: 2,
-                power: 4.3,
+                power: 4,
                 basePrice: 1000,
                 element: document.getElementById('shBuyableU2'),
                 cost(x = player.shard.upgrades[2]) {
@@ -1218,7 +1249,7 @@ const UPGS = {
             },
             3: {
                 id: 3,
-                power: 20,
+                power: 25,
                 basePrice: 5000,
                 element: document.getElementById('shBuyableU3'),
                 cost(x = player.shard.upgrades[3]) {
@@ -1249,7 +1280,7 @@ const UPGS = {
             buy(x) {
                 if (this.canAfford(x)) {
                     player.shard.currency -= this[x].cost();
-                    player.shard.singleUpgrades.push(x);
+                    if (!player.shard.singleUpgrades.includes(x)) player.shard.singleUpgrades.push(x);
                 }
             },
             disable(x) {
@@ -1581,7 +1612,7 @@ const UPGS = {
             buy(x) {
                 if (this.canAfford(x)) {
                     player.supercoin.currency -= this[x].cost();
-                    player.shop.unlockables.push(x);
+                    if (!player.shop.unlockables.includes(x)) player.shop.unlockables.push(x);
                 }
             },
             disable(x) {
@@ -1828,7 +1859,7 @@ const UPGS = {
                 element: document.getElementById('shopItem1'),
                 cost() { return 80; },
                 canUseItem(x = player.shop.items.amount[1], y = player.shop.items.used[1]) {
-                    if (x == 0 || y == this.maxAmount || player.challenge.activated != 0) return false;
+                    if (x == 0 || y == this.maxAmount || player.challenge.activated != 0 || player.prestige.challenge.activated != 0) return false;
                     else return true;
                 },
                 useItem() {
@@ -1853,7 +1884,7 @@ const UPGS = {
                 element: document.getElementById('shopItem2'),
                 cost() { return 250; },
                 canUseItem(x = player.shop.items.amount[2], y = player.shop.items.used[2]) {
-                    if (x == 0 || y == this.maxAmount || player.challenge.activated != 0) return false;
+                    if (x == 0 || y == this.maxAmount || player.challenge.activated != 0 || player.prestige.challenge.activated != 0) return false;
                     else return true;
                 },
                 useItem() {
@@ -1878,7 +1909,7 @@ const UPGS = {
                 element: document.getElementById('shopItem3'),
                 cost() { return 40; },
                 canUseItem(x = player.shop.items.amount[3], y = player.shop.items.used[3]) {
-                    if (x == 0 || y == this.maxAmount || player.challenge.activated != 0) return false;
+                    if (x == 0 || y == this.maxAmount || player.challenge.activated != 0 || player.prestige.challenge.activated != 0) return false;
                     else return true;
                 },
                 useItem() {
@@ -1903,7 +1934,7 @@ const UPGS = {
                 element: document.getElementById('shopItem4'),
                 cost() { return 350; },
                 canUseItem(x = player.shop.items.amount[4], y = player.shop.items.used[4]) {
-                    if (x == 0 || y == this.maxAmount || player.challenge.activated != 0) return false;
+                    if (x == 0 || y == this.maxAmount || player.challenge.activated != 0 || player.prestige.challenge.activated != 0) return false;
                     else return true;
                 },
                 useItem() {
@@ -1928,7 +1959,7 @@ const UPGS = {
                 element: document.getElementById('shopItem5'),
                 cost() { return 50; },
                 canUseItem(x = player.shop.items.amount[5], y = player.shop.items.used[5]) {
-                    if (x == 0 || y == this.maxAmount || player.challenge.activated != 0) return false;
+                    if (x == 0 || y == this.maxAmount || player.challenge.activated != 0 || player.prestige.challenge.activated != 0) return false;
                     else return true;
                 },
                 useItem() {
@@ -1953,7 +1984,7 @@ const UPGS = {
                 element: document.getElementById('shopItem6'),
                 cost() { return 140; },
                 canUseItem(x = player.shop.items.amount[6], y = player.shop.items.used[6]) {
-                    if (x == 0 || y == this.maxAmount || player.challenge.activated != 0) return false;
+                    if (x == 0 || y == this.maxAmount || player.challenge.activated != 0 || player.prestige.challenge.activated != 0) return false;
                     else return true;
                 },
                 useItem() {
@@ -1981,7 +2012,7 @@ const UPGS = {
         buy(x) {
             if (this.canAfford(x)) {
                 player.supercrystal.currency -= this[x].cost();
-                player.supercrystal.upgrades.push(x);
+                if (!player.supercrystal.upgrades.includes(x)) player.supercrystal.upgrades.push(x);
             }
         },
         disable(x) {
@@ -2146,6 +2177,7 @@ const UPGS = {
                 if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect();
                 if (player.fortune.activatedBoosts[7].activated) eff *= UPGS.fortune.boosts[7].effect()
                 if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect());
+                if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                 return 1 + eff;
             },
             effect2(x = player.minerals[1]) {
@@ -2154,6 +2186,7 @@ const UPGS = {
                 if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect();
                 if (player.fortune.activatedBoosts[7].activated) eff *= UPGS.fortune.boosts[7].effect()
                 if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect());
+                if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                 return 1 + eff;
             },
             effect3(x = player.minerals[1]) {
@@ -2162,6 +2195,7 @@ const UPGS = {
                 if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect();
                 if (player.fortune.activatedBoosts[7].activated) eff *= UPGS.fortune.boosts[7].effect()
                 if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect());
+                if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                 return 1 + eff;
             },
             bulk(x = player.minerals[1]) {
@@ -2193,6 +2227,7 @@ const UPGS = {
                 if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect();
                 if (player.fortune.activatedBoosts[7].activated) eff *= UPGS.fortune.boosts[7].effect()
                 if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect());
+                if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                 return eff;
             },
             effect2(x = player.minerals[2]) {
@@ -2201,6 +2236,7 @@ const UPGS = {
                 if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect();
                 if (player.fortune.activatedBoosts[7].activated) eff *= UPGS.fortune.boosts[7].effect()
                 if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect());
+                if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                 return eff;
             },
             effect3(x = player.minerals[2]) {
@@ -2209,6 +2245,7 @@ const UPGS = {
                 if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect();
                 if (player.fortune.activatedBoosts[7].activated) eff *= UPGS.fortune.boosts[7].effect()
                 if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect());
+                if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                 return eff;
             },
             bulk(x = player.minerals[2]) {
@@ -2240,6 +2277,7 @@ const UPGS = {
                 if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect();
                 if (player.fortune.activatedBoosts[7].activated) eff *= UPGS.fortune.boosts[7].effect()
                 if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect());
+                if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                 return eff;
             },
             effect2(x = player.minerals[3]) {
@@ -2248,6 +2286,7 @@ const UPGS = {
                 if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect();
                 if (player.fortune.activatedBoosts[7].activated) eff *= UPGS.fortune.boosts[7].effect()
                 if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect());
+                if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                 return eff;
             },
             effect3(x = player.minerals[3]) {
@@ -2256,6 +2295,7 @@ const UPGS = {
                 if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect();
                 if (player.fortune.activatedBoosts[7].activated) eff *= UPGS.fortune.boosts[7].effect()
                 if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect());
+                if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                 return eff;
             },
             bulk(x = player.minerals[3]) {
@@ -2289,6 +2329,7 @@ const UPGS = {
                 if (player.fortune.activatedBoosts[7].activated) eff *= UPGS.fortune.boosts[7].effect()
                 if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect());
 
+                if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                 return eff;
             },
             effect2(x = player.minerals[4]) {
@@ -2299,16 +2340,18 @@ const UPGS = {
                 if (player.fortune.activatedBoosts[7].activated) eff *= UPGS.fortune.boosts[7].effect()
                 if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect());
 
+                if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                 return eff;
             },
             effect3(x = player.minerals[4]) {
                 if (x == 0) return 1;
-                let eff = 150 * Math.pow(2.03, x / 4)
+                let eff = 100 * Math.pow(2.03, x / 4)
 
                 if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect();
                 if (player.fortune.activatedBoosts[7].activated) eff *= UPGS.fortune.boosts[7].effect()
                 if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect());
 
+                if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                 return eff;
             },
             bulk(x = player.minerals[4]) {
@@ -2367,7 +2410,7 @@ const UPGS = {
                 player.fortune.activatedBoosts[x].activated = true
                 player.fortune.activatedBoosts[x].time = 60*UPGS.fortune.upgrades.buyables[3].effect()
                 player.fortune.activatedBoosts[x].effect = UPGS.fortune.boosts[x].generateNumber()
-
+                if (player.prestige.challenge.activated == 8) player.fortune.activatedBoosts[x].effect = Math.pow(player.fortune.activatedBoosts[x].effect, 0.1)
                 if (x == 12) MISC.fortune.fortuneBoost12()
             },
             activateTheBoost() {
@@ -2416,35 +2459,35 @@ const UPGS = {
                             while (player.fortune.activatedBoosts.list.includes(boost)) {
                                 boost = randomNumber(1, 3)
                             }
-                            player.fortune.activatedBoosts.list.push(boost)
+                            if (!player.fortune.activatedBoosts.list.includes(boost)) player.fortune.activatedBoosts.list.push(boost)
                             break;
                         case rarity == 'A' && ![1, 2, 3, 4, 5, 6].every(element => player.fortune.activatedBoosts.list.includes(element)) && player.fortune.upgrades.singles.includes(12):
                             boost = randomNumber(4, 6)
                             while (player.fortune.activatedBoosts.list.includes(boost)) {
                                 boost = randomNumber(4, 6)
                             }
-                            player.fortune.activatedBoosts.list.push(boost)
+                            if (!player.fortune.activatedBoosts.list.includes(boost)) player.fortune.activatedBoosts.list.push(boost)
                             break;
                         case rarity == 'S' && ![1, 2, 3, 4, 5, 6, 7, 8, 9].every(element => player.fortune.activatedBoosts.list.includes(element)):
                             boost = randomNumber(7, 9)
                             while (player.fortune.activatedBoosts.list.includes(boost)) {
                                 boost = randomNumber(7, 9)
                             }
-                            player.fortune.activatedBoosts.list.push(boost)
+                            if (!player.fortune.activatedBoosts.list.includes(boost)) player.fortune.activatedBoosts.list.push(boost)
                             break;
                         case rarity == 'EX' && ![1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].every(element => player.fortune.activatedBoosts.list.includes(element)):
                             boost = randomNumber(10, 12)
                             while (player.fortune.activatedBoosts.list.includes(boost)) {
                                 boost = randomNumber(10, 12)
                             }
-                            player.fortune.activatedBoosts.list.push(boost)
+                            if (!player.fortune.activatedBoosts.list.includes(boost)) player.fortune.activatedBoosts.list.push(boost)
                             break;
                         case rarity == 'ALL':
                             boost = randomNumber(1, 12)
                             while (player.fortune.activatedBoosts.list.includes(boost)) {
                                 boost = randomNumber(1, 12)
                             }
-                            player.fortune.activatedBoosts.list.push(boost)
+                            if (!player.fortune.activatedBoosts.list.includes(boost)) player.fortune.activatedBoosts.list.push(boost)
                             break;
                         default:
                             return 0;
@@ -2464,7 +2507,7 @@ const UPGS = {
                     return Math.pow(10, x)
                 },
                 max(y = UPGS.fortune.upgrades.buyables[2].effect()) {                    
-                    return Math.pow(750, y) * (ACHS.has(54) ? 1.05 : 1)
+                    return Math.pow(250, y) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1)
                 },
                 effect(x = this.id) {
                     return player.fortune.activatedBoosts[x].activated == true ? player.fortune.activatedBoosts[x].effect : 1
@@ -2488,7 +2531,7 @@ const UPGS = {
                     return Math.pow(2, x)
                 },
                 max(y = UPGS.fortune.upgrades.buyables[2].effect()) {
-                    return Math.pow(16, y) * (ACHS.has(54) ? 1.05 : 1)
+                    return Math.pow(8, y) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1)
                 },
                 effect(x = this.id) {
                     return player.fortune.activatedBoosts[x].activated == true ? player.fortune.activatedBoosts[x].effect : 1
@@ -2512,7 +2555,7 @@ const UPGS = {
                     return Math.pow(4, x)
                 },
                 max(y = UPGS.fortune.upgrades.buyables[2].effect()) {
-                    return Math.pow(200, y) * (ACHS.has(54) ? 1.05 : 1)
+                    return Math.pow(50, y) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1)
                 },
                 effect(x = this.id) {
                     return player.fortune.activatedBoosts[x].activated == true ? player.fortune.activatedBoosts[x].effect : 1
@@ -2536,7 +2579,7 @@ const UPGS = {
                     return Math.pow(1.01, x)
                 },
                 max(y = UPGS.fortune.upgrades.buyables[2].effect()) {
-                    return Math.pow(1.09, y) * (ACHS.has(54) ? 1.05 : 1)
+                    return Math.pow(1.075, y) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1)
                 },
                 effect(x = this.id) {
                     return player.fortune.activatedBoosts[x].activated == true ? player.fortune.activatedBoosts[x].effect : 1
@@ -2555,7 +2598,7 @@ const UPGS = {
                     return Math.pow(1.01, x)
                 },
                 max(y = UPGS.fortune.upgrades.buyables[2].effect()) {
-                    return Math.pow(1.09, y) * (ACHS.has(54) ? 1.05 : 1)
+                    return Math.pow(1.075, y) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1)
                 },
                 effect(x = this.id) {
                     return player.fortune.activatedBoosts[x].activated == true ? player.fortune.activatedBoosts[x].effect : 1
@@ -2574,7 +2617,7 @@ const UPGS = {
                     return Math.pow(2, x)
                 },
                 max(y = UPGS.fortune.upgrades.buyables[2].effect()) {
-                    return Math.pow(18, y) * (ACHS.has(54) ? 1.05 : 1)
+                    return Math.pow(16, y) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1)
                 },
                 effect(x = this.id) {
                     return player.fortune.activatedBoosts[x].activated == true ? player.fortune.activatedBoosts[x].effect : 1
@@ -2595,10 +2638,10 @@ const UPGS = {
                 element: document.getElementsByClassName('fortuneBoost')[6],
                 element2: document.getElementsByClassName('fortune-img')[6],
                 min(x = UPGS.fortune.upgrades.buyables[1].effect()) {
-                    return Math.pow(1.025, x)
+                    return Math.pow(1.02, x)
                 },
                 max(y = UPGS.fortune.upgrades.buyables[2].effect()) {
-                    return Math.pow(1.15, y) * (ACHS.has(54) ? 1.05 : 1)
+                    return Math.pow(1.12, y) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1)
                 },
                 effect(x = this.id) {
                     return player.fortune.activatedBoosts[x].activated == true ? player.fortune.activatedBoosts[x].effect : 1
@@ -2617,7 +2660,7 @@ const UPGS = {
                     return Math.pow(1.05, x)
                 },
                 max(y = UPGS.fortune.upgrades.buyables[2].effect()) {
-                    return Math.pow(1.2, y) * (ACHS.has(54) ? 1.05 : 1)
+                    return Math.pow(1.125, y) * (ACHS.has(54) ? 1.05 : 1)
                 },
                 effect(x = this.id) {
                     return player.fortune.activatedBoosts[x].activated == true ? player.fortune.activatedBoosts[x].effect : 1
@@ -2636,7 +2679,7 @@ const UPGS = {
                     return Math.pow(1.055, x)
                 },
                 max(y = UPGS.fortune.upgrades.buyables[2].effect()) {
-                    return Math.pow(1.175, y) * (ACHS.has(54) ? 1.05 : 1)
+                    return Math.pow(1.15, y) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1)
                 },
                 effect(x = this.id) {
                     return player.fortune.activatedBoosts[x].activated == true ? player.fortune.activatedBoosts[x].effect : 1
@@ -2674,7 +2717,7 @@ const UPGS = {
                     return Math.pow(1.01, x)
                 },
                 max(y = UPGS.fortune.upgrades.buyables[2].effect()) {
-                    return Math.pow(1.04, y) * (ACHS.has(54) ? 1.05 : 1)
+                    return Math.pow(1.025, y) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1)
                 },
                 effect(x = this.id) {
                     return player.fortune.activatedBoosts[x].activated == true ? player.fortune.activatedBoosts[x].effect : 1
@@ -2690,10 +2733,10 @@ const UPGS = {
                 element: document.getElementsByClassName('fortuneBoost')[11],
                 element2: document.getElementsByClassName('fortune-img')[11],
                 min(x = UPGS.fortune.upgrades.buyables[1].effect()) {
-                    return Math.pow(1.025, x)
+                    return Math.pow(1.015, x)
                 },
                 max(y = UPGS.fortune.upgrades.buyables[2].effect()) {
-                    return Math.pow(1.075, y) * (ACHS.has(54) ? 1.05 : 1)
+                    return Math.pow(1.035, y) * (ACHS.has(54) ? 1.05 : 1)
                 },
                 effect(x = this.id) {
                     return player.fortune.activatedBoosts[x].activated == true ? player.fortune.activatedBoosts[x].effect : 1
@@ -2785,7 +2828,7 @@ const UPGS = {
                 },
                 buy(x) {
                     if (this.canAfford(x)) {
-                        player.fortune.upgrades.singles.push(x);
+                        if (!player.fortune.upgrades.singles.includes(x)) player.fortune.upgrades.singles.push(x);
                         if (x == 23) player.fortune.daily_resets += 10
                     }
                 },
@@ -2891,28 +2934,28 @@ const UPGS = {
             1: {
                 id: 1,
                 basePrice: 10,
-                power: 1.09,
+                power: 1.1,
                 element: document.getElementsByClassName('balanceBuyableButton')[2],
                 cost(x = player.balance.upgrades.buyables[1]) {
                     return this.basePrice * Math.pow(this.power, x)
                 },
                 effect(x = player.balance.upgrades.buyables[1]) {
                     if (x == 0) return 1
-                    let eff = 1 + x / 100
+                    let eff = 1 + x / 150
                     return eff;
                 },
             },
             2: {
                 id: 2,
                 basePrice: 10,
-                power: 1.125,
+                power: 1.13,
                 element: document.getElementsByClassName('balanceBuyableButton')[3],
                 cost(x = player.balance.upgrades.buyables[2]) {
                     return this.basePrice * Math.pow(this.power, x)
                 },
                 effect(x = player.balance.upgrades.buyables[2]) {
                     if (x == 0) return 1
-                    let eff = 1 + x / 400
+                    let eff = 1 + x / 500
                     return eff;
                 },
             },
@@ -2938,7 +2981,7 @@ const UPGS = {
             buy(x) {
                 if (this.canAfford(x)) {
                     player.balance.neutral -= this[x].cost()
-                    player.balance.upgrades.singles.push(x);
+                    if (!player.balance.upgrades.singles.includes(x)) player.balance.upgrades.singles.push(x);
                 }
             },
             disable(x) {
@@ -2977,43 +3020,43 @@ const UPGS = {
                 id: 13,
                 element: document.getElementsByClassName('balanceSingleButton')[2],
                 unl() { return player.balance.upgrades.singles.includes(this.id); },
-                cost() { return 250000; },
+                cost() { return 1000000; },
             },
             21: {
                 id: 21,
                 element: document.getElementsByClassName('balanceSingleButton')[3],
                 unl() { return player.balance.upgrades.singles.includes(this.id); },
-                cost() { return 500000; },
+                cost() { return 2500000; },
             },
             22: {
                 id: 22,
                 element: document.getElementsByClassName('balanceSingleButton')[4],
                 unl() { return player.balance.upgrades.singles.includes(this.id); },
-                cost() { return 500000; },
+                cost() { return 2500000; },
             },
             23: {
                 id: 23,
                 element: document.getElementsByClassName('balanceSingleButton')[5],
                 unl() { return player.balance.upgrades.singles.includes(this.id); },
-                cost() { return 1e6; },
+                cost() { return 1e7; },
             },
             31: {
                 id: 31,
                 element: document.getElementsByClassName('balanceSingleButton')[6],
                 unl() { return player.balance.upgrades.singles.includes(this.id); },
-                cost() { return 1e7; },
+                cost() { return 1e8; },
             },
             32: {
                 id: 32,
                 element: document.getElementsByClassName('balanceSingleButton')[7],
                 unl() { return player.balance.upgrades.singles.includes(this.id); },
-                cost() { return 1e7; },
+                cost() { return 1e8; },
             },
             33: {
                 id: 33,
                 element: document.getElementsByClassName('balanceSingleButton')[8],
                 unl() { return player.balance.upgrades.singles.includes(this.id); },
-                cost() { return 1e9; },
+                cost() { return 1e10; },
             },
         }
     }
@@ -3163,9 +3206,9 @@ const AUTO = {
             if (MISC.automation.umultiplier.charged) this.activate() 
         },
         activate() {
-            if (MISC.automation.umultiplier.time() != 50) LAYERS.umultiplier.doReset() 
+            if (MISC.automation.umultiplier.time() != 50 && player.prestige.challenge.activated != 3) LAYERS.umultiplier.doReset() 
             else {
-                if (player.time.umultiplier >= player.automation.conditions.umultiplier) {
+                if ((player.time.umultiplier >= player.automation.conditions.umultiplier) && player.prestige.challenge.activated != 3) {
                     LAYERS.umultiplier.doReset()
                 }
             }
@@ -3180,9 +3223,9 @@ const AUTO = {
             if (MISC.automation.upower.charged) this.activate() 
         },
         activate() {
-            if (MISC.automation.upower.time() != 50) LAYERS.upower.doReset() 
+            if (MISC.automation.upower.time() != 50 && player.prestige.challenge.activated != 3 && player.umultipliers >= 4) LAYERS.upower.doReset() 
             else {
-                if (player.time.upower >= player.automation.conditions.upower.time && player.umultipliers >= player.automation.conditions.upower.x_of_umulti) {
+                if ((player.time.upower >= player.automation.conditions.upower.time && player.umultipliers >= player.automation.conditions.upower.x_of_umulti)  && player.prestige.challenge.activated != 3) {
                     LAYERS.upower.doReset()
                 }
             }
@@ -3231,9 +3274,9 @@ const AUTO = {
             if (MISC.automation.uadder.charged) this.activate() 
         },
         activate() {
-            if (MISC.automation.uadder.time() != 50) LAYERS.uadder.doReset() 
+            if (MISC.automation.uadder.time() != 50 && player.prestige.challenge.activated != 3 && player.upowers >= 10) LAYERS.uadder.doReset() 
             else {
-                if (player.time.uadder >= player.automation.conditions.uadder.time && player.upowers >= player.automation.conditions.uadder.x_of_upower) {
+                if (((player.time.uadder >= player.automation.conditions.uadder.time && player.upowers >= player.automation.conditions.uadder.x_of_upower) && player.upowers >= 10) && player.prestige.challenge.activated != 3) {
                     LAYERS.uadder.doReset()
                 }
             }
@@ -3247,50 +3290,50 @@ function decreaseInterval(type) {
         player.prestige.currency -= MISC.automation[type].cost()
         player.automation.upgrades[type]++
         if (type == 'single') {
-            if (MISC.automation.single.interval != '') {
+                if (MISC.automation.single.interval != '') {
                 clearInterval(MISC.automation.single.interval)
                 MISC.automation.single.interval = ''
-                MISC.automation.single.interval = setInterval(AUTO.single.charge(), 50); 
+                MISC.automation.single.interval = setInterval(()=>{AUTO.single.charge()}, 50); 
                 AUTO.single.time = MISC.automation.single.activateTime()
             }
         }
         if (type == 'buyable') {
-            if (MISC.automation.buyable.interval != '') {
+                if (MISC.automation.buyable.interval != '') {
                 clearInterval(MISC.automation.buyable.interval)
                 MISC.automation.buyable.interval = ''
-                MISC.automation.buyable.interval = setInterval(AUTO.buyable.charge(), 50); 
+                MISC.automation.buyable.interval = setInterval(()=>{AUTO.buyable.charge()}, 50); 
                 AUTO.buyable.time = MISC.automation.buyable.activateTime()
             }
         }       
         if (type == 'umultiplier') {
-            if (MISC.automation.umultiplier.interval != '') {
+                if (MISC.automation.umultiplier.interval != '') {
                 clearInterval(MISC.automation.umultiplier.interval)
                 MISC.automation.umultiplier.interval = ''
-                MISC.automation.umultiplier.interval = setInterval(AUTO.umultiplier.charge(), 50); 
+                MISC.automation.umultiplier.interval = setInterval(()=>{AUTO.umultiplier.charge()}, 50); 
                 AUTO.umultiplier.time = MISC.automation.umultiplier.activateTime()
             }
         }        
         if (type == 'upower') {
-            if (MISC.automation.upower.interval != '') {
+                if (MISC.automation.upower.interval != '') {
                 clearInterval(MISC.automation.upower.interval)
                 MISC.automation.upower.interval = ''
-                MISC.automation.upower.interval = setInterval(AUTO.upower.charge(), 50); 
+                MISC.automation.upower.interval = setInterval(()=>{AUTO.upower.charge()}, 50); 
                 AUTO.upower.time = MISC.automation.upower.activateTime()
             }
         }        
         if (type == 'prestige') {
-            if (MISC.automation.prestige.interval != '') {
+                if (MISC.automation.prestige.interval != '') {
                 clearInterval(MISC.automation.prestige.interval)
                 MISC.automation.prestige.interval = ''
-                MISC.automation.prestige.interval = setInterval(AUTO.prestige.charge(), 50); 
+                MISC.automation.prestige.interval = setInterval(()=>{AUTO.prestige.charge()}, 50); 
                 AUTO.prestige.time = MISC.automation.prestige.activateTime()
             }
         }
         if (type == 'uadder') {
-            if (MISC.automation.uadder.interval != '') {
+                if (MISC.automation.uadder.interval != '') {
                 clearInterval(MISC.automation.uadder.interval)
                 MISC.automation.uadder.interval = ''
-                MISC.automation.uadder.interval = setInterval(AUTO.uadder.charge(), 50); 
+                MISC.automation.uadder.interval = setInterval(()=>{AUTO.uadder.charge()}, 50); 
                 AUTO.uadder.time = MISC.automation.uadder.activateTime()
             }
         }  
@@ -3368,30 +3411,30 @@ function changePrestigeMode() {
     if (player.settings.whichPrestigeMode == 'crystals') {
         autoPrestigeMode.innerHTML = text.automation.coin_req //I18
         player.settings.whichPrestigeMode = 'coins'
-        autoPrestigeInput.value = player.automation.conditions.prestige.coins
+        autoPrestigeInput.value = formatNumber(Number(player.automation.conditions.prestige.coins))
     }
     else if (player.settings.whichPrestigeMode == 'coins') {
         autoPrestigeMode.innerHTML = text.automation.time_req //I18
         player.settings.whichPrestigeMode = 'time'
-        autoPrestigeInput.value = player.automation.conditions.prestige.time
+        autoPrestigeInput.value = formatNumber(Number(player.automation.conditions.prestige.time))
     }
     else if (player.settings.whichPrestigeMode == 'time') {
         autoPrestigeMode.innerHTML = text.automation.prestige_req //I18
         player.settings.whichPrestigeMode = 'prestige'
-        autoPrestigeInput.value = player.automation.conditions.prestige.prestige
+        autoPrestigeInput.value = formatNumber(Number(player.automation.conditions.prestige.prestige))
     }
     else {
         autoPrestigeMode.innerHTML = text.automation.crystal_req //I18
         player.settings.whichPrestigeMode = 'crystals'
-        autoPrestigeInput.value = player.automation.conditions.prestige.crystals
+        autoPrestigeInput.value = formatNumber(Number(player.automation.conditions.prestige.crystals))
     }
 }
 
 autoPrestigeInput.addEventListener("blur", ()=>{
-        if (player.settings.whichPrestigeMode == 'time' && autoPrestigeInput.value !='') player.automation.conditions.prestige.time = parseFloat(autoPrestigeInput.value)
-        else if (player.settings.whichPrestigeMode == 'coins' && autoPrestigeInput.value != '') player.automation.conditions.prestige.coins = parseFloat(autoPrestigeInput.value)
-        else if (player.settings.whichPrestigeMode == 'prestige' && autoPrestigeInput.value != '') player.automation.conditions.prestige.prestige = parseFloat(autoPrestigeInput.value)
-        else if (player.settings.whichPrestigeMode == 'crystals' && autoPrestigeInput.value != '') player.automation.conditions.prestige.crystals = parseFloat(autoPrestigeInput.value)
+        if (player.settings.whichPrestigeMode == 'time' && autoPrestigeInput.value !='') player.automation.conditions.prestige.time = autoPrestigeInput.value
+        else if (player.settings.whichPrestigeMode == 'coins' && autoPrestigeInput.value != '') player.automation.conditions.prestige.coins = autoPrestigeInput.value
+        else if (player.settings.whichPrestigeMode == 'prestige' && autoPrestigeInput.value != '') player.automation.conditions.prestige.prestige = autoPrestigeInput.value
+        else if (player.settings.whichPrestigeMode == 'crystals' && autoPrestigeInput.value != '') player.automation.conditions.prestige.crystals = autoPrestigeInput.value
         reautomate()
     });
 
@@ -3433,22 +3476,22 @@ function reautomate() {
         if (autoPrestigeCheckbox.checked) {
             MISC.automation.prestige.interval = setInterval(()=>{
                 if (player.settings.whichPrestigeMode == 'time') {
-                    if (player.time.real.prestige.timer >= player.automation.conditions.prestige.time) {
+                    if (player.time.real.prestige.timer >= Number(player.automation.conditions.prestige.time)) {
                         LAYERS.prestige.doReset() 
                     }
                 }
                 else if (player.settings.whichPrestigeMode == 'coins') {
-                    if (player.coin.currency >= player.automation.conditions.prestige.coins) {
+                    if (player.coin.currency >= Number(player.automation.conditions.prestige.coins)) {
                         LAYERS.prestige.doReset() 
                     }
                 }
                 else if (player.settings.whichPrestigeMode == 'prestige') {
-                    if (GAIN.prestige.reset() >= player.automation.conditions.prestige.prestige) {
+                    if (GAIN.prestige.reset() >= Number(player.automation.conditions.prestige.prestige)) {
                         LAYERS.prestige.doReset() 
                     }
                 }
                 else {
-                    if (GAIN.crystal.reset() >= player.automation.conditions.prestige.crystals) {
+                    if (GAIN.crystal.reset() >= Number(player.automation.conditions.prestige.crystals)) {
                         LAYERS.prestige.doReset() 
                     }
                 }

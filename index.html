@@ -32,13 +32,19 @@
 
   <footer id="autoTimer">It's text</footer>
     <div id="topValues">
-      <div id="idk" class="topVars"></div>
+      <div id="reflashGet" class="topVars">
+        <span id="bitsCount" style="display: none">У вас 10 кристаллов</span>
+        <button onclick="" class="reflashButton" id="doReflash">Соберите Infinity монет и выполните Престижное Испытание 8</button>
+      </div>
       <div id="coinGet" class="topVars">
         <span id="coinsCount"></span>
         <span id="coinsGain"></span>
-        <div id="worldText">
-          <span class="whiteText" id="youAreInXWorld" style="font-size: calc(12px * var(--font-scale));">Вы в Цифровом Мире (Испытание не активировано)</span>
-          <button onclick="startChallenge(0)" id="exitChallenge" class="tabButton">Выйти</button>
+        <div id="worldTextDiv">
+          <div id="worldText">
+          <span class="whiteText" id="youAreInXWorld" style="font-size: calc(14px * var(--font-scale));">Вы в Цифровом Мире (Испытание не активировано)</span>
+          <button onclick="startChallenge(0)" id="exitChallenge" class="tabButton exitChallenge">Выйти</button>
+          <button onclick="startPChallenge(0)" id="exitPChallenge" class="tabButton exitChallenge">Выйти</button>
+        </div>
         </div>
       </div>
       <div id="prestigeGet" class="topVars">
@@ -49,13 +55,19 @@
 
     <hr>
     <div id="topButtons">
-        <div class="mainSettings" style="display: none">
+        <div class="mainSettings">
           <button onclick="maxOrNo('coin')" id="maxOrNoUpgrades">Купить один</button>
           <button onclick="modernize()" id="modernizeButton" style="display: none"></button>
         </div>
+        <div class="mainSettings" style="display: none">
+          <button onclick="maxOrNo('superprestige')" id="maxOrNoSuperprestigeUpgrades">Купить один</button>
+        </div>
+        <div class="mainSettings" style="display: none">
+          <button onclick="maxOrNo('shard')" id="maxOrNoShardUpgrades">Купить один</button>
+        </div>
         <button onclick="selectTab(eventTab, false)" id= "eventSelect" class="tabButton">Новости</button>
         <button onclick="selectTab(settingsTab, false)" id= "settingsSelect" class="tabButton">Настройки</button>
-        <button onclick="selectTab(mainTab, false)" id= "mainSelect" class="tabButton">Кликер</button>
+        <button onclick="selectTab(mainTab, false)" id= "mainSelect" class="tabButton active">Кликер</button>
         <button onclick="selectTab(challengeTab, true)" id= "challengeSelect" class="tabButton" style="display:none">Испытания</button>
         <button onclick="selectTab(prestigeTab, false)" id= "prestigeSelect" class="tabButton prestigeButton" style="display:none">Престиж</button>
         <button onclick="selectTab(achTab, false)" id= "achSelect" class="tabButton">Достижения</button>
@@ -99,7 +111,7 @@
   </div>
     <div id="settingsTab" style="display:none">
       <div id="settingSubButtons">
-        <button onclick="selectSubTab(settingsSaveTab, false, 'settings')" id="saveSelect" class="tabButton subButton">Saves</button>
+        <button onclick="selectSubTab(settingsSaveTab, false, 'settings')" id="saveSelect" class="tabButton subButton active">Saves</button>
         <button onclick="selectSubTab(settingsGraphicTab, false, 'settings')" id="graphicSelect" class="tabButton subButton">Graphic</button>
         <button onclick="selectSubTab(settingsOtherTab, false, 'settings')" id="otherSelect" class="tabButton subButton">Other</button>
       </div>
@@ -289,7 +301,7 @@
         </div>
     <div id="mainTab">
         <div id="mainSubButtons">
-          <button onclick="selectSubTab(coinsTab, false, 'clicker')" id="coinsSelect" class="tabButton subButton">Монеты</button>
+          <button onclick="selectSubTab(coinsTab, false, 'clicker')" id="coinsSelect" class="tabButton subButton active">Монеты</button>
           <button onclick="selectSubTab(overdriveTab, true, 'clicker')" id="overdriveSelect" class="tabButton subButton" style="display: none">Овердрайв</button>
         </div>
     <div id="coinsTab">
@@ -427,12 +439,17 @@
     </div>
     </div>  
     <div id="challengeTab" style="display:none">
+      <div id="challengeSubButtons">
+        <button onclick="selectSubTab(challengeCoinTab, false, 'challenge')" id="challengeCoinSelect" class="tabButton subButton active">Испытания</button>
+        <button onclick="selectSubTab(challengePrestigeTab, false, 'challenge')" id="challengePrestigeSelect" class="prestigeButton tabButton subButton">Испытания Престижа</button>
+      </div>
+      <div id="challengeCoinTab">
       <span id="challengeTabDesc" class="smallDesc">Добро пожаловать в Испытания, здесь вы должны достигнуть Престижа с различными условиями. <br>
       Каждое испытание обладает уникальной наградой, которую вы получите, если достигнете 1е15 монет внутри Испытания. <br>
       Помимо особенных условий, они также имеют общие условия: эффект Осколков ^0.5, награды за Испытания не работают. <br>
       Если Испытание показалось вам слишком трудным, вы можете выйти из него, и продолжить в любое время. 
       </span>
-      <div> 
+      <div style="height: 30px; display: flex; align-items: center; justify-content: center;"> 
         <span class="whiteText" id="restartTheChallenge"> Начинать Испытания заново</span> 
         <input type="checkbox" id="restartChallenge">
       </div>
@@ -521,19 +538,89 @@
           <button onclick="startChallenge(12)" class="challengeStart tabButton" id="challenge12Start">Начать</button>
           <span class="challengeDesc challengeReward statsSlot" id="challenge12Reward">Награда: Уменьшает увеличение цены У-множителей до 40 и У-силителей до 80.</span>
         </div>
+        </div>
     </div>
+      <div id="challengePrestigeTab" style="display: none">
+         <span id="challengePrestigeTabDesc" class="smallDesc">Добро пожаловать в Испытания, здесь вы должны достигнуть Престижа с различными условиями. <br>
+          Каждое испытание обладает уникальной наградой, которую вы получите, если достигнете 1е15 монет внутри Испытания. <br>
+          Помимо особенных условий, они также имеют общие условия: эффект Осколков ^0.5, награды за Испытания не работают. <br>
+          Если Испытание показалось вам слишком трудным, вы можете выйти из него, и продолжить в любое время. 
+          </span>
+          <div style="height: 30px; display: flex; align-items: center; justify-content: center;"> 
+            <span class="whiteText" id="restartThePChallenge"> Начинать Испытания заново</span> 
+            <input type="checkbox" id="restartPChallenge">
+          </div>
+          <div id="prestigeChallenges">
+            <div class="challengePDiv" style="border-color: aqua">
+              <p class="challengePTitle" id="pChallengeTitle">Престижное Испытание 1</p>
+              <span class="challengePDesc challengePCond statsSlot" id="pChallenge1Desc">Условие: Одновременно активируются условия Испытаний 1-6.</span>
+              <span class="challengePDesc challengePGoal statsSlot" id="pChallenge1Goal">Цель: Собрать 1е50 монет.</span>
+              <button onclick="startPChallenge(1)" class="challengePStart tabButton" id="pChallenge1Start">Начать</button>
+              <span class="challengePDesc challengePReward statsSlot" id="pChallenge1Reward">Награда: Увеличивает доход Кристаллов.</span>
+            </div>
+            <div class="challengePDiv" style="border-color: aqua">
+              <p class="challengePTitle" id="pChallengeTitle">Престижное Испытание 2</p>
+              <span class="challengePDesc challengePCond statsSlot" id="pChallenge1Desc">Условие: Одновременно активируются условия Испытаний 7-12.</span>
+              <span class="challengePDesc challengePGoal statsSlot" id="pChallenge1Goal">Цель: Собрать 1е50 монет.</span>
+              <button onclick="startPChallenge(2)" class="challengePStart tabButton" id="pChallenge2Start">Начать</button>
+              <span class="challengePDesc challengePReward statsSlot" id="pChallenge1Reward">Награда: Количество У-множителей увеличивает их базовый эффект.</span>
+            </div>
+            <div class="challengePDiv" style="border-color: aqua">
+              <p class="challengePTitle" id="pChallengeTitle">Престижное Испытание 3</p>
+              <span class="challengePDesc challengePCond statsSlot" id="pChallenge1Desc">Условие: У-тели отключены.</span>
+              <span class="challengePDesc challengePGoal statsSlot" id="pChallenge1Goal">Цель: Собрать 1е50 монет.</span>
+              <button onclick="startPChallenge(3)" class="challengePStart tabButton" id="pChallenge3Start">Начать</button>
+              <span class="challengePDesc challengePReward statsSlot" id="pChallenge1Reward">Награда: Открывает автоматизацию У-разнителей.</span>
+            </div>
+            <div class="challengePDiv" style="border-color: aqua">
+              <p class="challengePTitle" id="pChallengeTitle">Престижное Испытание 4</p>
+              <span class="challengePDesc challengePCond statsSlot" id="pChallenge1Desc">Условие: Цены на Улучшения Монет^2, цены на У-тели^2, Эффект У-разнителя^0.1.</span>
+              <span class="challengePDesc challengePGoal statsSlot" id="pChallenge1Goal">Цель: Собрать 1е50 монет.</span>
+              <button onclick="startPChallenge(4)" class="challengePStart tabButton" id="pChallenge4Start">Начать</button>
+              <span class="challengePDesc challengePReward statsSlot" id="pChallenge1Reward">Награда: Критические нажатия за всё время увеличивают доход Осколков.</span>
+            </div>
+            <div class="challengePDiv" style="border-color: aqua">
+              <p class="challengePTitle" id="pChallengeTitle">Престижное Испытание 5</p>
+              <span class="challengePDesc challengePCond statsSlot" id="pChallenge1Desc">Условие: Эффекты Минералов^0.1, Эффекты Улучшений^0.1.</span>
+              <span class="challengePDesc challengePGoal statsSlot" id="pChallenge1Goal">Цель: Собрать 1е50 монет.</span>
+              <button onclick="startPChallenge(5)" class="challengePStart tabButton" id="pChallenge5Start">Начать</button>
+              <span class="challengePDesc challengePReward statsSlot" id="pChallenge1Reward">Награда: Все Весы Баланса увеличивают максимальные эффекты Усилений Фортуны.</span>
+            </div>
+            <div class="challengePDiv" style="border-color: aqua">
+              <p class="challengePTitle" id="pChallengeTitle">Престижное Испытание 6</p>
+              <span class="challengePDesc challengePCond statsSlot" id="pChallenge1Desc">Условие: Каждый сброс У-телей увеличивает цену других как будто ты их купил.</span>
+              <span class="challengePDesc challengePGoal statsSlot" id="pChallenge1Goal">Цель: Собрать 1е50 монет.</span>
+              <button onclick="startPChallenge(6)" class="challengePStart tabButton" id="pChallenge6Start">Начать</button>
+              <span class="challengePDesc challengePReward statsSlot" id="pChallenge1Reward">Награда: Снижает цену Суперкристаллов на 1е12.</span>
+            </div>
+            <div class="challengePDiv" style="border-color: aqua">
+              <p class="challengePTitle" id="pChallengeTitle">Престижное Испытание 7</p>
+              <span class="challengePDesc challengePCond statsSlot" id="pChallenge1Desc">Условие: Одновременно активируются условия Испытаний 1-12.</span>
+              <span class="challengePDesc challengePGoal statsSlot" id="pChallenge1Goal">Цель: Собрать 1е50 монет.</span>
+              <button onclick="startPChallenge(7)" class="challengePStart tabButton" id="pChallenge7Start">Начать</button>
+              <span class="challengePDesc challengePReward statsSlot" id="pChallenge1Reward">Награда: Испытание 12 имеет счётчик прохождений. Каждое прохождение даёт +100% к доходу монет и +1000000% к доходу монет в Престижном Испытании 8.</span>
+            </div>
+            <div class="challengePDiv" style="border-color: aqua">
+              <p class="challengePTitle" id="pChallengeTitle">Престижное Испытание 8</p>
+              <span class="challengePDesc challengePCond statsSlot" id="pChallenge1Desc">Условие: Последний Престиж. Эффекты Улучшений^0.1, Эффекты У-телей^0.1, Доход монет^0.1, Эффект Осколков^0.1, Множитель критических нажатий^0.1, Эффекты Минералов^0.1, Эффекты Усилений Фортуны^0.1, Эффекты Баланса^0.1.</span>
+              <span class="challengePDesc challengePGoal statsSlot" id="pChallenge1Goal">Цель: Собрать 1е50 монет.</span>
+              <button onclick="startPChallenge(8)" class="challengePStart tabButton" id="pChallenge8Start">Начать</button>
+              <span class="challengePDesc challengePReward statsSlot" id="pChallenge1Reward">Награда: Конец?</span>
+            </div>
+          </div>
+      </div>
   </div>
     <div id="prestigeTab" style="display:none">
       <div id="prestigeSubButtons">
-        <button onclick="selectSubTab(upgradesTab, false, 'prestige')" id="upgradesSelect" class="tabButton subButton prestigeButton">Улучшения</button>
+        <button onclick="selectSubTab(upgradesTab, false, 'prestige')" id="upgradesSelect" class="tabButton subButton prestigeButton active">Улучшения</button>
         <button onclick="selectSubTab(milestonesTab, true, 'prestige')" id="milestonesSelect" class="tabButton subButton prestigeButton">Этапы</button>
         <button onclick="selectSubTab(automationTab, true, 'prestige')" id="automationSelect" class="tabButton subButton prestigeButton">Автоматизация</button>
         <button onclick="selectSubTab(shardsTab, false, 'prestige')" id="shardsSelect" class="tabButton subButton prestigeButton">Осколки</button>
         <button onclick="selectSubTab(superCrystalsTab, true, 'prestige')" id="superCrystalsSelect" class="tabButton subButton prestigeButton" style="display:none">Супер-Кристаллы</button>
         <button onclick="selectSubTab(mineralsTab, true, 'prestige')" id="mineralsSelect" class="tabButton subButton prestigeButton" style="display:none">Минералы</button>
         <button onclick="selectSubTab(superprestigeTab, false, 'prestige')" id="superprestigeSelect" class="tabButton subButton prestigeButton" style="display:none">Суперпрестиж</button>
-        <button onclick="selectSubTab(fortuneTab, true, 'prestige')" id="fortuneSelect" class="tabButton subButton" style="color: hotpink; border-color: hotpink;">Фортуна</button>
-        <button onclick="selectSubTab(balanceTab, true, 'prestige')" id="balanceSelect" class="tabButton subButton" style="color: rgb(255, 255, 255); border-color: rgb(255, 255, 255);">Баланс</button>
+        <button onclick="selectSubTab(fortuneTab, true, 'prestige')" id="fortuneSelect" class="tabButton subButton fortuneButton2">Фортуна</button>
+        <button onclick="selectSubTab(balanceTab, true, 'prestige')" id="balanceSelect" class="tabButton subButton">Баланс</button>
       </div>
 
       <div id="upgradesTab" style="display: block">
@@ -682,9 +769,6 @@
       
     </div>
     <div id="shardsTab" style="display: none">
-      <div class="mainSettings">
-        <button onclick="maxOrNo('shard')" id="maxOrNoShardUpgrades">Купить один</button>
-      </div>
       <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
       <span id="shardsCountText">You have <shn>10</shn> shards</span>
       <span id="shardsPerSecondText" class="statsSlot" style="display: none"> You're gaining 10 shards per second</span>
@@ -815,9 +899,6 @@
       <button onclick="respecMinerals()" id="respecMineralsButton" class="tabButton">Respec</button>
   </div>
     <div id="superprestigeTab" style="display: none">
-      <div class="mainSettings">
-        <button onclick="maxOrNo('superprestige')" id="maxOrNoSuperprestigeUpgrades">Купить один</button>
-      </div>
       <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
       <button onclick="UPGS.prestige.super.singles.buy(25)" id="superPSingleU10" class="upgradeButton prestigeSingleButton">Улучшение</button>
       <div id="superPRow1" class="row">
@@ -1062,7 +1143,7 @@
   </div>
     <div id="achTab" style="display:none">
       <div id="achSubButtons">
-        <button onclick="selectSubTab(achScreenDescription, false, 'achievements')" id="achievementsSelect" class="tabButton subButton">Достижения</button>
+        <button onclick="selectSubTab(achScreenDescription, false, 'achievements')" id="achievementsSelect" class="tabButton subButton active">Достижения</button>
         <button onclick="selectSubTab(shardAchsTab, true, 'achievements')" id="shardAchievementsSelect" class="tabButton subButton prestigeButton">Дост. Осколков</button>
       </div>
       <div id="achScreenDescription">
@@ -1606,7 +1687,7 @@
     </div>
     <div id="infoTab" style="display:none">
     <div id="statsSubButtons">
-      <button onclick="selectSubTab(statisticsTab, false, 'info')" id= "statisticsSelect" class="tabButton subButton">Статистика</button>
+      <button onclick="selectSubTab(statisticsTab, false, 'info')" id= "statisticsSelect" class="tabButton subButton active">Статистика</button>
       <button onclick="selectSubTab(multipliersTab, true, 'info')" id="multiplierSelect" class="tabButton subButton">Мультипликаторы</button>
       <button onclick="selectSubTab(challengesTimeTab, false, 'info')" id="challengesTimeSelect" class="tabButton subButton">Время испытаний</button>
       <button onclick="selectSubTab(recentPrestigesTab, true, 'info')" id="recentPrestigesSelect" class="tabButton subButton">Престижи</button>
@@ -1646,6 +1727,15 @@
       <p id="challengeTime10" class="statsSlot">Испытание</p> 
       <p id="challengeTime11" class="statsSlot">Испытание</p> 
       <p id="challengeTime12" class="statsSlot">Испытание</p> 
+      <p id="challengesPTimeTitle" class="titleTab">Время испытаний</p>
+      <p id="challengePTime1" class="statsSlot">Испытание</p> 
+      <p id="challengePTime2" class="statsSlot">Испытание</p> 
+      <p id="challengePTime3" class="statsSlot">Испытание</p> 
+      <p id="challengePTime4" class="statsSlot">Испытание</p> 
+      <p id="challengePTime5" class="statsSlot">Испытание</p> 
+      <p id="challengePTime6" class="statsSlot">Испытание</p> 
+      <p id="challengePTime7" class="statsSlot">Испытание</p> 
+      <p id="challengePTime8" class="statsSlot">Испытание</p> 
     </div>
     <div id="recentPrestigesTab" style="display:none">
       <p id="recentPrestigesTitle" class="titleTab">Недавние престижи</p>
@@ -2213,6 +2303,7 @@
     <script src="javascript/jsfiles/layers.js"></script>
     <script src="javascript/jsfiles/changelog.js"></script>
     <script src="javascript/jsfiles/saving.js"></script>
+    <script src="javascript/jsfiles/translationsOptimizer.js"></script>
     <script type="module" src="javascript/jsfiles/languages.js"></script>
     <script src="javascript/jsfiles/functions.js"></script>
     <script>
@@ -2331,8 +2422,6 @@ function findMultiplierDecimal(base, power) {
     firstMineralEffect1Piece.addEventListener("mouseleave", () => {hoverColorInverse("firstMineralEffect1")})
     critChShAchPiece.addEventListener("mouseenter", () => {hoverColor("critChShAch")})
     critChShAchPiece.addEventListener("mouseleave", () => {hoverColorInverse("critChShAch")})
-    fifthBuyableSuperEffectPiece.addEventListener("mouseenter", () => {hoverColor("fifthBuyableSuperEffect")})
-    fifthBuyableSuperEffectPiece.addEventListener("mouseleave", () => {hoverColorInverse("fifthBuyableSuperEffect")})
     fortuneBoostCrystalPiece.addEventListener("mouseenter", () => {hoverColor("fortuneBoostCrystal")})
     fortuneBoostCrystalPiece.addEventListener("mouseleave", () => {hoverColorInverse("fortuneBoostCrystal")})
     minusCoinsForCrystalsPiece.addEventListener("mouseenter", () => {hoverColor("minusCoinsForCrystals")})

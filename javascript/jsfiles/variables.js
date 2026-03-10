@@ -254,7 +254,69 @@ let player = {
                 }
             },
         },
-        table_resets: 1
+        table_resets: 1,
+        challenge: {
+        completed: [],
+        activated: 0,
+        time: {
+            1: {
+                days: 999,
+                hours: 99,
+                minutes: 59,
+                seconds: 59, 
+                timer: 99999
+            },
+            2: {
+                days: 999,
+                hours: 99,
+                minutes: 59,
+                seconds: 59, 
+                timer: 99999
+            },
+            3: {
+                days: 999,
+                hours: 99,
+                minutes: 59,
+                seconds: 59, 
+                timer: 99999
+            },
+            4: {
+                days: 999,
+                hours: 99,
+                minutes: 59,
+                seconds: 59, 
+                timer: 99999
+            },
+            5: {
+                days: 999,
+                hours: 99,
+                minutes: 59,
+                seconds: 59, 
+                timer: 99999
+            },
+            6: {
+                days: 999,
+                hours: 99,
+                minutes: 59,
+                seconds: 59, 
+                timer: 99999
+            },
+            7: {
+                days: 999,
+                hours: 99,
+                minutes: 59,
+                seconds: 59, 
+                timer: 99999
+            },
+            8: {
+                days: 999,
+                hours: 99,
+                minutes: 59,
+                seconds: 59, 
+                timer: 99999
+            }
+        }
+        }
     },
     shard: {
         upgrades: {
@@ -603,7 +665,8 @@ let player = {
                 hours: 99,
                 minutes: 59,
                 seconds: 59, 
-                timer: 99999
+                timer: 99999,
+                times_completed: 0,
             },
         }
     },
@@ -846,4 +909,17 @@ const text = {
             21:'',
         },
         empty: '',
+    }
+
+const PRES_CHALL = {
+        goals: {
+            1: 1e30,
+            2: 1e35,
+            3: 1e60,
+            4: 1e75,
+            5: 1e50,
+            6: 1e65,
+            7: 1e30,
+            8: 1e15,
+        }
     }

@@ -65,7 +65,9 @@ try {
         [mineralsSelect, 'mineralsButton'],
         [superprestigeSelect, 'superprestigeButton'],
         [fortuneSelect, 'fortuneButton'],
-        [balanceSelect, 'balanceButton']
+        [balanceSelect, 'balanceButton'],
+        [challengeCoinSelect, 'challengeCoinButton'],
+        [challengePrestigeSelect, 'challengePrestigeButton']
     ]);
 
     applyMap([
@@ -79,7 +81,8 @@ try {
     applyMap([
         [statsTitle, 'stastisticsTitle'],
         [recentPrestigesTitle, 'recentPrestigesTitle'],
-        [challengesTimeTitle, 'challengesTimeTitle']
+        [challengesTimeTitle, 'challengesTimeTitle'],
+        [challengesPTimeTitle, 'challengesPTimeTitle']
     ]);
 
     applyMap([
@@ -270,7 +273,6 @@ try {
         [eighthShopBuyableEffectStats, 'eighthShopBuyableEffectName'],
         [firstMineralEffect1Stats, 'firstMineralEffect1Name'],
         [critChShAchStats, 'critChShAchName'],
-        [fifthBuyableSuperEffectStats, 'fifthBuyableSuperEffectName'],
         [fortuneBoostCritChanceStats, 'critChanceBlessingName'],
         [plusCoinsForCritChanceStats, 'plusCoinForCritChanceName'],
         [summaryCritChanceStats, 'totalMultiplier']
@@ -396,6 +398,9 @@ try {
     exitChallenge.innerHTML = i18next.t('exitChallenge');
     challengeTabDesc.innerHTML = i18next.t('challengeTabDesc');
     restartTheChallenge.innerHTML = i18next.t('restartTheChallenge');
+    exitPChallenge.innerHTML = i18next.t('exitChallenge');
+    challengePrestigeTabDesc.innerHTML = i18next.t('challengePTabDesc');
+    restartThePChallenge.innerHTML = i18next.t('restartTheChallenge');
 
     text.notification.used_item = i18next.t('useItemNotification');
     text.notification.dont_have_item = i18next.t('dontHaveItemNotification');
@@ -417,35 +422,129 @@ try {
         else document.getElementsByClassName("challengeStart")[i].innerHTML = i18next.t('challengeStart');
     }
 
+    for (let i = 0; i < 8; i++){
+        document.getElementsByClassName("challengePTitle")[i].innerHTML = i18next.t('challengePTitle', {x: i+1});
+        document.getElementsByClassName("challengePCond")[i].innerHTML = i18next.t(`challengePConditionText${i+1}`);
+        document.getElementsByClassName("challengePReward")[i].innerHTML = i18next.t(`challengePReward${i+1}`);
+        document.getElementsByClassName("challengePGoal")[i].innerHTML = i18next.t(`challengePGoal`, {x: formatNumber(PRES_CHALL.goals[i+1])});
+        if (player.prestige.challenge.completed.includes(i+1)) document.getElementsByClassName("challengePStart")[i].innerHTML = i18next.t('challengeCompleted')
+        else document.getElementsByClassName("challengePStart")[i].innerHTML = i18next.t('challengeStart');
+    }
+
     mineralsTabDesc.innerHTML = i18next.t('mineralsDesc');
     respecMineralsButton.innerHTML = i18next.t('respecShop');
+
+    PROGRESS.name[0] = i18next.t('pbtitle1');
+    PROGRESS.name[1] = i18next.t('pbtitle2');
+    PROGRESS.name[2] = i18next.t('pbtitle3');
+    PROGRESS.name[3] = i18next.t('pbtitle4');
+    PROGRESS.name[4] = i18next.t('pbtitle5');
+    PROGRESS.name[5] = i18next.t('pbtitle6');
+    PROGRESS.name[6] = i18next.t('pbtitle7');
+    PROGRESS.name[7] = i18next.t('pbtitle8');
+    PROGRESS.name[8] = `Infinity?`
+
+    PROGRESS.currency[0] = i18next.t('pbcurrency1');
+    PROGRESS.currency[1] = i18next.t('pbcurrency1');
+    PROGRESS.currency[2] = i18next.t('pbcurrency1');
+    PROGRESS.currency[3] = i18next.t('pbcurrency2');
+    PROGRESS.currency[4] = i18next.t('pbcurrency3');
+    PROGRESS.currency[5] = i18next.t('pbcurrency4');
+    PROGRESS.currency[6] = i18next.t('pbcurrency4');
+    PROGRESS.currency[7] = i18next.t('pbcurrency3');
+    PROGRESS.currency[8] = i18next.t('pbcurrency1');
 }
 catch (error) {
     console.error('Ошибка загрузки и инициализации переводов:', error);
 }
 }
 
-setInterval(() => {
-    loadTranslations()
-    updateTranslations()
-}, 50);
-
+// ОСНОВНОЙ ИНТЕРВАЛ ОБНОВЛЕНИЯ ПЕРЕВОДОВ
 setInterval(() => {
     changeText()
-}, 25);
+    // Обновления которые всегда нужны (верхняя панель)
+    // loadTranslationsAlways();
+    
+    // Обновления для активной вкладки и подвкладки
+    TabUpdater.getActiveTab();
+    switch (TabUpdater.currentMainTab) {
+        case 'mainTab':
+            loadTranslationsCoins();
+            break;
 
-function updateTranslations() {
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-        el.innerHTML = i18next.t(el.getAttribute('data-i18n'));
-    });
-    // Для option
-    document.querySelectorAll('option[data-i18n]').forEach(opt => {
-        opt.innerHTML = i18next.t(opt.getAttribute('data-i18n'));
-    });
-}
+        case 'prestigeTab':
+            switch (TabUpdater.currentSubTab) {
+                case 'upgradesTab':
+                    loadTranslationsPrestige();
+                    break;
+                case 'shardsTab':
+                    loadTranslationsShards();
+                    break;
+                case 'superCrystalsTab':
+                    loadTranslationsSuperCrystal();
+                    break;
+                case 'superprestigeTab':
+                    loadTranslationsSuperprestige();
+                    break;
+                case 'fortuneTab':
+                    loadTranslationsFortune();
+                    break;
+                case 'balanceTab':
+                    loadTranslationsBalance();
+                    break;
+                case 'automationTab':
+                    loadTranslationsAutomation()
+                    break;
+                case 'milestonesTab':
+                    loadTranslationsSuperprestige();
+                    break;
+                case 'mineralsTab':
+                    loadTranslationsMinerals()
+                    break;
+            }
+            break;
+            
+        case 'shopTab':
+            loadTranslationsShop();
+            break;
+            
+        case 'challengeTab':
+            loadTranslationsChallenges();
+            break;
+            
+        case 'infoTab':
+            loadTranslationsInfo();
+            break;
+            
+        case 'achTab':
+            loadTranslationsAchievements();
+            break;
+            
+        case 'settingsTab':
+            loadTranslationsSettings();
+            loadTranslationsCode()
+            break;
+            
+        case 'eventTab':
+            loadTranslationsEvent();
+            break;
+    }
+}, 50);
 
-// Загрузка переводов
-function loadTranslations() {
+// function updateTranslations() {
+//   document.querySelectorAll('[data-i18n]').forEach(el => {
+//         el.innerHTML = i18next.t(el.getAttribute('data-i18n'));
+//     });
+//     // Для option
+//     document.querySelectorAll('option[data-i18n]').forEach(opt => {
+//         opt.innerHTML = i18next.t(opt.getAttribute('data-i18n'));
+//     });
+// }
+
+// ============================================================
+// Функция для ВСЕГДА обновляемых элементов (верхняя панель)
+// ============================================================
+function loadTranslationsAlways() {
     applyMap([
         [coinsCount, 'moneyCount', { money: formatNumber(player.coin.currency)}],
         [coinsGain, 'moneyPerSec', { gainPerSec: formatNumber(GAIN.coin.second.effect(), 'boost')}],
@@ -457,8 +556,14 @@ function loadTranslations() {
         [crystalCount, 'crystalCount', {crystals: formatNumber(player.prestige.currency, 'floor')}]
     ]);
 
-    if (player.coin.currency >= 1e15) {
+    if (player.coin.currency >= 1e15 && player.prestige.challenge.activated == 0) {
         setText(doPrestige, 'prestigeEnabled', { crystalsTemp: formatNumber(GAIN.crystal.reset()), prestigeCountMultiplierText: MILESTONES.has(15) ? i18next.t('prestigeCountMultiplierText', {prestigeCountMultiplier: formatNumber(GAIN.prestige.reset()) }) : ''});
+    }
+    else if (player.prestige.challenge.activated != 0) {
+        if (player.coin.currency >= PRES_CHALL.goals[player.prestige.challenge.activated]) {
+            setText(doPrestige, 'prestigeInChallengeCompleted', { coins: formatNumber(PRES_CHALL.goals[player.prestige.challenge.activated]) });
+        }
+        else setText(doPrestige, 'prestigeInChallenge', { coins: formatNumber(PRES_CHALL.goals[player.prestige.challenge.activated]) });
     }
     else setText(doPrestige, 'prestigeDisabled');
 
@@ -477,12 +582,24 @@ function loadTranslations() {
         [ureducerBoost, 'ureducerText', {amount: formatNumber(player.ureducers), base: formatNumber(GAIN.ureducer.base(), 'number'), ureducer: formatNumber(GAIN.ureducer.effect(), 'number'), cost: formatNumber(LAYERS.ureducer.cost())}]
     ]);
 
+    autosaveSlider.innerHTML = i18next.t('autoSaveSlider', {x: mySlider.value/1000 < 1 ? formatNumber(JSON.parse(mySlider.value/1000), 'boost') : formatNumber(JSON.parse(mySlider.value/1000))});
+    toggleOffline.innerHTML = i18next.t('offlineGainToggle', {offline: player.settings.offline})
+
+    if (player.challenge.activated == 0 && player.prestige.challenge.activated == 0) youAreInXWorld.innerHTML = i18next.t('challengeDeactivated')
+    else if (player.prestige.challenge.activated != 0) youAreInXWorld.innerHTML = i18next.t('challengePActivated', {x: player.prestige.challenge.activated})
+    else youAreInXWorld.innerHTML = i18next.t('challengeActivated', {x: player.challenge.activated})
+}
+
+// ============================================================
+// Функция для вкладки COINS (монеты)
+// ============================================================
+function loadTranslationsCoins() {
     if (!player.settings.modernization_activated) {
         buyableU1.innerHTML = i18next.t('firstBuyable', {amount: formatNumber(player.coin.upgrades[1]), free: MISC.free_upgrade[1]() > 0 ? i18next.t('free', {free: formatNumber(MISC.free_upgrade[1]())}) : '', bulk: formatNumber(UPGS.coin.buyables[1].bulk()), effect: formatNumber(UPGS.coin.buyables[1].effect()), super_effect: player.coin.superUpgrades.includes(11) ? i18next.t('super_effect_plus', {effect: formatNumber(UPGS.coin.buyables[1].effect_super())}) : '', cost: formatNumber(UPGS.coin.buyables.bulk_cost(1))});
         buyableU2.innerHTML = i18next.t('secondBuyable', {amount: formatNumber(player.coin.upgrades[2]), free: MISC.free_upgrade[2]() > 0 ? i18next.t('free', {free: formatNumber(MISC.free_upgrade[2]())}) : '', bulk: formatNumber(UPGS.coin.buyables[2].bulk()), effect: formatNumber(UPGS.coin.buyables[2].effect(), 'percent'), super_effect: player.coin.superUpgrades.includes(12) ? i18next.t('super_effect_mul', {effect: formatNumber(UPGS.coin.buyables[2].effect_super(), 'boost')}) : '', cost: formatNumber(UPGS.coin.buyables.bulk_cost(2))});
         buyableU3.innerHTML = i18next.t('thirdBuyable', {amount: formatNumber(player.coin.upgrades[3]), bulk: formatNumber(UPGS.coin.buyables[3].bulk()), effect: formatNumber(UPGS.coin.buyables[3].effect(), 'boost'), super_effect: player.coin.superUpgrades.includes(13) ? i18next.t('super_effect_mul', {effect: formatNumber(UPGS.coin.buyables[3].effect_super(), 'boost')}) : '', cost: formatNumber(UPGS.coin.buyables.bulk_cost(3))});
         buyableU4.innerHTML = i18next.t('fourthBuyable', {amount: formatNumber(player.coin.upgrades[4]), free: MISC.free_upgrade[4]() > 0 ? i18next.t('free', {free: formatNumber(MISC.free_upgrade[4]())}) : '', bulk: formatNumber(UPGS.coin.buyables[4].bulk()), base: UPGS.prestige.singles[22].unl() ? 1.075 : 1.05, effect: formatNumber(UPGS.coin.buyables[4].effect(), 'boost'), super_effect: player.coin.superUpgrades.includes(14) ? i18next.t('super_effect_mul', {effect: formatNumber(UPGS.coin.buyables[4].effect_super(), 'boost')}) : '', cost: formatNumber(UPGS.coin.buyables.bulk_cost(4))});
-        buyableU5.innerHTML = i18next.t('fifthBuyable', {amount: formatNumber(player.coin.upgrades[5]), bulk: formatNumber(UPGS.coin.buyables[5].bulk()), effect: formatNumber(UPGS.coin.buyables[5].effect(), 'power'), super_effect: player.coin.superUpgrades.includes(15) ? i18next.t('super_effect_exp', {effect: formatNumber(UPGS.coin.buyables[5].effect_super(), 'power')}) : '', cost: formatNumber(UPGS.coin.buyables.bulk_cost(5))});    
+        buyableU5.innerHTML = i18next.t('fifthBuyable', {amount: formatNumber(player.coin.upgrades[5]), bulk: formatNumber(UPGS.coin.buyables[5].bulk()), effect: formatNumber(UPGS.coin.buyables[5].effect(), 'number'), super_effect: player.coin.superUpgrades.includes(15) ? i18next.t('super_effect_exp', {effect: formatNumber(UPGS.coin.buyables[5].effect_super(), 'power')}) : '', cost: formatNumber(UPGS.coin.buyables.bulk_cost(5))});    
     }
     else {
         buyableU1.innerHTML = i18next.t('superfirstBuyable', {cost: !player.coin.superUpgrades.includes(11) ? i18next.t('super_cost', {cost: UPGS.coin.buyables[1].cost_super()}) : ''})
@@ -552,6 +669,19 @@ function loadTranslations() {
             })
         }
 
+    challengeCondition.innerHTML = ''
+    if (player.challenge.activated == 2) challengeCondition.innerHTML = i18next.t('challengeCondition2')
+    if (player.challenge.activated == 7) {
+        (MISC.amount_of_upgrades.coin()/50*100) <= 100 ? challengeCondition.innerHTML = i18next.t('challengeCondition7', {x: formatNumber(MISC.amount_of_upgrades.coin()/50*100, 'boost')}) : challengeCondition.innerHTML = i18next.t('challengeCondition7', {x: 100})
+    }
+    if (player.challenge.activated == 8 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) challengeCondition.innerHTML = i18next.t('challengeCondition8', {x: formatNumber(CHALL.virusCoins_gen())})
+    if (player.challenge.activated == 10 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) challengeCondition.innerHTML = i18next.t('challengeCondition10', {x: 25-MISC.amount_of_upgrades.coin()}) 
+}
+
+// ============================================================
+// Функция для вкладки PRESTIGE (престиж)
+// ============================================================
+function loadTranslationsPrestige() {
     pBuyableU1.innerHTML = i18next.t('firstPrestigeBuyable', {
         amount: formatNumber(player.prestige.upgrades[1]), 
         effect: formatNumber(UPGS.prestige.buyables[1].effect(), 'boost'), 
@@ -593,6 +723,14 @@ function loadTranslations() {
                     time: ACHS.has(27) ? 10 : 5
                 })
         }
+}
+
+// ============================================================
+// Функция для вкладки SHARDS (осколки)
+// ============================================================
+function loadTranslationsShards() {
+    shardsCountText.innerHTML = i18next.t('shardCount', {shards: formatNumber(player.shard.currency), percent: formatNumber(GAIN.shard.effect.effect(), 'percent')})
+    shardsPerSecondText.innerHTML = i18next.t('shardsPerSec', {shards: formatNumber(GAIN.shard.second(), 'boost')})
 
     shBuyableU1.innerHTML = i18next.t('firstShardBuyable', {
         amount: formatNumber(player.shard.upgrades[1]), 
@@ -643,6 +781,142 @@ function loadTranslations() {
                 })
         }
 
+    brokeCrystals.innerHTML = i18next.t('didBreakCrystal', {crystals: formatNumber(text.broken_crystals.broken_crystals), shards: formatNumber(text.broken_crystals.gain)})
+
+    shardUnlock1Text.innerHTML = i18next.t('shardUnlockable1', {percent: formatNumber(UNL.shard.second.percent(), 'boost'), consumedShards: formatNumber(player.shard.consumed.second), price: formatNumber(UNL.shard.second.cost)});
+    shardUnlock2Text.innerHTML = i18next.t('shardUnlockable2', {percent: formatNumber(UNL.shard.click.percent(), 'boost'), consumedShards: formatNumber(player.shard.consumed.click), price: formatNumber(UNL.shard.click.cost)});
+    shardUnlock3Text.innerHTML = i18next.t('shardUnlockable3', {percent: formatNumber(UNL.shard.buyables.percent(), 'boost'), consumedShards: formatNumber(player.shard.consumed.buyables), price: formatNumber(UNL.shard.buyables.cost)});
+    shardUnlock4Text.innerHTML = i18next.t('shardUnlockable4', {percent: formatNumber(UNL.shard.singles.percent(), 'boost'), consumedShards: formatNumber(player.shard.consumed.singles), price: formatNumber(UNL.shard.singles.cost)});
+}
+
+function loadTranslationsAutomation() {
+    singleACInterval.innerHTML = i18next.t('automationDesc', {interval: formatNumber(MISC.automation.single.time()/1000, 'power')});
+    buyableACInterval.innerHTML = i18next.t('automationDesc2', {interval: formatNumber(MISC.automation.buyable.time()/1000, 'power'), bulkBuyDesc: i18next.t('bulkBuyDesc', {bulk: formatNumber(MISC.automation.buyable.bulk())})});
+    umultiplierACInterval.innerHTML = i18next.t('automationDesc', {interval: formatNumber(MISC.automation.umultiplier.time()/1000, 'power')});
+    upowerACInterval.innerHTML = i18next.t('automationDesc', {interval: formatNumber(MISC.automation.upower.time()/1000, 'power')});
+    prestigeACInterval.innerHTML = i18next.t('automationDesc', {interval: formatNumber(MISC.automation.prestige.time()/1000, 'power')});
+    uadderACInterval.innerHTML = i18next.t('automationDesc', {interval: formatNumber(MISC.automation.uadder.time()/1000, 'power')});
+
+    ELS.automationUpgradesArray[0].innerHTML =  i18next.t('decreaseInterval', {percent: 40, price: formatNumber(MISC.automation.single.cost())})
+    ELS.automationUpgradesArray[1].innerHTML =  i18next.t('decreaseInterval', {percent: 40, price: formatNumber(MISC.automation.buyable.cost())})
+    ELS.automationUpgradesArray[2].innerHTML =  i18next.t('decreaseInterval', {percent: 40, price: formatNumber(MISC.automation.umultiplier.cost())})
+    ELS.automationUpgradesArray[3].innerHTML =  i18next.t('decreaseInterval', {percent: 40, price: formatNumber(MISC.automation.upower.cost())})
+    ELS.automationUpgradesArray[4].innerHTML =  i18next.t('decreaseInterval', {percent: 40, price: formatNumber(MISC.automation.prestige.cost())})
+    ELS.automationUpgradesArray[5].innerHTML =  i18next.t('decreaseInterval', {percent: 33, price: formatNumber(MISC.automation.uadder.cost())})
+
+    increaseBulkBuyButton.innerHTML = i18next.t('increaseBulk', {price: formatNumber(MISC.automation.buyable.cost())})
+
+    if (player.settings.whichPrestigeMode == 'time') autoPrestigeMode.innerHTML = text.automation.time_req
+    if (player.settings.whichPrestigeMode == 'coins') autoPrestigeMode.innerHTML = text.automation.coin_req
+    if (player.settings.whichPrestigeMode == 'prestige') autoPrestigeMode.innerHTML = text.automation.prestige_req
+    if (player.settings.whichPrestigeMode == 'crystals') autoPrestigeMode.innerHTML = text.automation.crystal_req
+}
+
+// ============================================================
+// Функция для SHOP и TOOLTIPS (магазин и подсказки)
+// ============================================================
+function loadTranslationsShop() {
+    superCount.innerHTML = i18next.t('superCoinCount', {supercoins: formatNumber(player.supercoin.currency)});
+    respecShop.innerHTML = i18next.t('respecShop');
+    respecSuperCrystalSingle.innerHTML = i18next.t('respecShop');
+
+    const shop_buyables = [
+        tooltipShopBuyableU1, tooltipShopBuyableU2, tooltipShopBuyableU3, tooltipShopBuyableU4, tooltipShopBuyableU5, tooltipShopBuyableU6, tooltipShopBuyableU7,
+    ];
+
+    const shop_buyables_name = [
+        "firstShopBuyable", "secondShopBuyable", "thirdShopBuyable", "fourthShopBuyable", "fifthShopBuyable", "sixthShopBuyable", "seventhShopBuyable",
+    ];
+
+    for (let i = 0; i < 7; i++){
+        const id = i+1
+        shop_buyables[i].innerHTML = i18next.t(shop_buyables_name[i], {
+            amount: formatNumber(player.shop.upgrades[id]), 
+            bulk: formatNumber(UPGS.shop.buyables[id].bulk()), 
+            effect: formatNumber(UPGS.shop.buyables[id].effect(), 'percent'), 
+            next_effect: formatNumber(UPGS.shop.buyables[id].next_effect(), 'percent'),
+            cost: player.shop.upgrades[id] != UPGS.shop.buyables[id].maxAmount ? i18next.t('shop_cost', {
+                cost: formatNumber(UPGS.shop.buyables.bulk_cost(id))
+            }) : ''
+        })
+        window[`shopBuyableU${id}Req`].innerHTML = formatNumber(player.shop.upgrades[id]) + '/' + UPGS.shop.buyables[id].maxAmount
+    }
+
+    const shop_permanents = [
+        tooltipShopPermanentU1, tooltipShopPermanentU2, tooltipShopPermanentU3, tooltipShopPermanentU4, tooltipShopPermanentU5, tooltipShopPermanentU6, tooltipShopPermanentU7
+    ];
+
+    const shop_permanent_name = [
+        "firstShopPermanent", "secondShopPermanent", "thirdShopPermanent", "fourthShopPermanent", "fifthShopPermanent", "sixthShopPermanent", "seventhShopPermanent",
+    ];
+
+    for (let i = 0; i < 7; i++){
+        const id = i+1
+        if (id != 3 && id != 6 && id != 5 && id != 7) shop_permanents[i].innerHTML = i18next.t(shop_permanent_name[i], {
+            amount: formatNumber(player.shop.permanentUpgrades[id]), 
+            effect: formatNumber(UPGS.shop.permanent[id].effect(), 'percent'), 
+            next_effect: formatNumber(UPGS.shop.permanent[id].next_effect(), 'percent'),
+            cost: player.shop.permanentUpgrades[id] != UPGS.shop.permanent[id].maxAmount ? i18next.t('shop_cost', {
+                cost: formatNumber(UPGS.shop.permanent[id].cost())
+            }) : ''
+        })
+        else if (id != 5 && id != 7) shop_permanents[i].innerHTML = i18next.t(shop_permanent_name[i], {
+            amount: formatNumber(player.shop.permanentUpgrades[id]), 
+            effect: formatNumber(UPGS.shop.permanent[id].effect(), 'boost'),  
+            next_effect: formatNumber(UPGS.shop.permanent[id].next_effect(), 'boost'),
+            cost: player.shop.permanentUpgrades[id] != UPGS.shop.permanent[id].maxAmount ? i18next.t('shop_cost', {
+                cost: formatNumber(UPGS.shop.permanent[id].cost())
+            }) : ''
+        })
+        else shop_permanents[i].innerHTML = i18next.t(shop_permanent_name[i], {
+            amount: formatNumber(player.shop.permanentUpgrades[id]), 
+            effect: formatNumber(UPGS.shop.permanent[id].effect()),  
+            next_effect: formatNumber(UPGS.shop.permanent[id].next_effect()),
+            cost: player.shop.permanentUpgrades[id] != UPGS.shop.permanent[id].maxAmount ? i18next.t('shop_cost', {
+                cost: formatNumber(UPGS.shop.permanent[id].cost())
+            }) : ''
+        })
+        window[`shopPermanentU${id}Req`].innerHTML = formatNumber(player.shop.permanentUpgrades[id]) + '/' + UPGS.shop.permanent[id].maxAmount
+    }
+
+    const shop_unlockables = [
+        tooltipShopSingleU1, tooltipShopSingleU2, tooltipShopSingleU3, tooltipShopSingleU4, tooltipShopSingleU5, tooltipShopSingleU6
+    ];
+
+    const shop_unlockables_name = [
+        "firstShopSingle", "secondShopSingle", "thirdShopSingle", "fourthShopSingle", "fifthShopSingle", "sixthShopSingle"
+    ];
+    
+    for (let i = 0; i < 6; i++){
+        const id = i+1
+        shop_unlockables[i].innerHTML = i18next.t(shop_unlockables_name[i], {
+            cost: !player.shop.unlockables.includes(id) ? i18next.t('shop_cost', {
+                cost: formatNumber(UPGS.shop.unlockables[id].cost())
+            }) : ''
+        })
+        window[`shopSingleU${id}Req`].innerHTML = formatNumber(Number(player.shop.unlockables.includes(id))) + '/' + 1
+    }
+
+    const shop_items = [
+        tooltipshopItem1, tooltipshopItem2, tooltipshopItem3, tooltipshopItem4, tooltipshopItem5, tooltipshopItem6
+    ];
+
+    const shop_items_name = [
+        "firstShopItem", "secondShopItem", "thirdShopItem", "fourthShopItem", "fifthShopItem", "sixthShopItem",
+    ];
+    
+    for (let i = 0; i < 6; i++){
+        const id = i+1
+        shop_items[i].innerHTML = i18next.t(shop_items_name[i], {
+            amount: player.shop.items.amount[id],
+            max: UPGS.shop.items[id].maxAmount,
+            cost: i18next.t('shop_cost', {
+                cost: formatNumber(UPGS.shop.items[id].cost())
+            })
+        })
+        window[`shopItem${id}Req`].innerHTML = formatNumber(player.shop.items.amount[id]) + '/' + UPGS.shop.items[id].maxAmount
+    }
+
     const tooltips = [
         tooltipbuyableU1, tooltipbuyableU2, tooltipbuyableU3, tooltipbuyableU4, tooltipbuyableU5,
         tooltipsingleU1, tooltipsingleU2, tooltipsingleU3, tooltipsingleU4, tooltipsingleU5,
@@ -676,7 +950,12 @@ function loadTranslations() {
             }
         }
     }
+}
 
+// ============================================================
+// Функция для SUPERCRYSTAL (супер-кристаллы)
+// ============================================================
+function loadTranslationsSuperCrystal() {
     const supercrystal_singles = [
         sCSingleU1, sCSingleU2, sCSingleU3, sCSingleU4, sCSingleU5,
         sCSingleU6, sCSingleU7, sCSingleU8, sCSingleU9
@@ -702,6 +981,13 @@ function loadTranslations() {
 
     superCrystalCount.innerHTML = i18next.t('superCrystalAmount', {x: formatNumber(player.supercrystal.currency)})
 
+    superCrystalPour.innerHTML = UNL.supercrystal.pour()+'%'
+}
+
+// ============================================================
+// Функция для SUPERPRESTIGE (супер-престиж)
+// ============================================================
+function loadTranslationsSuperprestige() {
     superPBuyableU1.innerHTML = i18next.t('firstSuperPrestigeBuyable', {
         amount: formatNumber(player.prestige.super.buyables[1]), 
         bulk: formatNumber(UPGS.prestige.super.buyables[1].bulk()), 
@@ -760,52 +1046,12 @@ function loadTranslations() {
         const milestoneEl2 = `prestigeMilestone${i}`
         milestoneEl.innerHTML = i18next.t(milestoneEl2);
     }
+}
 
-    singleACInterval.innerHTML = i18next.t('automationDesc', {interval: formatNumber(MISC.automation.single.time()/1000, 'power')});
-    buyableACInterval.innerHTML = i18next.t('automationDesc2', {interval: formatNumber(MISC.automation.buyable.time()/1000, 'power'), bulkBuyDesc: i18next.t('bulkBuyDesc', {bulk: formatNumber(MISC.automation.buyable.bulk())})});
-    umultiplierACInterval.innerHTML = i18next.t('automationDesc', {interval: formatNumber(MISC.automation.umultiplier.time()/1000, 'power')});
-    upowerACInterval.innerHTML = i18next.t('automationDesc', {interval: formatNumber(MISC.automation.upower.time()/1000, 'power')});
-    prestigeACInterval.innerHTML = i18next.t('automationDesc', {interval: formatNumber(MISC.automation.prestige.time()/1000, 'power')});
-    uadderACInterval.innerHTML = i18next.t('automationDesc', {interval: formatNumber(MISC.automation.uadder.time()/1000, 'power')});
-
-    ELS.automationUpgradesArray[0].innerHTML =  i18next.t('decreaseInterval', {percent: 40, price: formatNumber(MISC.automation.single.cost())})
-    ELS.automationUpgradesArray[1].innerHTML =  i18next.t('decreaseInterval', {percent: 40, price: formatNumber(MISC.automation.buyable.cost())})
-    ELS.automationUpgradesArray[2].innerHTML =  i18next.t('decreaseInterval', {percent: 40, price: formatNumber(MISC.automation.umultiplier.cost())})
-    ELS.automationUpgradesArray[3].innerHTML =  i18next.t('decreaseInterval', {percent: 40, price: formatNumber(MISC.automation.upower.cost())})
-    ELS.automationUpgradesArray[4].innerHTML =  i18next.t('decreaseInterval', {percent: 40, price: formatNumber(MISC.automation.prestige.cost())})
-    ELS.automationUpgradesArray[5].innerHTML =  i18next.t('decreaseInterval', {percent: 33, price: formatNumber(MISC.automation.uadder.cost())})
-
-    increaseBulkBuyButton.innerHTML = i18next.t('increaseBulk', {price: formatNumber(MISC.automation.buyable.cost())})
-
-    if (player.settings.whichPrestigeMode == 'time') autoPrestigeMode.innerHTML = text.automation.time_req
-    if (player.settings.whichPrestigeMode == 'coins') autoPrestigeMode.innerHTML = text.automation.coin_req
-    if (player.settings.whichPrestigeMode == 'prestige') autoPrestigeMode.innerHTML = text.automation.prestige_req
-    if (player.settings.whichPrestigeMode == 'crystals') autoPrestigeMode.innerHTML = text.automation.crystal_req
-
-    shardsCountText.innerHTML = i18next.t('shardCount', {shards: formatNumber(player.shard.currency), percent: formatNumber(GAIN.shard.effect.effect(), 'percent')})
-    shardsPerSecondText.innerHTML = i18next.t('shardsPerSec', {shards: formatNumber(GAIN.shard.second(), 'boost')})
-
-    brokeCrystals.innerHTML = i18next.t('didBreakCrystal', {crystals: formatNumber(text.broken_crystals.broken_crystals), shards: formatNumber(text.broken_crystals.gain)})
-
-    shardUnlock1Text.innerHTML = i18next.t('shardUnlockable1', {percent: formatNumber(UNL.shard.second.percent(), 'boost'), consumedShards: formatNumber(player.shard.consumed.second), price: formatNumber(UNL.shard.second.cost)});
-    shardUnlock2Text.innerHTML = i18next.t('shardUnlockable2', {percent: formatNumber(UNL.shard.click.percent(), 'boost'), consumedShards: formatNumber(player.shard.consumed.click), price: formatNumber(UNL.shard.click.cost)});
-    shardUnlock3Text.innerHTML = i18next.t('shardUnlockable3', {percent: formatNumber(UNL.shard.buyables.percent(), 'boost'), consumedShards: formatNumber(player.shard.consumed.buyables), price: formatNumber(UNL.shard.buyables.cost)});
-    shardUnlock4Text.innerHTML = i18next.t('shardUnlockable4', {percent: formatNumber(UNL.shard.singles.percent(), 'boost'), consumedShards: formatNumber(player.shard.consumed.singles), price: formatNumber(UNL.shard.singles.cost)});
-
-    achBonus.innerHTML = i18next.t('achievementsBonus', {
-        achievementBonus: formatNumber(ACHS.effect.coin(), 'boost'), 
-        1: UPGS.coin.singles[25].unl_super() ? i18next.t('achievementsBonus1', {x: formatNumber(ACHS.effect.crystal(), 'boost')}) : '', 
-        2: UPGS.coin.singles[25].unl_super() ? i18next.t('achievementsBonus2', {x: formatNumber(ACHS.effect.shard(), 'boost')}) : ''
-    })
-    for (let i = 0; i < 50; i++) {
-        const achNaming = window["achName" + (i + 11)]; // Добавляем 11, чтобы начать с 11-го элемента
-        const achNameKey = `achRow1.name.${i}`;
-        const achNameWithoutQuotes = i18next.t(achNameKey).replace(/"/g, ''); // Удалить все кавычки из строки
-        achNaming.innerHTML = i18next.t(achNameWithoutQuotes);
-        ACHS.names[i] = i18next.t(`achRow1.name.${i}`);
-        if (i != 49) document.getElementsByClassName("tooltipAch")[i].innerHTML = i18next.t(`achievement${i + 11}Desc`); // Добавляем 11, чтобы начать с 11-го элемента
-    }    
-
+// ============================================================
+// Функция для INFO (информация, статистика, челленджи)
+// ============================================================
+function loadTranslationsInfo() {
     totalCoins.innerHTML = i18next.t('totalMoney', {totalCoins: formatNumber(player.coin.total_currency)});
     totalSuperCoinsStats.innerHTML = i18next.t('totalSuperMoney', {totalSuperCoins: formatNumber(player.supercoin.total_currency)});
     totalCrystalsStats.innerHTML = i18next.t('totalCrystals', {totalCrystals: formatNumber(player.prestige.total_currency)});
@@ -863,262 +1109,6 @@ function loadTranslations() {
 
     CRYSTAL_GAIN_SC_001Stats.innerHTML = i18next.t('postE7ShardSoftcap')
     SHARD_EFF_SC_001Stats.innerHTML = i18next.t('SHARD_EFF_SC_001')
-    
-    superCount.innerHTML = i18next.t('superCoinCount', {supercoins: formatNumber(player.supercoin.currency)});
-    respecShop.innerHTML = i18next.t('respecShop');
-    respecSuperCrystalSingle.innerHTML = i18next.t('respecShop');
-
-    const shop_buyables = [
-        tooltipShopBuyableU1, tooltipShopBuyableU2, tooltipShopBuyableU3, tooltipShopBuyableU4, tooltipShopBuyableU5, tooltipShopBuyableU6, tooltipShopBuyableU7,
-    ];
-
-    const shop_buyables_name = [
-        "firstShopBuyable", "secondShopBuyable", "thirdShopBuyable", "fourthShopBuyable", "fifthShopBuyable", "sixthShopBuyable", "seventhShopBuyable",
-    ];
-
-    for (let i = 0; i < 7; i++){
-        const id = i+1
-        shop_buyables[i].innerHTML = i18next.t(shop_buyables_name[i], {
-            amount: formatNumber(player.shop.upgrades[id]), 
-            bulk: formatNumber(UPGS.shop.buyables[id].bulk()), 
-            effect: formatNumber(UPGS.shop.buyables[id].effect(), 'percent'), 
-            next_effect: formatNumber(UPGS.shop.buyables[id].next_effect(), 'percent'),
-            cost: player.shop.upgrades[id] != UPGS.shop.buyables[id].maxAmount ? i18next.t('shop_cost', {
-                cost: formatNumber(UPGS.shop.buyables.bulk_cost(id))
-            }) : ''
-        })
-        window[`shopBuyableU${id}Req`].innerHTML = formatNumber(player.shop.upgrades[id]) + '/' + UPGS.shop.buyables[id].maxAmount
-    }
-
-    const shop_permanents = [
-        tooltipShopPermanentU1, tooltipShopPermanentU2, tooltipShopPermanentU3, tooltipShopPermanentU4, tooltipShopPermanentU5, tooltipShopPermanentU6, tooltipShopPermanentU7, tooltipShopPermanentU8, 
-    ];
-
-    const shop_permanent_name = [
-        "firstShopPermanent", "secondShopPermanent", "thirdShopPermanent", "fourthShopPermanent", "fifthShopPermanent", "sixthShopPermanent", "seventhShopPermanent", "eighthShopPermanent",
-    ];
-
-    for (let i = 0; i < 8; i++){
-        const id = i+1
-        if (id != 3 && id != 6 && id != 5 && id != 7 && id != 8) shop_permanents[i].innerHTML = i18next.t(shop_permanent_name[i], {
-            amount: formatNumber(player.shop.permanentUpgrades[id]), 
-            effect: formatNumber(UPGS.shop.permanent[id].effect(), 'percent'), 
-            next_effect: formatNumber(UPGS.shop.permanent[id].next_effect(), 'percent'),
-            cost: player.shop.permanentUpgrades[id] != UPGS.shop.permanent[id].maxAmount ? i18next.t('shop_cost', {
-                cost: formatNumber(UPGS.shop.permanent[id].cost())
-            }) : ''
-        })
-        else if (id != 5 && id != 7) shop_permanents[i].innerHTML = i18next.t(shop_permanent_name[i], {
-            amount: formatNumber(player.shop.permanentUpgrades[id]), 
-            effect: formatNumber(UPGS.shop.permanent[id].effect(), 'boost'),  
-            next_effect: formatNumber(UPGS.shop.permanent[id].next_effect(), 'boost'),
-            cost: player.shop.permanentUpgrades[id] != UPGS.shop.permanent[id].maxAmount ? i18next.t('shop_cost', {
-                cost: formatNumber(UPGS.shop.permanent[id].cost())
-            }) : ''
-        })
-        else shop_permanents[i].innerHTML = i18next.t(shop_permanent_name[i], {
-            amount: formatNumber(player.shop.permanentUpgrades[id]), 
-            effect: formatNumber(UPGS.shop.permanent[id].effect()),  
-            next_effect: formatNumber(UPGS.shop.permanent[id].next_effect()),
-            cost: player.shop.permanentUpgrades[id] != UPGS.shop.permanent[id].maxAmount ? i18next.t('shop_cost', {
-                cost: formatNumber(UPGS.shop.permanent[id].cost())
-            }) : ''
-        })
-        window[`shopPermanentU${id}Req`].innerHTML = formatNumber(player.shop.permanentUpgrades[id]) + '/' + UPGS.shop.permanent[id].maxAmount
-    }
-
-    const shop_unlockables = [
-        tooltipShopSingleU1, tooltipShopSingleU2, tooltipShopSingleU3, tooltipShopSingleU4, tooltipShopSingleU5, tooltipShopSingleU6
-    ];
-
-    const shop_unlockables_name = [
-        "firstShopSingle", "secondShopSingle", "thirdShopSingle", "fourthShopSingle", "fifthShopSingle", "sixthShopSingle",
-    ];
-    
-    for (let i = 0; i < 6; i++){
-        const id = i+1
-        shop_unlockables[i].innerHTML = i18next.t(shop_unlockables_name[i], {
-            cost: !player.shop.unlockables.includes(id) ? i18next.t('shop_cost', {
-                cost: formatNumber(UPGS.shop.unlockables[id].cost())
-            }) : ''
-        })
-        window[`shopSingleU${id}Req`].innerHTML = formatNumber(Number(player.shop.unlockables.includes(id))) + '/' + 1
-    }
-
-    const shop_items = [
-        tooltipshopItem1, tooltipshopItem2, tooltipshopItem3, tooltipshopItem4, tooltipshopItem5, tooltipshopItem6
-    ];
-
-    const shop_items_name = [
-        "firstShopItem", "secondShopItem", "thirdShopItem", "fourthShopItem", "fifthShopItem", "sixthShopItem",
-    ];
-    
-    for (let i = 0; i < 6; i++){
-        const id = i+1
-        shop_items[i].innerHTML = i18next.t(shop_items_name[i], {
-            amount: player.shop.items.amount[id],
-            max: UPGS.shop.items[id].maxAmount,
-            cost: i18next.t('shop_cost', {
-                cost: formatNumber(UPGS.shop.items[id].cost())
-            })
-        })
-        window[`shopItem${id}Req`].innerHTML = formatNumber(player.shop.items.amount[id]) + '/' + UPGS.shop.items[id].maxAmount
-    }
-
-    offlineGainTitle.innerHTML = i18next.t('offlineGainTitle');   
-    offlineShowGain.innerHTML = i18next.t('offlineGain', {
-        timeDifference: formatNumber(player.offline_gain.time),
-        moneyTemp: formatNumber(player.offline_gain.coin), 
-        superCoinsTemp: formatNumber(player.offline_gain.supercoin), 
-        crystals: ACHS.has(22) ? i18next.t('offlineCrystalsTempText', {
-            crystals: formatNumber(player.offline_gain.crystal, 'floor')
-        }) : '', 
-        prestiges: MILESTONES.has(16) ? i18next.t('offlinePrestigesTempText', {
-            prestiges: formatNumber(player.offline_gain.prestige, 'floor')
-        }) : '',
-        shards: UNL.shard.second.unl() ? i18next.t('offlineShardsTempText', {
-            shards: formatNumber(player.offline_gain.shard)
-        }) : ''
-    });
-    
-    text.code.name_of_code = document.getElementById('codeInput').value
-
-    inputText.innerHTML = i18next.t('codeInput');
-
-    text.code.wrong_code = i18next.t('codeIsFalse', {code: text.code.name_of_code});
-    text.code.true_code = i18next.t('codeIsTrue', {code: text.code.name_of_code, codeReward: text.code.reward});
-    text.code.used_code = i18next.t('codeIsUsed', {code: text.code.name_of_code});
-    if (!player.got_daily_reward) {
-        getDailyReward.innerHTML = i18next.t('getDailyReward');
-    }
-    else {
-        getDailyReward.innerHTML = ("0" + formatNumber(player.time.real.daily.hours)).slice(-2)+":"+("0" + formatNumber(player.time.real.daily.minutes)).slice(-2)+":"+("0" + formatNumber(player.time.real.daily.seconds)).slice(-2)
-    }
-
-    text.daily.true = i18next.t('dailyIsTrue', {
-        superCoinsTemp2: player.offline_gain.daily
-    });
-    text.daily.false = i18next.t('dailyIsFalse', {
-        dailySeconds: formatNumber(player.time.real.daily.seconds), 
-        dailyMinutes: formatNumber(player.time.real.daily.minutes), 
-        dailyHours: formatNumber(player.time.real.daily.hours)
-    });
-
-    for (let i = 1; i < 22; i++) {
-        if (i < 18) {
-            window[`chapter${i}Tab`].innerHTML = i18next.t(`chapter${i}Name`);
-            text.chapter[i] = i18next.t(`chapter${i}`);
-        }
-        window[`helpTab${i}`].innerHTML = i18next.t(`help${i}Name`);
-        text.helpTitle[i] = i18next.t(`help${i}Name`);
-        if (i != 13) text.help[i] = i18next.t(`help${i}`);
-    }
-
-    text.help[13] = i18next.t(`help13`, {
-        x: formatNumber(GAIN.coin.click.softcap().softcap_start),
-        y: player.prestige.singleUpgrades.includes(11) ? 0.55 : 0.5,
-        z: player.prestige.singleUpgrades.includes(11) ? 0.45 : 0.4
-        })
-
-    challengeCondition.innerHTML = ''
-    if (player.challenge.activated == 2) challengeCondition.innerHTML = i18next.t('challengeCondition2')
-    if (player.challenge.activated == 7) {
-        (MISC.amount_of_upgrades.coin()/50*100) <= 100 ? challengeCondition.innerHTML = i18next.t('challengeCondition7', {x: formatNumber(MISC.amount_of_upgrades.coin()/50*100, 'boost')}) : challengeCondition.innerHTML = i18next.t('challengeCondition7', {x: 100})
-    }
-    if (player.challenge.activated == 8) challengeCondition.innerHTML = i18next.t('challengeCondition8', {x: formatNumber(CHALL.virusCoins_gen())})
-    if (player.challenge.activated == 10) challengeCondition.innerHTML = i18next.t('challengeCondition10', {x: 25-MISC.amount_of_upgrades.coin()}) 
-
-    challenge3Reward.innerHTML = i18next.t('challengeReward3', {
-        x: player.challenge.completed.includes(3) ? formatNumber(CHALL[3].effect(), 'power') : formatNumber(1, 'power')
-    })
-    challenge4Reward.innerHTML = i18next.t('challengeReward4', {
-        x: player.challenge.completed.includes(4) ? formatNumber(CHALL[4].effect()) : formatNumber(0)
-    })
-    challenge5Reward.innerHTML = i18next.t('challengeReward5', {
-        x: player.challenge.completed.includes(5) ? formatNumber(CHALL[5].effect(), 'boost') : formatNumber(1, 'boost')
-    })
-    challenge6Reward.innerHTML = i18next.t('challengeReward6', {
-        x: player.challenge.completed.includes(6) ? formatNumber(CHALL[6].effect(), 'boost') : formatNumber(1, 'boost')
-    })
-    challenge7Reward.innerHTML = i18next.t('challengeReward7', {
-        x: player.challenge.completed.includes(7) ? formatNumber(CHALL[7].effect(), 'boost') : formatNumber(1, 'boost')
-    })
-    challenge8Reward.innerHTML = i18next.t('challengeReward8', {
-        x: player.challenge.completed.includes(8) ? formatNumber(CHALL[8].effect(), 'boost') : formatNumber(1, 'boost')
-    })
-    challenge9Reward.innerHTML = i18next.t('challengeReward9', {
-        x: player.challenge.completed.includes(9) ? formatNumber(CHALL[9].effect(), 'boost') : formatNumber(1, 'boost')
-    })
-    challenge10Reward.innerHTML = i18next.t('challengeReward10', {
-        x: player.challenge.completed.includes(10) ? formatNumber(CHALL[10].effect(), 'boost') : formatNumber(1, 'boost')
-    })
-
-    if (player.challenge.activated == 0) youAreInXWorld.innerHTML = i18next.t('challengeDeactivated')
-    else youAreInXWorld.innerHTML = i18next.t('challengeActivated', {x: player.challenge.activated})
-
-    for (let i = 0; i < 12; i++){
-        const id = i+1
-        if (player.challenge.completed.includes(id)) document.getElementsByClassName("challengeStart")[i].innerHTML = i18next.t('challengeCompleted')
-        else document.getElementsByClassName("challengeStart")[i].innerHTML = i18next.t('challengeStart');
-    }
-
-    superCrystalPour.innerHTML = UNL.supercrystal.pour()+'%'
-
-    tooltipMineral1.innerHTML = i18next.t('makeMineral', {y: formatNumber(UPGS.minerals[1].bulk().bulk1), x: formatNumber(UPGS.minerals[1].bulk().bulk2)});
-    tooltipMineral2.innerHTML = i18next.t('makeMineral', {y: formatNumber(UPGS.minerals[2].bulk().bulk1), x: formatNumber(UPGS.minerals[2].bulk().bulk2)});
-    tooltipMineral3.innerHTML = i18next.t('makeMineral', {y: formatNumber(UPGS.minerals[3].bulk().bulk1), x: formatNumber(UPGS.minerals[3].bulk().bulk2)});
-    tooltipMineral4.innerHTML = i18next.t('makeMineral', {y: formatNumber(UPGS.minerals[4].bulk().bulk1), x: formatNumber(UPGS.minerals[4].bulk().bulk2)});
-
-    mineral1Desc.innerHTML = i18next.t('mineral1', {
-        x: formatNumber(player.minerals[1]), 
-        e1: formatNumber(UPGS.minerals[1].effect1(), 'boost'), 
-        e2: formatNumber(UPGS.minerals[1].effect2(), 'boost'), 
-        e3: formatNumber(UPGS.minerals[1].effect3(), 'boost')
-    })
-    mineral2Desc.innerHTML = i18next.t('mineral2', {
-        x: formatNumber(player.minerals[2]), 
-        e1: formatNumber(UPGS.minerals[2].effect1(), 'boost'), 
-        e2: formatNumber(UPGS.minerals[2].effect2(), 'boost'), 
-        e3: formatNumber(UPGS.minerals[2].effect3(), 'boost')
-    })
-    mineral3Desc.innerHTML = i18next.t('mineral3', {
-        x: formatNumber(player.minerals[3]), 
-        e1: formatNumber(UPGS.minerals[3].effect1(), 'boost'), 
-        e2: formatNumber(UPGS.minerals[3].effect2(), 'boost'), 
-        e3: formatNumber(UPGS.minerals[3].effect3(), 'boost')
-    })
-    mineral4Desc.innerHTML = i18next.t('mineral4', {
-        x: formatNumber(player.minerals[4]), 
-        e1: formatNumber(UPGS.minerals[4].effect1(), 'boost'), 
-        e2: formatNumber(UPGS.minerals[4].effect2(), 'boost'), 
-        e3: formatNumber(UPGS.minerals[4].effect3(), 'boost')
-    })
-
-    runesCount.innerHTML = i18next.t('runesCount', {x: formatNumber(player.rune.currency)})
-    shardsCountForMinerals.innerHTML = i18next.t('shardsCountForMinerals', {x: formatNumber(player.shard.currency)})
-
-    generateRunes.innerHTML = i18next.t('generateRunes', {x: formatNumber(UNL.rune.cost())})
-    generateRunesMax.innerHTML = i18next.t('generateRunesBulk', {x: formatNumber(UNL.rune.max_cost().cost), y: formatNumber(UNL.rune.max_cost().iter)})
-
-    PROGRESS.name[0] = i18next.t('pbtitle1');
-    PROGRESS.name[1] = i18next.t('pbtitle2');
-    PROGRESS.name[2] = i18next.t('pbtitle3');
-    PROGRESS.name[3] = i18next.t('pbtitle4');
-    PROGRESS.name[4] = i18next.t('pbtitle5');
-    PROGRESS.name[5] = i18next.t('pbtitle6');
-    PROGRESS.name[6] = i18next.t('pbtitle7');
-    PROGRESS.name[7] = i18next.t('pbtitle8');
-    PROGRESS.name[8] = `Infinity?`
-
-    PROGRESS.currency[0] = i18next.t('pbcurrency1');
-    PROGRESS.currency[1] = i18next.t('pbcurrency1');
-    PROGRESS.currency[2] = i18next.t('pbcurrency1');
-    PROGRESS.currency[3] = i18next.t('pbcurrency2');
-    PROGRESS.currency[4] = i18next.t('pbcurrency3');
-    PROGRESS.currency[5] = i18next.t('pbcurrency4');
-    PROGRESS.currency[6] = i18next.t('pbcurrency4');
-    PROGRESS.currency[7] = i18next.t('pbcurrency3');
-    PROGRESS.currency[8] = i18next.t('pbcurrency1');
 
     for (let i = 0; i < 12; i++){
         const id = i+1
@@ -1138,6 +1128,24 @@ function loadTranslations() {
             window[`challengeTime${id}`].innerHTML = i18next.t('challengeNotCompletedYet', {
             n: formatNumber(i+1)
             })
+        if (i < 8) {
+            if (player.prestige.challenge.completed.includes(id) && player.prestige.challenge.time[id].timer > 0.999) 
+            window[`challengePTime${id}`].innerHTML = i18next.t('challengePTime', {
+                n: formatNumber(i+1), 
+                h: convertToTwoDigits(player.prestige.challenge.time[id].hours), 
+                m: convertToTwoDigits(player.prestige.challenge.time[id].minutes), 
+                s: convertToTwoDigits(player.prestige.challenge.time[id].seconds)
+            })
+            else if (player.prestige.challenge.completed.includes(id)) 
+                window[`challengePTime${id}`].innerHTML = i18next.t('challengePTimeFast', {
+                n: formatNumber(i+1), 
+                ms: formatNumber(player.prestige.challenge.time[id].timer*1000)
+                })
+            else 
+                window[`challengePTime${id}`].innerHTML = i18next.t('challengePNotCompletedYet', {
+                n: formatNumber(i+1)
+                })
+            }
         }
 
     for (let i = 0; i < 10; i++) {
@@ -1219,20 +1227,55 @@ function loadTranslations() {
         x: formatNumber(MISC.average.crystals_per_min(), 'boost')
     });
 
-    for (let i = 1; i <= 10; i++) {
-        document.getElementsByClassName('shardAchBarGhostProgress')[i-1].innerHTML = i18next.t(`shardAchBar${i}`, {
-            completed: formatNumber(player.shard.achievements[i]),
-            current: formatNumber(UNL.shard_achievements[i].current(), 'boost'),
-            goal: formatNumber(UNL.shard_achievements[i].goal(), 'boost'),
-            effect: formatNumber(UNL.shard_achievements[i].effect(), 'boost')
-        });
-
-        if (i <= 5) {
-            document.getElementsByClassName('shardAchUnlBase')[i-1].innerHTML = i18next.t(`shardAchUnlockable.${i-1}`)
-            
+    for (let i = 1; i <= 6; i++) {
+        const id = i-1
+        let value = [0, 0]
+        document.getElementsByClassName('softcapCode')[id].innerHTML = i18next.t(`softcaps.${id}.codename`)
+        switch (i) {
+            case 1:
+                value[0] = UPGS.coin.singles[22].softcap_start()
+                value[1] = 0.5
+                break;
+            case 2:
+                value[0] = GAIN.coin.second.softcap().softcap_start
+                value[1] = GAIN.coin.second.softcap().softcap_power
+                break;
+            case 3:
+                value[0] = GAIN.coin.click.softcap().softcap_start
+                value[1] = GAIN.coin.click.softcap().softcap_power
+                break;
+            case 4:
+                value[0] = GAIN.coin.gain.softcap().softcap_start
+                value[1] = GAIN.coin.gain.softcap().softcap_power
+                break;
+            case 5:
+                value[0] = GAIN.crystal.softcap().softcap_start
+                value[1] = GAIN.crystal.softcap().softcap_power
+                break;
+            case 6:
+                value[0] = GAIN.shard.effect.softcap().softcap_start
+                value[1] = GAIN.shard.effect.softcap().softcap_power
+                break;
+            default:
+                break;
         }
+        document.getElementsByClassName('softcapStart')[id].innerHTML = i18next.t(`softcaps.${id}.starts`, {
+            x: formatNumber(value[0])
+        })
+        document.getElementsByClassName('softcapEffect')[id].innerHTML = i18next.t(`softcap`, {
+            x: formatNumber(value[1], 'boost')
+        })
     }
+}
 
+// ============================================================
+// Функции-заглушки для других вкладок
+// ============================================================
+function loadTranslationsOverdrive() {
+    // Overdrive обновляется вместе с Coins
+}
+
+function loadTranslationsFortune() {
     for (let i = 1; i <= 12; i++) {
         document.getElementsByClassName('fortuneBoostName')[i-1].innerHTML = i18next.t(`fortuneBoost${i}`, {
             min: UPGS.fortune.boosts[i].min() < 1.1 
@@ -1297,7 +1340,9 @@ function loadTranslations() {
 
     fortuneRandomBoost.innerHTML = i18next.t('getRandomFortuneBoost', {s: formatNumber(60*UPGS.fortune.upgrades.buyables[3].effect())})
     fortuneRespecBoost.innerHTML = i18next.t('respecFortuneBoosts', {x: player.fortune.daily_resets})
+}
 
+function loadTranslationsBalance() {
     plusCoinsCount.innerHTML = `${player.balance.coins.plus}⊕`
     plusCoinsPercent.innerHTML = `${MISC.balance.ratio().leftPercent}%`
     
@@ -1363,50 +1408,156 @@ function loadTranslations() {
                     }) : '',
                 })
         }
+}
 
+function loadTranslationsChallenges() {
+    challenge3Reward.innerHTML = i18next.t('challengeReward3', {
+        x: player.challenge.completed.includes(3) ? formatNumber(CHALL[3].effect(), 'power') : formatNumber(1, 'power')
+    })
+    challenge4Reward.innerHTML = i18next.t('challengeReward4', {
+        x: player.challenge.completed.includes(4) ? formatNumber(CHALL[4].effect()) : formatNumber(0)
+    })
+    challenge5Reward.innerHTML = i18next.t('challengeReward5', {
+        x: player.challenge.completed.includes(5) ? formatNumber(CHALL[5].effect(), 'boost') : formatNumber(1, 'boost')
+    })
+    challenge6Reward.innerHTML = i18next.t('challengeReward6', {
+        x: player.challenge.completed.includes(6) ? formatNumber(CHALL[6].effect(), 'boost') : formatNumber(1, 'boost')
+    })
+    challenge7Reward.innerHTML = i18next.t('challengeReward7', {
+        x: player.challenge.completed.includes(7) ? formatNumber(CHALL[7].effect(), 'boost') : formatNumber(1, 'boost')
+    })
+    challenge8Reward.innerHTML = i18next.t('challengeReward8', {
+        x: player.challenge.completed.includes(8) ? formatNumber(CHALL[8].effect(), 'boost') : formatNumber(1, 'boost')
+    })
+    challenge9Reward.innerHTML = i18next.t('challengeReward9', {
+        x: player.challenge.completed.includes(9) ? formatNumber(CHALL[9].effect(), 'boost') : formatNumber(1, 'boost')
+    })
+    challenge10Reward.innerHTML = i18next.t('challengeReward10', {
+        x: player.challenge.completed.includes(10) ? formatNumber(CHALL[10].effect(), 'boost') : formatNumber(1, 'boost')
+    })
 
-    for (let i = 1; i <= 6; i++) {
-        const id = i-1
-        let value = [0, 0]
-        document.getElementsByClassName('softcapCode')[id].innerHTML = i18next.t(`softcaps.${id}.codename`)
-        switch (i) {
-            case 1:
-                value[0] = UPGS.coin.singles[22].softcap_start()
-                value[1] = 0.5
-                break;
-            case 2:
-                value[0] = GAIN.coin.second.softcap().softcap_start
-                value[1] = GAIN.coin.second.softcap().softcap_power
-                break;
-            case 3:
-                value[0] = GAIN.coin.click.softcap().softcap_start
-                value[1] = GAIN.coin.click.softcap().softcap_power
-                break;
-            case 4:
-                value[0] = GAIN.coin.gain.softcap().softcap_start
-                value[1] = GAIN.coin.gain.softcap().softcap_power
-                break;
-            case 5:
-                value[0] = GAIN.crystal.softcap().softcap_start
-                value[1] = GAIN.crystal.softcap().softcap_power
-                break;
-            case 6:
-                value[0] = GAIN.shard.effect.softcap().softcap_start
-                value[1] = GAIN.shard.effect.softcap().softcap_power
-                break;
-            default:
-                break;
+    for (let i = 0; i < 12; i++){
+        const id = i+1
+        if (player.challenge.completed.includes(id)) document.getElementsByClassName("challengeStart")[i].innerHTML = i18next.t('challengeCompleted')
+        else document.getElementsByClassName("challengeStart")[i].innerHTML = i18next.t('challengeStart');
+    }
+}
+
+function loadTranslationsMinerals() {
+    tooltipMineral1.innerHTML = i18next.t('makeMineral', {y: formatNumber(UPGS.minerals[1].bulk().bulk1), x: formatNumber(UPGS.minerals[1].bulk().bulk2)});
+    tooltipMineral2.innerHTML = i18next.t('makeMineral', {y: formatNumber(UPGS.minerals[2].bulk().bulk1), x: formatNumber(UPGS.minerals[2].bulk().bulk2)});
+    tooltipMineral3.innerHTML = i18next.t('makeMineral', {y: formatNumber(UPGS.minerals[3].bulk().bulk1), x: formatNumber(UPGS.minerals[3].bulk().bulk2)});
+    tooltipMineral4.innerHTML = i18next.t('makeMineral', {y: formatNumber(UPGS.minerals[4].bulk().bulk1), x: formatNumber(UPGS.minerals[4].bulk().bulk2)});
+
+    mineral1Desc.innerHTML = i18next.t('mineral1', {
+        x: formatNumber(player.minerals[1]), 
+        e1: formatNumber(UPGS.minerals[1].effect1(), 'boost'), 
+        e2: formatNumber(UPGS.minerals[1].effect2(), 'boost'), 
+        e3: formatNumber(UPGS.minerals[1].effect3(), 'boost')
+    })
+    mineral2Desc.innerHTML = i18next.t('mineral2', {
+        x: formatNumber(player.minerals[2]), 
+        e1: formatNumber(UPGS.minerals[2].effect1(), 'boost'), 
+        e2: formatNumber(UPGS.minerals[2].effect2(), 'boost'), 
+        e3: formatNumber(UPGS.minerals[2].effect3(), 'boost')
+    })
+    mineral3Desc.innerHTML = i18next.t('mineral3', {
+        x: formatNumber(player.minerals[3]), 
+        e1: formatNumber(UPGS.minerals[3].effect1(), 'boost'), 
+        e2: formatNumber(UPGS.minerals[3].effect2(), 'boost'), 
+        e3: formatNumber(UPGS.minerals[3].effect3(), 'boost')
+    })
+    mineral4Desc.innerHTML = i18next.t('mineral4', {
+        x: formatNumber(player.minerals[4]), 
+        e1: formatNumber(UPGS.minerals[4].effect1(), 'boost'), 
+        e2: formatNumber(UPGS.minerals[4].effect2(), 'boost'), 
+        e3: formatNumber(UPGS.minerals[4].effect3(), 'boost')
+    })
+
+    runesCount.innerHTML = i18next.t('runesCount', {x: formatNumber(player.rune.currency)})
+    shardsCountForMinerals.innerHTML = i18next.t('shardsCountForMinerals', {x: formatNumber(player.shard.currency)})
+
+    generateRunes.innerHTML = i18next.t('generateRunes', {x: formatNumber(UNL.rune.cost())})
+    generateRunesMax.innerHTML = i18next.t('generateRunesBulk', {x: formatNumber(UNL.rune.max_cost().cost), y: formatNumber(UNL.rune.max_cost().iter)})
+}
+
+function loadTranslationsAchievements() {
+    achBonus.innerHTML = i18next.t('achievementsBonus', {
+        achievementBonus: formatNumber(ACHS.effect.coin(), 'boost'), 
+        1: UPGS.coin.singles[25].unl_super() ? i18next.t('achievementsBonus1', {x: formatNumber(ACHS.effect.crystal(), 'boost')}) : '', 
+        2: UPGS.coin.singles[25].unl_super() ? i18next.t('achievementsBonus2', {x: formatNumber(ACHS.effect.shard(), 'boost')}) : ''
+    })
+    for (let i = 0; i < 50; i++) {
+        const achNaming = window["achName" + (i + 11)]; // Добавляем 11, чтобы начать с 11-го элемента
+        const achNameKey = `achRow1.name.${i}`;
+        const achNameWithoutQuotes = i18next.t(achNameKey).replace(/"/g, ''); // Удалить все кавычки из строки
+        achNaming.innerHTML = i18next.t(achNameWithoutQuotes);
+        ACHS.names[i] = i18next.t(`achRow1.name.${i}`);
+        if (i != 49) document.getElementsByClassName("tooltipAch")[i].innerHTML = i18next.t(`achievement${i + 11}Desc`); // Добавляем 11, чтобы начать с 11-го элемента
+    }    
+
+    for (let i = 1; i <= 10; i++) {
+        document.getElementsByClassName('shardAchBarGhostProgress')[i-1].innerHTML = i18next.t(`shardAchBar${i}`, {
+            completed: formatNumber(player.shard.achievements[i]),
+            current: formatNumber(UNL.shard_achievements[i].current(), 'boost'),
+            goal: formatNumber(UNL.shard_achievements[i].goal(), 'boost'),
+            effect: formatNumber(UNL.shard_achievements[i].effect(), 'boost')
+        });
+
+        if (i <= 5) {
+            document.getElementsByClassName('shardAchUnlBase')[i-1].innerHTML = i18next.t(`shardAchUnlockable.${i-1}`)
+            
         }
-        document.getElementsByClassName('softcapStart')[id].innerHTML = i18next.t(`softcaps.${id}.starts`, {
-            x: formatNumber(value[0])
-        })
-        document.getElementsByClassName('softcapEffect')[id].innerHTML = i18next.t(`softcap`, {
-            x: formatNumber(value[1], 'boost')
-        })
+    }
+}
+
+function loadTranslationsSettings() {
+    for (let i = 1; i < 22; i++) {
+        if (i < 18) {
+            window[`chapter${i}Tab`].innerHTML = i18next.t(`chapter${i}Name`);
+            text.chapter[i] = i18next.t(`chapter${i}`);
+        }
+        window[`helpTab${i}`].innerHTML = i18next.t(`help${i}Name`);
+        text.helpTitle[i] = i18next.t(`help${i}Name`);
+        if (i != 13) text.help[i] = i18next.t(`help${i}`);
     }
 
-    autosaveSlider.innerHTML = i18next.t('autoSaveSlider', {x: mySlider.value/1000 < 1 ? formatNumber(JSON.parse(mySlider.value/1000), 'boost') : formatNumber(JSON.parse(mySlider.value/1000))});
-    toggleOffline.innerHTML = i18next.t('offlineGainToggle', {offline: player.settings.offline})
+    text.help[13] = i18next.t(`help13`, {
+        x: formatNumber(GAIN.coin.click.softcap().softcap_start),
+        y: player.prestige.singleUpgrades.includes(11) ? 0.55 : 0.5,
+        z: player.prestige.singleUpgrades.includes(11) ? 0.45 : 0.4
+        })
+    // Настройки обновляются вместе с Info
+}
+
+function loadTranslationsEvent() {
+    // События обновляются вместе с Always
+}
+
+function loadTranslationsCode() {
+        text.code.name_of_code = document.getElementById('codeInput').value
+
+        inputText.innerHTML = i18next.t('codeInput');
+
+        text.code.wrong_code = i18next.t('codeIsFalse', {code: text.code.name_of_code});
+        text.code.true_code = i18next.t('codeIsTrue', {code: text.code.name_of_code, codeReward: text.code.reward});
+        text.code.used_code = i18next.t('codeIsUsed', {code: text.code.name_of_code});
+
+        if (!player.got_daily_reward) {
+        getDailyReward.innerHTML = i18next.t('getDailyReward');
+        }
+        else {
+            getDailyReward.innerHTML = ("0" + formatNumber(player.time.real.daily.hours)).slice(-2)+":"+("0" + formatNumber(player.time.real.daily.minutes)).slice(-2)+":"+("0" + formatNumber(player.time.real.daily.seconds)).slice(-2)
+        }
+
+        text.daily.true = i18next.t('dailyIsTrue', {
+            superCoinsTemp2: player.offline_gain.daily
+        });
+        text.daily.false = i18next.t('dailyIsFalse', {
+            dailySeconds: formatNumber(player.time.real.daily.seconds), 
+            dailyMinutes: formatNumber(player.time.real.daily.minutes), 
+            dailyHours: formatNumber(player.time.real.daily.hours)
+        });
 }
 
 document.getElementById('changingLanguage').addEventListener('click', () => {
@@ -1425,7 +1576,23 @@ setTimeout(() => {
     document.documentElement.style.overflowY = 'auto'
     wholeGame.style.display = 'block'
     player.time.savedTime = Date.now()
-    setInterval(loop, 50)
+    // setInterval(loop, 50)
+    offlineGainTitle.innerHTML = i18next.t('offlineGainTitle');   
+    player.offline_gain.time == null ? offlineShowGain.innerHTML = '' :
+    offlineShowGain.innerHTML = i18next.t('offlineGain', {
+        timeDifference: formatNumber(player.offline_gain.time),
+        moneyTemp: formatNumber(player.offline_gain.coin), 
+        superCoinsTemp: formatNumber(player.offline_gain.supercoin), 
+        crystals: ACHS.has(22) ? i18next.t('offlineCrystalsTempText', {
+            crystals: formatNumber(player.offline_gain.crystal, 'floor')
+        }) : '', 
+        prestiges: MILESTONES.has(16) ? i18next.t('offlinePrestigesTempText', {
+            prestiges: formatNumber(player.offline_gain.prestige, 'floor')
+        }) : '',
+        shards: UNL.shard.second.unl() ? i18next.t('offlineShardsTempText', {
+            shards: formatNumber(player.offline_gain.shard)
+        }) : ''
+    });
 }, 2000);
 
 window.onload = loadTranslationsFromChangeLanguage();
@@ -1492,9 +1659,9 @@ function readCode() {
             }
             else {
                 text.code.reward = text.code.rewards[id]
-                loadTranslations()
+                loadTranslationsCode()
                 whichCode.innerHTML = text.code.true_code
-                player.code.activated.push(codeInput.value)
+                if (!player.code.activated.includes(codeInput.value)) player.code.activated.push(codeInput.value)
 
             }
         }
