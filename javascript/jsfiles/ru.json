@@ -531,9 +531,9 @@
     "offlinePrestige": "{{prestiges}} престижей/мин и ",
     "offlineCrystal": "{{crystals}} кристаллов/мин.",
 
-    "daysText": " {{days}} дней,",
-    "hoursText": " {{hours}} часов,",
-    "minutesText": " {{minutes}} минут и",
+    "daysText": " дней,",
+    "hoursText": " часов,",
+    "minutesText": " минут и",
 
     "totalClicks": "Вы сделали всего {{clickCount}} реальных нажатий!",
     "totalGameClicks": "Вы сделали всего {{clickCount}} игровых нажатий!",

@@ -87,7 +87,7 @@ gt {
   font-size: calc(30px * var(--font-scale));
 }
 
-pt {
+#ft_tokens_val, #bal_ft_tokens, pt {
   color: hotpink;
   text-shadow: 0 0 5px hotpink;
   font-size: calc(30px * var(--font-scale));

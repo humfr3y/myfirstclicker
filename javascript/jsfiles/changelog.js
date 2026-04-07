@@ -6,26 +6,35 @@ function showStory(chapter) {
 }
 function showHelpPage(help, helpName) {
     ELS.helpDesc.innerHTML = help;
-    helpPageTitle.innerHTML = helpName
+    helpPageTitle.innerHTML = helpName;
 }
 
 const LORE = {
+    has(id) { return player.settings.loreBoolean.includes(id); },
+
     unl(id) {
-        if (!player.settings.loreBoolean.includes(id)) {
-            player.settings.loreBoolean.push(id)
-            notify(text.notification.lore, 'mediumpurple', '500px') 
+        if (!this.has(id)) {
+            player.settings.loreBoolean.push(id);
+            notify(text.notification.lore, 'mediumpurple', '500px'); 
+            
+            // Красим кнопку ТОЛЬКО один раз при получении
+            let element = document.getElementsByClassName("loreChapter")[id - 1];
+            if (element) element.classList.add("unlockedChapter");
         }
     },
-    has(id) { return player.settings.loreBoolean.includes(id) },
-    checkLore(){
-        for (let c = 1; c <= Object.keys(this.conditions).length; c++) {
-            if (this.conditions[c] !== undefined ? this.conditions[c]() : false) this.unl(c)
-            if (this.has(c)) {
-                element = document.getElementsByClassName("loreChapter")[c-1]
-                element.classList.add("unlockedChapter")
+
+    checkLore() {
+        // Кэшируем количество глав, чтобы не дергать Object.keys каждый тик
+        const totalChapters = Object.keys(this.conditions).length;
+        
+        for (let c = 1; c <= totalChapters; c++) {
+            // Проверяем условие, только если глава еще не открыта
+            if (!this.has(c) && this.conditions[c] && this.conditions[c]()) {
+                this.unl(c);
             }
         }
     },
+
     conditions: {
         1() { return player.coin.currency > 10 },
         2() { return player.coin.singleUpgrades.length > 0 },
@@ -46,3 +55,13 @@ const LORE = {
         17() { return player.balance.total_coins.plus >= 1 || player.balance.total_coins.minus >= 1},
     }
 }
+
+// --- ОТРИСОВКА СОХРАНЕННЫХ ГЛАВ ПРИ ЗАГРУЗКЕ ---
+function renderSavedLore() {
+    player.settings.loreBoolean.forEach(id => {
+        let element = document.getElementsByClassName("loreChapter")[id - 1];
+        if (element) element.classList.add("unlockedChapter");
+    });
+}
+
+// Не забудь вызвать renderSavedLore() в функции загрузки сохранений (там же, где и renderSavedAchievements)
