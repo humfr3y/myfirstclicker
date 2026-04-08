@@ -20,7 +20,6 @@
     "pbcurrency3": "crystals",
     "pbcurrency4": "total supercrystals",
 
-    "crystalCount": "You have <ct>{{crystals}}</ct> crystals",
     "prestigeDisabled": "Collect 1е15 α-coins",
     "prestigeEnabled": "Reset everything for {{crystalsTemp}} crystals {{prestigeCountMultiplierText}}",
     "prestigeInChallenge": "Collect {{coins}} coins to complete the Prestige Challenge",
@@ -42,7 +41,6 @@
     "achievementsButton": "Achievements",
     "informationSubButton": "Information",
     "statisticsSubButton": "Statistics",
-    "shopButton": "Supershop ({{superCoins}})",
     "multipliersSubButton": "Multipliers",
     "aboutButton": "About game",
     "challengeTimeButton": "Challenge Time",
@@ -122,14 +120,6 @@
     "layer_ureducer_desc1": "Reset everything including U-adders to reduce rest of U-tils requirements by",
     "layer_ureducer_req": "Productivities and 4 U-adders",
 
-    "maxBuy": "Buy Max",
-
-    "free": "+{{free}}",
-    "super_effect_plus": " | <super>⧋ +{{effect}}</super>",
-    "super_effect_mul": " | <super>⧋ x{{effect}}</super>",
-    "super_effect_exp": " | <super>⧋ ^{{effect}}</super>",
-    "empty": "",
-
     "word_currently": "Currently:",
     "word_cost": "Cost:",
     "currency_acoins": "α-coins",
@@ -164,10 +154,6 @@
     "upg_coin_b5_sname": "Super Wallet",
     "upg_coin_b5_sdesc": "Upgrade also multiplies coin gain",
     "tt_coin_b5": "Super-effect:<br>Upgrade multiplies coin gain: ^",
-
-    "single_cost": "<br> Cost: {{cost}} α-coins",
-    "notCapped": "Currently",
-    "capped": "Capped",
 
     "word_capped": "Capped:",
     "currency_crystals": "crystals",
@@ -362,10 +348,8 @@
     "upg_sp_s9_desc": "Pushes scaling start of U-multipliers by 10 amount",
 
     "overdriveType1Name": "Overdrive I",
-    "overdriveType1Progress": "{{overdrivePercent}}% <br> Currently: x{{overdriveEffect}} to α-coin gain <br> Cost: {{overdrivePrice}} α-coins",
 
     "overdriveType2Name": "Overdrive II",
-    "overdriveType2Progress": "{{overdrivePercent}}% <br> Currently: x{{overdriveEffect}} to crystal gain <br> Cost: {{overdrivePrice}} crystals",
 
     "prestigeMilestone1": "<ut>Milestone 1</ut> Requirement: 1 prestige <it>Reward: Unlock Shards</it>",
     "prestigeMilestone2": "<ut>Milestone 2</ut> Requirement: 2 prestige <it>Reward: Unlock Single Upgrades Automation</it>",
@@ -395,13 +379,6 @@
     "prestigeAutomationTitle": "Auto-Prestige",
     "uadderAutomationTitle": "Auto-U-Adder",
 
-    "automationDesc": "Current interval: {{interval}}s",
-    "automationDesc2": "Current interval: {{interval}}s | {{bulkBuyDesc}}",
-    "bulkBuyDesc": "Bulk: x{{bulk}}",
-
-    "decreaseInterval": "Decrease interval by {{percent}}% <br> Cost: {{price}} crystals",
-    "increaseBulk": "Increase bulk buy by x2 <br> Cost: {{price}} crystals",
-
     "timePrestigeMode": "Mode: time in seconds",
     "coinsPrestigeMode": "Mode: α-coins",
     "prestigePrestigeMode": "Mode: prestiges per reset",
@@ -410,9 +387,6 @@
     "intervalText": "Interval in X seconds",
     "requirementText": "Reset at X U-multipliers",
     "requirementText2": "Reset at X U-powers",
-
-    "shardCount": "You have <shn>{{shards}}</shn> shards, which boosts α-coin gain by +<shn>{{percent}}</shn>%",
-    "shardsPerSec": "You're getting {{shards}} shards per second",
 
     "doBreakCrystal": "Break crystals",
     "breakCrystalTitle": "How much crystals do you want to break?",
@@ -459,13 +433,7 @@
     "upg_shard_s5_name": "Crystalize",
     "upg_shard_s5_desc": "Increases all minerals power based on total Supercrystals",
     "upg_shard_s6_name": "???",
-    "upg_shard_s6_desc": "Reduces the cost of recycling ??? ??? due to the number of total Shards",
-
-    "shardUnlockable1": "<ut> Shard Generator ({{percent}}%): </ut> <br> {{consumedShards}}/{{price}}",
-    "shardUnlockable2": "<ut> Clicker ({{percent}}%): </ut> <br> {{consumedShards}}/{{price}}",
-    "shardUnlockable3": "<ut> Buyable upgrades ({{percent}}%): </ut> <br> {{consumedShards}}/{{price}}",
-    "shardUnlockable4": "<ut> Single upgrades ({{percent}}%): </ut> <br> {{consumedShards}}/{{price}}",
-
+    "upg_shard_s6_desc": "Locked",
 
     "shardAchUnlockable": [
         "Unlock Shard Achievements for coins and supercoins <br> Cost: 1 supercrystal",
@@ -476,7 +444,6 @@
     ],
 
     "mineralsDesc": "Welcome to Minerals! Minerals have few effects and may be very useful!<br> To create Mineral you need to generate Rune with Crystals and then combine it with Shards into one of the three minerals of your choice.<br> However Rune price is growing very quickly, so use them wisely. <br> You can also respec Minerals, but you can't refund anything, but Rune price. Also respec causes prestige reset.",
-
 
     "convertToPlusCoin": "<ut>Exchange 1 Fortune Token for +Coin</ut>",
     "convertToMinusCoin": "<ut>Exchange 1 Fortune Token for -Coin</ut>",
@@ -614,6 +581,7 @@
     "bal_sin_name_33": "Mastery",
     "bal_sin_desc_33": "Fortune Boosts always have maximum effect",
 
+    "maxBuy": "Купить всё",
 
     "achievementsTitle": "Achievements",
 
@@ -631,8 +599,6 @@
             "99% Of Gamblers Quit Before They Win Big", "The First Googol of Coins", "Yin and Yang", "INCREDIBLE POWER", "Flaming Drive", "God of Luck", "Game On", "Total Annihilation", "Prestigious Champion", "Finale"
         ]
         },
-        "achievementsBonus1": ", x{{x}} for crystal multiplier",
-        "achievementsBonus2": ", x{{x}} for shards generation",
 
     "achievement11Desc": "<ut> Without walkers (11) </ut> <br> <br> Begin generating α-coins!",
     "achievement12Desc": "<ut> First thousand (12) </ut> <br> <br> Collect 1000 α-coins.",
@@ -760,10 +726,6 @@
     "daysText": " days,",
     "hoursText": " hours,",
     "minutesText": " minutes and",
-
-    "totalClicks": "You have made {{clickCount}} real clicks!",
-    "totalGameClicks": "You have made {{clickCount}} game clicks!",
-    "totalCriticalClicks": "You have made {{clickCount}} critical clicks!",
 
     "multipliersTitle": "Multiplier Breakdown",
 
@@ -903,13 +865,10 @@
     "telegramChannelText": "Join to telegram channel (russian)",
     "gmailText": "Send e-mail",
 
-    "shopTitle": "Supershop",
     "shopDesc": "Welcome to Supershop! You can spend unique Supercoins for items from other dimensions here! <br> Their power allows save them between Prestiges, but you can respec Buyables anytime too! <br> Sadly, you are too weak to respec rest upgrades. <br> There is 4 types of them: Buyables - you can always respec them, Permanent - you can't respec them and they don't have bulk buy, <br>Unlockables - unlock new in-game features and Items - may improve your progress with various bonuses, but they have limit per Prestige.",
-    "superCoinCount": "You have <st>{{supercoins}}</st> supercoins",
     "shopTitle2": "Upgrades",
     "respecShop": "Respec",
 
-    "shop_cost": "<br> Cost: {{cost}} supercoins",
     "superCoinCount_1": "You have",
     "shop_b1_name": "Golden Glove",
     "shop_b1_desc": "Increase α-coins per click",
@@ -918,7 +877,7 @@
     "shop_b3_name": "Golden Key",
     "shop_b3_desc": "Increase α-coin gain",
     "shop_b4_name": "Clover",
-    "shop_b4_desc": "Increase the Super Coin chance",
+    "shop_b4_desc": "Increase the Supercoin chance",
     "shop_b5_name": "Shard Rain",
     "shop_b5_desc": "Increase Shards gain",
     "shop_b6_name": "Precious Prestige",
@@ -1281,7 +1240,6 @@
     "realTimeTable": "{{h}}:{{m}}:{{s}}",
     "realTimeTableMs": "{{ms}}ms",
 
-    "softcap": "Softcap: ^{{x}}",
     "softcaps": [
         {
             "codename": "COIN_UPG07_SC_001",

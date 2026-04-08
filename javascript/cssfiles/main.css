@@ -133,7 +133,7 @@ nt {
 }
 
 #loadingScreen {
-  background-image: url("images/loadingscreen014.jpg");
+  background-image: url("images/loadingscreen015.jpg");
   background-repeat: no-repeat;
   background-size: contain;
   width: 100%;
@@ -1596,8 +1596,10 @@ img.disabled {
 .fortuneButton {
   font-size: calc(16px * var(--font-scale)) !important;
   height: 60px !important;
-  max-width: 200px !important;
-  width: 30vw !important;
+  max-width: 340px !important;
+  width: 25vw !important;
+  margin: 0 !important;
+  border-width: 2px !important;
 }
 
 .fortuneBoost {

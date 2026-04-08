@@ -121,6 +121,7 @@ function formatSmallNumber(number, mode, x) {
 }
 
 function formatNumber(number, mode = 'number', x = 3) {
+    if (number >= 1.79e308) return "Infinity";
     const notation = player.settings.notation;
 
     // Специфичные моды, игнорирующие размер числа
@@ -175,6 +176,8 @@ function formatPercent(percent) {
 
 // Форматирование для значений библиотеки Break Infinity (Decimal)
 function formatDecimal(value, mode = 'number', x = 3) {
+    if (typeof value === 'number' && value >= 1.79e308) return "Infinity";
+    if (value && typeof value.gte === 'function' && value.gte(new Decimal("1.79e308"))) return "Infinity"; // <-- ДОБАВЛЯЕМ СЮДА
     // 1. Если это обычное число, прогоняем через наш основной форматтер
     if (typeof value === 'number') return formatNumber(value, mode, x);
 

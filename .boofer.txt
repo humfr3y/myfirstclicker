@@ -2545,8 +2545,8 @@ function readCode () {
 }
 
 // function loadTrrr() {
-//     coinsCount.innerHTML = i18next.t('moneyCount', { money: player.coin.currency >= 1e6 ? formatNumber(player.coin.currency) : 666}, { 'interpolation': {'escapeValue': false} });
-//     coinsGain.innerHTML = i18next.t('moneyPerSec', { gainPerSec: i18next.t('moneyCount', { money: player.coin.currency >= 1e6 ? formatNumber(player.coin.currency) : 666}, { 'interpolation': {'escapeValue': false} })});
+//     coinsCount.innerHTML = i18next.t('moneyCount', { money: player.coin.currency >= 1e6 ? r(player.coin.currency) : 666}, { 'interpolation': {'escapeValue': false} });
+//     coinsGain.innerHTML = i18next.t('moneyPerSec', { gainPerSec: i18next.t('moneyCount', { money: player.coin.currency >= 1e6 ? r(player.coin.currency) : 666}, { 'interpolation': {'escapeValue': false} })});
 
 // }
 // setInterval(() => {
@@ -2571,32 +2571,32 @@ function readCode () {
         if (!modernizeActivated) {
         if (challengeCompleted[3]) {
             if (firstBuyable.superamount == 0)
-            buyableU1.innerHTML = i18next.t('firstBuyable2', {amount: formatNumber(player), x: formatNumber(firstBuyable.bulkAmount), firstBuyableFreeAmount: formatNumber(firstBuyable.freeAmount), firstBuyableEffect: formatNumber(firstBuyableEffect), firstBuyablePrice: formatNumber(firstBuyable.bulkPrice)});
-            else buyableU1.innerHTML = i18next.t('firstBuyable2Super', {firstBuyableAmount: formatNumber(firstBuyable.amount), x: formatNumber(firstBuyable.bulkAmount), z: formatNumber(firstBuyable.superEffect), firstBuyableFreeAmount: formatNumber(firstBuyable.freeAmount), firstBuyableEffect: formatNumber(firstBuyableEffect), firstBuyablePrice: formatNumber(firstBuyable.bulkPrice)});
+            buyableU1.innerHTML = i18next.t('firstBuyable2', {amount: r(player), x: r(firstBuyable.bulkAmount), firstBuyableFreeAmount: r(firstBuyable.freeAmount), firstBuyableEffect: r(firstBuyableEffect), firstBuyablePrice: r(firstBuyable.bulkPrice)});
+            else buyableU1.innerHTML = i18next.t('firstBuyable2Super', {firstBuyableAmount: r(firstBuyable.amount), x: r(firstBuyable.bulkAmount), z: r(firstBuyable.superEffect), firstBuyableFreeAmount: r(firstBuyable.freeAmount), firstBuyableEffect: r(firstBuyableEffect), firstBuyablePrice: r(firstBuyable.bulkPrice)});
         }
         else {
             if (firstBuyable.superamount == 0)
-            buyableU1.innerHTML = i18next.t('firstBuyable', {firstBuyableAmount: formatNumber(firstBuyable.amount), x: formatNumber(firstBuyable.bulkAmount), firstBuyableEffect: formatNumber(firstBuyableEffect), firstBuyablePrice: formatNumber(firstBuyable.bulkPrice)});
-            else buyableU1.innerHTML = i18next.t('firstBuyableSuper', {firstBuyableAmount: formatNumber(firstBuyable.amount), x: formatNumber(firstBuyable.bulkAmount), z: formatNumber(firstBuyable.superEffect), firstBuyableEffect: formatNumber(firstBuyableEffect), firstBuyablePrice: formatNumber(firstBuyable.bulkPrice)});
+            buyableU1.innerHTML = i18next.t('firstBuyable', {firstBuyableAmount: r(firstBuyable.amount), x: r(firstBuyable.bulkAmount), firstBuyableEffect: r(firstBuyableEffect), firstBuyablePrice: r(firstBuyable.bulkPrice)});
+            else buyableU1.innerHTML = i18next.t('firstBuyableSuper', {firstBuyableAmount: r(firstBuyable.amount), x: r(firstBuyable.bulkAmount), z: r(firstBuyable.superEffect), firstBuyableEffect: r(firstBuyableEffect), firstBuyablePrice: r(firstBuyable.bulkPrice)});
         }
-        if (secondBuyable.superamount == 0) buyableU2.innerHTML = i18next.t('secondBuyable', {secondBuyableAmount: formatNumber(secondBuyable.amount), x: formatNumber(secondBuyable.bulkAmount), secondBuyableEffect: formatNumber(secondBuyableEffect*10), secondBuyablePrice: formatNumber(secondBuyable.bulkPrice)});
-        else buyableU2.innerHTML = i18next.t('secondBuyableSuper', {secondBuyableAmount: formatNumber(secondBuyable.amount), x: formatNumber(secondBuyable.bulkAmount), z: formatBoost(secondBuyable.superEffect), secondBuyableEffect: formatNumber(secondBuyableEffect*10), secondBuyablePrice: formatNumber(secondBuyable.bulkPrice)});
+        if (secondBuyable.superamount == 0) buyableU2.innerHTML = i18next.t('secondBuyable', {secondBuyableAmount: r(secondBuyable.amount), x: r(secondBuyable.bulkAmount), secondBuyableEffect: r(secondBuyableEffect*10), secondBuyablePrice: r(secondBuyable.bulkPrice)});
+        else buyableU2.innerHTML = i18next.t('secondBuyableSuper', {secondBuyableAmount: r(secondBuyable.amount), x: r(secondBuyable.bulkAmount), z: formatBoost(secondBuyable.superEffect), secondBuyableEffect: r(secondBuyableEffect*10), secondBuyablePrice: r(secondBuyable.bulkPrice)});
 
-        if (thirdBuyable.superamount == 0) buyableU3.innerHTML = i18next.t('thirdBuyable', {thirdBuyableAmount: formatNumber(thirdBuyable.amount), x: formatNumber(thirdBuyable.bulkAmount), thirdBuyableEffect: formatBoost(thirdBuyableEffect), thirdBuyablePrice: formatNumber(thirdBuyable.bulkPrice)});
-        else buyableU3.innerHTML = i18next.t('thirdBuyableSuper', {thirdBuyableAmount: formatNumber(thirdBuyable.amount), x: formatNumber(thirdBuyable.bulkAmount), z: formatBoost(thirdBuyable.superEffect), thirdBuyableEffect: formatBoost(thirdBuyableEffect), thirdBuyablePrice: formatNumber(thirdBuyable.bulkPrice)});
+        if (thirdBuyable.superamount == 0) buyableU3.innerHTML = i18next.t('thirdBuyable', {thirdBuyableAmount: r(thirdBuyable.amount), x: r(thirdBuyable.bulkAmount), thirdBuyableEffect: formatBoost(thirdBuyableEffect), thirdBuyablePrice: r(thirdBuyable.bulkPrice)});
+        else buyableU3.innerHTML = i18next.t('thirdBuyableSuper', {thirdBuyableAmount: r(thirdBuyable.amount), x: r(thirdBuyable.bulkAmount), z: formatBoost(thirdBuyable.superEffect), thirdBuyableEffect: formatBoost(thirdBuyableEffect), thirdBuyablePrice: r(thirdBuyable.bulkPrice)});
 
         if (fifthSingle.superamount) {
-            if (fourthBuyable.superamount == 0) buyableU4.innerHTML = i18next.t('fourthBuyable2', {effect: prestigeSinglesEffects[5], fourthBuyableAmount: formatNumber(fourthBuyable.amount), x: formatNumber(fourthBuyable.bulkAmount), fourthBuyableFreeAmount: formatNumber(fourthBuyable.freeAmount), fourthBuyableEffect: formatBoost(fourthBuyableEffect), fourthBuyablePrice: formatNumber(fourthBuyable.bulkPrice)});
-            else buyableU4.innerHTML = i18next.t('fourthBuyable2Super', {effect: prestigeSinglesEffects[5], fourthBuyableAmount: formatNumber(fourthBuyable.amount), x: formatNumber(fourthBuyable.bulkAmount), z: formatBoost(fourthBuyable.superEffect), fourthBuyableFreeAmount: formatNumber(fourthBuyable.freeAmount), fourthBuyableEffect: formatBoost(fourthBuyableEffect), fourthBuyablePrice: formatNumber(fourthBuyable.bulkPrice)});
+            if (fourthBuyable.superamount == 0) buyableU4.innerHTML = i18next.t('fourthBuyable2', {effect: prestigeSinglesEffects[5], fourthBuyableAmount: r(fourthBuyable.amount), x: r(fourthBuyable.bulkAmount), fourthBuyableFreeAmount: r(fourthBuyable.freeAmount), fourthBuyableEffect: formatBoost(fourthBuyableEffect), fourthBuyablePrice: r(fourthBuyable.bulkPrice)});
+            else buyableU4.innerHTML = i18next.t('fourthBuyable2Super', {effect: prestigeSinglesEffects[5], fourthBuyableAmount: r(fourthBuyable.amount), x: r(fourthBuyable.bulkAmount), z: formatBoost(fourthBuyable.superEffect), fourthBuyableFreeAmount: r(fourthBuyable.freeAmount), fourthBuyableEffect: formatBoost(fourthBuyableEffect), fourthBuyablePrice: r(fourthBuyable.bulkPrice)});
         }
         else {
-            if (fourthBuyable.superamount == 0) buyableU4.innerHTML = i18next.t('fourthBuyable', {effect: prestigeSinglesEffects[5], fourthBuyableAmount: formatNumber(fourthBuyable.amount), x: formatNumber(fourthBuyable.bulkAmount), fourthBuyableEffect: formatBoost(fourthBuyableEffect), fourthBuyablePrice: formatNumber(fourthBuyable.bulkPrice)});
-            else buyableU4.innerHTML = i18next.t('fourthBuyableSuper', {effect: prestigeSinglesEffects[5], fourthBuyableAmount: formatNumber(fourthBuyable.amount), x: formatNumber(fourthBuyable.bulkAmount), z: formatBoost(fourthBuyable.superEffect), fourthBuyableEffect: formatBoost(fourthBuyableEffect), fourthBuyablePrice: formatNumber(fourthBuyable.bulkPrice)});
+            if (fourthBuyable.superamount == 0) buyableU4.innerHTML = i18next.t('fourthBuyable', {effect: prestigeSinglesEffects[5], fourthBuyableAmount: r(fourthBuyable.amount), x: r(fourthBuyable.bulkAmount), fourthBuyableEffect: formatBoost(fourthBuyableEffect), fourthBuyablePrice: r(fourthBuyable.bulkPrice)});
+            else buyableU4.innerHTML = i18next.t('fourthBuyableSuper', {effect: prestigeSinglesEffects[5], fourthBuyableAmount: r(fourthBuyable.amount), x: r(fourthBuyable.bulkAmount), z: formatBoost(fourthBuyable.superEffect), fourthBuyableEffect: formatBoost(fourthBuyableEffect), fourthBuyablePrice: r(fourthBuyable.bulkPrice)});
         }
 
         
-        if (fifthBuyable.superamount == 0) buyableU5.innerHTML = i18next.t('fifthBuyable', {fifthBuyableAmount: formatNumber(fifthBuyable.amount), x: formatNumber(fifthBuyable.bulkAmount), fifthBuyableEffect: formatPower(fifthBuyableEffect), fifthBuyablePrice: formatNumber(fifthBuyable.bulkPrice)});
-        else buyableU5.innerHTML = i18next.t('fifthBuyableSuper', {fifthBuyableAmount: formatNumber(fifthBuyable.amount), x: formatNumber(fifthBuyable.bulkAmount), z: formatPower(fifthBuyable.superEffect), fifthBuyableEffect: formatPower(fifthBuyableEffect), fifthBuyablePrice: formatNumber(fifthBuyable.bulkPrice)});
+        if (fifthBuyable.superamount == 0) buyableU5.innerHTML = i18next.t('fifthBuyable', {fifthBuyableAmount: r(fifthBuyable.amount), x: r(fifthBuyable.bulkAmount), fifthBuyableEffect: formatPower(fifthBuyableEffect), fifthBuyablePrice: r(fifthBuyable.bulkPrice)});
+        else buyableU5.innerHTML = i18next.t('fifthBuyableSuper', {fifthBuyableAmount: r(fifthBuyable.amount), x: r(fifthBuyable.bulkAmount), z: formatPower(fifthBuyable.superEffect), fifthBuyableEffect: formatPower(fifthBuyableEffect), fifthBuyablePrice: r(fifthBuyable.bulkPrice)});
 }
 
 for (const [index, singleName] of singleNames.entries()) {
@@ -2658,12 +2658,12 @@ for (const [index, singleName] of singleNames.entries()) {
     }
 
     if (single.amount === 0 && !singleName.includes("Buyable")) {
-        single.priceText = i18next.t(priceTextKey, { [priceKey]: formatNumber(single.price) });
+        single.priceText = i18next.t(priceTextKey, { [priceKey]: r(single.price) });
     } 
     else if (modernizeActivated && !singleName.includes("Prestige") && !singleName.includes("Shard")) {
         const superPrice = 'super' + priceTextKey
         const superSingle = 'super' + singleName
-        single.superamount === 0 ? single.superPriceText = i18next.t(superPrice, {x: formatNumber(single.superprice)}) : single.superPriceText = ''
+        single.superamount === 0 ? single.superPriceText = i18next.t(superPrice, {x: r(single.superprice)}) : single.superPriceText = ''
         singleElement.innerHTML = i18next.t(superSingle, {
             x: single.superPriceText
         })
@@ -2673,23 +2673,23 @@ for (const [index, singleName] of singleNames.entries()) {
     }
 }
 
-    // spiritualEventCurrency.innerHTML = i18next.t('spiritualEventCurrency', {spirits: formatNumber(spirits)});
+    // spiritualEventCurrency.innerHTML = i18next.t('spiritualEventCurrency', {spirits: r(spirits)});
     // spiritualEventEffects.innerHTML = i18next.t('spiritualEventEffects', {effect1: formatBoost(spiritEffects[0]), effect2: formatBoost(spiritEffects[1]), effect3: formatBoost(spiritEffects[2]), effect4: formatBoost(spiritEffects[3])});
     // spiritualEventTime.innerHTML = i18next.t('spiritualEventTime');
 
-    // triplePowerEventCurrency1.innerHTML = i18next.t('triplePowerEventCurrency1', {x: formatNumber(pinkCoin.totalAmount), y: formatPercent(pinkCoin.effect)});
-    // triplePowerEventCurrency2.innerHTML = i18next.t('triplePowerEventCurrency2', {x: formatNumber(greenCoin.totalAmount), y: formatPercent(greenCoin.effect)});
-    // triplePowerEventCurrency3.innerHTML = i18next.t('triplePowerEventCurrency3', {x: formatNumber(blueCoin.totalAmount), y: formatPercent(blueCoin.effect)});
+    // triplePowerEventCurrency1.innerHTML = i18next.t('triplePowerEventCurrency1', {x: r(pinkCoin.totalAmount), y: formatPercent(pinkCoin.effect)});
+    // triplePowerEventCurrency2.innerHTML = i18next.t('triplePowerEventCurrency2', {x: r(greenCoin.totalAmount), y: formatPercent(greenCoin.effect)});
+    // triplePowerEventCurrency3.innerHTML = i18next.t('triplePowerEventCurrency3', {x: r(blueCoin.totalAmount), y: formatPercent(blueCoin.effect)});
 
-    // sacrificePink.innerHTML = i18next.t('pinkSacrifice', {y: formatNumber(pinkCoin.requirement), x: formatNumber(pinkCoin.currency)});
-    // sacrificeGreen.innerHTML = i18next.t('greenSacrifice', {y: formatNumber(greenCoin.requirement), x: formatNumber(greenCoin.currency)});
-    // sacrificeBlue.innerHTML = i18next.t('blueSacrifice', {y: formatNumber(blueCoin.requirement), x: formatNumber(blueCoin.currency)});
+    // sacrificePink.innerHTML = i18next.t('pinkSacrifice', {y: r(pinkCoin.requirement), x: r(pinkCoin.currency)});
+    // sacrificeGreen.innerHTML = i18next.t('greenSacrifice', {y: r(greenCoin.requirement), x: r(greenCoin.currency)});
+    // sacrificeBlue.innerHTML = i18next.t('blueSacrifice', {y: r(blueCoin.requirement), x: r(blueCoin.currency)});
 
-    // upgradePink.innerHTML = i18next.t('pinkUpgrade', {x: formatNumber(pinkCoin.price), y: formatNumber(pinkCoin.amount)});
-    // upgradeGreen.innerHTML = i18next.t('greenUpgrade', {x: formatNumber(greenCoin.price), y: formatNumber(greenCoin.amount)})
-    // upgradeBlue.innerHTML = i18next.t('blueUpgrade', {x: formatNumber(blueCoin.price), y: formatNumber(blueCoin.amount)})
+    // upgradePink.innerHTML = i18next.t('pinkUpgrade', {x: r(pinkCoin.price), y: r(pinkCoin.amount)});
+    // upgradeGreen.innerHTML = i18next.t('greenUpgrade', {x: r(greenCoin.price), y: r(greenCoin.amount)})
+    // upgradeBlue.innerHTML = i18next.t('blueUpgrade', {x: r(blueCoin.price), y: r(blueCoin.amount)})
 
-    // upgradeGrey.innerHTML = i18next.t('greyUpgrade', {x: formatNumber(greyCoin.price), y: formatNumber(greyCoin.amount)})
+    // upgradeGrey.innerHTML = i18next.t('greyUpgrade', {x: r(greyCoin.price), y: r(greyCoin.amount)})
 
 
 for (let i = 0; i < 5; i++) {
@@ -2727,69 +2727,69 @@ for (let i = 0; i < 5; i++) {
         // }
     }
 
-        tooltipShopBuyableU6.innerHTML = i18next.t('sixthShopBuyable', {x: formatNumber(sixthShopBuyable.amount), w: formatNumber(sixthShopBuyable.bulkAmount), y: formatPercent(sixthShopBuyableEffect), z: sixthShopBuyable.priceText});
+        tooltipShopBuyableU6.innerHTML = i18next.t('sixthShopBuyable', {x: r(sixthShopBuyable.amount), w: r(sixthShopBuyable.bulkAmount), y: formatPercent(sixthShopBuyableEffect), z: sixthShopBuyable.priceText});
     if (sixthShopBuyable.amount < 25) {
-        sixthShopBuyable.priceText = i18next.t('sixthShopBuyablePriceText', {x: formatNumber(sixthShopBuyable.bulkPrice)});
+        sixthShopBuyable.priceText = i18next.t('sixthShopBuyablePriceText', {x: r(sixthShopBuyable.bulkPrice)});
     }
     else sixthShopBuyable.priceText = ''
 
-    tooltipShopBuyableU7.innerHTML = i18next.t('seventhShopBuyable', {x: formatNumber(seventhShopBuyable.amount), w: formatNumber(seventhShopBuyable.bulkAmount), y: formatPercent(seventhShopBuyableEffect), z: seventhShopBuyable.priceText});
+    tooltipShopBuyableU7.innerHTML = i18next.t('seventhShopBuyable', {x: r(seventhShopBuyable.amount), w: r(seventhShopBuyable.bulkAmount), y: formatPercent(seventhShopBuyableEffect), z: seventhShopBuyable.priceText});
     if (seventhShopBuyable.amount < 5) {
-        seventhShopBuyable.priceText = i18next.t('seventhShopBuyablePriceText', {x: formatNumber(seventhShopBuyable.bulkPrice)});
+        seventhShopBuyable.priceText = i18next.t('seventhShopBuyablePriceText', {x: r(seventhShopBuyable.bulkPrice)});
     }
     else seventhShopBuyable.priceText = ''
 
-    tooltipShopBuyableU8.innerHTML = i18next.t('eighthShopBuyable', {x: formatNumber(eighthShopBuyable.amount), w: formatNumber(eighthShopBuyable.bulkAmount), y: formatBoost(eighthShopBuyableEffect), z: eighthShopBuyable.priceText});
+    tooltipShopBuyableU8.innerHTML = i18next.t('eighthShopBuyable', {x: r(eighthShopBuyable.amount), w: r(eighthShopBuyable.bulkAmount), y: formatBoost(eighthShopBuyableEffect), z: eighthShopBuyable.priceText});
     if (eighthShopBuyable.amount < 100) {
-        eighthShopBuyable.priceText = i18next.t('eighthShopBuyablePriceText', {x: formatNumber(eighthShopBuyable.bulkPrice)});
+        eighthShopBuyable.priceText = i18next.t('eighthShopBuyablePriceText', {x: r(eighthShopBuyable.bulkPrice)});
     }
     else eighthShopBuyable.priceText = ''
 
-    tooltipShopBuyableU9.innerHTML = i18next.t('ninthShopBuyable', {x: formatNumber(ninthShopBuyable.amount), w: formatNumber(ninthShopBuyable.bulkAmount), y: formatPercent(ninthShopBuyableEffect), z: ninthShopBuyable.priceText});
+    tooltipShopBuyableU9.innerHTML = i18next.t('ninthShopBuyable', {x: r(ninthShopBuyable.amount), w: r(ninthShopBuyable.bulkAmount), y: formatPercent(ninthShopBuyableEffect), z: ninthShopBuyable.priceText});
     if (ninthShopBuyable.amount < 100) {
-        ninthShopBuyable.priceText = i18next.t('ninthShopBuyablePriceText', {x: formatNumber(ninthShopBuyable.bulkPrice)});
+        ninthShopBuyable.priceText = i18next.t('ninthShopBuyablePriceText', {x: r(ninthShopBuyable.bulkPrice)});
     }
     else ninthShopBuyable.priceText = ''
 
         // tooltipShopSingleU1.innerHTML = i18next.t('firstShopSingle', { fshsPrice: firstShopSingle.priceText});
     // if (firstShopSingle.amount < 1) {
-    //     firstShopSingle.priceText = i18next.t('firstShopSinglePriceText', {fshsPrice: formatNumber(firstShopSingle.price)});
+    //     firstShopSingle.priceText = i18next.t('firstShopSinglePriceText', {fshsPrice: r(firstShopSingle.price)});
     // }
     // else firstShopSingle.priceText = ''
 
     // tooltipShopSingleU2.innerHTML = i18next.t('secondShopSingle', { x: secondShopSingle.priceText});
     // if (secondShopSingle.amount < 1) {
-    //     secondShopSingle.priceText = i18next.t('secondShopSinglePriceText', {x: formatNumber(secondShopSingle.price)});
+    //     secondShopSingle.priceText = i18next.t('secondShopSinglePriceText', {x: r(secondShopSingle.price)});
     // }
     // else secondShopSingle.priceText = ''
 
     // tooltipShopSingleU3.innerHTML = i18next.t('thirdShopSingle', { x: thirdShopSingle.priceText});
     // if (thirdShopSingle.amount < 1) {
-    //     thirdShopSingle.priceText = i18next.t('thirdShopSinglePriceText', {x: formatNumber(thirdShopSingle.price)});
+    //     thirdShopSingle.priceText = i18next.t('thirdShopSinglePriceText', {x: r(thirdShopSingle.price)});
     // }
     // else thirdShopSingle.priceText = ''
 
-        tooltipshopItem1.innerHTML = i18next.t('firstShopItem', {x: formatNumber(firstShopItem.amount), y: formatNumber(firstShopItem.max), z: firstShopItem.priceText});
+        tooltipshopItem1.innerHTML = i18next.t('firstShopItem', {x: r(firstShopItem.amount), y: r(firstShopItem.max), z: firstShopItem.priceText});
     if (firstShopItem.amount < firstShopItem.max) {
-        firstShopItem.priceText = i18next.t('shopItemPriceText', {x: formatNumber(firstShopItem.price)});
+        firstShopItem.priceText = i18next.t('shopItemPriceText', {x: r(firstShopItem.price)});
     }
     else firstShopItem.priceText = ''
 
-    tooltipshopItem2.innerHTML = i18next.t('secondShopItem', {x: formatNumber(secondShopItem.amount), y: formatNumber(secondShopItem.max), z: secondShopItem.priceText});
+    tooltipshopItem2.innerHTML = i18next.t('secondShopItem', {x: r(secondShopItem.amount), y: r(secondShopItem.max), z: secondShopItem.priceText});
     if (secondShopItem.amount < secondShopItem.max) {
-        secondShopItem.priceText = i18next.t('shopItemPriceText', {x: formatNumber(secondShopItem.price)});
+        secondShopItem.priceText = i18next.t('shopItemPriceText', {x: r(secondShopItem.price)});
     }
     else secondShopItem.priceText = ''
 
-    tooltipshopItem3.innerHTML = i18next.t('thirdShopItem', {x: formatNumber(thirdShopItem.amount), y: formatNumber(thirdShopItem.max), z: thirdShopItem.priceText});
+    tooltipshopItem3.innerHTML = i18next.t('thirdShopItem', {x: r(thirdShopItem.amount), y: r(thirdShopItem.max), z: thirdShopItem.priceText});
     if (thirdShopItem.amount < thirdShopItem.max) {
-        thirdShopItem.priceText = i18next.t('shopItemPriceText', {x: formatNumber(thirdShopItem.price)});
+        thirdShopItem.priceText = i18next.t('shopItemPriceText', {x: r(thirdShopItem.price)});
     }
     else thirdShopItem.priceText = ''
 
-    tooltipshopItem4.innerHTML = i18next.t('fourthShopItem', {x: formatNumber(fourthShopItem.amount), y: formatNumber(fourthShopItem.max), z: fourthShopItem.priceText});
+    tooltipshopItem4.innerHTML = i18next.t('fourthShopItem', {x: r(fourthShopItem.amount), y: r(fourthShopItem.max), z: fourthShopItem.priceText});
     if (fourthShopItem.amount < fourthShopItem.max) {
-        fourthShopItem.priceText = i18next.t('shopItemPriceText', {x: formatNumber(fourthShopItem.price)});
+        fourthShopItem.priceText = i18next.t('shopItemPriceText', {x: r(fourthShopItem.price)});
     }
     else fourthShopItem.priceText = ''
 

@@ -106,17 +106,24 @@ const UPGS = {
         singles: new UniversalSinglesManager('coin', 'singleUpgrades', [
             {
                 id: 11, super_id: 21, elementId: 'singleU1', basePrice: 100000, cost_super: 1500,
-                effect: function(x = this.unl()) {
+                effect: function(x = 0) {
                     if (x == 0) return 1;
-                    let eff = 1 + (Math.log10(player.coin.total_currency + 10));
+                    
+                    // Блокируем значение от Infinity и NaN прямо внутри формулы
+                    let safeTotal = Math.min(player.coin.total_currency || 0, 1e308);
+                    let eff = 1 + (Math.log10(safeTotal + 10));
+                    
                     eff *= this.effect_super();
                     if (player.coin.singleUpgrades.includes(24)) eff = Math.pow(eff, UPGS.coin.singles[24].effect());
                     if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
                     return eff;
                 },
-                effect_super: function(x = this.unl_super() && this.unl()) {
+                effect_super: function(x = 0 && this.unl()) {
                     if (x == 0) return 1;
-                    return 1 + (Math.log10(player.coin.currency + 10));
+                    
+                    // Блокируем и тут
+                    let safeCurrency = Math.min(player.coin.currency || 0, 1e308);
+                    return 1 + (Math.log10(safeCurrency + 10));
                 }
             },
             {

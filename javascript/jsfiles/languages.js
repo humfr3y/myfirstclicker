@@ -161,6 +161,13 @@ function loadTranslationsAlways() {
     document.getElementById('maxOrNoUpgrades').textContent = player.settings.buy_max_activate ? i18next.t('maxUpgradesTrue') : i18next.t('maxUpgradesFalse');
     document.getElementById('maxOrNoShardUpgrades').textContent = player.settings.shard_buy_max_activate ? i18next.t('maxUpgradesTrue') : i18next.t('maxUpgradesFalse');
     document.getElementById('maxOrNoSuperprestigeUpgrades').textContent = player.settings.superprestige_buy_max_activate ? i18next.t('maxUpgradesTrue') : i18next.t('maxUpgradesFalse');
+
+    const btnReflash = document.getElementById('doReflash');
+    if ((player.coin.currency >= 1.79e308 || player.coin.currency == Infinity) && player.prestige.challenge.completed.includes(8)) {
+        btnReflash.textContent = i18next.t('reflashFirst');
+    } else {
+        btnReflash.textContent = i18next.t('reflashDisabled');
+    }
 }
 
 // ============================================================
@@ -423,6 +430,9 @@ function loadTranslationsAutomation() {
 // ============================================================
 // Функция для SHOP и TOOLTIPS (магазин и подсказки)
 // ============================================================
+// ============================================================
+// Функция для SUPERSHOP (суперлавка) — 100% ОПТИМИЗИРОВАНА
+// ============================================================
 function loadTranslationsShop() {
     // Верхний счетчик
     document.getElementById('top_shop_sc_val').textContent = formatNumber(player.supercoin.currency);
@@ -438,24 +448,41 @@ function loadTranslationsShop() {
         document.getElementById(`sb${i}_eff`).textContent = formatNumber(UPGS.shop.buyables[i].effect(), 'percent');
         document.getElementById(`sb${i}_neff`).textContent = formatNumber(UPGS.shop.buyables[i].next_effect(), 'percent');
         
+        // Скрываем "=>" и цену, если макс. уровень
+        document.getElementById(`sb${i}_next_cont`).style.display = (amt === max) ? 'none' : 'inline';
         document.getElementById(`sb${i}_cost_cont`).style.display = (amt === max) ? 'none' : 'inline';
         if (amt !== max) document.getElementById(`sb${i}_cost`).textContent = formatNumber(UPGS.shop.buyables.bulk_cost(i));
         
         document.getElementById(`shopBuyableU${i}Req`).textContent = `${formatNumber(amt)}/${max}`;
     }
 
+    // Правильное форматирование для Постоянных улучшений
+    const fmtMap = {
+        1: 'percent', // Crystal Booster (x2 -> 100%)
+        2: 'percent', // Credit Card (x3 -> 200%)
+        3: 'boost',   // Super Muscles (+0.4)
+        4: 'percent',   // Flame Hand (+0.2)
+        5: 'number',  // Midas Touch (+1)
+        6: 'power',   // Energy Shard (^0.5)
+        7: 'number',  // Crystal Sword (-1)
+        8: 'number'   // Fortune Ticket (+2)
+    };
+
     // 2. Постоянные улучшения (Permanents 1-8)
     for (let i = 1; i <= 8; i++) {
         let max = UPGS.shop.permanent[i].maxAmount;
         let amt = player.shop.permanentUpgrades[i];
+        let fmt = fmtMap[i];
         
         document.getElementById(`sp${i}_amt`).textContent = formatNumber(amt);
         document.getElementById(`sp${i}_max`).textContent = max;
         
-        let fmt = (i === 3 || i === 4 || i === 8) ? 'percent' : (i === 5 || i === 7) ? 'number' : 'boost';
         document.getElementById(`sp${i}_eff`).textContent = formatNumber(UPGS.shop.permanent[i].effect(), fmt);
         document.getElementById(`sp${i}_neff`).textContent = formatNumber(UPGS.shop.permanent[i].next_effect(), fmt);
         
+        // Скрываем "=>" и цену, если макс. уровень
+
+        document.getElementById(`sp${i}_next_cont`).style.display = (amt === max) ? 'none' : 'inline';
         document.getElementById(`sp${i}_cost_cont`).style.display = (amt === max) ? 'none' : 'inline';
         if (amt !== max) document.getElementById(`sp${i}_cost`).textContent = formatNumber(UPGS.shop.permanent[i].cost());
         
@@ -611,28 +638,57 @@ function loadTranslationsInfo() {
     }
 
     // 3. Таблица Недавних Престижей
+    // 3. Таблица Недавних Престижей
     for (let i = 0; i < 10; i++) {
         document.getElementById(`rp_run_${i}`).textContent = i === 0 ? i18next.t('prestigesAgoZero') : i18next.t('prestigesAgo', {i});
         let pt = player.prestige.prestigeTable[i];
-        document.getElementById(`rp_pres_${i}`).textContent = pt.prestiges !== '' ? formatNumber(pt.prestiges) : '';
-        document.getElementById(`rp_crys_${i}`).textContent = pt.crystals !== '' ? formatNumber(pt.crystals) : '';
         
-        document.getElementById(`rp_gt_${i}`).textContent = pt.time.game.timer !== '' ? (pt.time.game.timer >= 1 ? `${convertToTwoDigits(pt.time.game.hours)}:${convertToTwoDigits(pt.time.game.minutes)}:${convertToTwoDigits(pt.time.game.seconds)}` : `${formatNumber(pt.time.game.timer*1000)}ms`) : '';
-        document.getElementById(`rp_rt_${i}`).textContent = pt.time.real.timer !== '' ? (pt.time.real.timer >= 1 ? `${convertToTwoDigits(pt.time.real.hours)}:${convertToTwoDigits(pt.time.real.minutes)}:${convertToTwoDigits(pt.time.real.seconds)}` : `${formatNumber(pt.time.real.timer*1000)}ms`) : '';
+        document.getElementById(`rp_pres_${i}`).textContent = pt.prestiges !== '' 
+            ? i18next.t('prestigesCountTable', { x: formatNumber(pt.prestiges) }) : '';
+            
+        document.getElementById(`rp_crys_${i}`).textContent = pt.crystals !== '' 
+            ? i18next.t('crystalCountTable', { x: formatNumber(pt.crystals) }) : '';
         
-        document.getElementById(`rp_ppm_${i}`).textContent = pt.prestiges !== '' && pt.time.real.timer > 0 ? formatNumber(pt.prestiges*60/pt.time.real.timer) : '';
-        document.getElementById(`rp_cpm_${i}`).textContent = pt.crystals !== '' && pt.time.real.timer > 0 ? formatNumber(pt.crystals*60/pt.time.real.timer) : '';
+        if (pt.time.game.timer !== '') {
+            document.getElementById(`rp_gt_${i}`).textContent = pt.time.game.timer >= 1 
+                ? i18next.t('gameTimeTable', { h: convertToTwoDigits(pt.time.game.hours), m: convertToTwoDigits(pt.time.game.minutes), s: convertToTwoDigits(pt.time.game.seconds) }) 
+                : i18next.t('gameTimeTableMs', { ms: formatNumber(pt.time.game.timer * 1000) });
+        } else {
+            document.getElementById(`rp_gt_${i}`).textContent = '';
+        }
+
+        if (pt.time.real.timer !== '') {
+            document.getElementById(`rp_rt_${i}`).textContent = pt.time.real.timer >= 1 
+                ? i18next.t('realTimeTable', { h: convertToTwoDigits(pt.time.real.hours), m: convertToTwoDigits(pt.time.real.minutes), s: convertToTwoDigits(pt.time.real.seconds) }) 
+                : i18next.t('realTimeTableMs', { ms: formatNumber(pt.time.real.timer * 1000) });
+        } else {
+            document.getElementById(`rp_rt_${i}`).textContent = '';
+        }
+        
+        document.getElementById(`rp_ppm_${i}`).textContent = pt.prestiges !== '' && pt.time.real.timer > 0 
+            ? i18next.t('prestigesPerMinCountTable', { x: formatNumber(pt.prestiges * 60 / pt.time.real.timer) }) : '';
+            
+        document.getElementById(`rp_cpm_${i}`).textContent = pt.crystals !== '' && pt.time.real.timer > 0 
+            ? i18next.t('crystalPerMinCountTable', { x: formatNumber(pt.crystals * 60 / pt.time.real.timer) }) : '';
     }
     
     // Средние значения (Averages)
-    document.getElementById(`rp_avg_pres`).textContent = formatNumber(MISC.average.prestiges(), 'boost');
-    document.getElementById(`rp_avg_crys`).textContent = formatNumber(MISC.average.crystals(), 'boost');
+    document.getElementById(`rp_avg_pres`).textContent = i18next.t('prestigesCountTable', { x: formatNumber(MISC.average.prestiges(), 'boost') });
+    document.getElementById(`rp_avg_crys`).textContent = i18next.t('crystalCountTable', { x: formatNumber(MISC.average.crystals(), 'boost') });
+    
     let avg_gt = player.time.game.average;
-    document.getElementById(`rp_avg_gt`).textContent = avg_gt.timer >= 1 ? `${convertToTwoDigits(avg_gt.hours)}:${convertToTwoDigits(avg_gt.minutes)}:${convertToTwoDigits(avg_gt.seconds)}` : `${formatNumber(avg_gt.timer*1000)}ms`;
+    document.getElementById(`rp_avg_gt`).textContent = avg_gt.timer >= 1 
+        ? i18next.t('gameTimeTable', { h: convertToTwoDigits(avg_gt.hours), m: convertToTwoDigits(avg_gt.minutes), s: convertToTwoDigits(avg_gt.seconds) }) 
+        : i18next.t('gameTimeTableMs', { ms: formatNumber(avg_gt.timer * 1000) });
+        
     let avg_rt = player.time.real.average;
-    document.getElementById(`rp_avg_rt`).textContent = avg_rt.timer >= 1 ? `${convertToTwoDigits(avg_rt.hours)}:${convertToTwoDigits(avg_rt.minutes)}:${convertToTwoDigits(avg_rt.seconds)}` : `${formatNumber(avg_rt.timer*1000)}ms`;
-    document.getElementById(`rp_avg_ppm`).textContent = formatNumber(MISC.average.prestiges_per_min(), 'boost');
-    document.getElementById(`rp_avg_cpm`).textContent = formatNumber(MISC.average.crystals_per_min(), 'boost');
+    document.getElementById(`rp_avg_rt`).textContent = avg_rt.timer >= 1 
+        ? i18next.t('realTimeTable', { h: convertToTwoDigits(avg_rt.hours), m: convertToTwoDigits(avg_rt.minutes), s: convertToTwoDigits(avg_rt.seconds) }) 
+        : i18next.t('realTimeTableMs', { ms: formatNumber(avg_rt.timer * 1000) });
+        
+    document.getElementById(`rp_avg_ppm`).textContent = i18next.t('prestigesPerMinCountTable', { x: formatNumber(MISC.average.prestiges_per_min(), 'boost') });
+    document.getElementById(`rp_avg_cpm`).textContent = i18next.t('crystalPerMinCountTable', { x: formatNumber(MISC.average.crystals_per_min(), 'boost') });
+
 
     // 4. Ослабления (Softcaps)
     for (let i = 1; i <= 6; i++) {
@@ -990,9 +1046,8 @@ function updateStaticTranslations() {
 
     for (let i = 0; i < text.code.rewards.length; i++) text.code.rewards[i] = i18next.t(`codeReward${i+1}`);
     for (let i = 0; i < text.itemNames.length; i++) {
-        text.itemNames[i] = i18next.t(`shopItemTitle${i+1}`);
-        let itemTitle = document.getElementById(`shopItem${i+1}Title`);
-        if (itemTitle) itemTitle.innerHTML = text.itemNames[i];
+        text.itemNames[i] = i18next.t(`shop_i${i+1}_name`);
+        // HTML мы не трогаем, data-i18n переведет всё сам!
     }
     
     document.querySelectorAll('.useButton').forEach(btn => btn.innerHTML = i18next.t('useTitle'));

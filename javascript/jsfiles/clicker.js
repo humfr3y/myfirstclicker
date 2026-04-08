@@ -63,7 +63,11 @@ const GAIN = {
 
                 return effect;
             },
-            effect() { return applyDecimalSoftcap(this); },
+            effect() { 
+                let val = applyDecimalSoftcap(this);
+                // Оставляем объект Decimal, просто ограничиваем его через встроенный min
+                return Decimal.min(val, new Decimal("1.79e308")); 
+            },
             softcap() {
                 let softcap_start = 1e13;
                 let softcap_power = player.prestige.singleUpgrades.includes(11) ? 0.45 : 0.4;
@@ -113,7 +117,11 @@ const GAIN = {
 
                 return effect;
             },
-            effect() { return applyDecimalSoftcap(this); },
+            effect() { 
+                let val = applyDecimalSoftcap(this);
+                // Оставляем объект Decimal, просто ограничиваем его через встроенный min
+                return Decimal.min(val, new Decimal("1.79e308")); 
+            },
             softcap() {
                 let softcap_start = 1e13;
                 let softcap_power = player.prestige.singleUpgrades.includes(11) ? 0.55 : 0.5;
@@ -164,7 +172,11 @@ const GAIN = {
 
                 return effect;
             },
-            effect() { return applyDecimalSoftcap(this); },
+            effect() { 
+                let val = applyDecimalSoftcap(this);
+                // Оставляем объект Decimal, чтобы методы .add() и .log10() работали!
+                return Decimal.min(val, new Decimal("1.79e308")); 
+            },
             softcap() {
                 let softcap_start = 1e20;
                 if (player.balance.upgrades.singles.includes(11)) softcap_start *= MISC.balance.plusCoins.buff().coinGainSoftcapPusher;
@@ -559,6 +571,10 @@ const GAIN = {
         // Начисляем валюты
         player.coin.currency += coinGain;
         player.coin.total_currency += coinGain;
+        
+        // Лимит для оффлайна
+        if (player.coin.currency > 1.79e308) player.coin.currency = 1.79e308;
+        if (player.coin.total_currency > 1.79e308) player.coin.total_currency = 1.79e308;
         player.shard.currency += shardGain;
         player.prestige.currency += crystalGain;
         player.prestige.total_currency += crystalGain;
@@ -975,7 +991,7 @@ const MISC = {
                 let coinBuff = a ? Math.pow(1000, a) * UPGS.balance.buyables[1].effect() : 1;
                 let coinGainSoftcapPusher = player.balance.upgrades.singles.includes(11) && a ? Math.pow(80, a) * UPGS.balance.buyables[1].effect() : 0;
                 let upgradePriceDivisor = player.balance.upgrades.singles.includes(21) && a ? Math.pow(10, a) * UPGS.balance.buyables[1].effect() : 1;
-                let chanceBuffer = player.balance.upgrades.singles.includes(31) && a ? a / 200 * UPGS.balance.buyables[1].effect() : 1;
+                let chanceBuffer = player.balance.upgrades.singles.includes(31) && a ? a / 200 * UPGS.balance.buyables[1].effect() : 0;
                 
                 if (player.prestige.challenge.activated === 8) {
                     coinBuff = Math.pow(coinBuff, 0.1); coinGainSoftcapPusher = Math.pow(coinGainSoftcapPusher, 0.1); 
@@ -999,7 +1015,7 @@ const MISC = {
             buff(b = player.balance.coins.minus) {
                 let crystalGainBuff = b ? Math.pow(20, b) * UPGS.balance.buyables[1].effect() : 1;
                 let crystalSoftcapSofter = player.balance.upgrades.singles.includes(12) && b ? b / 350 * UPGS.balance.buyables[1].effect() : 0;
-                let utilsCostReducer = player.balance.upgrades.singles.includes(22) && b ? b / 30 * UPGS.balance.buyables[1].effect() : 1;
+                let utilsCostReducer = player.balance.upgrades.singles.includes(22) && b ? b / 30 * UPGS.balance.buyables[1].effect() : 0;
                 let crystalSoftcapPusher = player.balance.upgrades.singles.includes(32) && b ? 33 * Math.pow(3, b) * UPGS.balance.buyables[1].effect() : 1;
                 
                 if (player.prestige.challenge.activated === 8) {
@@ -1070,9 +1086,14 @@ function loop() {
     } else {
         MISC.auto_save_timer = 0;
     }
-
-    player.coin.currency += (player.challenge.activated !== 0 && player.coin.currency >= 1e15) ? 0 : GAIN.coin.second.effect() * time;
-    player.coin.total_currency += GAIN.coin.second.effect() * time;
+    if (isNaN(player.coin.currency)) player.coin.currency = 1.79e308
+    else player.coin.currency += (player.challenge.activated !== 0 && player.coin.currency >= 1e15) ? 0 : GAIN.coin.second.effect() * time;
+    if (isNaN(player.coin.total_currency)) player.coin.total_currency = 1.79e308
+    else player.coin.total_currency += GAIN.coin.second.effect() * time;
+    // Хардкап: не пускаем монеты за предел
+    if (player.coin.currency > 1.79e308) player.coin.currency = 1.79e308;
+    if (player.coin.total_currency > 1.79e308) player.coin.total_currency = 1.79e308;
+    
     player.shard.currency += GAIN.shard.second() * time;
     player.balance.neutral += GAIN.balance.generation() * time;
     player.balance.scales_of_balance += GAIN.balance.scales_of_balance() * time;
@@ -1344,6 +1365,8 @@ function getCoin(e) {
         
         player.coin.currency += gain * 1;
         player.coin.total_currency += gain * 1;
+        if (player.coin.currency > 1.79e308) player.coin.currency = 1.79e308;
+        if (player.coin.total_currency > 1.79e308) player.coin.total_currency = 1.79e308;
         
         // Спавним текст
         spawnFloatingText(e, "+" + formatNumber(gain), getCrit, 'myMessage');
