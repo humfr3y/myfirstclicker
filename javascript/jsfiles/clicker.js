@@ -157,13 +157,10 @@ const GAIN = {
                     [player.shard.achievements[1], UNL.shard_achievements[1].effect()],
                     [player.fortune.activatedBoosts[1].activated, UPGS.fortune.boosts[1].effect()],
                     [player.balance.coins.plus, MISC.balance.plusCoins.buff().coinBuff],
-                    [PRES_CHALLENGE[7].completed(), PRES_CHALLENGE[7].effect().effect1]
+                    [PRES_CHALLENGE[7].completed(), PRES_CHALLENGE[7].effect()]
                 ];
                 mults.forEach(([cond, val]) => { if (cond) effect = effect.mul(val); });
 
-                if (PRES_CHALLENGE[7].completed() && player.prestige.challenge.activated === 8) {
-                    effect = effect.mul(PRES_CHALLENGE[7].effect().effect2);
-                }
                 if (player.balance.coins.minus) effect = effect.div(MISC.balance.minusCoins.nerf().coinNerf);
 
                 let upowerEff = GAIN.upower.effect();
@@ -175,7 +172,7 @@ const GAIN = {
             effect() { 
                 let val = applyDecimalSoftcap(this);
                 // Оставляем объект Decimal, чтобы методы .add() и .log10() работали!
-                return Decimal.min(val, new Decimal("1.79e308")); 
+                return val
             },
             softcap() {
                 let softcap_start = 1e20;
@@ -196,8 +193,7 @@ const GAIN = {
                 [player.shard.upgrades[1], UPGS.shard.buyables[1].effect()],
                 [player.shop.upgrades[5], UPGS.shop.buyables[5].effect()],
                 [UPGS.supercrystal[33].unl(), UPGS.supercrystal[33].effect()],
-                [player.fortune.activatedBoosts[3].activated, UPGS.fortune.boosts[3].effect()],
-                [player.prestige.challenge.completed.includes(4), PRES_CHALLENGE[4].effect()]
+                [player.fortune.activatedBoosts[3].activated, UPGS.fortune.boosts[3].effect()]
             ];
             mults.forEach(([cond, val]) => { if (cond) effect *= val; });
             return effect;
@@ -212,8 +208,7 @@ const GAIN = {
                 [ACHS.has(39), 1.337],
                 [true, ACHS.effect.shard()],
                 [player.shard.achievements[4], UNL.shard_achievements[4].effect()],
-                [player.fortune.activatedBoosts[3].activated, UPGS.fortune.boosts[3].effect()],
-                [player.prestige.challenge.completed.includes(4), PRES_CHALLENGE[4].effect()]
+                [player.fortune.activatedBoosts[3].activated, UPGS.fortune.boosts[3].effect()]
             ];
             mults.forEach(([cond, val]) => { if (cond) effect *= val; });
             return effect;
@@ -226,7 +221,8 @@ const GAIN = {
                 let effect = new Decimal("1").add(player.shard.currency / 100);
                 
                 if (ACHS.has(30)) effect = effect.mul(1 + Math.pow(player.prestige.resets, 0.3));
-                if (player.shard.singleUpgrades.includes(21)) effect = effect.pow(UPGS.shard.singles[21].effect());
+                if (PRES_CHALLENGE[3].completed()) effect = effect.mul(PRES_CHALLENGE[3].effect())
+                if (player.shard.singleUpgrades.includes(21)) effect = effect.mul(UPGS.shard.singles[21].effect());
 
                 let cAct = player.challenge.activated;
                 let pcAct = player.prestige.challenge.activated;
@@ -263,7 +259,7 @@ const GAIN = {
             }
         },
         min() { return UPGS.shard.buyables[3].effect().min; },
-        max() { return 50 * UPGS.shard.buyables[3].effect().max; },
+        max() { return 100 * UPGS.shard.buyables[3].effect().max; },
         break_crystal(x = howMuchCrystalsInput.value) {
             let gain = 0, temp = 0;
             let parsed_x = x.includes('e') ? convert(x) : parseInt(parseFloat(x));
@@ -288,7 +284,6 @@ const GAIN = {
             
             if (UPGS.supercrystal[33].unl()) gain *= UPGS.supercrystal[33].effect();
             if (player.fortune.activatedBoosts[3].activated) gain *= UPGS.fortune.boosts[3].effect();
-            if (player.prestige.challenge.completed.includes(4)) gain *= PRES_CHALLENGE[4].effect();
             
             return { gain, broken_crystals };
         }
@@ -317,7 +312,7 @@ const GAIN = {
                 [player.shard.achievements[3], UNL.shard_achievements[3].effect()],
                 [player.fortune.activatedBoosts[2].activated, UPGS.fortune.boosts[2].effect()],
                 [player.balance.coins.minus, MISC.balance.minusCoins.buff().crystalGainBuff],
-                [player.prestige.challenge.completed.includes(1), 1e6]
+                [player.prestige.challenge.completed.includes(1), PRES_CHALLENGE[1].effect()]
             ];
             mults.forEach(([cond, val]) => { if (cond) gain *= val; });
 
@@ -725,7 +720,7 @@ const UNL = {
         },
         check() {
             // Проходим по всем 83 элементам без вычисления длины ключей каждый раз
-            for (let i = 1; i <= 83; i++) {
+            for (let i = 1; i <= 85; i++) {
                 if (this[i]) this.unl(i, this[i].type !== 'none' ? 'none' : 'flex');
             }
         },
@@ -812,7 +807,9 @@ const UNL = {
         80: { type: 'flex', element: () => document.getElementById('aquamarineMineral'), req: () => player.shop.unlockables.includes(6) },
         81: { type: 'flex', element: () => document.getElementById('crystalgainsc'), req: () => player.prestige.total_currency >= 1e50 },
         82: { type: 'flex', element: () => document.getElementById('shardeffectsc'), req: () => player.shard.currency >= 1e10 },
-        83: { type: 'inline-block', element: () => document.getElementById('exitPChallenge'), req: () => player.prestige.challenge.activated !== 0 }
+        83: { type: 'inline-block', element: () => document.getElementById('exitPChallenge'), req: () => player.prestige.challenge.activated !== 0 },
+        84: { type: 'flex', element: () => document.getElementById('superPUs'), req: () => player.prestige.super.singles.includes(25)},
+        85: { type: 'flex', element: () => document.getElementById('doReflash'), req: () => player.prestige.challenge.completed.length >= 4},
     }
 };
 
@@ -827,7 +824,7 @@ const CHALL = {
     1: { id: 1, completed: () => isChallComp(1), effect: () => (1 + 0.1 * fb8()) },
     2: { id: 2, completed: () => isChallComp(2), effect: () => 1000000 * fb8() },
     3: { id: 3, completed: () => isChallComp(3), effect: () => (1 + Math.log(player.prestige.resets + 1)) * fb8() },
-    4: { id: 4, completed: () => isChallComp(4), effect: () => Math.pow(1.43, player.achievements.length) * fb8() },
+    4: { id: 4, completed: () => isChallComp(4), effect: () => Math.pow(1.35, player.achievements.length) * fb8() },
     5: { id: 5, completed: () => isChallComp(5), effect: () => CHALL[5].completed() ? 0.9 : 1 },
     6: { id: 6, completed: () => isChallComp(6), effect: () => Math.pow(1.99, player.challenge.completed.length) * fb8() },
     7: { id: 7, completed: () => isChallComp(7), effect: () => Math.log2(player.shard.currency + 1) * fb8() },
@@ -844,16 +841,13 @@ const CHALL = {
 };
 
 const PRES_CHALLENGE = {
-    1: { id: 1, completed: () => isPChallComp(1), effect: () => 1e6 },
-    2: { id: 2, completed: () => isPChallComp(2), effect: () => Math.log10(player.umultipliers / 2 + 1) },
-    3: { id: 3, completed: () => isPChallComp(3) },
-    4: { id: 4, completed: () => isPChallComp(4), effect: () => player.clicks.critical * 10 },
-    5: { id: 5, completed: () => isPChallComp(5), effect: () => Math.pow(player.balance.scales_of_balance, 0.005) },
-    6: { id: 6, completed: () => isPChallComp(6), effect: () => 1e12 },
-    7: { id: 7, completed: () => isPChallComp(7), effect() { 
-        let times = player.challenge.time[12].times_completed;
-        return { effect1: 1 + times, effect2: 1 + (times * 10001) }; 
-    }}
+    1: { id: 1, completed: () => isPChallComp(1), effect: () => ACHS.has(59) ? 1e6*1.1 : 1e6 },
+    2: { id: 2, completed: () => isPChallComp(2), effect: () => ACHS.has(59) ? 1+(1.1*(Math.log10(player.umultipliers / 4 + 1)-1)) : Math.log10(player.umultipliers / 4 + 1) },
+    3: { id: 3, completed: () => isPChallComp(3), effect: () => ACHS.has(59) ? 1.1*Math.pow(2.5, player.prestige.challenge.completed.length) : Math.pow(2.5, player.prestige.challenge.completed.length) },
+    4: { id: 4, completed: () => isPChallComp(4), effect: () => ACHS.has(59) ? 1.1*13 * player.supercrystal.total_currency : 13 * player.supercrystal.total_currency },
+    5: { id: 5, completed: () => isPChallComp(5), effect: () => ACHS.has(59) ? 1+(1.1*(Math.pow(player.balance.scales_of_balance, 0.005)-1)) : Math.pow(player.balance.scales_of_balance, 0.005) },
+    6: { id: 6, completed: () => isPChallComp(6), effect: () => ACHS.has(59) ? 1.1*1e12 : 1e12 },
+    7: { id: 7, completed: () => isPChallComp(7), effect: () => ACHS.has(59) ? 1.1*(player.challenge.time[12].times_completed + 1) : player.challenge.time[12].times_completed + 1 }
 };
 
 // --- РАЗНОЕ И УТИЛИТЫ (MISC) ---
@@ -906,7 +900,7 @@ const MISC = {
             return player.minerals[4] ? effect * UPGS.minerals[4].effect2() : effect;
         },
         2() {
-            let effect = player.prestige.super.singles.includes(15) ? GAIN.uadder.effect2() : 0;
+            let effect = PRES_CHALLENGE[4].completed() ? PRES_CHALLENGE[4].effect() : 0;
             return player.minerals[4] ? effect * UPGS.minerals[4].effect2() : effect;
         },
         4() { 
@@ -1042,25 +1036,49 @@ const MISC = {
 // --- СИСТЕМА ПРОГРЕССА (PROGRESS) ---
 
 const PROGRESS = {
-    unl(x) { return player[this[x].layer][this[x].type] >= this[x].req(); },
+    unl(x) { 
+        // Если есть кастомная функция current(), используем её, иначе берём стандартный путь
+        let current = this[x].current ? this[x].current() : player[this[x].layer][this[x].type];
+        return current >= this[x].req(); 
+    },
     add(x) { if (!player.progressBarGoals.includes(x) && this.unl(x)) player.progressBarGoals.push(x); },
-    name: ['', '', '', '', '', '', '', ''],
-    currency: ['', '', '', '', '', '', '', ''],
+    
+    // Оставляем пустыми, они заполнятся из languages.js
+    name: ['', '', '', '', '', '', '', '', '', ''],
+    currency: ['', '', '', '', '', '', '', '', '', ''],
     
     check_progress() {
-        for (let i = 1; i <= this.name.length; i++) this.add(i); // Исправлен баг с глобальным i
+        for (let i = 1; i <= this.name.length; i++) this.add(i); 
     },
     
     update(x = (Math.max(...player.progressBarGoals)) + 1) {
         this.check_progress();
-        // Защита от NaN при инициализации
+        // Защита от выхода за пределы
         if (x > this.name.length) return; 
         
-        let current = player[this[x].layer][this[x].type];
+        let current = this[x].current ? this[x].current() : player[this[x].layer][this[x].type];
         let required = this[x].req();
         
-        progressbar.style.width = Math.min(Math.log(current) / Math.log(required) * 100, 100) + "%";
-        percent.innerHTML = `${this.name[x-1]}: ${formatNumber(current)}/${formatNumber(required)} ${this.currency[x-1]} (${Math.min(findRatio(current, required), 100)}%)`;
+        let width = 0;
+        let ratio = 0;
+        
+        // Линейный режим для маленьких цифр (как 4 испытания) и логарифмический для огромных
+        if (this[x].linear) {
+            width = (current / required) * 100;
+            ratio = width;
+        } else {
+            if (current > 0) { // Защита от Math.log(0) = -Infinity
+                width = (Math.log(current) / Math.log(required)) * 100;
+                ratio = findRatio(current, required);
+            }
+        }
+        
+        // Жестко ограничиваем от 0 до 100%
+        width = Math.min(Math.max(width, 0), 100);
+        ratio = Math.min(Math.max(ratio, 0), 100);
+        
+        progressbar.style.width = width + "%";
+        percent.innerHTML = `${this.name[x-1]}: ${formatNumber(current)}/${formatNumber(required)} ${this.currency[x-1]} (${ratio.toFixed(2)}%)`;
     },
     
     1: { layer: "coin", type: "currency", req: () => 1e15 }, // prestige
@@ -1069,9 +1087,11 @@ const PROGRESS = {
     4: { layer: "prestige", type: "resets", req: () => 1e7 }, // minerals
     5: { layer: "prestige", type: "currency", req: () => 1e15 }, // superprestige
     6: { layer: "supercrystal", type: "total_currency", req: () => 25 }, // fortune
-    7: { layer: "supercrystal", type: "total_currency", req: () => 40 }, // balls
-    8: { layer: "prestige", type: "currency", req: () => 1e100 },
-    9: { layer: "coin", type: "currency", req: () => 1.79e308 }
+    7: { layer: "supercrystal", type: "total_currency", req: () => 40 }, // balance
+    8: { layer: "prestige", type: "currency", req: () => 1e100 }, // ???
+    // Вот наш новый 9-й пункт с кастомной функцией:
+    9: { current: () => player.prestige.challenge.completed.length, req: () => 4, linear: true },
+    10: { layer: "coin", type: "currency", req: () => 1.79e308 } // Infinity
 };
 let new_date = 0, time = 0
 

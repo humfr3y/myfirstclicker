@@ -19,6 +19,7 @@
     "pbcurrency2": "prestiges",
     "pbcurrency3": "crystals",
     "pbcurrency4": "total supercrystals",
+    "pbcurrency5": "prestige challenge completions",
 
     "prestigeDisabled": "Collect 1е15 α-coins",
     "prestigeEnabled": "Reset everything for {{crystalsTemp}} crystals {{prestigeCountMultiplierText}}",
@@ -28,7 +29,7 @@
 
     "reflashCount": "You have <rt>{{reflashes}}</rt> bits",
     "reflashDisabled": "Collect Infinity α-coins and complete Prestige Challenge 8",
-    "reflashFirst": "It's time to hard reset the world!",
+    "reflashFirst": "The limit has been reached, time to Reflash this world! (Soon in 1.0)",
     "reflashEnabled": "Reset everything to get {{reflashesTemp}} bits",
 
     "maxUpgradesTrue": "Buy All",
@@ -153,7 +154,7 @@
     "upg_coin_b5_desc": "Increase α-coins gain",
     "upg_coin_b5_sname": "Super Wallet",
     "upg_coin_b5_sdesc": "Upgrade also multiplies coin gain",
-    "tt_coin_b5": "Super-effect:<br>Upgrade multiplies coin gain: ^",
+    "tt_coin_b5": "Super-effect:<br>Upgrade multiplies coin gain: x",
 
     "word_capped": "Capped:",
     "currency_crystals": "crystals",
@@ -418,7 +419,7 @@
     "upg_shard_b2_name": "Generator Boost",
     "upg_shard_b2_desc": "Triples Shards per second",
     "upg_shard_b3_name": "Powerful Crusher",
-    "upg_shard_b3_desc": "Increases 2 times the minimum and 1.75 times the maximum Shards per Break",
+    "upg_shard_b3_desc": "Increases 2 times the minimum and 1.7 times the maximum Shards per Break",
     "upg_shard_b3_desc2": "for min and x",
     "upg_shard_b3_desc3": "for max",
 
@@ -428,8 +429,8 @@
     "upg_shard_s2_desc": "Increases the effects of purchased 1st and 2nd Shard upgrades based on broken Crystals",
     "upg_shard_s3_name": "Diamond Discount",
     "upg_shard_s3_desc": "Reduces the cost of Shard upgrades based on Crystals",
-    "upg_shard_s4_name": "Prestige Fame",
-    "upg_shard_s4_desc": "Amount of Shards increases power of their effect",
+    "upg_shard_s4_name": "Pentagram",
+    "upg_shard_s4_desc": "Total amount of Runes increase Shard effect",
     "upg_shard_s5_name": "Crystalize",
     "upg_shard_s5_desc": "Increases all minerals power based on total Supercrystals",
     "upg_shard_s6_name": "???",
@@ -496,7 +497,7 @@
     "fb_buy_name_1": "Cornucopia",
     "fb_buy_desc_1": "Increases minimum effect of Fortune Boosts by 50%",
     "fb_buy_name_2": "The Luck",
-    "fb_buy_desc_2": "Increases maximum effect of Fortune Boosts by 15%",
+    "fb_buy_desc_2": "Increases maximum effect of Fortune Boosts by 12.5%",
     "fb_buy_name_3": "Wheel of Fortune",
     "fb_buy_desc_3": "Doubles duration of Fortune Boosts",
 
@@ -581,7 +582,7 @@
     "bal_sin_name_33": "Mastery",
     "bal_sin_desc_33": "Fortune Boosts always have maximum effect",
 
-    "maxBuy": "Купить всё",
+    "maxBuy": "Buy All (M)",
 
     "achievementsTitle": "Achievements",
 
@@ -647,16 +648,16 @@
     "achievement54Desc": "<ut> INCREDIBLE POWER (54) </ut> <br> <br> Get an EX Fortune Boost <br> <br> <it>Reward: Increases the maximum effects of all Fortune Boosts by 5%. </it>",
     "achievement55Desc": "<ut> Flame Drive (55) </ut> <br> <br> Fill Overdrive II to 100% <br> <br> <it>Reward: Overdrive I no longer resets on Prestiges, except Challenges. </it>",
     "achievement56Desc": "<ut> God of Luck (56) </ut> <br> <br> Obtain all Fortune Boosts.",
-    "achievement57Desc": "<ut> Game On (57) </ut> <br> <br> Complete the Prestige Challenge <br> <br> <it>Reward: Challange 12 has a completion counter and increase Crystal gain. </it>",
+    "achievement57Desc": "<ut> Game On (57) </ut> <br> <br> Complete the Prestige Challenge",
     "achievement58Desc": "<ut> Total Annihilation (58) </ut> <br> <br> Complete Challenge 12 in under 999ms.",
-    "achievement59Desc": "<ut> Prestige Champion (59) </ut> <br> <br> Complete all Prestige Challenges in under a minute. <br> <br> <it>Reward: Increases the reward for all Prestige Challenges by 10% </it>",
+    "achievement59Desc": "<ut> Prestige Champion (59) </ut> <br> <br> Complete all Prestige Challenges <br> <br> <it>Reward: Increases the reward for all Prestige Challenges by 10% </it>",
     "achievement60Desc": "<ut> Finale (60) </ut> <br> <br> Collect Infinity Coins <br> <br> <it>Reward: {{trick}}</it>",
 
     "achievement60Tricks": [
     "There's nothing here", "go away", "nothing", "reset game", "You don't belong here", "impossible", "world border", "game over", "emptiness", "Settings -> Reset Game", "coin multiplier x0", "777 Fortune Tokens", "hopelessness", "end game", "1.79e308 Super Coins", "Something's wrong here, right?", "There is NO reward here", "the meaning of life", "???", "epilogue", "...", "how did you beat Fortune?", "it's none of your business", "Alt+F4", "computer virus", "remove System32"
     ],
 
-    "achievement61Desc": "<ut> Прощай (41) </ut> <br> <br> Разбить предел Престижа",
+    "achievement61Desc": "<ut> Made in Heaven (61) </ut> <br> <br> Reflash the Digital World. <br> <br> <it>Reward: Coin gain x4, Crystal gain x4, Shard gain x10.</it>",
     "achievement62Desc": "<ut> Первый Гугол монет (42) </ut> <br> <br> Получить 1е100 монет <br> <br> <it>Награда: Удваивает ежедневную награду </it>",
     "achievement63Desc": "<ut> Инь и Ян (43) </ut> <br> <br> Открыть Баланс и получить 1 Весы Баланса <br> <br> <it>Награда:  </it>",
     "achievement64Desc": "<ut>  (44) </ut> <br> <br>  <br> <br> <it>Награда:  </it>",
@@ -1197,14 +1198,15 @@
     "challengeReward11": "Reward: Unlock new items in Supershop.",
     "challengeReward12": "Reward: Decreases U-multiplier's scaling to 40, and U-power's to 80.",
 
-    "challengePReward1": "Reward: Increases Crystal gain.",
-    "challengePReward2": "Reward: Amount of U-multipliers increase their base effect.",
-    "challengePReward3": "Reward: Unlocks U-reducer automation.",
-    "challengePReward4": "Reward: Lifetime critical clicks increase Shards gain.",
-    "challengePReward5": "Reward: All Balance Scales increase maximum effects of Fortune Boosts.",
-    "challengePReward6": "Reward: Reduce cost of Supercrystals by 1e12.",
-    "challengePReward7": "Reward: Challenge 12 has a completion counter. Each completion grants +100% coin gain and +1,000,000% coin gain inside Prestige Challenge 8.",
-    "challengePReward8": "Reward: Finale?",
+    "challengePReward8": "Reward: The End?",
+
+    "cp_rew_1": "Reward: Increase Crystals gain by x",
+    "cp_rew_2": "Reward: U-multipliers increase their base effect. Currently: x",
+    "cp_rew_3": "Reward: Completed Prestige Challenges increase Shards effect. Currently: x",
+    "cp_rew_4": "Reward: Supercrystals give free Productivities. Currently: +",
+    "cp_rew_5": "Reward: All Balance Scales increase maximum effects of Fortune Boosts except Blessings: Challenge, Simulation, Fortune. Currently: х",
+    "cp_rew_6": "Reward: Reduce Supercrystals cost by ",
+    "cp_rew_7": "Reward: Challenge 12 have completion count. Every completion gives bonus for coin gain. Currently: х",
 
     "challengePGoal": "Goal: Collect {{x}} α-coins.",
 

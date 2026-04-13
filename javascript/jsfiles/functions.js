@@ -1,14 +1,30 @@
+function maxOrNo(type) {
+    if (type === 'coin') {
+        player.settings.buy_max_activate = !player.settings.buy_max_activate;
+    } else if (type === 'shard') {
+        player.settings.shard_buy_max_activate = !player.settings.shard_buy_max_activate;
+    } else if (type === 'superprestige') {
+        player.settings.superprestige_buy_max_activate = !player.settings.superprestige_buy_max_activate;
+    }
+}
+
 // --- МАТЕМАТИКА И ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ---
 
 function upgradesPurchasableCustom(currentUpgrades, currencyAmount, costPerUpgrade, increaseRate) {
-    return Math.floor(Math.log((currencyAmount * (increaseRate - 1) / costPerUpgrade + 1)) / Math.log(increaseRate));
+    // Защита от переполнения: ограничиваем валюту так, чтобы при умножении не вышло Infinity
+    let safeCurrency = Math.min(currencyAmount, 1.7e308 / increaseRate);
+    let bulk = Math.floor(Math.log((safeCurrency * (increaseRate - 1) / costPerUpgrade + 1)) / Math.log(increaseRate));
+    // Если по какой-то причине вылез NaN или Infinity, возвращаем 0
+    return isFinite(bulk) ? Math.max(bulk, 1) : 0;
 }
 
 // JS умеет парсить "1e10" нативно, сложные сплиты больше не нужны
 function convert(input) { return Number(input); }
 
 function totalCost(numUpgrades, firstCost, ratio) {
-    return firstCost * ((Math.pow(ratio, numUpgrades) - 1) / (ratio - 1));
+    let cost = firstCost * ((Math.pow(ratio, numUpgrades) - 1) / (ratio - 1));
+    // Если стоимость перевалила за лимит, просто возвращаем потолок
+    return isFinite(cost) ? cost : 1.79e308;
 }
 
 function totalCostFromCurrent(currentUpgrades, totalUpgrades, firstCost, ratio) {
@@ -770,7 +786,7 @@ function statsShardsEffectUpdate() {
     applyStatsUpdate([
         { effectValue: () => 1 + player.shard.currency / 100, effectPrefix: 'x', effectMode: 'boost', effectId: 'shardStatsEffect', pieceId: 'shardPiece', piecePercentId: 'shardPiecePercent', summary: () => GAIN.shard.effect.no_softcap_effect() },
         { effectValue: () => Math.pow(1+Math.pow(player.prestige.resets, 0.3), ACHS.has(30)), effectPrefix: 'x', effectMode: 'boost', effectId: 'achievement30StatsEffect', pieceId: 'achievement30Piece', piecePercentId: 'achievement30PiecePercent', summary: () => GAIN.shard.effect.no_softcap_effect() },
-        { effectValue: () => UPGS.shard.singles[21].effect(), effectPrefix: '^', effectMode: 'power', effectId: 'fourthShardSingleEffectStatsEffect', pieceId: 'fourthShardSingleEffectPiece', piecePercentId: 'fourthShardSingleEffectPiecePercent', summary: () => GAIN.shard.effect.no_softcap_effect(), graphicValue: () => findMultiplier(Math.pow(GAIN.shard.effect.no_softcap_effect(), 1 / UPGS.shard.singles[21].effect()), UPGS.shard.singles[21].effect()) },
+        { effectValue: () => UPGS.shard.singles[21].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fourthShardSingleEffectStatsEffect', pieceId: 'fourthShardSingleEffectPiece', piecePercentId: 'fourthShardSingleEffectPiecePercent', summary: () => GAIN.shard.effect.no_softcap_effect() },
         { effectValue: () => (player.challenge.completed.includes(7) ? CHALL[7].effect() : 1), effectPrefix: 'x', effectMode: 'boost', effectId: 'challengeReward7StatsEffect', pieceId: 'challengeReward7Piece', piecePercentId: 'challengeReward7PiecePercent', summary: () => GAIN.shard.effect.no_softcap_effect() },
         { effectValue: () => GAIN.shard.effect.softcap().softcap_power, effectPrefix: '^', effectMode: 'power', effectId: 'SHARD_EFF_SC_001StatsEffect' }
     ], 'summaryShEffectStatsEffect', GAIN.shard.effect.effect());

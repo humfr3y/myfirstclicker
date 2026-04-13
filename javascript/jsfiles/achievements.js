@@ -103,7 +103,12 @@ const ACHS = {
         52() { return player.coin.total_currency >= 1e100},
         53() { return player.balance.scales_of_balance >= 1},
         54() { return player.fortune.activatedBoosts[10].activated || player.fortune.activatedBoosts[11].activated || player.fortune.activatedBoosts[12].activated},
-        55() { return UNL.overdrive.type2.percent() == 100}
+        55() { return UNL.overdrive.type2.percent() == 100},
+        56() { return player.fortune.activatedBoosts.list.length == 12},
+        57() { return player.prestige.challenge.completed.length >= 1},
+        58() { return player.challenge.time[12].timer <= 1000},
+        59() { return player.prestige.challenge.completed.length >= 8 },
+        60() { return player.coin.currency >= 1.79e308}
     },
 
     // --- УНИВЕРСАЛЬНАЯ ФУНКЦИЯ ДЛЯ ЭФФЕКТОВ АЧИВОК ---

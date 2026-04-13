@@ -39,8 +39,28 @@ class UniversalBuyableUpgrade {
     effect2(...args) { return this.customEffect2 ? this.customEffect2(...args) : null; }
 
     bulk(x = this.state.currency, y = this.targetArray[this.id]) {
-        if (this.customBulk) return this.customBulk(x, y);
-        return upgradesPurchasableCustom(y, x, this.cost(), this.power);
+        // Сколько мы физически можем позволить себе купить
+        let affordable = upgradesPurchasableCustom(y, x, this.cost(), this.power);
+
+        // Если у улучшения прописана своя логика опта (как у Осколков и Суперпрестижа)
+        if (this.customBulk) {
+            let custom = this.customBulk(x, y);
+            // Защита: не даем вернуть 1, если денег вообще 0
+            return Math.max(Math.min(custom, affordable), 0);
+        }
+
+        // Проверяем, включена ли кнопка "Купить всё" для конкретной вкладки
+        let isMaxActive = true;
+        if (this.layer === 'coin') isMaxActive = player.settings.buy_max_activate;
+        if (this.layer === 'prestige') isMaxActive = player.settings.superprestige_buy_max_activate;
+        if (this.layer === 'shard') isMaxActive = player.settings.shard_buy_max_activate;
+
+        // Если кнопка выключена, мы хотим купить только 1 штуку (если хватает денег)
+        if (!isMaxActive) {
+            return affordable >= 1 ? 1 : 0;
+        }
+
+        return Math.max(affordable, 0);
     }
 
     unl_super() { return this.state.superUpgrades && this.state.superUpgrades.includes(this.super_id); }
@@ -107,9 +127,10 @@ class UniversalBuyablesManager {
         }
     }
 
-    buy_auto() { this._forEachBuyable(x => this.buy(x)); }
-    buyMax() { this._forEachBuyable(x => this.max(x)); }
-    buyMax_auto() { this._forEachBuyable(x => this.max_auto(x)); }
+    // СТАЛО: Покупаем с конца (от дорогих к дешевым)
+    buy_auto() { [...this._keys].reverse().forEach(x => this.buy(x)); }
+    buyMax() { [...this._keys].reverse().forEach(x => this.max(x)); }
+    buyMax_auto() { [...this._keys].reverse().forEach(x => this.max_auto(x)); }
 
     max_auto(x) {
         if (this.canAfford(x)) {
@@ -297,14 +318,21 @@ class ShopBuyableUpgrade extends UniversalBuyableUpgrade {
     
     // Встроенный bulk с учетом поля ввода и лимита
     bulk(x = player.supercoin.currency, y = this.targetArray[this.id]) {
-        let bulk = upgradesPurchasableCustom(y, x, this.cost(), this.power);
+        // Сколько мы ВООБЩЕ можем позволить себе купить по деньгам
+        let maxAffordable = upgradesPurchasableCustom(y, x, this.cost(), this.power);
+        
+        // Сколько мы ХОТИМ купить (из поля ввода)
         let bulkBuyAmount = parseInt(shopBulkBuyInput.value);
-        let maxBulk = this.maxAmount - y;
+        if (isNaN(bulkBuyAmount) || bulkBuyAmount < 1) bulkBuyAmount = 1;
         
-        if (isNaN(bulkBuyAmount)) bulkBuyAmount = 1;
-        let finalBulk = bulkBuyAmount < maxBulk ? bulkBuyAmount : maxBulk;
+        // Сколько нам ОСТАЛОСЬ купить до максимума
+        let leftToMax = this.maxAmount - y;
         
-        return finalBulk < bulk ? finalBulk : bulk;
+        // Берем самое маленькое из трех: что можем, что хотим, и что осталось
+        let finalBulk = Math.min(maxAffordable, bulkBuyAmount, leftToMax);
+        
+        // Если ничего купить не можем (уперлись в цену или лимит), возвращаем 0
+        return Math.max(finalBulk, 0);
     }
 }
 
@@ -502,6 +530,7 @@ class MineralManager {
     reset(x) { if (player.minerals[x] >= 1) player.minerals[x] = 0; }
 
     respec() {
+        player.rune.currency = 0
         player.rune.total_currency = 0;
         this._keys.forEach(x => this.reset(x));
     }

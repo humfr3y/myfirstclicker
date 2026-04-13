@@ -197,9 +197,8 @@ function loadTranslationsCoins() {
             document.getElementById(`buyableU${i}_effect`).textContent = formatNumber(UPGS.coin.buyables[i].effect(), effFormat);
             
             let isSuperBought = player.coin.superUpgrades.includes(10 + i);
-            let sPrefix = (i === 1 || i === 5) ? '+' : 'x';
-            if (i === 5) sPrefix = '^'; 
-            let sFormat = (i === 5) ? 'power' : 'boost';
+            let sPrefix = (i === 1) ? '+' : 'x';
+            let sFormat = 'boost';
             
             document.getElementById(`buyableU${i}_super`).innerHTML = isSuperBought 
                 ? ` | <super>⧋ ${sPrefix}${formatNumber(UPGS.coin.buyables[i].effect_super(), sFormat)}</super>` : '';
@@ -385,7 +384,7 @@ function loadTranslationsShards() {
         let isBought = player.shard.singleUpgrades.includes(upg);
         
         // Для 13 и 23 форматирование 'boost' (т.к. мы делим), для остальных - 'power' или 'boost'
-        let effFormat = (upg === 11 || upg === 12 || upg === 13 || upg === 23) ? 'boost' : 'power';
+        let effFormat = (upg === 11 || upg === 12 || upg === 13 || upg === 23 || upg === 21) ? 'boost' : 'power';
         document.getElementById(`shs${i}_eff`).textContent = formatNumber(UPGS.shard.singles[upg].effect(), effFormat);
         
         // Скрываем цену, если куплено
@@ -868,6 +867,14 @@ function loadTranslationsChallenges() {
         setTxt(`challenge${i}Start`, i18next.t(player.challenge.completed.includes(i) ? 'challengeCompleted' : 'challengeStart'));
     }
 
+    setTxt('cp1_eff', formatNumber(player.prestige.challenge.completed.includes(1) ? PRES_CHALLENGE[1].effect() : 1));
+    setTxt('cp2_eff', formatNumber(player.prestige.challenge.completed.includes(2) ? PRES_CHALLENGE[2].effect() : 1, 'boost'));
+    setTxt('cp3_eff', formatNumber(player.prestige.challenge.completed.includes(3) ? PRES_CHALLENGE[3].effect() : 1, 'boost'));
+    setTxt('cp4_eff', formatNumber(player.prestige.challenge.completed.includes(4) ? PRES_CHALLENGE[4].effect() : 0));
+    setTxt('cp5_eff', formatNumber(player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1, 'power'));
+    setTxt('cp6_eff', formatNumber(player.prestige.challenge.completed.includes(6) ? PRES_CHALLENGE[6].effect() : 1));
+    setTxt('cp7_eff', formatNumber(player.prestige.challenge.completed.includes(7) ? PRES_CHALLENGE[7].effect() : 1, 'boost'));
+    
     // 3. Цели и кнопки Престижных Испытаний
     for (let i = 1; i <= 8; i++) {
         setTxt(`pc${i}_goal`, formatNumber(PRES_CHALL.goals[i]));
@@ -1052,8 +1059,18 @@ function updateStaticTranslations() {
     
     document.querySelectorAll('.useButton').forEach(btn => btn.innerHTML = i18next.t('useTitle'));
 
-    PROGRESS.name = [i18next.t('pbtitle1'), i18next.t('pbtitle2'), i18next.t('pbtitle3'), i18next.t('pbtitle4'), i18next.t('pbtitle5'), i18next.t('pbtitle6'), i18next.t('pbtitle7'), i18next.t('pbtitle8'), 'Infinity?'];
-    PROGRESS.currency = [i18next.t('pbcurrency1'), i18next.t('pbcurrency1'), i18next.t('pbcurrency1'), i18next.t('pbcurrency2'), i18next.t('pbcurrency3'), i18next.t('pbcurrency4'), i18next.t('pbcurrency4'), i18next.t('pbcurrency3'), i18next.t('pbcurrency1')];
+    PROGRESS.name = [
+        i18next.t('pbtitle1'), i18next.t('pbtitle2'), i18next.t('pbtitle3'), 
+        i18next.t('pbtitle4'), i18next.t('pbtitle5'), i18next.t('pbtitle6'), 
+        i18next.t('pbtitle7'), i18next.t('pbtitle8'), i18next.t('pbtitle9'), 
+        'Infinity?'
+    ];
+    PROGRESS.currency = [
+        i18next.t('pbcurrency1'), i18next.t('pbcurrency1'), i18next.t('pbcurrency1'), 
+        i18next.t('pbcurrency2'), i18next.t('pbcurrency3'), i18next.t('pbcurrency4'), 
+        i18next.t('pbcurrency4'), i18next.t('pbcurrency3'), i18next.t('pbcurrency5'), 
+        i18next.t('pbcurrency1')
+    ];
 
     // 5. Инициализация 50 Обычных Ачивок
     for (let i = 0; i < 50; i++) {
