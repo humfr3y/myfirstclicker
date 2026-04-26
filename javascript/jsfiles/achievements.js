@@ -89,7 +89,7 @@ const ACHS = {
         39() { return GAIN.coin.click.effect() >= 4.20e69},
         40() { return UNL.overdrive.type1.percent() == 100},
 
-        41() { return player.prestige.super.singles.includes(25)},
+        41() { return player.prestige.break.singles.includes(25)},
         42() { return player.uadders >= 1 && player.ureducers >= 1 && player.umultipliers >= 1 && player.upowers >= 1},
         43() { return UNL.shard_achievements[10].current() >= 10},
         44() { return player.coin.superUpgrades.length == 15},
@@ -106,7 +106,7 @@ const ACHS = {
         55() { return UNL.overdrive.type2.percent() == 100},
         56() { return player.fortune.activatedBoosts.list.length == 12},
         57() { return player.prestige.challenge.completed.length >= 1},
-        58() { return player.challenge.time[12].timer <= 1000},
+        58() { return player.challenge.time[12].timer < 10},
         59() { return player.prestige.challenge.completed.length >= 8 },
         60() { return player.coin.currency >= 1.79e308}
     },
@@ -120,7 +120,7 @@ const ACHS = {
         eff += player.achievements.length * achRew + player.achievement_rows.length * rowRew;
         
         if (player.coin.singleUpgrades.includes(25)) eff = Math.pow(eff, UPGS.coin.singles[25].effect());
-        if (player.prestige.super.singles.includes(22)) eff *= UPGS.prestige.super.singles[22].effect();
+        if (player.prestige.break.singles.includes(22)) eff *= UPGS.prestige.break.singles[22].effect();
         if (player.shard.achievements[5]) eff *= UNL.shard_achievements[5].effect();
         if (player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
         

@@ -3,8 +3,8 @@ function maxOrNo(type) {
         player.settings.buy_max_activate = !player.settings.buy_max_activate;
     } else if (type === 'shard') {
         player.settings.shard_buy_max_activate = !player.settings.shard_buy_max_activate;
-    } else if (type === 'superprestige') {
-        player.settings.superprestige_buy_max_activate = !player.settings.superprestige_buy_max_activate;
+    } else if (type === 'breakprestige') {
+        player.settings.breakprestige_buy_max_activate = !player.settings.breakprestige_buy_max_activate;
     }
 }
 
@@ -62,8 +62,8 @@ function buyShardUpgrade(x) {
     player.settings.shard_buy_max_activate ? UPGS.shard.buyables.max(x) : UPGS.shard.buyables.buy(x);
 }
 
-function buySuperprestigeUpgrade(x) {
-    player.settings.superprestige_buy_max_activate ? UPGS.prestige.super.buyables.max(x) : UPGS.prestige.super.buyables.buy(x);
+function buyBreakPrestigeUpgrade(x) {
+    player.settings.breakprestige_buy_max_activate ? UPGS.prestige.break.buyables.max(x) : UPGS.prestige.break.buyables.buy(x);
 }
 
 // --- УПРАВЛЕНИЕ СТРАНИЦЕЙ И UI ---
@@ -564,6 +564,7 @@ function statsPerSecondUpdate() {
 
 function createGainWholeUI() {
     const descriptors = [
+        { id: 'alphaPower', title: 'Альфа-Сила', colorStyle: 'background-image: radial-gradient(#23e019, black 210%)' },
         { id: 'doublerPlus', title: 'Удвоитель+', colorStyle: 'background-image: radial-gradient(#1226ff, rgba(0, 0, 0, 0)210%)' },
         { id: 'cashBack', title: 'Кэшбэк', colorStyle: 'background-image: radial-gradient(#1226ff, black 210%)' },
         { id: 'goldenKey', title: 'Золотой ключ', colorStyle: 'background-image: radial-gradient(rgb(255, 174, 0), black 210%)' },
@@ -578,7 +579,7 @@ function createGainWholeUI() {
         { id: 'coinFactory', title: 'Фабрика монет', colorStyle: 'background-image: radial-gradient(cadetblue, black 210%)' },
         { id: 'fortuneBoostCoin', title: 'Усиление Фортуны', colorStyle: 'background-image: radial-gradient(hotpink, black 210%)' },
         { id: 'plusCoinsForGain', title: 'Плюс монет', colorStyle: 'background-image: radial-gradient(white, black 210%)' },
-        { id: 'alphaPower', title: 'Альфа-Сила', colorStyle: 'background-image: radial-gradient(#23e019, black 210%)' },
+        { id: 'pchall7', title: 'Испытание Престижа 7', colorStyle: 'background-image: radial-gradient(rgb(0, 212, 212), black 210%)' },
         { id: 'upower', title: 'У-сила', colorStyle: 'background-image: radial-gradient(palevioletred, black 210%)' },
         { id: 'activity2', title: 'Активность 2', colorStyle: 'background-image: radial-gradient(rgb(0, 212, 212), black 210%)' }
     ];
@@ -595,13 +596,12 @@ function createGainWholeUI() {
 createGainWholeUI();
 
 function statsGainUpdate() {
-    const gainWithoutPower1 = findMultiplierDecimal(GAIN.coin.gain.no_softcap_effect().pow(1 / UPGS.coin.buyables[5].effect()), UPGS.coin.buyables[5].effect());
-    const temp1 = GAIN.coin.gain.no_softcap_effect().pow(1 / UPGS.coin.buyables[5].effect());
-    const gainWithoutPower2 = findMultiplierDecimal(temp1.pow(1 / UPGS.prestige.singles[12].effect()), UPGS.prestige.singles[12].effect());
-    const temp2 = temp1.pow(1 / UPGS.prestige.singles[12].effect());
-    const gainWithoutPower3 = findMultiplierDecimal(temp2.pow(1 / GAIN.upower.effect()), GAIN.upower.effect());
+    const gainWithoutPower1 = findMultiplierDecimal(GAIN.coin.gain.no_softcap_effect().pow(1 / UPGS.prestige.singles[12].effect()), UPGS.prestige.singles[12].effect());
+    const temp1 = GAIN.coin.gain.no_softcap_effect().pow(1 / UPGS.prestige.singles[12].effect());
+    const gainWithoutPower2 = findMultiplierDecimal(temp1.pow(1 / GAIN.upower.effect()), GAIN.upower.effect());
 
     const sources = [
+        { effectValue: () => UPGS.coin.buyables[5].effect(), effectPrefix: '+', effectMode: 'number', effectId: 'alphaPowerStatsEffect', pieceId: 'alphaPowerPiece', piecePercentId: 'alphaPowerPiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect() },
         { effectValue: () => UPGS.coin.singles[13].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'doublerPlusStatsEffect', pieceId: 'doublerPlusPiece', piecePercentId: 'doublerPlusPiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect() },
         { effectValue: () => UPGS.coin.singles[22].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'cashBackStatsEffect', pieceId: 'cashBackPiece', piecePercentId: 'cashBackPiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect() },
         { effectValue: () => UPGS.shop.buyables[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'goldenKeyStatsEffect', pieceId: 'goldenKeyPiece', piecePercentId: 'goldenKeyPiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect() },
@@ -616,9 +616,9 @@ function statsGainUpdate() {
         { effectValue: () => UNL.shard_achievements[1].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'coinFactoryStatsEffect', pieceId: 'coinFactoryPiece', piecePercentId: 'coinFactoryPiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect() },
         { effectValue: () => UPGS.fortune.boosts[1].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fortuneBoostCoinStatsEffect', pieceId: 'fortuneBoostCoinPiece', piecePercentId: 'fortuneBoostCoinPiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect() },
         { effectValue: () => MISC.balance.plusCoins.buff().coinBuff, effectPrefix: 'x', effectMode: 'boost', effectId: 'plusCoinsForGainStatsEffect', pieceId: 'plusCoinsForGainPiece', piecePercentId: 'plusCoinsForGainPiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect() },
-        { effectValue: () => GAIN.upower.effect(), effectPrefix: '^', effectMode: 'power', effectId: 'upowerStatsEffect', pieceId: 'upowerPiece', piecePercentId: 'upowerPiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect(), graphicValue: () => gainWithoutPower3 },
-        { effectValue: () => UPGS.prestige.singles[12].effect(), effectPrefix: '^', effectMode: 'power', effectId: 'activity2StatsEffect', pieceId: 'activity2Piece', piecePercentId: 'activity2PiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect(), graphicValue: () => gainWithoutPower2 },
-        { effectValue: () => UPGS.coin.buyables[5].effect(), effectPrefix: '^', effectMode: 'power', effectId: 'alphaPowerStatsEffect', pieceId: 'alphaPowerPiece', piecePercentId: 'alphaPowerPiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect(), graphicValue: () => gainWithoutPower1 }
+        { effectValue: () => PRES_CHALLENGE[7].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'pchall7StatsEffect', pieceId: 'pchall7Piece', piecePercentId: 'pchall7PiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect() },
+        { effectValue: () => GAIN.upower.effect(), effectPrefix: '^', effectMode: 'power', effectId: 'upowerStatsEffect', pieceId: 'upowerPiece', piecePercentId: 'upowerPiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect(), graphicValue: () => gainWithoutPower2 },
+        { effectValue: () => UPGS.prestige.singles[12].effect(), effectPrefix: '^', effectMode: 'power', effectId: 'activity2StatsEffect', pieceId: 'activity2Piece', piecePercentId: 'activity2PiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect(), graphicValue: () => gainWithoutPower1 }
     ];
 
     applyStatsUpdate(sources, 'summaryGainStatsEffect', GAIN.coin.gain.effect());
@@ -653,7 +653,7 @@ function statsSuperCoinChanceUpdate() {
         { effectValue: () => (Math.pow(1.5, UPGS.supercrystal[11].unl())), effectPrefix: 'x', effectMode: 'boost', effectId: 'firstSuperCrystalEffectStatsEffect', pieceId: 'firstSuperCrystalEffectPiece', piecePercentId: 'firstSuperCrystalEffectPiecePercent', summary: () => GAIN.supercoin.chance() },
         { effectValue: () => UPGS.minerals[1].effect3(), effectPrefix: 'x', effectMode: 'boost', effectId: 'firstMineralEffect3StatsEffect', pieceId: 'firstMineralEffect3Piece', piecePercentId: 'firstMineralEffect3PiecePercent', summary: () => GAIN.supercoin.chance() },
         { effectValue: () => UNL.shard_achievements[2].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'superDvorStatsEffect', pieceId: 'superDvorPiece', piecePercentId: 'superDvorPiecePercent', summary: () => GAIN.supercoin.chance() },
-        { effectValue: () => UPGS.prestige.super.singles[12].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'hercCursorStatsEffect', pieceId: 'hercCursorPiece', piecePercentId: 'hercCursorPiecePercent', summary: () => GAIN.supercoin.chance() },
+        { effectValue: () => UPGS.prestige.break.singles[12].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'hercCursorStatsEffect', pieceId: 'hercCursorPiece', piecePercentId: 'hercCursorPiecePercent', summary: () => GAIN.supercoin.chance() },
         { effectValue: () => UPGS.fortune.boosts[4].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fortuneBoostSupercoinStatsEffect', pieceId: 'fortuneBoostSupercoinPiece', piecePercentId: 'fortuneBoostSupercoinPiecePercent', summary: () => GAIN.supercoin.chance() },
         { effectValue: () => MISC.balance.plusCoins.buff().chanceBuffer, effectPrefix: 'x', effectMode: 'boost', effectId: 'plusCoinForSupercoinStatsEffect', pieceId: 'plusCoinForSupercoinPiece', piecePercentId: 'plusCoinForSupercoinPiecePercent', summary: () => GAIN.supercoin.chance() },
         { effectValue: () => Number(ACHS.has(37)), effectPrefix: '+', effectMode: 'boost', effectId: 'achievement37StatsEffect', pieceId: 'achievement37Piece', piecePercentId: 'achievement37PiecePercent', summary: () => GAIN.supercoin.chance(), graphicValue: ach37Graphic }
@@ -680,6 +680,7 @@ function createCrystalsUI() {
         { id: 'crystalShAch', title: 'Кристаллический Усилитель', colorStyle: 'background-image: radial-gradient(rgb(86, 247, 255), black 210%)' },
         { id: 'fortuneBoostCrystal', title: 'Альфа-Усилитель', colorStyle: 'background-image: radial-gradient(hotpink, black 210%)' },
         { id: 'minusCoinsForCrystals', title: 'Альфа-Усилитель', colorStyle: 'background-image: radial-gradient(white, black 210%)' },
+        { id: 'pchall1', title: 'Испытание Престижа 1', colorStyle: 'background-image: radial-gradient(rgb(0, 212, 212), black 210%)' },
         { id: 'achievementBonus2', title: 'Кристаллический Усилитель', colorStyle: 'background-image: radial-gradient(lightsteelblue, black 210%)' }
     ];
 
@@ -694,7 +695,7 @@ function createCrystalsUI() {
 createCrystalsUI();
 
 function statsCrystalsUpdate() {
-    const gain = player.prestige.super.singles.includes(25) ? Math.pow(1.35+UPGS.prestige.super.buyables[1].effect(), Math.log10((player.coin.currency+10)/1e15)) : 1;
+    const gain = player.prestige.break.singles.includes(25) ? Math.pow(1.2 + UPGS.prestige.break.buyables[1].effect(), Math.log10((player.coin.currency + 10) / 1e15)): 1;
 
     const sources = [
         { effectValue: () => gain, effectPrefix: 'x', effectMode: 'boost', effectId: 'baseCrystalStatsEffect', pieceId: 'baseCrystalPiece', piecePercentId: 'baseCrystalPiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
@@ -706,11 +707,12 @@ function statsCrystalsUpdate() {
         { effectValue: () => UNL.overdrive.type2.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'overdrive2EffectStatsEffect', pieceId: 'overdrive2EffectPiece', piecePercentId: 'overdrive2EffectPiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => UPGS.minerals[3].effect1(), effectPrefix: 'x', effectMode: 'boost', effectId: 'thirdMineralEffect1StatsEffect', pieceId: 'thirdMineralEffect1Piece', piecePercentId: 'thirdMineralEffect1PiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => Math.pow(3, UPGS.supercrystal[12].unl()), effectPrefix: 'x', effectMode: 'boost', effectId: 'secondSuperCrystalSingleEffectStatsEffect', pieceId: 'secondSuperCrystalSingleEffectPiece', piecePercentId: 'secondSuperCrystalSingleEffectPiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
-        { effectValue: () => UPGS.prestige.super.singles[11].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'prestigeFameStatsEffect', pieceId: 'prestigeFamePiece', piecePercentId: 'prestigeFamePiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
+        { effectValue: () => UPGS.prestige.break.singles[11].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'prestigeFameStatsEffect', pieceId: 'prestigeFamePiece', piecePercentId: 'prestigeFamePiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => UNL.shard_achievements[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalShAchStatsEffect', pieceId: 'crystalShAchPiece', piecePercentId: 'crystalShAchPiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => ACHS.effect.crystal(), effectPrefix: 'x', effectMode: 'boost', effectId: 'achievementBonus2StatsEffect', pieceId: 'achievementBonus2Piece', piecePercentId: 'achievementBonus2PiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => UPGS.fortune.boosts[2].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fortuneBoostCrystalStatsEffect', pieceId: 'fortuneBoostCrystalPiece', piecePercentId: 'fortuneBoostCrystalPiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => MISC.balance.minusCoins.buff().crystalGainBuff, effectPrefix: 'x', effectMode: 'boost', effectId: 'minusCoinsForCrystalsStatsEffect', pieceId: 'minusCoinsForCrystalsPiece', piecePercentId: 'minusCoinsForCrystalsPiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
+        { effectValue: () => PRES_CHALLENGE[1].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'pchall1StatsEffect', pieceId: 'pchall1Piece', piecePercentId: 'pchall1PiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => GAIN.crystal.softcap().softcap_power, effectPrefix: '^', effectMode: 'power', effectId: 'CRYSTAL_GAIN_SC_001StatsEffect' }
     ];
 
@@ -731,7 +733,8 @@ function createShardsUI() {
         { id: 'firstShardBuyableEffect', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(rgb(111, 202, 199), black 210%)' },
         { id: 'fifthShopBuyableEffect', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(rgb(255, 174, 0), black 210%)' },
         { id: 'ninthSuperCrystalSingleEffect', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(rgb(0, 151, 151), black 210%)' },
-        { id: 'fortuneBoostShardClick', title: 'Альфа-Усилитель', colorStyle: 'background-image: radial-gradient(hotpink, black 210%)' }
+        { id: 'fortuneBoostShardClick', title: 'Альфа-Усилитель', colorStyle: 'background-image: radial-gradient(hotpink, black 210%)' },
+        { id: 'breakPrestigeBuyable31', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(rgb(111, 202, 199), black 210%)' }
     ], 'Общий множитель', 'summaryShPerClickStatsEffect');
 
     buildStatsUI('shardsPerSecondStats', 'shardsPerSecondGraphic', [
@@ -741,6 +744,7 @@ function createShardsUI() {
         { id: 'shardShAch', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(rgb(86, 247, 255), black 210%)' },
         { id: 'achievement39', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(lightsteelblue, black 210%)' },
         { id: 'fortuneBoostShardSecond', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(hotpink, black 210%)' },
+        { id: 'breakPrestigeBuyable32', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(rgb(111, 202, 199), black 210%)' },
         { id: 'achievementBonus3', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(lightsteelblue, black 210%)' }
     ], 'Общий множитель', 'summaryShPerSecondStatsEffect');
 
@@ -748,7 +752,8 @@ function createShardsUI() {
         { id: 'shard', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(rgb(111, 202, 199), black 210%)' },
         { id: 'achievement30', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(lightsteelblue, black 210%)' },
         { id: 'fourthShardSingleEffect', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(rgb(127, 210, 136), black 210%)' },
-        { id: 'challengeReward7', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(rgb(255, 174, 0), black 210%)' }
+        { id: 'challengeReward7', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(rgb(255, 174, 0), black 210%)' },
+        { id: 'pchall3', title: 'Испытание Престижа 3', colorStyle: 'background-image: radial-gradient(rgb(0, 212, 212), black 210%)' },
     ];
 
     const softcapHTML = `
@@ -766,7 +771,8 @@ function statsShardsPerClickUpdate() {
         { effectValue: () => UPGS.shard.buyables[1].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'firstShardBuyableEffectStatsEffect', pieceId: 'firstShardBuyableEffectPiece', piecePercentId: 'firstShardBuyableEffectPiecePercent', summary: () => GAIN.shard.click() },
         { effectValue: () => UPGS.shop.buyables[5].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fifthShopBuyableEffectStatsEffect', pieceId: 'fifthShopBuyableEffectPiece', piecePercentId: 'fifthShopBuyableEffectPiecePercent', summary: () => GAIN.shard.click() },
         { effectValue: () => Math.pow(UPGS.supercrystal[33].effect(), UPGS.supercrystal[33].unl()), effectPrefix: 'x', effectMode: 'boost', effectId: 'ninthSuperCrystalSingleEffectStatsEffect', pieceId: 'ninthSuperCrystalSingleEffectPiece', piecePercentId: 'ninthSuperCrystalSingleEffectPiecePercent', summary: () => GAIN.shard.click() },
-        { effectValue: () => UPGS.fortune.boosts[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fortuneBoostShardClickStatsEffect', pieceId: 'fortuneBoostShardClickPiece', piecePercentId: 'fortuneBoostShardClickPiecePercent', summary: () => GAIN.shard.click() }
+        { effectValue: () => UPGS.fortune.boosts[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fortuneBoostShardClickStatsEffect', pieceId: 'fortuneBoostShardClickPiece', piecePercentId: 'fortuneBoostShardClickPiecePercent', summary: () => GAIN.shard.click() },
+        { effectValue: () => UPGS.prestige.break.buyables[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'breakPrestigeBuyable31StatsEffect', pieceId: 'breakPrestigeBuyable31Piece', piecePercentId: 'breakPrestigeBuyable31PiecePercent', summary: () => GAIN.shard.click() },
     ], 'summaryShPerClickStatsEffect', GAIN.shard.click());
 }
 
@@ -778,7 +784,8 @@ function statsShardsPerSecondUpdate() {
         { effectValue: () => UNL.shard_achievements[4].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'shardShAchStatsEffect', pieceId: 'shardShAchPiece', piecePercentId: 'shardShAchPiecePercent', summary: () => GAIN.shard.second() },
         { effectValue: () => Math.pow(1.337, ACHS.has(39)), effectPrefix: 'x', effectMode: 'boost', effectId: 'achievement39StatsEffect', pieceId: 'achievement39Piece', piecePercentId: 'achievement39PiecePercent', summary: () => GAIN.shard.second() },
         { effectValue: () => ACHS.effect.shard(), effectPrefix: 'x', effectMode: 'boost', effectId: 'achievementBonus3StatsEffect', pieceId: 'achievementBonus3Piece', piecePercentId: 'achievementBonus3PiecePercent', summary: () => GAIN.shard.second() },
-        { effectValue: () => UPGS.fortune.boosts[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fortuneBoostShardSecondStatsEffect', pieceId: 'fortuneBoostShardSecondPiece', piecePercentId: 'fortuneBoostShardSecondPiecePercent', summary: () => GAIN.shard.second() }
+        { effectValue: () => UPGS.fortune.boosts[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fortuneBoostShardSecondStatsEffect', pieceId: 'fortuneBoostShardSecondPiece', piecePercentId: 'fortuneBoostShardSecondPiecePercent', summary: () => GAIN.shard.second() },
+        { effectValue: () => UPGS.prestige.break.buyables[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'breakPrestigeBuyable32StatsEffect', pieceId: 'breakPrestigeBuyable32Piece', piecePercentId: 'breakPrestigeBuyable32PiecePercent', summary: () => GAIN.shard.click() },
     ], 'summaryShPerSecondStatsEffect', GAIN.shard.second());
 }
 
@@ -788,6 +795,7 @@ function statsShardsEffectUpdate() {
         { effectValue: () => Math.pow(1+Math.pow(player.prestige.resets, 0.3), ACHS.has(30)), effectPrefix: 'x', effectMode: 'boost', effectId: 'achievement30StatsEffect', pieceId: 'achievement30Piece', piecePercentId: 'achievement30PiecePercent', summary: () => GAIN.shard.effect.no_softcap_effect() },
         { effectValue: () => UPGS.shard.singles[21].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fourthShardSingleEffectStatsEffect', pieceId: 'fourthShardSingleEffectPiece', piecePercentId: 'fourthShardSingleEffectPiecePercent', summary: () => GAIN.shard.effect.no_softcap_effect() },
         { effectValue: () => (player.challenge.completed.includes(7) ? CHALL[7].effect() : 1), effectPrefix: 'x', effectMode: 'boost', effectId: 'challengeReward7StatsEffect', pieceId: 'challengeReward7Piece', piecePercentId: 'challengeReward7PiecePercent', summary: () => GAIN.shard.effect.no_softcap_effect() },
+        { effectValue: () => PRES_CHALLENGE[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'pchall3StatsEffect', pieceId: 'pchall3Piece', piecePercentId: 'pchall3PiecePercent', summary: () => GAIN.shard.effect.no_softcap_effect() },
         { effectValue: () => GAIN.shard.effect.softcap().softcap_power, effectPrefix: '^', effectMode: 'power', effectId: 'SHARD_EFF_SC_001StatsEffect' }
     ], 'summaryShEffectStatsEffect', GAIN.shard.effect.effect());
 }
@@ -941,7 +949,7 @@ function createPrestigeUI(){
     buildStatsUI('prestigeMultiplierStats', 'prestigeMultiplierGraphic', [
         { id: 'prestigeBase', title: 'Базовый прирост', colorStyle: 'background-image: radial-gradient(rgba(0, 242, 255, 1), black 210%)' },
         { id: 'prestigeAch35', title: 'Достижение 35', colorStyle: 'background-image: radial-gradient(lightsteelblue, black 210%)' },
-        { id: 'prestigeSuperSingle13', title: 'Супер-престиж 13', colorStyle: 'background-image: radial-gradient(rgb(0, 212, 212), black 210%)' },
+        { id: 'prestigeBreakSingle13', title: 'Супер-престиж 13', colorStyle: 'background-image: radial-gradient(rgb(0, 212, 212), black 210%)' },
         { id: 'prestigeShop6', title: 'Магазин 6', colorStyle: 'background-image: radial-gradient(rgb(255, 174, 0), black 210%)' },
         { id: 'prestigeShardAch7', title: 'Осколки (ach7)', colorStyle: 'background-image: radial-gradient(rgb(0, 212, 212), black 210%)' },
         { id: 'prestigeFortune22', title: 'Фортуна 22', colorStyle: 'background-image: radial-gradient(hotpink, black 210%)' }
@@ -953,7 +961,7 @@ function statsPrestigeUpdate() {
     applyStatsUpdate([
         { effectValue: () => (MILESTONES.has(15) ? Math.floor(Math.log10(player.coin.currency + 10) - 14) : 1), effectPrefix: '', effectMode: 'number', effectId: 'prestigeBaseStatsEffect', pieceId: 'prestigeBasePiece', piecePercentId: 'prestigeBasePiecePercent', summary: () => GAIN.prestige.reset() },
         { effectValue: () => (ACHS.has(35) ? (1 + MISC.amount_of_upgrades.super() / 100) : 1), effectPrefix: 'x', effectMode: 'boost', effectId: 'prestigeAch35StatsEffect', pieceId: 'prestigeAch35Piece', piecePercentId: 'prestigeAch35PiecePercent', summary: () => GAIN.prestige.reset() },
-        { effectValue: () => (player.prestige.super.singles.includes(13) ? UPGS.prestige.super.singles[13].effect() : 1), effectPrefix: 'x', effectMode: 'boost', effectId: 'prestigeSuperSingle13StatsEffect', pieceId: 'prestigeSuperSingle13Piece', piecePercentId: 'prestigeSuperSingle13PiecePercent', summary: () => GAIN.prestige.reset() },
+        { effectValue: () => (player.prestige.break.singles.includes(13) ? UPGS.prestige.break.singles[13].effect() : 1), effectPrefix: 'x', effectMode: 'boost', effectId: 'prestigeBreakSingle13StatsEffect', pieceId: 'prestigeBreakSingle13Piece', piecePercentId: 'prestigeBreakSingle13PiecePercent', summary: () => GAIN.prestige.reset() },
         { effectValue: () => (player.shop.upgrades[6] ? UPGS.shop.buyables[6].effect() : 1), effectPrefix: 'x', effectMode: 'boost', effectId: 'prestigeShop6StatsEffect', pieceId: 'prestigeShop6Piece', piecePercentId: 'prestigeShop6PiecePercent', summary: () => GAIN.prestige.reset() },
         { effectValue: () => (player.shard.achievements[7] ? UNL.shard_achievements[7].effect() : 1), effectPrefix: 'x', effectMode: 'boost', effectId: 'prestigeShardAch7StatsEffect', pieceId: 'prestigeShardAch7Piece', piecePercentId: 'prestigeShardAch7PiecePercent', summary: () => GAIN.prestige.reset() },
         { effectValue: () => (player.fortune.upgrades.singles.includes(22) ? 2 : 1), effectPrefix: 'x', effectMode: 'boost', effectId: 'prestigeFortune22StatsEffect', pieceId: 'prestigeFortune22Piece', piecePercentId: 'prestigeFortune22PiecePercent', summary: () => GAIN.prestige.reset() }
@@ -1021,5 +1029,15 @@ function unlockShardAch(id) {
     if (player.supercrystal.currency >= 1 && !player.shard_achievements.includes(id)) {
         player.supercrystal.currency--;
         player.shard_achievements.push(id);
+    }
+}
+
+function changeSaveSlotsText() {
+    for (let i = 0; i < 5; i++) {
+        let coins = JSON.parse(localStorage.getItem(getSaveKey(i+1))) ? Number(JSON.parse(localStorage.getItem(getSaveKey(i+1))).coin.currency) : 10
+        let crystals = JSON.parse(localStorage.getItem(getSaveKey(i+1))) ? Number(JSON.parse(localStorage.getItem(getSaveKey(i+1))).prestige.currency) : 0
+        let amount = crystals >= 1 ? crystals : coins
+        document.getElementsByClassName('save_coin_amount')[i].textContent = formatNumber(amount)
+        document.getElementsByClassName('saveCurrency')[i].textContent = crystals >= 1 ? i18next.t('pbcurrency3') : i18next.t('pbcurrency1')
     }
 }

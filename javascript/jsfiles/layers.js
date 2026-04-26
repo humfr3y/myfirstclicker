@@ -15,7 +15,7 @@ function restoreSavedUtils(level) {
     if (level >= 3) player.uadders = 0;
     if (level >= 4) player.ureducers = 0;
     
-    if (player.challenge.activated === 0) {
+    if (player.challenge.activated === 0 && player.prestige.challenge.activated === 0) {
         if (player.prestige.singleUpgrades.includes(41)) player.umultipliers = Math.max(player.umultipliers, 1);
         if (player.prestige.singleUpgrades.includes(42)) player.umultipliers = Math.max(player.umultipliers, 2);
         if (player.prestige.singleUpgrades.includes(43)) player.umultipliers = Math.max(player.umultipliers, 3);
@@ -26,13 +26,13 @@ function restoreSavedUtils(level) {
     }
 }
 
-function applyUtilsCostModifiers(cost) {
+function applyUtilsCostModifiers(cost, type="none") {
     if (player.balance.upgrades.singles.includes(22)) cost /= MISC.balance.minusCoins.buff().utilsCostReducer;
     if (player.balance.upgrades.singles.includes(21)) cost *= MISC.balance.plusCoins.nerf().utilsCostIncreaser;
+    if (player.prestige.challenge.activated === 4) cost = Math.pow(cost, 1.25);
     if (player.minerals[4]) cost -= UPGS.minerals[4].effect3();
-    cost -= GAIN.ureducer.effect();
+    if (type == "none") cost -= GAIN.ureducer.effect();
     cost = Math.max(cost, 0);
-    if (player.prestige.challenge.activated === 4) cost = Math.pow(cost, 2);
     return cost;
 }
 
@@ -64,7 +64,7 @@ const LAYERS = {
         },
         cost() {
             let scaler = player.prestige.challenge.activated === 6 ? MISC.amount_of_upgrades.utils() : player.umultipliers;
-            let eff24 = UPGS.prestige.super.singles[24].unl() ? UPGS.prestige.super.singles[24].effect() : 0;
+            let eff24 = UPGS.prestige.break.singles[24].unl() ? UPGS.prestige.break.singles[24].effect() : 0;
             let mult = (player.challenge.activated === 0 && player.challenge.completed.includes(12)) ? 40 : 50;
             
             let cost = scaler >= 20 + eff24 
@@ -149,7 +149,7 @@ const LAYERS = {
         cost() {
             let scaler = player.prestige.challenge.activated === 6 ? MISC.amount_of_upgrades.utils() : player.ureducers;
             let cost = scaler >= 10 ? Math.pow((650 + (250 * scaler)), 1 + (scaler - 9) / 60) : 650 + (250 * scaler);
-            return applyUtilsCostModifiers(cost);
+            return applyUtilsCostModifiers(cost, "ureducer");
         },
         disable(x = this.cost(), y = document.getElementById('ureducerBoost'), z = player.uadders) {
             y.disabled = !(player.coin.upgrades[2] >= x && z >= 4 && player.prestige.challenge.activated !== 3);
@@ -206,7 +206,7 @@ const LAYERS = {
             }
 
             if (player.prestige.singleUpgrades.includes(34)) {
-                player.shard.currency += (player.challenge.activated === 0 && player.challenge.completed.includes(2)) ? 10 * 1e6 * player.prestige.currency : 10;
+                player.shard.currency += (player.challenge.activated === 0 && player.challenge.completed.includes(2)) ? 10 * 1000 * player.prestige.currency : 10;
             }
 
             if (player.challenge.activated !== 0) {
@@ -271,7 +271,7 @@ const LAYERS = {
         if (player.challenge.activated === 0 && player.prestige.challenge.activated === 0) {
             if (player.prestige.singleUpgrades.includes(11)) player.coin.currency = 1000;
             if (MILESTONES.has(7)) player.coin.currency = 1e6;
-            if (MILESTONES.has(17)) player.coin.currency = 1e9;
+            if (MILESTONES.has(18)) player.coin.currency = 1e9;
         }
         
         let keepCoins = player.prestige.singleUpgrades.includes(21) && player.challenge.activated === 0 && player.prestige.challenge.activated === 0;

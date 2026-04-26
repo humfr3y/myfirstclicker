@@ -53,72 +53,96 @@
     background-color: rgb(65, 65, 65) !important; 
 }
 .upgradeButton:disabled:hover{
-    background-color: rgb(255, 63, 63)  !important;
+    background-color: rgb(241, 103, 103)  !important;
     color: black  !important;
 }
 .buyableButton{
     background-color: #000000;
-    border-color: #23e019;
+    border-color: var(--coin-upgrade);
     color: rgb(255, 255, 255);
 }
 .buyableButton:hover:enabled{
-    background-color: #23e019;
-    box-shadow: 0 0 10px #23e019;
+    background-color: var(--coin-upgrade);
+    box-shadow: 0 0 10px var(--coin-upgrade);
     color: black;
 }
 .singleButton{
     background-color: #000000;
-    border-color: #2536ff;
+    border-color: var(--coin-upgrade);
     color: rgb(255, 255, 255);
 }
 .singleButton:hover:enabled{
-    background-color: #2536ff;
-    box-shadow: 0 0 10px #2536ff;
+    background-color: var(--coin-upgrade);
+    box-shadow: 0 0 10px var(--coin-upgrade);
     color: black;
 }
 .singleButton.purchased {
-    background-color: #2536ff;
+    background-color: var(--coin-upgrade);
     color: black;
 }
 .coinUpgradeButton.superPurchased {
-  background-color: rgb(255, 174, 0);
+  background-color: var(--supercoin);
   color: black;
-  border-color: rgb(255, 174, 0);
+  border-color: var(--supercoin);
 }
 .coinUpgradeButton.superPurchasedBuyable {
   background-color: rgb(0, 0, 0);
-  border-color: rgb(255, 174, 0);
+  border-color: var(--supercoin);
 }
 .coinUpgradeButton.superPurchasedBuyable:hover:enabled, .coinUpgradeButton.superPurchased:hover:enabled  {
-  background-color: rgb(255, 174, 0);
+  background-color: var(--supercoin);
   color: rgb(0, 0, 0);
-  box-shadow: 0 0 10px rgb(255, 174, 0);
+  box-shadow: 0 0 10px var(--supercoin);
 }
 .coinUpgradeButton.superPurchasedBuyable:hover:enabled super, .coinUpgradeButton.superPurchased:hover:enabled super, .coinUpgradeButton.superPurchased super {
   color: rgb(0, 0, 0);
 }
 .prestigeSingleButton{
   background-color: #000000;
-  border-color: rgb(0, 212, 212);
+  border-color: var(--prestige-upgrade);
   color: rgb(255, 255, 255);
 }
 .prestigeSingleButton:hover:enabled {
-  background-color: rgb(0, 212, 212);
-  box-shadow: 0 0 10px rgb(0, 212, 212);
+  background-color: var(--prestige-upgrade);
+  box-shadow: 0 0 10px var(--prestige-upgrade);
   color: black;
 }
 .prestigeSingleButton.purchased {
-  background-color: rgb(0, 212, 212);
+  background-color: var(--prestige-upgrade);
   color: black;
 }
 .prestigeBuyableButton{
   background-color: #000000;
-  border-color: rgb(0, 151, 151);
+  border-color: var(--prestige-upgrade);
   color: rgb(255, 255, 255);
 }
 .prestigeBuyableButton:hover:enabled {
-  background-color: rgb(0, 151, 151);
-  box-shadow: 0 0 10px rgb(0, 151, 151);
+  background-color: var(--prestige-upgrade);
+  box-shadow: 0 0 10px var(--prestige-upgrade);
+  color: black;
+}
+.breakPrestigeSingleButton{
+  background-color: #000000;
+  border-color: var(--break-prestige-upgrade);
+  color: rgb(255, 255, 255);
+}
+.breakPrestigeSingleButton:hover:enabled {
+  background-color: var(--break-prestige-upgrade);
+  box-shadow: 0 0 10px var(--break-prestige-upgrade);
+  color: black;
+}
+.breakPrestigeSingleButton.purchased {
+  background-color: var(--break-prestige-upgrade);
+  color: black;
+}
+.breakPrestigeBuyableButton{
+  background-color: #000000;
+  border-color: var(--break-prestige-upgrade);
+  color: rgb(255, 255, 255);
+}
+.breakPrestigeBuyableButton:hover:enabled {
+  background-color: var(--break-prestige-upgrade);
+  box-shadow: 0 0 10px var(--break-prestige-upgrade);
   color: black;
 }
 
@@ -140,67 +164,67 @@
 
 
 #umultiplierBoost {
-  border-color:cadetblue;
+  border-color:var(--umultiplier);
 }
 
 #umultiplierBoost:hover:enabled{
-  background-color: cadetblue;
-  box-shadow: 0 0 10px cadetblue;
+  background-color: var(--umultiplier);
+  box-shadow: 0 0 10px var(--umultiplier);
   color: black;
 }
 
 #upowerBoost {
-  border-color:palevioletred;
+  border-color:var(--upower);
 }
 
 #upowerBoost:hover:enabled{
-  background-color: palevioletred;
-  box-shadow: 0 0 10px palevioletred;
+  background-color: var(--upower);
+  box-shadow: 0 0 10px var(--upower);
   color: black;
 }
 
 #uadderBoost {
-  border-color:rgb(145, 248, 93);
+  border-color:var(--uadder);
 }
 
 #uadderBoost:hover:enabled{
-  background-color: rgb(145, 248, 93);
-  box-shadow: 0 0 10px rgb(145, 248, 93);
+  background-color: var(--uadder);
+  box-shadow: 0 0 10px var(--uadder);
   color: black;
 }
 
 #ureducerBoost {
-  border-color:rgb(255, 255, 94);
+  border-color:var(--ureducer);
 }
 
 #ureducerBoost:hover:enabled{
-  background-color: rgb(255, 255, 94);
-  box-shadow: 0 0 10px rgb(255, 255, 94);
+  background-color: var(--ureducer);
+  box-shadow: 0 0 10px var(--ureducer);
   color: black;
 }
 
 .shardBuyableButton {
-  border-color: rgb(138, 255, 249);
+  border-color: var(--shard);
 }
 
 .shardBuyableButton:hover:enabled {
-  background-color: rgb(138, 255, 249);
-  box-shadow: 0 0 10px rgb(138, 255, 249);
+  background-color: var(--shard);
+  box-shadow: 0 0 10px var(--shard);
   color: black;
 }
 
 .shardSingleButton {
-  border-color: rgb(111, 202, 199);
+  border-color: var(--shard);
 }
 
 .shardSingleButton:hover:enabled {
-  background-color: rgb(111, 202, 199);
-  box-shadow: 0 0 10px rgb(111, 202, 199);
+  background-color: var(--shard);
+  box-shadow: 0 0 10px var(--shard);
   color: black;
 }
 
 .shardSingleButton.purchased {
-  background-color: rgb(111, 202, 199);
+  background-color: var(--shard);
   color: black;
 }
 
@@ -254,66 +278,66 @@
 
 .superCrystalUpgradeButton {
   background-color: #000000;
-  border-color: rgb(0, 180, 212);
+  border-color: var(--supercrystal);
   color: rgb(255, 255, 255);
 }
 
 .superCrystalUpgradeButton:hover:enabled{
-  background-color: rgb(0, 180, 212);
-  box-shadow: 0 0 10px rgb(0, 180, 212);
+  background-color: var(--supercrystal);
+  box-shadow: 0 0 10px var(--supercrystal);
   color: black;
 }
 .superCrystalUpgradeButton.purchased {
-  background-color: rgb(0, 180, 212);
+  background-color: var(--supercrystal);
   color: black;
 }
 
 .fortuneBuyableButton {
-  border-color: hotpink;
+  border-color: var(--fortune);
 }
 
 .fortuneBuyableButton:hover:enabled {
-  background-color: hotpink;
-  box-shadow: 0 0 10px hotpink;
+  background-color: var(--fortune);
+  box-shadow: 0 0 10px var(--fortune);
   color: black;
 }
 
 .fortuneSingleButton {
-  border-color: hotpink;
+  border-color: var(--fortune);
 }
 
 .fortuneSingleButton:hover:enabled {
-  background-color: hotpink;
-  box-shadow: 0 0 10px hotpink;
+  background-color: var(--fortune);
+  box-shadow: 0 0 10px var(--fortune);
   color: black;
 }
 
 .fortuneSingleButton.purchased {
-  background-color: hotpink;
+  background-color: var(--fortune);
   color: black;
 }
 
 .balanceBuyableButton {
-  border-color: white;
+  border-color: var(--balance);
 }
 
 .balanceBuyableButton:hover:enabled {
-  background-color: white;
-  box-shadow: 0 0 10px white;
+  background-color: var(--balance);
+  box-shadow: 0 0 10px var(--balance);
   color: black;
 }
 
 .balanceSingleButton {
-  border-color: white;
+  border-color: var(--balance);
 }
 
 .balanceSingleButton:hover:enabled {
-  background-color: white;
-  box-shadow: 0 0 10px white;
+  background-color: var(--balance);
+  box-shadow: 0 0 10px var(--balance);
   color: black;
 }
 
 .balanceSingleButton.purchased {
-  background-color: white;
+  background-color: var(--balance);
   color: black;
 }

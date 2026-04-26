@@ -189,6 +189,7 @@ it {
     border-radius: 5px;
     font-size: calc(12px * var(--font-scale));
     line-height: 20px;
+    display: block;
 }
 
 .automationContainer input {

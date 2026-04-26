@@ -69,7 +69,7 @@
     max-width: 750px;
     max-height: 550px;
     width: 80vw;
-    height: 50vh;
+    height: 51vh;
     z-index: 9989;
     text-align: left;
     display: none;
@@ -132,18 +132,19 @@
 }
 
 .closeWindow {
+    top: 0%;
+    right: 0%;
     z-index: 9998;
-    left: 93.5%;
-    bottom: 92.5%;
     width:35px;
     height:35px;
-    border: solid 3px #ffffff;
+    border: solid 0px #ffffff;
+    border-width: 0 0 3px 3px;
     background-color: #000000;
     position: fixed;
     cursor: pointer;
     padding: 1px;
     padding-left: 5px;
-    border-radius: 5px;
+    border-radius: 0 5px 0 5px
 }
 
 .closeWindow::before {
@@ -154,9 +155,6 @@
     background-image: url("images/close.png");
     background-size: contain;
     background-repeat: no-repeat;
-}
-.closeWindow:hover {
-    background-color: rgb(62, 62, 62);
 }
 #versionChooser {
     z-index: 9998;
@@ -202,7 +200,7 @@
     overflow-y: auto;
     color:white;
     margin-top:0;
-    max-height: 440px;
+    max-height: 80%;
 }
 
 .loreChapter {
@@ -274,6 +272,7 @@ footer {
 #helpDescription {
     margin-left: 5px;
     margin-top: 5px;
+    height: 1px;
 }
 
 #helpPageTitle {

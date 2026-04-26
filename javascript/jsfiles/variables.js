@@ -49,9 +49,9 @@ let player = {
     },
     supercoin: { currency: 0, total_currency: 0, spent_currency: 0 },
     prestige: {
-        upgrades: { 1: 0, 2: 0 },
+        upgrades: { 1: 0 },
         singleUpgrades: [],
-        super: { buyables: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }, singles: [] },
+        break: { buyables: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }, singles: [] },
         milestones: [],
         currency: 0, total_currency: 0, broken_currency: 0, resets: 0,
         prestigeTable: getPrestigeTable(),
@@ -83,6 +83,9 @@ let player = {
         neutral: 0, scales_of_balance: 0,
         upgrades: { buyables: { 1: 0, 2: 0, 3: 0 }, singles: [] }
     },
+    reflash: {
+        currency: 0, total_currency: 0, resets: 0
+    },
     time: {
         savedTime: Date.now(), currentTime: 0,
         game: {
@@ -98,7 +101,7 @@ let player = {
     settings: {
         currentLanguage: 'en', auto_save: true, mutedAudio: false, shop_bulkbuy: 1, minerals_bulkbuy: 1,
         font: 'option1', notation: 'option1',
-        buy_max_activate: false, shard_buy_max_activate: false, superprestige_buy_max_activate: false, modernization_activated: false,
+        buy_max_activate: false, shard_buy_max_activate: false, breakprestige_buy_max_activate: false, modernization_activated: false,
         loreBoolean: [], event: { spiritual: false, triplePower: false },
         whichPrestigeMode: 'time', autosave_interval: 30000, offline: true
     },
@@ -146,7 +149,7 @@ const text = {
     },
     changelog: {
         start: '', "0.0":'', "0.1":'', "0.2":'', "0.3":'', "0.4":'', "0.5":'', "0.5.1":'', "0.6":'', "0.7":'', "0.7.1":'', "0.8":'',
-        "0.8.0.1":'', "0.9":'', "0.9.1":'', "0.9.2":'', "0.10":'', "0.10.1":'', "0.11":'', "0.11.1":'', "0.12":'', "0.12.1": '', "0.13": '', "0.14": ''
+        "0.8.0.1":'', "0.9":'', "0.9.1":'', "0.9.2":'', "0.10":'', "0.10.1":'', "0.11":'', "0.11.1":'', "0.12":'', "0.12.1": '', "0.13": '', "0.14": '', "0.15": '',
     },
     // Генерируем повторяющиеся тексты с помощью функции
     chapter: generateEmptyObj(17, true),
@@ -157,6 +160,6 @@ const text = {
 
 const PRES_CHALL = {
     goals: {
-        1: 1e30, 2: 1e35, 3: 1e60, 4: 1e75, 5: 1e50, 6: 1e65, 7: 1e30, 8: 1e15,
+        1: 1e20, 2: 1e24, 3: 1e60, 4: 1e62, 5: 1e52, 6: 1e67, 7: 1e25, 8: 1e15,
     }
 };

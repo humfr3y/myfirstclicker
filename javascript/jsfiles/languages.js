@@ -64,8 +64,8 @@ setInterval(() => {
                 case 'superCrystalsTab':
                     loadTranslationsSuperCrystal();
                     break;
-                case 'superprestigeTab':
-                    loadTranslationsSuperprestige();
+                case 'breakPrestigeTab':
+                    loadTranslationsBreakPrestige();
                     break;
                 case 'fortuneTab':
                     loadTranslationsFortune();
@@ -77,7 +77,7 @@ setInterval(() => {
                     loadTranslationsAutomation()
                     break;
                 case 'milestonesTab':
-                    loadTranslationsSuperprestige();
+                    loadTranslationsBreakPrestige();
                     break;
                 case 'mineralsTab':
                     loadTranslationsMinerals()
@@ -142,10 +142,12 @@ function loadTranslationsAlways() {
     // Кнопка Престижа
     const btnPrestige = document.getElementById('doPrestige');
     if (player.coin.currency >= 1e15 && player.prestige.challenge.activated === 0) {
-        let pGain = formatNumber(GAIN.prestige.reset());
-        let cGain = formatNumber(GAIN.crystal.reset());
-        let extra = MILESTONES.has(15) ? i18next.t('prestigeCountMultiplierText', {prestigeCountMultiplier: pGain}) : '';
-        btnPrestige.textContent = i18next.t('prestigeEnabled', {crystalsTemp: cGain, prestigeCountMultiplierText: extra});
+        let pGain = GAIN.prestige.reset();
+        let cGain = GAIN.crystal.reset();
+        let extra = MILESTONES.has(15) && player.prestige.total_currency < 1e15? i18next.t('prestigeCountMultiplierText', {prestigeCountMultiplier: formatNumber(pGain)}) : '';
+        btnPrestige.textContent = player.prestige.total_currency >= 1e15 ? 
+        i18next.t('prestigeEnabledAdvanced', {crystalsTemp: formatNumber(cGain), crystalsPerMin: formatNumber(cGain * 60 / player.time.real.prestige.timer) }) :
+        i18next.t('prestigeEnabled', {crystalsTemp: formatNumber(cGain), prestigeCountMultiplierText: extra});
     } else if (player.prestige.challenge.activated !== 0) {
         let goal = formatNumber(PRES_CHALL.goals[player.prestige.challenge.activated]);
         if (player.coin.currency >= PRES_CHALL.goals[player.prestige.challenge.activated]) {
@@ -160,7 +162,7 @@ function loadTranslationsAlways() {
     // Кнопки "Купить один/макс"
     document.getElementById('maxOrNoUpgrades').textContent = player.settings.buy_max_activate ? i18next.t('maxUpgradesTrue') : i18next.t('maxUpgradesFalse');
     document.getElementById('maxOrNoShardUpgrades').textContent = player.settings.shard_buy_max_activate ? i18next.t('maxUpgradesTrue') : i18next.t('maxUpgradesFalse');
-    document.getElementById('maxOrNoSuperprestigeUpgrades').textContent = player.settings.superprestige_buy_max_activate ? i18next.t('maxUpgradesTrue') : i18next.t('maxUpgradesFalse');
+    document.getElementById('maxOrNoBreakPrestigeUpgrades').textContent = player.settings.breakprestige_buy_max_activate ? i18next.t('maxUpgradesTrue') : i18next.t('maxUpgradesFalse');
 
     const btnReflash = document.getElementById('doReflash');
     if ((player.coin.currency >= 1.79e308 || player.coin.currency == Infinity) && player.prestige.challenge.completed.includes(8)) {
@@ -315,7 +317,7 @@ function loadTranslationsCoins() {
 // ============================================================
 function loadTranslationsPrestige() {
     // 1. Покупаемые улучшения престижа
-    for (let i = 1; i <= 2; i++) {
+    for (let i = 1; i <= 1; i++) {
         document.getElementById(`pBuyableU${i}_amount`).textContent = formatNumber(player.prestige.upgrades[i]);
         document.getElementById(`pBuyableU${i}_effect`).textContent = formatNumber(UPGS.prestige.buyables[i].effect(), 'boost');
         document.getElementById(`pBuyableU${i}_cost`).textContent = formatNumber(UPGS.prestige.buyables[i].cost());
@@ -536,38 +538,38 @@ function loadTranslationsSuperCrystal() {
 // ============================================================
 // Функция для SUPERPRESTIGE (супер-престиж)
 // ============================================================
-function loadTranslationsSuperprestige() {
+function loadTranslationsBreakPrestige() {
     // 1. Покупаемые улучшения
     for (let i = 1; i <= 5; i++) {
-        document.getElementById(`spb${i}_amt`).textContent = formatNumber(player.prestige.super.buyables[i]);
-        document.getElementById(`spb${i}_bulk`).textContent = formatNumber(UPGS.prestige.super.buyables[i].bulk());
+        document.getElementById(`bpb${i}_amt`).textContent = formatNumber(player.prestige.break.buyables[i]);
+        document.getElementById(`bpb${i}_bulk`).textContent = formatNumber(UPGS.prestige.break.buyables[i].bulk());
         
         let effFormat = (i === 1) ? 'power' : (i === 2) ? 'percent' : 'boost';
         // Специальный формат для 5-го апгрейда из старого кода ('power', 4 знака)
         if (i === 5) {
-            document.getElementById(`spb${i}_eff`).textContent = formatNumber(UPGS.prestige.super.buyables[i].effect(), 'power', 4);
+            document.getElementById(`bpb${i}_eff`).textContent = formatNumber(UPGS.prestige.break.buyables[i].effect(), 'power', 4);
         } else {
-            document.getElementById(`spb${i}_eff`).textContent = formatNumber(UPGS.prestige.super.buyables[i].effect(), effFormat);
+            document.getElementById(`bpb${i}_eff`).textContent = formatNumber(UPGS.prestige.break.buyables[i].effect(), effFormat);
         }
         
-        document.getElementById(`spb${i}_cost`).textContent = formatNumber(UPGS.prestige.super.buyables.bulk_cost(i));
+        document.getElementById(`bpb${i}_cost`).textContent = formatNumber(UPGS.prestige.break.buyables.bulk_cost(i));
     }
 
     // 2. Одиночные улучшения (включая 10-е Superhammer, которое мы вывели под индексом 10)
     const sp_s_ids = [11, 12, 13, 14, 15, 21, 22, 23, 24, 25]; // 25 - это Superhammer
     for (let i = 1; i <= 10; i++) {
         let upg = sp_s_ids[i-1];
-        let isBought = player.prestige.super.singles.includes(upg);
+        let isBought = player.prestige.break.singles.includes(upg);
         
         // Обновляем эффект, если это не Superhammer (25)
         if (upg !== 25) {
             let effFormat = (upg === 14 || upg === 24) ? 'number' : 'boost';
-            document.getElementById(`sps${i}_eff`).textContent = formatNumber(UPGS.prestige.super.singles[upg].effect(), effFormat);
+            document.getElementById(`bps${i}_eff`).textContent = formatNumber(UPGS.prestige.break.singles[upg].effect(), effFormat);
         }
 
-        document.getElementById(`sps${i}_cost_cont`).style.display = isBought ? 'none' : 'inline';
+        document.getElementById(`bps${i}_cost_cont`).style.display = isBought ? 'none' : 'inline';
         if (!isBought) {
-            document.getElementById(`sps${i}_cost`).textContent = formatNumber(UPGS.prestige.super.singles[upg].cost());
+            document.getElementById(`bps${i}_cost`).textContent = formatNumber(UPGS.prestige.break.singles[upg].cost());
         }
     }
 }
@@ -718,6 +720,7 @@ function loadTranslationsFortune() {
     // 1. Верхние счетчики и конвертация
     document.getElementById('ft_tokens_val').textContent = formatNumber(player.fortune.tokens);
     document.getElementById('ft_tokens_val2').textContent = formatNumber(player.fortune.tokens);
+    document.getElementById('ft_sc_val').textContent = formatNumber(player.supercrystal.currency);
     document.getElementById('ft_coin_cost').textContent = MISC.fortune.cost.coin();
     document.getElementById('ft_cryst_cost').textContent = MISC.fortune.cost.crystal();
     document.getElementById('ft_rand_time').textContent = formatNumber(60 * UPGS.fortune.upgrades.buyables[3].effect());
@@ -765,7 +768,7 @@ function loadTranslationsBalance() {
     document.getElementById('bal_min_perc').textContent = MISC.balance.ratio().rightPercent + '%';
     
     document.getElementById('bal_ft_tokens').textContent = formatNumber(player.fortune.tokens);
-    document.getElementById('bal_neutral_val').textContent = formatNumber(player.balance.neutral);
+    document.getElementById('bal_neutral_val').textContent = formatNumber(player.balance.neutral, 'boost');
 
     // 2. Генерация весов
     let has23 = player.balance.upgrades.singles.includes(23);
@@ -774,9 +777,9 @@ function loadTranslationsBalance() {
     
     if (!has23) {
         document.getElementById('bsc_sob1').textContent = formatNumber(MISC.balance.scales_of_balance());
-        document.getElementById('bsc_neu1').textContent = formatNumber(GAIN.balance.generation());
+        document.getElementById('bsc_neu1').textContent = formatNumber(GAIN.balance.generation(), 'boost');
     } else {
-        document.getElementById('bsc_sobc').textContent = formatNumber(GAIN.balance.scales_of_balance(), 'power');
+        document.getElementById('bsc_sobc').textContent = formatNumber(GAIN.balance.scales_of_balance(), 'power', 5);
         document.getElementById('bsc_sob2').textContent = formatNumber(MISC.balance.scales_of_balance());
         document.getElementById('bsc_sob3').textContent = formatNumber(player.balance.scales_of_balance, 'boost');
         document.getElementById('bsc_neu2').textContent = formatNumber(GAIN.balance.generation());
@@ -828,7 +831,7 @@ function loadTranslationsBalance() {
 
     // 5. Улучшения Баланса
     for(let i=1; i<=3; i++) {
-        document.getElementById(`bal_b_eff_${i}`).textContent = formatNumber((UPGS.balance.buyables[i].effect() - 1) * 100);
+        document.getElementById(`bal_b_eff_${i}`).textContent = formatNumber((UPGS.balance.buyables[i].effect() - 1) * 100, 'boost');
         document.getElementById(`bal_b_cost_${i}`).textContent = formatNumber(UPGS.balance.buyables[i].cost());
     }
     for (let j = 1; j <= 3; j++) {
@@ -841,6 +844,9 @@ function loadTranslationsBalance() {
             }
         }
     }
+
+    document.getElementById('convertToPlusCoin').textContent = player.balance.coins.plus >= 10 ? i18next.t('fullConvert') : i18next.t('convertToPlusCoin')
+    document.getElementById('convertToMinusCoin').textContent = player.balance.coins.minus >= 10 ? i18next.t('fullConvert') : i18next.t('convertToMinusCoin')
 }
 // ============================================================
 // Функция для вкладки ИСПЫТАНИЙ (CHALLENGES) — 100% ОПТИМИЗИРОВАНА И БЕЗОПАСНА
@@ -997,14 +1003,14 @@ function updateStaticTranslations() {
     });
 
     // 2. Инициализация массивов для Лора (My Diary)
-    for (let i = 1; i <= 17; i++) {
+    for (let i = 1; i <= 18; i++) {
         text.chapter[i] = i18next.t(`chapter${i}`);
         let tab = document.getElementById(`chapter${i}Tab`);
         if (tab) tab.textContent = i18next.t(`chapter${i}Name`);
     }
 
     // 3. Инициализация массивов для Помощи (How to play)
-    for (let i = 1; i <= 21; i++) {
+    for (let i = 1; i <= 22; i++) {
         text.helpTitle[i] = i18next.t(`help${i}Name`);
         if (i !== 13) {
             text.help[i] = i18next.t(`help${i}`);
@@ -1045,7 +1051,7 @@ function updateStaticTranslations() {
     text.chapter.start = i18next.t('startLoreDescription');
     text.help.start = i18next.t('startHelpDescription');
 
-    const versions = ['0.0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.5.1', '0.6', '0.7', '0.7.1', '0.8', '0.8.0.1', '0.9', '0.9.1', '0.9.2', '0.10', '0.10.1', '0.11', '0.12', '0.12.1', '0.13', '0.14'];
+    const versions = ['0.0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.5.1', '0.6', '0.7', '0.7.1', '0.8', '0.8.0.1', '0.9', '0.9.1', '0.9.2', '0.10', '0.10.1', '0.11', '0.12', '0.12.1', '0.13', '0.14', '0.15'];
     versions.forEach(v => {
         let key = 'version' + v.replace(/\./g, '');
         text.changelog[v] = i18next.t(key);
@@ -1063,13 +1069,13 @@ function updateStaticTranslations() {
         i18next.t('pbtitle1'), i18next.t('pbtitle2'), i18next.t('pbtitle3'), 
         i18next.t('pbtitle4'), i18next.t('pbtitle5'), i18next.t('pbtitle6'), 
         i18next.t('pbtitle7'), i18next.t('pbtitle8'), i18next.t('pbtitle9'), 
-        'Infinity?'
+        'Infinity?', i18next.t('pbtitle10')
     ];
     PROGRESS.currency = [
         i18next.t('pbcurrency1'), i18next.t('pbcurrency1'), i18next.t('pbcurrency1'), 
         i18next.t('pbcurrency2'), i18next.t('pbcurrency3'), i18next.t('pbcurrency4'), 
         i18next.t('pbcurrency4'), i18next.t('pbcurrency3'), i18next.t('pbcurrency5'), 
-        i18next.t('pbcurrency1')
+        i18next.t('pbcurrency1'), i18next.t('pbcurrency6')
     ];
 
     // 5. Инициализация 50 Обычных Ачивок
@@ -1121,8 +1127,9 @@ function updateStaticTranslations() {
         ['baseCriticalGainEffectStats', 'baseCriticalGainEffectName'], ['fifthSuperCrystalSingleEffectStats', 'fifthSuperCrystalSingleEffectName'], ['ninthShopBuyableEffectStats', 'ninthShopBuyableEffectName'],
         ['firstMineralEffect2Stats', 'firstMineralEffect2Name'], ['critMuShAchStats', 'critMuShAchName'], ['thirdBuyableSuperEffectStats', 'thirdBuyableSuperEffectName'],
         ['fortuneBoostCritMultiStats', 'critMultiplierBlessingName'], ['thirdSuperCrystalSingleEffectStats', 'thirdSuperCrystalSingleEffectName'], ['fortuneBoostSimulationStats', 'simulationBlessingName'],
-        ['prestigeBaseStats', 'basePrestigesName'], ['prestigeAch35Stats', 'achievement35Name'], ['prestigeSuperSingle13Stats', 'thirdSuperPrestigeSingleEffectName'],
-        ['prestigeShop6Stats', 'sixthShopBuyableEffectName'], ['prestigeShardAch7Stats', 'prestigeShAchName'], ['prestigeFortune22Stats', 'fifthFortuneSingleEffectName']
+        ['prestigeBaseStats', 'basePrestigesName'], ['prestigeAch35Stats', 'achievement35Name'], ['prestigeBreakSingle13Stats', 'thirdBreakPrestigeSingleEffectName'],
+        ['prestigeShop6Stats', 'sixthShopBuyableEffectName'], ['prestigeShardAch7Stats', 'prestigeShAchName'], ['prestigeFortune22Stats', 'fifthFortuneSingleEffectName'],
+        ['pchall7Stats', 'pchall7Name'], ['pchall1Stats', 'pchall1Name'], ['pchall3Stats', 'pchall3Name'], ['breakPrestigeBuyable31Stats', 'triplerName'], ['breakPrestigeBuyable32Stats', 'triplerName'],
     ];
     dynamicStats.forEach(([id, key]) => {
         const el = document.getElementById(id);
@@ -1251,4 +1258,3 @@ function changeText() {
         document.getElementsByClassName("tooltipAch")[49].innerHTML = ''
     }
 }
-

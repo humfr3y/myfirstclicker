@@ -1,8 +1,30 @@
 /*смена полоски прокрутки для хрома*/
 
 :root {
-  --reflash: #00dc00;
+  --reflash: #00ca00;
+  --coin: #ffd900;
+  --crystal: aqua;
+  --supercrystal: rgb(0, 180, 212);
+  --fortune: hotpink;
+  --balance: white;
+  --neutral: rgb(190, 190, 190);
+  --grey-text: #656565;
+  --shard: rgb(138, 255, 249);
+  --supercoin: rgb(255, 174, 0);
+  --spirit: rgb(202, 255, 237);
+  --critical: rgb(255, 0, 0);
+  --rune: rgb(45, 202, 210);
+
+  --coin-upgrade: #23e019;
+  --prestige-upgrade: rgb(0, 212, 212);
+  --break-prestige-upgrade: rgb(18, 179, 179);
+
+  --umultiplier: cadetblue;
+  --upower: palevioletred;
+  --uadder: rgb(145, 248, 93);
+  --ureducer: rgb(255, 255, 94);
 }
+
 html::-webkit-scrollbar, #versionDiv::-webkit-scrollbar, #helpDiv::-webkit-scrollbar {
   width:8px;
 }
@@ -47,7 +69,7 @@ hr {
   color:white;
 }
 
-#maxOrNoUpgrades, #modernizeButton, #maxOrNoShardUpgrades, #maxOrNoSuperprestigeUpgrades {
+#maxOrNoUpgrades, #modernizeButton, #maxOrNoShardUpgrades, #maxOrNoBreakPrestigeUpgrades {
   background-color: #060606;
   border:#ffffff solid 1.6px;
   color: white;
@@ -62,7 +84,7 @@ hr {
   cursor: pointer;
 }
 
-#maxOrNoUpgrades:hover, #maxOrNoShardUpgrades:hover, #maxOrNoSuperprestigeUpgrades:hover {
+#maxOrNoUpgrades:hover, #maxOrNoShardUpgrades:hover, #maxOrNoBreakPrestigeUpgrades:hover {
   background-color: #494949;
 }
 
@@ -82,32 +104,32 @@ hr {
 }
 
 gt {
-  color: #ffd900;
-  text-shadow: 0 0 5px rgb(255, 217, 0);
+  color: var(--coin);
+  text-shadow: 0 0 5px var(--coin);
   font-size: calc(30px * var(--font-scale));
 }
 
 #ft_tokens_val, #bal_ft_tokens, pt {
-  color: hotpink;
-  text-shadow: 0 0 5px hotpink;
+  color: var(--fortune);
+  text-shadow: 0 0 5px var(--fortune);;
   font-size: calc(30px * var(--font-scale));
 }
 
 bt {
-  color: white;
-  text-shadow: 0 0 5px white;
+  color: var(--balance);
+  text-shadow: 0 0 5px var(--balance);
   font-size: calc(30px * var(--font-scale));
 }
 
 nt {
-  color: rgb(190, 190, 190);
-  text-shadow: 0 0 5px rgb(190, 190, 190);
+  color: var(--neutral);
+  text-shadow: 0 0 5px var(--neutral);
   font-size: calc(30px * var(--font-scale));
 }
 
 
 #coinsGain {
-    color: #656565;
+    color: var(--grey-text);
     font-size: calc(15px * var(--font-scale));
     text-align: center;
     margin: 5px;
@@ -215,7 +237,7 @@ nt {
   position: absolute; 
   display: flex; 
   padding: 5px;
-  text-shadow: 1px 1px #ffd900, -1px -1px #ffd900, 1px -1px #ffd900, -1px 1px #ffd900;
+  text-shadow: 1px 1px var(--coin), -1px -1px var(--coin), 1px -1px var(--coin), -1px 1px var(--coin);
   font-weight:900;
   color: rgb(0, 0, 0);
   cursor:default;
@@ -225,17 +247,17 @@ nt {
 }
 
 .shardCountPerClick {
-  text-shadow: 1px 1px rgb(138, 255, 249), -1px -1px rgb(138, 255, 249), 1px -1px rgb(138, 255, 249), -1px 1px rgb(138, 255, 249);
+  text-shadow: 1px 1px var(--shard), -1px -1px var(--shard), 1px -1px var(--shard), -1px 1px var(--shard);
 }
 .superCoinText {
-  text-shadow: 1px 1px rgb(255, 174, 0), -1px -1px rgb(255, 174, 0), 1px -1px rgb(255, 174, 0), -1px 1px rgb(255, 174, 0);
+  text-shadow: 1px 1px var(--supercoin), -1px -1px var(--supercoin), 1px -1px var(--supercoin), -1px 1px var(--supercoin);
   z-index: 100000;
 }
 .spiritText {
-  text-shadow: 1px 1px rgb(202, 255, 237), -1px -1px rgb(202, 255, 237), 1px -1px rgb(202, 255, 237), -1px 1px rgb(202, 255, 237);
+  text-shadow: 1px 1px var(--spirit), -1px -1px var(--spirit), 1px -1px var(--spirit), -1px 1px var(--spirit);
 }
 .criticalClick {
-  text-shadow: 1px 1px rgb(255, 0, 0), -1px -1px rgb(255, 0, 0), 1px -1px rgb(255, 0, 0), -1px 1px rgb(255, 0, 0);
+  text-shadow: 1px 1px var(--critical), -1px -1px var(--critical), 1px -1px var(--critical), -1px 1px var(--critical);
   z-index: 99999;
 }
 
@@ -254,15 +276,10 @@ nt {
 .confirmationWindow {
   display: none;
   width: 400px;
-  height: 250px;
 }
 #windowTitleDiv {
   width: 100%;
   margin-top: 50px;
-}
-.confClose{
-  left: 90.5%;
-  bottom: 85%;
 }
 
 #resetTitle {
@@ -437,12 +454,12 @@ nt {
 
 .shopButton, .mineralButton {
   background-color: #060606;
-  color: rgb(255, 174, 0);
-  border: rgb(235, 160, 0) 1px solid;
+  color: var(--supercoin);
+  border: var(--supercoin) 1px solid;
   border-radius: 3px;
   width: 48px;
   height: 48px;
-  box-shadow: 0 0 1px rgb(255, 174, 0);
+  box-shadow: 0 0 1px var(--supercoin);
   cursor: pointer;
   font-size: calc(11px * var(--font-scale));
   margin: 5px;
@@ -557,7 +574,7 @@ nt {
 }
 
 .bulkShopBuyButton {
-  border: rgb(255, 174, 0) 1px solid;
+  border: var(--supercoin) 1px solid;
   background-color: #000000;
   width: 100%;
   height: 30px;
@@ -566,14 +583,14 @@ nt {
 }
 
 .bulkShopBuyButton:hover, .useButton:hover {
-  background-color:rgb(255, 174, 0);
+  background-color:var(--supercoin);
   color: black
 }
 
 st {
   font-size: calc(30px * var(--font-scale));
-  color:rgb(255, 174, 0);
-  text-shadow: 0 0 5px rgb(255, 174, 0);
+  color:var(--supercoin);
+  text-shadow: 0 0 5px var(--supercoin);
 }
 #overdriveTab {
   display: flex;
@@ -612,11 +629,11 @@ st {
 }
 #overdriveType1ProgressBar{
   height: 100%;
-  background-image:radial-gradient( gold, black 210%);
+  background-image:radial-gradient( var(--coin), black 210%);
 }
 #overdriveType2ProgressBar{
   height: 100%;
-  background-image:radial-gradient( rgb(0, 242, 255), black 210%);
+  background-image:radial-gradient( var(--crystal), black 210%);
 }
 .overdriveTypeGhost {
   position: absolute;
@@ -658,16 +675,16 @@ st {
 }
 
 ct {
-  color:aqua;
+  color:var(--crystal);
   font-size: calc(20px * var(--font-scale));
-  text-shadow: 0 0 5px aqua;
+  text-shadow: 0 0 5px var(--crystal);
 }
 
 #doPrestige, #doReflash {
   border-style: solid;
   border-radius: 5px;
   background-color: black;
-  color: aqua;
+  color: var(--crystal);
   font-size: calc(13px * var(--font-scale));
   max-width: 250px;
   max-height: 90px;
@@ -676,7 +693,7 @@ ct {
   text-align: center;
   transition:  0.2s ease-in-out;
   cursor: pointer;
-  border-color:aqua;
+  border-color:var(--crystal);
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -689,7 +706,7 @@ ct {
 }
 
 #doPrestige:hover {
-  background-color: aqua;
+  background-color: var(--crystal);
   color:black;
 }
 
@@ -707,8 +724,8 @@ ct {
 }
 
 .prestigeButton {
-  color: aqua;
-  border-color: aqua;
+  color: var(--crystal);
+  border-color: var(--crystal);
 }
 
 .prestigeButton:hover {
@@ -720,17 +737,17 @@ ct {
 }
 
 .fortuneButton2 {
-  color: hotpink;
-  border-color: hotpink;
+  color: var(--fortune);
+  border-color: var(--fortune);
 }
 
 /* Specific active styles for special-colored tab buttons */
 .tabButton.prestigeButton.active,
 .tabButton.prestigeButton[aria-selected="true"] {
   /* make the aqua color the background and use dark text */
-  background-color: rgba(0, 255, 255, 1);
+  background-color: var(--crystal);
   color: black;
-  border-color: rgba(0, 255, 255, 1);
+  border-color: var(--crystal);
 }
 .tabButton.prestigeButton.active:hover,
 .tabButton.prestigeButton[aria-selected="true"]:hover {
@@ -740,9 +757,9 @@ ct {
 .tabButton.fortuneButton2.active,
 .tabButton.fortuneButton2[aria-selected="true"] {
   /* use a stronger pink for fortune active */
-  background-color: rgb(255, 105, 180);
+  background-color: var(--fortune);
   color: black;
-  border-color: rgb(255, 105, 180);
+  border-color: var(--fortune);
 }
 .tabButton.fortuneButton2.active:hover,
 .tabButton.fortuneButton2[aria-selected="true"]:hover {
@@ -851,9 +868,9 @@ ct {
 }
 
 shn {
-  color: rgb(138, 255, 249);
+  color: var(--shard);
   font-size: calc(30px * var(--font-scale));
-  text-shadow: 0 0 5px rgb(138, 255, 249);
+  text-shadow: 0 0 5px var(--shard);
 }
 
 #breakCrystal {
@@ -873,7 +890,7 @@ shn {
 }
 
 #doBreakCrystal {
-  border: rgb(106, 253, 246) solid 2px;
+  border: var(--crystal) solid 2px;
   width: 300px;
   height: 50px;
   font-size: calc(16px * var(--font-scale));
@@ -881,7 +898,7 @@ shn {
 }
 
 #doBreakCrystal:hover {
-  background-color: rgb(106, 253, 246);
+  background-color: var(--crystal);
   color: black;
 }
 
@@ -891,7 +908,7 @@ shn {
 }
 
 .shardUnlockableBase {
-  border: rgb(106, 253, 246) 1px solid;
+  border: var(--shard) 1px solid;
   border-radius: 3px; 
   background-color: #111111;
   width: 600px;
@@ -939,9 +956,9 @@ shn {
 }
 
 spn {
-  color: rgb(202, 255, 237);
+  color: var(--spirit);
   font-size: calc(30px * var(--font-scale));
-  text-shadow: 0 0 5px rgb(202, 255, 237);
+  text-shadow: 0 0 5px var(--spirit);
 }
 
 pn {
@@ -963,9 +980,9 @@ bn {
 }
 
 rn {
-  color: rgb(45, 202, 210);
+  color: var(--rune);
   font-size: calc(30px * var(--font-scale));
-  text-shadow: 0 0 5px rgb(45, 202, 210);
+  text-shadow: 0 0 5px var(--rune);
 }
 
 #shopBuyableU1 {
@@ -1082,6 +1099,11 @@ rn {
   flex-direction: row;
 }
 
+.prestigeChallengePair {
+  display: flex;
+  flex-direction: row;
+}
+
 #superCrystalsTab, #superCrystalUpgrades{
   margin-top: 30px;
   justify-content: space-evenly;
@@ -1102,9 +1124,9 @@ rn {
 }
 
 scn {
-  color: rgb(0, 180, 212);
+  color: var(--supercrystal);
   font-size: calc(30px * var(--font-scale));
-  text-shadow: 0 0 5px rgb(0, 180, 212);
+  text-shadow: 0 0 5px var(--supercrystal);
 }
 
 #superCrystalBarBase{
@@ -1166,20 +1188,20 @@ scn {
 }
 
 .mineralButton {
-  border-color: rgb(45, 202, 210)
+  border-color: var(--rune);
 }
 
 #generateRunes, #generateRunesMax {
   margin: 0;
-  border-color: rgb(45, 202, 210);
+  border-color: var(--rune);
   width: 175px;
   height: 60px;
   margin-bottom: 10px;
 }
 
 #generateRunes:hover, #generateRunesMax:hover{
-  background-color: rgb(45, 202, 210);
-  box-shadow: 0 0 10px rgb(45, 202, 210);
+  background-color: var(--rune);
+  box-shadow: 0 0 10px var(--rune);
   color: black;
 }
 
@@ -1189,8 +1211,8 @@ scn {
 }
 
 super {
-  color: rgb(255, 174, 0);
-  text-shadow: 0 0 5px rgb(255, 174, 0);
+  color: var(--supercoin);
+  text-shadow: 0 0 5px var(--supercoin);
   pointer-events: none;
   user-select: none;
 }
@@ -1223,13 +1245,13 @@ th {
   margin-top: 20px;
 }
 
-#superprestigeTab {
+#breakPrestigeTab {
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-#superPRow1{
+#breakPRow1{
   margin-top: 100px;
 }
 
@@ -1378,14 +1400,14 @@ th {
 }
 
 .halfButton.left {
-  background: radial-gradient(rgb(0, 0, 0) 45%, rgb(255, 217, 0) 100%);
+  background: radial-gradient(rgb(0, 0, 0) 45%, var(--coin) 100%);
   clip-path: polygon(0 0, 180px 0, 180px 360px, 0 360px);
   border-right: none;
 
 }
 
 .halfButton.right {
-  background: radial-gradient(rgb(0, 0, 0) 45%, rgb(0, 204, 255));
+  background: radial-gradient(rgb(0, 0, 0) 45%, var(--crystal));
   clip-path: polygon(180px 0, 360px 0, 360px 360px, 180px 360px);
   border-left: none;
   justify-content: right;
@@ -1606,7 +1628,10 @@ img.disabled {
   font-size: calc(12px * var(--font-scale));
 }
 
-
+.save_slot {
+  max-height: 50px;
+  width: 200px;
+}
 
 
 
@@ -1717,7 +1742,7 @@ img.disabled {
     --font-scale: 1; 
   }
 
-  #maxOrNoUpgrades, #modernizeButton, #maxOrNoShardUpgrades, #maxOrNoSuperprestigeUpgrades {
+  #maxOrNoUpgrades, #modernizeButton, #maxOrNoShardUpgrades, #maxOrNoBreakPrestigeUpgrades {
     border-radius: 2.5px;
   }
   #multiplierStats {
@@ -1750,8 +1775,5 @@ img.disabled {
   }
   #versionDiv {
     max-height: 85%;
-  }
-  .closeWindow {
-    left: 88.5%;
   }
 }

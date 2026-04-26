@@ -5,7 +5,7 @@ const TabUpdater = {
     
     subTabsMap: {
         mainTab: ['coinsTab', 'overdriveTab'],
-        prestigeTab: ['upgradesTab', 'milestonesTab', 'automationTab', 'shardsTab', 'superCrystalsTab', 'mineralsTab', 'superprestigeTab', 'fortuneTab', 'balanceTab'],
+        prestigeTab: ['upgradesTab', 'milestonesTab', 'automationTab', 'shardsTab', 'superCrystalsTab', 'mineralsTab', 'breakPrestigeTab', 'fortuneTab', 'balanceTab'],
         infoTab: ['aboutGameTab', 'statisticsTab', 'multipliersTab', 'challengesTimeTab', 'recentPrestigesTab', 'softcapsTab'],
         settingsTab: ['settingsSaveTab', 'settingsGraphicTab', 'settingsOtherTab'],
         achTab: ['achScreenDescription', 'shardAchsTab'],

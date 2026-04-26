@@ -48,11 +48,12 @@ const LORE = {
         10() { return player.supercrystal.currency > 0},
         11() { return player.minerals[1] > 0 || player.minerals[2] > 0 || player.minerals[3] > 0},
         12() { return player.shop.unlockables.includes(4)},
-        13() { return player.prestige.super.singles.includes(25) },
+        13() { return player.prestige.break.singles.includes(25) },
         14() { return player.uadders > 0 },
         15() { return player.ureducers > 0 },
         16() { return player.fortune.total_tokens >= 1 },
         17() { return player.balance.total_coins.plus >= 1 || player.balance.total_coins.minus >= 1},
+        18() { return player.progressBarGoals.includes(8)}
     }
 }
 

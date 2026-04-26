@@ -29,6 +29,13 @@ class UniversalBuyableUpgrade {
     get element() { return document.getElementById(this.elementId); }
 
     cost(x = this.targetArray[this.id]) {
+        // Условие Испытания 5: цены зависят от суммы всех покупаемых улучшений монет
+        if (this.layer === 'coin' && (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7)) {
+            if (x === this.targetArray[this.id]) {
+                x = player.coin.upgrades[1] + player.coin.upgrades[2] + player.coin.upgrades[3] + player.coin.upgrades[4] + player.coin.upgrades[5];
+            }
+        }
+        
         if (this.customCost) return this.customCost(x); // Если есть кастомная цена - используем её!
         let cost = this.basePrice * Math.pow(this.power, x);
         cost *= this.customCostMod(cost, x); 
@@ -39,20 +46,26 @@ class UniversalBuyableUpgrade {
     effect2(...args) { return this.customEffect2 ? this.customEffect2(...args) : null; }
 
     bulk(x = this.state.currency, y = this.targetArray[this.id]) {
+        // Условие Испытания 5 для синхронизации оптовой покупки
+        if (this.layer === 'coin' && (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7)) {
+            if (y === this.targetArray[this.id]) {
+                y = player.coin.upgrades[1] + player.coin.upgrades[2] + player.coin.upgrades[3] + player.coin.upgrades[4] + player.coin.upgrades[5];
+            }
+        }
+
         // Сколько мы физически можем позволить себе купить
         let affordable = upgradesPurchasableCustom(y, x, this.cost(), this.power);
 
         // Если у улучшения прописана своя логика опта (как у Осколков и Суперпрестижа)
         if (this.customBulk) {
             let custom = this.customBulk(x, y);
-            // Защита: не даем вернуть 1, если денег вообще 0
             return Math.max(Math.min(custom, affordable), 0);
         }
 
         // Проверяем, включена ли кнопка "Купить всё" для конкретной вкладки
         let isMaxActive = true;
         if (this.layer === 'coin') isMaxActive = player.settings.buy_max_activate;
-        if (this.layer === 'prestige') isMaxActive = player.settings.superprestige_buy_max_activate;
+        if (this.layer === 'prestige') isMaxActive = player.settings.breakprestige_buy_max_activate;
         if (this.layer === 'shard') isMaxActive = player.settings.shard_buy_max_activate;
 
         // Если кнопка выключена, мы хотим купить только 1 штуку (если хватает денег)
@@ -477,10 +490,10 @@ class MineralUpgrade {
 
     // Универсальный метод, который заменяет 12 одинаковых проверок из старого кода!
     applyMods(eff) {
-        if (player.prestige.super.singles.includes(23)) eff *= UPGS.prestige.super.singles[23].effect();
+        if (player.prestige.break.singles.includes(23)) eff *= UPGS.prestige.break.singles[23].effect();
         if (player.fortune.activatedBoosts[7].activated) eff *= UPGS.fortune.boosts[7].effect();
         if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect());
-        if (player.prestige.challenge.activated == 5 || player.prestige.challenge.activated == 8) eff = Math.pow(eff, 0.1);
+        if (player.prestige.challenge.activated == 5) eff = Math.pow(eff, 0.1);
         return eff;
     }
 
@@ -614,7 +627,7 @@ class FortuneBoostsManager {
         player.fortune.activatedBoosts[x].activated = true;
         player.fortune.activatedBoosts[x].time = 60 * UPGS.fortune.upgrades.buyables[3].effect();
         player.fortune.activatedBoosts[x].effect = this[x].generateNumber();
-        if (player.prestige.challenge.activated == 8) player.fortune.activatedBoosts[x].effect = Math.pow(player.fortune.activatedBoosts[x].effect, 0.1);
+        if (player.prestige.challenge.activated == 8) player.fortune.activatedBoosts[x].effect = 1;
         if (x == 12) MISC.fortune.fortuneBoost12();
     }
 

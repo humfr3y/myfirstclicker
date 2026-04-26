@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="javascript/cssfiles/main.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/upgrades.css" type="text/css">
 
-    <script src="https://cdn.jsdelivr.net/npm/break_infinity.js@2"></script>
+    <script src="node_modules/break_infinity.js/dist/break_infinity.min.js"></script>
 </head>
 <body>
   <div id="loadingScreen">
@@ -60,7 +60,7 @@
           <button onclick="modernize()" id="modernizeButton" style="display: none"></button>
         </div>
         <div class="mainSettings" style="display: none">
-          <button onclick="maxOrNo('superprestige')" id="maxOrNoSuperprestigeUpgrades"></button>
+          <button onclick="maxOrNo('breakprestige')" id="maxOrNoBreakPrestigeUpgrades"></button>
         </div>
         <div class="mainSettings" style="display: none">
           <button onclick="maxOrNo('shard')" id="maxOrNoShardUpgrades"></button>
@@ -196,7 +196,7 @@
         <div id="myPopupBackdrop1" class="myPopupBackdrop"></div>
         <div id="changelogWindow" class="gameWindow">
           <div id="titleDiv" class="titleDivClass">
-            <p id="changelogTitle" class="windowTitle">Changelog</p>
+            <p id="changelogTitle" class="windowTitle" data-i18n="changelog">Changelog</p>
             <button onclick="hidePopup()" class="closeWindow"></button>
           </div>
           <div id="versionChooser">
@@ -222,6 +222,7 @@
             <button onclick='showChangelog(text.changelog["0.12.1"])' class="versionButton">0.12.1</button>
             <button onclick='showChangelog(text.changelog["0.13"])' class="versionButton">0.13</button>
             <button onclick='showChangelog(text.changelog["0.14"])' class="versionButton">0.14</button>
+            <button onclick='showChangelog(text.changelog["0.15"])' class="versionButton">0.15</button>
           </div>
         <div id="versionDiv" class="windowDesc">
           <p id="versionDescription">Choose version</p>
@@ -229,7 +230,7 @@
         </div>
         <div id="gameLoreWindow" class="gameWindow">
           <div id="loreTitleDiv" class="titleDivClass">
-            <p id="loreTitle" class="windowTitle">Changelog</p>
+            <p id="loreTitle" class="windowTitle" data-i18n="gameLore">Changelog</p>
           </div>
           <button onclick="hidePopup()" class="closeWindow"></button>
           <div id="chapterChooser">
@@ -250,6 +251,7 @@
             <button onclick="showStory(text.chapter[15])" id="chapter15Tab" class="versionButton loreChapter">У-разнители</button>
             <button onclick="showStory(text.chapter[16])" id="chapter16Tab" class="versionButton loreChapter">У-разнители</button>
             <button onclick="showStory(text.chapter[17])" id="chapter17Tab" class="versionButton loreChapter">У-разнители</button>
+            <button onclick="showStory(text.chapter[18])" id="chapter18Tab" class="versionButton loreChapter">У-разнители</button>
           </div>
           <div id="chapterDiv" class="windowDesc">
             <p id="chapterDescription">Choose chapter</p>
@@ -258,7 +260,7 @@
 
         <div id="gameHelpWindow" class="gameWindow">
           <div id="helpTitleDiv" class="titleDivClass">
-            <p id="helpTitle" class="windowTitle">Помощь</p>
+            <p id="helpTitle" class="windowTitle" data-i18n="howToPlay">Помощь</p>
           </div>
           <button onclick="hidePopup()" class="closeWindow"></button>
           <div id="horizontalLine"></div>
@@ -286,6 +288,7 @@
               <button onclick="showHelpPage(text.help[19], text.helpTitle[19])" id="helpTab19" class="versionButton versionButtonVertical">У-сложители и У-разнители</button>
               <button onclick="showHelpPage(text.help[20], text.helpTitle[20])" id="helpTab20" class="versionButton versionButtonVertical">У-сложители и У-разнители</button>
               <button onclick="showHelpPage(text.help[21], text.helpTitle[21])" id="helpTab21" class="versionButton versionButtonVertical">У-сложители и У-разнители</button>
+              <button onclick="showHelpPage(text.help[22], text.helpTitle[22])" id="helpTab22" class="versionButton versionButtonVertical">У-сложители и У-разнители</button>
             </div>
           </div>
           <div id="line"></div>
@@ -761,6 +764,7 @@
           <input type="checkbox" id="restartPChallenge">
         </div>
         <div id="prestigeChallenges">
+          <div id="prestigeChallengePair1" class="prestigeChallengePair">
           <div class="challengePDiv" style="border-color: aqua">
             <p class="challengePTitle" data-i18n="challengePTitle_1">Prestige Challenge 1</p>
             <span class="challengePDesc challengePCond statsSlot" data-i18n="challengePConditionText1"></span>
@@ -774,21 +778,25 @@
             <span class="challengePDesc challengePGoal statsSlot"><span data-i18n="cp_goal">Goal: Collect </span><span id="pc2_goal">0</span><span data-i18n="currency_acoins_space"> α-coins.</span></span>
             <button onclick="startPChallenge(2)" class="challengePStart tabButton" id="pChallenge2Start">Start</button>
             <span class="challengePDesc challengePReward statsSlot"><span data-i18n="cp_rew_2"></span><span id="cp2_eff">1</span></span>
+            </div>
           </div>
-          <div class="challengePDiv" style="border-color: aqua">
-            <p class="challengePTitle" data-i18n="challengePTitle_3">Prestige Challenge 3</p>
-            <span class="challengePDesc challengePCond statsSlot" data-i18n="challengePConditionText3"></span>
-            <span class="challengePDesc challengePGoal statsSlot"><span data-i18n="cp_goal">Goal: Collect </span><span id="pc3_goal">0</span><span data-i18n="currency_acoins_space"> α-coins.</span></span>
-            <button onclick="startPChallenge(3)" class="challengePStart tabButton" id="pChallenge3Start">Start</button>
-            <span class="challengePDesc challengePReward statsSlot"><span data-i18n="cp_rew_3"></span><span id="cp3_eff">1</span></span>
+          <div id="prestigeChallengePair2" class="prestigeChallengePair">
+            <div class="challengePDiv" style="border-color: aqua">
+              <p class="challengePTitle" data-i18n="challengePTitle_3">Prestige Challenge 3</p>
+              <span class="challengePDesc challengePCond statsSlot" data-i18n="challengePConditionText3"></span>
+              <span class="challengePDesc challengePGoal statsSlot"><span data-i18n="cp_goal">Goal: Collect </span><span id="pc3_goal">0</span><span data-i18n="currency_acoins_space"> α-coins.</span></span>
+              <button onclick="startPChallenge(3)" class="challengePStart tabButton" id="pChallenge3Start">Start</button>
+              <span class="challengePDesc challengePReward statsSlot"><span data-i18n="cp_rew_3"></span><span id="cp3_eff">1</span></span>
+            </div>
+            <div class="challengePDiv" style="border-color: aqua">
+              <p class="challengePTitle" data-i18n="challengePTitle_4">Prestige Challenge 4</p>
+              <span class="challengePDesc challengePCond statsSlot" data-i18n="challengePConditionText4"></span>
+              <span class="challengePDesc challengePGoal statsSlot"><span data-i18n="cp_goal">Goal: Collect </span><span id="pc4_goal">0</span><span data-i18n="currency_acoins_space"> α-coins.</span></span>
+              <button onclick="startPChallenge(4)" class="challengePStart tabButton" id="pChallenge4Start">Start</button>
+              <span class="challengePDesc challengePReward statsSlot"><span data-i18n="cp_rew_4"></span><span id="cp4_eff">1</span></span>
+            </div>
           </div>
-          <div class="challengePDiv" style="border-color: aqua">
-            <p class="challengePTitle" data-i18n="challengePTitle_4">Prestige Challenge 4</p>
-            <span class="challengePDesc challengePCond statsSlot" data-i18n="challengePConditionText4"></span>
-            <span class="challengePDesc challengePGoal statsSlot"><span data-i18n="cp_goal">Goal: Collect </span><span id="pc4_goal">0</span><span data-i18n="currency_acoins_space"> α-coins.</span></span>
-            <button onclick="startPChallenge(4)" class="challengePStart tabButton" id="pChallenge4Start">Start</button>
-            <span class="challengePDesc challengePReward statsSlot"><span data-i18n="cp_rew_4"></span><span id="cp4_eff">1</span></span>
-          </div>
+          <div id="prestigeChallengePair3" class="prestigeChallengePair">
           <div class="challengePDiv" style="border-color: aqua">
             <p class="challengePTitle" data-i18n="challengePTitle_5">Prestige Challenge 5</p>
             <span class="challengePDesc challengePCond statsSlot" data-i18n="challengePConditionText5"></span>
@@ -803,6 +811,8 @@
             <button onclick="startPChallenge(6)" class="challengePStart tabButton" id="pChallenge6Start">Start</button>
             <span class="challengePDesc challengePReward statsSlot"><span data-i18n="cp_rew_6"></span><span id="cp6_eff">1</span></span>
           </div>
+          </div>
+          <div id="prestigeChallengePair4" class="prestigeChallengePair">
           <div class="challengePDiv" style="border-color: aqua">
             <p class="challengePTitle" data-i18n="challengePTitle_7">Prestige Challenge 7</p>
             <span class="challengePDesc challengePCond statsSlot" data-i18n="challengePConditionText7"></span>
@@ -817,6 +827,7 @@
             <button onclick="startPChallenge(8)" class="challengePStart tabButton" id="pChallenge8Start">Start</button>
             <span class="challengePDesc challengePReward statsSlot" data-i18n="challengePReward8"></span>
           </div>
+          </div>
         </div>
       </div>
     </div>
@@ -828,7 +839,7 @@
         <button onclick="selectSubTab(shardsTab, false, 'prestige')" id="shardsSelect" class="tabButton subButton prestigeButton" data-i18n="shardsButton">Осколки</button>
         <button onclick="selectSubTab(superCrystalsTab, true, 'prestige')" id="superCrystalsSelect" class="tabButton subButton prestigeButton" style="display:none" data-i18n="superCrystalButton">Супер-Кристаллы</button>
         <button onclick="selectSubTab(mineralsTab, true, 'prestige')" id="mineralsSelect" class="tabButton subButton prestigeButton" style="display:none" data-i18n="mineralsButton">Минералы</button>
-        <button onclick="selectSubTab(superprestigeTab, false, 'prestige')" id="superprestigeSelect" class="tabButton subButton prestigeButton" style="display:none" data-i18n="superprestigeButton">Суперпрестиж</button>
+        <button onclick="selectSubTab(breakPrestigeTab, false, 'prestige')" id="breakPrestigeSelect" class="tabButton subButton prestigeButton" style="display:none" data-i18n="breakPrestigeButton">Суперпрестиж</button>
         <button onclick="selectSubTab(fortuneTab, true, 'prestige')" id="fortuneSelect" class="tabButton subButton fortuneButton2" data-i18n="fortuneButton">Фортуна</button>
         <button onclick="selectSubTab(balanceTab, true, 'prestige')" id="balanceSelect" class="tabButton subButton" data-i18n="balanceButton">Баланс</button>
       </div>
@@ -934,12 +945,12 @@
             <span data-i18n="word_currently">Currently:</span> x<span id="pBuyableU1_effect">0</span><br>
             <span data-i18n="word_cost">Cost:</span> <span id="pBuyableU1_cost">0</span> <span data-i18n="currency_crystals">crystals</span>
           </button>
-          <button onclick="UPGS.prestige.buyables.buy(2)" id="pBuyableU2" class="upgradeButton prestigeBuyableButton">
+          <!-- <button onclick="UPGS.prestige.buyables.buy(2)" id="pBuyableU2" class="upgradeButton prestigeBuyableButton">
             <ut data-i18n="upg_pres_b2_name">Gem Investment</ut> (<span id="pBuyableU2_amount">0</span>)<br>
             <span data-i18n="upg_pres_b2_desc">Reduces time of offline crystals gain</span><br>
             <span data-i18n="word_currently">Currently:</span> /<span id="pBuyableU2_effect">0</span><br>
             <span data-i18n="word_cost">Cost:</span> <span id="pBuyableU2_cost">0</span> <span data-i18n="currency_crystals">crystals</span>
-          </button>
+          </button> -->
         </div>
         <div id="prestigeSpecialRow" class="centeredDiv" style="display: none">
           <button onclick="maxBuyAllPrestige()" id="maxBuyPrestige" class="upgradeButton maxBuy" style="width: 200px; border-color: rgb(0, 124, 124)">Купить все</button>
@@ -1335,104 +1346,104 @@
       </div>
       <button onclick="respecMinerals()" id="respecMineralsButton" class="tabButton" data-i18n="respecShop">Respec</button>
     </div>
-    <div id="superprestigeTab" style="display: none">
+    <div id="breakPrestigeTab" style="display: none">
       <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-      <button onclick="UPGS.prestige.super.singles.buy(25)" id="superPSingleU10" class="upgradeButton prestigeSingleButton">
-        <ut data-i18n="upg_sp_s10_name">Superhammer</ut><br>
-        <span data-i18n="upg_sp_s10_desc">Breaks Prestige barrier, makes able to gain more Crystals per Prestige than 1.</span><br>
-        <span id="sps10_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sps10_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
+      <button onclick="UPGS.prestige.break.singles.buy(25)" id="breakPSingleU10" class="upgradeButton breakPrestigeSingleButton">
+        <ut data-i18n="upg_bp_s10_name">Superhammer</ut><br>
+        <span data-i18n="upg_bp_s10_desc">Breaks Prestige barrier, makes able to gain more Crystals per Prestige than 1.</span><br>
+        <span id="bps10_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="bps10_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
       </button>
       
-      <div id="superPUs" style="display: flex; flex-direction: column; align-items: center">
-      <div id="superPRow1" class="row">
-        <button onclick="buySuperprestigeUpgrade(1)" id="superPBuyableU1" class="upgradeButton prestigeBuyableButton">
-          <ut data-i18n="upg_sp_b1_name">Big Investment</ut> (<span id="spb1_amt">0</span>) [+<span id="spb1_bulk">1</span>]<br>
-          <span data-i18n="upg_sp_b1_desc">Improves formula of Superprestige crystals</span><br>
-          <span data-i18n="word_currently">Currently:</span> +<span id="spb1_eff">0</span><br>
-          <span data-i18n="word_cost">Cost:</span> <span id="spb1_cost">0</span> <span data-i18n="currency_crystals">crystals</span>
+      <div id="breakPUs" style="display: flex; flex-direction: column; align-items: center">
+      <div id="breakPRow1" class="row">
+        <button onclick="buyBreakPrestigeUpgrade(1)" id="breakPBuyableU1" class="upgradeButton breakPrestigeBuyableButton">
+          <ut data-i18n="upg_bp_b1_name">Big Investment</ut> (<span id="bpb1_amt">0</span>) [+<span id="bpb1_bulk">1</span>]<br>
+          <span data-i18n="upg_bp_b1_desc">Improves formula of Break Prestige crystals</span><br>
+          <span data-i18n="word_currently">Currently:</span> +<span id="bpb1_eff">0</span><br>
+          <span data-i18n="word_cost">Cost:</span> <span id="bpb1_cost">0</span> <span data-i18n="currency_crystals">crystals</span>
         </button>
-        <button onclick="buySuperprestigeUpgrade(2)" id="superPBuyableU2" class="upgradeButton prestigeBuyableButton">
-          <ut data-i18n="upg_sp_b2_name">Precious Shares</ut> (<span id="spb2_amt">0</span>) [+<span id="spb2_bulk">1</span>]<br>
-          <span data-i18n="upg_sp_b2_desc">Increase effect of Big Investment</span><br>
-          <span data-i18n="word_currently">Currently:</span> +<span id="spb2_eff">0</span>%<br>
-          <span data-i18n="word_cost">Cost:</span> <span id="spb2_cost">0</span> <span data-i18n="currency_crystals">crystals</span>
+        <button onclick="buyBreakPrestigeUpgrade(2)" id="breakPBuyableU2" class="upgradeButton breakPrestigeBuyableButton">
+          <ut data-i18n="upg_bp_b2_name">Precious Shares</ut> (<span id="bpb2_amt">0</span>) [+<span id="bpb2_bulk">1</span>]<br>
+          <span data-i18n="upg_bp_b2_desc">Increase effect of Big Investment</span><br>
+          <span data-i18n="word_currently">Currently:</span> +<span id="bpb2_eff">0</span>%<br>
+          <span data-i18n="word_cost">Cost:</span> <span id="bpb2_cost">0</span> <span data-i18n="currency_crystals">crystals</span>
         </button>
-        <button onclick="buySuperprestigeUpgrade(3)" id="superPBuyableU3" class="upgradeButton prestigeBuyableButton">
-          <ut data-i18n="upg_sp_b3_name">Tripler</ut> (<span id="spb3_amt">0</span>) [+<span id="spb3_bulk">1</span>]<br>
-          <span data-i18n="upg_sp_b3_desc">Triples offline crystals</span><br>
-          <span data-i18n="word_currently">Currently:</span> x<span id="spb3_eff">1</span><br>
-          <span data-i18n="word_cost">Cost:</span> <span id="spb3_cost">0</span> <span data-i18n="currency_crystals">crystals</span>
+        <button onclick="buyBreakPrestigeUpgrade(3)" id="breakPBuyableU3" class="upgradeButton breakPrestigeBuyableButton">
+          <ut data-i18n="upg_bp_b3_name">Tripler</ut> (<span id="bpb3_amt">0</span>) [+<span id="bpb3_bulk">1</span>]<br>
+          <span data-i18n="upg_bp_b3_desc">Triples offline crystals</span><br>
+          <span data-i18n="word_currently">Currently:</span> x<span id="bpb3_eff">1</span><br>
+          <span data-i18n="word_cost">Cost:</span> <span id="bpb3_cost">0</span> <span data-i18n="currency_crystals">crystals</span>
         </button>
-        <button onclick="buySuperprestigeUpgrade(4)" id="superPBuyableU4" class="upgradeButton prestigeBuyableButton">
-          <ut data-i18n="upg_sp_b4_name">Divisor</ut> (<span id="spb4_amt">0</span>) [+<span id="spb4_bulk">1</span>]<br>
-          <span data-i18n="upg_sp_b4_desc">Divides cost of all coin upgrades</span><br>
-          <span data-i18n="word_currently">Currently:</span> /<span id="spb4_eff">1</span><br>
-          <span data-i18n="word_cost">Cost:</span> <span id="spb4_cost">0</span> <span data-i18n="currency_crystals">crystals</span>
+        <button onclick="buyBreakPrestigeUpgrade(4)" id="breakPBuyableU4" class="upgradeButton breakPrestigeBuyableButton">
+          <ut data-i18n="upg_bp_b4_name">Divisor</ut> (<span id="bpb4_amt">0</span>) [+<span id="bpb4_bulk">1</span>]<br>
+          <span data-i18n="upg_bp_b4_desc">Divides cost of all coin upgrades</span><br>
+          <span data-i18n="word_currently">Currently:</span> /<span id="bpb4_eff">1</span><br>
+          <span data-i18n="word_cost">Cost:</span> <span id="bpb4_cost">0</span> <span data-i18n="currency_crystals">crystals</span>
         </button>
-        <button onclick="buySuperprestigeUpgrade(5)" id="superPBuyableU5" class="upgradeButton prestigeBuyableButton">
-          <ut data-i18n="upg_sp_b5_name">Super-Power</ut> (<span id="spb5_amt">0</span>) [+<span id="spb5_bulk">1</span>]<br>
-          <span data-i18n="upg_sp_b5_desc">Increase U-power base exponent</span><br>
-          <span data-i18n="word_currently">Currently:</span> +<span id="spb5_eff">0</span><br>
-          <span data-i18n="word_cost">Cost:</span> <span id="spb5_cost">0</span> <span data-i18n="currency_crystals">crystals</span>
+        <button onclick="buyBreakPrestigeUpgrade(5)" id="breakPBuyableU5" class="upgradeButton breakPrestigeBuyableButton">
+          <ut data-i18n="upg_bp_b5_name">Super-Power</ut> (<span id="bpb5_amt">0</span>) [+<span id="bpb5_bulk">1</span>]<br>
+          <span data-i18n="upg_bp_b5_desc">Increase U-power base exponent</span><br>
+          <span data-i18n="word_currently">Currently:</span> +<span id="bpb5_eff">0</span><br>
+          <span data-i18n="word_cost">Cost:</span> <span id="bpb5_cost">0</span> <span data-i18n="currency_crystals">crystals</span>
         </button>
       </div>
 
-      <div id="superPRow2" class="row">
-        <button onclick="UPGS.prestige.super.singles.buy(11)" id="superPSingleU1" class="upgradeButton prestigeSingleButton">
-          <ut data-i18n="upg_sp_s1_name">Prestige Fame</ut><br>
-          <span data-i18n="upg_sp_s1_desc">Total crystals giving more Crystals</span><br>
-          <span data-i18n="word_currently">Currently:</span> x<span id="sps1_eff">1</span><br>
-          <span id="sps1_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sps1_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
+      <div id="breakPRow2" class="row">
+        <button onclick="UPGS.prestige.break.singles.buy(11)" id="breakPSingleU1" class="upgradeButton breakPrestigeSingleButton">
+          <ut data-i18n="upg_bp_s1_name">Prestige Fame</ut><br>
+          <span data-i18n="upg_bp_s1_desc">Total crystals giving more Crystals</span><br>
+          <span data-i18n="word_currently">Currently:</span> x<span id="bps1_eff">1</span><br>
+          <span id="bps1_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="bps1_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
         </button>
-        <button onclick="UPGS.prestige.super.singles.buy(12)" id="superPSingleU2" class="upgradeButton prestigeSingleButton">
-          <ut data-i18n="upg_sp_s2_name">Hercules Cursor</ut><br>
-          <span data-i18n="upg_sp_s2_desc">Critical clicks boosts Supercoin chance</span><br>
-          <span data-i18n="word_currently">Currently:</span> x<span id="sps2_eff">1</span><br>
-          <span id="sps2_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sps2_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
+        <button onclick="UPGS.prestige.break.singles.buy(12)" id="breakPSingleU2" class="upgradeButton breakPrestigeSingleButton">
+          <ut data-i18n="upg_bp_s2_name">Hercules Cursor</ut><br>
+          <span data-i18n="upg_bp_s2_desc">Critical clicks boosts Supercoin chance</span><br>
+          <span data-i18n="word_currently">Currently:</span> x<span id="bps2_eff">1</span><br>
+          <span id="bps2_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="bps2_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
         </button>
-        <button onclick="UPGS.prestige.super.singles.buy(13)" id="superPSingleU3" class="upgradeButton prestigeSingleButton">
-          <ut data-i18n="upg_sp_s3_name">Azure Cube</ut><br>
-          <span data-i18n="upg_sp_s3_desc">Increases Prestiges gain by 6 times</span><br>
-          <span data-i18n="word_currently">Currently:</span> x<span id="sps3_eff">1</span><br>
-          <span id="sps3_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sps3_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
+        <button onclick="UPGS.prestige.break.singles.buy(13)" id="breakPSingleU3" class="upgradeButton breakPrestigeSingleButton">
+          <ut data-i18n="upg_bp_s3_name">Azure Cube</ut><br>
+          <span data-i18n="upg_bp_s3_desc">Increases Prestiges gain by 6 times</span><br>
+          <span data-i18n="word_currently">Currently:</span> x<span id="bps3_eff">1</span><br>
+          <span id="bps3_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="bps3_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
         </button>
-        <button onclick="UPGS.prestige.super.singles.buy(14)" id="superPSingleU4" class="upgradeButton prestigeSingleButton">
-          <ut data-i18n="upg_sp_s4_name">Champion Belt</ut><br>
-          <span data-i18n="upg_sp_s4_desc">Sum of Challenge completion timers increases base effect of U-reducer</span><br>
-          <span data-i18n="word_currently">Currently:</span> +<span id="sps4_eff">0</span><br>
-          <span id="sps4_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sps4_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
+        <button onclick="UPGS.prestige.break.singles.buy(14)" id="breakPSingleU4" class="upgradeButton breakPrestigeSingleButton">
+          <ut data-i18n="upg_bp_s4_name">Champion Belt</ut><br>
+          <span data-i18n="upg_bp_s4_desc">Sum of Challenge completion timers increases base effect of U-reducer</span><br>
+          <span data-i18n="word_currently">Currently:</span> +<span id="bps4_eff">0</span><br>
+          <span id="bps4_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="bps4_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
         </button>
-        <button onclick="UPGS.prestige.super.singles.buy(15)" id="superPSingleU5" class="upgradeButton prestigeSingleButton">
-          <ut data-i18n="upg_sp_s5_name">Treasure of Fate</ut><br>
-          <span data-i18n="upg_sp_s5_desc">U-adder also gives +0.1 free U-powers</span><br>
-          <span data-i18n="word_currently">Currently:</span> +<span id="sps5_eff">0</span><br>
-          <span id="sps5_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sps5_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
+        <button onclick="UPGS.prestige.break.singles.buy(15)" id="breakPSingleU5" class="upgradeButton breakPrestigeSingleButton">
+          <ut data-i18n="upg_bp_s5_name">Treasure of Fate</ut><br>
+          <span data-i18n="upg_bp_s5_desc">U-adder also gives +0.1 free U-powers</span><br>
+          <span data-i18n="word_currently">Currently:</span> +<span id="bps5_eff">0</span><br>
+          <span id="bps5_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="bps5_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
         </button>
       </div>
-      <div id="superPRow3" class="row">
-        <button onclick="UPGS.prestige.super.singles.buy(21)" id="superPSingleU6" class="upgradeButton prestigeSingleButton">
-          <ut data-i18n="upg_sp_s6_name">Negative Cashback</ut><br>
-          <span data-i18n="upg_sp_s6_desc">Supercrystals increase Cashback effect</span><br>
-          <span data-i18n="word_currently">Currently:</span> x<span id="sps6_eff">1</span><br>
-          <span id="sps6_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sps6_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
+      <div id="breakPRow3" class="row">
+        <button onclick="UPGS.prestige.break.singles.buy(21)" id="breakPSingleU6" class="upgradeButton breakPrestigeSingleButton">
+          <ut data-i18n="upg_bp_s6_name">Negative Cashback</ut><br>
+          <span data-i18n="upg_bp_s6_desc">Supercrystals increase Cashback effect</span><br>
+          <span data-i18n="word_currently">Currently:</span> x<span id="bps6_eff">1</span><br>
+          <span id="bps6_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="bps6_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
         </button>
-        <button onclick="UPGS.prestige.super.singles.buy(22)" id="superPSingleU7" class="upgradeButton prestigeSingleButton">
-          <ut data-i18n="upg_sp_s7_name">God's Gift</ut><br>
-          <span data-i18n="upg_sp_s7_desc">Increase general achievements rewards by 1000 times</span><br>
-          <span data-i18n="word_currently">Currently:</span> x<span id="sps7_eff">1</span><br>
-          <span id="sps7_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sps7_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
+        <button onclick="UPGS.prestige.break.singles.buy(22)" id="breakPSingleU7" class="upgradeButton breakPrestigeSingleButton">
+          <ut data-i18n="upg_bp_s7_name">God's Gift</ut><br>
+          <span data-i18n="upg_bp_s7_desc">Increase general achievements rewards by 1000 times</span><br>
+          <span data-i18n="word_currently">Currently:</span> x<span id="bps7_eff">1</span><br>
+          <span id="bps7_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="bps7_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
         </button>
-        <button onclick="UPGS.prestige.super.singles.buy(23)" id="superPSingleU8" class="upgradeButton prestigeSingleButton">
-          <ut data-i18n="upg_sp_s8_name">Jewelry</ut><br>
-          <span data-i18n="upg_sp_s8_desc">Increases Minerals effect based on time spent in current prestige</span><br>
-          <span data-i18n="word_currently">Currently:</span> x<span id="sps8_eff">1</span><br>
-          <span id="sps8_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sps8_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
+        <button onclick="UPGS.prestige.break.singles.buy(23)" id="breakPSingleU8" class="upgradeButton breakPrestigeSingleButton">
+          <ut data-i18n="upg_bp_s8_name">Jewelry</ut><br>
+          <span data-i18n="upg_bp_s8_desc">Increases Minerals effect based on time spent in current prestige</span><br>
+          <span data-i18n="word_currently">Currently:</span> x<span id="bps8_eff">1</span><br>
+          <span id="bps8_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="bps8_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
         </button>
-        <button onclick="UPGS.prestige.super.singles.buy(24)" id="superPSingleU9" class="upgradeButton prestigeSingleButton">
-          <ut data-i18n="upg_sp_s9_name">Alpha-Crystal</ut><br>
-          <span data-i18n="upg_sp_s9_desc">Pushes scaling start of U-multipliers by 10 amount</span><br>
-          <span data-i18n="word_currently">Currently:</span> +<span id="sps9_eff">0</span><br>
-          <span id="sps9_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sps9_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
+        <button onclick="UPGS.prestige.break.singles.buy(24)" id="breakPSingleU9" class="upgradeButton breakPrestigeSingleButton">
+          <ut data-i18n="upg_bp_s9_name">Alpha-Crystal</ut><br>
+          <span data-i18n="upg_bp_s9_desc">Pushes scaling start of U-multipliers by 10 amount</span><br>
+          <span data-i18n="word_currently">Currently:</span> +<span id="bps9_eff">0</span><br>
+          <span id="bps9_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="bps9_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
         </button>
       </div>
       </div>
@@ -1610,8 +1621,8 @@
       <div id="rightSideBalance" class="sideFortune">
         <span class="currencyCount"><span data-i18n="fort_tokens_count">You have</span> <span id="bal_ft_tokens">0</span> <span data-i18n="fort_tokens">Fortune Tokens</span></span>
         <div class="row">
-          <button class="upgradeButton balanceBuyableButton" style="font-size: calc(18px * var(--font-scale));" onclick="MISC.balance.exchange('plus')"><ut data-i18n="convertToPlusCoin">Exchange 1 Fortune Token for +Coin</ut></button>
-          <button class="upgradeButton balanceBuyableButton" style="font-size: calc(18px * var(--font-scale));" onclick="MISC.balance.exchange('minus')"><ut data-i18n="convertToMinusCoin">Exchange 1 Fortune Token for -Coin</ut></button>
+          <button class="upgradeButton balanceBuyableButton" style="font-size: calc(18px * var(--font-scale));" onclick="MISC.balance.exchange('plus')"><ut id="convertToPlusCoin">Exchange 1 Fortune Token for +Coin</ut></button>
+          <button class="upgradeButton balanceBuyableButton" style="font-size: calc(18px * var(--font-scale));" onclick="MISC.balance.exchange('minus')"><ut id="convertToMinusCoin">Exchange 1 Fortune Token for -Coin</ut></button>
         </div>
         <button onclick="MISC.balance.respec()" data-i18n="respecShop" class="tabButton">Respec</button>
         
@@ -2630,7 +2641,7 @@
                   <span id="shopPermanentU4Req">0/100</span>
                 </div>
 
-                <div id="postSuperprestige">
+                <div id="postBreakprestige">
                   <div class="shopContainer">
                     <button id="shopPermanentU5" class="shopButton" onclick="UPGS.shop.permanent.buy(5)"></button>
                     <div id="tooltip-shopPermanentU5" class="tooltip" role="tooltip">
@@ -2834,7 +2845,7 @@
                     <span id="shopItem4Req">0/3</span>
                   </div>
                 </div>
-                <div id="postSuperprestige2">
+                <div id="postBreakprestige2">
                   <div class="shopContainer">
                     <button id="shopItem5" class="shopButton shopItemButton" onclick="UPGS.shop.items.buy(5)"></button>
                     <button id="useShopItem5" class="useButton" onclick="UPGS.shop.items[5].useItem()" data-i18n="useTitle">Use</button>
@@ -2899,7 +2910,7 @@
           <div id="windowTitleDiv" class="titleDivClass">
             <span id="windowTitle2" class="windowTitle">Вы точно хотите сбросить игру?</span>
           </div>
-            <button onclick="hidePopup()" id="closeWindow2" class="closeWindow confClose"></button>
+            <button onclick="hidePopup()" id="closeWindow2" class="closeWindow confClose" style="top: 0%; right: 0%"></button>
 
             <div id="confirmationButtons" class="windowDesc" style="display: none">
               <button onclick="reloadPage()" id="yesHR" class="tabButton" data-i18n="yes">Да</button>
@@ -2922,9 +2933,11 @@
             <div id="chooseSaveDiv" class="windowDesc" style="display: none">
               <span id="selectSave" data-i18n="chooseSaveTitle">СКОЛЬКО СБРОСИТЬ ТЕКСТ</span>
               <div id="saveButtons"> 
-                <button onclick="chooseSave(1)" id="save1" class="tabButton" data-i18n="save1"></button>
-                <button onclick="chooseSave(2)" id="save2" class="tabButton" data-i18n="save2"></button>
-                <button onclick="chooseSave(3)" id="save3" class="tabButton" data-i18n="save3"></button>
+                <button onclick="chooseSave(1)" id="save1" class="tabButton save_slot"><span data-i18n="save1"></span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                <button onclick="chooseSave(2)" id="save2" class="tabButton save_slot"><span data-i18n="save2"></span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                <button onclick="chooseSave(3)" id="save3" class="tabButton save_slot"><span data-i18n="save3"></span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                <button onclick="chooseSave(4)" id="save4" class="tabButton save_slot"><span data-i18n="save4"></span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                <button onclick="chooseSave(5)" id="save5" class="tabButton save_slot" ><span data-i18n="save5"></span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
               </div>
             </div>
             </div>
