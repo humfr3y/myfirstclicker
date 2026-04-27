@@ -1,4 +1,10 @@
-import '../../node_modules/i18next/i18next.min.js'
+try {
+    // 1. Сначала пытаемся загрузить модуль с быстрого CDN
+    await import('https://cdn.jsdelivr.net/npm/i18next@23/i18next.min.js');
+} catch (error) {
+    // 2. Если CDN недоступен (или нет интернета), грузим из твоей папки
+    await import('../../node_modules/i18next/i18next.min.js');
+}
 
 
 
