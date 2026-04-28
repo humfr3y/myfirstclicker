@@ -442,7 +442,7 @@ function loadTranslationsAutomation() {
 // ============================================================
 function loadTranslationsShop() {
     // Верхний счетчик
-    document.getElementById('top_shop_sc_val').textContent = formatNumber(player.supercoin.currency);
+    document.getElementById('top_shop_sc_val').textContent = formatNumber(player.supercoin.currency, 'boost');
 
     // 1. Покупаемые улучшения (Buyables 1-7)
     for (let i = 1; i <= 7; i++) {
@@ -458,7 +458,7 @@ function loadTranslationsShop() {
         // Скрываем "=>" и цену, если макс. уровень
         document.getElementById(`sb${i}_next_cont`).style.display = (amt === max) ? 'none' : 'inline';
         document.getElementById(`sb${i}_cost_cont`).style.display = (amt === max) ? 'none' : 'inline';
-        if (amt !== max) document.getElementById(`sb${i}_cost`).textContent = formatNumber(UPGS.shop.buyables.bulk_cost(i));
+        if (amt !== max) document.getElementById(`sb${i}_cost`).textContent = formatNumber(UPGS.shop.buyables.bulk_cost(i), 'boost');
         
         document.getElementById(`shopBuyableU${i}Req`).textContent = `${formatNumber(amt)}/${max}`;
     }
