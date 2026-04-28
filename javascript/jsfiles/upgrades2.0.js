@@ -110,7 +110,7 @@ const UPGS = {
                     if (x == 0) return 1;
                     
                     // Блокируем значение от Infinity и NaN прямо внутри формулы
-                    let safeTotal = Math.min(player.coin.total_currency || 0, 1e308);
+                    let safeTotal = Math.min(player.coin.this_reflash_currency || 0, 1e308);
                     let eff = 1 + (Math.log10(safeTotal + 10));
                     
                     eff *= this.effect_super();
@@ -307,7 +307,7 @@ const UPGS = {
                 }
             ], 'break.buyables'),
             singles: new UniversalSinglesManager('prestige', 'break.singles', [
-                { id: 11, elementId: 'breakPSingleU1', basePrice: 1e25, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.log10(player.prestige.total_currency + 1) / 1.5; } },
+                { id: 11, elementId: 'breakPSingleU1', basePrice: 1e25, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.log10(player.prestige.this_reflash_currency + 1) / 1.5; } },
                 { id: 12, elementId: 'breakPSingleU2', basePrice: 1e30, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.log10(Math.log10(player.clicks.critical)); } },
                 { id: 13, elementId: 'breakPSingleU3', basePrice: 1e35, effect: function(x = this.unl()) { return x == 0 ? 1 : 6; } },
                 { id: 14, elementId: 'breakPSingleU4', basePrice: 1e40, effect: function(x = this.unl()) {
@@ -409,7 +409,7 @@ const UPGS = {
             { id: 2, maxAmount: 3, elementId: 'shopItem2', cost: () => 250, effect: () => player.upowers++ },
             { id: 3, maxAmount: 10, elementId: 'shopItem3', cost: () => 40, effect: () => GAIN.offline_gain_time_warp(60) },
             { id: 4, maxAmount: 3, elementId: 'shopItem4', cost: () => 350, effect: () => GAIN.offline_gain_time_warp(600) },
-            { id: 5, maxAmount: 25, elementId: 'shopItem5', cost: () => 50, effect: () => { player.coin.currency += player.coin.total_currency / 1e25; } },
+            { id: 5, maxAmount: 25, elementId: 'shopItem5', cost: () => 50, effect: () => { player.coin.currency += player.coin.this_reflash_currency / 1e25; } },
             { id: 6, maxAmount: 5, elementId: 'shopItem6', cost: () => 140, effect: () => 1 }
         ])
     },

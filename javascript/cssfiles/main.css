@@ -778,6 +778,18 @@ ct {
   background-color: rgba(255, 0, 0, 0.9);
 }
 
+.tabButton.reflashButton.active,
+.tabButton.reflashButton[aria-selected="true"] {
+  background-color: var(--reflash);
+  color: black;
+  border-color: var(--reflash);
+}
+
+.tabButton.reflashButton.active:hover,
+.tabButton.reflashButton[aria-selected="true"]:hover {
+  background-color: var(--reflash);
+}
+
 
 #prestigeSingleUpgrades {
   display: flex;

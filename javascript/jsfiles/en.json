@@ -71,6 +71,12 @@
     "challengeCoinButton": "Challenges",
     "challengePrestigeButton": "Prestige Challenges",
 
+    "reflashButton": "Reflash",
+    "reflashUpgradesButton": "Upgrades",
+    "acceleratorButton": "Accelerator",
+    "algorithmButton": "ALGORITHM TREE",
+    "consoleButton": "Console (NOMEMORY)",
+
     "settingsTitle": "Settings",
 
     "saveTitle": "Saving settings",
@@ -724,6 +730,13 @@
     "secondsText": "seconds.",
     "softcap_starts": "Starts from",
     "softcap_effect": "Softcap:",
+
+    "totalReflashCurrency_1": "Total you collected",
+    "totalReflashCurrency_2": "BITs",
+    "totalReflashResets_1": "You reflashed Digital World",
+    "totalReflashResets_2": "times",
+    "reflashTime_1": "You've been in this Reflash for",
+    "fastestReflashTime_1": "Your fastest Reflash took",
 
     "offlinePrestigesStats": "You're gaining {{prestiges}}{{crystals}} while offline.",
 

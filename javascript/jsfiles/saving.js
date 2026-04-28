@@ -91,6 +91,14 @@ function loadGame() {
         player.supercoin.total_currency = player.supercoin.spent_currency + player.supercoin.currency;
     }
 
+    if (player.coin.this_reflash_currency == 10) {
+        player.coin.this_reflash_currency = player.coin.total_currency
+        player.supercoin.this_reflash_currency = player.supercoin.total_currency
+        player.prestige.this_reflash_currency = player.prestige.total_currency
+        player.time.game.reflash.timer = player.time.game.total.timer
+        player.time.real.reflash.timer = player.time.real.total.timer
+    }
+
     // Оффлайн прогресс
     GAIN.offline_gain();
     if (player.settings.offline) {

@@ -10,6 +10,12 @@ const getPrestigeTable = () => {
     return table;
 };
 
+const getReflashTable = () => {
+    let table = {};
+    for (let i = 0; i <= 9; i++) table[i] = { currency: '', resets: '', time: { game: getEmptyTime(), real: getEmptyTime() } };
+    return table;
+};
+
 const getChallengeTime = () => {
     let table = {};
     for (let i = 1; i <= 11; i++) table[i] = getMaxTime();
@@ -45,15 +51,15 @@ let player = {
     coin: {
         upgrades: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
         singleUpgrades: [], superUpgrades: [],
-        currency: 10, total_currency: 10,
+        currency: 10, total_currency: 10, this_reflash_currency: 10
     },
-    supercoin: { currency: 0, total_currency: 0, spent_currency: 0 },
+    supercoin: { currency: 0, total_currency: 0, spent_currency: 0, this_reflash_currency: 0 },
     prestige: {
         upgrades: { 1: 0 },
         singleUpgrades: [],
         break: { buyables: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }, singles: [] },
         milestones: [],
-        currency: 0, total_currency: 0, broken_currency: 0, resets: 0,
+        currency: 0, total_currency: 0, broken_currency: 0, resets: 0, this_reflash_currency: 0,
         prestigeTable: getPrestigeTable(),
         table_resets: 1,
         challenge: { completed: [], activated: 0, time: getChallengeTime() }
@@ -84,15 +90,16 @@ let player = {
         upgrades: { buyables: { 1: 0, 2: 0, 3: 0 }, singles: [] }
     },
     reflash: {
-        currency: 0, total_currency: 0, resets: 0
+        currency: 0, total_currency: 0, resets: 0,
+        resetTable: getReflashTable(),
     },
     time: {
         savedTime: Date.now(), currentTime: 0,
         game: {
-            total: getZeroTime(), prestige: getZeroTime(), fastestPrestige: { ...getZeroTime(), timer: 1e69 }, average: getEmptyTime()
+            total: getZeroTime(), prestige: getZeroTime(), fastestPrestige: { ...getZeroTime(), timer: 1e69 }, average: getEmptyTime(), reflash: getZeroTime(), fastestReflash: { ...getZeroTime(), timer: 1e69 },
         },
         real: {
-            total: getZeroTime(), prestige: getZeroTime(), fastestPrestige: { ...getZeroTime(), timer: 1e69 }, daily: getZeroTime(), average: getEmptyTime()
+            total: getZeroTime(), prestige: getZeroTime(), fastestPrestige: { ...getZeroTime(), timer: 1e69 }, daily: getZeroTime(), average: getEmptyTime(), reflash: getZeroTime(), fastestReflash: { ...getZeroTime(), timer: 1e69 },
         },
         next_daily: 0, umultiplier: 0, upower: 0, uadder: 0, ureducer: 0,
     },

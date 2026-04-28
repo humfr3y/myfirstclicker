@@ -1,6 +1,6 @@
 const ACHS = {
     cols: 10,
-    rows: 6, // Увеличили до 6, так как у тебя уже есть ачивки из серии 50+ (51, 52 и т.д.)
+    rows: 7, // Увеличили до 6, так как у тебя уже есть ачивки из серии 50+ (51, 52 и т.д.)
     
     names: [
         // Твои названия ачивок (массив оставил как есть, заполнишь потом)
@@ -143,7 +143,7 @@ const ACHS = {
 };
 
 function setAchievementsBg() {
-  for (let i = 11; i <= 60; i++) {
+  for (let i = 11; i <= 70; i++) {
     const el = document.getElementById(`ach${i}`);
     if (el) el.style.backgroundImage = `url("javascript/cssfiles/images/ach${i}.jpg")`;
   }

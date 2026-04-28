@@ -47,7 +47,7 @@
     <div id="topValues">
       <div id="reflashGet" class="topVars">
         <span id="bitsCount" style="display: none">У вас 10 кристаллов</span>
-        <button onclick="" class="reflashButton" id="doReflash">Соберите Infinity монет и выполните Престижное Испытание 8</button>
+        <button onclick="openWindow('reflashConfirm', true)" class="reflashButton" id="doReflash">Соберите Infinity монет и выполните Престижное Испытание 8</button>
       </div>
       <div id="coinGet" class="topVars">
         <span id="coinsCount"><span data-i18n="top_you_have">You have</span> <gt id="top_coins_val">10</gt> <span data-i18n="currency_acoins">α-coins</span></span>
@@ -83,6 +83,7 @@
         <button onclick="selectTab(mainTab, false)" id="mainSelect" class="tabButton active" data-i18n="clickerButton">Clicker</button>
         <button onclick="selectTab(challengeTab, true)" id="challengeSelect" class="tabButton" style="display:none" data-i18n="challengeButton">Challenges</button>
         <button onclick="selectTab(prestigeTab, false)" id="prestigeSelect" class="tabButton prestigeButton" style="display:none" data-i18n="prestigeButton">Prestige</button>
+        <button onclick="selectTab(reflashTab, false)" id="reflashSelect" class="tabButton reflashButton" style="display:none" data-i18n="reflashButton">Prestige</button>
         <button onclick="selectTab(achTab, false)" id="achSelect" class="tabButton" data-i18n="achievementsButton">Achievements</button>
         <button onclick="selectTab(infoTab, false)" id="infoSelect" class="tabButton" data-i18n="informationSubButton">Information</button>
         <button onclick="selectTab(shopTab, false)" id="shopSelect" class="tabButton"><span data-i18n="shopButton_text">Supershop</span> (<span id="top_supercoins_val">0</span>)</button>
@@ -1676,6 +1677,14 @@
       </div>
     </div>
   </div>
+    <div id="reflashTab" style="display:none">
+      <div id="reflashSubButtons">
+        <button onclick="selectSubTab(reflashUpgradesTab, false, 'reflash')" id="reflashUpgradesSelect" class="tabButton subButton reflashButton active" data-i18n="reflashUpgradesButton">Улучшения</button>
+        <button onclick="selectSubTab(acceleratorTab, true, 'reflash')" id="acceleratorSelect" class="tabButton subButton reflashButton" data-i18n="acceleratorButton">Ускоритель</button>
+        <button onclick="selectSubTab(algorithmTab, true, 'reflash')" id="algorithmSelect" class="tabButton subButton reflashButton" data-i18n="algorithmButton">АЛГОРИТМ. ДРЕВО</button>
+        <button onclick="" id="consoleSelect" class="tabButton subButton reflashButton" data-i18n="consoleButton">Консоль</button>
+      </div>
+    </div>
     <div id="achTab" style="display:none">
       <div id="achSubButtons">
         <button onclick="selectSubTab(achScreenDescription, false, 'achievements')" id="achievementsSelect" class="tabButton subButton active" data-i18n="achButton">Достижения</button>
@@ -2095,6 +2104,87 @@
               <div class="arrow" data-popper-arrow></div>
             </div>
           </div>
+          <div id="sixthAchievementRow" class="achRow">
+            <div id="ach61" class="ach">
+              <span id="achName61" class="achievementName">Without</span>
+            </div>
+            <div id="tooltip-ach61" class="tooltip" role="tooltip">
+              <span id="tooltipAch61" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+
+            <div id="ach62" class="ach">
+              <span id="achName62" class="achievementName">Without</span>
+            </div>
+            <div id="tooltip-ach62" class="tooltip" role="tooltip">
+              <span id="tooltipAch62" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+
+            <div id="ach63" class="ach">
+              <span id="achName63" class="achievementName">Without</span>
+            </div>
+            <div id="tooltip-ach63" class="tooltip" role="tooltip">
+              <span id="tooltipAch63" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+
+            <div id="ach64" class="ach">
+              <span id="achName64" class="achievementName">Without</span>
+            </div>
+            <div id="tooltip-ach64" class="tooltip" role="tooltip">
+              <span id="tooltipAch64" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+
+            <div id="ach65" class="ach">
+              <span id="achName65" class="achievementName">Without</span>
+            </div>
+            <div id="tooltip-ach65" class="tooltip" role="tooltip">
+              <span id="tooltipAch65" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+
+            <div id="ach66" class="ach">
+              <span id="achName66" class="achievementName">Without</span>
+            </div>
+            <div id="tooltip-ach66" class="tooltip" role="tooltip">
+              <span id="tooltipAch66" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+
+            <div id="ach67" class="ach">
+              <span id="achName67" class="achievementName">Without</span>
+            </div>
+            <div id="tooltip-ach67" class="tooltip" role="tooltip">
+              <span id="tooltipAch67" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+
+            <div id="ach68" class="ach">
+              <span id="achName58" class="achievementName">Without</span>
+            </div>
+            <div id="tooltip-ach68" class="tooltip" role="tooltip">
+              <span id="tooltipAch68" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+
+            <div id="ach69" class="ach">
+              <span id="achName69" class="achievementName">Without</span>
+            </div>
+            <div id="tooltip-ach69" class="tooltip" role="tooltip">
+              <span id="tooltipAch69" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+
+            <div id="ach70" class="ach">
+              <span id="achName70" class="achievementName">Without</span>
+            </div>
+            <div id="tooltip-ach70" class="tooltip" role="tooltip">
+              <span id="tooltipAch70" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+              <div class="arrow" data-popper-arrow></div>
+            </div>
+          </div>
         </div>
       </div>
       <div id="shardAchsTab" style="display:none">
@@ -2283,6 +2373,13 @@
         <p class="statsSlot"><span data-i18n="fastestPrestigeTime_1">Your fastest Prestige took</span> <span id="stat_fpt">0</span></p> 
         <p class="statsSlot" id="stat_offline_pres_farm"></p> 
       </div>
+      <div id="reflashSection" style="display: none">
+        <br>
+        <p class="statsSlot"><span data-i18n="totalReflashCurrency_1">Total you collected</span> <span id="stat_total_bits">0</span> <span data-i18n="totalReflashCurrency_2">crystals.</span></p>
+        <p class="statsSlot"><span data-i18n="totalReflashResets_1">You became Prestige</span> <span id="stat_total_refs">0</span> <span data-i18n="totalReflashResets_2">times.</span></p>
+        <p class="statsSlot"><span data-i18n="reflashTime_1">You've been in this Prestige for</span> <span id="stat_ret_d">0</span> <span data-i18n="daysText">days,</span> <span id="stat_ret_h">0</span> <span data-i18n="hoursText">hours,</span> <span id="stat_ret_m">0</span> <span data-i18n="minutesText">minutes and</span> <span id="stat_ret_s">0</span> <span data-i18n="secondsText">seconds.</span></p>
+        <p class="statsSlot"><span data-i18n="fastestReflashTime_1">Your fastest Prestige took</span> <span id="stat_fret">0</span></p> 
+      </div>
       <br>
       <p class="statsSlot"><span data-i18n="totalClicks_1">You have made</span> <span id="stat_clicks_real">0</span> <span data-i18n="totalClicks_2">real clicks!</span></p>
       <p class="statsSlot"><span data-i18n="totalGameClicks_1">You have made</span> <span id="stat_clicks_game">0</span> <span data-i18n="totalGameClicks_2">game clicks!</span></p>
@@ -2326,6 +2423,29 @@
         </tbody>
         <tfoot>
           <tr><th class="averageTable" data-i18n="averagePrestigesTitle">Average</th><th class="averageTable" id="rp_avg_pres"></th><th class="averageTable" id="rp_avg_crys"></th><th class="averageTable" id="rp_avg_gt"></th><th class="averageTable" id="rp_avg_rt"></th><th class="averageTable" id="rp_avg_ppm"></th><th class="averageTable" id="rp_avg_cpm"></th></tr>
+        </tfoot>
+    </table>
+    <p class="titleTab" data-i18n="recentReflashesTitle">Recent reflashes</p>
+      <table>
+        <thead>
+            <tr>
+                <th class="tableTitle" data-i18n="titleTableR1">Runs</th><th class="tableTitle" data-i18n="titleTableR2">Prestiges</th><th class="tableTitle" data-i18n="titleTableR3">Crystals</th><th class="tableTitle" data-i18n="titleTableR4">Game time</th><th class="tableTitle" data-i18n="titleTableR5">Real time</th><th class="tableTitle" data-i18n="titleTableR6">Prestiges per min.</th><th class="tableTitle" data-i18n="titleTableR7">Crystals per min.</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><th id="rr_run_0"></th><th id="rr_res_0"></th><th id="rr_bits_0"></th><th id="rr_gt_0"></th><th id="rr_rt_0"></th><th id="rr_rpm_0"></th><th id="rr_bpm_0"></th></tr>
+            <tr><th id="rr_run_1"></th><th id="rr_res_1"></th><th id="rr_bits_1"></th><th id="rr_gt_1"></th><th id="rr_rt_1"></th><th id="rr_rpm_1"></th><th id="rr_bpm_1"></th></tr>
+            <tr><th id="rr_run_2"></th><th id="rr_res_2"></th><th id="rr_bits_2"></th><th id="rr_gt_2"></th><th id="rr_rt_2"></th><th id="rr_rpm_2"></th><th id="rr_bpm_2"></th></tr>
+            <tr><th id="rr_run_3"></th><th id="rr_res_3"></th><th id="rr_bits_3"></th><th id="rr_gt_3"></th><th id="rr_rt_3"></th><th id="rr_rpm_3"></th><th id="rr_bpm_3"></th></tr>
+            <tr><th id="rr_run_4"></th><th id="rr_res_4"></th><th id="rr_bits_4"></th><th id="rr_gt_4"></th><th id="rr_rt_4"></th><th id="rr_rpm_4"></th><th id="rr_bpm_4"></th></tr>
+            <tr><th id="rr_run_5"></th><th id="rr_res_5"></th><th id="rr_bits_5"></th><th id="rr_gt_5"></th><th id="rr_rt_5"></th><th id="rr_rpm_5"></th><th id="rr_bpm_5"></th></tr>
+            <tr><th id="rr_run_6"></th><th id="rr_res_6"></th><th id="rr_bits_6"></th><th id="rr_gt_6"></th><th id="rr_rt_6"></th><th id="rr_rpm_6"></th><th id="rr_bpm_6"></th></tr>
+            <tr><th id="rr_run_7"></th><th id="rr_res_7"></th><th id="rr_bits_7"></th><th id="rr_gt_7"></th><th id="rr_rt_7"></th><th id="rr_rpm_7"></th><th id="rr_bpm_7"></th></tr>
+            <tr><th id="rr_run_8"></th><th id="rr_res_8"></th><th id="rr_bits_8"></th><th id="rr_gt_8"></th><th id="rr_rt_8"></th><th id="rr_rpm_8"></th><th id="rr_bpm_8"></th></tr>
+            <tr><th id="rr_run_9"></th><th id="rr_res_9"></th><th id="rr_bits_9"></th><th id="rr_gt_9"></th><th id="rr_rt_9"></th><th id="rr_rpm_9"></th><th id="rr_bpm_9"></th></tr>
+        </tbody>
+        <tfoot>
+          <tr><th class="averageTable" data-i18n="averageReflashesTitle">Average</th><th class="averageTable" id="rr_avg_res"></th><th class="averageTable" id="rr_avg_bits"></th><th class="averageTable" id="rr_avg_gt"></th><th class="averageTable" id="rr_avg_rt"></th><th class="averageTable" id="rr_avg_rpm"></th><th class="averageTable" id="rr_avg_bpm"></th></tr>
         </tfoot>
     </table>
     </div>
@@ -2952,6 +3072,12 @@
                 <button onclick="chooseSave(4)" id="save4" class="tabButton save_slot"><span data-i18n="save4"></span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
                 <button onclick="chooseSave(5)" id="save5" class="tabButton save_slot" ><span data-i18n="save5"></span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
               </div>
+            </div>
+
+            <div id="reflashConfirmation" class="windowDesc" style="display: none">
+              <ut><p data-i18n="reflasnConfirmTitle">Placeholder</p></ut>
+              <p data-i18n="reflasnConfirmDesc">Placeholder</p>
+              <button onclick="LAYERS.reflash.doReset()" class="tabButton" data-i18n="reflasnConfirmButton">OK</button>
             </div>
             </div>
         </div>

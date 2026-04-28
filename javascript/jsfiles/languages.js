@@ -150,8 +150,8 @@ function loadTranslationsAlways() {
     if (player.coin.currency >= 1e15 && player.prestige.challenge.activated === 0) {
         let pGain = GAIN.prestige.reset();
         let cGain = GAIN.crystal.reset();
-        let extra = MILESTONES.has(15) && player.prestige.total_currency < 1e15? i18next.t('prestigeCountMultiplierText', {prestigeCountMultiplier: formatNumber(pGain)}) : '';
-        btnPrestige.textContent = player.prestige.total_currency >= 1e15 ? 
+        let extra = MILESTONES.has(15) && player.prestige.this_reflash_currency < 1e15 ? i18next.t('prestigeCountMultiplierText', {prestigeCountMultiplier: formatNumber(pGain)}) : '';
+        btnPrestige.textContent = player.prestige.this_reflash_currency >= 1e15 ? 
         i18next.t('prestigeEnabledAdvanced', {crystalsTemp: formatNumber(cGain), crystalsPerMin: formatNumber(cGain * 60 / player.time.real.prestige.timer) }) :
         i18next.t('prestigeEnabled', {crystalsTemp: formatNumber(cGain), prestigeCountMultiplierText: extra});
     } else if (player.prestige.challenge.activated !== 0) {
@@ -606,6 +606,14 @@ function loadTranslationsInfo() {
     document.getElementById('stat_pt_m').textContent = formatNumber(player.time.game.prestige.minutes, 'floor');
     document.getElementById('stat_pt_s').textContent = formatNumber(player.time.game.prestige.seconds, 'floor');
 
+    document.getElementById('stat_total_bits').textContent = formatNumber(player.reflash.total_currency);
+    document.getElementById('stat_total_refs').textContent = formatNumber(player.reflash.resets);
+
+    document.getElementById('stat_ret_d').textContent = formatNumber(player.time.game.reflash.days, 'floor');
+    document.getElementById('stat_ret_h').textContent = formatNumber(player.time.game.reflash.hours, 'floor');
+    document.getElementById('stat_ret_m').textContent = formatNumber(player.time.game.reflash.minutes, 'floor');
+    document.getElementById('stat_ret_s').textContent = formatNumber(player.time.game.reflash.seconds, 'floor');
+
     let fpt_timer = player.time.real.fastestPrestige.timer;
     let fpt_str = '';
     if (fpt_timer > 86399) fpt_str += formatNumber(player.time.game.fastestPrestige.days, 'floor') + ' ' + i18next.t('daysText') + ' ';
@@ -613,6 +621,14 @@ function loadTranslationsInfo() {
     if (fpt_timer > 59) fpt_str += formatNumber(player.time.real.fastestPrestige.minutes, 'floor') + ' ' + i18next.t('minutesText') + ' ';
     fpt_str += (fpt_timer >= 1 ? formatNumber(player.time.real.fastestPrestige.seconds, 'floor') : formatNumber(fpt_timer, 'boost')) + ' ' + i18next.t('secondsText');
     document.getElementById('stat_fpt').textContent = fpt_str;
+
+    let fret_timer = player.time.real.fastestReflash.timer;
+    let fret_str = '';
+    if (fret_timer > 86399) fret_str += formatNumber(player.time.game.fastestReflash.days, 'floor') + ' ' + i18next.t('daysText') + ' ';
+    if (fret_timer > 3599) fret_str += formatNumber(player.time.game.fastestReflash.hours, 'floor') + ' ' + i18next.t('hoursText') + ' ';
+    if (fret_timer > 59) fret_str += formatNumber(player.time.real.fastestReflash.minutes, 'floor') + ' ' + i18next.t('minutesText') + ' ';
+    fret_str += (fret_timer >= 1 ? formatNumber(player.time.real.fastestReflash.seconds, 'floor') : formatNumber(fret_timer, 'boost')) + ' ' + i18next.t('secondsText');
+    document.getElementById('stat_fret').textContent = fret_str;
 
     document.getElementById('stat_clicks_real').textContent = formatNumber(player.clicks.real);
     document.getElementById('stat_clicks_game').textContent = formatNumber(player.clicks.simulated);
@@ -1191,6 +1207,8 @@ function checkCode(id=999) {
     case 1:
         player.supercoin.currency += 69
         player.supercoin.total_currency += 69
+        player.supercoin.this_reflash_currency += 69
+        
         break;
     case 2:
         if (!player.settings.event.spiritual) return 1
@@ -1217,6 +1235,7 @@ function checkCode(id=999) {
     case 7:
         player.supercoin.currency += 128
         player.supercoin.total_currency += 128
+        player.supercoin.this_reflash_currency += 128
         break;
     case 8: 
         player.shop.items.amount[4] += 1

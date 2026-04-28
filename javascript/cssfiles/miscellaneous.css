@@ -11,7 +11,7 @@ button {
     border-width: 1px;
 }
 
-#prestigeSubButtons, #mainSubButtons, #settingSubButtons, #statsSubButtons, #achSubButtons, #topButtons, #challengeSubButtons {
+#prestigeSubButtons, #mainSubButtons, #settingSubButtons, #statsSubButtons, #achSubButtons, #topButtons, #challengeSubButtons, #reflashSubButtons {
     margin: 0 auto;
     display: flex;
     justify-content: center;

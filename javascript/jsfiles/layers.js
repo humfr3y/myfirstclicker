@@ -174,6 +174,7 @@ const LAYERS = {
             let cr_gain = GAIN.crystal.reset();
             player.prestige.currency += cr_gain;
             player.prestige.total_currency += cr_gain;
+            player.prestige.this_reflash_currency += cr_gain;
             player.prestige.resets += GAIN.prestige.reset();
             PROGRESS.add(1);
     
@@ -251,6 +252,49 @@ const LAYERS = {
         },
         cost() { return player.prestige.challenge.activated !== 0 ? PRES_CHALL.goals[player.prestige.challenge.activated] : 1e15; }
     },
+
+    reflash: {
+        doReset() {
+            if (player.coin.currency < 1.7e308 || !player.prestige.challenge.completed.includes(8)) return 0;
+
+            if (!ACHS.has(61)) ACHS.unl(61);
+
+            // Исправлено начисление валюты перепрошивания
+            let refl_gain = 1;
+            player.reflash.currency += refl_gain;
+            player.reflash.total_currency += refl_gain;
+            player.reflash.resets += 1;
+            
+            PROGRESS.add(11);
+
+            for (let i = player.reflash.table_resets - 1; i > 0; i--) {
+                const k = i, j = i - 1;
+                player.reflash.resetTable[k].resets = player.reflash.resetTable[j].resets;
+                player.reflash.resetTable[k].currency = player.reflash.resetTable[j].currency;
+                Object.assign(player.reflash.resetTable[k].time.game, player.reflash.resetTable[j].time.game);
+                Object.assign(player.reflash.resetTable[k].time.real, player.reflash.resetTable[j].time.real);
+            }
+            
+            player.reflash.resetTable[0].resets = 1;
+            player.reflash.resetTable[0].currency = refl_gain;
+            updateTimeObject(player.reflash.resetTable[0].time.game, player.time.game.reflash.timer);
+            updateTimeObject(player.reflash.resetTable[0].time.real, player.time.real.reflash.timer);
+    
+            if (player.reflash.table_resets < 10) player.reflash.table_resets++;
+
+            LAYERS.doReflashReset();
+
+            if (player.time.real.reflash.timer < player.time.real.fastestReflash.timer) {
+                updateTimeObject(player.time.real.fastestReflash, player.time.real.reflash.timer);
+            }
+            if (player.time.game.reflash.timer < player.time.game.fastestReflash.timer) {
+                updateTimeObject(player.time.game.fastestReflash, player.time.game.reflash.timer);
+            }
+
+            player.time.game.reflash.timer = 0;
+            player.time.real.reflash.timer = 0;
+        },
+    },
     
     doForcedReset() {
         player.overdrive.consumed.type1 = 0;
@@ -282,6 +326,108 @@ const LAYERS = {
         if (!(player.challenge.activated === 0 && MILESTONES.has(9)) || player.prestige.challenge.activated !== 0) {
             player.coin.singleUpgrades = [];
         }
+    },
+
+    doReflashReset() {
+        player.umultipliers = 0;
+        player.upowers = 0;
+        player.uadders = 0;
+        player.ureducers = 0;
+
+        player.clicks.prestige = 0;
+
+        player.coin.currency = 10;
+        player.coin.this_reflash_currency = 10;
+        for (let i = 1; i <= 5; i++) player.coin.upgrades[i] = 0;
+        player.coin.singleUpgrades = [];
+        player.coin.superUpgrades = [];
+
+        player.supercoin.currency = 0;
+        player.supercoin.this_reflash_currency = 0;
+        player.supercoin.spent_currency = 0;
+        for (let i = 1; i <= 7; i++) player.shop.upgrades[i] = 0;
+        for (let i = 1; i <= 8; i++) player.shop.permanentUpgrades[i] = 0;
+        player.shop.unlockables = [];
+        for (let i = 1; i <= 6; i++) {
+            player.shop.items.amount[i] = 0;
+            player.shop.items.used[i] = 0;
+        }
+
+        player.prestige.currency = 0;
+        player.prestige.this_reflash_currency = 0;
+        player.prestige.broken_currency = 0;
+        player.prestige.resets = 0;
+        player.prestige.upgrades[1] = 0;
+        player.prestige.singleUpgrades = [];
+        player.prestige.milestones = [];
+        for (let i = 1; i <= 5; i++) player.prestige.break.buyables[i] = 0;
+        player.prestige.break.singles = [];
+
+        player.shard.currency = 0;
+        for (let i = 1; i <= 3; i++) player.shard.upgrades[i] = 0;
+        player.shard.singleUpgrades = [];
+        player.shard.unlockables = [];
+        player.shard.consumed = { click: 0, second: 0, buyables: 0, singles: 0 };
+        for (let i = 1; i <= 10; i++) player.shard.achievements[i] = 0;
+        player.shard_achievements = []; 
+
+        player.supercrystal.currency = 0;
+        player.supercrystal.total_currency = 0;
+        player.supercrystal.spent_currency_on_fortune_upgrades = 0;
+        player.supercrystal.consumedShards = 0;
+        player.supercrystal.upgrades = [];
+
+        player.rune.currency = 0;
+        player.rune.total_currency = 0;
+        for (let i = 1; i <= 4; i++) player.minerals[i] = 0;
+
+        player.fortune.tokens = 0;
+        player.fortune.total_tokens = 0;
+        player.fortune.spent_tokens = 0;
+        player.fortune.daily_resets = 10;
+        player.fortune.converted = { coins: 0, crystals: 0 };
+        for (let i = 1; i <= 3; i++) player.fortune.upgrades.buyables[i] = 0;
+        player.fortune.upgrades.singles = [];
+        for (let i = 1; i <= 12; i++) player.fortune.activatedBoosts[i] = { activated: false, effect: 0, time: 0 };
+        player.fortune.activatedBoosts.list = [];
+
+        player.balance.neutral = 0;
+        player.balance.scales_of_balance = 0;
+        player.balance.coins = { plus: 0, minus: 0 };
+        player.balance.total_coins = { plus: 0, minus: 0 };
+        for (let i = 1; i <= 3; i++) player.balance.upgrades.buyables[i] = 0;
+        player.balance.upgrades.singles = [];
+
+        player.challenge.completed = [];
+        player.challenge.activated = 0;
+        for (let i = 1; i <= 12; i++) {
+            player.challenge.time[i] = getMaxTime();
+            if (i === 12) player.challenge.time[i].times_completed = 0;
+        }
+
+        player.prestige.challenge.completed = [];
+        player.prestige.challenge.activated = 0;
+        for (let i = 1; i <= 8; i++) {
+            player.prestige.challenge.time[i] = getMaxTime();
+        }
+        player.overdrive.consumed = { type1: 0, type2: 0 };
+        const autoTypes = ['single', 'buyable', 'umultiplier', 'upower', 'prestige', 'uadder'];
+        autoTypes.forEach(type => {
+            player.automation.checkbox[type] = false;
+            player.automation.upgrades[type] = 0;
+            if (AUTO[type] && AUTO[type].stop) AUTO[type].stop(); 
+        });
+        player.time.game.total = getZeroTime();
+        player.time.game.prestige = getZeroTime();
+        player.time.real.total = getZeroTime();
+        player.time.real.prestige = getZeroTime();
+        player.time.umultiplier = 0;
+        player.time.upower = 0;
+        player.time.uadder = 0;
+        player.time.ureducer = 0;
+
+        LAYERS.doReset(); 
+        MILESTONES.checkMilestones()
     }
 };
 
