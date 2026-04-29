@@ -305,7 +305,6 @@ function loadTranslationsCoins() {
     // 4. ТЕКСТ УСЛОВИЯ ИСПЫТАНИЯ
     const ccEl = document.getElementById('challengeCondition');
     ccEl.textContent = '';
-    if (player.challenge.activated == 2) ccEl.textContent = i18next.t('challengeCondition2');
     if (player.challenge.activated == 7) {
         let val = (MISC.amount_of_upgrades.coin() / 50 * 100) <= 100 ? formatNumber(MISC.amount_of_upgrades.coin() / 50 * 100, 'boost') : 100;
         ccEl.textContent = i18next.t('challengeCondition7', {x: val});
@@ -497,7 +496,7 @@ function loadTranslationsShop() {
     }
 
     // 3. Разблокируемые (Unlockables / Singles 1-6)
-    for (let i = 1; i <= 6; i++) {
+    for (let i = 1; i <= 5; i++) {
         let isBought = player.shop.unlockables.includes(i);
         document.getElementById(`su${i}s_cost_cont`).style.display = isBought ? 'none' : 'inline';
         if (!isBought) document.getElementById(`su${i}s_cost`).textContent = formatNumber(UPGS.shop.unlockables[i].cost());
@@ -868,7 +867,7 @@ function loadTranslationsChallenges() {
     setTxt('c3_eff', formatNumber(player.challenge.completed.includes(3) ? CHALL[3].effect() : 1, 'power'));
     setTxt('c4_eff', formatNumber(player.challenge.completed.includes(4) ? CHALL[4].effect() : 0));
     setTxt('c5_eff', formatNumber(player.challenge.completed.includes(5) ? CHALL[5].effect() : 1, 'boost'));
-    setTxt('c6_eff', formatNumber(player.challenge.completed.includes(6) ? CHALL[6].effect() : 1, 'boost'));
+    setTxt('c1_eff', formatNumber(player.challenge.completed.includes(1) ? CHALL[1].effect() : 1, 'boost'));
     setTxt('c7_eff', formatNumber(player.challenge.completed.includes(7) ? CHALL[7].effect() : 1, 'boost'));
     setTxt('c8_eff', formatNumber(player.challenge.completed.includes(8) ? CHALL[8].effect() : 1, 'boost'));
     setTxt('c9_eff', formatNumber(player.challenge.completed.includes(9) ? CHALL[9].effect() : 1, 'boost'));

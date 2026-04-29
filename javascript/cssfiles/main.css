@@ -1030,27 +1030,27 @@ rn {
 #shopPermanentU8 {
   background-image: url('images/fortuneTicket.png')
 }
-#shopSingleU1 {
+/* #shopSingleU2{
   background-image: url('images/brokenspeedometer.webp');
   background-position: -0.5px -0.5px;
   image-rendering: pixelated;
-}
-#shopSingleU2 {
+} */
+#shopSingleU1 {
   background-image: url('images/crystalactualspeedometer.webp');
   background-position: -0.5px -0.5px;
   image-rendering: pixelated;
 }
-#shopSingleU3 {
+#shopSingleU2 {
   background-image: url('images/modernize.webp');
   background-position: -0.5px -0.5px;
   image-rendering: pixelated;
 }
-#shopSingleU4 {
+#shopSingleU3 {
   background-image: url('images/trophy.webp');
   background-position: -0.5px -0.5px;
   image-rendering: pixelated;
 }
-#shopSingleU5 {
+#shopSingleU4 {
   background-image: url('images/crystalclock.webp');
   background-position: -0.5px -0.5px;
   image-rendering: pixelated;

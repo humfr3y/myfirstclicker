@@ -52,7 +52,7 @@ const UPGS = {
             {
                 id: 3,
                 super_id: 13,
-                power: 9.66,
+                power: 11,
                 basePrice: 500,
                 elementId: 'buyableU3',
                 superCost: 500,
@@ -362,8 +362,8 @@ const UPGS = {
         singles: new UniversalSinglesManager('shard', 'singleUpgrades', [
             { id: 11, elementId: 'shSingleU1', basePrice: 500000, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.shard.currency + 1, 0.035) * 3; } },
             { id: 12, elementId: 'shSingleU2', basePrice: 1e12, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.prestige.broken_currency + 1, 0.06) * 3 } },
-            { id: 13, elementId: 'shSingleU3', basePrice: 1e15, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.prestige.currency + 1, 0.06) * 3; } },
-            { id: 21, elementId: 'shSingleU4', basePrice: 1e21, effect: function(x = this.unl()) {
+            { id: 13, elementId: 'shSingleU3', basePrice: 1e21, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.prestige.currency + 1, 0.06) * 3; } },
+            { id: 21, elementId: 'shSingleU4', basePrice: 1e30, effect: function(x = this.unl()) {
                 if (x == 0) return 1;
                 let eff = 1 + Math.pow(player.rune.total_currency, 1.5);
                 if (ACHS.has(48)) eff *= 1.04;
@@ -385,12 +385,12 @@ const UPGS = {
         ], 'upgrades'),
 
         unlockables: new ShopUnlockablesManager('shop', 'unlockables', [
-            { id: 1, elementId: 'shopSingleU1', basePrice: 250 },
-            { id: 2, elementId: 'shopSingleU2', basePrice: 1200 },
-            { id: 3, elementId: 'shopSingleU3', basePrice: 1000 },
-            { id: 4, elementId: 'shopSingleU4', basePrice: 1500 },
-            { id: 5, elementId: 'shopSingleU5', basePrice: 1000 },
-            { id: 6, elementId: 'shopSingleU6', basePrice: 3000 }
+            // { id: 1, elementId: 'shopSingleU1', basePrice: 250 },
+            { id: 1, elementId: 'shopSingleU1', basePrice: 1200 },
+            { id: 2, elementId: 'shopSingleU2', basePrice: 1000 },
+            { id: 3, elementId: 'shopSingleU3', basePrice: 1500 },
+            { id: 4, elementId: 'shopSingleU4', basePrice: 1000 },
+            { id: 5, elementId: 'shopSingleU5', basePrice: 3000 }
         ]),
 
         permanent: new ShopPermanentManager('shop', [

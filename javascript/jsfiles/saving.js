@@ -126,7 +126,7 @@ function loadGame() {
     }
 
     // Восстановление настроек UI
-    player.code.name = ['digitalgod', 'shirakamifubuki', 'suisei', 'koyori', 'manilovefauna', 'revolution', 'supercoin', 'superprestige', 'sorry'];
+    player.code.name = [];
     changeFonts2(player.settings.font);
     changeFont.value = player.settings.font;
     changeNotation.value = player.settings.notation;
@@ -159,6 +159,13 @@ function loadGame() {
             if (AUTO[type]) AUTO[type].start();
         }
     });
+
+    if (!player.shop.unlockables.includes(0) && player.shop.unlockables.length != 0) {
+        for (let i = 0; i < player.shop.unlockables.length; i++) {
+        player.shop.unlockables[i]--
+        }
+        player.supercoin.currency += 250
+    }
 
     player.settings.modernization_activated = false;
 }
@@ -260,7 +267,7 @@ function convert_save() {
         settings: { currentLanguage: 'en', auto_save: true, mutedAudio: false, shop_bulkbuy: 1, minerals_bulkbuy: 1, font: 'option1', notation: 'option1', buy_max_activate: false, shard_buy_max_activate: false, breakprestige_buy_max_activate: false, modernization_activated: false, loreBoolean: [], event: { spiritual: false, triplePower: false }, whichPrestigeMode: 'time', autosave_interval: 30000, offline: true },
         automation: { checkbox: { single: false, buyable: false, umultiplier: false, upower: false, prestige: false }, setIntervals: {}, upgrades: { single: 0, buyable: 0, umultiplier: 0, upower: 0, prestige: 0, uadder: 0 }, conditions: { umultiplier: 0, upower: { time: 0, x_of_umulti: 0 }, prestige: { time: 3600, coins: 1e15, prestige: 10000, crystals: 1e50 }, uadder: { time: 0, x_of_upower: 0 } } },
         got_daily_reward: false,
-        code: { activated: [], name: ['digitalgod', 'shirakamifubuki', 'suisei', 'koyori', 'manilovefauna', 'revolution', 'supercoin', 'superprestige', 'sorry'] },
+        code: { activated: [], name: [] },
         overdrive: { consumed: { type1: 0, type2: 0 } },
         offline_gain: { time: 0, coin: 0, supercoin: 0, crystal: 0, prestige: 0, shard: 0 }
     };

@@ -112,7 +112,7 @@ let player = {
         conditions: { umultiplier: 0, upower: { time: 0, x_of_umulti: 0 }, prestige: { time: 3600, coins: 1e15, prestige: 10000, crystals: 1e50 }, uadder: { time: 0, x_of_upower: 0 } }
     },
     got_daily_reward: false,
-    code: { activated: [], name: ['digitalgod', 'shirakamifubuki', 'suisei', 'koyori', 'manilovefauna', 'revolution', 'supercoin', 'superprestige', 'sorry'] },
+    code: { activated: [], name: [] },
     overdrive: { consumed: { type1: 0, type2: 0 } },
     offline_gain: { time: '', coin: '', supercoin: '', crystal: '', prestige: '', shard: '' }
 };
@@ -160,6 +160,6 @@ const text = {
 
 const PRES_CHALL = {
     goals: {
-        1: 1e20, 2: 1e24, 3: 1e60, 4: 1e62, 5: 1e52, 6: 1e67, 7: 1e25, 8: 1e15,
+        1: 1e30, 2: 1e24, 3: 1e71, 4: 1e73, 5: 1e60, 6: 1e80, 7: 1e30, 8: 1e15,
     }
 };

@@ -251,7 +251,7 @@ function startChallenge(number, again = false) {
 }
 
 function startPChallenge(number, again = false) {
-    UPGS.fortune.boosts.respec();
+    UPGS.fortune.boosts.respec(true);
     
     if (again && restartPChallenge.checked) {
         LAYERS.reset_time(); LAYERS.doReset(); LAYERS.doForcedReset();
@@ -485,10 +485,10 @@ function createGainPerClickUI() {
         { id: 'doubler', title: 'Удвоитель', colorStyle: 'background-image: radial-gradient(#23e019, rgba(0, 0, 0, 0)210%)' },
         { id: 'midasCursor', title: 'Курсор Мидаса', colorStyle: 'background-image: radial-gradient(#1226ff, black 210%)' },
         { id: 'rewardForFeats', title: 'Награда за Подвиги', colorStyle: 'background-image: radial-gradient(#1226ff, black 210%)' },
-        { id: 'challenge6', title: 'Испытание 6', colorStyle: 'background-image: radial-gradient(rgb(127, 210, 136), black 210%)' },
+        { id: 'challenge1', title: 'Испытание 1', colorStyle: 'background-image: radial-gradient(rgb(127, 210, 136), black 210%)' },
         { id: 'goldenGlove', title: 'Золотая перчатка', colorStyle: 'background-image: radial-gradient(rgb(255, 174, 0), black 210%)' },
         { id: 'gainClick', title: 'Общий доход', colorStyle: 'background-image: radial-gradient(gold, black 210%)' },
-        { id: 'challenge1', title: 'Испытание 1', colorStyle: 'background-image: radial-gradient(rgb(127, 210, 136), black 210%)' }
+        { id: 'challenge6', title: 'Испытание 6', colorStyle: 'background-image: radial-gradient(rgb(127, 210, 136), black 210%)' }
     ];
     
     const softcapHTML = `
@@ -504,16 +504,16 @@ function createGainPerClickUI() {
 createGainPerClickUI();
 
 function statsPerClickUpdate() {
-    const gainWithoutPower = findMultiplierDecimal(GAIN.coin.gain.no_softcap_effect().pow(1 / (player.challenge.completed.includes(1) ? CHALL[1].effect() : 1)), (player.challenge.completed.includes(1) ? CHALL[1].effect() : 1));
+    const gainWithoutPower = findMultiplierDecimal(GAIN.coin.gain.no_softcap_effect().pow(1 / (player.challenge.completed.includes(6) ? CHALL[6].effect() : 1)), (player.challenge.completed.includes(6) ? CHALL[6].effect() : 1));
 
     const sources = [
         { effectValue: () => UPGS.coin.buyables[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'doublerStatsEffect', pieceId: 'doublerPiece', piecePercentId: 'doublerPiecePercent', summary: () => GAIN.coin.click.no_softcap_effect() },
         { effectValue: () => UPGS.coin.singles[12].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'midasCursorStatsEffect', pieceId: 'midasCursorPiece', piecePercentId: 'midasCursorPiecePercent', summary: () => GAIN.coin.click.no_softcap_effect() },
         { effectValue: () => UPGS.coin.singles[23].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'rewardForFeatsStatsEffect', pieceId: 'rewardForFeatsPiece', piecePercentId: 'rewardForFeatsPiecePercent', summary: () => GAIN.coin.click.no_softcap_effect() },
-        { effectValue: () => CHALL[6].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'challenge6StatsEffect', pieceId: 'challenge6Piece', piecePercentId: 'challenge6PiecePercent', summary: () => GAIN.coin.click.no_softcap_effect() },
+        { effectValue: () => CHALL[1].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'challenge1StatsEffect', pieceId: 'challenge1Piece', piecePercentId: 'challenge1PiecePercent', summary: () => GAIN.coin.click.no_softcap_effect() },
         { effectValue: () => UPGS.shop.buyables[1].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'goldenGloveStatsEffect', pieceId: 'goldenGlovePiece', piecePercentId: 'goldenGlovePiecePercent', summary: () => GAIN.coin.click.no_softcap_effect() },
         { effectValue: () => GAIN.coin.gain.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'gainClickStatsEffect', pieceId: 'gainClickPiece', piecePercentId: 'gainClickPiecePercent', summary: () => GAIN.coin.click.no_softcap_effect() },
-        { effectValue: () => (player.challenge.completed.includes(1) ? CHALL[1].effect() : 1), effectPrefix: '^', effectMode: 'power', effectId: 'challenge1StatsEffect', pieceId: 'challenge1Piece', piecePercentId: 'challenge1PiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect(), graphicValue: () => gainWithoutPower }
+        { effectValue: () => (player.challenge.completed.includes(6) ? CHALL[6].effect() : 1), effectPrefix: '^', effectMode: 'power', effectId: 'challenge6StatsEffect', pieceId: 'challenge6Piece', piecePercentId: 'challenge6PiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect(), graphicValue: () => gainWithoutPower }
     ];
 
     applyStatsUpdate(sources, 'summaryClickStatsEffect', GAIN.coin.click.effect());

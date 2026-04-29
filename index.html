@@ -236,6 +236,7 @@
             <button onclick='showChangelog(text.changelog["0.13"])' class="versionButton">0.13</button>
             <button onclick='showChangelog(text.changelog["0.14"])' class="versionButton">0.14</button>
             <button onclick='showChangelog(text.changelog["0.15"])' class="versionButton">0.15</button>
+            <button onclick='showChangelog(text.changelog["0.15.x"])' class="versionButton">0.15.x</button>
           </div>
         <div id="versionDiv" class="windowDesc">
           <p id="versionDescription">Choose version</p>
@@ -688,7 +689,7 @@
             <span class="challengeDesc challengeCond statsSlot" data-i18n="challengeConditionText1"></span>
             <span class="challengeDesc challengeGoal statsSlot" data-i18n="challengeGoal"></span>
             <button onclick="startChallenge(1)" class="challengeStart tabButton" id="challenge1Start">Start</button>
-            <span class="challengeDesc challengeReward statsSlot" data-i18n="challengeReward1"></span>
+            <span class="challengeDesc challengeReward statsSlot"><span data-i18n="c_rew_1"></span><span id="c1_eff">1</span></span>
           </div>
           <div class="challengeDiv">
             <p class="challengeTitle" data-i18n="challengeTitle_2">Challenge 2</p>
@@ -723,7 +724,7 @@
             <span class="challengeDesc challengeCond statsSlot" data-i18n="challengeConditionText6"></span>
             <span class="challengeDesc challengeGoal statsSlot" data-i18n="challengeGoal"></span>
             <button onclick="startChallenge(6)" class="challengeStart tabButton" id="challenge6Start">Start</button>
-            <span class="challengeDesc challengeReward statsSlot"><span data-i18n="c_rew_6"></span><span id="c6_eff">1</span></span>
+            <span class="challengeDesc challengeReward statsSlot" data-i18n="challengeReward6"></span>
           </div>
           <div class="challengeDiv">
             <p class="challengeTitle" data-i18n="challengeTitle_7">Challenge 7</p>
@@ -966,7 +967,7 @@
           </button> -->
         </div>
         <div id="prestigeSpecialRow" class="centeredDiv" style="display: none">
-          <button onclick="maxBuyAllPrestige()" id="maxBuyPrestige" class="upgradeButton maxBuy" style="width: 200px; border-color: rgb(0, 124, 124)">Купить все</button>
+          <button onclick="maxBuyAllPrestige()" id="maxBuyPrestige" class="upgradeButton maxBuy" style="width: 200px; border-color: rgb(0, 124, 124)" data-i18n="buyMax">Купить все</button>
         </div>
       </div>
       <div id="milestonesTab" style="display:none">
@@ -1297,7 +1298,7 @@
           <span data-i18n="generateRunesBulk_1">Generate max runes</span> (+<span id="rune_bulk_iter">0</span>)<br> <span data-i18n="word_cost">Cost:</span> <span id="rune_bulk_cost">0</span> <span data-i18n="currency_crystals">crystals</span>
         </button>
       </div>
-      <span style="margin-bottom: 2px" data-i18n="mineralsBulkBuy_text">Bulk buy minerals</span>
+      <span class="whiteText" style="margin-bottom: 2px" data-i18n="mineralsBulkBuy_text">Bulk buy minerals</span>
       <input type="text" id="mineralsBulkInput" class="prestigeInput">
       <div id="mineralsDiv">
         <div class="mineralContainer">
@@ -2716,7 +2717,7 @@
               <hr style="margin: 0">
 
               <div id="thirdShopRow" class="shopRow">
-                <div class="shopContainer">
+                <!-- <div class="shopContainer">
                   <button id="shopSingleU1" class="shopButton" onclick="UPGS.shop.unlockables.buy(1)"></button>
                   <div id="tooltip-shopSingleU1" class="tooltip" role="tooltip">
                     <span class="tooltipShop">
@@ -2728,72 +2729,72 @@
                   </div>
                   <span id="shopSingleU1Title" data-i18n="shop_u1_name">Broken Speedometer</span>
                   <span id="shopSingleU1Req">0/1</span>
-                </div>
+                </div> -->
                 <div class="shopContainer" id="postAch32" style="display: none">
+                  <button id="shopSingleU1" class="shopButton" onclick="UPGS.shop.unlockables.buy(1)"></button>
+                  <div id="tooltip-shopSingleU1" class="tooltip" role="tooltip">
+                    <span class="tooltipShop">
+                      <ut data-i18n="shop_u1_name">Fragile Speedometer</ut><br>
+                      <span data-i18n="shop_u1_desc">Unlock Overdrive II</span><br>
+                      <span id="su1s_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="su1s_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                    </span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopSingleU1Title" data-i18n="shop_u1_name">Fragile Speedometer</span>
+                  <span id="shopSingleU1Req">0/1</span>
+                </div>
+                <div class="shopContainer postAch33" style="display: none">
                   <button id="shopSingleU2" class="shopButton" onclick="UPGS.shop.unlockables.buy(2)"></button>
                   <div id="tooltip-shopSingleU2" class="tooltip" role="tooltip">
                     <span class="tooltipShop">
-                      <ut data-i18n="shop_u2_name">Fragile Speedometer</ut><br>
-                      <span data-i18n="shop_u2_desc">Unlock Overdrive II</span><br>
+                      <ut data-i18n="shop_u2_name">Super-Machine</ut><br>
+                      <span data-i18n="shop_u2_desc">Unlock coin upgrades Super-Modernization</span><br>
                       <span id="su2s_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="su2s_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
                     </span>
                     <div class="arrow" data-popper-arrow></div>
                   </div>
-                  <span id="shopSingleU2Title" data-i18n="shop_u2_name">Fragile Speedometer</span>
+                  <span id="shopSingleU2Title" data-i18n="shop_u2_name">Super-Machine</span>
                   <span id="shopSingleU2Req">0/1</span>
                 </div>
-                <div class="shopContainer postAch33" style="display: none">
-                  <button id="shopSingleU3" class="shopButton" onclick="UPGS.shop.unlockables.buy(3)"></button>
-                  <div id="tooltip-shopSingleU3" class="tooltip" role="tooltip">
-                    <span class="tooltipShop">
-                      <ut data-i18n="shop_u3_name">Super-Machine</ut><br>
-                      <span data-i18n="shop_u3_desc">Unlock coin upgrades Super-Modernization</span><br>
-                      <span id="su3s_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="su3s_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                    </span>
-                    <div class="arrow" data-popper-arrow></div>
-                  </div>
-                  <span id="shopSingleU3Title" data-i18n="shop_u3_name">Super-Machine</span>
-                  <span id="shopSingleU3Req">0/1</span>
-                </div>
                 <div id="postMinerals2">
+                  <div class="shopContainer">
+                    <button id="shopSingleU3" class="shopButton" onclick="UPGS.shop.unlockables.buy(3)"></button>
+                    <div id="tooltip-shopSingleU3" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut data-i18n="shop_u3_name">Shard Trophy</ut><br>
+                        <span data-i18n="shop_u3_desc">Unlock Shard Achievements</span><br>
+                        <span id="su3s_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="su3s_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopSingleU3Title" data-i18n="shop_u3_name">Shard Trophy</span>
+                    <span id="shopSingleU3Req">0/1</span>
+                  </div>
                   <div class="shopContainer">
                     <button id="shopSingleU4" class="shopButton" onclick="UPGS.shop.unlockables.buy(4)"></button>
                     <div id="tooltip-shopSingleU4" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
-                        <ut data-i18n="shop_u4_name">Shard Trophy</ut><br>
-                        <span data-i18n="shop_u4_desc">Unlock Shard Achievements</span><br>
+                        <ut data-i18n="shop_u4_name">Supercrystal Watch</ut><br>
+                        <span data-i18n="shop_u4_desc">Smart Watch effect works with items too</span><br>
                         <span id="su4s_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="su4s_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
                       </span>
                       <div class="arrow" data-popper-arrow></div>
                     </div>
-                    <span id="shopSingleU4Title" data-i18n="shop_u4_name">Shard Trophy</span>
+                    <span id="shopSingleU4Title" data-i18n="shop_u4_name">Supercrystal Watch</span>
                     <span id="shopSingleU4Req">0/1</span>
                   </div>
                   <div class="shopContainer">
                     <button id="shopSingleU5" class="shopButton" onclick="UPGS.shop.unlockables.buy(5)"></button>
                     <div id="tooltip-shopSingleU5" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
-                        <ut data-i18n="shop_u5_name">Supercrystal Watch</ut><br>
-                        <span data-i18n="shop_u5_desc">Smart Watch effect works with items too</span><br>
+                        <ut data-i18n="shop_u5_name">Aquatic Pickaxe</ut><br>
+                        <span data-i18n="shop_u5_desc">Unlock new mineral - Aquamarine</span><br>
                         <span id="su5s_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="su5s_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
                       </span>
                       <div class="arrow" data-popper-arrow></div>
                     </div>
-                    <span id="shopSingleU5Title" data-i18n="shop_u5_name">Supercrystal Watch</span>
+                    <span id="shopSingleU5Title" data-i18n="shop_u5_name">Aquatic Pickaxe</span>
                     <span id="shopSingleU5Req">0/1</span>
-                  </div>
-                  <div class="shopContainer">
-                    <button id="shopSingleU6" class="shopButton" onclick="UPGS.shop.unlockables.buy(6)"></button>
-                    <div id="tooltip-shopSingleU6" class="tooltip" role="tooltip">
-                      <span class="tooltipShop">
-                        <ut data-i18n="shop_u6_name">Aquatic Pickaxe</ut><br>
-                        <span data-i18n="shop_u6_desc">Unlock new mineral - Aquamarine</span><br>
-                        <span id="su6s_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="su6s_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                      </span>
-                      <div class="arrow" data-popper-arrow></div>
-                    </div>
-                    <span id="shopSingleU6Title" data-i18n="shop_u6_name">Aquatic Pickaxe</span>
-                    <span id="shopSingleU6Req">0/1</span>
                   </div>
                 </div>
               </div>

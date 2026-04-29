@@ -53,8 +53,20 @@ class UniversalBuyableUpgrade {
             }
         }
 
-        // Сколько мы физически можем позволить себе купить
+        // Сколько мы физически можем позволить себе купить по деньгам
         let affordable = upgradesPurchasableCustom(y, x, this.cost(), this.power);
+
+        // === ЖЕСТКИЙ ЛИМИТ ДЛЯ ИСПЫТАНИЯ 10 ===
+        // Если мы в нужном испытании и покупаем улучшения монет:
+        if (this.layer === 'coin' && (player.challenge.activated == 10 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7)) {
+            // Вычисляем, сколько улучшений нам еще можно купить до лимита в 25
+            let upgradesLeft = 25 - MISC.amount_of_upgrades.coin();
+            
+            if (upgradesLeft <= 0) return 0; // Если лимит исчерпан, запрещаем опт
+            
+            // Берем самое маленькое: либо на сколько хватит денег, либо сколько осталось до лимита
+            affordable = Math.min(affordable, upgradesLeft);
+        }
 
         // Если у улучшения прописана своя логика опта (как у Осколков и Суперпрестижа)
         if (this.customBulk) {
@@ -108,7 +120,7 @@ class UniversalBuyablesManager {
     canAfford(x) {
         let canAffordBase = this.state.currency >= this[x].cost();
         if (this.layer === 'coin') {
-            if (player.challenge.activated == 6 || player.challenge.activated == 11 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) return false;
+            if (player.challenge.activated == 1 || player.challenge.activated == 11 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) return false;
             if ((player.challenge.activated == 10 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) && MISC.amount_of_upgrades.coin() >= 25) return false;
         }
         return canAffordBase;
@@ -215,7 +227,7 @@ class UniversalSingleUpgrade {
         if (this.basePrice !== undefined && this.layer === 'coin') {
             let cost = this.basePrice;
             if (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost *= Math.pow(10, MISC.amount_of_upgrades.coin());
-            if (player.challenge.activated == 6 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
+            if (player.challenge.activated == 1 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) cost /= Math.pow(Math.log10(10 + player.clicks.prestige), Math.log10(10 + player.clicks.prestige * player.clicks.prestige));
             if (player.prestige.challenge.activated == 4) cost = Math.pow(cost, 2);
             return cost;
         }
@@ -255,7 +267,7 @@ class UniversalSinglesManager {
         let bool = this.state.currency >= this[x].cost() && !this[x].unl();
         
         if (this.layer === 'coin') {
-            if (player.challenge.activated == 1 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) bool = false;
+            if (player.challenge.activated == 6 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7) bool = false;
             if ((player.challenge.activated == 10 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) && MISC.amount_of_upgrades.coin() >= 25) bool = false;
             if (player.challenge.activated == 11 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) bool = false;
         } 
@@ -602,8 +614,8 @@ class FortuneBoostsManager {
         }
     }
     
-    respec() { 
-        if (player.fortune.daily_resets == 0) return 0;
+    respec(free=false) { 
+        if (player.fortune.daily_resets == 0 && free == false) return 0;
         this._keys.forEach(x => this.reset(x, true));
         player.fortune.daily_resets -= 1;
     }
