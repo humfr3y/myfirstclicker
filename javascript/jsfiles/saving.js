@@ -82,7 +82,7 @@ function loadGame() {
 
     // Восстановление после NaN
     if (isNaN(player.coin.currency)) player.coin.currency = 10;
-    if (isNaN(player.coin.total_currency)) player.coin.total_currency = 10;
+    if (isNaN(player.coin.total_currency) || player.coin.total_currency < 0) player.coin.total_currency = 10;
     if (isNaN(player.prestige.currency)) { player.prestige.total_currency = 0; player.prestige.currency = 0; }
     if (isNaN(player.shard.currency)) player.shard.currency = 0;
     if (player.shard.currency < 0) player.shard.currency = 0;
