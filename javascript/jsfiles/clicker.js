@@ -902,7 +902,7 @@ const MISC = {
     
     offline(x = player.time.savedTime, y = Date.now()) {
         let max = ACHS.has(22) ? 28800 : 21600
-        let time = Math.min((y - x) / 1000, max);
+        let time = Math.max(Math.min((y - x) / 1000, max), 0);
         return UPGS.supercrystal[31].unl() ? time * 2 : time;
     },
     free_upgrade: {
@@ -1119,7 +1119,8 @@ let new_date = 0, time = 0
 function loop() {
     new_date = Date.now();
     player.time.currentTime = new_date;
-    time = (new_date - player.time.savedTime) / 1000;
+    time = Math.max((new_date - player.time.savedTime) / 1000, 0);
+
 
     if (player.settings.auto_save) {
         MISC.auto_save_timer += time;

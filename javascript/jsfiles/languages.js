@@ -1056,7 +1056,7 @@ function updateStaticTranslations() {
     text.chapter.start = i18next.t('startLoreDescription');
     text.help.start = i18next.t('startHelpDescription');
 
-    const versions = ['0.0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.5.1', '0.6', '0.7', '0.7.1', '0.8', '0.8.0.1', '0.9', '0.9.1', '0.9.2', '0.10', '0.10.1', '0.11', '0.12', '0.12.1', '0.13', '0.14', '0.15'];
+    const versions = ['0.0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.5.1', '0.6', '0.7', '0.7.1', '0.8', '0.8.0.1', '0.9', '0.9.1', '0.9.2', '0.10', '0.10.1', '0.11', '0.12', '0.12.1', '0.13', '0.14', '0.15', '0.15.x'];
     versions.forEach(v => {
         let key = 'version' + v.replace(/\./g, '');
         text.changelog[v] = i18next.t(key);
