@@ -112,7 +112,7 @@ let player = {
         conditions: { umultiplier: 0, upower: { time: 0, x_of_umulti: 0 }, prestige: { time: 3600, coins: 1e15, prestige: 10000, crystals: 1e50 }, uadder: { time: 0, x_of_upower: 0 } }
     },
     got_daily_reward: false,
-    code: { activated: [], name: [] },
+    code: { activated: [], name: ['umultiplier', 'upower', 'timemachine', 'hardmachine', 'sorry'] },
     overdrive: { consumed: { type1: 0, type2: 0 } },
     offline_gain: { time: '', coin: '', supercoin: '', crystal: '', prestige: '', shard: '' }
 };
@@ -144,7 +144,7 @@ const text = {
     window: { hard: '', NaN: '' },
     automation: { prestige_req: '', coin_req: '', time_req: '', crystal_req: '' },
     code: {
-        rewards: Array(9).fill(''),
+        rewards: Array(5).fill(''),
         reward: '', used_code: '', wrong_code: '', true_code: '', name_of_code: ''
     },
     changelog: {

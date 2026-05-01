@@ -494,7 +494,7 @@ buyable: {
                     priceText: 'g'
                 }
             },
-            superCrystal:{
+            :{
                 first: {
                     amount: 0,
                     effect: 2,
@@ -867,19 +867,19 @@ function checkUpgradesText () {
 
     //simulation.multiplier = 1, critical.chance = 1, critical.gain = 2
 
-    // simulation.multiplier *= Math.pow(thirdSuperCrystalSingle.effect, thirdSuperCrystalSingle.amount)
+    // simulation.multiplier *= Math.pow(thirdSingle.effect, thirdSingle.amount)
 
-    // critical.chance += fourthSuperCrystalSingle.effect*fourthSuperCrystalSingle.amount
+    // critical.chance += fourthSingle.effect*fourthSingle.amount
     // critical.chance += eighthShopBuyableEffect
     // critical.chance *= firstMineral.effect1
 
-    // critical.gain *= Math.pow(fifthSuperCrystalSingle.effect/2, fifthSuperCrystalSingle.amount)
+    // critical.gain *= Math.pow(fifthSingle.effect/2, fifthSingle.amount)
     // critical.gain *= 1+ninthShopBuyableEffect
     // critical.gain *= firstMineral.effect2
 
-    // ninthSuperCrystalSingle.effect = Math.pow(10, superCrystal.total)
+    // ninthSingle.effect = Math.pow(10, .total)
 
-    // superCrystal.price = (1e21 * Math.pow(1000, superCrystal.total))/thirdMineral.effect3
+    // .price = (1e21 * Math.pow(1000, .total))/thirdMineral.effect3
 
     // rune.price = 1e12*Math.pow(10, rune.total)
 
@@ -912,7 +912,7 @@ function checkUpgradesText () {
     //             singleArray[i].price = singleArray[i].price / Math.pow(Math.log10(10+prestigeClicks), Math.log10(10+prestigeClicks*prestigeClicks))
     //         }
     // }
-    // superCoinChanceFormula = (1+fourthShopBuyableEffect)*prestigeSinglesEffects[2][0]*Math.pow(firstSuperCrystalSingle.effect, firstSuperCrystalSingle.amount)*firstMineral.effect3+(1*achRow1.completion[26])
+    // superCoinChanceFormula = (1+fourthShopBuyableEffect)*prestigeSinglesEffects[2][0]*Math.pow(firstSingle.effect, firstSingle.amount)*firstMineral.effect3+(1*achRow1.completion[26])
 
 //*spiritEffects[1]*(1+blueCoin.effect)
 
@@ -990,7 +990,7 @@ function checkUpgradesText () {
 //         }
 //     }
 //     else shardsTemp = ((shardChanceMinimum+shardChanceMaximum)/2)*brokenCrystalsTemp
-//     shardsTemp *= Math.pow(ninthSuperCrystalSingle.effect, ninthSuperCrystalSingle.amount)
+//     shardsTemp *= Math.pow(ninthSingle.effect, ninthSingle.amount)
 //     shards += shardsTemp
 //     brokenCrystals += brokenCrystalsTemp
 // }
@@ -1053,7 +1053,7 @@ function checkUpgradesText () {
 
 //         prestigeCount >= 1, gameDays >= 3, brokenCrystals >= 100, noResets == true, umultipliercount >= 10, shardUnlockablePerSecond.percent == 100 && shardUnlockableClick.percent == 100, fastestPrestigeTimer <= 10, amountOfPrestigeUpgrades >= 16, overdriveType1.percent >= 25, prestigeMilestonesEffects[15] == true,
 
-//         challengeActivate == true, superCrystal.amount >= 1, firstMineral.amount >= 1 && secondMineral.amount >= 1 && thirdMineral.amount >= 1, challengeTime[0][3] + challengeTime[1][3] + challengeTime[2][3] + challengeTime[3][3] + challengeTime[4][3] + challengeTime[5][3] + challengeTime[6][3] + challengeTime[7][3] + challengeTime[8][3] + challengeTime[9][3] + challengeTime[10][3] <= 60, superamounts >= 1, challengeTime[11][3] <= 60, achRow1.specialVariables[1] == true, achRow1.specialVariables[0] == true, gainPerClick >= 4.20e69, overdriveType1.percent == 100
+//         challengeActivate == true, .amount >= 1, firstMineral.amount >= 1 && secondMineral.amount >= 1 && thirdMineral.amount >= 1, challengeTime[0][3] + challengeTime[1][3] + challengeTime[2][3] + challengeTime[3][3] + challengeTime[4][3] + challengeTime[5][3] + challengeTime[6][3] + challengeTime[7][3] + challengeTime[8][3] + challengeTime[9][3] + challengeTime[10][3] <= 60, superamounts >= 1, challengeTime[11][3] <= 60, achRow1.specialVariables[1] == true, achRow1.specialVariables[0] == true, gainPerClick >= 4.20e69, overdriveType1.percent == 100
 //     ]
 //     for (let i = 0; i < 30; i++){
 //         formula = Math.floor(i/10)+1
@@ -1147,10 +1147,10 @@ function checkUpgradesText () {
     // { name: 'autoUpowerInput2.value', key: 'autoUpowerInput2_value', type: 'float' },
     // { name: 'millisecondsNextDay', key: 'millisecondsNextDay', type: 'float' },
     // { name: 'prestigeTableResets', key: 'prestigeTableResets', type: 'float' },
-    // { name: 'superCrystal.price', key: 'superCrystal_price', type: 'float' },
-    // { name: 'superCrystal.amount', key: 'superCrystal_amount', type: 'float' },
-    // { name: 'superCrystal.consumedShards', key: 'superCrystal_consumedShards', type: 'float' },
-    // { name: 'superCrystal.total', key: 'superCrystal_total', type: 'float' },
+    // { name: '.price', key: '_price', type: 'float' },
+    // { name: '.amount', key: '_amount', type: 'float' },
+    // { name: '.consumedShards', key: '_consumedShards', type: 'float' },
+    // { name: '.total', key: '_total', type: 'float' },
     // { name: 'simulation.totalAmount', key: 'simulation_amount', type: 'float' },
     // { name: 'critical.totalAmount', key: 'critical_amount', type: 'float' },
     // // bool
@@ -1188,7 +1188,7 @@ function checkUpgradesText () {
     // { name: 'shopBuyableCount', key: 'shopBuyableCount' },
     // { name: 'shopItemCount', key: 'shopItemCount' },
     // { name: 'tripleEventCoins', key: 'tripleEventCoins' },
-    // { name: 'superCrystalUpgradesCount', key: 'superCrystalUpgradesCount' },
+    // { name: 'UpgradesCount', key: 'UpgradesCount' },
     // { name: 'prestigeTable', key: 'prestigeTable' },
     // { name: 'mineralCount', key: 'mineralCount' },
     // { name: 'buyableCount', key: 'buyableCount' },
@@ -1425,9 +1425,9 @@ function checkUpgradesText () {
     //     // }
     // }
     // if (version[4] == "0.12") {
-    //     const superCrystalUpgradesCount = ["first","second","third","fourth","fifth","sixth","seventh","eighth","ninth"]
-    //     for (let i of superCrystalUpgradesCount) {
-    //         window[i+"SuperCrystalSingle"].amount = parseFloat(parsedData[i+"SuperCrystalSingle_amount"]);
+    //     const UpgradesCount = ["first","second","third","fourth","fifth","sixth","seventh","eighth","ninth"]
+    //     for (let i of UpgradesCount) {
+    //         window[i+"Single"].amount = parseFloat(parsedData[i+"Single_amount"]);
     //     }
     //     gotDailyReward = parsedData.gotDailyReward
     //     // millisecondsNextDay = parsedData.millisecondsNextDay
@@ -1437,10 +1437,10 @@ function checkUpgradesText () {
 
     //     // prestigeTableResets = parseFloat(parsedData.prestigeTableResets)
         
-    //     // superCrystal.price = parseFloat(parsedData.superCrystal_price)
-    //     // superCrystal.amount = parseFloat(parsedData.superCrystal_amount)
-    //     // superCrystal.consumedShards = parseFloat(parsedData.superCrystal_consumedShards)
-    //     // superCrystal.total = parseFloat(parsedData.superCrystal_total)
+    //     // .price = parseFloat(parsedData._price)
+    //     // .amount = parseFloat(parsedData._amount)
+    //     // .consumedShards = parseFloat(parsedData._consumedShards)
+    //     // .total = parseFloat(parsedData._total)
 
     //     // simulation.clicksAmount = parseFloat(parsedData.simulation_amount)
     //     // critical.totalAmount = parseFloat(parsedData.critical_amount)
@@ -1637,7 +1637,7 @@ datasave = {
     //     'firstShardBuyable', 'secondShardBuyable', 'thirdShardBuyable',
     //     'firstShardSingle', 'secondShardSingle', 'thirdShardSingle', 'fourthShardSingle', 'fifthShardSingle', 'sixthShardSingle',
     //     'firstShopItem', 'secondShopItem', 'thirdShopItem', 'fourthShopItem',
-    //     'firstSuperCrystalSingle', 'secondSuperCrystalSingle', 'thirdSuperCrystalSingle', 'fourthSuperCrystalSingle', 'fifthSuperCrystalSingle', 'sixthSuperCrystalSingle', 'seventhSuperCrystalSingle', 'eighthSuperCrystalSingle', 'ninthSuperCrystalSingle', 
+    //     'firstSingle', 'secondSingle', 'thirdSingle', 'fourthSingle', 'fifthSingle', 'sixthSingle', 'seventhSingle', 'eighthSingle', 'ninthSingle', 
     //     'firstMineral', 'secondMineral', 'thirdMineral'
     // ];
 
@@ -1721,10 +1721,10 @@ datasave = {
 
     // datasave.shopBulkBuy_value = shopBulkBuyInput.value
 
-    // datasave.superCrystal_price = superCrystal.price
-    // datasave.superCrystal_amount = superCrystal.amount
-    // datasave.superCrystal_consumedShards = superCrystal.consumedShards
-    // datasave.superCrystal_total = superCrystal.total
+    // datasave._price = .price
+    // datasave._amount = .amount
+    // datasave._consumedShards = .consumedShards
+    // datasave._total = .total
 
     // datasave.simulation_amount = simulation.clicksAmount
 
@@ -2274,7 +2274,7 @@ function shardPerClickCalc() {
     shardsPerClick *= firstShardBuyableEffect
     shardsPerClick *= 1+fifthShopBuyableEffect
     // shardsPerClick *= 1+greenCoin.effect
-    shardsPerClick *= Math.pow(ninthSuperCrystalSingle.effect, ninthSuperCrystalSingle.amount)
+    shardsPerClick *= Math.pow(ninthSingle.effect, ninthSingle.amount)
 }
 
 function getShardPerSec() {
@@ -2294,7 +2294,7 @@ function getShardPerSec() {
     shardsEffect = shards/100
     achRow1.completion[19] ? shardsEffect *= 1+Math.pow(prestigeCount, 0.5) : shardsEffect
     shardsEffect = Math.pow(shardsEffect, fourthShardSingleEffect)
-    shardsEffect = softCap(shardsEffect, (1e7*Math.pow(sixthSuperCrystalSingle.effect, sixthSuperCrystalSingle.amount)), 0.5)
+    shardsEffect = softCap(shardsEffect, (1e7*Math.pow(sixthSingle.effect, sixthSingle.amount)), 0.5)
     let challengeReward7N = Math.log2(shards)
     isNaN(challengeReward7N) ? challengeReward7N = 1 : challengeReward7N
     !challengeActivate && challengeCompleted[6] ? shardsEffect *= challengeReward7N : shardsEffect
@@ -2364,8 +2364,8 @@ function checkShardBuyableDisabledUpgrade (x, y) {
 function checkShardSingleDisabledUpgrade (x, y) {
     shards >= x.price || x.amount == 1 ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
 }
-function checkSuperCrystalSingleDisabledUpgrade (x, y) {
-    superCrystal.amount >= 1 || x.amount == 1 ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
+function checkSingleDisabledUpgrade (x, y) {
+    .amount >= 1 || x.amount == 1 ? document.getElementById(y).disabled = false : document.getElementById(y).disabled = true
 }
 function disabledUpgrades(){
     const buyableUpgrades = [firstBuyable, secondBuyable, thirdBuyable, fourthBuyable, fifthBuyable];
@@ -2377,7 +2377,7 @@ function disabledUpgrades(){
         [thirteenthPrestigeSingle, fourteenthPrestigeSingle, fifteenthPrestigeSingle, sixteenthPrestigeSingle]];
     const shardsBuyableUpgrades = [firstShardBuyable, secondShardBuyable, thirdShardBuyable];
     const shardsSingleUpgrades = [firstShardSingle, secondShardSingle, thirdShardSingle, fourthShardSingle, fifthShardSingle, sixthShardSingle];
-    const superCrystalSingleUpgrades = [firstSuperCrystalSingle, secondSuperCrystalSingle, thirdSuperCrystalSingle, fourthSuperCrystalSingle, fifthSuperCrystalSingle, sixthSuperCrystalSingle, seventhSuperCrystalSingle, eighthSuperCrystalSingle, ninthSuperCrystalSingle];
+    const SingleUpgrades = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle];
     for (let i = 0; i < buyableUpgrades.length; i++) {
         checkBuyableDisabledUpgrade(buyableUpgrades[i], 'buyableU' + (i + 1));
     }
@@ -2393,8 +2393,8 @@ function disabledUpgrades(){
     for (let i = 0; i < shardsSingleUpgrades.length; i++) {
         checkShardSingleDisabledUpgrade(shardsSingleUpgrades[i], 'shSingleU' + (i + 1));
         }
-    for (let i = 0; i < superCrystalSingleUpgrades.length; i++) {
-        checkSuperCrystalSingleDisabledUpgrade(superCrystalSingleUpgrades[i], 'sCSingleU' + (i + 1));
+    for (let i = 0; i < SingleUpgrades.length; i++) {
+        checkSingleDisabledUpgrade(SingleUpgrades[i], 'sCSingleU' + (i + 1));
         }
     let j = 0, m = 0
     for (let i = 0; i < 4; i++) {
@@ -2450,7 +2450,7 @@ function offlineGain() {
     timeDifference = (currentOnlineTime - lastOnlineTime)/1000
     timeDifference = Math.min(1000000, timeDifference)
     timeDifference <= 0 ? timeDifference = 1 : timeDifference
-    timeDifference *= Math.pow(seventhSuperCrystalSingle.effect, seventhSuperCrystalSingle.amount)
+    timeDifference *= Math.pow(seventhSingle.effect, seventhSingle.amount)
     checkUpgradesText()
     prestigeSingleEffect()
 
@@ -2492,10 +2492,10 @@ function offlineGain() {
     gameTimer += timeDifference
     prestigeSeconds += timeDifference
     prestigeTimer += timeDifference
-    realSeconds += timeDifference/Math.pow(seventhSuperCrystalSingle.effect, seventhSuperCrystalSingle.amount)
-    prestigeRealTimer += timeDifference/Math.pow(seventhSuperCrystalSingle.effect, seventhSuperCrystalSingle.amount)
-    prestigeRealSeconds += timeDifference/Math.pow(seventhSuperCrystalSingle.effect, seventhSuperCrystalSingle.amount)
-    realTimer += timeDifference/Math.pow(seventhSuperCrystalSingle.effect, seventhSuperCrystalSingle.amount)
+    realSeconds += timeDifference/Math.pow(seventhSingle.effect, seventhSingle.amount)
+    prestigeRealTimer += timeDifference/Math.pow(seventhSingle.effect, seventhSingle.amount)
+    prestigeRealSeconds += timeDifference/Math.pow(seventhSingle.effect, seventhSingle.amount)
+    realTimer += timeDifference/Math.pow(seventhSingle.effect, seventhSingle.amount)
     umultiplierTimer += timeDifference
     upowerTimer += timeDifference
 }
@@ -2850,7 +2850,7 @@ for (let i = 0; i < 5; i++) {
 //     checkLore(loreBoolean, 6, brokenCrystals);
 //     checkLore(loreBoolean, 7, prestigeCount-2);
 //     checkLore(loreBoolean, 8, player.coins-1e25);
-//     checkLore(loreBoolean, 9, superCrystal.amount);
+//     checkLore(loreBoolean, 9, .amount);
 //     checkLore(loreBoolean, 10, player.coins-1e50);
 // }, 100)
 
@@ -2966,9 +2966,9 @@ function achievementGottenRemove () {
         if (shardSingleArray[i].amount == 1) {shardSingleArray[i].updateText.classList.add('purchased')}
     }
 
-    const superCrystalSingleArray = [firstSuperCrystalSingle, secondSuperCrystalSingle, thirdSuperCrystalSingle, fourthSuperCrystalSingle, fifthSuperCrystalSingle, sixthSuperCrystalSingle, seventhSuperCrystalSingle, eighthSuperCrystalSingle, ninthSuperCrystalSingle];
-    for (let i = 0; i < superCrystalSingleArray.length; i++){
-        if (superCrystalSingleArray[i].amount == 1) superCrystalSingleArray[i].updateText.classList.add('purchased')
+    const SingleArray = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle];
+    for (let i = 0; i < SingleArray.length; i++){
+        if (SingleArray[i].amount == 1) SingleArray[i].updateText.classList.add('purchased')
     }
 
     const buyableArray = [firstBuyable, secondBuyable, thirdBuyable, fourthBuyable, fifthBuyable]
@@ -2985,10 +2985,10 @@ function singleUpgradePurchasedRemove () {
     }
 }
 
-function superCrystalSingleUpgradePurchasedRemove(){
-    const superCrystalSingleUpgrades = [firstSuperCrystalSingle, secondSuperCrystalSingle, thirdSuperCrystalSingle, fourthSuperCrystalSingle, fifthSuperCrystalSingle, sixthSuperCrystalSingle, seventhSuperCrystalSingle, eighthSuperCrystalSingle, ninthSuperCrystalSingle];
-    for (let i = 0; i < superCrystalSingleUpgrades.length; i++){
-        superCrystalSingleUpgrades[i].updateText.classList.remove('purchased')
+function SingleUpgradePurchasedRemove(){
+    const SingleUpgrades = [firstSingle, secondSingle, thirdSingle, fourthSingle, fifthSingle, sixthSingle, seventhSingle, eighthSingle, ninthSingle];
+    for (let i = 0; i < SingleUpgrades.length; i++){
+        SingleUpgrades[i].updateText.classList.remove('purchased')
     }
 }
 
@@ -3000,6 +3000,6 @@ function buyShardSingle(single) {
         single.updateText.classList.add('purchased')
 }
 
-function buySuperCrystalSingle(single) {
+function buySingle(single) {
         single.updateText.classList.add('purchased')
 }

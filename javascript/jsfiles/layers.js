@@ -51,13 +51,13 @@ const LAYERS = {
         doReset() {
             if (player.coin.upgrades[1] < this.cost()) return 1;
             
-            if (!MILESTONES.has(12) || player.challenge.activated !== 0 || player.prestige.challenge.activated !== 0) {
+            if (!MILESTONES.has(11) || player.challenge.activated !== 0 || player.prestige.challenge.activated !== 0) {
                 player.umultipliers++;
             } else {
                 while (player.coin.upgrades[1] >= this.cost()) player.umultipliers++;
             }
             
-            if (!MILESTONES.has(19) || player.challenge.activated !== 0 || player.prestige.challenge.activated !== 0) {
+            if (!MILESTONES.has(18) || player.challenge.activated !== 0 || player.prestige.challenge.activated !== 0) {
                 LAYERS.doReset();
             }
             resetAutomationTimer('umultiplier');
@@ -91,17 +91,17 @@ const LAYERS = {
         doReset() {
             if (player.coin.upgrades[1] < this.cost() || player.umultipliers < 4) return 1;
             
-            if (!MILESTONES.has(13) || player.challenge.activated !== 0 || player.prestige.challenge.activated !== 0) {
+            if (!MILESTONES.has(12) || player.challenge.activated !== 0 || player.prestige.challenge.activated !== 0) {
                 player.upowers++;
             } else {
                 while (player.coin.upgrades[1] >= this.cost()) player.upowers++;
             }
             
-            if (!MILESTONES.has(20) || player.challenge.activated !== 0 || player.prestige.challenge.activated !== 0) {
+            if (!MILESTONES.has(19) || player.challenge.activated !== 0 || player.prestige.challenge.activated !== 0) {
                 LAYERS.doReset();
+                restoreSavedUtils(1);
             }
             
-            restoreSavedUtils(1); // Сбрасывает ТОЛЬКО umultipliers
             resetAutomationTimer('upower');
         },
         cost() {
@@ -125,8 +125,10 @@ const LAYERS = {
         doReset() {
             if (player.coin.upgrades[2] < this.cost()) return 1;
             player.uadders++;
-            LAYERS.doReset();
-            restoreSavedUtils(2); // Сбрасывает multi и powers
+            if (!MILESTONES.has(20) || player.challenge.activated !== 0 || player.prestige.challenge.activated !== 0) {
+                LAYERS.doReset();
+                restoreSavedUtils(2); 
+            }
             resetAutomationTimer('uadder');
         },
         cost() {
@@ -271,7 +273,7 @@ const LAYERS = {
         if (player.challenge.activated === 0 && player.prestige.challenge.activated === 0) {
             if (player.prestige.singleUpgrades.includes(11)) player.coin.currency = 1000;
             if (MILESTONES.has(7)) player.coin.currency = 1e6;
-            if (MILESTONES.has(18)) player.coin.currency = 1e9;
+            if (MILESTONES.has(14)) player.coin.currency = 1e9;
         }
         
         let keepCoins = player.prestige.singleUpgrades.includes(21) && player.challenge.activated === 0 && player.prestige.challenge.activated === 0;
@@ -286,7 +288,7 @@ const LAYERS = {
 };
 
 const MILESTONES = {
-    reqs: [0, 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50, 60, 75, 100, 1000, 1e6, 1e7, 1e8, 1e10],
+    reqs: [0, 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50, 60, 75, 100, 1000, 1e6, 1e7, 1e10, 1e15],
     milestones: 20,
     
     has(id) { return player.prestige.milestones.includes(id); },

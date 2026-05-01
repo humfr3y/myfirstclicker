@@ -362,8 +362,8 @@ const UPGS = {
         singles: new UniversalSinglesManager('shard', 'singleUpgrades', [
             { id: 11, elementId: 'shSingleU1', basePrice: 500000, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.shard.currency + 1, 0.035) * 3; } },
             { id: 12, elementId: 'shSingleU2', basePrice: 1e12, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.prestige.broken_currency + 1, 0.06) * 3 } },
-            { id: 13, elementId: 'shSingleU3', basePrice: 1e21, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.prestige.currency + 1, 0.06) * 3; } },
-            { id: 21, elementId: 'shSingleU4', basePrice: 1e30, effect: function(x = this.unl()) {
+            { id: 13, elementId: 'shSingleU3', basePrice: 1e18, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.prestige.currency + 1, 0.06) * 3; } },
+            { id: 21, elementId: 'shSingleU4', basePrice: 1e24, effect: function(x = this.unl()) {
                 if (x == 0) return 1;
                 let eff = 1 + Math.pow(player.rune.total_currency, 1.5);
                 if (ACHS.has(48)) eff *= 1.04;
@@ -405,10 +405,10 @@ const UPGS = {
         ], 'permanentUpgrades'),
 
         items: new ShopItemsManager([
-            { id: 1, maxAmount: 5, elementId: 'shopItem1', cost: () => 80, effect: () => player.umultipliers++ },
-            { id: 2, maxAmount: 3, elementId: 'shopItem2', cost: () => 250, effect: () => player.upowers++ },
-            { id: 3, maxAmount: 10, elementId: 'shopItem3', cost: () => 40, effect: () => GAIN.offline_gain_time_warp(60) },
-            { id: 4, maxAmount: 3, elementId: 'shopItem4', cost: () => 350, effect: () => GAIN.offline_gain_time_warp(600) },
+            { id: 1, maxAmount: 5, elementId: 'shopItem1', cost: () => 80, effect: () => 0},
+            { id: 2, maxAmount: 3, elementId: 'shopItem2', cost: () => 250, effect: () => 0 },
+            { id: 3, maxAmount: 10, elementId: 'shopItem3', cost: () => 100, effect: () => GAIN.offline_gain_time_warp(300) },
+            { id: 4, maxAmount: 3, elementId: 'shopItem4', cost: () => 400, effect: () => GAIN.offline_gain_time_warp(1800) },
             { id: 5, maxAmount: 25, elementId: 'shopItem5', cost: () => 50, effect: () => { player.coin.currency += player.coin.total_currency / 1e25; } },
             { id: 6, maxAmount: 5, elementId: 'shopItem6', cost: () => 140, effect: () => 1 }
         ])
@@ -461,8 +461,8 @@ const UPGS = {
     fortune: {
         boosts: new FortuneBoostsManager([
             { id: 1, generatorType: 'digits', min: () => Math.pow(10, UPGS.fortune.upgrades.buyables[1].effect()), max: () => Math.pow(250, UPGS.fortune.upgrades.buyables[2].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
-            { id: 2, generatorType: 'digits', min: () => Math.pow(2, UPGS.fortune.upgrades.buyables[1].effect()), max: () => Math.pow(4, UPGS.fortune.upgrades.buyables[2].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
-            { id: 3, generatorType: 'digits', min: () => Math.pow(4, UPGS.fortune.upgrades.buyables[1].effect()), max: () => Math.pow(16, UPGS.fortune.upgrades.buyables[2].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+            { id: 2, generatorType: 'digits', min: () => Math.pow(2, UPGS.fortune.upgrades.buyables[1].effect()), max: () => Math.pow(8, UPGS.fortune.upgrades.buyables[2].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+            { id: 3, generatorType: 'digits', min: () => Math.pow(4, UPGS.fortune.upgrades.buyables[1].effect()), max: () => Math.pow(24, UPGS.fortune.upgrades.buyables[2].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
             { id: 4, generatorType: 'float2', min: () => Math.pow(1.01, UPGS.fortune.upgrades.buyables[1].effect()), max: () => Math.pow(1.045, UPGS.fortune.upgrades.buyables[2].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
             { id: 5, generatorType: 'float2', min: () => Math.pow(1.01, UPGS.fortune.upgrades.buyables[1].effect()), max: () => Math.pow(1.065, UPGS.fortune.upgrades.buyables[2].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
             { id: 6, generatorType: 'digits', min: () => Math.pow(1.5, UPGS.fortune.upgrades.buyables[1].effect()), max: () => Math.pow(4, UPGS.fortune.upgrades.buyables[2].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },

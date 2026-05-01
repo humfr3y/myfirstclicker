@@ -62,7 +62,7 @@ const GAIN = {
                 // 5. Глобальные срезы
                 if (pcAct !== 0 && pcAct !== 8) effect = effect.pow(0.5);
                 if (pcAct == 8) effect = effect.pow(0.67)
-                if (cAct !== 0) effect = effect.pow(0.67);
+                if (cAct !== 0) effect = effect.pow(0.75);
                 if (cAct === 10) effect = effect.pow(0.67);
 
                 return effect;
@@ -332,7 +332,7 @@ const GAIN = {
             return softCap(this.no_softcap_reset(), softcap_start, softcap_power);
         },
         offline_calc() {
-            return player.prestige.singleUpgrades.includes[34] ? UPGS.prestige.singles[34].effect()/60 : 0
+            return player.prestige.singleUpgrades.includes(34) ? UPGS.prestige.singles[34].effect()/60 : 0
         },
         softcap() {
             let addition = player.balance.upgrades.singles.includes(12) ? MISC.balance.minusCoins.buff().crystalSoftcapSofter : 0;
@@ -725,7 +725,7 @@ const UNL = {
         },
         check() {
             // Проходим по всем 83 элементам без вычисления длины ключей каждый раз
-            for (let i = 1; i <= 87; i++) {
+            for (let i = 1; i <= 89; i++) {
                 if (this[i]) {
                     if (this[i].element().classList.contains('automationUpgrade')) this.unl(i, this[i].type !== 'none' ? 'none' : 'block') 
                     else this.unl(i, this[i].type !== 'none' ? 'none' : 'flex');
@@ -775,7 +775,7 @@ const UNL = {
         40: { type: 'none', element: () => ELS.automationUpgradesArray[2], req: () => MISC.automation.umultiplier.time() === 50 },
         41: { type: 'none', element: () => ELS.automationUpgradesArray[3], req: () => MISC.automation.upower.time() === 50 },
         42: { type: 'none', element: () => ELS.automationUpgradesArray[4], req: () => MISC.automation.prestige.time() === 50 },
-        43: { type: 'flex', element: () => document.getElementById('prestigeModeDiv'), req: () => MISC.automation.prestige.time() === 50 && MILESTONES.has(14) },
+        43: { type: 'flex', element: () => document.getElementById('prestigeModeDiv'), req: () => MISC.automation.prestige.time() === 50 && MILESTONES.has(13) },
         44: { type: 'flex', element: () => document.getElementById('increaseBulkBuyButton'), req: () => MISC.automation.buyable.time() === 50 && MILESTONES.has(6) && MISC.automation.buyable.bulk() !== 512 },
         45: { type: 'flex', element: () => document.getElementById('umultiIntervalDiv'), req: () => MISC.automation.umultiplier.time() === 50 },
         46: { type: 'flex', element: () => document.getElementById('upowerIntervalDiv'), req: () => MISC.automation.upower.time() === 50 },
@@ -822,7 +822,9 @@ const UNL = {
         85: { type: 'flex', element: () => document.getElementById('prestigeChallengePair2'), req: () => player.prestige.challenge.completed.length >= 1 },
         86: { type: 'flex', element: () => document.getElementById('prestigeChallengePair3'), req: () => player.prestige.challenge.completed.length >= 2 },
         87: { type: 'flex', element: () => document.getElementById('prestigeChallengePair4'), req: () => player.prestige.challenge.completed.length >= 3 },
-        88: { type: 'block', element: () => document.getElementById('helpTab22'), req: () => player.progressBarGoals.includes(8) }
+        88: { type: 'block', element: () => document.getElementById('helpTab22'), req: () => player.progressBarGoals.includes(8) },
+        89: { type: 'block', element: () => document.getElementById('aquaticPick'), req: () => ACHS.has(51) },
+        
     }
 };
 
@@ -901,6 +903,7 @@ const MISC = {
     },
     
     offline(x = player.time.savedTime, y = Date.now()) {
+        if (!player.settings.offline) return 0;
         let max = ACHS.has(22) ? 28800 : 21600
         let time = Math.max(Math.min((y - x) / 1000, max), 0);
         return UPGS.supercrystal[31].unl() ? time * 2 : time;
@@ -922,8 +925,14 @@ const MISC = {
             effect = player.minerals[4] ? effect * UPGS.minerals[4].effect2() : effect;
             return player.prestige.challenge.activated == 8 ? 0 : effect + player.shop.items.used[6] * 20;
         },
-        umultiplier: () => player.uadders ? GAIN.uadder.effect() : 0,
-        upower: () => (player.uadders && player.prestige.break.singles.includes(15)) ? GAIN.uadder.effect2() : 0
+        umultiplier: () => {
+            let effect = player.uadders ? GAIN.uadder.effect() : 0
+            return player.prestige.challenge.activated == 8 ? 0 : effect + player.shop.items.used[1]
+        },
+        upower: () => {
+            let effect = (player.uadders && player.prestige.break.singles.includes(15)) ? GAIN.uadder.effect2() : 0
+            return player.prestige.challenge.activated == 8 ? 0 : effect + player.shop.items.used[2]
+        },
     },
     auto_save_timer: 0,
     

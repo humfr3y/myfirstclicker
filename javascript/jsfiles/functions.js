@@ -303,8 +303,9 @@ function respecBuyables() {
 }
 
 function respecSuperCrystalSingles() {
+    player.supercrystal.currency += player.supercrystal.upgrades.length;
     player.supercrystal.upgrades = [];
-    player.supercrystal.currency += player.supercrystal.total_currency - player.shard_achievements.length - player.supercrystal.spent_currency_on_fortune_upgrades;
+    
     LAYERS.doReset();
     LAYERS.doForcedReset();
 }
