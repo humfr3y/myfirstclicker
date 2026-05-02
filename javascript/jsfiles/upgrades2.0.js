@@ -155,21 +155,21 @@ const UPGS = {
                 id: 14, super_id: 24, elementId: 'singleU4', basePrice: 2.5e7, cost_super: 3000,
                 effect: function(x = this.unl()) {
                     if (x == 0) return 1;
-                    let eff = 1 + Math.pow(Math.log10(player.coin.upgrades[1] + 10) / 2, 2);
+                    let eff = 1 + Math.pow(Math.log10(player.coin.upgrades[1] + 10), 2);
                     if (player.coin.superUpgrades.includes(24)) eff *= this.effect_super();
                     if (player.prestige.challenge.activated == 5) eff = Math.pow(eff, 0.1);
                     return eff;
                 },
                 effect_super: function(x = this.unl_super() && this.unl()) {
                     if (x == 0) return 1;
-                    return 1 + Math.pow((Math.log10(player.coin.upgrades[2] + 10)), 2);
+                    return 1 + Math.pow((Math.log10(player.coin.upgrades[2] + 10)), 2.15);
                 }
             },
             {
                 id: 15, super_id: 25, elementId: 'singleU5', basePrice: 6.5e8, cost_super: 4000,
                 effect: function(x = this.unl()) {
                     if (x == 0) return 1;
-                    let eff = Math.pow(Math.log10(player.coin.upgrades[4] + 10), 1.5);
+                    let eff = Math.pow(Math.log10(player.coin.upgrades[4] + 10), 2);
                     if (player.prestige.challenge.activated == 5) eff = Math.pow(eff, 0.1);
                     return eff;
                 },
