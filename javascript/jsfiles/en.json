@@ -947,7 +947,11 @@
     "resetBulkBuy": "Reset",
 
     "offlineGainTitle": "Welcome back!",
-    "offlineGain": "You have been offline for {{timeDifference}} seconds. <br> Here is what you earned while you were offline: <br> +{{moneyTemp}} α-coins. <br> +{{superCoinsTemp}} supercoins.{{crystals}}{{prestiges}}{{shards}}",
+    "offlineGain": "You have been offline for {{timeDifference}}. <br> Here is what you earned while you were offline: <br> +{{moneyTemp}} α-coins. <br> +{{superCoinsTemp}} supercoins.{{crystals}}{{prestiges}}{{shards}}",
+    "time_d": "d",
+    "time_h": "h",
+    "time_m": "m",
+    "time_s": "s",
 
     "offlineCrystalsTempText": "<br>+{{crystals}} crystals.",
     "offlinePrestigesTempText": "<br>+{{prestiges}} prestiges.",

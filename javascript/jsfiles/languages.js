@@ -1152,6 +1152,24 @@ document.getElementById('changingLanguage').addEventListener('click', () => {
     });
 });
 
+function formatOfflineTime(timeInSeconds) {
+    let t = Math.floor(timeInSeconds);
+    let d = Math.floor(t / 86400);
+    let h = Math.floor((t % 86400) / 3600);
+    let m = Math.floor((t % 3600) / 60);
+    let s = Math.floor(t % 60);
+
+    let parts = [];
+    if (d > 0) parts.push(`${d} ${i18next.t('time_d')}`);
+    if (h > 0) parts.push(`${h} ${i18next.t('time_h')}`);
+    if (m > 0) parts.push(`${m} ${i18next.t('time_m')}`);
+    
+    // Секунды показываем, если они больше 0, ИЛИ если всё остальное по нулям
+    if (s > 0 || parts.length === 0) parts.push(`${s} ${i18next.t('time_s')}`);
+
+    return parts.join(' ');
+}
+
 setTimeout(() => {
     loadingScreen.style.display = 'none'
     document.documentElement.style.overflowY = 'auto'
@@ -1161,19 +1179,20 @@ setTimeout(() => {
     offlineGainTitle.innerHTML = i18next.t('offlineGainTitle');   
     player.offline_gain.time == null ? offlineShowGain.innerHTML = '' :
     offlineShowGain.innerHTML = i18next.t('offlineGain', {
-        timeDifference: formatNumber(player.offline_gain.time),
-        moneyTemp: formatNumber(player.offline_gain.coin), 
-        superCoinsTemp: formatNumber(player.offline_gain.supercoin), 
-        crystals: ACHS.has(22) ? i18next.t('offlineCrystalsTempText', {
-            crystals: formatNumber(player.offline_gain.crystal, 'floor')
-        }) : '', 
-        prestiges: MILESTONES.has(16) ? i18next.t('offlinePrestigesTempText', {
-            prestiges: formatNumber(player.offline_gain.prestige, 'floor')
-        }) : '',
-        shards: UNL.shard.second.unl() ? i18next.t('offlineShardsTempText', {
-            shards: formatNumber(player.offline_gain.shard)
-        }) : ''
-    });
+    timeDifference: formatOfflineTime(player.offline_gain.time),
+    
+    moneyTemp: formatNumber(player.offline_gain.coin), 
+    superCoinsTemp: formatNumber(player.offline_gain.supercoin), 
+    crystals: ACHS.has(22) ? i18next.t('offlineCrystalsTempText', {
+        crystals: formatNumber(player.offline_gain.crystal, 'floor')
+    }) : '', 
+    prestiges: MILESTONES.has(16) ? i18next.t('offlinePrestigesTempText', {
+        prestiges: formatNumber(player.offline_gain.prestige, 'floor')
+    }) : '',
+    shards: UNL.shard.second.unl() ? i18next.t('offlineShardsTempText', {
+        shards: formatNumber(player.offline_gain.shard)
+    }) : ''
+});
     renderSavedAchievements();
     renderSavedLore();
 }, 2000);

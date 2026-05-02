@@ -947,7 +947,11 @@
     "resetBulkBuy": "Сбросить",
 
     "offlineGainTitle": "С возвращением!",
-    "offlineGain": "Вы были оффлайн {{timeDifference}} секунд. <br> За это время вы получили оффлайн: <br> +{{moneyTemp}} α-монет. <br> +{{superCoinsTemp}} супермонет.{{crystals}}{{prestiges}}{{shards}}",
+    "offlineGain": "Вы были оффлайн {{timeDifference}}. <br> За это время вы получили оффлайн: <br> +{{moneyTemp}} α-монет. <br> +{{superCoinsTemp}} супермонет.{{crystals}}{{prestiges}}{{shards}}",
+    "time_d": "дн.",
+    "time_h": "ч.",
+    "time_m": "мин.",
+    "time_s": "сек.",
 
     "offlineCrystalsTempText": "<br>+{{crystals}} кристаллов.",
     "offlinePrestigesTempText": "<br>+{{prestiges}} престижей.",
