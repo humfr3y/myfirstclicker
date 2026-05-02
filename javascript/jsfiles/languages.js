@@ -697,17 +697,17 @@ function loadTranslationsInfo() {
 
 
     // 4. Ослабления (Softcaps)
-    for (let i = 1; i <= 6; i++) {
+    for (let i = 1; i <= 5; i++) {
         let id = i - 1;
         document.getElementById(`sc_name_${i}`).textContent = i18next.t(`softcaps.${id}.codename`);
+        document.getElementById(`sc_desc_${i}`).textContent = i18next.t(`softcaps.${id}.desc`);
         let start = 0, power = 1;
         switch (i) {
             case 1: start = UPGS.coin.singles[22].softcap_start(); power = 0.5; break;
             case 2: start = GAIN.coin.second.softcap().softcap_start; power = GAIN.coin.second.softcap().softcap_power; break;
             case 3: start = GAIN.coin.click.softcap().softcap_start; power = GAIN.coin.click.softcap().softcap_power; break;
-            case 4: start = GAIN.coin.gain.softcap().softcap_start; power = GAIN.coin.gain.softcap().softcap_power; break;
-            case 5: start = GAIN.crystal.softcap().softcap_start; power = GAIN.crystal.softcap().softcap_power; break;
-            case 6: start = GAIN.shard.effect.softcap().softcap_start; power = GAIN.shard.effect.softcap().softcap_power; break;
+            case 4: start = GAIN.crystal.softcap().softcap_start; power = GAIN.crystal.softcap().softcap_power; break;
+            case 5: start = GAIN.shard.effect.softcap().softcap_start; power = GAIN.shard.effect.softcap().softcap_power; break;
         }
         document.getElementById(`sc_start_${i}`).textContent = formatNumber(start);
         document.getElementById(`sc_eff_${i}`).textContent = formatNumber(power, 'boost');

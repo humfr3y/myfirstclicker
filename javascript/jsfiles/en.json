@@ -1256,26 +1256,27 @@
     "softcaps": [
         {
             "codename": "COIN_UPG07_SC_001",
+            "desc": "Cashback effect",
             "starts": "Starts from {{x}} effect of upgrade"
         },
         {
             "codename": "COIN_PSEC_SC_001",
+            "desc": "Coins per second",
             "starts": "Starts from {{x}} coins per second"
         },
         {
             "codename": "COIN_PCLICK_SC_001",
+            "desc": "Coins per click",
             "starts": "Starts from {{x}} coins per click"
         },
         {
-            "codename": "COIN_GAIN_SC_001",
-            "starts": "Starts from {{x}} gain"
-        },
-        {
             "codename": "CRYSTAL_GAIN_SC_001",
+            "desc": "Crystals gain",
             "starts": "Starts from {{x}} Crystals gain"
         },
         {
             "codename": "SHARD_EFF_SC_001",
+            "desc": "Shards effect",
             "starts": "Starts from {{x}} Shards effect"
         }
     ]
