@@ -160,13 +160,6 @@ function loadGame() {
         }
     });
 
-    if (!player.shop.unlockables.includes(0) && player.shop.unlockables.length != 0) {
-        for (let i = 0; i < player.shop.unlockables.length; i++) {
-        player.shop.unlockables[i]--
-        }
-        player.supercoin.currency += 250
-    }
-
     player.settings.modernization_activated = false;
 }
 

@@ -67,7 +67,7 @@ let player = {
         upgrades: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 },
         permanentUpgrades: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0 },
         unlockables: [],
-        items: getShopItems()
+        items: getShopItems(),
     },
     supercrystal: { upgrades: [], currency: 0, total_currency: 0, spent_currency_on_fortune_upgrades: 0, consumedShards: 0 },
     rune: { currency: 0, total_currency: 0 },
