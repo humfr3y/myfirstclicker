@@ -1267,10 +1267,28 @@
     "prestigesPerMinCountTable": "{{x}} Престижей/мин.",
     "crystalCountTable": "{{x}} Кристаллов",
     "crystalPerMinCountTable": "{{x}} Кристаллов/мин.",
-    "gameTimeTable": "{{h}}:{{m}}:{{s}}",
+    "gameTimeTable": "{{d}}:{{h}}:{{m}}:{{s}}",
     "gameTimeTableMs": "{{ms}}мс",
-    "realTimeTable": "{{h}}:{{m}}:{{s}}",
+    "realTimeTable": "{{d}}:{{h}}:{{m}}:{{s}}",
     "realTimeTableMs": "{{ms}}мс",
+
+    "recentReflashesTitle": "Недавние Перепрошивания",
+    "averageReflashesTitle": "Среднее значения",
+
+    "titleRTable1": "Забеги",
+    "titleRTable2": "Перепрошивания",
+    "titleRTable3": "БИТы",
+    "titleRTable4": "Игровое время",
+    "titleRTable5": "Реальное время",
+    "titleRTable6": "Перепрошивания в мин.",
+    "titleRTable7": "БИТы в мин.",
+
+    "reflashesAgo": "{{i}} перепрош. назад",
+    "reflashesAgoZero": "Последнее перепрош.",
+    "reflashResetCountTable": "{{x}} Перепрошиваний",
+    "reflashResetPerMinCountTable": "{{x}} Перепрошиваний/мин.",
+    "reflashCurrencyCountTable": "{{x}} БИТов",
+    "reflashCurrencyPerMinCountTable": "{{x}} БИТов/мин.",
 
     "softcap": "Ослабление: ^{{x}}",
     "softcaps": [

@@ -90,7 +90,7 @@ let player = {
         upgrades: { buyables: { 1: 0, 2: 0, 3: 0 }, singles: [] }
     },
     reflash: {
-        currency: 0, total_currency: 0, resets: 0,
+        currency: 0, total_currency: 0, resets: 0, table_resets: 1,
         resetTable: getReflashTable(),
     },
     time: {

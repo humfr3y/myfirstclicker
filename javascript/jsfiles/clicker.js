@@ -940,12 +940,26 @@ const MISC = {
             for (let i = 0; i < resets; i++) sum += valFunc(player.prestige.prestigeTable[i]);
             return sum / resets;
         },
-        prestiges() { return this._getStat(t => t.prestiges); },
-        crystals() { return this._getStat(t => t.crystals); },
-        game_time() { return this._getStat(t => t.time.game.timer); },
-        real_time() { return this._getStat(t => t.time.real.timer); },
-        prestiges_per_min() { return this._getStat(t => (t.prestiges * 60) / Math.max(t.time.real.timer, 0.1)); },
-        crystals_per_min() { return this._getStat(t => (t.crystals * 60) / Math.max(t.time.real.timer, 0.1)); }
+        prestiges() { return this._getStat(t => t.prestiges, 'prestige'); },
+        crystals() { return this._getStat(t => t.crystals, 'prestige'); },
+        game_time() { return this._getStat(t => t.time.game.timer, 'prestige'); },
+        real_time() { return this._getStat(t => t.time.real.timer, 'prestige'); },
+        prestiges_per_min() { return this._getStat(t => (t.prestiges * 60) / Math.max(t.time.real.timer, 0.1), 'prestige'); },
+        crystals_per_min() { return this._getStat(t => (t.crystals * 60) / Math.max(t.time.real.timer, 0.1), 'prestige'); },
+        reflash: {
+            _getStat(valFunc) {
+            let sum = 0;
+            let resets = player.reflash.table_resets || 1; // Защита от деления на ноль
+            for (let i = 0; i < resets; i++) sum += valFunc(player.reflash.resetTable[i]);
+            return sum / resets;
+            },
+            resets() { return this._getStat(t => t.resets, 'reflash'); },
+            currency() { return this._getStat(t => t.currency, 'reflash'); },
+            game_time() { return this._getStat(t => t.time.game.timer, 'reflash'); },
+            real_time() { return this._getStat(t => t.time.real.timer, 'reflash'); },
+            resets_per_min() { return this._getStat(t => (t.resets * 60) / Math.max(t.time.real.timer, 0.1), 'reflash'); },
+            currency_per_min() { return this._getStat(t => (t.currency * 60) / Math.max(t.time.real.timer, 0.1), 'reflash'); },
+        }
     },
     
     fortune: {
@@ -1252,6 +1266,15 @@ function convert_time(type, layer) {
     player.time[type][layer].minutes = (t / 60) % 60;
     player.time[type][layer].hours = (t / 3600) % 24;
     player.time[type][layer].days = t / 86400;
+}
+
+function convert_time_temp(time) {
+    let seconds = time % 60;
+    let minutes = (time / 60) % 60;
+    let hours = (time / 3600) % 24;
+    let days = time / 86400;
+    let timer = time
+    return { seconds, minutes, hours, days, timer };
 }
 
 // --- ВИЗУАЛ: ПОЛОСКИ ПРОГРЕССА И ОВЕРДРАЙВ ---

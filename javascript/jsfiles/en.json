@@ -1264,10 +1264,28 @@
     "prestigesPerMinCountTable": "{{x}} Prestiges/min.",
     "crystalCountTable": "{{x}} Crystals",
     "crystalPerMinCountTable": "{{x}} Crystals/min.",
-    "gameTimeTable": "{{h}}:{{m}}:{{s}}",
+    "gameTimeTable": "{{d}}:{{h}}:{{m}}:{{s}}",
     "gameTimeTableMs": "{{ms}}ms",
-    "realTimeTable": "{{h}}:{{m}}:{{s}}",
+    "realTimeTable": "{{d}}:{{h}}:{{m}}:{{s}}",
     "realTimeTableMs": "{{ms}}ms",
+
+    "recentReflashesTitle": "Recent reflashes",
+    "averageReflashesTitle": "Average",
+
+    "titleRTable1": "Runs",
+    "titleRTable2": "Reflashes",
+    "titleRTable3": "BITs",
+    "titleRTable4": "Game time",
+    "titleRTable5": "Real time",
+    "titleRTable6": "Reflashes per min.",
+    "titleRTable7": "BITs per min.",
+
+    "reflashesAgo": "{{i}} reflashes ago",
+    "reflashesAgoZero": "Last reflash",
+    "reflashResetCountTable": "{{x}} Reflashes",
+    "reflashResetPerMinCountTable": "{{x}} Reflashes/min.",
+    "reflashCurrencyCountTable": "{{x}} BITs",
+    "reflashCurrencyPerMinCountTable": "{{x}} BITs/min.",
 
     "softcaps": [
         {

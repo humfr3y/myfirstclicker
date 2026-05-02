@@ -674,7 +674,7 @@ function loadTranslationsInfo() {
         
         if (pt.time.game.timer !== '') {
             document.getElementById(`rp_gt_${i}`).textContent = pt.time.game.timer >= 1 
-                ? i18next.t('gameTimeTable', { h: convertToTwoDigits(pt.time.game.hours), m: convertToTwoDigits(pt.time.game.minutes), s: convertToTwoDigits(pt.time.game.seconds) }) 
+                ? i18next.t('gameTimeTable', { d: convertToTwoDigits(pt.time.game.days),  h: convertToTwoDigits(pt.time.game.hours), m: convertToTwoDigits(pt.time.game.minutes), s: convertToTwoDigits(pt.time.game.seconds) }) 
                 : i18next.t('gameTimeTableMs', { ms: formatNumber(pt.time.game.timer * 1000) });
         } else {
             document.getElementById(`rp_gt_${i}`).textContent = '';
@@ -682,7 +682,7 @@ function loadTranslationsInfo() {
 
         if (pt.time.real.timer !== '') {
             document.getElementById(`rp_rt_${i}`).textContent = pt.time.real.timer >= 1 
-                ? i18next.t('realTimeTable', { h: convertToTwoDigits(pt.time.real.hours), m: convertToTwoDigits(pt.time.real.minutes), s: convertToTwoDigits(pt.time.real.seconds) }) 
+                ? i18next.t('realTimeTable', { d: convertToTwoDigits(pt.time.real.days), h: convertToTwoDigits(pt.time.real.hours), m: convertToTwoDigits(pt.time.real.minutes), s: convertToTwoDigits(pt.time.real.seconds) }) 
                 : i18next.t('realTimeTableMs', { ms: formatNumber(pt.time.real.timer * 1000) });
         } else {
             document.getElementById(`rp_rt_${i}`).textContent = '';
@@ -694,23 +694,75 @@ function loadTranslationsInfo() {
         document.getElementById(`rp_cpm_${i}`).textContent = pt.crystals !== '' && pt.time.real.timer > 0 
             ? i18next.t('crystalPerMinCountTable', { x: formatNumber(pt.crystals * 60 / pt.time.real.timer) }) : '';
     }
-    
-    // Средние значения (Averages)
+
     document.getElementById(`rp_avg_pres`).textContent = i18next.t('prestigesCountTable', { x: formatNumber(MISC.average.prestiges(), 'boost') });
     document.getElementById(`rp_avg_crys`).textContent = i18next.t('crystalCountTable', { x: formatNumber(MISC.average.crystals(), 'boost') });
-    
+
     let avg_gt = player.time.game.average;
     document.getElementById(`rp_avg_gt`).textContent = avg_gt.timer >= 1 
-        ? i18next.t('gameTimeTable', { h: convertToTwoDigits(avg_gt.hours), m: convertToTwoDigits(avg_gt.minutes), s: convertToTwoDigits(avg_gt.seconds) }) 
+        ? i18next.t('gameTimeTable', { d: convertToTwoDigits(avg_gt.days), h: convertToTwoDigits(avg_gt.hours), m: convertToTwoDigits(avg_gt.minutes), s: convertToTwoDigits(avg_gt.seconds) }) 
         : i18next.t('gameTimeTableMs', { ms: formatNumber(avg_gt.timer * 1000) });
         
     let avg_rt = player.time.real.average;
     document.getElementById(`rp_avg_rt`).textContent = avg_rt.timer >= 1 
-        ? i18next.t('realTimeTable', { h: convertToTwoDigits(avg_rt.hours), m: convertToTwoDigits(avg_rt.minutes), s: convertToTwoDigits(avg_rt.seconds) }) 
+        ? i18next.t('realTimeTable', { d: convertToTwoDigits(avg_rt.days), h: convertToTwoDigits(avg_rt.hours), m: convertToTwoDigits(avg_rt.minutes), s: convertToTwoDigits(avg_rt.seconds) }) 
         : i18next.t('realTimeTableMs', { ms: formatNumber(avg_rt.timer * 1000) });
         
     document.getElementById(`rp_avg_ppm`).textContent = i18next.t('prestigesPerMinCountTable', { x: formatNumber(MISC.average.prestiges_per_min(), 'boost') });
     document.getElementById(`rp_avg_cpm`).textContent = i18next.t('crystalPerMinCountTable', { x: formatNumber(MISC.average.crystals_per_min(), 'boost') });
+
+    //Таблица Перепрошиваний
+
+    for (let i = 0; i < 10; i++) {
+        document.getElementById(`rr_run_${i}`).textContent = i === 0 ? i18next.t('reflashesAgoZero') : i18next.t('reflashesAgo', {i});
+        let rt = player.reflash.resetTable[i];
+        
+        document.getElementById(`rr_res_${i}`).textContent = rt.resets !== '' 
+            ? i18next.t('reflashResetCountTable', { x: formatNumber(rt.resets) }) : '';
+            
+        document.getElementById(`rr_bits_${i}`).textContent = rt.currency !== '' 
+            ? i18next.t('reflashCurrencyCountTable', { x: formatNumber(rt.currency) }) : '';
+        
+        if (rt.time.game.timer !== '') {
+            document.getElementById(`rr_gt_${i}`).textContent = rt.time.game.timer >= 1 
+                ? i18next.t('gameTimeTable', { d: convertToTwoDigits(rt.time.game.days), h: convertToTwoDigits(rt.time.game.hours), m: convertToTwoDigits(rt.time.game.minutes), s: convertToTwoDigits(rt.time.game.seconds) }) 
+                : i18next.t('gameTimeTableMs', { ms: formatNumber(rt.time.game.timer * 1000) });
+        } else {
+            document.getElementById(`rr_gt_${i}`).textContent = '';
+        }
+
+        if (rt.time.real.timer !== '') {
+            document.getElementById(`rr_rt_${i}`).textContent = rt.time.real.timer >= 1 
+                ? i18next.t('realTimeTable', { d: convertToTwoDigits(rt.time.real.days), h: convertToTwoDigits(rt.time.real.hours), m: convertToTwoDigits(rt.time.real.minutes), s: convertToTwoDigits(rt.time.real.seconds) }) 
+                : i18next.t('realTimeTableMs', { ms: formatNumber(rt.time.real.timer * 1000) });
+        } else {
+            document.getElementById(`rr_rt_${i}`).textContent = '';
+        }
+        
+        document.getElementById(`rr_rpm_${i}`).textContent = rt.resets !== '' && rt.time.real.timer > 0 
+            ? i18next.t('reflashResetPerMinCountTable', { x: formatNumber(rt.resets * 60 / rt.time.real.timer) }) : '';
+            
+        document.getElementById(`rr_bpm_${i}`).textContent = rt.currency !== '' && rt.time.real.timer > 0 
+            ? i18next.t('reflashCurrencyPerMinCountTable', { x: formatNumber(rt.currency * 60 / rt.time.real.timer) }) : '';
+    }
+    
+    document.getElementById(`rr_avg_res`).textContent = i18next.t('reflashResetCountTable', { x: formatNumber(MISC.average.reflash.resets(), 'boost') });
+    document.getElementById(`rr_avg_bits`).textContent = i18next.t('reflashCurrencyCountTable', { x: formatNumber(MISC.average.reflash.currency(), 'boost') });
+    // Средние значения (Averages)
+
+    let avg_gt_ref = convert_time_temp(MISC.average.reflash.game_time());
+    document.getElementById(`rr_avg_gt`).textContent = avg_gt_ref.timer >= 1 
+        ? i18next.t('gameTimeTable', { d: convertToTwoDigits(avg_gt_ref.days), h: convertToTwoDigits(avg_gt_ref.hours), m: convertToTwoDigits(avg_gt_ref.minutes), s: convertToTwoDigits(avg_gt_ref.seconds) }) 
+        : i18next.t('gameTimeTableMs', { ms: formatNumber(avg_gt_ref.timer * 1000) });
+        
+    let avg_rt_ref = convert_time_temp(MISC.average.reflash.real_time());
+    document.getElementById(`rr_avg_rt`).textContent = avg_rt_ref.timer >= 1 
+        ? i18next.t('realTimeTable', { d: convertToTwoDigits(avg_rt_ref.days), h: convertToTwoDigits(avg_rt_ref.hours), m: convertToTwoDigits(avg_rt_ref.minutes), s: convertToTwoDigits(avg_rt_ref.seconds) }) 
+        : i18next.t('realTimeTableMs', { ms: formatNumber(avg_rt_ref.timer * 1000) });
+        
+    document.getElementById(`rr_avg_rpm`).textContent = i18next.t('reflashResetPerMinCountTable', { x: formatNumber(MISC.average.reflash.resets_per_min(), 'boost') });
+    document.getElementById(`rr_avg_bpm`).textContent = i18next.t('reflashCurrencyPerMinCountTable', { x: formatNumber(MISC.average.reflash.currency_per_min(), 'boost') });
+
 
 
     // 4. Ослабления (Softcaps)
