@@ -1153,7 +1153,7 @@ function updateStaticTranslations() {
     ];
 
     // 5. Инициализация 50 Обычных Ачивок
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 60; i++) {
         const achNaming = window["achName" + (i + 11)];
         if (achNaming) {
             const achNameKey = `achRow1.name.${i}`;

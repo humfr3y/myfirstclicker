@@ -51,7 +51,7 @@ let player = {
     coin: {
         upgrades: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
         singleUpgrades: [], superUpgrades: [],
-        currency: 10, total_currency: 10, this_reflash_currency: 10
+        currency: 10, total_currency: 10, this_reflash_currency: 0
     },
     supercoin: { currency: 0, total_currency: 0, spent_currency: 0, this_reflash_currency: 0 },
     prestige: {

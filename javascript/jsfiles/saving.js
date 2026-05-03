@@ -91,7 +91,7 @@ function loadGame() {
         player.supercoin.total_currency = player.supercoin.spent_currency + player.supercoin.currency;
     }
 
-    if (player.coin.this_reflash_currency == 10) {
+    if (player.coin.this_reflash_currency == 0) {
         player.coin.this_reflash_currency = player.coin.total_currency
         player.supercoin.this_reflash_currency = player.supercoin.total_currency
         player.prestige.this_reflash_currency = player.prestige.total_currency

@@ -1591,7 +1591,7 @@ function openWindow(arg, isFlex) {
 }
 
 function hidePopup() {
-    [changelogWindow, gameLoreWindow, gameHelpWindow, windowGame, myPopupBackdrop1, myPopupBackdrop2, offlineGainWindow].forEach(el => {
+    [changelogWindow, gameLoreWindow, gameHelpWindow, windowGame, myPopupBackdrop1, myPopupBackdrop2, offlineGainWindow, reflashConfirmation].forEach(el => {
         if (el) el.style.display = "none";
     });
     showChangelog(text.changelog.start); showStory(text.chapter.start); showHelpPage(text.help.start, text.empty);

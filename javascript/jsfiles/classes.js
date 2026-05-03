@@ -176,7 +176,8 @@ class UniversalBuyablesManager {
             if (this[y].unl_super && this[y].unl_super()) {
                 if (this[y].element) this[y].element.classList.add('superPurchasedBuyable');
             }
-        });
+            else if (this[y].element) this[y].element.classList.remove('superPurchasedBuyable')
+        }); 
     }
 }
 

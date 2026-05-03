@@ -74,7 +74,11 @@ function reloadPage2() { location.reload(); }
 function checkCompletedChallenges() {
     for (let i = 1; i <= 12; i++) {
         if (player.challenge.completed.includes(i)) window[`challenge${i}Start`].style.backgroundColor = '#09b909';
-        if (i <= 9 && player.prestige.challenge.completed.includes(i)) window[`pChallenge${i}Start`].style.backgroundColor = '#09b909';
+            else window[`challenge${i}Start`].style.backgroundColor = '';
+        if (i < 9) {
+            if (player.prestige.challenge.completed.includes(i)) window[`pChallenge${i}Start`].style.backgroundColor = '#09b909';
+            else window[`pChallenge${i}Start`].style.backgroundColor = ''
+        } 
     }
 }
 
@@ -712,7 +716,7 @@ function statsCrystalsUpdate() {
         { effectValue: () => ACHS.effect.crystal(), effectPrefix: 'x', effectMode: 'boost', effectId: 'achievementBonus2StatsEffect', pieceId: 'achievementBonus2Piece', piecePercentId: 'achievementBonus2PiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => UPGS.fortune.boosts[2].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fortuneBoostCrystalStatsEffect', pieceId: 'fortuneBoostCrystalPiece', piecePercentId: 'fortuneBoostCrystalPiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => MISC.balance.minusCoins.buff().crystalGainBuff, effectPrefix: 'x', effectMode: 'boost', effectId: 'minusCoinsForCrystalsStatsEffect', pieceId: 'minusCoinsForCrystalsPiece', piecePercentId: 'minusCoinsForCrystalsPiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
-        { effectValue: () => PRES_CHALLENGE[1].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'pchall1StatsEffect', pieceId: 'pchall1Piece', piecePercentId: 'pchall1PiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
+        { effectValue: () => PRES_CHALLENGE[1].completed() ? PRES_CHALLENGE[1].effect() : 1, effectPrefix: 'x', effectMode: 'boost', effectId: 'pchall1StatsEffect', pieceId: 'pchall1Piece', piecePercentId: 'pchall1PiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => GAIN.crystal.softcap().softcap_power, effectPrefix: '^', effectMode: 'power', effectId: 'CRYSTAL_GAIN_SC_001StatsEffect' }
     ];
 

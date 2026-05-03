@@ -207,7 +207,7 @@ const LAYERS = {
             }
 
             if (player.prestige.singleUpgrades.includes(34)) {
-                player.shard.currency += (player.challenge.activated === 0 && player.challenge.completed.includes(2)) ? 10 * 1000 * player.prestige.currency : 10;
+                player.shard.currency += (player.challenge.activated === 0 && player.challenge.completed.includes(2)) ? 10 * 1000 * player.prestige.currency : 0;
             }
 
             if (player.challenge.activated !== 0) {
@@ -293,6 +293,7 @@ const LAYERS = {
 
             player.time.game.reflash.timer = 0;
             player.time.real.reflash.timer = 0;
+            hidePopup() 
         },
     },
     
@@ -347,7 +348,7 @@ const LAYERS = {
         player.supercoin.spent_currency = 0;
         for (let i = 1; i <= 7; i++) player.shop.upgrades[i] = 0;
         for (let i = 1; i <= 8; i++) player.shop.permanentUpgrades[i] = 0;
-        player.shop.unlockables = [];
+
         for (let i = 1; i <= 6; i++) {
             player.shop.items.amount[i] = 0;
             player.shop.items.used[i] = 0;
@@ -417,9 +418,9 @@ const LAYERS = {
             player.automation.upgrades[type] = 0;
             if (AUTO[type] && AUTO[type].stop) AUTO[type].stop(); 
         });
-        player.time.game.total = getZeroTime();
+        player.time.game.reflash = getZeroTime();
         player.time.game.prestige = getZeroTime();
-        player.time.real.total = getZeroTime();
+        player.time.real.reflash = getZeroTime();
         player.time.real.prestige = getZeroTime();
         player.time.umultiplier = 0;
         player.time.upower = 0;
@@ -428,6 +429,7 @@ const LAYERS = {
 
         LAYERS.doReset(); 
         MILESTONES.checkMilestones()
+        checkCompletedChallenges()
     }
 };
 
