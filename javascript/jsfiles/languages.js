@@ -726,8 +726,8 @@ function loadTranslationsFortune() {
     document.getElementById('ft_tokens_val').textContent = formatNumber(player.fortune.tokens);
     document.getElementById('ft_tokens_val2').textContent = formatNumber(player.fortune.tokens);
     document.getElementById('ft_sc_val').textContent = formatNumber(player.supercrystal.currency);
-    document.getElementById('ft_coin_cost').textContent = MISC.fortune.cost.coin();
-    document.getElementById('ft_cryst_cost').textContent = MISC.fortune.cost.crystal();
+    document.getElementById('ft_coin_cost').textContent = formatNumber(MISC.fortune.cost.coin());
+    document.getElementById('ft_cryst_cost').textContent = formatNumber(MISC.fortune.cost.crystal());
     document.getElementById('ft_rand_time').textContent = formatNumber(60 * UPGS.fortune.upgrades.buyables[3].effect());
     document.getElementById('ft_respec_amt').textContent = player.fortune.daily_resets;
     document.getElementById('ft_total_sc_val').textContent = formatNumber(player.supercrystal.total_currency);

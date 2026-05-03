@@ -967,8 +967,8 @@ const MISC = {
             player.fortune.total_tokens++;
         },
         cost: {
-            coin: (x = player.fortune.converted.coins) => formatNumber(1e100 * Math.pow(1e20, x)), 
-            crystal: (x = player.fortune.converted.crystals) => formatNumber(1e50 * Math.pow(1e10, x)), 
+            coin: (x = player.fortune.converted.coins) => 1e100 * Math.pow(1e20, x), 
+            crystal: (x = player.fortune.converted.crystals) => 1e50 * Math.pow(1e10, x), 
         },
         fortuneBoost12() {
             let mult = UPGS.fortune.boosts[12].effect();
