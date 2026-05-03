@@ -82,7 +82,7 @@ function loadGame() {
 
     // Восстановление после NaN
     if (isNaN(player.coin.currency)) player.coin.currency = 10;
-    if (isNaN(player.coin.total_currency)) player.coin.total_currency = 10;
+    if (isNaN(player.coin.total_currency) || player.coin.total_currency < 0) player.coin.total_currency = 10;
     if (isNaN(player.prestige.currency)) { player.prestige.total_currency = 0; player.prestige.currency = 0; }
     if (isNaN(player.shard.currency)) player.shard.currency = 0;
     if (player.shard.currency < 0) player.shard.currency = 0;
@@ -105,7 +105,7 @@ function loadGame() {
         player.offline_gain.time = MISC.offline();
         player.offline_gain.coin = GAIN.coin.offline();
         player.offline_gain.supercoin = GAIN.supercoin.offline();
-        player.offline_gain.crystal = ACHS.has(22) ? GAIN.crystal.offline() : 0;
+        player.offline_gain.crystal = player.prestige.singleUpgrades.includes(34) ? GAIN.crystal.offline() : 0;
         player.offline_gain.prestige = MILESTONES.has(16) ? GAIN.prestige.offline() : 0;
         player.offline_gain.shard = UNL.shard.second.unl() ? GAIN.shard.offline() : 0;
     } else {
@@ -134,7 +134,7 @@ function loadGame() {
     }
 
     // Восстановление настроек UI
-    player.code.name = ['digitalgod', 'shirakamifubuki', 'suisei', 'koyori', 'manilovefauna', 'revolution', 'supercoin', 'superprestige', 'sorry'];
+    player.code.name = ['umultiplier', 'upower', 'timemachine', 'hardmachine', 'sorry'];
     changeFonts2(player.settings.font);
     changeFont.value = player.settings.font;
     changeNotation.value = player.settings.notation;
@@ -268,7 +268,7 @@ function convert_save() {
         settings: { currentLanguage: 'en', auto_save: true, mutedAudio: false, shop_bulkbuy: 1, minerals_bulkbuy: 1, font: 'option1', notation: 'option1', buy_max_activate: false, shard_buy_max_activate: false, breakprestige_buy_max_activate: false, modernization_activated: false, loreBoolean: [], event: { spiritual: false, triplePower: false }, whichPrestigeMode: 'time', autosave_interval: 30000, offline: true },
         automation: { checkbox: { single: false, buyable: false, umultiplier: false, upower: false, prestige: false }, setIntervals: {}, upgrades: { single: 0, buyable: 0, umultiplier: 0, upower: 0, prestige: 0, uadder: 0 }, conditions: { umultiplier: 0, upower: { time: 0, x_of_umulti: 0 }, prestige: { time: 3600, coins: 1e15, prestige: 10000, crystals: 1e50 }, uadder: { time: 0, x_of_upower: 0 } } },
         got_daily_reward: false,
-        code: { activated: [], name: ['digitalgod', 'shirakamifubuki', 'suisei', 'koyori', 'manilovefauna', 'revolution', 'supercoin', 'superprestige', 'sorry'] },
+        code: { activated: [], name: [['umultiplier', 'upower', 'timemachine', 'hardmachine', 'sorry']] },
         overdrive: { consumed: { type1: 0, type2: 0 } },
         offline_gain: { time: 0, coin: 0, supercoin: 0, crystal: 0, prestige: 0, shard: 0 }
     };

@@ -47,7 +47,7 @@ const LORE = {
         9() { return player.coin.currency > 1e25 },
         10() { return player.supercrystal.currency > 0},
         11() { return player.minerals[1] > 0 || player.minerals[2] > 0 || player.minerals[3] > 0},
-        12() { return player.shop.unlockables.includes(4)},
+        12() { return player.shop.unlockables.includes(3)},
         13() { return player.prestige.break.singles.includes(25) },
         14() { return player.uadders > 0 },
         15() { return player.ureducers > 0 },

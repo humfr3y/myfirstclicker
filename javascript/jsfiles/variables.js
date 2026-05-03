@@ -73,7 +73,7 @@ let player = {
         upgrades: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 },
         permanentUpgrades: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0 },
         unlockables: [],
-        items: getShopItems()
+        items: getShopItems(),
     },
     supercrystal: { upgrades: [], currency: 0, total_currency: 0, spent_currency_on_fortune_upgrades: 0, consumedShards: 0 },
     rune: { currency: 0, total_currency: 0 },
@@ -119,7 +119,7 @@ let player = {
         conditions: { umultiplier: 0, upower: { time: 0, x_of_umulti: 0 }, prestige: { time: 3600, coins: 1e15, prestige: 10000, crystals: 1e50 }, uadder: { time: 0, x_of_upower: 0 } }
     },
     got_daily_reward: false,
-    code: { activated: [], name: ['digitalgod', 'shirakamifubuki', 'suisei', 'koyori', 'manilovefauna', 'revolution', 'supercoin', 'superprestige', 'sorry'] },
+    code: { activated: [], name: ['umultiplier', 'upower', 'timemachine', 'hardmachine', 'sorry'] },
     overdrive: { consumed: { type1: 0, type2: 0 } },
     offline_gain: { time: '', coin: '', supercoin: '', crystal: '', prestige: '', shard: '' }
 };
@@ -151,12 +151,12 @@ const text = {
     window: { hard: '', NaN: '' },
     automation: { prestige_req: '', coin_req: '', time_req: '', crystal_req: '' },
     code: {
-        rewards: Array(9).fill(''),
+        rewards: Array(5).fill(''),
         reward: '', used_code: '', wrong_code: '', true_code: '', name_of_code: ''
     },
     changelog: {
         start: '', "0.0":'', "0.1":'', "0.2":'', "0.3":'', "0.4":'', "0.5":'', "0.5.1":'', "0.6":'', "0.7":'', "0.7.1":'', "0.8":'',
-        "0.8.0.1":'', "0.9":'', "0.9.1":'', "0.9.2":'', "0.10":'', "0.10.1":'', "0.11":'', "0.11.1":'', "0.12":'', "0.12.1": '', "0.13": '', "0.14": '', "0.15": '',
+        "0.8.0.1":'', "0.9":'', "0.9.1":'', "0.9.2":'', "0.10":'', "0.10.1":'', "0.11":'', "0.11.1":'', "0.12":'', "0.12.1": '', "0.13": '', "0.14": '', "0.15": '', "0.15.x": ""
     },
     // Генерируем повторяющиеся тексты с помощью функции
     chapter: generateEmptyObj(17, true),
@@ -167,6 +167,6 @@ const text = {
 
 const PRES_CHALL = {
     goals: {
-        1: 1e20, 2: 1e24, 3: 1e60, 4: 1e62, 5: 1e52, 6: 1e67, 7: 1e25, 8: 1e15,
+        1: 1e30, 2: 1e24, 3: 1e71, 4: 1e73, 5: 1e60, 6: 1e80, 7: 1e30, 8: 1e15,
     }
 };

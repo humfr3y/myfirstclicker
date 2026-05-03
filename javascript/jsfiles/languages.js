@@ -305,7 +305,6 @@ function loadTranslationsCoins() {
     // 4. ТЕКСТ УСЛОВИЯ ИСПЫТАНИЯ
     const ccEl = document.getElementById('challengeCondition');
     ccEl.textContent = '';
-    if (player.challenge.activated == 2) ccEl.textContent = i18next.t('challengeCondition2');
     if (player.challenge.activated == 7) {
         let val = (MISC.amount_of_upgrades.coin() / 50 * 100) <= 100 ? formatNumber(MISC.amount_of_upgrades.coin() / 50 * 100, 'boost') : 100;
         ccEl.textContent = i18next.t('challengeCondition7', {x: val});
@@ -442,7 +441,7 @@ function loadTranslationsAutomation() {
 // ============================================================
 function loadTranslationsShop() {
     // Верхний счетчик
-    document.getElementById('top_shop_sc_val').textContent = formatNumber(player.supercoin.currency);
+    document.getElementById('top_shop_sc_val').textContent = formatNumber(player.supercoin.currency, 'boost');
 
     // 1. Покупаемые улучшения (Buyables 1-7)
     for (let i = 1; i <= 7; i++) {
@@ -458,7 +457,7 @@ function loadTranslationsShop() {
         // Скрываем "=>" и цену, если макс. уровень
         document.getElementById(`sb${i}_next_cont`).style.display = (amt === max) ? 'none' : 'inline';
         document.getElementById(`sb${i}_cost_cont`).style.display = (amt === max) ? 'none' : 'inline';
-        if (amt !== max) document.getElementById(`sb${i}_cost`).textContent = formatNumber(UPGS.shop.buyables.bulk_cost(i));
+        if (amt !== max) document.getElementById(`sb${i}_cost`).textContent = formatNumber(UPGS.shop.buyables.bulk_cost(i), 'boost');
         
         document.getElementById(`shopBuyableU${i}Req`).textContent = `${formatNumber(amt)}/${max}`;
     }
@@ -497,7 +496,7 @@ function loadTranslationsShop() {
     }
 
     // 3. Разблокируемые (Unlockables / Singles 1-6)
-    for (let i = 1; i <= 6; i++) {
+    for (let i = 1; i <= 5; i++) {
         let isBought = player.shop.unlockables.includes(i);
         document.getElementById(`su${i}s_cost_cont`).style.display = isBought ? 'none' : 'inline';
         if (!isBought) document.getElementById(`su${i}s_cost`).textContent = formatNumber(UPGS.shop.unlockables[i].cost());
@@ -766,17 +765,17 @@ function loadTranslationsInfo() {
 
 
     // 4. Ослабления (Softcaps)
-    for (let i = 1; i <= 6; i++) {
+    for (let i = 1; i <= 5; i++) {
         let id = i - 1;
         document.getElementById(`sc_name_${i}`).textContent = i18next.t(`softcaps.${id}.codename`);
+        document.getElementById(`sc_desc_${i}`).textContent = i18next.t(`softcaps.${id}.desc`);
         let start = 0, power = 1;
         switch (i) {
             case 1: start = UPGS.coin.singles[22].softcap_start(); power = 0.5; break;
             case 2: start = GAIN.coin.second.softcap().softcap_start; power = GAIN.coin.second.softcap().softcap_power; break;
             case 3: start = GAIN.coin.click.softcap().softcap_start; power = GAIN.coin.click.softcap().softcap_power; break;
-            case 4: start = GAIN.coin.gain.softcap().softcap_start; power = GAIN.coin.gain.softcap().softcap_power; break;
-            case 5: start = GAIN.crystal.softcap().softcap_start; power = GAIN.crystal.softcap().softcap_power; break;
-            case 6: start = GAIN.shard.effect.softcap().softcap_start; power = GAIN.shard.effect.softcap().softcap_power; break;
+            case 4: start = GAIN.crystal.softcap().softcap_start; power = GAIN.crystal.softcap().softcap_power; break;
+            case 5: start = GAIN.shard.effect.softcap().softcap_start; power = GAIN.shard.effect.softcap().softcap_power; break;
         }
         document.getElementById(`sc_start_${i}`).textContent = formatNumber(start);
         document.getElementById(`sc_eff_${i}`).textContent = formatNumber(power, 'boost');
@@ -795,8 +794,8 @@ function loadTranslationsFortune() {
     document.getElementById('ft_tokens_val').textContent = formatNumber(player.fortune.tokens);
     document.getElementById('ft_tokens_val2').textContent = formatNumber(player.fortune.tokens);
     document.getElementById('ft_sc_val').textContent = formatNumber(player.supercrystal.currency);
-    document.getElementById('ft_coin_cost').textContent = MISC.fortune.cost.coin();
-    document.getElementById('ft_cryst_cost').textContent = MISC.fortune.cost.crystal();
+    document.getElementById('ft_coin_cost').textContent = formatNumber(MISC.fortune.cost.coin());
+    document.getElementById('ft_cryst_cost').textContent = formatNumber(MISC.fortune.cost.crystal());
     document.getElementById('ft_rand_time').textContent = formatNumber(60 * UPGS.fortune.upgrades.buyables[3].effect());
     document.getElementById('ft_respec_amt').textContent = player.fortune.daily_resets;
     document.getElementById('ft_total_sc_val').textContent = formatNumber(player.supercrystal.total_currency);
@@ -936,7 +935,7 @@ function loadTranslationsChallenges() {
     setTxt('c3_eff', formatNumber(player.challenge.completed.includes(3) ? CHALL[3].effect() : 1, 'power'));
     setTxt('c4_eff', formatNumber(player.challenge.completed.includes(4) ? CHALL[4].effect() : 0));
     setTxt('c5_eff', formatNumber(player.challenge.completed.includes(5) ? CHALL[5].effect() : 1, 'boost'));
-    setTxt('c6_eff', formatNumber(player.challenge.completed.includes(6) ? CHALL[6].effect() : 1, 'boost'));
+    setTxt('c1_eff', formatNumber(player.challenge.completed.includes(1) ? CHALL[1].effect() : 1, 'boost'));
     setTxt('c7_eff', formatNumber(player.challenge.completed.includes(7) ? CHALL[7].effect() : 1, 'boost'));
     setTxt('c8_eff', formatNumber(player.challenge.completed.includes(8) ? CHALL[8].effect() : 1, 'boost'));
     setTxt('c9_eff', formatNumber(player.challenge.completed.includes(9) ? CHALL[9].effect() : 1, 'boost'));
@@ -1125,7 +1124,7 @@ function updateStaticTranslations() {
     text.chapter.start = i18next.t('startLoreDescription');
     text.help.start = i18next.t('startHelpDescription');
 
-    const versions = ['0.0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.5.1', '0.6', '0.7', '0.7.1', '0.8', '0.8.0.1', '0.9', '0.9.1', '0.9.2', '0.10', '0.10.1', '0.11', '0.12', '0.12.1', '0.13', '0.14', '0.15'];
+    const versions = ['0.0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.5.1', '0.6', '0.7', '0.7.1', '0.8', '0.8.0.1', '0.9', '0.9.1', '0.9.2', '0.10', '0.10.1', '0.11', '0.12', '0.12.1', '0.13', '0.14', '0.15', '0.15.x'];
     versions.forEach(v => {
         let key = 'version' + v.replace(/\./g, '');
         text.changelog[v] = i18next.t(key);
@@ -1221,6 +1220,24 @@ document.getElementById('changingLanguage').addEventListener('click', () => {
     });
 });
 
+function formatOfflineTime(timeInSeconds) {
+    let t = Math.floor(timeInSeconds);
+    let d = Math.floor(t / 86400);
+    let h = Math.floor((t % 86400) / 3600);
+    let m = Math.floor((t % 3600) / 60);
+    let s = Math.floor(t % 60);
+
+    let parts = [];
+    if (d > 0) parts.push(`${d} ${i18next.t('time_d')}`);
+    if (h > 0) parts.push(`${h} ${i18next.t('time_h')}`);
+    if (m > 0) parts.push(`${m} ${i18next.t('time_m')}`);
+    
+    // Секунды показываем, если они больше 0, ИЛИ если всё остальное по нулям
+    if (s > 0 || parts.length === 0) parts.push(`${s} ${i18next.t('time_s')}`);
+
+    return parts.join(' ');
+}
+
 setTimeout(() => {
     loadingScreen.style.display = 'none'
     document.documentElement.style.overflowY = 'auto'
@@ -1230,19 +1247,20 @@ setTimeout(() => {
     offlineGainTitle.innerHTML = i18next.t('offlineGainTitle');   
     player.offline_gain.time == null ? offlineShowGain.innerHTML = '' :
     offlineShowGain.innerHTML = i18next.t('offlineGain', {
-        timeDifference: formatNumber(player.offline_gain.time),
-        moneyTemp: formatNumber(player.offline_gain.coin), 
-        superCoinsTemp: formatNumber(player.offline_gain.supercoin), 
-        crystals: ACHS.has(22) ? i18next.t('offlineCrystalsTempText', {
-            crystals: formatNumber(player.offline_gain.crystal, 'floor')
-        }) : '', 
-        prestiges: MILESTONES.has(16) ? i18next.t('offlinePrestigesTempText', {
-            prestiges: formatNumber(player.offline_gain.prestige, 'floor')
-        }) : '',
-        shards: UNL.shard.second.unl() ? i18next.t('offlineShardsTempText', {
-            shards: formatNumber(player.offline_gain.shard)
-        }) : ''
-    });
+    timeDifference: formatOfflineTime(player.offline_gain.time),
+    
+    moneyTemp: formatNumber(player.offline_gain.coin), 
+    superCoinsTemp: formatNumber(player.offline_gain.supercoin), 
+    crystals: ACHS.has(22) ? i18next.t('offlineCrystalsTempText', {
+        crystals: formatNumber(player.offline_gain.crystal, 'floor')
+    }) : '', 
+    prestiges: MILESTONES.has(16) ? i18next.t('offlinePrestigesTempText', {
+        prestiges: formatNumber(player.offline_gain.prestige, 'floor')
+    }) : '',
+    shards: UNL.shard.second.unl() ? i18next.t('offlineShardsTempText', {
+        shards: formatNumber(player.offline_gain.shard)
+    }) : ''
+});
     renderSavedAchievements();
     renderSavedLore();
 }, 2000);
@@ -1256,24 +1274,27 @@ codeInput.addEventListener("keydown", function(event) {
 function checkCode(id=999) {
     id += 1
     switch (id) {
+<<<<<<< HEAD
     case 1:
         player.supercoin.currency += 69
         player.supercoin.total_currency += 69
         player.supercoin.this_reflash_currency += 69
         
+=======
+        case 1:
+            player.shop.items.amount[1] += 2
+>>>>>>> main
         break;
-    case 2:
-        if (!player.settings.event.spiritual) return 1
-
+        case 2:
+            player.shop.items.amount[2] += 1
         break;
-    case 3:
-        if (!player.settings.event.triplePower) return 1
-
+        case 3:
+            player.shop.items.amount[3] += 5
         break;
-    case 4:
-        if (!player.settings.event.triplePower) return 1
-        
+        case 4:
+            player.shop.items.amount[4] += 2
         break;
+<<<<<<< HEAD
     case 5:
         if (!player.settings.event.triplePower) return 1
         
@@ -1291,6 +1312,11 @@ function checkCode(id=999) {
         break;
     case 8: 
         player.shop.items.amount[4] += 1
+=======
+        case 5:
+            player.supercoin.currency += 150
+            player.supercoin.total_currency += 150
+>>>>>>> main
         break;
     default:
         return 1
