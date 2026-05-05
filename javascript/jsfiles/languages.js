@@ -1274,16 +1274,8 @@ codeInput.addEventListener("keydown", function(event) {
 function checkCode(id=999) {
     id += 1
     switch (id) {
-<<<<<<< HEAD
-    case 1:
-        player.supercoin.currency += 69
-        player.supercoin.total_currency += 69
-        player.supercoin.this_reflash_currency += 69
-        
-=======
         case 1:
             player.shop.items.amount[1] += 2
->>>>>>> main
         break;
         case 2:
             player.shop.items.amount[2] += 1
@@ -1294,29 +1286,9 @@ function checkCode(id=999) {
         case 4:
             player.shop.items.amount[4] += 2
         break;
-<<<<<<< HEAD
-    case 5:
-        if (!player.settings.event.triplePower) return 1
-        
-        break;
-    case 6:
-        player.shop.items.amount[3] += 5
-        break;
-    case 9:
-        player.shop.items.amount[3] += 5
-        break;
-    case 7:
-        player.supercoin.currency += 128
-        player.supercoin.total_currency += 128
-        player.supercoin.this_reflash_currency += 128
-        break;
-    case 8: 
-        player.shop.items.amount[4] += 1
-=======
         case 5:
             player.supercoin.currency += 150
             player.supercoin.total_currency += 150
->>>>>>> main
         break;
     default:
         return 1

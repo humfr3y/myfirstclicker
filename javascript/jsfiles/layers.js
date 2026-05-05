@@ -429,6 +429,14 @@ const LAYERS = {
         player.time.uadder = 0;
         player.time.ureducer = 0;
 
+        const autoKeys = ['single', 'buyable', 'umultiplier', 'upower', 'prestige', 'uadder'];
+        autoKeys.forEach(type => {
+            if (player.automation.checkbox[type]) {
+                const checkboxEl = document.getElementById(checkboxId);
+                if (checkboxEl) checkboxEl.checked = false;
+            }
+        });
+
         LAYERS.doReset(); 
         MILESTONES.checkMilestones()
         checkCompletedChallenges()
