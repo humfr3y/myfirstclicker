@@ -308,7 +308,7 @@ const UPGS = {
             ], 'break.buyables'),
             singles: new UniversalSinglesManager('prestige', 'break.singles', [
                 { id: 11, elementId: 'breakPSingleU1', basePrice: 1e25, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.log10(player.prestige.total_currency + 1) / 1.5; } },
-                { id: 12, elementId: 'breakPSingleU2', basePrice: 1e30, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.log10(Math.log10(player.clicks.critical)); } },
+                { id: 12, elementId: 'breakPSingleU2', basePrice: 1e30, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.log10(Math.log10(player.clicks.critical/2)); } },
                 { id: 13, elementId: 'breakPSingleU3', basePrice: 1e35, effect: function(x = this.unl()) { return x == 0 ? 1 : 6; } },
                 { id: 14, elementId: 'breakPSingleU4', basePrice: 1e40, effect: function(x = this.unl()) {
                     if (x == 0) return 0;
