@@ -25,6 +25,13 @@
   --ureducer: rgb(255, 255, 94);
 }
 
+.text-hidden-mode * {
+    color: transparent !important;
+    text-shadow: none;
+    user-select: none !important; /* Полностью запрещает выделение */
+    -webkit-user-select: none !important; /* Для поддержки Safari и iOS */
+}
+
 html::-webkit-scrollbar, #versionDiv::-webkit-scrollbar, #helpDiv::-webkit-scrollbar {
   width:8px;
 }

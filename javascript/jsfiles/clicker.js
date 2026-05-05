@@ -1367,6 +1367,7 @@ setInterval(() => { GAIN.clicksPerSecond = 0; }, 1000);
 
 // --- ГЕНЕРАТОР ВСПЛЫВАЮЩИХ ТЕКСТОВ ---
 function spawnFloatingText(e, text, isCrit, cssClass) {
+    if (player.settings.font === 'option11') { return 0 }
     // Берем событие из переданного параметра ИЛИ из глобального окна (как было в старом коде)
     const evt = e || window.event;
     
@@ -1572,7 +1573,7 @@ const FONTS = {
     option1: { name: 'Poly', scale: 1 }, option2: { name: 'serif', scale: 1 }, option3: { name: 'Impact', scale: 0.95 },
     option4: { name: 'Courier', scale: 0.9 }, option5: { name: 'Verdana', scale: 0.85 }, option6: { name: 'system-ui', scale: 0.9 },
     option7: { name: 'PAPYRUS THE GREAT', scale: 0.85 }, option8: { name: 'Comic Sans', scale: 0.85 }, option9: { name: 'monotyper', scale: 0.9 },
-    option10: { name: 'swkeys', scale: 0.8 }, option11: { name: 'swkeys', scale: 0 }, option12: { name: 'minecraft', scale: 0.92 },
+    option10: { name: 'swkeys', scale: 0.8 }, option11: { name: 'serif', scale: 1 }, option12: { name: 'minecraft', scale: 0.92 },
     option13: { name: 'SaiyanSans', scale: 1.1 }
 };
 
@@ -1586,6 +1587,11 @@ function applyFont(val, isInit = false) {
     } else {
         THEMEOFTHEGREAT.currentTime = 0; THEMEOFTHEGREAT.pause();
     }
+
+    if (val === 'option11') {
+        document.body.classList.add('text-hidden-mode');
+    }
+    else document.body.classList.remove('text-hidden-mode');
     
     document.body.style.fontFamily = config.name;
     document.querySelectorAll("select, label, button, div").forEach(el => el.style.fontFamily = config.name);
