@@ -360,7 +360,7 @@ const UPGS = {
             }
         ]),
         singles: new UniversalSinglesManager('shard', 'singleUpgrades', [
-            { id: 11, elementId: 'shSingleU1', basePrice: 500000, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.shard.currency + 1, 0.04) * 3; } },
+            { id: 11, elementId: 'shSingleU1', basePrice: 500000, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.shard.currency + 1, 0.04) * 5; } },
             { id: 12, elementId: 'shSingleU2', basePrice: 1e12, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.prestige.broken_currency + 1, 0.06) * 3 } },
             { id: 13, elementId: 'shSingleU3', basePrice: 1e18, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.prestige.currency + 1, 0.06) * 3; } },
             { id: 21, elementId: 'shSingleU4', basePrice: 1e24, effect: function(x = this.unl()) {
