@@ -384,7 +384,7 @@ const GAIN = {
 
     supercoin: {
         offline(x = GAIN.supercoin.chance(), y = MISC.offline()) {
-            return y / (100 / x);
+            return y / (200 / x);
         },
         chance() {
             let chance = 1;
