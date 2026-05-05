@@ -1210,7 +1210,7 @@
     "challengePConditionText8": "Condition: Final Prestige. Coin gain^0.67, achievements bonus^0.1, U-tils have starting base effect, almost all coin multipliers are disabled. Free upgrades, shards effect, fortune, balance, minerals and challenge bonuses are disabled too.",
 
     "challengeReward6": "Reward: Increase coins per click exponent by ^1.1.",
-    "challengeReward2": "Reward: Prestige Reset gives x1000 Shards based on Crystals.",
+    "challengeReward2": "Reward: Prestige Reset gives x1000000 Shards based on Crystals.",
     "challengeReward11": "Reward: Unlock new items in Supershop.",
     "challengeReward12": "Reward: Decreases U-multiplier's scaling to 40, and U-power's to 80.",
     "challengePReward8": "Reward: The End?",

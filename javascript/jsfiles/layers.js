@@ -208,7 +208,7 @@ const LAYERS = {
             }
 
             if (player.prestige.singleUpgrades.includes(34)) {
-                player.shard.currency += (player.challenge.activated === 0 && player.challenge.completed.includes(2)) ? 10 * 1000 * player.prestige.currency : 10;
+                player.shard.currency += (player.challenge.activated === 0 && player.challenge.completed.includes(2)) ? 1000000 * player.prestige.currency : 10;
             }
 
             if (player.challenge.activated !== 0) {
