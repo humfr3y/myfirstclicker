@@ -713,7 +713,7 @@ function statsCrystalsUpdate() {
         { effectValue: () => ACHS.effect.crystal(), effectPrefix: 'x', effectMode: 'boost', effectId: 'achievementBonus2StatsEffect', pieceId: 'achievementBonus2Piece', piecePercentId: 'achievementBonus2PiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => UPGS.fortune.boosts[2].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fortuneBoostCrystalStatsEffect', pieceId: 'fortuneBoostCrystalPiece', piecePercentId: 'fortuneBoostCrystalPiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => MISC.balance.minusCoins.buff().crystalGainBuff, effectPrefix: 'x', effectMode: 'boost', effectId: 'minusCoinsForCrystalsStatsEffect', pieceId: 'minusCoinsForCrystalsPiece', piecePercentId: 'minusCoinsForCrystalsPiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
-        { effectValue: () => PRES_CHALLENGE[1].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'pchall1StatsEffect', pieceId: 'pchall1Piece', piecePercentId: 'pchall1PiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
+        { effectValue: () => player.prestige.challenge.completed.includes(1) ? PRES_CHALLENGE[1].effect() : 1, effectPrefix: 'x', effectMode: 'boost', effectId: 'pchall1StatsEffect', pieceId: 'pchall1Piece', piecePercentId: 'pchall1PiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
         { effectValue: () => GAIN.crystal.softcap().softcap_power, effectPrefix: '^', effectMode: 'power', effectId: 'CRYSTAL_GAIN_SC_001StatsEffect' }
     ];
 

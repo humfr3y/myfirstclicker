@@ -845,7 +845,7 @@ const CHALL = {
     7: { id: 7, completed: () => isChallComp(7), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.log2(player.shard.currency + 1) * fb8() },
     8: { id: 8, completed: () => isChallComp(8), effect: () => player.prestige.challenge.activated == 8 ? 1 : (1 + player.time.real.prestige.timer/2) * fb8() },
     9: { id: 9, completed: () => isChallComp(9), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.pow(player.supercoin.total_currency, 1.5) * fb8() },
-    10: { id: 10, completed: () => isChallComp(10), effect: () => player.prestige.challenge.activated == 8 ? 1 : (1 + Math.log10(MISC.amount_of_upgrades.coin() + 1)) * fb8() },
+    10: { id: 10, completed: () => isChallComp(10), effect: () => player.prestige.challenge.activated == 8 ? 1 : (1 + Math.pow(MISC.amount_of_upgrades.coin() + 1, 0.65)) * fb8() },
     11: { id: 11, completed: () => isChallComp(11) }, // new items in shop
     12: { id: 12, completed: () => isChallComp(12) }, // decrease umulti and upower scaling
     

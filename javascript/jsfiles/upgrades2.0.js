@@ -360,7 +360,7 @@ const UPGS = {
             }
         ]),
         singles: new UniversalSinglesManager('shard', 'singleUpgrades', [
-            { id: 11, elementId: 'shSingleU1', basePrice: 500000, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.shard.currency + 1, 0.035) * 3; } },
+            { id: 11, elementId: 'shSingleU1', basePrice: 500000, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.shard.currency + 1, 0.04) * 3; } },
             { id: 12, elementId: 'shSingleU2', basePrice: 1e12, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.prestige.broken_currency + 1, 0.06) * 3 } },
             { id: 13, elementId: 'shSingleU3', basePrice: 1e18, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.prestige.currency + 1, 0.06) * 3; } },
             { id: 21, elementId: 'shSingleU4', basePrice: 1e24, effect: function(x = this.unl()) {
@@ -380,13 +380,13 @@ const UPGS = {
             { id: 3, power: 1.06, basePrice: 1.4, maxAmount: 100, elementId: 'shopBuyableU3', effect: function(x = player.shop.upgrades[3]) { return 1 + x / 66.666666; }, next_effect: function(x = player.shop.upgrades[3] + this.bulk()) { return 1 + x / 66.666666; } },
             { id: 4, power: 1.065, basePrice: 1.5, maxAmount: 100, elementId: 'shopBuyableU4', effect: function(x = player.shop.upgrades[4]) { return 1 + x / 100; }, next_effect: function(x = player.shop.upgrades[4] + this.bulk()) { return 1 + x / 100; } },
             { id: 5, power: 1.07, basePrice: 5, maxAmount: 50, elementId: 'shopBuyableU5', effect: function(x = player.shop.upgrades[5]) { return 1 + x / 2.5; }, next_effect: function(x = player.shop.upgrades[5] + this.bulk()) { return 1 + x / 2.5; } },
-            { id: 6, power: 1.075, basePrice: 10, maxAmount: 100, elementId: 'shopBuyableU6', effect: function(x = player.shop.upgrades[6]) { return 1 + x / 100; }, next_effect: function(x = player.shop.upgrades[6] + this.bulk()) { return 1 + x / 100; } },
-            { id: 7, power: 1.5, basePrice: 15, maxAmount: 20, elementId: 'shopBuyableU7', effect: function(x = player.shop.upgrades[7]) { return 1 + x / 10; }, next_effect: function(x = player.shop.upgrades[7] + this.bulk()) { return 1 + x / 10; } }
+            { id: 6, power: 1.075, basePrice: 10, maxAmount: 100, elementId: 'shopBuyableU6', effect: function(x = player.shop.upgrades[6]) { return 1 + x / 50; }, next_effect: function(x = player.shop.upgrades[6] + this.bulk()) { return 1 + x / 100; } },
+            { id: 7, power: 1.2, basePrice: 15, maxAmount: 20, elementId: 'shopBuyableU7', effect: function(x = player.shop.upgrades[7]) { return 1 + x / 10; }, next_effect: function(x = player.shop.upgrades[7] + this.bulk()) { return 1 + x / 10; } }
         ], 'upgrades'),
 
         unlockables: new ShopUnlockablesManager('shop', 'unlockables', [
             // { id: 1, elementId: 'shopSingleU1', basePrice: 250 },
-            { id: 1, elementId: 'shopSingleU1', basePrice: 1200 },
+            { id: 1, elementId: 'shopSingleU1', basePrice: 500 },
             { id: 2, elementId: 'shopSingleU2', basePrice: 1000 },
             { id: 3, elementId: 'shopSingleU3', basePrice: 1500 },
             { id: 4, elementId: 'shopSingleU4', basePrice: 1000 },
@@ -394,7 +394,7 @@ const UPGS = {
         ]),
 
         permanent: new ShopPermanentManager('shop', [
-            { id: 1, power: 1.25, basePrice: 10, maxAmount: 25, elementId: 'shopPermanentU1', effect: function(x = player.shop.permanentUpgrades[1]) { return 1 + x / 25; }, next_effect: function(x = player.shop.permanentUpgrades[1] + 1) { return 1 + x / 25; } },
+            { id: 1, power: 1.25, basePrice: 10, maxAmount: 25, elementId: 'shopPermanentU1', effect: function(x = player.shop.permanentUpgrades[1]) { return 1 + x / 10; }, next_effect: function(x = player.shop.permanentUpgrades[1] + 1) { return 1 + x / 25; } },
             { id: 2, power: 2, basePrice: 100, maxAmount: 5, elementId: 'shopPermanentU2', effect: function(x = player.shop.permanentUpgrades[2]) { return 1 + x / 5; }, next_effect: function(x = player.shop.permanentUpgrades[2] + 1) { return 1 + x / 5; } },
             { id: 3, power: 1.075, basePrice: 10, maxAmount: 100, elementId: 'shopPermanentU3', effect: function(x = player.shop.permanentUpgrades[3]) { return x / 50; }, next_effect: function(x = player.shop.permanentUpgrades[3] + 1) { return x / 50; } },
             { id: 4, power: 1.085, basePrice: 5, maxAmount: 100, elementId: 'shopPermanentU4', effect: function(x = player.shop.permanentUpgrades[4]) { return 1 + x / 10; }, next_effect: function(x = player.shop.permanentUpgrades[4] + 1) { return 1 + x / 10; } },
@@ -445,7 +445,7 @@ const UPGS = {
             id: 3, elementId: 'mineral3',
             cost1: x => 1 + Math.floor(x / 10),
             cost2: x => 1e15 * Math.pow(100, x) * (Math.pow(1000000, Math.floor(x / 10))),
-            effect1: function(x) { return x == 0 || player.prestige.challenge.activated == 8 ? 1 : this.applyMods(Math.pow(2, x / 1.5)); },
+            effect1: function(x) { return x == 0 || player.prestige.challenge.activated == 8 ? 1 : this.applyMods(Math.pow(2, x / 1.25)); },
             effect2: function(x) { return x == 0 || player.prestige.challenge.activated == 8 ? 1 : this.applyMods(Math.pow(3, x / 1.65)); },
             effect3: function(x) { return x == 0 || player.prestige.challenge.activated == 8 ? 1 : this.applyMods(Math.pow(2, x / 3)); }
         },
