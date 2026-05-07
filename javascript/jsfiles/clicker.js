@@ -182,7 +182,6 @@ const GAIN = {
             },
             effect() { 
                 let val = applyDecimalSoftcap(this);
-                // Оставляем объект Decimal, чтобы методы .add() и .log10() работали!
                 return val
             },
             softcap() {
@@ -199,7 +198,7 @@ const GAIN = {
     
     shard: {
         click() {
-            let effect = 1;
+            let effect = new Decimal("1");
             const mults = [
                 [player.shard.upgrades[1], UPGS.shard.buyables[1].effect()],
                 [player.shop.upgrades[5], UPGS.shop.buyables[5].effect()],
@@ -207,12 +206,12 @@ const GAIN = {
                 [player.fortune.activatedBoosts[3].activated, UPGS.fortune.boosts[3].effect()],
                 [player.prestige.break.buyables[3], UPGS.prestige.break.buyables[3].effect()]
             ];
-            mults.forEach(([cond, val]) => { if (cond) effect *= val; });
-            return effect;
+            mults.forEach(([cond, val]) => { if (cond) effect = effect.mul(val); });
+            return Decimal.min(effect, new Decimal("1.79e308"));
         },
         second() {
             if (!UNL.shard.second.unl()) return 0;
-            let effect = 1;
+            let effect = new Decimal("1");
             const mults = [
                 [player.shard.upgrades[2], UPGS.shard.buyables[2].effect()],
                 [player.shop.upgrades[5], UPGS.shop.buyables[5].effect()],
@@ -223,8 +222,8 @@ const GAIN = {
                 [player.fortune.activatedBoosts[3].activated, UPGS.fortune.boosts[3].effect()],
                 [player.prestige.break.buyables[3], UPGS.prestige.break.buyables[3].effect()]
             ];
-            mults.forEach(([cond, val]) => { if (cond) effect *= val; });
-            return effect;
+            mults.forEach(([cond, val]) => { if (cond) effect = effect.mul(val); });
+            return Decimal.min(effect, new Decimal("1.79e308"));
         },
         offline(x = GAIN.shard.second(), y = MISC.offline()) {
             return UNL.shard.second.unl() ? x * y : 0;
@@ -295,7 +294,7 @@ const GAIN = {
             if (player.fortune.activatedBoosts[3].activated) gain *= UPGS.fortune.boosts[3].effect();
             if (player.prestige.break.buyables[3]) gain *= UPGS.prestige.break.buyables[3].effect()
             
-            return { gain, broken_crystals };
+            return { gain: Math.min(gain, 1.7e308), broken_crystals };
         }
     },
     crystal: {
@@ -344,7 +343,7 @@ const GAIN = {
             let softcap_power = 1;
             if (this.no_softcap_reset() >= 1e50) {
                 let calcPower = (1 - ((Math.log10(this.no_softcap_reset()) - 50 - Math.log(pusher)) / 125)) - substract + addition;
-                let minPower = 0.4 - substract + addition;
+                let minPower = 0.3 - substract + addition;
                 softcap_power = Math.max(calcPower, minPower);
             }
             
@@ -576,6 +575,7 @@ const GAIN = {
         if (player.coin.currency > 1.79e308) player.coin.currency = 1.79e308;
         if (player.coin.total_currency > 1.79e308) player.coin.total_currency = 1.79e308;
         player.shard.currency += shardGain;
+        if (player.shard.currency > 1.79e308) player.shard.currency = 1.79e308;
         player.prestige.currency += crystalGain;
         player.prestige.total_currency += crystalGain;
         player.prestige.resets += prestigeGain;
@@ -703,7 +703,7 @@ const UNL = {
             return isAdditive ? (1 + val * ach10 * fBoost) : (val * ach10 * fBoost);
         },
         1: { id: 1, current() { return player.coin.total_currency; }, goal(x = player.shard.achievements[1]) { return 1e50 * Math.pow(1e20, x); }, ratio() { return findRatio(this.current(), this.goal()); }, effect(x = player.shard.achievements[1]) { let e = UNL.shard_achievements._effBase(1, Math.pow(7, x), false); return player.prestige.challenge.activated === 8 ? 1: e; } },
-        2: { id: 2, current() { return player.supercoin.total_currency; }, goal(x = player.shard.achievements[2]) { return 1000 * Math.pow(2, x); }, ratio() { return findRatio(this.current(), this.goal()); }, effect(x = player.shard.achievements[2]) { return UNL.shard_achievements._effBase(1, x / 25, true); } },
+        2: { id: 2, current() { return player.supercoin.total_currency; }, goal(x = player.shard.achievements[2]) { return 1000 * Math.pow(2, x); }, ratio() { return findRatio(this.current(), this.goal()); }, effect(x = player.shard.achievements[2]) { return UNL.shard_achievements._effBase(1, x / 50, true); } },
         3: { id: 3, current() { return player.prestige.total_currency; }, goal(x = player.shard.achievements[3]) { return 1e10 * Math.pow(1e10, x); }, ratio() { return findRatio(this.current() + 0.00001, this.goal()); }, effect(x = player.shard.achievements[3]) { return UNL.shard_achievements._effBase(2, Math.pow(2.33, x), false); } },
         4: { id: 4, current() { return player.shard.currency; }, goal(x = player.shard.achievements[4]) { return 1e25 * Math.pow(1e25, x); }, ratio() { return findRatio(this.current() + 0.00001, this.goal()); }, effect(x = player.shard.achievements[4]) { return UNL.shard_achievements._effBase(2, Math.pow(7, x), false); } },
         5: { id: 5, current() { return player.achievements.length; }, goal(x = player.shard.achievements[5]) { return 10 + (10 * x); }, ratio() { return findRatio(this.current(), this.goal()); }, effect(x = player.shard.achievements[5]) { return UNL.shard_achievements._effBase(3, Math.pow(1.85, x), false); } },
@@ -1037,7 +1037,7 @@ const MISC = {
         minusCoins: {
             buff(b = player.balance.coins.minus) {
                 let crystalGainBuff = b ? Math.pow(20, b) * UPGS.balance.buyables[1].effect() : 1;
-                let crystalSoftcapSofter = player.balance.upgrades.singles.includes(12) && b ? b / 350 * UPGS.balance.buyables[1].effect() : 0;
+                let crystalSoftcapSofter = player.balance.upgrades.singles.includes(12) && b ? b / 700 * UPGS.balance.buyables[1].effect() : 0;
                 let utilsCostReducer = player.balance.upgrades.singles.includes(22) && b ? b / 30 * UPGS.balance.buyables[1].effect() : 0;
                 let crystalSoftcapPusher = player.balance.upgrades.singles.includes(32) && b ? 33 * Math.pow(3, b) * UPGS.balance.buyables[1].effect() : 1;
                 
@@ -1143,6 +1143,7 @@ function loop() {
     else player.coin.total_currency += GAIN.coin.second.effect() * time;
     // Хардкап: не пускаем монеты за предел
     if (player.coin.currency > 1.79e308) player.coin.currency = 1.79e308;
+    if (player.shard.currency > 1.79e308) player.shard.currency = 1.79e308;
     if (player.coin.total_currency > 1.79e308) player.coin.total_currency = 1.79e308;
     
     player.shard.currency += GAIN.shard.second() * time;
@@ -1450,6 +1451,8 @@ function getShardPerClick(e) {
         if (GAIN.critical.get() && UPGS.supercrystal[32].unl()) {
             gain = GAIN.critical.gain(gain); getCrit = true; player.clicks.critical++;
         }
+
+        if (player.shard.currency > 1.79e308) player.shard.currency = 1.79e308;
         
         player.shard.currency += gain;
         spawnFloatingText(e, "+" + formatNumber(gain), getCrit, 'shardCountPerClick');

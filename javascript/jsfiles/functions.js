@@ -284,7 +284,8 @@ function generateRune(number) {
 
 function createMineral(x) {
     let bulk = UPGS.minerals[x].bulk();
-    if (bulk.iter > 0) {
+
+    if (bulk.iter > 0 && player.rune.currency >= bulk.bulk1 && player.shard.currency >= bulk.bulk2) {
         player.minerals[x] += bulk.iter;
         player.rune.currency -= bulk.bulk1;
         player.shard.currency -= bulk.bulk2;

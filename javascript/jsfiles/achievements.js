@@ -101,7 +101,7 @@ const ACHS = {
 
         51() { return player.fortune.tokens >= 1},
         52() { return player.coin.total_currency >= 1e100},
-        53() { return player.balance.scales_of_balance >= 1},
+        53() { return MISC.balance.scales_of_balance() >= 1},
         54() { return player.fortune.activatedBoosts[10].activated || player.fortune.activatedBoosts[11].activated || player.fortune.activatedBoosts[12].activated},
         55() { return UNL.overdrive.type2.percent() == 100},
         56() { return player.fortune.activatedBoosts.list.length == 12},
