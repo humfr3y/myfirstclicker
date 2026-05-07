@@ -198,7 +198,7 @@ const GAIN = {
     
     shard: {
         click() {
-            let effect = new Decimal("1");
+            let effect = 1;
             const mults = [
                 [player.shard.upgrades[1], UPGS.shard.buyables[1].effect()],
                 [player.shop.upgrades[5], UPGS.shop.buyables[5].effect()],
@@ -206,12 +206,12 @@ const GAIN = {
                 [player.fortune.activatedBoosts[3].activated, UPGS.fortune.boosts[3].effect()],
                 [player.prestige.break.buyables[3], UPGS.prestige.break.buyables[3].effect()]
             ];
-            mults.forEach(([cond, val]) => { if (cond) effect = effect.mul(val); });
-            return Decimal.min(effect, new Decimal("1.79e308"));
+            mults.forEach(([cond, val]) => { if (cond) effect = effect * val; });
+            return Math.min(effect, 1.79e308);
         },
         second() {
             if (!UNL.shard.second.unl()) return 0;
-            let effect = new Decimal("1");
+            let effect = 1;
             const mults = [
                 [player.shard.upgrades[2], UPGS.shard.buyables[2].effect()],
                 [player.shop.upgrades[5], UPGS.shop.buyables[5].effect()],
@@ -222,8 +222,8 @@ const GAIN = {
                 [player.fortune.activatedBoosts[3].activated, UPGS.fortune.boosts[3].effect()],
                 [player.prestige.break.buyables[3], UPGS.prestige.break.buyables[3].effect()]
             ];
-            mults.forEach(([cond, val]) => { if (cond) effect = effect.mul(val); });
-            return Decimal.min(effect, new Decimal("1.79e308"));
+            mults.forEach(([cond, val]) => { if (cond) effect = effect * val; });
+            return Math.min(effect, 1.79e308);
         },
         offline(x = GAIN.shard.second(), y = MISC.offline()) {
             return UNL.shard.second.unl() ? x * y : 0;
