@@ -284,7 +284,7 @@ const GAIN = {
             if (broken_crystals < 1e6) {
                 for (let i = 0; i < broken_crystals; i++) {
                     gain += randomNumber(this.min(), this.max());
-                    if (player.shard.currency === 0) gain = 100;
+                    if (player.shard.currency === 0) gain += 100;
                 }
             } else {
                 gain = ((this.min() + this.max()) / 2) * broken_crystals;
