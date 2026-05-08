@@ -94,7 +94,7 @@ const ACHS = {
         43() { return UNL.shard_achievements[10].current() >= 10 && player.shard_achievements.includes(5)},
         44() { return player.coin.superUpgrades.length == 15},
         45() { return player.supercoin.total_currency >= 10000},
-        46() { return player.challenge.activated == 8 && player.time.real.prestige.timer >= 28800},
+        46() { return player.challenge.activated == 8 && player.time.game.prestige.timer >= 28800},
         48() { return player.shard.currency >= 1e100},
         49() { return player.prestige.resets >= 1e8},
         50() { return (player.uadders + player.ureducers + player.umultipliers + player.upowers) >= 100},
