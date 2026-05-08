@@ -61,7 +61,7 @@ const GAIN = {
 
                 // 5. Глобальные срезы
                 if (pcAct !== 0 && pcAct !== 8) effect = effect.pow(0.5);
-                if (pcAct == 8) effect = effect.pow(0.67)
+                if (pcAct == 8) effect = effect.pow(0.7);
                 if (cAct !== 0) effect = effect.pow(0.75);
                 if (cAct === 10) effect = effect.pow(0.67);
 
@@ -119,7 +119,7 @@ const GAIN = {
                 if (pcAct === 1 || pcAct === 7) effect = effect.sqrt();
 
                 if (pcAct !== 0 && pcAct !== 8) effect = effect.pow(0.5);
-                if (pcAct == 8) effect = effect.pow(0.67)
+                if (pcAct == 8) effect = effect.pow(0.7)
                 if (cAct !== 0) effect = effect.pow(0.67);
                 if (cAct === 10) effect = effect.pow(0.67);
 
@@ -343,7 +343,7 @@ const GAIN = {
             let softcap_power = 1;
             if (this.no_softcap_reset() >= 1e50) {
                 let calcPower = (1 - ((Math.log10(this.no_softcap_reset()) - 50 - Math.log(pusher)) / 125)) - substract + addition;
-                let minPower = 0.3 - substract + addition;
+                let minPower = 0.4 - substract + addition;
                 softcap_power = Math.max(calcPower, minPower);
             }
             
@@ -382,8 +382,8 @@ const GAIN = {
     },
 
     supercoin: {
-        offline(x = GAIN.supercoin.chance(), y = MISC.offline()) {
-            return y / (200 / x);
+        offline(x = GAIN.supercoin.gain_per_second(), y = MISC.offline()) {
+            return x * y
         },
         chance() {
             let chance = 1;
@@ -425,6 +425,10 @@ const GAIN = {
             reward() {
                 return randomNumber(this.min(), this.max());
             }
+        },
+        gain_per_second() {
+            if (!player.shop.unlockables.includes(6)) return 0
+            return (1 + this.chance() / 10) * (Math.log10(GAIN.coin.second.effect() * 1 + 1)/1000)
         }
     },
 
@@ -613,7 +617,7 @@ const GAIN = {
         },
         scales_of_balance() {
             if (!player.balance.upgrades.singles.includes(23)) return 0;
-            return MISC.balance.scales_of_balance() / 50000;
+            return MISC.balance.scales_of_balance() / 20000;
         },
         sob_offline(x = GAIN.balance.scales_of_balance(), y = MISC.offline()) {
             return player.balance.upgrades.singles.includes(23) ? x * y : 0;
@@ -725,7 +729,7 @@ const UNL = {
         },
         check() {
             // Проходим по всем 83 элементам без вычисления длины ключей каждый раз
-            for (let i = 1; i <= 89; i++) {
+            for (let i = 1; i <= 90; i++) {
                 if (this[i]) {
                     if (this[i].element().classList.contains('automationUpgrade')) this.unl(i, this[i].type !== 'none' ? 'none' : 'block') 
                     else this.unl(i, this[i].type !== 'none' ? 'none' : 'flex');
@@ -824,7 +828,7 @@ const UNL = {
         87: { type: 'flex', element: () => document.getElementById('prestigeChallengePair4'), req: () => player.prestige.challenge.completed.length >= 3 },
         88: { type: 'block', element: () => document.getElementById('helpTab22'), req: () => player.progressBarGoals.includes(8) },
         89: { type: 'block', element: () => document.getElementById('aquaticPick'), req: () => ACHS.has(51) },
-        
+        90: { type: 'block', element: () => document.getElementById('supercoinsGain'), req: () => player.shop.unlockables.includes(6) },
     }
 };
 
@@ -845,7 +849,7 @@ const CHALL = {
     7: { id: 7, completed: () => isChallComp(7), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.log2(player.shard.currency + 1) * fb8() },
     8: { id: 8, completed: () => isChallComp(8), effect: () => player.prestige.challenge.activated == 8 ? 1 : (1 + player.time.real.prestige.timer/2) * fb8() },
     9: { id: 9, completed: () => isChallComp(9), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.pow(player.supercoin.total_currency, 1.5) * fb8() },
-    10: { id: 10, completed: () => isChallComp(10), effect: () => player.prestige.challenge.activated == 8 ? 1 : (1 + Math.pow(MISC.amount_of_upgrades.coin() + 1, 0.65)) * fb8() },
+    10: { id: 10, completed: () => isChallComp(10), effect: () => player.prestige.challenge.activated == 8 ? 1 : (1 + Math.pow(MISC.amount_of_upgrades.coin() + 1, 0.75)) * fb8() },
     11: { id: 11, completed: () => isChallComp(11) }, // new items in shop
     12: { id: 12, completed: () => isChallComp(12) }, // decrease umulti and upower scaling
     
@@ -875,6 +879,7 @@ const MISC = {
             player.supercoin.total_currency += gain;
             player.got_daily_reward = true;
             dailyDesc.innerHTML = text.daily.true;
+            toggleBadges(['badge-settings', 'badge-misc', 'badge-daily'], false);
         } else {
             dailyDesc.innerHTML = text.daily.false;
         }
@@ -1037,7 +1042,7 @@ const MISC = {
         minusCoins: {
             buff(b = player.balance.coins.minus) {
                 let crystalGainBuff = b ? Math.pow(20, b) * UPGS.balance.buyables[1].effect() : 1;
-                let crystalSoftcapSofter = player.balance.upgrades.singles.includes(12) && b ? b / 700 * UPGS.balance.buyables[1].effect() : 0;
+                let crystalSoftcapSofter = player.balance.upgrades.singles.includes(12) && b ? b / 350 * UPGS.balance.buyables[1].effect() : 0;
                 let utilsCostReducer = player.balance.upgrades.singles.includes(22) && b ? b / 30 * UPGS.balance.buyables[1].effect() : 0;
                 let crystalSoftcapPusher = player.balance.upgrades.singles.includes(32) && b ? 33 * Math.pow(3, b) * UPGS.balance.buyables[1].effect() : 1;
                 
@@ -1149,6 +1154,9 @@ function loop() {
     player.shard.currency += GAIN.shard.second() * time;
     player.balance.neutral += GAIN.balance.generation() * time;
     player.balance.scales_of_balance += GAIN.balance.scales_of_balance() * time;
+
+    player.supercoin.currency += GAIN.supercoin.gain_per_second() * time;
+    player.supercoin.total_currency += GAIN.supercoin.gain_per_second() * time;
 
     player.time.game.total.timer += time;
     player.time.game.prestige.timer += time;
@@ -1518,8 +1526,8 @@ function notify(notiString, notiColor, notiWidth = '350px') {
 }
 
 function changelog() { changelogWindow.style.display = "block"; myPopupBackdrop1.style.display = "flex"; }
-function gameLoreOpen() { gameLoreWindow.style.display = "block"; myPopupBackdrop1.style.display = "flex"; }
-function howToPlayOpen() { gameHelpWindow.style.display = "flex"; myPopupBackdrop1.style.display = "flex"; }
+function gameLoreOpen() { gameLoreWindow.style.display = "block"; myPopupBackdrop1.style.display = "flex"; toggleBadges(['badge-settings-2', 'badge-misc-2', 'badge-lore'], false)}
+function howToPlayOpen() { gameHelpWindow.style.display = "flex"; myPopupBackdrop1.style.display = "flex"; toggleBadges(['badge-settings-1', 'badge-misc-1', 'badge-h2p'], false)}
 
 function openWindow(arg, isFlex) {
     ['confirmationButtons', 'whichCode', 'dailyDesc', 'breakCrystal', 'brokeCrystals', 'falseBrokeCrystals', 'welcomeToDigitalGod', 'chooseSaveDiv'].forEach(id => {

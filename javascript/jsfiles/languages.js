@@ -441,7 +441,8 @@ function loadTranslationsAutomation() {
 // ============================================================
 function loadTranslationsShop() {
     // Верхний счетчик
-    document.getElementById('top_shop_sc_val').textContent = formatNumber(player.supercoin.currency, 'boost');
+    document.getElementById('top_shop_sc_val').textContent = formatNumber(player.supercoin.currency, 'boost');;
+    document.getElementById('top_scoins_gain_val').textContent = formatNumber(GAIN.supercoin.gain_per_second(), 'power', 3);
 
     // 1. Покупаемые улучшения (Buyables 1-7)
     for (let i = 1; i <= 7; i++) {
@@ -496,7 +497,7 @@ function loadTranslationsShop() {
     }
 
     // 3. Разблокируемые (Unlockables / Singles 1-6)
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 6; i++) {
         let isBought = player.shop.unlockables.includes(i);
         document.getElementById(`su${i}s_cost_cont`).style.display = isBought ? 'none' : 'inline';
         if (!isBought) document.getElementById(`su${i}s_cost`).textContent = formatNumber(UPGS.shop.unlockables[i].cost());

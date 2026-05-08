@@ -135,7 +135,7 @@ nt {
 }
 
 
-#coinsGain {
+#coinsGain, #supercoinsGain {
     color: var(--grey-text);
     font-size: calc(15px * var(--font-scale));
     text-align: center;

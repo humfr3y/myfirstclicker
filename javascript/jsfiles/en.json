@@ -3,6 +3,7 @@
     "top_you_have": "You have",
     "top_getting": "You're getting ",
     "top_per_sec": " α-coins per second",
+    "top_sc_per_sec": " supercoins per second",
     "shopButton_text": "Supershop",
 
     "pbtitle1": "Prestige",
@@ -26,7 +27,7 @@
     "prestigeDisabled": "Collect 1е15 α-coins",
     "prestigeEnabled": "Reset everything for {{crystalsTemp}} crystals {{prestigeCountMultiplierText}}",
     "prestigeEnabledAdvanced": "Reset everything to get {{crystalsTemp}} crystals ({{crystalsPerMin}}/min.)",
-    "prestigeInChallenge": "Collect {{coins}} coins to complete the Prestige Challenge",
+    "prestigeInChallenge": "Collect {{coins}} α-coins to complete the Prestige Challenge",
     "prestigeInChallengeCompleted": "Complete the Prestige Challenge",
     "prestigeCountMultiplierText": "and {{prestigeCountMultiplier}} prestiges",
 
@@ -158,8 +159,8 @@
     "upg_coin_b5_name": "Wallet",
     "upg_coin_b5_desc": "Increase base α-coins gain",
     "upg_coin_b5_sname": "Super Wallet",
-    "upg_coin_b5_sdesc": "Upgrade also multiplies coin gain",
-    "tt_coin_b5": "Super-effect:<br>Upgrade multiplies coin gain: x",
+    "upg_coin_b5_sdesc": "Upgrade also multiplies α-coin gain",
+    "tt_coin_b5": "Super-effect:<br>Upgrade multiplies α-coin gain: x",
 
     "word_capped": "Capped:",
     "currency_crystals": "crystals",
@@ -254,7 +255,7 @@
     "upg_pres_s9_desc_3": " minutes",
     
     "upg_pres_s10_name": "Anti-Hourglass",
-    "upg_pres_s10_desc": "α-сoin gain increases overtime in current Prestige",
+    "upg_pres_s10_desc": "α-coin gain increases overtime in current Prestige",
     "upg_pres_s11_name": "Course Stabilization",
     "upg_pres_s11_desc": "COIN_PSEC_SC_001 and COIN_PCLICK_SC_001 are reduced to ^0.45/0.55 (^0.4/^0.5 -> ^0.45/^0.55)",
     "upg_pres_s12_name": "Passive Income",
@@ -282,7 +283,7 @@
     "upg_sc_s4_name": "Light Glove",
     "upg_sc_s4_desc": "Increases critical chance by +2% (additive)",
     "upg_sc_s5_name": "Crystal Muscles",
-    "upg_sc_s5_desc": "Critical click gives 10 times more coins instead of two",
+    "upg_sc_s5_desc": "Critical click gives 10 times more α-coins instead of two",
     "upg_sc_s6_name": "Big Wallet",
     "upg_sc_s6_desc": "Pushes SHARD_EFF_SC_001 from 1e7 to 1e10",
     "upg_sc_s7_name": "Smart Watch",
@@ -308,7 +309,7 @@
     "min1_d2": "to critical multiplier,",
     "min1_d3": "to supercoins chance",
     "mineral2_name": "Topaz",
-    "min2_d1": "to coin gain,",
+    "min2_d1": "to α-coin gain,",
     "min2_d2": "to push COIN_PSEC_SC_001 and COIN_PCLICK_SC_001 further,",
     "min2_d3": "free Small Investments",
     "mineral3_name": "Jade",
@@ -442,7 +443,7 @@
     "upg_shard_s6_desc": "Locked",
 
     "shardAchUnlockable": [
-        "Unlock Shard Achievements for coins and supercoins <br> Cost: 1 supercrystal",
+        "Unlock Shard Achievements for α-coins and supercoins <br> Cost: 1 supercrystal",
         "Unlock Shard Achievements for crystals and shards <br> Cost: 1 supercrystal",
         "Unlock Shard Achievements for achievements and spent days in game <br> Cost: 1 supercrystal",
         "Unlock Shard Achievements for prestiges and clicks <br> Cost: 1 supercrystal",
@@ -531,7 +532,7 @@
 
     "bal_p_line0": "You have",
     "bal_p_line0_2": "+Coins, which:",
-    "bal_p_l1_1": "Increase coin gain by",
+    "bal_p_l1_1": "Increase α-coin gain by",
     "bal_p_l1_2": "BUT reduce Crystals gain by",
     "bal_p_l2_1": "Pushes COIN_GAIN_SC_001 by",
     "bal_p_l2_2": "BUT increase exponent of CRYSTAL_GAIN_SC_001 by",
@@ -543,7 +544,7 @@
     "bal_m_line0": "You have",
     "bal_m_line0_2": "-Coins, which:",
     "bal_m_l1_1": "Increase Crystal gain by",
-    "bal_m_l1_2": "BUT reduce coin gain by",
+    "bal_m_l1_2": "BUT reduce α-coin gain by",
     "bal_m_l2_1": "Reduce exponent of CRYSTAL_GAIN_SC_001 by",
     "bal_m_l2_2": "BUT pulls COIN_GAIN_SC_001 by",
     "bal_m_l3_1": "Divide requirements of all U-tils by",
@@ -635,7 +636,7 @@
     "achievement36Desc": "<ut> Why shards won't help? (36) </ut> <br> <br> Complete Challenge 12 less than 1 minute.",
     "achievement37Desc": "<ut> Jackpot (37) </ut> <br> <br> Get supercoin and make critical click at the same time. <br> <br> <it>Reward: Supercoins chance increased by 1% additive.</it>",
     "achievement38Desc": "<ut> I was in [REDACTED] dimension (38) </ut> <br> <br> Complete challenge 9 without upgrades.",
-    "achievement39Desc": "<ut> NICE (39) </ut> <br> <br> Collect 4.20е69 coins per click. <br> <br> <it>Reward: Shards generation increased by 13.37%. </it>",
+    "achievement39Desc": "<ut> NICE (39) </ut> <br> <br> Collect 4.20е69 α-coins per click. <br> <br> <it>Reward: Shards generation increased by 13.37%. </it>",
     "achievement40Desc": "<ut> Hamon OVERDRIVE (40) </ut> <br> <br> Fill Overdrive I to 100%. <br> <br> <it>Reward: You save 50% from current Overdrive I after Prestiges without challenges. </it>",
     "achievement41Desc": "<ut> Adios. (41) </ut> <br> <br> Break prestige.",
     "achievement42Desc": "<ut> After all these years, finally I have them all! (42) </ut> <br> <br> Do 1 U-multiplier, 1 U-power, 1 U-adder and 1 U-reducer.<br> <br> <it>Reward: Increase U-multiplier base effect by +0.05.</it>",
@@ -649,7 +650,7 @@
     "achievement50Desc": "<ut> U-100 (50) </ut> <br> <br> Get in total 100 U-tils (U-multipliers, U-powers, U-adders, U-reducers) <br> <br> <it>Reward: Increase U-adder base effects by 10%.</it>",
 
     "achievement51Desc": "<ut> 99% Of Gamblers Quit Before They Win Big (51) </ut> <br> <br> Get a Fortune Token. <br> <br> <it>Reward: Unlock new unlockable in supershop.</it>",
-    "achievement52Desc": "<ut> The First Googol of Coins (52) </ut> <br> <br> Get 1e100 Coins <br> <br> <it>Reward: Doubles your daily reward. </it>",
+    "achievement52Desc": "<ut> The First Googol of Coins (52) </ut> <br> <br> Get 1e100 α-coins <br> <br> <it>Reward: Doubles your daily reward. </it>",
     "achievement53Desc": "<ut> Yin and Yang (43) </ut> <br> <br> Open Balance and get 1 Balance Scale",
     "achievement54Desc": "<ut> INCREDIBLE POWER (54) </ut> <br> <br> Get an EX Fortune Boost <br> <br> <it>Reward: Increases the maximum effects of all Fortune Boosts by 5%. </it>",
     "achievement55Desc": "<ut> Flame Drive (55) </ut> <br> <br> Fill Overdrive II to 100% <br> <br> <it>Reward: Overdrive I no longer resets on Prestiges, except Challenges. </it>",
@@ -657,13 +658,13 @@
     "achievement57Desc": "<ut> Game On (57) </ut> <br> <br> Complete the Prestige Challenge",
     "achievement58Desc": "<ut> Total Annihilation (58) </ut> <br> <br> Complete Challenge 12 in under 999ms.",
     "achievement59Desc": "<ut> Prestige Champion (59) </ut> <br> <br> Complete all Prestige Challenges <br> <br> <it>Reward: Increases the reward for all Prestige Challenges by 10% </it>",
-    "achievement60Desc": "<ut> Finale (60) </ut> <br> <br> Collect Infinity Coins <br> <br> <it>Reward: {{trick}}</it>",
+    "achievement60Desc": "<ut> Finale (60) </ut> <br> <br> Collect Infinity α-coins <br> <br> <it>Reward: {{trick}}</it>",
 
     "achievement60Tricks": [
     "There's nothing here", "go away", "nothing", "reset game", "You don't belong here", "impossible", "world border", "game over", "emptiness", "Settings -> Reset Game", "coin multiplier x0", "777 Fortune Tokens", "hopelessness", "end game", "1.79e308 Super Coins", "Something's wrong here, right?", "There is NO reward here", "the meaning of life", "???", "epilogue", "...", "how did you beat Fortune?", "it's none of your business", "Alt+F4", "computer virus", "remove System32"
     ],
 
-    "achievement61Desc": "<ut> Made in Heaven (61) </ut> <br> <br> Reflash the Digital World. <br> <br> <it>Reward: Coin gain x4, Crystal gain x4, Shard gain x10.</it>",
+    "achievement61Desc": "<ut> Made in Heaven (61) </ut> <br> <br> Reflash the Digital World. <br> <br> <it>Reward: α-coin gain x4, Crystal gain x4, Shard gain x10.</it>",
     "achievement62Desc": "<ut> Первый Гугол монет (42) </ut> <br> <br> Получить 1е100 монет <br> <br> <it>Награда: Удваивает ежедневную награду </it>",
     "achievement63Desc": "<ut> Инь и Ян (43) </ut> <br> <br> Открыть Баланс и получить 1 Весы Баланса <br> <br> <it>Награда:  </it>",
     "achievement64Desc": "<ut>  (44) </ut> <br> <br>  <br> <br> <it>Награда:  </it>",
@@ -925,6 +926,8 @@
     "shop_u4_desc": "Smart Watch effect works with items too",
     "shop_u5_name": "Aquatic Pickaxe",
     "shop_u5_desc": "Unlock new mineral - Aquamarine",
+    "shop_u6_name": "Golden Investment",
+    "shop_u6_desc": "Unlock supercoin generation based on α-coins per second",
 
     "shop_i1_name": "Free U-multiplier",
     "shop_i1_desc": "Gives +1 U-multiplier",
@@ -935,7 +938,7 @@
     "shop_i4_name": "Time Accelerator+",
     "shop_i4_desc": "Gives instantly 10 minutes worth gain",
     "shop_i5_name": "Golden Pound",
-    "shop_i5_desc": "Gives 1e50 times less coins than gained in total",
+    "shop_i5_desc": "Gives 1e50 times less α-coins than gained in total",
     "shop_i6_name": "Math Analysis",
     "shop_i6_desc": "Gives +20 Multipliers",
 
@@ -979,7 +982,7 @@
     "startHelpDescription": "Choose the page to read it",
     "helpTitleText": "How to play?",
 
-    "welcomeToGame": "Welcome to Digital God! <br> You need to collect mystic coins to reveal all secrets of this Digital World, there is interesting mechanics, lore (which you can check in \"Settings\" -> \"Other\" -> \"My Diary\"), and many many unlockables. <br> If you need help, then use \"How to Play?\" in the same tab, or if you have any questions then dm me in discord or gmail in \"Information\" -> \"About game\"! <br> Good luck and have fun!",
+    "welcomeToGame": "Welcome to Digital God! <br> You need to collect mystic α-coins to reveal all secrets of this Digital World, there is interesting mechanics, lore (which you can check in \"Settings\" -> \"Other\" -> \"My Diary\"), and many many unlockables. <br> If you need help, then use \"How to Play?\" in the same tab, or if you have any questions then dm me in discord or gmail in \"Information\" -> \"About game\"! <br> Good luck and have fun!",
 
     "codeInput": "Enter code",
 
@@ -1021,7 +1024,7 @@
     "version013": "<b>11.07.2025 | Digital God 0.13. Superprestige. </b> <br> NEW FEATURES: <br> - SUPERPRESTIGE! Collect 1e15 crystals to unlock the ability to break Prestige barrier and get more Crystals per reset than just 1! <br> - 15 NEW SUPERPRESTIGE UPGRADES! 5 buyable and 10 single (including the Super Hammer). <br> - U-ADDERS AND U-REDUCERS! After breaking Prestige barrier, you can perform resets to get 2 new boosts: U-Adder – +1 free U-Multiplier, and U-Reducer – subtracts 100 upgrades from U-tils requirements. <br> - SHARD ACHIEVEMENTS! After purchasing Shard Trophy, you can complete mini-achievements to increase the production of all resources in game! <br> - 10 new achievements!<br> - New Shard upgrade.<br> - Added bulk purchase for Shard and Crystal upgrades.<br> - New items in Supershop.<br> - Three new fonts. <br> BUFFS: <br> - Reduced prices for Super-upgrades and Supershop items.<br> NERFS:<br> - Base effect of U-Booster reduced from 0.04 to 0.02.<br> - Slightly increased price scaling for U-Multiplier.<br> - Slightly increased price scaling for U-Booster.<br> - Minerals and Supercrystals have a sharp cost scaling starting from the 10th purchase. <br> - Reduced price scaling for Crystal Glove.<br> - Jade effects have been reduced.<br> - Increased price scaling for Gem Investment.<br> REWORKS: <br> - Alpha-Booster upgrade reworked: instead of x/1000 to coins per click, now gives x/2500 to total coin gain.<br> - Challenge 1 reward now boosts coins per click.<br> - Opal formula changed.",
     "version014": "<ut>11/25/2025 | Digital God 0.14. Fortune and Balance.</ut><br>NEW FEATURES:<br>- FORTUNE! Exchange Coins or Crystals for Fortune Coins to unlock special Fortune boosts! <br>- 12 NEW FORTUNE UPGRADES! 3 buyable and 9 single.<br>- BALANCE! It's time to create balance in universe after a series of wins and loses, only neutrality and stability!<br>- 12 NEW BALANCE UPGRADES! 3 buyable and 9 single.<br>- 5 new achievements! The remaining 5 will be added in 0.15!<br>- Two new items in Supershop: Fortune Ticket and Aquatic Pickaxe.<br>- New mineral - Aquamarine.<br>CHANGES IN THE INTERFACE:<br>- New tab - Softcaps.<br>- Global change in adaptation for mobile devices. Improved flexibility for various screen resolutions.<br>- Changed style of tab and sub-tab buttons.<br>- Gray text made slightly lighter.<br>CODE CHANGES:<br>- Optimized Multiplier Breakdown code.<br>BUFFS:<br>- Increased the Overdrive 1 effect by 3 times.<br>- Reduced the requirements for Prestige Stages 19 and 20.<br>- Reduced the price of Math Analysis.<br>- Reduced costs for Energy Shard and Crystal Sword.<br>- Increased reward for Challenge 9.<br>- Increased effect of Topaz.<br>- Increased base effect of U-reducer from 100 to 500.<br>- Increased effect of Champion's Belt.<br>- Removed cost scaling of Supercrystal.<br>NERFS:<br>- Gift of Destiny gives +0.1 free U-boost instead of +0.2.<br>- Decreased base effect of the U-boost to 0.1 instead of 0.2.<br>- The effect of Math Analysis is reduced to 20 instead of 50.<br>- Decreased effect of Energy Shard.<br>- Decreased Buy limit of Math Analysis.<br>- Decreased effect of Strong Hardworker.<br>- Decreased effect of Alpha Power.<br>- Increased cost scaling of shards for buying Minerals every 10 purchases.<br>- Decreased effect of Prestige Fame.<br>- The limit for post-1e50 gain of Crystals softcap is reduced to 0.3 instead of 0.4.<br>REWORK: <br>- Changed formulas for effects of Opal.<br>- Cost scaling of U-tils has been reworked.<br>- Crystal Sword now reduces cost of Supercrystal by 10^n for each upgrade.<br>- Challenge 3 reward effect changed to increase instead of power.",
     "version015": "<ut>26.04.2026 | Digital God 0.15. Prestige Challenges.</ut><br>NEW FEATURES:<br>- PRESTIGE CHALLENGES! Let's return to period of difficult prestiges, where even more cool rewards are given for completing them! Unlocks at 1e100 Crystals.<br>- 5 NEW ACHIEVEMENTS! <br>CHANGES IN THE INTERFACE:<br>- Enlarged buttons.<br>- Gray text has become more readable.<br>- Small text has been enlarged.<br>- Settings buttons have become brighter.<br>- Blessing has been renamed to Winner's Belt.<br>- Color of single coin upgrades has been changed to green.<br>- Button colors have been changed in some places.<br>- Super Prestige and its associated renamed to Break Prestige.<br>- Window optimization.<br>- Coin and crystal values are now displayed in save slots.<br>CODE CHANGES:<br>- Complete rewrite of upgrade code (now in classes).<br>- Complete rewrite of text translation code.<br>- General code optimization.<br>BUFFS:<br>- Removed sloftcap for coin gain after 1e15.<br>- Increased effect of Super Multiplier.<br>- Increased effect of Midas Cursor.<br>- Reduced costs of Prestige upgrades.<br>- Cost of first Supercrystal has been reduced from 1e18 to 1e15.<br>- Cost of first three runes has been reduced from 1e21 shards to 1e15.<br>- Base automation time of U-Adder has been reduced from 600s to 30s.<br>- Increased effect of Scales of Balance.<br>- Reduced cost of Aquatic Pickaxe (5000 -> 3000).<br>- Softcap effect for Crystals increases more slowly.<br>- Condition of Challenge 12 has been changed: Coin gain ^0.1 instead of Coin gain ^0.01, Shards effect is no longer reduced.<br>NERFS:<br>- Decreased maximum effect of Powerful Crusher and increased cost scaling.<br>- Increased cost scaling of U-Powers.<br>- Reduced effect of Supercoin factory.<br>- Reduced effect of Strong Worker.<br>- Reduced effects of several Fortune boosts.<br>- Increased cost scaling for Coin upgrades.<br>- Reduced effect of Champion's Belt.<br>- Reduced effects of Break Prestige upgrades.<br>- Reduced effect of Challenge reward 4.<br>- Reduced Luck effect.<br>- Reduced Cashback effect.<br>- Increased cost of all single shard upgrades.<br>- Reduced reward effect of Challenge 2.<br>- Reduced Smart Watch effect to x2.<br>- Offline time is limited from 1,000,000 seconds to 21,600 (6 hours).<br>- Reduced Negative Cashback effect.<br>- Reduced Reverse Generation effect.<br>- Reduced Positive Thoughts and Fight Evil effects.<br>- Reduced generation of Balance Scales by Balance Power upgrade.<br>- Added a limit on Balance coin exchange to 10.<br>- Reduced effects of minerals.<br>REWORK:<br>- Alpha Booster upgrade has been changed to a Wallet, which increases base coin gain. Super Alpha Booster gives a multiplier for overall coin gain.<br>- Rewards for Milestones 17 and 18 have been swapped, now Minerals are unlocked upon reaching 1e6 Prestiges.<br>- Crystal Sword formula has been reworked.<br>- Overdrive 2 formula has been reworked.<br>- Crystal Investment has been removed.<br>- Crystal Overload effect has been transformed into Passive Income, which unlocks offline crystal gain for average of last 10 Prestiges.<br>- Achievement 22 increases maximum offline time from 6 to 8 hours instead of offline crystal gain.<br>- Tripler instead of offline crystal income now triples all Shards gain.<br>- Effect of General Opinion upgrade has been reworked and has a multiplicative formula instead of an additive one.<br>- The effect has been reworked Aquamarine aimed at reducing requirements of U-tils.<br>- Prestigious Glory has been reworked and is now called Pentagram. All runes increase effect of Shards.<br>- The formula for effects of 1st, 2nd, and 3rd single Shard upgrades has been reworked.<br>- Conditions of Challenges 2 and 3 have been reworked.<br>- Formula for Hercules Cursor has been reworked.<br>BUGFIXES:<br>- Fixed a bug with automation of U-adders that worked with U-Powers less than 10.<br>- Fixed Achievements that were not received when completed.<br>- Fixed Balance effect - increasing cost of U-tils to less than 1.<br>- Fixed Balance effect - too low a gain for the weakening CRYSTAL_GAIN_SC_001.<br>- Fixed effect of Overdrive 2 below 1.<br>- Fixed ignoring Crystal softcap if you lower the number of Crystals to less than 1e50.<br>- Breaking crystals gives from 1 to 100 shards instead of 1-50.<br>",
-    "version015x": "<ut>28.04.2026 | Digital God 0.15.0.1</ut><br>- Amount of supercoins and costs of upgrades are not rounded<br><ut>29.04.2026 | Digital God 0.15.1</ut><br>BUFFS:<br>- Conditions of Challenge 1 have been incrased (coin increase per click has been increased).<br>- Reward effect of Challenge 1 has been increased<br>NERFS:<br>- Cost scaling of Doubler has been increased.<br>- Goals of Prestige Challenges have been increased.<br>REWORK:<br>- Challenges 1 and 6 have been swapped<br>- Overdrive 1 has been made permanent, Broken Speedometer upgrade has been removed and everyone who bought it will be compensated with 250 supercoins.<br>- Global conditions of Challenges have been changed: coin gain^0.67. Shards effect is not reduced and rewards for Challenges work inside themselves.<br>- Changed conditions of Challenges 3, 9, 10, 11<br>BUGFIX:<br>- Fixed the \"Buy all\" button in Prestige upgrades tab was in Russian<br>- Text \"Bulk buy minerals\" became visible<br>- Fixed a bug where it was possible to buy more than 25 upgrades in Challenge 10<br>- Fixed a bug where resetting Fortune boosts when entering a Prestige Challenge spent resets<br>- Fixed a bug where the reward for Challenge 9 worked without completing it.<br>- Errors in text were corrected.<br><ut>04/30/2026 | Digital God 0.15.1.1</ut><br>- (Possibly) fixed a bug with a negative value of the total collected coins.<br>- The changelog for 0.15.x.<br><ut>01.05.2026 | Digital God 0.15.2</ut><br>BUFFS:<br>- General conditions of Challenges were weaked: Coin gain^0.67 -> Coin gain^0.75.<br> Reduced costs of 3rd and 4th Shard upgrades.<br> - Increased max effect of Crystal and Shard blessings.<br>REWORK:<br>- Aquatic Pickaxe can be unlocked after Achievement 51.<br> Prestige Milestone which let you start with 1e9 coins was moved higher. <br> - Some Milestones were pushed so their requirements were lowered. <br> - Removed Auto-Prestige Upgrade milestone. <br> - Added Miletone 20 which let you don't reset progress after U-adders. <br>- Time Accelerator has been reworked: Cost: 40 -> 100, Effect: 1m -> 5m. <br> - Time Accelerator+ has been reworked: Cost: 350 -> 400, Effect: 10m -> 30m.<br>BUGFIXES:<br>- Fixed Offline crystals bug when it didn't work.<br>- Fixed bug when disabling offline gain didn't work.<br>- Fixed some Challenges text.<br>- Fixed bug which could let you gain Supercrystals infinitely after respecs.<br>- Fixed bug which could reset other U-tils amount even if you had 18 and 19 Milestones.<br>- Free U-multipliers and U-powers (supershop items) now giving FREE U-tils instead of being to amount of usual ones.<br>MISC:<br>- Added details in some Prestige Milestones.<br>- Added details in some Achievements.<br>- Added 5 new codes. <it>sorry</it> that I had to remove them so suddenly, <it>umultiplier</it> and <it>upower</it> will help to achieve prestige faster after Challenge 11... Sadly we can't use <it>timemachine</it> or even <it>hardmachine</it> to type them again...<br><ut>02.05.2026 | Digital God 0.15.2.1</ut><br> - Added description for softcaps.<br><ut>02.05.2026 | Digital God 0.15.2.2</ut><br> - Offline supercoins formula brings twice as many coins and is not rounded up. <br> - Offline gain window shows time in minutes and hours. <br><ut>02.05.2026 | Digital God 0.15.2.3</ut><br> - Increased the effect of Motivation and Double Multiplier. <br> - Increased effect of super-upgrade of Motivation. <br> <ut>02.05.2026 | Digital God 0.15.2.4</ut> <br> - (Probably) Fixed a bug due to which it was impossible to generate Fortune Token. <br> <ut>02.05.2026 | Digital God 0.15.3</ut><br> - Increased effect of Challenge 10.<br> - Increased effect of Recycling. <br> - Increased effect of Jade. <br> - Increased effect of Crystal Booster and reduced cost increase. <br> - Increased effect of Precious Prestige. <br> - Reduced cost increase of Energy Drink. <br> - Reduced cost of Fragile Speedometer.<br><ut>07.05.2026 | Digital God 0.15.4</ut><br>BUFFS:<br>- Increased Credit Card effect from 20% to 50% per upgrade<br>- Reduced cost increase of Credit Card.<br>- Increased effect of Fortune Tickets from 2 to 5.<br>NERFS:<br>- Reduced max softcap effect of crystals to 0.3.<br>- Reduced effect of -Coins that reduces softcap effect of crystals.<br>- Increased cost increase of Powerful Crusher.<br>- Reduced effect of Diamond Discount.<br>- Reduced effect of Big Investment.<br>- Reduced effect of Precious Shares.<br>- Increased cost increase of Midas Touch.<br>- Reduced effect of Energy Shard.<br>- Increased cost increase of Energy Shard.<br>- Reduced effect of Crystal Sword.<br>- Increased cost increase of Crystal Sword.<br>- Reduced effect of Reverse Generation.<br>- Reduced effect of Opal.<br>- Reduced effect of Supercoin Factory. <br>BUGFIX:<br>- Fixed a bug where Ach 43 could not be obtained.<br>- (Possibly) fixed a bug with Infinity shards.<br>- Fixed a bug where it was possible to set number of Runes to negative.",
+    "version015x": "<ut>28.04.2026 | Digital God 0.15.0.1</ut><br>- Amount of supercoins and costs of upgrades are not rounded<br><br><ut>29.04.2026 | Digital God 0.15.1</ut><br>BUFFS:<br>- Conditions of Challenge 1 have been incrased (coin increase per click has been increased).<br>- Reward effect of Challenge 1 has been increased<br>NERFS:<br>- Cost scaling of Doubler has been increased.<br>- Goals of Prestige Challenges have been increased.<br>REWORK:<br>- Challenges 1 and 6 have been swapped<br>- Overdrive 1 has been made permanent, Broken Speedometer upgrade has been removed and everyone who bought it will be compensated with 250 supercoins.<br>- Global conditions of Challenges have been changed: coin gain^0.67. Shards effect is not reduced and rewards for Challenges work inside themselves.<br>- Changed conditions of Challenges 3, 9, 10, 11<br>BUGFIX:<br>- Fixed the \"Buy all\" button in Prestige upgrades tab was in Russian<br>- Text \"Bulk buy minerals\" became visible<br>- Fixed a bug where it was possible to buy more than 25 upgrades in Challenge 10<br>- Fixed a bug where resetting Fortune boosts when entering a Prestige Challenge spent resets<br>- Fixed a bug where the reward for Challenge 9 worked without completing it.<br>- Errors in text were corrected.<br><br><ut>04/30/2026 | Digital God 0.15.1.1</ut><br>- (Possibly) fixed a bug with a negative value of the total collected coins.<br>- The changelog for 0.15.x.<br><br><ut>01.05.2026 | Digital God 0.15.2</ut><br>BUFFS:<br>- General conditions of Challenges were weaked: Coin gain^0.67 -> Coin gain^0.75.<br> Reduced costs of 3rd and 4th Shard upgrades.<br> - Increased max effect of Crystal and Shard blessings.<br>REWORK:<br>- Aquatic Pickaxe can be unlocked after Achievement 51.<br> Prestige Milestone which let you start with 1e9 coins was moved higher. <br> - Some Milestones were pushed so their requirements were lowered. <br> - Removed Auto-Prestige Upgrade milestone. <br> - Added Miletone 20 which let you don't reset progress after U-adders. <br>- Time Accelerator has been reworked: Cost: 40 -> 100, Effect: 1m -> 5m. <br> - Time Accelerator+ has been reworked: Cost: 350 -> 400, Effect: 10m -> 30m.<br>BUGFIXES:<br>- Fixed Offline crystals bug when it didn't work.<br>- Fixed bug when disabling offline gain didn't work.<br>- Fixed some Challenges text.<br>- Fixed bug which could let you gain Supercrystals infinitely after respecs.<br>- Fixed bug which could reset other U-tils amount even if you had 18 and 19 Milestones.<br>- Free U-multipliers and U-powers (supershop items) now giving FREE U-tils instead of being to amount of usual ones.<br>MISC:<br>- Added details in some Prestige Milestones.<br>- Added details in some Achievements.<br>- Added 5 new codes. <it>sorry</it> that I had to remove them so suddenly, <it>umultiplier</it> and <it>upower</it> will help to achieve prestige faster after Challenge 11... Sadly we can't use <it>timemachine</it> or even <it>hardmachine</it> to type them again...<br><br><ut>02.05.2026 | Digital God 0.15.2.1</ut><br> - Added description for softcaps.<br><br><ut>02.05.2026 | Digital God 0.15.2.2</ut><br> - Offline supercoins formula brings twice as many coins and is not rounded up. <br> - Offline gain window shows time in minutes and hours. <br><br><ut>02.05.2026 | Digital God 0.15.2.3</ut><br> - Increased the effect of Motivation and Double Multiplier. <br> - Increased effect of super-upgrade of Motivation. <br><br> <ut>02.05.2026 | Digital God 0.15.2.4</ut> <br> - (Probably) Fixed a bug due to which it was impossible to generate Fortune Token. <br> <br><ut>02.05.2026 | Digital God 0.15.3</ut><br> - Increased effect of Challenge 10.<br> - Increased effect of Recycling. <br> - Increased effect of Jade. <br> - Increased effect of Crystal Booster and reduced cost increase. <br> - Increased effect of Precious Prestige. <br> - Reduced cost increase of Energy Drink. <br> - Reduced cost of Fragile Speedometer.<br><br><ut>07.05.2026 | Digital God 0.15.4</ut><br>BUFFS:<br>- Increased Credit Card effect from 20% to 50% per upgrade<br>- Reduced cost increase of Credit Card.<br>- Increased effect of Fortune Tickets from 2 to 5.<br>NERFS:<br>- Reduced max softcap effect of crystals to 0.3.<br>- Reduced effect of -Coins that reduces softcap effect of crystals.<br>- Increased cost increase of Powerful Crusher.<br>- Reduced effect of Diamond Discount.<br>- Reduced effect of Big Investment.<br>- Reduced effect of Precious Shares.<br>- Increased cost increase of Midas Touch.<br>- Reduced effect of Energy Shard.<br>- Increased cost increase of Energy Shard.<br>- Reduced effect of Crystal Sword.<br>- Increased cost increase of Crystal Sword.<br>- Reduced effect of Reverse Generation.<br>- Reduced effect of Opal.<br>- Reduced effect of Supercoin Factory. <br>BUGFIX:<br>- Fixed a bug where Ach 43 could not be obtained.<br>- (Possibly) fixed a bug with Infinity shards.<br>- Fixed a bug where it was possible to set number of Runes to negative.<br><br><ut>08.05.2026 | Digital God 0.15.5</ut><br>NEW FEATURES:<br>- NEW UNLOCKABLE UPGRADE IN THE SUPER SHOP! Golden Investment allows you to generate Supercoins based on your coins and their chance! No more monotonous Supercoin farming! Available at beginning of game for 100 supercoins.<br>- Exclamation (!) marks that will remind you of daily reward and opening of new lore.<br>- Opportunity to respec Shard Achievements.<br>BUFFS:<br>- Prestige Challenge 8 conditions have been changed: Coin gain ^ 0.67 -> Coin gain ^ 0.7.<br>- Increased minimum softcap effect of Crystals from 0.3 to 0.4.<br>- Increased generation of Balance Scales.<br>- Increased effect of Challenge 10.<br>- Increased effect of -Coins.<br>- Reduced cost increase of a Big Investment.<br>- Increased basic effect of Big Investment.<br>- Reduced cost increase of Crystal Glove.<br>- Reduced cost increase of General Opinion.<br>- Reduced goals of almost all Prestige Challenges.<br>NERFS:<br>-Increased cost scaling for Generator Boost.<br>REWORK:<br>- Supercoin generation. When purchasing a Golden Investment, your coins will generate supercoins that will be multiplied by their chance.<br>- Changed offline supercoin generation, now it depends on the generation of supercoins per second.<br>BUGFIX:<br>- Fixed a bug where Achievement 43 was completed even without unlocking Shard Achievements.<br>- Fixed a bug where it was possible to dupe resources when game was constantly loading.<br>MISC:<br>- Added the letter \"alpha\" wherever \"coins\" are mentioned.",
 
     "chapter1Name": "Beginning",
     "chapter2Name": "Upgrades",
@@ -1133,12 +1136,12 @@
 
     "exitChallenge": "Leave",
 
-    "challengeTabDesc": "Welcome to Challenges, you need to do Prestige with several conditions. <br> Every Challenge has unique reward, which you will get, as you collect 1e15 coins inside it. <br> Besides special conditions, they have also general conditions like: Coin gain^0.75, items can't be used.<br> If you found out Challenge was too difficult for you, you can leave it, and try again in any time. Good luck!",
-    "challengePTabDesc": "Welcome to Prestige Challenges! They have more conditions and difficulty than Challenges. <br> There is 8 challenges, and each pair requires certain amount of completed Prestige Challenges. First pair is always unlocked.<br> Each Challenge has one goal - to collect different amount of coins inside Prestige Challenge and do Prestige reset, in return you will receive a powerful reward. <br> In addition to individual conditions, they also have general conditions like: Shards effect ^0.1, separate coin gain ^0.5, bulk reset for U-tils disabled. <br> If a Prestige Challenge seemed impossible, you should quit it and become stronger.",
+    "challengeTabDesc": "Welcome to Challenges, you need to do Prestige with several conditions. <br> Every Challenge has unique reward, which you will get, as you collect 1e15 α-coins inside it. <br> Besides special conditions, they have also general conditions like: α-coin gain^0.75, items can't be used.<br> If you found out Challenge was too difficult for you, you can leave it, and try again in any time. Good luck!",
+    "challengePTabDesc": "Welcome to Prestige Challenges! They have more conditions and difficulty than Challenges. <br> There is 8 challenges, and each pair requires certain amount of completed Prestige Challenges. First pair is always unlocked.<br> Each Challenge has one goal - to collect different amount of α-coins inside Prestige Challenge and do Prestige reset, in return you will receive a powerful reward. <br> In addition to individual conditions, they also have general conditions like: Shards effect ^0.1, separate α-coin gain ^0.5, bulk reset for U-tils disabled. <br> If a Prestige Challenge seemed impossible, you should quit it and become stronger.",
 
-    "challengeCondition2": "Shards decreasing coin gain by -99%",
+    "challengeCondition2": "Shards decreasing α-coin gain by -99%",
     "challengeCondition7": "Gain decreased by -{{x}}%",
-    "challengeCondition8": "Virus coins divide coin gain by /{{x}}",
+    "challengeCondition8": "Virus coins divide α-coin gain by /{{x}}",
     "challengeCondition10": "You have {{x}} upgrades left",
 
     "challengeTitle": "Challenge {{x}}",
@@ -1179,7 +1182,7 @@
     "c_rew_4": "Reward: Achievements gives free Small Investments. Effect: +",
     "c_rew_5": "Reward: Upgrades price slightly decreased. Effect: ^",
     "c_rew_1": "Reward: Completed Challenges increases gain per click. Effect: x",
-    "c_rew_7": "Reward: Shards increases coin gain more by Log2(Shards). Effect: x",
+    "c_rew_7": "Reward: Shards increases α-coin gain more by Log2(Shards). Effect: x",
     "c_rew_8": "Reward: Gain per second increases over time in current Prestige. Effect: x",
     "c_rew_9": "Reward: Supercoins pushes COIN_PSEC_SC_001 and COIN_PCLICK_SC_001 further. Effect: ",
     "c_rew_10": "Reward: Amount of upgrades increases Crystals gain. Effect: x",
@@ -1188,17 +1191,17 @@
     "currency_acoins_space": " α-coins.",
 
     "challengeConditionText1": "Condition: Buyable upgrades disabled. Clicks decay Single Upgrades price and increase click gain. Shards effect ^0.5.",
-    "challengeConditionText2": "Condition: Softcaps for gain per second and for gain per click starts from 10 coins.",
+    "challengeConditionText2": "Condition: Softcaps for gain per second and for gain per click starts from 10 α-coins.",
     "challengeConditionText3": "Condition: Gain per second disabled, U-Multipliers effect decreased by ^0.5, shards effect^0.25.",
-    "challengeConditionText4": "Condition: Coin gain decreased by ^0.5.",
+    "challengeConditionText4": "Condition: α-coin gain decreased by ^0.5.",
     "challengeConditionText5": "Condition: Every purchase increases other buyable upgrades price, like you buy them. Shards effect ^0.5.",
     "challengeConditionText6": "Condition: All Single Upgrades disabled. Shards effect ^0.5.",
     "challengeConditionText7": "Condition: Every purchase decreases gain by 2%. Shards effect ^0.5.",
-    "challengeConditionText8": "Condition: Gain per second disabled and instead of coins generates Virus Coins which divide your gain. Shard effect ^0.25.",
-    "challengeConditionText9": "Condition: Softcaps starts from 1e6 coins and doubles effect.",
-    "challengeConditionText10": "Condition: You can buy only 25 upgrades. Coin gain^0.67.",
+    "challengeConditionText8": "Condition: Gain per second disabled and instead of α-coins generates Virus Coins which divide your gain. Shard effect ^0.25.",
+    "challengeConditionText9": "Condition: Softcaps starts from 1e6 α-coins and doubles effect.",
+    "challengeConditionText10": "Condition: You can buy only 25 upgrades. α-coin gain^0.67.",
     "challengeConditionText11": "Condition: All upgrades disabled. Good luck.",
-    "challengeConditionText12": "Condition: Coin gain ^0.1, U-multipliers and U-power became cheaper, their scaling decreased, and they are not affected by conditions.",
+    "challengeConditionText12": "Condition: α-coin gain ^0.1, U-multipliers and U-power became cheaper, their scaling decreased, and they are not affected by conditions.",
 
     "challengePConditionText1": "Condition: Challenge conditions 1-6 are activated simultaneously.",
     "challengePConditionText2": "Condition: Challenge conditions 7-12 are activated simultaneously.",
@@ -1207,9 +1210,9 @@
     "challengePConditionText5": "Condition: Mineral Effects^0.1, Upgrade Effects^0.1.",
     "challengePConditionText6": "Condition: Each U-tils reset increases price of others as if you reset them.",
     "challengePConditionText7": "Condition: Challenge conditions 1-12 are activated simultaneously.",
-    "challengePConditionText8": "Condition: Final Prestige. Coin gain^0.67, achievements bonus^0.1, U-tils have starting base effect, almost all coin multipliers are disabled. Free upgrades, shards effect, fortune, balance, minerals and challenge bonuses are disabled too.",
+    "challengePConditionText8": "Condition: Final Prestige. α-coin gain^0.7, achievements bonus^0.1, U-tils have starting base effect, almost all α-coin multipliers are disabled. Free upgrades, shards effect, fortune, balance, minerals and challenge bonuses are disabled too.",
 
-    "challengeReward6": "Reward: Increase coins per click exponent by ^1.1.",
+    "challengeReward6": "Reward: Increase α-coins per click exponent by ^1.1.",
     "challengeReward2": "Reward: Prestige Reset gives x1000000 Shards based on Crystals.",
     "challengeReward11": "Reward: Unlock new items in Supershop.",
     "challengeReward12": "Reward: Decreases U-multiplier's scaling to 40, and U-power's to 80.",
@@ -1221,7 +1224,7 @@
     "cp_rew_4": "Reward: Supercrystals give free Productivities. Currently: +",
     "cp_rew_5": "Reward: All Balance Scales increase maximum effects of Fortune Boosts except Blessings: Challenge, Simulation, Fortune. Currently: х",
     "cp_rew_6": "Reward: Reduce Supercrystals cost. Currently: /",
-    "cp_rew_7": "Reward: Challenge 12 have completion count. Every completion gives bonus for coin gain. Currently: х",
+    "cp_rew_7": "Reward: Challenge 12 have completion count. Every completion gives bonus for α-coin gain. Currently: х",
 
     "challengePGoal": "Goal: Collect {{x}} α-coins.",
 
@@ -1265,13 +1268,13 @@
         },
         {
             "codename": "COIN_PSEC_SC_001",
-            "desc": "Coins per second",
-            "starts": "Starts from {{x}} coins per second"
+            "desc": "α-coins per second",
+            "starts": "Starts from {{x}} α-coins per second"
         },
         {
             "codename": "COIN_PCLICK_SC_001",
-            "desc": "Coins per click",
-            "starts": "Starts from {{x}} coins per click"
+            "desc": "α-coins per click",
+            "starts": "Starts from {{x}} α-coins per click"
         },
         {
             "codename": "CRYSTAL_GAIN_SC_001",

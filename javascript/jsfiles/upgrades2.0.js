@@ -286,8 +286,8 @@ const UPGS = {
         break: {
             buyables: new UniversalBuyablesManager('prestige', [
                 {
-                    id: 1, power: 17, basePrice: 1e13, elementId: 'breakPBuyableU1',
-                    effect: function(x = player.prestige.break.buyables[1]) { return x * 0.00075 * UPGS.prestige.break.buyables[2].effect(); },
+                    id: 1, power: 16, basePrice: 1e13, elementId: 'breakPBuyableU1',
+                    effect: function(x = player.prestige.break.buyables[1]) { return x * 0.001 * UPGS.prestige.break.buyables[2].effect(); },
                 },
                 {
                     id: 2, power: 40, basePrice: 1e15, elementId: 'breakPBuyableU2',
@@ -327,7 +327,7 @@ const UPGS = {
     shard: {
         buyables: new UniversalBuyablesManager('shard', [
             {
-                id: 1, power: 2.95, basePrice: 1000, elementId: 'shBuyableU1',
+                id: 1, power: 2.575, basePrice: 1000, elementId: 'shBuyableU1',
                 customCostMod: function() { return player.shard.singleUpgrades.includes(13) ? 1 / UPGS.shard.singles[13].effect() : 1; },
                 effect: function(x = player.shard.upgrades[1]) {
                     let eff = Math.pow(2, x);
@@ -336,7 +336,7 @@ const UPGS = {
                 },
             },
             {
-                id: 2, power: 4.5, basePrice: 1000, elementId: 'shBuyableU2',
+                id: 2, power: 4.55, basePrice: 1000, elementId: 'shBuyableU2',
                 customCostMod: function() { return player.shard.singleUpgrades.includes(13) ? 1 / UPGS.shard.singles[13].effect() : 1; },
                 effect: function(x = player.shard.upgrades[2]) {
                     let eff = Math.pow(3, x);
@@ -390,7 +390,8 @@ const UPGS = {
             { id: 2, elementId: 'shopSingleU2', basePrice: 1000 },
             { id: 3, elementId: 'shopSingleU3', basePrice: 1500 },
             { id: 4, elementId: 'shopSingleU4', basePrice: 1000 },
-            { id: 5, elementId: 'shopSingleU5', basePrice: 3000 }
+            { id: 5, elementId: 'shopSingleU5', basePrice: 3000 },
+            { id: 6, elementId: 'shopSingleU6', basePrice: 100 },
         ]),
 
         permanent: new ShopPermanentManager('shop', [
@@ -509,7 +510,7 @@ const UPGS = {
         buyables: new BalanceBuyablesManager('balance', [
             { id: 1, basePrice: 10, power: 1.1, elementIndex: 2, effect: function(x = player.balance.upgrades.buyables[1]) { return x == 0 ? 1 : 1 + x / 150; } },
             { id: 2, basePrice: 10, power: 1.13, elementIndex: 3, effect: function(x = player.balance.upgrades.buyables[2]) { return x == 0 ? 1 : 1 + x / 500; } },
-            { id: 3, basePrice: 50, power: 1.25, elementIndex: 4, effect: function(x = player.balance.upgrades.buyables[3]) { return x == 0 ? 1 : Math.pow(1.025, x); } }
+            { id: 3, basePrice: 50, power: 1.215, elementIndex: 4, effect: function(x = player.balance.upgrades.buyables[3]) { return x == 0 ? 1 : Math.pow(1.025, x); } }
         ], 'upgrades.buyables'),
 
         singles: new BalanceSinglesManager('balance', 'upgrades.singles', [

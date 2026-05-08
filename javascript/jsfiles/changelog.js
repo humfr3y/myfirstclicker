@@ -31,6 +31,7 @@ const LORE = {
             // Проверяем условие, только если глава еще не открыта
             if (!this.has(c) && this.conditions[c] && this.conditions[c]()) {
                 this.unl(c);
+                toggleBadges(['badge-settings-2', 'badge-misc-2', 'badge-lore'], true)
             }
         }
     },

@@ -299,6 +299,11 @@ function respecMinerals() {
     LAYERS.doForcedReset(); 
 }
 
+function respecShardAchs() {
+    player.supercrystal.currency += player.shard_achievements.length
+    player.shard_achievements = []
+}
+
 function respecBuyables() { 
     UPGS.shop.buyables.respec(); 
 }
@@ -1012,18 +1017,18 @@ document.addEventListener('click', function(e) {
     const btn = e.target.closest && e.target.closest('.tabButton');
     if (!btn) return;
 
-    // Игнорируем кнопки испытаний, чтобы не ломать их зеленую/красную подсветку
     if (btn.classList.contains('challengeStart') || 
         btn.classList.contains('challengePStart') || 
         btn.classList.contains('exitChallenge')) return;
 
-    const parent = btn.parentElement;
+    let parent = btn.parentElement;
     if (!parent) return;
 
-    // Убираем active у всех вкладок в этом ряду
-    parent.querySelectorAll('.tabButton.active:not(.challengeStart)').forEach(b => b.classList.remove('active'));
+    if (parent.classList.contains('button-wrapper')) {
+        parent = parent.parentElement;
+    }
 
-    // Делаем текущую вкладку белой
+    parent.querySelectorAll('.tabButton.active:not(.challengeStart)').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 }, false);
 
@@ -1042,4 +1047,17 @@ function changeSaveSlotsText() {
         document.getElementsByClassName('save_coin_amount')[i].textContent = formatNumber(amount)
         document.getElementsByClassName('saveCurrency')[i].textContent = crystals >= 1 ? i18next.t('pbcurrency3') : i18next.t('pbcurrency1')
     }
+}
+
+function toggleBadges(badgeIds, condition) {
+    let displayStyle = condition ? 'flex' : 'none';
+    
+    if (!Array.isArray(badgeIds)) {
+        badgeIds = [badgeIds];
+    }
+    
+    badgeIds.forEach(id => {
+        let badge = document.getElementById(id);
+        if (badge) badge.style.display = displayStyle;
+    });
 }

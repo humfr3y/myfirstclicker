@@ -115,17 +115,21 @@ function loadGame() {
         showHelpPage(text.help.start, text.empty);
     }, 3000);
     
-    if (!player.got_daily_reward) setTimeout(() => notify(text.notification.dailyRewardRestart, 'mediumspringgreen'), 5000);
+    if (!player.got_daily_reward) {
+        setTimeout(() => notify(text.notification.dailyRewardRestart, 'mediumspringgreen'), 5000);
+        toggleBadges(['badge-settings', 'badge-misc', 'badge-daily'], !player.got_daily_reward);
+    } 
 
     // Логика первого захода
     if (player.coin.total_currency === 10) {
         let userLang = navigator.language || navigator.userLanguage;
         player.settings.currentLanguage = (userLang.includes('ru')) ? 'ru' : 'en';
         openWindow('welcome', false);
-        player.time.savedTime = Date.now();
+        toggleBadges(['badge-settings-1', 'badge-misc-1', 'badge-h2p'], !player.checked.h2p)
     }
 
-    // Восстановление настроек UI
+    player.time.savedTime = Date.now();
+
     player.code.name = ['umultiplier', 'upower', 'timemachine', 'hardmachine', 'sorry'];
     changeFonts2(player.settings.font);
     changeFont.value = player.settings.font;

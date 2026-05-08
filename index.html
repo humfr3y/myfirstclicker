@@ -79,7 +79,12 @@
           <button onclick="maxOrNo('shard')" id="maxOrNoShardUpgrades"></button>
         </div>
         <button onclick="selectTab(eventTab, false)" id="eventSelect" class="tabButton" data-i18n="eventButton">Events</button>
-        <button onclick="selectTab(settingsTab, false)" id="settingsSelect" class="tabButton" data-i18n="settingsButton">Settings</button>
+        <div class="button-wrapper">
+          <button onclick="selectTab(settingsTab, false)" id="settingsSelect" class="tabButton has-badge" data-i18n="settingsButton">Settings</button>
+          <div class="notification-badge" id="badge-settings">!</div>
+          <div class="notification-badge" id="badge-settings-1">!</div>
+          <div class="notification-badge" id="badge-settings-2">!</div>
+        </div>
         <button onclick="selectTab(mainTab, false)" id="mainSelect" class="tabButton active" data-i18n="clickerButton">Clicker</button>
         <button onclick="selectTab(challengeTab, true)" id="challengeSelect" class="tabButton" style="display:none" data-i18n="challengeButton">Challenges</button>
         <button onclick="selectTab(prestigeTab, false)" id="prestigeSelect" class="tabButton prestigeButton" style="display:none" data-i18n="prestigeButton">Prestige</button>
@@ -126,7 +131,12 @@
       <div id="settingSubButtons">
         <button onclick="selectSubTab(settingsSaveTab, false, 'settings')" id="saveSelect" class="tabButton subButton active" data-i18n="saveButton">Saves</button>
         <button onclick="selectSubTab(settingsGraphicTab, false, 'settings')" id="graphicSelect" class="tabButton subButton" data-i18n="graphicButton">Graphic</button>
-        <button onclick="selectSubTab(settingsOtherTab, false, 'settings')" id="otherSelect" class="tabButton subButton" data-i18n="otherButton">Other</button>
+        <div class="button-wrapper">
+          <button onclick="selectSubTab(settingsOtherTab, false, 'settings')" id="otherSelect" class="tabButton subButton has-badge" data-i18n="otherButton">Other</button>
+          <span class="notification-badge" id="badge-misc">!</span>
+          <span class="notification-badge" id="badge-misc-1">!</span>
+          <span class="notification-badge" id="badge-misc-2">!</span>
+        </div>
       </div>
       <div class="settingButtonsWindow">
         <div id="settingsSaveTab">
@@ -190,8 +200,14 @@
         <p id="settingsTitle3" class="titleTab" data-i18n="otherTitle">Other settings</p>
         <div id="firstOtherSettingsRow" class="settingsRow">
           <button onclick="changelog(this)" id="changelogOpen" class="settingButton" data-i18n="changelog">Changelog</button>
-          <button onclick="gameLoreOpen(this)" id="gameLore" class="settingButton" data-i18n="gameLore">My Diary</button>
-          <button onclick="howToPlayOpen(this)" id="howToPlay" class="settingButton" data-i18n="howToPlay">How to play?</button>
+          <div class="button-wrapper">
+            <button onclick="gameLoreOpen(this)" id="gameLore" class="settingButton has-badge" data-i18n="gameLore">My Diary</button>
+            <span class="notification-badge" id="badge-lore">!</span>
+          </div>
+          <div class="button-wrapper">
+            <button onclick="howToPlayOpen(this)" id="howToPlay" class="settingButton has-badge" data-i18n="howToPlay">How to play?</button>
+            <span class="notification-badge" id="badge-h2p">!</span>
+          </div>
         </div>
         <div id="secondOtherSettingsRow" class="settingsRow">
           <div id="inputBorder">
@@ -200,7 +216,10 @@
           </div>
         </div>
         <div id="secondOtherSettingsRow" class="settingsRow">
-          <button onclick="MISC.daily_reward()" id="getDailyReward" class="settingButton"></button>
+          <div class="button-wrapper">
+            <button onclick="MISC.daily_reward()" id="getDailyReward" class="settingButton has-badge"></button>
+            <span class="notification-badge" id="badge-daily">!</span>
+          </div>
           <button onclick="toggleOfflineGain()" id="toggleOffline" class="settingButton"></button>
         </div>
       </div>
@@ -2259,6 +2278,7 @@
           </div>
         </div>
         </div>
+        <button onclick="respecShardAchs()" id="respecShardAchsButton" class="tabButton" data-i18n="respecShop">Respec</button>
       </div>
     </div>
     <div id="infoTab" style="display:none">
@@ -2469,8 +2489,9 @@
     </div>
   </div>
     <div id="shopTab" style="display: none; justify-content: center;">
-      <div style="display: flex; justify-content:center">
+      <div style="display: flex; justify-content:center; flex-direction: column">
         <p class="titleTab"><span data-i18n="superCoinCount_1">You have</span> <st id="top_shop_sc_val">0</st> <span data-i18n="currency_supercoins">supercoins</span></p>
+        <span id="supercoinsGain"><span data-i18n="top_getting">You're getting</span><span id="top_scoins_gain_val">0</span><span data-i18n="top_sc_per_sec">α-coins per second</span></span>
       </div>
       <p class="smallDesc" data-i18n="shopDesc">Welcome to Supershop! You can spend unique Supercoins for items...</p>
       
@@ -2716,19 +2737,19 @@
               <hr style="margin: 0">
 
               <div id="thirdShopRow" class="shopRow">
-                <!-- <div class="shopContainer">
-                  <button id="shopSingleU1" class="shopButton" onclick="UPGS.shop.unlockables.buy(1)"></button>
-                  <div id="tooltip-shopSingleU1" class="tooltip" role="tooltip">
+                <div class="shopContainer">
+                  <button id="shopSingleU6" class="shopButton" onclick="UPGS.shop.unlockables.buy(6)"></button>
+                  <div id="tooltip-shopSingleU6" class="tooltip" role="tooltip">
                     <span class="tooltipShop">
-                      <ut data-i18n="shop_u1_name">Broken Speedometer</ut><br>
-                      <span data-i18n="shop_u1_desc">Unlock Overdrive I</span><br>
-                      <span id="su1s_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="su1s_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      <ut data-i18n="shop_u6_name">Golden Investment</ut><br>
+                      <span data-i18n="shop_u6_desc">Unlock supercoin generation based on coins per second</span><br>
+                      <span id="su6s_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="su6s_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
                     </span>
                     <div class="arrow" data-popper-arrow></div>
                   </div>
-                  <span id="shopSingleU1Title" data-i18n="shop_u1_name">Broken Speedometer</span>
-                  <span id="shopSingleU1Req">0/1</span>
-                </div> -->
+                  <span id="shopSingleU6Title" data-i18n="shop_u6_name">Golden Investment</span>
+                  <span id="shopSingleU6Req">0/1</span>
+                </div>
                 <div class="shopContainer" id="postAch32" style="display: none">
                   <button id="shopSingleU1" class="shopButton" onclick="UPGS.shop.unlockables.buy(1)"></button>
                   <div id="tooltip-shopSingleU1" class="tooltip" role="tooltip">
