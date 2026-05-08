@@ -568,7 +568,7 @@ const GAIN = {
         const shardGain = isWarp ? this.shard.offline(undefined, timeVal) : this.shard.offline();
         const crystalGain = isWarp ? this.crystal.offline(undefined, timeVal) : this.crystal.offline();
         const prestigeGain = Math.floor(isWarp ? this.prestige.offline(timeVal) : this.prestige.offline());
-        const superCoinGain = isWarp ? this.supercoin.offline(undefined, timeVal) : this.supercoin.offline();
+        const superCoinGain = isWarp ? 0 : this.supercoin.offline();
         const balanceNeutral = isWarp ? this.balance.offline(undefined, timeVal) : this.balance.offline();
         const balanceScales = isWarp ? this.balance.sob_offline(undefined, timeVal) : this.balance.scales_of_balance();
         // Начисляем валюты
