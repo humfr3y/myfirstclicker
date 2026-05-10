@@ -122,6 +122,7 @@ setInterval(() => {
 // Функция для ВСЕГДА обновляемых элементов (верхняя панель)
 // ============================================================
 function loadTranslationsAlways() {
+    const globals = getGlobalNumbers();
     // 1. Верхняя панель (СВЕРХБЫСТРОЕ ОБНОВЛЕНИЕ ЦИФР)
     document.getElementById('top_coins_val').textContent = formatNumber(player.coin.currency);
     document.getElementById('top_coins_gain_val').textContent = formatNumber(GAIN.coin.second.effect(), 'boost');
@@ -152,8 +153,8 @@ function loadTranslationsAlways() {
         let cGain = GAIN.crystal.reset();
         let extra = MILESTONES.has(15) && player.prestige.total_currency < 1e15? i18next.t('prestigeCountMultiplierText', {prestigeCountMultiplier: formatNumber(pGain)}) : '';
         btnPrestige.textContent = player.prestige.total_currency >= 1e15 ? 
-        i18next.t('prestigeEnabledAdvanced', {crystalsTemp: formatNumber(cGain), crystalsPerMin: formatNumber(cGain * 60 / player.time.real.prestige.timer) }) :
-        i18next.t('prestigeEnabled', {crystalsTemp: formatNumber(cGain), prestigeCountMultiplierText: extra});
+        i18next.t('prestigeEnabledAdvanced', {crystalsTemp: formatNumber(cGain), crystalsPerMin: formatNumber(cGain * 60 / player.time.real.prestige.timer), ...globals }) :
+        i18next.t('prestigeEnabled', {crystalsTemp: formatNumber(cGain), prestigeCountMultiplierText: extra, ...globals});
     } else if (player.prestige.challenge.activated !== 0) {
         let goal = formatNumber(PRES_CHALL.goals[player.prestige.challenge.activated]);
         if (player.coin.currency >= PRES_CHALL.goals[player.prestige.challenge.activated]) {
@@ -162,19 +163,20 @@ function loadTranslationsAlways() {
             btnPrestige.textContent = i18next.t('prestigeInChallenge', {coins: goal});
         }
     } else {
-        btnPrestige.textContent = i18next.t('prestigeDisabled');
+        btnPrestige.textContent = i18next.t('prestigeDisabled', globals);
     }
 
     // Кнопки "Купить один/макс"
     document.getElementById('maxOrNoUpgrades').textContent = player.settings.buy_max_activate ? i18next.t('maxUpgradesTrue') : i18next.t('maxUpgradesFalse');
     document.getElementById('maxOrNoShardUpgrades').textContent = player.settings.shard_buy_max_activate ? i18next.t('maxUpgradesTrue') : i18next.t('maxUpgradesFalse');
     document.getElementById('maxOrNoBreakPrestigeUpgrades').textContent = player.settings.breakprestige_buy_max_activate ? i18next.t('maxUpgradesTrue') : i18next.t('maxUpgradesFalse');
+    document.getElementById('maxOrNoBalanceUpgrades').textContent = player.settings.balance_buy_max_activate ? i18next.t('maxUpgradesTrue') : i18next.t('maxUpgradesFalse');
 
     const btnReflash = document.getElementById('doReflash');
     if ((player.coin.currency >= 1.79e308 || player.coin.currency == Infinity) && player.prestige.challenge.completed.includes(8)) {
-        btnReflash.textContent = i18next.t('reflashFirst');
+        btnReflash.textContent = i18next.t('reflashFirst', globals);
     } else {
-        btnReflash.textContent = i18next.t('reflashDisabled');
+        btnReflash.textContent = i18next.t('reflashDisabled', globals); // И СЮДА!
     }
 }
 
@@ -506,7 +508,7 @@ function loadTranslationsShop() {
     }
 
     // 4. Предметы (Items 1-6)
-    for (let i = 1; i <= 6; i++) {
+    for (let i = 1; i <= 3; i++) {
         let max = UPGS.shop.items[i].maxAmount;
         let amt = player.shop.items.amount[i];
         
@@ -837,6 +839,8 @@ function loadTranslationsBalance() {
 
     // 5. Улучшения Баланса
     for(let i=1; i<=3; i++) {
+        document.getElementById(`bb${i}_amt`).textContent = formatNumber(player.balance.upgrades.buyables[i]);
+        document.getElementById(`bb${i}_bulk`).textContent = formatNumber(UPGS.balance.buyables[i].bulk());
         document.getElementById(`bal_b_eff_${i}`).textContent = formatNumber((UPGS.balance.buyables[i].effect() - 1) * 100, 'boost');
         document.getElementById(`bal_b_cost_${i}`).textContent = formatNumber(UPGS.balance.buyables[i].cost());
     }
@@ -999,36 +1003,39 @@ function loadTranslationsCode() {
 // --- НОВЫЙ ДВИЖОК СТАТИЧНЫХ ПЕРЕВОДОВ ---
 // --- УЛЬТИМАТИВНЫЙ ДВИЖОК СТАТИЧНЫХ ПЕРЕВОДОВ ---
 function updateStaticTranslations() {
+    const globals = getGlobalNumbers(); // Вызываем словарь
+
     // 1. Быстрый перевод всего статического HTML
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (key) {
-            const translated = i18next.t(key);
+            const translated = i18next.t(key, globals); // Подставляем сюда
             if (translated && translated !== key) el.innerHTML = translated;
         }
     });
 
-    // 2. Инициализация массивов для Лора (My Diary)
+    // 2. Инициализация массивов для Лора
     for (let i = 1; i <= 18; i++) {
-        text.chapter[i] = i18next.t(`chapter${i}`);
+        text.chapter[i] = i18next.t(`chapter${i}`, globals); // Сюда
         let tab = document.getElementById(`chapter${i}Tab`);
-        if (tab) tab.textContent = i18next.t(`chapter${i}Name`);
+        if (tab) tab.textContent = i18next.t(`chapter${i}Name`, globals);
     }
 
-    // 3. Инициализация массивов для Помощи (How to play)
+    // 3. Инициализация массивов для Помощи
     for (let i = 1; i <= 22; i++) {
-        text.helpTitle[i] = i18next.t(`help${i}Name`);
+        text.helpTitle[i] = i18next.t(`help${i}Name`, globals);
         if (i !== 13) {
-            text.help[i] = i18next.t(`help${i}`);
+            text.help[i] = i18next.t(`help${i}`, globals);
         } else {
             text.help[13] = i18next.t(`help13`, {
+                ...globals, // Подставляем все глобальные числа
                 x: formatNumber(GAIN.coin.click.softcap().softcap_start),
                 y: player.prestige.singleUpgrades.includes(11) ? 0.55 : 0.5,
                 z: player.prestige.singleUpgrades.includes(11) ? 0.45 : 0.4
             });
         }
         let tab = document.getElementById(`helpTab${i}`);
-        if (tab) tab.textContent = i18next.t(`help${i}Name`);
+        if (tab) tab.textContent = i18next.t(`help${i}Name`, globals);
     }
 
     // 4. Тексты окон, уведомлений и массивы прогресса (внутри JS)
@@ -1090,11 +1097,11 @@ function updateStaticTranslations() {
         if (achNaming) {
             const achNameKey = `achRow1.name.${i}`;
             const achNameWithoutQuotes = i18next.t(achNameKey).replace(/"/g, '');
-            achNaming.innerHTML = i18next.t(achNameWithoutQuotes);
-            ACHS.names[i] = i18next.t(`achRow1.name.${i}`);
+            achNaming.innerHTML = i18next.t(achNameWithoutQuotes, globals);
+            ACHS.names[i] = i18next.t(`achRow1.name.${i}`, globals);
             if (i != 49) {
                 const tooltipEl = document.getElementsByClassName("tooltipAch")[i];
-                if (tooltipEl) tooltipEl.innerHTML = i18next.t(`achievement${i + 11}Desc`);
+                if (tooltipEl) tooltipEl.innerHTML = i18next.t(`achievement${i + 11}Desc`, globals); // И сюда
             }
         }
     }
@@ -1143,6 +1150,24 @@ function updateStaticTranslations() {
     });
 }
 
+function getGlobalNumbers() {
+    return {
+        n1000: formatNumber(1000),
+        n2500: formatNumber(2500),
+        n10000: formatNumber(10000),
+        n1e6: formatNumber(1e6),
+        n1e7: formatNumber(1e7),
+        n1e8: formatNumber(1e8),
+        n1e9: formatNumber(1e9),
+        n1e10: formatNumber(1e10),
+        n1e15: formatNumber(1e15),
+        n1e25: formatNumber(1e25),
+        n1e50: formatNumber(1e50),
+        n1e100: formatNumber(1e100),
+        nInf: formatNumber(1.79e308) 
+    };
+}
+
 document.getElementById('changingLanguage').addEventListener('click', () => {
     player.settings.currentLanguage = i18next.language == 'ru' ? 'en' : 'ru';
     i18next.changeLanguage(player.settings.currentLanguage, () => {
@@ -1152,6 +1177,13 @@ document.getElementById('changingLanguage').addEventListener('click', () => {
         showHelpPage(text.help.start, text.empty);
     });
 });
+
+function changeNotations(option) { player.settings.notation = option.value; updateStaticTranslations()}
+
+changeNotation.addEventListener("change", function(){
+        selectedOption2 = select2.options[select2.selectedIndex];
+        changeNotations(selectedOption2)
+    })
 
 function formatOfflineTime(timeInSeconds) {
     let t = Math.floor(timeInSeconds);
@@ -1217,7 +1249,7 @@ function checkCode(id=999) {
             player.shop.items.amount[3] += 5
         break;
         case 4:
-            player.shop.items.amount[4] += 2
+            player.shop.items.amount[3] += 10
         break;
         case 5:
             player.supercoin.currency += 150
@@ -1255,9 +1287,13 @@ function readCode() {
 }
 
 function changeText() {
+    const globals = getGlobalNumbers(); // Добавляем
     if (document.getElementById('tooltip-ach60').getAttribute('data-show') == '') {
         if (!ELS.isAch60Opened) {
-            document.getElementsByClassName("tooltipAch")[49].innerHTML = i18next.t(`achievement${60}Desc`, {trick: i18next.t(`achievement60Tricks.${randomNumber(0, 26)}`)})
+            document.getElementsByClassName("tooltipAch")[49].innerHTML = i18next.t(`achievement${60}Desc`, {
+                trick: i18next.t(`achievement60Tricks.${randomNumber(0, 26)}`, globals), // Сюда
+                ...globals // И сюда
+            });
             ELS.isAch60Opened = true
         }
     }

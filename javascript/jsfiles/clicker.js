@@ -61,7 +61,7 @@ const GAIN = {
 
                 // 5. Глобальные срезы
                 if (pcAct !== 0 && pcAct !== 8) effect = effect.pow(0.5);
-                if (pcAct == 8) effect = effect.pow(0.7);
+                if (pcAct == 8) effect = effect.pow(0.6);
                 if (cAct !== 0) effect = effect.pow(0.75);
                 if (cAct === 10) effect = effect.pow(0.67);
 
@@ -85,6 +85,8 @@ const GAIN = {
                 } 
                 if (player.challenge.completed.includes(9)) softcap_start *= CHALL[9].effect();
                 softcap_start *= UPGS.minerals[2].effect2();
+                if (player.balance.upgrades.singles.includes(11)) softcap_start *= MISC.balance.plusCoins.buff().coinGainSoftcapPusher;
+                if (player.balance.upgrades.singles.includes(12)) softcap_start /= MISC.balance.minusCoins.nerf().coinGainSoftcapPuller;
                 return { softcap_start, softcap_power };
             }
         },
@@ -119,7 +121,7 @@ const GAIN = {
                 if (pcAct === 1 || pcAct === 7) effect = effect.sqrt();
 
                 if (pcAct !== 0 && pcAct !== 8) effect = effect.pow(0.5);
-                if (pcAct == 8) effect = effect.pow(0.7)
+                if (pcAct == 8) effect = effect.pow(0.6)
                 if (cAct !== 0) effect = effect.pow(0.67);
                 if (cAct === 10) effect = effect.pow(0.67);
 
@@ -143,6 +145,8 @@ const GAIN = {
                 } 
                 if (player.challenge.completed.includes(9)) softcap_start *= CHALL[9].effect();
                 softcap_start *= UPGS.minerals[2].effect2();
+                if (player.balance.upgrades.singles.includes(11)) softcap_start *= MISC.balance.plusCoins.buff().coinGainSoftcapPusher;
+                if (player.balance.upgrades.singles.includes(12)) softcap_start /= MISC.balance.minusCoins.nerf().coinGainSoftcapPuller;
                 
                 return { softcap_start, softcap_power };
             }
@@ -186,8 +190,6 @@ const GAIN = {
             },
             softcap() {
                 let softcap_start = 1e20;
-                if (player.balance.upgrades.singles.includes(11)) softcap_start *= MISC.balance.plusCoins.buff().coinGainSoftcapPusher;
-                if (player.balance.upgrades.singles.includes(12)) softcap_start *= MISC.balance.minusCoins.nerf().coinGainSoftcapPuller;
                 return { softcap_start: Math.max(softcap_start, 1), softcap_power: 1 };
             }
         },
@@ -305,7 +307,7 @@ const GAIN = {
         no_softcap_reset() {
             let gain = 1;
             const mults = [
-                [player.prestige.break.singles.includes(25), Math.pow(1.2 + UPGS.prestige.break.buyables[1].effect(), Math.log10((player.coin.currency + 10) / 1e15))],
+                [player.prestige.break.singles.includes(25), Math.pow(1.2, Math.log10((Math.max(GAIN.coin.click.effect(), GAIN.coin.second.effect()) + 10) / 1e15) + UPGS.prestige.break.buyables[1].effect())],
                 [player.prestige.upgrades[1], UPGS.prestige.buyables[1].effect()],
                 [ACHS.has(28), 4],
                 [player.shard.singleUpgrades.includes(11), UPGS.shard.singles[11].effect()],
@@ -338,17 +340,18 @@ const GAIN = {
             let substract = player.balance.upgrades.singles.includes(11) ? MISC.balance.plusCoins.nerf().crystalSoftcapHarsher : 0;
             let pusher = player.balance.upgrades.singles.includes(32) ? MISC.balance.minusCoins.buff().crystalSoftcapPusher : 1;
             
-            const softcap_start = Math.max(1e50 * pusher, 1);
-            
+            const softcap_start = Math.max(1e80 * pusher, 1);
+            // const softcap_start = 1e308
             let softcap_power = 1;
-            if (this.no_softcap_reset() >= 1e50) {
-                let calcPower = (1 - ((Math.log10(this.no_softcap_reset()) - 50 - Math.log(pusher)) / 125)) - substract + addition;
-                let minPower = 0.4 - substract + addition;
+            
+            if (this.no_softcap_reset() >= 1e80) {
+                let calcPower = (1 - ((Math.log10(this.no_softcap_reset()) - 80 - Math.log10(pusher)) / 100)) - substract + addition;
+                let minPower = 0.5 - substract + addition;
                 softcap_power = Math.max(calcPower, minPower);
             }
             
             return { softcap_start, softcap_power };
-        }
+        },
     },
 
     prestige: {
@@ -428,7 +431,7 @@ const GAIN = {
         },
         gain_per_second() {
             if (!player.shop.unlockables.includes(6)) return 0
-            return (1 + this.chance() / 10) * (Math.log10(GAIN.coin.second.effect() * 1 + 1)/1000)
+            return ((1 + this.chance() / 10) * (Math.log10(GAIN.coin.second.effect() * 1 + 1)/1000)) / 2
         }
     },
 
@@ -607,17 +610,16 @@ const GAIN = {
 
     balance: {
         generation() {
-            const scalesBase = Math.pow(MISC.balance.scales_of_balance(), 3);
-            if (!player.balance.upgrades.singles.includes(23)) return scalesBase * UPGS.balance.buyables[3].effect();
+            const scalesBase = Math.pow(MISC.balance.scales_of_balance() + player.balance.scales_of_balance, 3);
             
-            return (Math.pow(player.balance.scales_of_balance, 3) + scalesBase) * UPGS.balance.buyables[3].effect();
+            return scalesBase * UPGS.balance.buyables[3].effect();
         },
         offline(x = GAIN.balance.generation(), y = MISC.offline()) {
             return UNL.display[76].req() ? x * y : 0;
         },
         scales_of_balance() {
             if (!player.balance.upgrades.singles.includes(23)) return 0;
-            return MISC.balance.scales_of_balance() / 20000;
+            return MISC.balance.scales_of_balance() / 50000;
         },
         sob_offline(x = GAIN.balance.scales_of_balance(), y = MISC.offline()) {
             return player.balance.upgrades.singles.includes(23) ? x * y : 0;
@@ -673,17 +675,26 @@ const UNL = {
     rune: {
         cost() { return 1e8 * Math.pow(10, player.rune.total_currency); },
         max_cost() {
-            let cost = 1e8 * Math.pow(10, player.rune.total_currency);
             let currency = player.prestige.currency;
+            let totalCost = 0;
             let iter = 0;
+            
             for (let i = 0; i < 999; i++) {
-                if (currency >= cost) {
-                    cost = 1e8 * Math.pow(10, i + player.rune.total_currency);
-                    currency -= cost;
-                    iter = i;
-                } else break;
+                let currentPrice = 1e8 * Math.pow(10, i + player.rune.total_currency);
+                
+                if (currency >= currentPrice) {
+                    currency -= currentPrice;
+                    totalCost += currentPrice;
+                    iter++; 
+                } else {
+                    break; 
+                }
             }
-            return { cost, iter };
+            if (iter === 0) {
+                totalCost = 1e8 * Math.pow(10, player.rune.total_currency);
+            }
+            
+            return { cost: totalCost, iter };
         }
     },
     shard_achievements: {
@@ -709,7 +720,7 @@ const UNL = {
         1: { id: 1, current() { return player.coin.total_currency; }, goal(x = player.shard.achievements[1]) { return 1e50 * Math.pow(1e20, x); }, ratio() { return findRatio(this.current(), this.goal()); }, effect(x = player.shard.achievements[1]) { let e = UNL.shard_achievements._effBase(1, Math.pow(7, x), false); return player.prestige.challenge.activated === 8 ? 1: e; } },
         2: { id: 2, current() { return player.supercoin.total_currency; }, goal(x = player.shard.achievements[2]) { return 1000 * Math.pow(2, x); }, ratio() { return findRatio(this.current(), this.goal()); }, effect(x = player.shard.achievements[2]) { return UNL.shard_achievements._effBase(1, x / 50, true); } },
         3: { id: 3, current() { return player.prestige.total_currency; }, goal(x = player.shard.achievements[3]) { return 1e10 * Math.pow(1e10, x); }, ratio() { return findRatio(this.current() + 0.00001, this.goal()); }, effect(x = player.shard.achievements[3]) { return UNL.shard_achievements._effBase(2, Math.pow(2.33, x), false); } },
-        4: { id: 4, current() { return player.shard.currency; }, goal(x = player.shard.achievements[4]) { return 1e25 * Math.pow(1e25, x); }, ratio() { return findRatio(this.current() + 0.00001, this.goal()); }, effect(x = player.shard.achievements[4]) { return UNL.shard_achievements._effBase(2, Math.pow(7, x), false); } },
+        4: { id: 4, current() { return player.shard.currency; }, goal(x = player.shard.achievements[4]) { return 1e25 * Math.pow(1e25, x); }, ratio() { return findRatio(this.current() + 0.00001, this.goal()); }, effect(x = player.shard.achievements[4]) { return UNL.shard_achievements._effBase(2, Math.pow(6, x), false); } },
         5: { id: 5, current() { return player.achievements.length; }, goal(x = player.shard.achievements[5]) { return 10 + (10 * x); }, ratio() { return findRatio(this.current(), this.goal()); }, effect(x = player.shard.achievements[5]) { return UNL.shard_achievements._effBase(3, Math.pow(1.85, x), false); } },
         6: { id: 6, current() { return player.time.game.total.days; }, goal(x = player.shard.achievements[6]) { return Math.pow(2, x); }, ratio() { return findRatio(this.current(), this.goal()); }, effect(x = player.shard.achievements[6]) { return UNL.shard_achievements._effBase(3, 0.002 * x, true); } },
         7: { id: 7, current() { return player.prestige.resets; }, goal(x = player.shard.achievements[7]) { return 1e6 * Math.pow(10, x); }, ratio() { return findRatio(this.current() + 0.00001, this.goal()); }, effect(x = player.shard.achievements[7]) { return UNL.shard_achievements._effBase(4, Math.pow(2.05, x), false); } },
@@ -842,14 +853,14 @@ const isPChallComp = (id) => player.prestige.challenge.completed.includes(id);
 const CHALL = {
     1: { id: 1, completed: () => isChallComp(1), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.pow(player.challenge.completed.length+1, 3.5) * fb8() },
     2: { id: 2, completed: () => isChallComp(2), effect: () => player.prestige.challenge.activated == 8 ? 1 : 1000 * fb8() },
-    3: { id: 3, completed: () => isChallComp(3), effect: () => player.prestige.challenge.activated == 8 ? 1 : (1 + Math.log(player.prestige.resets + 1)) * fb8() },
+    3: { id: 3, completed: () => isChallComp(3), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.pow(player.prestige.resets, 0.35) * fb8() },
     4: { id: 4, completed: () => isChallComp(4), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.pow(1.35, player.achievements.length) * fb8() },
     5: { id: 5, completed: () => isChallComp(5), effect: () => player.prestige.challenge.activated == 8 ? 1 : CHALL[5].completed() ? 0.9 : 1 },
     6: { id: 6, completed: () => isChallComp(6), effect: () => player.prestige.challenge.activated == 8 ? 1 : (1 + 0.1 * fb8()) },
     7: { id: 7, completed: () => isChallComp(7), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.log2(player.shard.currency + 1) * fb8() },
     8: { id: 8, completed: () => isChallComp(8), effect: () => player.prestige.challenge.activated == 8 ? 1 : (1 + player.time.real.prestige.timer/2) * fb8() },
     9: { id: 9, completed: () => isChallComp(9), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.pow(player.supercoin.total_currency, 1.5) * fb8() },
-    10: { id: 10, completed: () => isChallComp(10), effect: () => player.prestige.challenge.activated == 8 ? 1 : (1 + Math.pow(MISC.amount_of_upgrades.coin() + 1, 0.75)) * fb8() },
+    10: { id: 10, completed: () => isChallComp(10), effect: () => player.prestige.challenge.activated == 8 ? 1 : 1 + MISC.amount_of_upgrades.coin() * fb8() },
     11: { id: 11, completed: () => isChallComp(11) }, // new items in shop
     12: { id: 12, completed: () => isChallComp(12) }, // decrease umulti and upower scaling
     
@@ -1017,18 +1028,18 @@ const MISC = {
         plusCoins: {
             buff(a = player.balance.coins.plus) {
                 let coinBuff = a ? Math.pow(1000, a) * UPGS.balance.buyables[1].effect() : 1;
-                let coinGainSoftcapPusher = player.balance.upgrades.singles.includes(11) && a ? Math.pow(80, a) * UPGS.balance.buyables[1].effect() : 0;
-                let upgradePriceDivisor = player.balance.upgrades.singles.includes(21) && a ? Math.pow(10, a) * UPGS.balance.buyables[1].effect() : 1;
+                let coinGainSoftcapPusher = player.balance.upgrades.singles.includes(11) && a ? Math.pow(500, a) * UPGS.balance.buyables[1].effect() : 1;
+                let upgradePriceDivisor = player.balance.upgrades.singles.includes(21) && a ? Math.pow(2, a) * UPGS.balance.buyables[1].effect() : 1;
                 let chanceBuffer = player.balance.upgrades.singles.includes(31) && a ? a / 200 * UPGS.balance.buyables[1].effect() : 0;
                 
                 if (player.prestige.challenge.activated === 8) {
-                    coinBuff = 1; coinGainSoftcapPusher = 0; 
+                    coinBuff = 1; coinGainSoftcapPusher = 1; 
                     upgradePriceDivisor = 1; chanceBuffer = 0;
                 }
                 return { coinBuff, coinGainSoftcapPusher, upgradePriceDivisor, chanceBuffer: chanceBuffer + 1 };
             },
             nerf(a = player.balance.coins.plus) {
-                let crystalGainNerf = a ? Math.pow(20, a) / UPGS.balance.buyables[2].effect() : 1;
+                let crystalGainNerf = a ? Math.pow(3, a) / UPGS.balance.buyables[2].effect() : 1;
                 let crystalSoftcapHarsher = player.balance.upgrades.singles.includes(11) ? subtractPercentage(a / 350, UPGS.balance.buyables[2].effect()) : 0;
                 let utilsCostIncreaser = player.balance.upgrades.singles.includes(21) ? subtractPercentage(a / 30, UPGS.balance.buyables[2].effect()) : 1;
                 
@@ -1041,7 +1052,7 @@ const MISC = {
         },
         minusCoins: {
             buff(b = player.balance.coins.minus) {
-                let crystalGainBuff = b ? Math.pow(20, b) * UPGS.balance.buyables[1].effect() : 1;
+                let crystalGainBuff = b ? Math.pow(3, b) * UPGS.balance.buyables[1].effect() : 1;
                 let crystalSoftcapSofter = player.balance.upgrades.singles.includes(12) && b ? b / 350 * UPGS.balance.buyables[1].effect() : 0;
                 let utilsCostReducer = player.balance.upgrades.singles.includes(22) && b ? b / 30 * UPGS.balance.buyables[1].effect() : 0;
                 let crystalSoftcapPusher = player.balance.upgrades.singles.includes(32) && b ? 33 * Math.pow(3, b) * UPGS.balance.buyables[1].effect() : 1;
@@ -1054,11 +1065,11 @@ const MISC = {
             },
             nerf(b = player.balance.coins.minus) {
                 let coinNerf = b ? Math.pow(1000, b) / UPGS.balance.buyables[2].effect() : 1;
-                let coinGainSoftcapPuller = player.balance.upgrades.singles.includes(12) && b ? subtractPercentage(Math.pow(80, b), UPGS.balance.buyables[2].effect()) : 0;
-                let upgradePriceMultiplier = player.balance.upgrades.singles.includes(22) && b ? subtractPercentage(Math.pow(10, b), UPGS.balance.buyables[2].effect()) : 1;
+                let coinGainSoftcapPuller = player.balance.upgrades.singles.includes(12) && b ? subtractPercentage(Math.pow(500, b), UPGS.balance.buyables[2].effect()) : 1;
+                let upgradePriceMultiplier = player.balance.upgrades.singles.includes(22) && b ? subtractPercentage(Math.pow(2, b), UPGS.balance.buyables[2].effect()) : 1;
                 
                 if (player.prestige.challenge.activated === 8) {
-                    coinNerf = 1; coinGainSoftcapPuller = 0; 
+                    coinNerf = 1; coinGainSoftcapPuller = 1; 
                     upgradePriceMultiplier = 1;
                 }
                 return { coinNerf, coinGainSoftcapPuller, upgradePriceMultiplier };
@@ -1120,7 +1131,7 @@ const PROGRESS = {
     3: { layer: "coin", type: "currency", req: () => 1e35 }, // supercrystals
     4: { layer: "prestige", type: "resets", req: () => 1e6 }, // minerals
     5: { layer: "prestige", type: "currency", req: () => 1e15 }, // superprestige
-    6: { layer: "supercrystal", type: "total_currency", req: () => 25 }, // fortune
+    6: { layer: "supercrystal", type: "total_currency", req: () => 20 }, // fortune
     7: { layer: "supercrystal", type: "total_currency", req: () => 40 }, // balance
     8: { layer: "prestige", type: "currency", req: () => 1e100 }, // ???
     // Вот наш новый 9-й пункт с кастомной функцией:
@@ -1254,11 +1265,12 @@ function loop() {
 mySlider.oninput = function() { player.settings.autosave_interval = this.value; };
 
 function convert_time(type, layer) {
-    let t = player.time[type][layer].timer;
+    let t = Math.floor(player.time[type][layer].timer); 
+    
     player.time[type][layer].seconds = t % 60;
-    player.time[type][layer].minutes = (t / 60) % 60;
-    player.time[type][layer].hours = (t / 3600) % 24;
-    player.time[type][layer].days = t / 86400;
+    player.time[type][layer].minutes = Math.floor(t / 60) % 60;
+    player.time[type][layer].hours = Math.floor(t / 3600) % 24;
+    player.time[type][layer].days = Math.floor(t / 86400);
 }
 
 // --- ВИЗУАЛ: ПОЛОСКИ ПРОГРЕССА И ОВЕРДРАЙВ ---
@@ -1476,6 +1488,9 @@ function selectTab(argument, isFlex) {
     });
     argument.style.display = isFlex ? "flex" : "block";
     document.getElementsByClassName('mainSettings')[0].style.display = (argument === mainTab) ? "flex" : "none";
+    document.getElementsByClassName('mainSettings')[3].style.display = (argument === prestigeTab) ? "flex" : "none";
+    document.getElementsByClassName('mainSettings')[2].style.display = (argument === prestigeTab) ? "flex" : "none";
+    document.getElementsByClassName('mainSettings')[1].style.display = (argument === prestigeTab) ? "flex" : "none";
 }
 
 function selectSubTab(argument, isFlex, mainTabType) {
@@ -1493,6 +1508,8 @@ function selectSubTab(argument, isFlex, mainTabType) {
     });
     argument.style.display = isFlex ? "flex" : "block";
     
+    document.getElementsByClassName('mainSettings')[0].style.display = (argument === coinsTab) ? "flex" : "none";
+    document.getElementsByClassName('mainSettings')[3].style.display = (argument === balanceTab) ? "flex" : "none";
     document.getElementsByClassName('mainSettings')[2].style.display = (argument === shardsTab) ? "flex" : "none";
     document.getElementsByClassName('mainSettings')[1].style.display = (argument === breakPrestigeTab) ? "flex" : "none";
 }
@@ -1610,7 +1627,7 @@ function applyFont(val, isInit = false) {
 }
 function changeFonts(option) { applyFont(option.value, false); }
 function changeFonts2(optionVal) { applyFont(optionVal, true); }
-function changeNotations(option) { player.settings.notation = option.value; }
+
 
 function muteTheAudio() {
     player.settings.mutedAudio = !player.settings.mutedAudio;

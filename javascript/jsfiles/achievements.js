@@ -133,11 +133,11 @@ const ACHS = {
         },
         crystal() {
             if (!player.coin.superUpgrades.includes(35)) return 1;
-            return ACHS.getBoost(0.09, 1.3, 0.15, 2);
+            return ACHS.getBoost(0.02, 0.3, 0.03, 0.5);
         },
         shard() {
             if (!player.coin.superUpgrades.includes(35)) return 1;
-            return ACHS.getBoost(0.225, 3.5, 0.4, 6);
+            return ACHS.getBoost(0.05, 0.6, 0.075, 1);
         }
     }
 };

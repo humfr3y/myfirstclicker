@@ -78,6 +78,9 @@
         <div class="mainSettings" style="display: none">
           <button onclick="maxOrNo('shard')" id="maxOrNoShardUpgrades"></button>
         </div>
+        <div class="mainSettings" style="display: none">
+          <button onclick="maxOrNo('balance')" id="maxOrNoBalanceUpgrades"></button>
+        </div>
         <button onclick="selectTab(eventTab, false)" id="eventSelect" class="tabButton" data-i18n="eventButton">Events</button>
         <div class="button-wrapper">
           <button onclick="selectTab(settingsTab, false)" id="settingsSelect" class="tabButton has-badge" data-i18n="settingsButton">Settings</button>
@@ -144,7 +147,7 @@
           <div id="firstSaveSettingsRow" class="settingsRow">
             <button onclick="saveGame(this)" id="savingGame" class="settingButton" data-i18n="saveGame">Save game</button>
             <button onclick="loadGame(this)" id="loadingGame" class="settingButton" data-i18n="loadGame">Load game</button>
-            <button onclick="autoSaveGame(this)" id="autoSavingGame" class="settingButton"></button>
+            <button onclick="toggleAutoSave(this)" id="autoSavingGame" class="settingButton"></button>
           </div>
           <div id="secondSaveSettingsRow" class="settingsRow">
             <button onclick="importSave(this)" id="impSave" class="settingButton" data-i18n="importGame">Import</button>
@@ -1154,7 +1157,9 @@
         </div>
       </div>
       <button onclick="openWindow('break', true)" id="doBreakCrystal" class="upgradeButton" data-i18n="doBreakCrystal">Break crystals</button>
-      
+      <div class="centeredDiv">
+          <button onclick="maxBuyAllShards()" id="maxBuyShards" class="upgradeButton maxBuy" data-i18n="buyMax">Купить все</button>
+        </div>
       <div id="shardBuyables" class="shardSinglesRow" style="display: none">
         <button onclick="buyShardUpgrade(1)" id="shBuyableU1" class="upgradeButton shardBuyableButton">
           <ut data-i18n="upg_shard_b1_name">Crystal Gauntlet</ut> (<span id="shb1_amount">0</span>) [+<span id="shb1_bulk">1</span>]<br>
@@ -1386,7 +1391,9 @@
         <span data-i18n="upg_bp_s10_desc">Breaks Prestige barrier, makes able to gain more Crystals per Prestige than 1.</span><br>
         <span id="bps10_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="bps10_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
       </button>
-      
+      <div class="centeredDiv">
+          <button onclick="maxBuyAllBreakPrestige()" id="maxBuyBreakPrestige" class="upgradeButton maxBuy" data-i18n="buyMax">Купить все</button>
+        </div>
       <div id="breakPUs" style="display: flex; flex-direction: column; align-items: center">
       <div id="breakPRow1" class="row">
         <button onclick="buyBreakPrestigeUpgrade(1)" id="breakPBuyableU1" class="upgradeButton breakPrestigeBuyableButton">
@@ -1666,16 +1673,21 @@
           <span data-i18n="bal_scale_v2_1">Your Coins generate</span> <bt id="bsc_sobc">0</bt> <span data-i18n="bal_scale_v2_2">Balance Scales per second.<br> You have</span> <bt><span id="bsc_sob2">0</span>+<span id="bsc_sob3">0</span></bt> <span data-i18n="bal_scale_v2_3">Balance Scales, which generate</span> <nt id="bsc_neu2">0</nt> <span data-i18n="bal_scale_v2_4">Neutrals per second</span>
         </span>
         <span class="currencyCount"><span data-i18n="neutralCount_1">You have</span> <nt id="bal_neutral_val">0</nt> <span data-i18n="neutralCount_2">neutrals</span></span>
-        
+        <div class="centeredDiv">
+          <button onclick="maxBuyAllBalance()" id="maxBuyBalance" class="upgradeButton maxBuy" data-i18n="buyMax">Купить все</button>
+        </div>
         <div class="row">
-          <button class="upgradeButton balanceBuyableButton" onclick="UPGS.balance.buyables.buy(1)">
-            <ut data-i18n="bal_buy_name_1">Positive Mind</ut><br><span data-i18n="bal_buy_desc_1">Increase positive effect of Balance Coins by 1%</span><br><span data-i18n="word_effect">Effect:</span> +<span id="bal_b_eff_1">0</span>%<br><span data-i18n="word_cost">Cost:</span> <span id="bal_b_cost_1">0</span> <span data-i18n="currency_neutral">neutral</span>
+          <button class="upgradeButton balanceBuyableButton" onclick="buyBalanceUpgrade(1)">
+            <ut data-i18n="bal_buy_name_1">Positive Mind</ut> (<span id="bb1_amt">0</span>) [+<span id="bb1_bulk">1</span>]<br>
+            <span data-i18n="bal_buy_desc_1">Increase positive effect of Balance Coins by 1%</span><br><span data-i18n="word_effect">Effect:</span> +<span id="bal_b_eff_1">0</span>%<br><span data-i18n="word_cost">Cost:</span> <span id="bal_b_cost_1">0</span> <span data-i18n="currency_neutral">neutral</span>
           </button>
-          <button class="upgradeButton balanceBuyableButton" onclick="UPGS.balance.buyables.buy(2)">
-            <ut data-i18n="bal_buy_name_2">Fight Evil</ut><br><span data-i18n="bal_buy_desc_2">Decrease negative effect of Balance Coins by -0.25%</span><br><span data-i18n="word_effect">Effect:</span> -<span id="bal_b_eff_2">0</span>%<br><span data-i18n="word_cost">Cost:</span> <span id="bal_b_cost_2">0</span> <span data-i18n="currency_neutral">neutral</span>
+          <button class="upgradeButton balanceBuyableButton" onclick="buyBalanceUpgrade(2)">
+            <ut data-i18n="bal_buy_name_2">Fight Evil</ut> (<span id="bb2_amt">0</span>) [+<span id="bb2_bulk">1</span>]<br>
+            <span data-i18n="bal_buy_desc_2">Decrease negative effect of Balance Coins by -0.25%</span><br><span data-i18n="word_effect">Effect:</span> -<span id="bal_b_eff_2">0</span>%<br><span data-i18n="word_cost">Cost:</span> <span id="bal_b_cost_2">0</span> <span data-i18n="currency_neutral">neutral</span>
           </button>
-          <button class="upgradeButton balanceBuyableButton" onclick="UPGS.balance.buyables.buy(3)">
-            <ut data-i18n="bal_buy_name_3">General Opinion</ut><br><span data-i18n="bal_buy_desc_3">Increase Neutral production by 5%</span><br><span data-i18n="word_effect">Effect:</span> +<span id="bal_b_eff_3">0</span>%<br><span data-i18n="word_cost">Cost:</span> <span id="bal_b_cost_3">0</span> <span data-i18n="currency_neutral">neutral</span>
+          <button class="upgradeButton balanceBuyableButton" onclick="buyBalanceUpgrade(3)">
+            <ut data-i18n="bal_buy_name_3">General Opinion</ut> (<span id="bb3_amt">0</span>) [+<span id="bb3_bulk">1</span>]<br>
+            <span data-i18n="bal_buy_desc_3">Increase Neutral production by 5%</span><br><span data-i18n="word_effect">Effect:</span> +<span id="bal_b_eff_3">0</span>%<br><span data-i18n="word_cost">Cost:</span> <span id="bal_b_cost_3">0</span> <span data-i18n="currency_neutral">neutral</span>
           </button>
         </div>
         <div class="row">
@@ -2864,7 +2876,7 @@
                     <span id="shopItem3Title" data-i18n="shop_i3_name">Time Accelerator</span>
                     <span id="shopItem3Req">0/10</span>
                   </div>
-                  <div class="shopContainer">
+                  <!-- <div class="shopContainer">
                     <button id="shopItem4" class="shopButton shopItemButton" onclick="UPGS.shop.items.buy(4)"></button>
                     <button id="useShopItem4" class="useButton" onclick="UPGS.shop.items[4].useItem()" data-i18n="useTitle">Use</button>
                     <div id="tooltip-shopItem4" class="tooltip" role="tooltip">
@@ -2877,10 +2889,10 @@
                     </div>
                     <span id="shopItem4Title" data-i18n="shop_i4_name">Time Accelerator+</span>
                     <span id="shopItem4Req">0/3</span>
-                  </div>
+                  </div> -->
                 </div>
                 <div id="postBreakprestige2">
-                  <div class="shopContainer">
+                  <!-- <div class="shopContainer">
                     <button id="shopItem5" class="shopButton shopItemButton" onclick="UPGS.shop.items.buy(5)"></button>
                     <button id="useShopItem5" class="useButton" onclick="UPGS.shop.items[5].useItem()" data-i18n="useTitle">Use</button>
                     <div id="tooltip-shopItem5" class="tooltip" role="tooltip">
@@ -2893,8 +2905,8 @@
                     </div>
                     <span id="shopItem5Title" data-i18n="shop_i5_name">Golden Pound</span>
                     <span id="shopItem5Req">0/1</span>
-                  </div>
-                  <div class="shopContainer">
+                  </div> -->
+                  <!-- <div class="shopContainer">
                     <button id="shopItem6" class="shopButton shopItemButton" onclick="UPGS.shop.items.buy(6)"></button>
                     <button id="useShopItem6" class="useButton" onclick="UPGS.shop.items[6].useItem()" data-i18n="useTitle">Use</button>
                     <div id="tooltip-shopItem6" class="tooltip" role="tooltip">
@@ -2907,7 +2919,7 @@
                     </div>
                     <span id="shopItem6Title" data-i18n="shop_i6_name">Math Analysis</span>
                     <span id="shopItem6Req">0/3</span>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -2966,12 +2978,29 @@
 
             <div id="chooseSaveDiv" class="windowDesc" style="display: none">
               <span id="selectSave" data-i18n="chooseSaveTitle">СКОЛЬКО СБРОСИТЬ ТЕКСТ</span>
-              <div id="saveButtons"> 
-                <button onclick="chooseSave(1)" id="save1" class="tabButton save_slot"><span data-i18n="save1"></span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
-                <button onclick="chooseSave(2)" id="save2" class="tabButton save_slot"><span data-i18n="save2"></span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
-                <button onclick="chooseSave(3)" id="save3" class="tabButton save_slot"><span data-i18n="save3"></span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
-                <button onclick="chooseSave(4)" id="save4" class="tabButton save_slot"><span data-i18n="save4"></span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
-                <button onclick="chooseSave(5)" id="save5" class="tabButton save_slot" ><span data-i18n="save5"></span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+              <div id="saveButtons" style="display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 10px;"> 
+                
+                <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
+                  <button onclick="chooseSave(1)" id="save1" class="tabButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName1">Save 1</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                  <button onclick="editSaveName(1)" class="tabButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
+                </div>
+                <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
+                  <button onclick="chooseSave(2)" id="save2" class="tabButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName2">Save 2</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                  <button onclick="editSaveName(2)" class="tabButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
+                </div>
+                <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
+                  <button onclick="chooseSave(3)" id="save3" class="tabButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName3">Save 3</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                  <button onclick="editSaveName(3)" class="tabButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
+                </div>
+                <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
+                  <button onclick="chooseSave(4)" id="save4" class="tabButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName4">Save 4</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                  <button onclick="editSaveName(4)" class="tabButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
+                </div>
+                <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
+                  <button onclick="chooseSave(5)" id="save5" class="tabButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName5">Save 5</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                  <button onclick="editSaveName(5)" class="tabButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
+                </div>
+
               </div>
             </div>
             </div>
@@ -3021,10 +3050,7 @@
         selectedOption = select.options[select.selectedIndex];
         changeFonts(selectedOption)
 })
-    changeNotation.addEventListener("change", function(){
-        selectedOption2 = select2.options[select2.selectedIndex];
-        changeNotations(selectedOption2)
-    })
+    
 
 
   function findRatio (multiplier, multipliers){

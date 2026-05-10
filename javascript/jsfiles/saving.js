@@ -175,7 +175,7 @@ function resetDailyReward() {
         nextDay.setHours(0, 0, 0, 0);
         player.time.next_daily = nextDay.getTime();
         player.got_daily_reward = false;
-        player.fortune.daily_resets = player.fortune.upgrades.singles.includes(23) ? 20 : 10;
+        player.fortune.daily_resets = player.fortune.upgrades.singles.includes(23) ? 30 + UPGS.shop.permanent[8].effect() : 15 + UPGS.shop.permanent[8].effect() ;
     }
 }
 

@@ -29,17 +29,34 @@ class UniversalBuyableUpgrade {
     get element() { return document.getElementById(this.elementId); }
 
     cost(x = this.targetArray[this.id]) {
-        // Условие Испытания 5: цены зависят от суммы всех покупаемых улучшений монет
         if (this.layer === 'coin' && (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7)) {
             if (x === this.targetArray[this.id]) {
                 x = player.coin.upgrades[1] + player.coin.upgrades[2] + player.coin.upgrades[3] + player.coin.upgrades[4] + player.coin.upgrades[5];
             }
         }
         
-        if (this.customCost) return this.customCost(x); // Если есть кастомная цена - используем её!
-        let cost = this.basePrice * Math.pow(this.power, x);
-        cost *= this.customCostMod(cost, x); 
-        return cost;
+        if (this.customCost) return this.customCost(x); 
+
+        // ИСПОЛЬЗУЕМ ЛОГАРИФМЫ: log(a * b^x) = log(a) + x * log(b)
+        let logCost = Math.log10(this.basePrice) + x * Math.log10(this.power);
+        
+        let costMod = this.customCostMod(this.basePrice, x); 
+        if (costMod > 0 && costMod !== 1) logCost += Math.log10(costMod);
+
+        // --- ГЛОБАЛЬНЫЕ СКИДКИ И ШТРАФЫ ДЛЯ МОНЕТ ---
+        if (this.layer === 'coin') {
+            let div1 = UPGS.minerals[4].effect1(); // Аквамарин
+            let div2 = UPGS.prestige.break.buyables[4].effect(); // Разлом
+            let div3 = MISC.balance.plusCoins.buff().upgradePriceDivisor; // Баланс +
+            let mult1 = MISC.balance.minusCoins.nerf().upgradePriceMultiplier; // Баланс -
+            
+            // Вычитаем логарифмы делителей и прибавляем логарифм умножителя
+            logCost = logCost - Math.log10(div1) - Math.log10(div2) - Math.log10(div3) + Math.log10(mult1);
+        }
+
+        // Возвращаем из логарифма в обычное число
+        let finalCost = Math.pow(10, logCost);
+        return isFinite(finalCost) ? finalCost : 1.79e308;
     }
 
     effect(...args) { return this.customEffect(...args); }
@@ -52,6 +69,7 @@ class UniversalBuyableUpgrade {
                 y = player.coin.upgrades[1] + player.coin.upgrades[2] + player.coin.upgrades[3] + player.coin.upgrades[4] + player.coin.upgrades[5];
             }
         }
+        
 
         // Сколько мы физически можем позволить себе купить по деньгам
         let affordable = upgradesPurchasableCustom(y, x, this.cost(), this.power);
@@ -79,6 +97,7 @@ class UniversalBuyableUpgrade {
         if (this.layer === 'coin') isMaxActive = player.settings.buy_max_activate;
         if (this.layer === 'prestige') isMaxActive = player.settings.breakprestige_buy_max_activate;
         if (this.layer === 'shard') isMaxActive = player.settings.shard_buy_max_activate;
+        if (this.layer === 'balance') isMaxActive = player.settings.balance_buy_max_activate;
 
         // Если кнопка выключена, мы хотим купить только 1 штуку (если хватает денег)
         if (!isMaxActive) {
@@ -152,7 +171,6 @@ class UniversalBuyablesManager {
         }
     }
 
-    // СТАЛО: Покупаем с конца (от дорогих к дешевым)
     buy_auto() { [...this._keys].reverse().forEach(x => this.buy(x)); }
     buyMax() { [...this._keys].reverse().forEach(x => this.max(x)); }
     buyMax_auto() { [...this._keys].reverse().forEach(x => this.max_auto(x)); }
@@ -581,6 +599,7 @@ class FortuneBoost {
     generateNumber() {
         if (player.balance.upgrades.singles.includes(33)) return this.max();
         let min = this.min(), max = this.max();
+        if (min > max) return min
         
         if (this.generatorType === 'digits') {
             let minD = Math.floor(Math.log10(min)), maxD = Math.floor(Math.log10(max));
@@ -589,6 +608,7 @@ class FortuneBoost {
         }
         if (this.generatorType === 'float2') return randomNumber(min, max, 2);
         if (this.generatorType === 'float3') return randomNumber(min, max, 3);
+
         return randomNumber(min, max); // int
     }
 }
@@ -617,7 +637,7 @@ class FortuneBoostsManager {
     respec(free=false) { 
         if (player.fortune.daily_resets == 0 && free == false) return 0;
         this._keys.forEach(x => this.reset(x, true));
-        player.fortune.daily_resets -= 1;
+        free ? 0 : player.fortune.daily_resets -= 1;
     }
     
     finishedBoost(x) { if (player.fortune.activatedBoosts[x].time < 0) this.reset(x); }
@@ -720,6 +740,11 @@ class BalanceBuyableUpgrade extends UniversalBuyableUpgrade {
     }
     // Переопределяем поиск элемента
     get element() { return document.getElementsByClassName('balanceBuyableButton')[this.elementIndex]; }
+
+    // ФИКС: Переопределяем bulk, чтобы он смотрел в кошелек neutral, а не currency!
+    bulk(x = player.balance.neutral, y = this.targetArray[this.id]) {
+        return super.bulk(x, y); 
+    }
 }
 
 class BalanceBuyablesManager extends UniversalBuyablesManager {
@@ -734,10 +759,29 @@ class BalanceBuyablesManager extends UniversalBuyablesManager {
 
     // Заменяем currency на neutral
     canAfford(x) { return player.balance.neutral >= this[x].cost(); }
+    
     buy(x) {
         if (this.canAfford(x)) {
             player.balance.neutral -= this[x].cost();
             this.targetArray[x]++;
+        }
+    }
+
+    // ФИКС: Добавляем забытый метод оптовой покупки для кнопки "Купить макс"
+    max(x) {
+        if (this.canAfford(x)) {
+            let bulk = this[x].bulk();
+            player.balance.neutral -= totalCost(bulk, this[x].cost(), this[x].power);
+            this.targetArray[x] += bulk;
+        }
+    }
+
+    // ФИКС: Добавляем метод оптовой покупки для Автоматизации (если она когда-то будет)
+    max_auto(x) {
+        if (this.canAfford(x)) {
+            let bulk = Math.min(this[x].bulk(), MISC.automation.buyable.bulk());
+            player.balance.neutral -= totalCost(bulk, this[x].cost(), this[x].power);
+            this.targetArray[x] += bulk;
         }
     }
 }

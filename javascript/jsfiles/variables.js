@@ -38,6 +38,7 @@ const generateEmptyObj = (count, hasStart = false) => {
 // --- ГЛАВНЫЙ ОБЪЕКТ ИГРОКА (Blueprint) ---
 
 let player = {
+    saveName: 'Save',
     clicks: { real: 0, simulated: 0, critical: 0, prestige: 0 },
     achievements: [], achievement_rows: [], shard_achievements: [], progressBarGoals: [0],
     umultipliers: 0, upowers: 0, uadders: 0, ureducers: 0,
@@ -101,7 +102,7 @@ let player = {
     settings: {
         currentLanguage: 'en', auto_save: true, mutedAudio: false, shop_bulkbuy: 1, minerals_bulkbuy: 1,
         font: 'option1', notation: 'option1',
-        buy_max_activate: false, shard_buy_max_activate: false, breakprestige_buy_max_activate: false, modernization_activated: false,
+        buy_max_activate: false, shard_buy_max_activate: false, breakprestige_buy_max_activate: false, balance_buy_max_activate: false, modernization_activated: false,
         loreBoolean: [], event: { spiritual: false, triplePower: false },
         whichPrestigeMode: 'time', autosave_interval: 30000, offline: true
     },
@@ -164,6 +165,6 @@ const text = {
 
 const PRES_CHALL = {
     goals: {
-        1: 1e25, 2: 1e25, 3: 1e65, 4: 1e67, 5: 1e62, 6: 1e80, 7: 1e21, 8: 1e15,
+        1: 1e25, 2: 1e25, 3: 1e89, 4: 1e91, 5: 5e75, 6: 5e94, 7: 1e20, 8: 1e15,
     }
 };

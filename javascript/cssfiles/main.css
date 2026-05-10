@@ -76,7 +76,7 @@ hr {
   color:white;
 }
 
-#maxOrNoUpgrades, #modernizeButton, #maxOrNoShardUpgrades, #maxOrNoBreakPrestigeUpgrades {
+#maxOrNoUpgrades, #modernizeButton, #maxOrNoShardUpgrades, #maxOrNoBreakPrestigeUpgrades, #maxOrNoBalanceUpgrades {
   background-color: #060606;
   border:#ffffff solid 1.6px;
   color: white;
@@ -91,7 +91,7 @@ hr {
   cursor: pointer;
 }
 
-#maxOrNoUpgrades:hover, #maxOrNoShardUpgrades:hover, #maxOrNoBreakPrestigeUpgrades:hover {
+#maxOrNoUpgrades:hover, #maxOrNoShardUpgrades:hover, #maxOrNoBreakPrestigeUpgrades:hover, #maxOrNoBalanceUpgrades:hover {
   background-color: #494949;
 }
 
@@ -1258,10 +1258,6 @@ th {
   justify-content: center;
 }
 
-#breakPRow1{
-  margin-top: 100px;
-}
-
 .row {
   display: flex;
 }
@@ -1749,7 +1745,7 @@ img.disabled {
     --font-scale: 1; 
   }
 
-  #maxOrNoUpgrades, #modernizeButton, #maxOrNoShardUpgrades, #maxOrNoBreakPrestigeUpgrades {
+  #maxOrNoUpgrades, #modernizeButton, #maxOrNoShardUpgrades, #maxOrNoBreakPrestigeUpgrades, #maxOrNoBalanceUpgrades {
     border-radius: 2.5px;
   }
   #multiplierStats {

@@ -1,10 +1,19 @@
 function maxOrNo(type) {
-    if (type === 'coin') {
-        player.settings.buy_max_activate = !player.settings.buy_max_activate;
-    } else if (type === 'shard') {
-        player.settings.shard_buy_max_activate = !player.settings.shard_buy_max_activate;
-    } else if (type === 'breakprestige') {
-        player.settings.breakprestige_buy_max_activate = !player.settings.breakprestige_buy_max_activate;
+    switch (type) {
+        case 'coin':
+            player.settings.buy_max_activate = !player.settings.buy_max_activate;
+            break;
+        case 'shard':
+            player.settings.shard_buy_max_activate = !player.settings.shard_buy_max_activate;
+            break;
+        case 'balance':
+            player.settings.balance_buy_max_activate = !player.settings.balance_buy_max_activate;
+            break;
+        case 'breakprestige':
+            player.settings.breakprestige_buy_max_activate = !player.settings.breakprestige_buy_max_activate;
+            break;
+        default:
+            break;
     }
 }
 
@@ -64,6 +73,10 @@ function buyShardUpgrade(x) {
 
 function buyBreakPrestigeUpgrade(x) {
     player.settings.breakprestige_buy_max_activate ? UPGS.prestige.break.buyables.max(x) : UPGS.prestige.break.buyables.buy(x);
+}
+
+function buyBalanceUpgrade(x) {
+    player.settings.balance_buy_max_activate ? UPGS.balance.buyables.max(x) : UPGS.balance.buyables.buy(x);
 }
 
 // --- УПРАВЛЕНИЕ СТРАНИЦЕЙ И UI ---
@@ -131,6 +144,8 @@ function formatSmallNumber(number, mode, x) {
         case 'power': return number < 10 ? number.toFixed(x) : (number < 100 ? number.toFixed(2) : number.toFixed(0));
         case 'percent': 
             let p = number * 100 - 100;
+            // Если процент стал огромным, прогоняем его через настройки нотации игрока!
+            if (p >= 1e6) return formatNumber(p, 'number'); 
             return p < 10 ? p.toFixed(2) : p.toFixed(0);
         default: return number.toString();
     }
@@ -183,11 +198,12 @@ function formatNumber(number, mode = 'number', x = 3) {
 }
 
 // Мини-форматтеры сжаты до тернарников
-function formatBoost(boost) { return boost < 100 ? boost.toFixed(2) : (boost < 1e6 ? boost.toFixed(0) : boost.toExponential(2).replace("+","")); }
-function formatPower(power) { return power < 10 ? power.toFixed(3) : (power < 1e6 ? power.toFixed(0) : power.toExponential(2).replace("+","")); }
+// Мини-форматтеры сжаты до тернарников, огромные числа идут через главную нотацию
+function formatBoost(boost) { return boost < 100 ? boost.toFixed(2) : (boost < 1e6 ? boost.toFixed(0) : formatNumber(boost, 'number')); }
+function formatPower(power) { return power < 10 ? power.toFixed(3) : (power < 1e6 ? power.toFixed(0) : formatNumber(power, 'number')); }
 function formatPercent(percent) { 
-    percent *= 100;
-    return percent < 10 ? percent.toFixed(2) : (percent < 1e6 ? percent.toFixed(0) : percent.toExponential(2).replace("+","")); 
+    let p = percent * 100;
+    return p < 10 ? p.toFixed(2) : (p < 1e6 ? p.toFixed(0) : formatNumber(p, 'number')); 
 }
 
 // Форматирование для значений библиотеки Break Infinity (Decimal)
@@ -702,7 +718,7 @@ function createCrystalsUI() {
 createCrystalsUI();
 
 function statsCrystalsUpdate() {
-    const gain = player.prestige.break.singles.includes(25) ? Math.pow(1.2 + UPGS.prestige.break.buyables[1].effect(), Math.log10((player.coin.currency + 10) / 1e15)): 1;
+    const gain = player.prestige.break.singles.includes(25) ? Math.pow(1.2, Math.log10((Math.max(GAIN.coin.click.effect(), GAIN.coin.second.effect()) + 10) / 1e15) + UPGS.prestige.break.buyables[1].effect()): 1;
 
     const sources = [
         { effectValue: () => gain, effectPrefix: 'x', effectMode: 'boost', effectId: 'baseCrystalStatsEffect', pieceId: 'baseCrystalPiece', piecePercentId: 'baseCrystalPiecePercent', summary: () => GAIN.crystal.no_softcap_reset() },
@@ -1039,14 +1055,56 @@ function unlockShardAch(id) {
     }
 }
 
+// --- ОБНОВЛЕННАЯ ФУНКЦИЯ ЧТЕНИЯ СЛОТОВ ---
 function changeSaveSlotsText() {
     for (let i = 0; i < 5; i++) {
-        let coins = JSON.parse(localStorage.getItem(getSaveKey(i+1))) ? Number(JSON.parse(localStorage.getItem(getSaveKey(i+1))).coin.currency) : 10
-        let crystals = JSON.parse(localStorage.getItem(getSaveKey(i+1))) ? Number(JSON.parse(localStorage.getItem(getSaveKey(i+1))).prestige.currency) : 0
-        let amount = crystals >= 1 ? crystals : coins
-        document.getElementsByClassName('save_coin_amount')[i].textContent = formatNumber(amount)
-        document.getElementsByClassName('saveCurrency')[i].textContent = crystals >= 1 ? i18next.t('pbcurrency3') : i18next.t('pbcurrency1')
+        let savedDataStr = localStorage.getItem(getSaveKey(i+1));
+        let savedObj = savedDataStr ? JSON.parse(savedDataStr) : null;
+        
+        let coins = savedObj ? Number(savedObj.coin.currency) : 10;
+        let crystals = savedObj ? Number(savedObj.prestige.currency) : 0;
+        let amount = crystals >= 1 ? crystals : coins;
+        
+        document.getElementsByClassName('save_coin_amount')[i].textContent = formatNumber(amount);
+        document.getElementsByClassName('saveCurrency')[i].textContent = crystals >= 1 ? i18next.t('pbcurrency3') : i18next.t('pbcurrency1');
+
+        let nameSpan = document.getElementById(`saveName${i+1}`);
+        if (nameSpan) {
+            let customName = (savedObj && savedObj.saveName) ? savedObj.saveName : '';
+            nameSpan.textContent = customName !== '' ? customName : i18next.t(`save${i+1}`);
+        }
     }
+}
+
+// --- НОВАЯ ФУНКЦИЯ ПЕРЕИМЕНОВАНИЯ ---
+function editSaveName(slotNum) {
+    let savedDataStr = localStorage.getItem(getSaveKey(slotNum));
+    let savedObj = savedDataStr ? JSON.parse(savedDataStr) : null;
+    
+    if (!savedObj && slotNum !== save_number) {
+        notify("Сначала сохраните игру в этот слот!", "red");
+        return;
+    }
+
+    // Достаем текущее имя
+    let currentName = (savedObj && savedObj.saveName) ? savedObj.saveName : "";
+    
+    // Спрашиваем новое
+    let promptMsg = player.settings.currentLanguage === 'ru' 
+        ? "Введите новое название сохранения (оставьте пустым для сброса):" 
+        : "Enter a new name for the save (leave blank to reset):";
+        
+    let newName = prompt(promptMsg, currentName);
+    if (newName === null) return;
+    let finalName = newName.trim();
+    if (slotNum === save_number) {
+        player.saveName = finalName;
+    }
+    if (savedObj) {
+        savedObj.saveName = finalName;
+        localStorage.setItem(getSaveKey(slotNum), JSON.stringify(savedObj));
+    }
+    changeSaveSlotsText();
 }
 
 function toggleBadges(badgeIds, condition) {
