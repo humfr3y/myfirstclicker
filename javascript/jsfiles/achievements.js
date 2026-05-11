@@ -91,17 +91,17 @@ const ACHS = {
 
         41() { return player.prestige.break.singles.includes(25)},
         42() { return player.uadders >= 1 && player.ureducers >= 1 && player.umultipliers >= 1 && player.upowers >= 1},
-        43() { return UNL.shard_achievements[10].current() >= 10},
+        43() { return UNL.shard_achievements[10].current() >= 10 && player.shard_achievements.includes(5)},
         44() { return player.coin.superUpgrades.length == 15},
         45() { return player.supercoin.total_currency >= 10000},
-        46() { return player.challenge.activated == 8 && player.time.real.prestige.timer >= 28800},
+        46() { return player.challenge.activated == 8 && player.time.game.prestige.timer >= 28800},
         48() { return player.shard.currency >= 1e100},
         49() { return player.prestige.resets >= 1e8},
         50() { return (player.uadders + player.ureducers + player.umultipliers + player.upowers) >= 100},
 
         51() { return player.fortune.tokens >= 1},
         52() { return player.coin.total_currency >= 1e100},
-        53() { return player.balance.scales_of_balance >= 1},
+        53() { return MISC.balance.scales_of_balance() >= 1},
         54() { return player.fortune.activatedBoosts[10].activated || player.fortune.activatedBoosts[11].activated || player.fortune.activatedBoosts[12].activated},
         55() { return UNL.overdrive.type2.percent() == 100},
         56() { return player.fortune.activatedBoosts.list.length == 12},
@@ -133,11 +133,11 @@ const ACHS = {
         },
         crystal() {
             if (!player.coin.superUpgrades.includes(35)) return 1;
-            return ACHS.getBoost(0.09, 1.3, 0.15, 2);
+            return ACHS.getBoost(0.02, 0.3, 0.03, 0.5);
         },
         shard() {
             if (!player.coin.superUpgrades.includes(35)) return 1;
-            return ACHS.getBoost(0.225, 3.5, 0.4, 6);
+            return ACHS.getBoost(0.05, 0.6, 0.075, 1);
         }
     }
 };

@@ -25,6 +25,13 @@
   --ureducer: rgb(255, 255, 94);
 }
 
+.text-hidden-mode * {
+    color: transparent !important;
+    text-shadow: none;
+    user-select: none !important; /* Полностью запрещает выделение */
+    -webkit-user-select: none !important; /* Для поддержки Safari и iOS */
+}
+
 html::-webkit-scrollbar, #versionDiv::-webkit-scrollbar, #helpDiv::-webkit-scrollbar {
   width:8px;
 }
@@ -69,7 +76,7 @@ hr {
   color:white;
 }
 
-#maxOrNoUpgrades, #modernizeButton, #maxOrNoShardUpgrades, #maxOrNoBreakPrestigeUpgrades {
+#maxOrNoUpgrades, #modernizeButton, #maxOrNoShardUpgrades, #maxOrNoBreakPrestigeUpgrades, #maxOrNoBalanceUpgrades {
   background-color: #060606;
   border:#ffffff solid 1.6px;
   color: white;
@@ -84,7 +91,7 @@ hr {
   cursor: pointer;
 }
 
-#maxOrNoUpgrades:hover, #maxOrNoShardUpgrades:hover, #maxOrNoBreakPrestigeUpgrades:hover {
+#maxOrNoUpgrades:hover, #maxOrNoShardUpgrades:hover, #maxOrNoBreakPrestigeUpgrades:hover, #maxOrNoBalanceUpgrades:hover {
   background-color: #494949;
 }
 
@@ -128,7 +135,7 @@ nt {
 }
 
 
-#coinsGain {
+#coinsGain, #supercoinsGain {
     color: var(--grey-text);
     font-size: calc(15px * var(--font-scale));
     text-align: center;
@@ -1263,10 +1270,6 @@ th {
   justify-content: center;
 }
 
-#breakPRow1{
-  margin-top: 100px;
-}
-
 .row {
   display: flex;
 }
@@ -1754,7 +1757,7 @@ img.disabled {
     --font-scale: 1; 
   }
 
-  #maxOrNoUpgrades, #modernizeButton, #maxOrNoShardUpgrades, #maxOrNoBreakPrestigeUpgrades {
+  #maxOrNoUpgrades, #modernizeButton, #maxOrNoShardUpgrades, #maxOrNoBreakPrestigeUpgrades, #maxOrNoBalanceUpgrades {
     border-radius: 2.5px;
   }
   #multiplierStats {

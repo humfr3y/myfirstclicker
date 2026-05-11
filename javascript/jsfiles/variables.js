@@ -44,6 +44,7 @@ const generateEmptyObj = (count, hasStart = false) => {
 // --- ГЛАВНЫЙ ОБЪЕКТ ИГРОКА (Blueprint) ---
 
 let player = {
+    saveName: 'Save',
     clicks: { real: 0, simulated: 0, critical: 0, prestige: 0 },
     achievements: [], achievement_rows: [], shard_achievements: [], progressBarGoals: [0],
     umultipliers: 0, upowers: 0, uadders: 0, ureducers: 0,
@@ -108,7 +109,7 @@ let player = {
     settings: {
         currentLanguage: 'en', auto_save: true, mutedAudio: false, shop_bulkbuy: 1, minerals_bulkbuy: 1,
         font: 'option1', notation: 'option1',
-        buy_max_activate: false, shard_buy_max_activate: false, breakprestige_buy_max_activate: false, modernization_activated: false,
+        buy_max_activate: false, shard_buy_max_activate: false, breakprestige_buy_max_activate: false, balance_buy_max_activate: false, modernization_activated: false,
         loreBoolean: [], event: { spiritual: false, triplePower: false },
         whichPrestigeMode: 'time', autosave_interval: 30000, offline: true
     },
@@ -119,6 +120,10 @@ let player = {
         conditions: { umultiplier: 0, upower: { time: 0, x_of_umulti: 0 }, prestige: { time: 3600, coins: 1e15, prestige: 10000, crystals: 1e50 }, uadder: { time: 0, x_of_upower: 0 } }
     },
     got_daily_reward: false,
+    checked: {
+        lore: false,
+        h2p: false
+    },
     code: { activated: [], name: ['umultiplier', 'upower', 'timemachine', 'hardmachine', 'sorry'] },
     overdrive: { consumed: { type1: 0, type2: 0 } },
     offline_gain: { time: '', coin: '', supercoin: '', crystal: '', prestige: '', shard: '' }
@@ -167,6 +172,6 @@ const text = {
 
 const PRES_CHALL = {
     goals: {
-        1: 1e30, 2: 1e24, 3: 1e71, 4: 1e73, 5: 1e60, 6: 1e80, 7: 1e30, 8: 1e15,
+        1: 1e25, 2: 1e25, 3: 1e89, 4: 1e91, 5: 5e75, 6: 5e94, 7: 1e20, 8: 1e15,
     }
 };
