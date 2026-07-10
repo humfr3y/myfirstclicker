@@ -5,6 +5,8 @@
     "top_per_sec": " α-coins per second",
     "top_sc_per_sec": " supercoins per second",
     "shopButton_text": "Supershop",
+    "your_world": "Your world is accelerated by x",
+    "times": "times",
 
     "pbtitle1": "Prestige",
     "pbtitle2": "Challenges",
@@ -16,6 +18,7 @@
     "pbtitle8": "Prestige Challenges",
     "pbtitle9": "Reflash",
     "pbtitle10": "Reflash tab",
+    "pbtitle11": "Computer (1.1)",
 
     "pbcurrency1": "α-coins",
     "pbcurrency2": "prestiges",
@@ -23,6 +26,7 @@
     "pbcurrency4": "total supercrystals",
     "pbcurrency5": "prestige challenge completions",
     "pbcurrency6": "reflashes",
+    "pbcurrency7": "node",
 
     "prestigeDisabled": "Collect {{n1e15}} α-coins",
     "prestigeEnabled": "Reset everything for {{crystalsTemp}} crystals {{prestigeCountMultiplierText}}",
@@ -33,7 +37,7 @@
 
     "reflashCount": "You have <rt>{{reflashes}}</rt> bits",
     "reflashDisabled": "Collect Infinity α-coins and complete Prestige Challenge 8",
-    "reflashFirst": "The limit has been reached, time to Reflash this world! (Soon in 1.0)",
+    "reflashFirst": "The limit has been reached, time to Reflash this world!",
     "reflashEnabled": "Reset everything to get {{reflashesTemp}} bits",
 
     "maxUpgradesTrue": "Buy All",
@@ -90,8 +94,11 @@
     "importGame": "Import game",
     "importGameFromAFile": "Import game from a file",
     "exportGame": "Export game",
+    "exportGame2": "Export game <br>+ {{sc}} supercoins today",
+    "exportGame3": "Export game <br>{{h}}h {{m}}m {{s}}s for reward",
     "changeLanguage": "Change language",
     "mutingAudio": "Muted song: {{status}}",
+    "switchConfirmation": "Reflash reset confirmation: {{status}}",
     "changelog": "Changelog",
     "hardReset": "Hard reset",
     "gameLore": "My Diary",
@@ -113,6 +120,9 @@
     "save3": "Save 3",
     "save4": "Save 4",
     "save5": "Save 5",
+
+    "reflashConfirmTitle": "Warning!",
+    "reflashConfirmDesc": "You are going to do Reflash! <br> This will reset ALL your progress except completed Achievements, unlocked tabs and Unlockables in supershop. <br> You also lose SUPERCOINS, so we recommend to buy all necessary upgrades and complete missing achievements. <br> After reset you will unlock new Reflash tab, new unique abilities and BITs. <br> Press \"OK\" if you are confident in your choice.",
 
     "harshUmulti": "Decrease U-multiplier by 1",
 
@@ -597,6 +607,68 @@
 
     "maxBuy": "Buy All (M)",
 
+    "currency_bits": "BITs",
+
+    "upg_ref_s1_name": "Heritage",
+    "upg_ref_s1_desc": "Reflashes increase coin gain (not affected by softcaps)",
+    "upg_ref_s2_name": "Digital Wellbeing",
+    "upg_ref_s2_desc": "Time spent in current Reflash increases crystal gain (not affected by softcaps)",
+    "upg_ref_s3_name": "New Gears",
+    "upg_ref_s3_desc": "Reduces minimum automation time to 25ms",
+    "upg_ref_s4_name": "???",
+    "upg_ref_s4_desc": "Coming soon...",
+    "upg_ref_s5_name": "???",
+    "upg_ref_s5_desc": "Coming soon...",
+    "upg_ref_s6_name": "???",
+    "upg_ref_s6_desc": "Coming soon...",
+
+    "upg_ref_b1_name": "Data Transfer",
+    "upg_ref_b1_desc": "Doubles BITs gain",
+
+    "upg_ref_acc1_name": "Stabilizer",
+    "upg_ref_acc1_desc": "Increases minimum Accelerator effect",
+    "upg_ref_acc2_name": "Destabilizer",
+    "upg_ref_acc2_desc": "Increases maximum Accelerator effect",
+    "upg_ref_acc3_name": "Outgoing Speed",
+    "upg_ref_acc3_desc": "Increases base effects of Stabilizers",
+    "upg_ref_acc4_name": "Additional Speed",
+    "upg_ref_acc4_desc": "Increases additional Accelerator effect",
+    "upg_ref_acc5_name": "Accelerator",
+    "upg_ref_acc5_desc": "Speeds up time in game.",
+    "upg_ref_acc5_req": "U-tils in total",
+
+    "upg_algo_11_name": "Node 11",
+    "upg_algo_11_desc": "Increase coin gain per click and second by x3 (not affected by softcaps)",
+    "upg_algo_21_name": "Node 21",
+    "upg_algo_21_desc": "Starts Reflashes with 3 Supercrystals",
+    "upg_algo_22_name": "Node 22",
+    "upg_algo_22_desc": "First 10 Prestiges give 3x more Crystals",
+    "upg_algo_31_name": "Node 31",
+    "upg_algo_31_desc": "Backup upgrades don't reset after Reflashes",
+    "upg_algo_32_name": "Node 32",
+    "upg_algo_32_desc": "First 5 prestige resets give 10x more Prestiges",
+    "upg_algo_41_name": "Node 41",
+    "upg_algo_41_desc": "Doubles Supercoin gain",
+    "upg_algo_42_name": "Node 42",
+    "upg_algo_42_desc": "Increases Shard gain 10x",
+    "upg_algo_43_name": "Node 43",
+    "upg_algo_43_desc": "Starts Reflashes with 2 Fortune Tokens",
+    "upg_algo_51_name": "Node 51",
+    "upg_algo_51_desc": "Unlock Computer (1.1)",
+
+    "respec_tree": "Reset tree after Reflash",
+    "export_tree": "Export tree",
+    "import_tree": "Import tree",
+
+    "presetTitle": "Preset",
+    "renamePreset": "Rename",
+    "nodeOrder": "Node Order",
+    "copyOrder": "Copy",
+    "pasteOrder": "Paste",
+    "resetOrder": "Reset",
+    "saveOrder": "Save",
+    "importOrder": "Import",
+
     "achievementsTitle": "Achievements",
 
     "achievementsDesc": "Unlock achievements and get bonus for α-coins gain! Also some of them has own rewards. For filling a row you will get significant boost for it",
@@ -610,7 +682,8 @@
             "\"I was waiting for you...\"","\"I wish I escape this infinity offline production coding\"","\"Who the hell needs those crystals?\"","\"Maybe I need just to bypass the wall?\"","\"U-multimultiplier\"","\"Shard palace\"","\"Is this a Prestige?\"","\"Crystal Tycoon\"","\"BRAKES FOR LOSERS\"","\"WHAT THE HELL IS KILOMETER?\"",
             "\"Let the game begin!\"", "\"Ah shard here we go again\"", "\"This is NOT game about miners\"", "\"I like the pain\"", "\"Super everything\"", "\"Why shards won't help?\"", "\"Jackpot\"", "\"I was in [REDACTED] dimension\"", "\"NICE\"", "\"Hamon OVERDRIVE\"",
             "Adios.", "After all these years, finally I have them all!", "This is not Sparta", "Modernize yourself. Now!", "Super first 10 thousands", "Soporific virus", "Only invest!", "Be aware of many shards", "Too prestigious", "U-100",
-            "99% Of Gamblers Quit Before They Win Big", "The First Googol of Coins", "Yin and Yang", "INCREDIBLE POWER", "Flaming Drive", "God of Luck", "Game On", "Total Annihilation", "Prestigious Champion", "Finale"
+            "99% Of Gamblers Quit Before They Win Big", "The First Googol of Coins", "Yin and Yang", "INCREDIBLE POWER", "Flaming Drive", "God of Luck", "Game On", "Total Annihilation", "Prestigious Champion", "Finale",
+            "Made In Heaven"
         ]
         },
 
@@ -883,7 +956,7 @@
 
     "aboutGameTitle": "About game",
 
-    "aboutGame": "<ut> Digital God 0.15.6. Prestige Challenges update.</ut> <br> Developed by Humfrey. <br> Icons were drawn by galvares#0000. <br> <br> Digital God was inspired by such awesome games: Antimatter Dimensions, Synergism, Prestige Tree. <br> <br> Thanks everyone for playing!<br>",
+    "aboutGame": "<ut> Digital God 1.0. Reflash update.</ut> <br> Developed by Humfrey. <br> Icons were drawn by galvares#0000. <br> <br> Digital God was inspired by such awesome games: Antimatter Dimensions, Synergism, Prestige Tree. <br> <br> Thanks everyone for playing!<br>",
     "galaxyClickText": "Rate game on galaxy.click",
     "discordText": "Join to discord server",
     "telegramChatText": "Join to telegram chat (russian)",
@@ -909,6 +982,14 @@
     "shop_b6_desc": "Increase Prestiges gain",
     "shop_b7_name": "Energy Drink",
     "shop_b7_desc": "Increase Overdrives effect",
+    "shop_b8_name": "Golden Glove II",
+    "shop_b8_desc": "Increase α-coins per click",
+    "shop_b9_name": "Golden Watch II",
+    "shop_b9_desc": "Increase α-coins per second",
+    "shop_b10_name": "Golden Key II",
+    "shop_b10_desc": "Increase α-coin gain",
+    "shop_b11_name": "Golden Clover",
+    "shop_b11_desc": "Increase the Supercoin chance",
 
     "shop_p1_name": "Crystal Booster",
     "shop_p1_desc": "Increase Crystals gain",
@@ -926,6 +1007,10 @@
     "shop_p7_desc": "Reduces Supercrystal cost scaling",
     "shop_p8_name": "Fortune Ticket",
     "shop_p8_desc": "Increase daily resets of Fortune Boosts by +5",
+    "shop_p9_name": "Credit Card PLUS",
+    "shop_p9_desc": "Increase daily reward and export reward",
+    "shop_p10_name": "REAPER",
+    "shop_p10_desc": "Reduces virus catch chance and their requirements",
 
     "shop_u10_name": "Broken Speedometer",
     "shop_u10_desc": "Unlock Overdrive I",
@@ -985,6 +1070,12 @@
     "limitItemNotification": "You reached limit in ",
     "limitItemNotification2": " at Prestige!",
     "dailyRewardRestartNotification": "You can collect daily reward again!",
+
+    "presetCopyNotification": "Preset copied to clipboard!",
+    "presetPasteNotification": "Preset pasted from clipboard!",
+    "presetSaveNotification": "Preset saved!",
+    "presetResetNotification": "Preset reset!",
+    "presetImportNotification": "Preset imported, available nodes activated!",
 
     "startDescription": "Choose version number above to check it's changelog.",
     "changeLogTitleText": "Changelog",

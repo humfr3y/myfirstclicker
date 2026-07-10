@@ -814,6 +814,70 @@ class BalanceSinglesManager extends UniversalSinglesManager {
     }
 }
 
+class AcceleratorBuyableUpgrade extends UniversalBuyableUpgrade {
+    bulk(x, y = this.targetArray[this.id]) {
+        // Для 5-го улучшения подменяем кошелек на сумму У-телей
+        if (this.id == 5) {
+            x = player.uadders + player.ureducers + player.umultipliers + player.upowers;
+        } else {
+            x = this.state.currency; // Для остальных 1-4 берем обычную валюту
+        }
+        return super.bulk(x, y);
+    }
+}
+
+class AcceleratorManager extends UniversalBuyablesManager {
+    constructor(layerName, upgradesArray, arrayName = 'upgrades') {
+        super(layerName, upgradesArray, arrayName);
+        this._keys = [];
+        upgradesArray.forEach(upg => {
+            this[upg.id] = new AcceleratorBuyableUpgrade(upg, layerName, arrayName);
+            this._keys.push(upg.id);
+        });
+    }
+
+    sum_of_utils() {
+        return player.uadders + player.ureducers + player.umultipliers + player.upowers;
+    }
+
+    canAfford(x) {
+        if (x == 5) return this.sum_of_utils() >= this[x].cost();
+        return super.canAfford(x);
+    }
+
+    buy(x) {
+        if (this.canAfford(x)) {
+            if (x == 5) {
+                this.targetArray[x]++;
+            } else {
+                super.buy(x);
+            }
+        }
+    }
+
+    max(x) {
+        if (this.canAfford(x)) {
+            if (x == 5) {
+                let bulk = this[x].bulk();
+                this.targetArray[x] += bulk;
+            } else {
+                super.max(x);
+            }
+        }
+    }
+
+    max_auto(x) {
+        if (this.canAfford(x)) {
+            if (x == 5) {
+                let bulk = Math.min(this[x].bulk(), MISC.automation.buyable.bulk());
+                this.targetArray[x] += bulk;
+            } else {
+                super.max_auto(x);
+            }
+        }
+    }
+}
+
 // --- КЛАСС АВТОМАТИЗАЦИИ ---
 
 class AutomationTask {

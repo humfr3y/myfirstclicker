@@ -97,7 +97,7 @@ const ACHS = {
         46() { return player.challenge.activated == 8 && player.time.game.prestige.timer >= 28800},
         48() { return player.shard.currency >= 1e100},
         49() { return player.prestige.resets >= 1e8},
-        50() { return (player.uadders + player.ureducers + player.umultipliers + player.upowers) >= 100},
+        50() { return MISC.sum_of_utils() >= 100},
 
         51() { return player.fortune.tokens >= 1},
         52() { return player.coin.total_currency >= 1e100},

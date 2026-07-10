@@ -25,6 +25,7 @@ const GAIN = {
                     [player.shop.upgrades[1], UPGS.shop.buyables[1].effect()],
                     [player.coin.singleUpgrades.includes(12), UPGS.coin.singles[12].effect()],
                     [player.coin.singleUpgrades.includes(23), UPGS.coin.singles[23].effect()],
+                    [player.shop.upgrades[8], UPGS.shop.buyables[8].effect()],
                     [true, GAIN.coin.gain.effect()] // Всегда применяется
                 ];
                 mults.forEach(([cond, val]) => { if (cond) effect = effect.mul(val); });
@@ -70,6 +71,9 @@ const GAIN = {
             effect() { 
                 let val = applyDecimalSoftcap(this);
                 // Оставляем объект Decimal, просто ограничиваем его через встроенный min
+                if (player.reflash.algo.includes(11)) {
+                    val = val.mul(UPGS.reflash.algo.tree[0].effect());
+                }
                 return Decimal.min(val, new Decimal("1.79e308")); 
             },
             softcap() {
@@ -101,6 +105,7 @@ const GAIN = {
                     [player.coin.singleUpgrades.includes(11), UPGS.coin.singles[11].effect()],
                     [player.coin.singleUpgrades.includes(21), UPGS.coin.singles[21].effect()],
                     [ACHS.has(15) && player.prestige.challenge.activated != 8, (1 + 0.0001 * player.clicks.simulated)],
+                    [player.shop.upgrades[9], UPGS.shop.buyables[9].effect()],
                     [true, GAIN.coin.gain.effect()]
                 ];
                 mults.forEach(([cond, val]) => { if (cond) effect = effect.mul(val); });
@@ -130,6 +135,9 @@ const GAIN = {
             effect() { 
                 let val = applyDecimalSoftcap(this);
                 // Оставляем объект Decimal, просто ограничиваем его через встроенный min
+                if (player.reflash.algo.includes(11)) {
+                    val = val.mul(UPGS.reflash.algo.tree[0].effect());
+                }
                 return Decimal.min(val, new Decimal("1.79e308")); 
             },
             softcap() {
@@ -172,6 +180,7 @@ const GAIN = {
                     [player.shard.achievements[1], UNL.shard_achievements[1].effect()],
                     [player.fortune.activatedBoosts[1].activated, UPGS.fortune.boosts[1].effect()],
                     [player.balance.coins.plus, MISC.balance.plusCoins.buff().coinBuff],
+                    [player.shop.upgrades[9], UPGS.shop.buyables[9].effect()],
                     [PRES_CHALLENGE[7].completed(), PRES_CHALLENGE[7].effect()]
                 ];
                 mults.forEach(([cond, val]) => { if (cond) effect = effect.mul(val); });
@@ -181,6 +190,8 @@ const GAIN = {
                 let upowerEff = GAIN.upower.effect();
                 if (upowerEff) effect = effect.pow(upowerEff);
                 if (UPGS.prestige.singles[12].unl()) effect = effect.pow(UPGS.prestige.singles[12].effect());
+
+                if (UPGS.reflash.singles[11].unl()) effect = effect.mul(UPGS.reflash.singles[11].effect());
 
                 return effect;
             },
@@ -206,7 +217,8 @@ const GAIN = {
                 [player.shop.upgrades[5], UPGS.shop.buyables[5].effect()],
                 [UPGS.supercrystal[33].unl(), UPGS.supercrystal[33].effect()],
                 [player.fortune.activatedBoosts[3].activated, UPGS.fortune.boosts[3].effect()],
-                [player.prestige.break.buyables[3], UPGS.prestige.break.buyables[3].effect()]
+                [player.prestige.break.buyables[3], UPGS.prestige.break.buyables[3].effect()],
+                [player.reflash.algo.includes(42), UPGS.reflash.algo.tree[6].effect()]
             ];
             mults.forEach(([cond, val]) => { if (cond) effect = effect * val; });
             return Math.min(effect, 1.79e308);
@@ -222,7 +234,8 @@ const GAIN = {
                 [true, ACHS.effect.shard()],
                 [player.shard.achievements[4], UNL.shard_achievements[4].effect()],
                 [player.fortune.activatedBoosts[3].activated, UPGS.fortune.boosts[3].effect()],
-                [player.prestige.break.buyables[3], UPGS.prestige.break.buyables[3].effect()]
+                [player.prestige.break.buyables[3], UPGS.prestige.break.buyables[3].effect()],
+                [player.reflash.algo.includes(42), UPGS.reflash.algo.tree[6].effect()]
             ];
             mults.forEach(([cond, val]) => { if (cond) effect = effect * val; });
             return Math.min(effect, 1.79e308);
@@ -233,8 +246,10 @@ const GAIN = {
         effect: {
             no_softcap_effect() {
                 let effect = new Decimal("1").add(player.shard.currency / 100);
+
+                if (player.shard.currency === 0) return new Decimal("1");
                 
-                if (ACHS.has(30)) effect = effect.mul(1 + Math.pow(player.prestige.resets, 0.3));
+                if (ACHS.has(30)) effect = effect.mul(Math.pow(player.prestige.resets + 1, 0.3));
                 if (PRES_CHALLENGE[3].completed()) effect = effect.mul(PRES_CHALLENGE[3].effect())
                 if (player.shard.singleUpgrades.includes(21)) effect = effect.mul(UPGS.shard.singles[21].effect());
 
@@ -295,6 +310,7 @@ const GAIN = {
             if (UPGS.supercrystal[33].unl()) gain *= UPGS.supercrystal[33].effect();
             if (player.fortune.activatedBoosts[3].activated) gain *= UPGS.fortune.boosts[3].effect();
             if (player.prestige.break.buyables[3]) gain *= UPGS.prestige.break.buyables[3].effect()
+            if (player.reflash.algo.includes(42)) gain *= UPGS.reflash.algo.tree[6].effect()
             
             return { gain: Math.min(gain, 1.7e308), broken_crystals };
         }
@@ -321,6 +337,7 @@ const GAIN = {
                 [player.shard.achievements[3], UNL.shard_achievements[3].effect()],
                 [player.fortune.activatedBoosts[2].activated, UPGS.fortune.boosts[2].effect()],
                 [player.balance.coins.minus, MISC.balance.minusCoins.buff().crystalGainBuff],
+                [player.reflash.algo.includes(22) && player.prestige.true_resets <= 10, UPGS.reflash.algo.tree[2].effect()],
                 [player.prestige.challenge.completed.includes(1), PRES_CHALLENGE[1].effect()]
             ];
             mults.forEach(([cond, val]) => { if (cond) gain *= val; });
@@ -330,7 +347,9 @@ const GAIN = {
         },
         reset() {
             const { softcap_start, softcap_power } = this.softcap();
-            return softCap(this.no_softcap_reset(), softcap_start, softcap_power);
+            let gain = softCap(this.no_softcap_reset(), softcap_start, softcap_power);
+            if (UPGS.reflash.singles[12].unl()) gain *= UPGS.reflash.singles[12].effect()
+            return gain;
         },
         offline_calc() {
             return player.prestige.singleUpgrades.includes(34) ? UPGS.prestige.singles[34].effect()/60 : 0
@@ -377,7 +396,8 @@ const GAIN = {
                 [player.prestige.break.singles.includes(13), UPGS.prestige.break.singles[13].effect()],
                 [player.shop.upgrades[6], UPGS.shop.buyables[6].effect()],
                 [player.shard.achievements[7], UNL.shard_achievements[7].effect()],
-                [player.fortune.upgrades.singles.includes(22), 2]
+                [player.fortune.upgrades.singles.includes(22), 2],
+                [player.reflash.algo.includes(32) && player.prestige.true_resets <= 5, UPGS.reflash.algo.tree[4].effect()],
             ];
             mults.forEach(([cond, val]) => { if (cond) gain *= val; });
             return Math.floor(gain);
@@ -399,6 +419,7 @@ const GAIN = {
                 [player.prestige.break.singles.includes(12), UPGS.prestige.break.singles[12].effect()],
                 [player.shard.achievements[2], UNL.shard_achievements[2].effect()],
                 [player.fortune.activatedBoosts[4].activated, UPGS.fortune.boosts[4].effect()],
+                [player.shop.upgrades[11], UPGS.shop.buyables[11].effect()],
                 [player.balance.upgrades.singles.includes(31), MISC.balance.plusCoins.buff().chanceBuffer]
             ];
             mults.forEach(([cond, val]) => { if (cond) chance *= val; });
@@ -410,23 +431,39 @@ const GAIN = {
             return randomNumber(0, (100 / this.chance()) - 1) === 0;
         },
         gain() {
-            return ACHS.has(44) ? 2 : 1;
+            let gain = 1;
+            const mults = [
+                [ACHS.has(44), 2],
+                [player.reflash.algo.includes(41), UPGS.reflash.algo.tree[5].effect()],
+            ];
+            mults.forEach(([cond, val]) => { if (cond) gain *= val; });
+            return gain;
         },
         daily: {
             min() {
                 let effect = 25;
                 if (player.shop.permanentUpgrades[2]) effect *= UPGS.shop.permanent[2].effect();
+                if (player.shop.permanentUpgrades[9]) effect *= UPGS.shop.permanent[9].effect();
                 if (ACHS.has(52)) effect *= 2;
                 return effect;
             },
             max() {
                 let effect = 100;
                 if (player.shop.permanentUpgrades[2]) effect *= UPGS.shop.permanent[2].effect();
+                if (player.shop.permanentUpgrades[9]) effect *= UPGS.shop.permanent[9].effect();
                 if (ACHS.has(52)) effect *= 2;
                 return effect;
             },
             reward() {
                 return randomNumber(this.min(), this.max());
+            }
+        },
+        export: {
+            base: 30,
+            reward() {
+                let effect = this.base;
+                if (player.shop.permanentUpgrades[9]) effect *= UPGS.shop.permanent[9].effect();
+                return effect
             }
         },
         gain_per_second() {
@@ -599,12 +636,14 @@ const GAIN = {
         player.time.game.prestige.timer += timeVal;
         player.time.umultiplier += timeVal;
         player.time.upower += timeVal;
+        player.time.game.reflash.timer += timeVal
 
         // Реальное время начисляется только при обычном оффлайне (варп не старит нас в реале)
         if (!isWarp) {
             let realTimeGain = UPGS.supercrystal[31].unl() ? timeVal / 5 : timeVal;
             player.time.real.total.timer += realTimeGain;
             player.time.real.prestige.timer += realTimeGain;
+            player.time.real.reflash.timer += realTimeGain;
         }
     },
 
@@ -668,7 +707,8 @@ const UNL = {
     supercrystal: {
         pour() { return Math.max(Math.min(findRatio(player.supercrystal.consumedShards, this.cost()), 100), 0); },
         cost() {
-            let cost = 1e15 * Math.pow(1000 - UPGS.shop.permanent[7].effect(), player.supercrystal.total_currency);
+            let total_currency = player.reflash.algo.includes(21) ? player.supercrystal.total_currency - 3 : player.supercrystal.total_currency;
+            let cost = 1e15 * Math.pow(1000 - UPGS.shop.permanent[7].effect(), total_currency);
             cost /= UPGS.minerals[3].effect3();
             if (PRES_CHALLENGE[6].completed()) cost /= PRES_CHALLENGE[6].effect();
             return cost;
@@ -743,7 +783,7 @@ const UNL = {
         },
         check() {
             // Проходим по всем 83 элементам без вычисления длины ключей каждый раз
-            for (let i = 1; i <= 90; i++) {
+            for (let i = 1; i <= 97; i++) {
                 if (this[i]) {
                     if (this[i].element().classList.contains('automationUpgrade')) this.unl(i, this[i].type !== 'none' ? 'none' : 'block') 
                     else this.unl(i, this[i].type !== 'none' ? 'none' : 'flex');
@@ -766,9 +806,9 @@ const UNL = {
         13: { type: 'block', element: () => document.getElementById('superCrystalsSelect'), req: () => player.progressBarGoals.includes(3) },
         14: { type: 'block', element: () => document.getElementById('mineralsSelect'), req: () => player.progressBarGoals.includes(4) },
         15: { type: 'block', element: () => document.getElementById('challengeSelect'), req: () => player.progressBarGoals.includes(2) },
-        16: { type: 'flex', element: () => document.getElementById('post11challenge'), req: () => player.challenge.completed.includes(11) },
-        17: { type: 'flex', element: () => document.getElementById('post11challenge2'), req: () => player.challenge.completed.includes(11) },
-        18: { type: 'flex', element: () => document.getElementById('post11challenge3'), req: () => player.challenge.completed.includes(11) },
+        16: { type: 'flex', element: () => document.getElementById('post11challenge'), req: () => player.challenge.completed.includes(11) || player.reflash.resets >= 1 },
+        17: { type: 'flex', element: () => document.getElementById('post11challenge2'), req: () => player.challenge.completed.includes(11) || player.reflash.resets >= 1 },
+        18: { type: 'flex', element: () => document.getElementById('post11challenge3'), req: () => player.challenge.completed.includes(11) || player.reflash.resets >= 1 },
         19: { type: 'flex', element: () => document.getElementById('postAch32'), req: () => ACHS.has(32) },
         20: { type: 'flex', element: () => document.getElementsByClassName('postAch33')[0], req: () => ACHS.has(33) },
         21: { type: 'flex', element: () => document.getElementsByClassName('postAch33')[1], req: () => ACHS.has(33) },
@@ -835,7 +875,7 @@ const UNL = {
         // 82: { type: 'flex', element: () => document.getElementById('shardeffectsc'), req: () => player.shard.currency >= 1e10 },
         81: { type: 'inline-block', element: () => document.getElementById('exitPChallenge'), req: () => player.prestige.challenge.activated !== 0 },
         82: { type: 'flex', element: () => document.getElementById('breakPUs'), req: () => player.prestige.break.singles.includes(25)},
-        83: { type: 'flex', element: () => document.getElementById('doReflash'), req: () => player.prestige.challenge.completed.length >= 4},
+        83: { type: 'flex', element: () => document.getElementById('doReflash'), req: () => player.prestige.challenge.completed.length >= 4 || player.reflash.resets >= 1},
         84: { type: 'block', element: () => document.getElementById('challengePrestigeSelect'), req: () => player.progressBarGoals.includes(8)},
         85: { type: 'flex', element: () => document.getElementById('prestigeChallengePair2'), req: () => player.prestige.challenge.completed.length >= 1 },
         86: { type: 'flex', element: () => document.getElementById('prestigeChallengePair3'), req: () => player.prestige.challenge.completed.length >= 2 },
@@ -843,6 +883,15 @@ const UNL = {
         88: { type: 'block', element: () => document.getElementById('helpTab22'), req: () => player.progressBarGoals.includes(8) },
         89: { type: 'block', element: () => document.getElementById('aquaticPick'), req: () => ACHS.has(51) },
         90: { type: 'block', element: () => document.getElementById('supercoinsGain'), req: () => player.shop.unlockables.includes(6) },
+        91: { type: 'block', element: () => document.getElementById('reflashSelect'), req: () => player.reflash.resets >= 1 },
+        92: { type: 'block', element: () => document.getElementById('recentReflashes'), req: () => player.reflash.resets >= 1 },
+        93: { type: 'block', element: () => document.getElementById('reflashSection'), req: () => player.reflash.resets >= 1 },
+        94: { type: 'block', element: () => document.getElementById('bitsCount'), req: () => player.reflash.resets >= 1 }, 
+        95: { type: 'flex', element: () => document.getElementById('postReflashShop'), req: () => player.reflash.resets >= 1 }, 
+        96: { type: 'flex', element: () => document.getElementById('postReflashShop2'), req: () => player.reflash.resets >= 1 }, 
+        97: { type: 'block', element: () => document.getElementById('worldSpeed'), req: () => player.reflash.acceleratorUpgrades[5] >= 1 }, 
+        
+        
     }
 };
 
@@ -926,7 +975,7 @@ const MISC = {
         if (!player.settings.offline) return 0;
         let max = ACHS.has(22) ? 28800 : 21600
         let time = Math.max(Math.min((y - x) / 1000, max), 0);
-        return UPGS.supercrystal[31].unl() ? time * 2 : time;
+        return UPGS.supercrystal[31].unl() ? time * 2 * UPGS.reflash.accelerator[5].effect() : time * UPGS.reflash.accelerator[5].effect();
     },
     free_upgrade: {
         1() { 
@@ -960,7 +1009,8 @@ const MISC = {
     average: {
         _getStat(valFunc) {
             let sum = 0;
-            let resets = player.prestige.table_resets || 1; // Защита от деления на ноль
+            let resets = player.prestige.table_resets; // Защита от деления на ноль
+            if (resets === 0) return 0;
             for (let i = 0; i < resets; i++) sum += valFunc(player.prestige.prestigeTable[i]);
             return sum / resets;
         },
@@ -973,7 +1023,8 @@ const MISC = {
         reflash: {
             _getStat(valFunc) {
             let sum = 0;
-            let resets = player.reflash.table_resets || 1; // Защита от деления на ноль
+            let resets = player.reflash.table_resets; // Защита от деления на ноль
+            if (resets === 0) return 0;
             for (let i = 0; i < resets; i++) sum += valFunc(player.reflash.resetTable[i]);
             return sum / resets;
             },
@@ -1093,6 +1144,9 @@ const MISC = {
                 return { coinNerf, coinGainSoftcapPuller, upgradePriceMultiplier };
             }
         }
+    },
+    sum_of_utils() {
+        return (player.uadders + player.ureducers + player.umultipliers + player.upowers)
     }
 };
 
@@ -1164,7 +1218,6 @@ function loop() {
     player.time.currentTime = new_date;
     time = Math.max((new_date - player.time.savedTime) / 1000, 0);
 
-
     if (player.settings.auto_save) {
         MISC.auto_save_timer += time;
         if (MISC.auto_save_timer >= player.settings.autosave_interval / 1000) autoSaveThis();
@@ -1172,27 +1225,27 @@ function loop() {
         MISC.auto_save_timer = 0;
     }
     if (isNaN(player.coin.currency)) player.coin.currency = 1.79e308
-    else player.coin.currency += (player.challenge.activated !== 0 && player.coin.currency >= 1e15) ? 0 : GAIN.coin.second.effect() * time;
+    else player.coin.currency += (player.challenge.activated !== 0 && player.coin.currency >= 1e15) ? 0 : GAIN.coin.second.effect() * time * UPGS.reflash.accelerator[5].effect();
     if (isNaN(player.coin.total_currency)) player.coin.total_currency = 1.79e308
-    else player.coin.total_currency += GAIN.coin.second.effect() * time;
+    else player.coin.total_currency += GAIN.coin.second.effect() * time * UPGS.reflash.accelerator[5].effect();
     if (isNaN(player.coin.this_reflash_currency)) player.coin.this_reflash_currency = 1.79e308
-    else player.coin.this_reflash_currency += GAIN.coin.second.effect() * time;
+    else player.coin.this_reflash_currency += GAIN.coin.second.effect() * time * UPGS.reflash.accelerator[5].effect();
     // Хардкап: не пускаем монеты за предел
     if (player.coin.currency > 1.79e308) player.coin.currency = 1.79e308;
     if (player.shard.currency > 1.79e308) player.shard.currency = 1.79e308;
     if (player.coin.total_currency > 1.79e308) player.coin.total_currency = 1.79e308;
     if (player.coin.this_reflash_currency > 1.79e308) player.coin.this_reflash_currency = 1.79e308;
     
-    player.shard.currency += GAIN.shard.second() * time;
-    player.balance.neutral += GAIN.balance.generation() * time;
-    player.balance.scales_of_balance += GAIN.balance.scales_of_balance() * time;
+    player.shard.currency += GAIN.shard.second() * time * UPGS.reflash.accelerator[5].effect();
+    player.balance.neutral += GAIN.balance.generation() * time * UPGS.reflash.accelerator[5].effect();
+    player.balance.scales_of_balance += GAIN.balance.scales_of_balance() * time * UPGS.reflash.accelerator[5].effect();
 
-    player.supercoin.currency += GAIN.supercoin.gain_per_second() * time;
-    player.supercoin.total_currency += GAIN.supercoin.gain_per_second() * time;
+    player.supercoin.currency += GAIN.supercoin.gain_per_second() * time * UPGS.reflash.accelerator[5].effect();
+    player.supercoin.total_currency += GAIN.supercoin.gain_per_second() * time * UPGS.reflash.accelerator[5].effect();
 
-    player.time.game.total.timer += time;
-    player.time.game.prestige.timer += time;
-    player.time.game.reflash.timer += time;
+    player.time.game.total.timer += time * UPGS.reflash.accelerator[5].effect();
+    player.time.game.prestige.timer += time * UPGS.reflash.accelerator[5].effect();
+    player.time.game.reflash.timer += time * UPGS.reflash.accelerator[5].effect();
     convert_time('game', 'total');
     convert_time('game', 'prestige');
     convert_time('game', 'reflash');
@@ -1204,10 +1257,10 @@ function loop() {
     convert_time('real', 'prestige');
     convert_time('real', 'reflash');
     
-    player.time.umultiplier += time;
-    player.time.upower += time;
-    player.time.uadder += time;
-    player.time.ureducer += time;
+    player.time.umultiplier += time * UPGS.reflash.accelerator[5].effect();
+    player.time.upower += time * UPGS.reflash.accelerator[5].effect();
+    player.time.uadder += time * UPGS.reflash.accelerator[5].effect();
+    player.time.ureducer += time * UPGS.reflash.accelerator[5].effect();
     
     player.time.real.daily.timer = Math.max((player.time.next_daily - player.time.currentTime) / 1000, 0);
     convert_time('real', 'daily');
@@ -1249,6 +1302,10 @@ function loop() {
     UPGS.balance.buyables.checkDisable();
     UPGS.balance.singles.checkDisable();
 
+    UPGS.reflash.buyables.checkDisable();
+    UPGS.reflash.singles.checkDisable();
+    UPGS.reflash.accelerator.checkDisable();
+
     UPGS.coin.buyables.checkPurchased();
     UPGS.coin.singles.checkPurchased();
     UPGS.prestige.singles.checkPurchased();
@@ -1257,6 +1314,9 @@ function loop() {
     UPGS.prestige.break.singles.checkPurchased();
     UPGS.fortune.upgrades.singles.checkPurchased();
     UPGS.balance.singles.checkPurchased();
+    UPGS.reflash.singles.checkPurchased();
+    UPGS.reflash.algo.updateStates();
+    
 
     MISC.balance.ratio();
     UNL.shard_achievements.check();
@@ -1374,10 +1434,11 @@ function fillTheProgressBar(type, number) {
 }
 
 function fillTheProgressBar2() {
-    let sub = Math.min(player.supercrystal.consumedShards * Math.pow(1.337, player.supercrystal.total_currency), player.supercrystal.consumedShards, (UNL.supercrystal.cost() - player.supercrystal.consumedShards));
+    let total_currency = player.reflash.algo.includes(21) ? player.supercrystal.total_currency - 3 : player.supercrystal.total_currency;
+    let sub = Math.min(player.supercrystal.consumedShards * Math.pow(1.337, total_currency), player.supercrystal.consumedShards, (UNL.supercrystal.cost() - player.supercrystal.consumedShards));
     UNL.supercrystal.interval = setInterval(() => {
         if (player.shard.currency >= sub) {
-            sub = Math.min(100 + player.supercrystal.consumedShards * Math.pow(1.337, player.supercrystal.total_currency), player.shard.currency, (UNL.supercrystal.cost() - player.supercrystal.consumedShards));
+            sub = Math.min(100 + player.supercrystal.consumedShards * Math.pow(1.337, total_currency), player.shard.currency, (UNL.supercrystal.cost() - player.supercrystal.consumedShards));
             player.shard.currency -= sub;
             player.supercrystal.consumedShards += sub;
             if (UNL.supercrystal.pour() >= 100) {
@@ -1546,6 +1607,12 @@ function selectSubTab(argument, isFlex, mainTabType) {
         if (el) el.style.display = "none";
     });
     argument.style.display = isFlex ? "flex" : "block";
+
+    if (argument.id === 'reflashTreeTab' || argument.id === 'acceleratorTab') {
+        requestAnimationFrame(() => {
+            drawTreeLines();
+        });
+    }
     
     document.getElementsByClassName('mainSettings')[0].style.display = (argument === coinsTab) ? "flex" : "none";
     document.getElementsByClassName('mainSettings')[3].style.display = (argument === balanceTab) ? "flex" : "none";
@@ -1585,8 +1652,8 @@ function changelog() { changelogWindow.style.display = "block"; myPopupBackdrop1
 function gameLoreOpen() { gameLoreWindow.style.display = "block"; myPopupBackdrop1.style.display = "flex"; toggleBadges(['badge-settings-2', 'badge-misc-2', 'badge-lore'], false)}
 function howToPlayOpen() { gameHelpWindow.style.display = "flex"; myPopupBackdrop1.style.display = "flex"; toggleBadges(['badge-settings-1', 'badge-misc-1', 'badge-h2p'], false)}
 
-function openWindow(arg, isFlex) {
-    ['confirmationButtons', 'whichCode', 'dailyDesc', 'breakCrystal', 'brokeCrystals', 'falseBrokeCrystals', 'welcomeToDigitalGod', 'chooseSaveDiv', 'reflashConfirmation'].forEach(id => {
+function openWindow(arg, isFlex, number) {
+    ['confirmationButtons', 'whichCode', 'dailyDesc', 'breakCrystal', 'brokeCrystals', 'falseBrokeCrystals', 'welcomeToDigitalGod', 'chooseSaveDiv', 'reflashConfirmation', 'presetEditor'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = "none";
     });
@@ -1601,7 +1668,7 @@ function openWindow(arg, isFlex) {
         if (arg === 'hardReset') { windowTitle2.innerHTML = text.window.hard; windowTitle2.style.fontSize = 'calc(24px * var(--font-scale))'; yesHR.style.display = "block"; }
         else { windowTitle2.innerHTML = text.window.NaN; windowTitle2.style.fontSize = 'calc(14px * var(--font-scale))'; yesRP.style.display = "block"; }
     } else {
-        const map = { 'code': whichCode, 'daily': dailyDesc, 'break': breakCrystal, 'submit': brokeCrystals, 'falseSubmit': falseBrokeCrystals, 'welcome': welcomeToDigitalGod, 'chooseSave': chooseSaveDiv, 'reflashConfirm': reflashConfirmation };
+        const map = { 'code': whichCode, 'daily': dailyDesc, 'break': breakCrystal, 'submit': brokeCrystals, 'falseSubmit': falseBrokeCrystals, 'welcome': welcomeToDigitalGod, 'chooseSave': chooseSaveDiv, 'reflashConfirm': reflashConfirmation, 'presetEditor': presetEditor };
         if (map[arg]) map[arg].style.display = arg === 'break' ? 'flex' : 'block';
     }
     switch (arg) {
@@ -1615,13 +1682,18 @@ function openWindow(arg, isFlex) {
         case 'break':
         case 'brokeCrystals':    
         case 'falseBrokeCrystals':
-        windowGame.style.height = '250px'
+            windowGame.style.height = '250px'
+        case 'presetEditor':
+            windowGame.style.height = '320px'
+            player.reflash.selectedPreset = number;
+            document.getElementById('presetName').innerText = player.reflash.presets[number].name;
+            document.getElementById('nodeOrderInput').value = player.reflash.presets[number].ids.join(', ');
             break;
         case 'reflashConfirm':
             windowGame.style.height = '400px'
             windowGame.style.width = '500px'
             windowGame.style.fontSize = 'calc(16px * var(--font-scale))'
-
+            break;
         default:
             break;
     }
@@ -1682,7 +1754,9 @@ function muteTheAudio() {
     else { THEMEOFTHEGREAT.currentTime = 0; THEMEOFTHEGREAT.pause(); }
 }
 
-// --- СОЦИАЛЬНЫЕ СЕТИ И ССЫЛКИ ---
+function switchConfirmation() {
+    player.settings.confirmations.reflash = !player.settings.confirmations.reflash;
+}
 
 function nextShopPage(direction) {
     const isRight = direction === 'right';

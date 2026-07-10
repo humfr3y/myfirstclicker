@@ -178,6 +178,8 @@ const LAYERS = {
             player.prestige.total_currency += cr_gain;
             player.prestige.this_reflash_currency += cr_gain;
             player.prestige.resets += GAIN.prestige.reset();
+            player.prestige.true_resets++
+
             PROGRESS.add(1);
     
             for (let i = player.prestige.table_resets - 1; i > 0; i--) {
@@ -261,6 +263,8 @@ const LAYERS = {
 
             if (!ACHS.has(61)) ACHS.unl(61);
 
+            rollNextAcceleratorSeed();
+
             // Исправлено начисление валюты перепрошивания
             let refl_gain = 1;
             player.reflash.currency += refl_gain;
@@ -284,18 +288,36 @@ const LAYERS = {
     
             if (player.reflash.table_resets < 10) player.reflash.table_resets++;
 
-            LAYERS.doReflashReset();
-
             if (player.time.real.reflash.timer < player.time.real.fastestReflash.timer) {
                 updateTimeObject(player.time.real.fastestReflash, player.time.real.reflash.timer);
             }
+
             if (player.time.game.reflash.timer < player.time.game.fastestReflash.timer) {
                 updateTimeObject(player.time.game.fastestReflash, player.time.game.reflash.timer);
             }
 
+            LAYERS.doReflashReset();
+
             player.time.game.reflash.timer = 0;
             player.time.real.reflash.timer = 0;
             hidePopup() 
+
+            if (player.reflash.respecTree) {
+                UPGS.reflash.algo.respec()
+                player.reflash.respecTree = false
+            }
+//[player.reflash.algo.includes(11), UPGS.reflash.algo[0].effect()],
+            if (player.reflash.algo.includes(21)) {
+                player.supercrystal.currency += 3
+                player.supercrystal.total_currency += 3
+            }
+            if (player.reflash.algo.includes(31)) {
+                player.prestige.singleUpgrades = [41, 42, 43, 44]
+            }
+            if (player.reflash.algo.includes(43)) {
+                player.fortune.tokens += 2
+                player.fortune.total_tokens += 2
+            }
         },
     },
     
@@ -423,7 +445,9 @@ const LAYERS = {
         player.time.game.reflash = getZeroTime();
         player.time.game.prestige = getZeroTime();
         player.time.real.reflash = getZeroTime();
-        player.time.real.prestige = getZeroTime();
+        player.time.game.fastestPrestige = getMaxTime();
+        player.time.real.fastestPrestige = getMaxTime();
+
         player.time.umultiplier = 0;
         player.time.upower = 0;
         player.time.uadder = 0;
@@ -462,8 +486,3 @@ const MILESTONES = {
     }
 };
 
-document.addEventListener("keydown", function(event) {
-    if ((event.key === "P" || event.key === "p" || event.key === "з" || event.key === "З") && player.prestige.total_currency >= 1) {
-        LAYERS.prestige.doReset();
-    }
-});

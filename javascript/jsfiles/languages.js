@@ -115,6 +115,10 @@ setInterval(() => {
         case 'eventTab':
             loadTranslationsEvent();
             break;
+
+        case 'reflashTab':
+            loadTranslationsReflash();
+            break;
     }
 }, 50);
 
@@ -126,9 +130,13 @@ function loadTranslationsAlways() {
     // 1. Верхняя панель (СВЕРХБЫСТРОЕ ОБНОВЛЕНИЕ ЦИФР)
     document.getElementById('top_coins_val').textContent = formatNumber(player.coin.currency);
     document.getElementById('top_coins_gain_val').textContent = formatNumber(GAIN.coin.second.effect(), 'boost');
-    
+    document.getElementById('worldSpeedValue').textContent = formatNumber(UPGS.reflash.accelerator[5].effect(), 'boost');
+
     const topCrystals = document.getElementById('top_crystals_val');
     if (topCrystals) topCrystals.textContent = formatNumber(player.prestige.currency, 'floor');
+
+    const topBits = document.getElementById('top_ref_cur_val');
+    if (topBits) topBits.textContent = formatNumber(player.reflash.currency, 'floor')
 
     document.getElementById('top_supercoins_val').textContent = formatNumber(player.supercoin.currency);
     
@@ -446,8 +454,8 @@ function loadTranslationsShop() {
     document.getElementById('top_shop_sc_val').textContent = formatNumber(player.supercoin.currency, 'boost');;
     document.getElementById('top_scoins_gain_val').textContent = formatNumber(GAIN.supercoin.gain_per_second(), 'power', 3);
 
-    // 1. Покупаемые улучшения (Buyables 1-7)
-    for (let i = 1; i <= 7; i++) {
+    // 1. Покупаемые улучшения (Buyables 1-11)
+    for (let i = 1; i <= 11; i++) {
         let max = UPGS.shop.buyables[i].maxAmount;
         let amt = player.shop.upgrades[i];
         
@@ -474,11 +482,13 @@ function loadTranslationsShop() {
         5: 'number',  // Midas Touch (+1)
         6: 'power',   // Energy Shard (^0.5)
         7: 'number',  // Crystal Sword (-1)
-        8: 'number'   // Fortune Ticket (+2)
+        8: 'number',   // Fortune Ticket (+2)
+        9: 'percent',
+        10: 'percent',
     };
 
-    // 2. Постоянные улучшения (Permanents 1-8)
-    for (let i = 1; i <= 8; i++) {
+    // 2. Постоянные улучшения (Permanents 1-10)
+    for (let i = 1; i <= 10; i++) {
         let max = UPGS.shop.permanent[i].maxAmount;
         let amt = player.shop.permanentUpgrades[i];
         let fmt = fmtMap[i];
@@ -618,16 +628,16 @@ function loadTranslationsInfo() {
 
     let fpt_timer = player.time.real.fastestPrestige.timer;
     let fpt_str = '';
-    if (fpt_timer > 86399) fpt_str += formatNumber(player.time.game.fastestPrestige.days, 'floor') + ' ' + i18next.t('daysText') + ' ';
-    if (fpt_timer > 3599) fpt_str += formatNumber(player.time.game.fastestPrestige.hours, 'floor') + ' ' + i18next.t('hoursText') + ' ';
+    if (fpt_timer > 86399) fpt_str += formatNumber(player.time.real.fastestPrestige.days, 'floor') + ' ' + i18next.t('daysText') + ' ';
+    if (fpt_timer > 3599) fpt_str += formatNumber(player.time.real.fastestPrestige.hours, 'floor') + ' ' + i18next.t('hoursText') + ' ';
     if (fpt_timer > 59) fpt_str += formatNumber(player.time.real.fastestPrestige.minutes, 'floor') + ' ' + i18next.t('minutesText') + ' ';
     fpt_str += (fpt_timer >= 1 ? formatNumber(player.time.real.fastestPrestige.seconds, 'floor') : formatNumber(fpt_timer, 'boost')) + ' ' + i18next.t('secondsText');
     document.getElementById('stat_fpt').textContent = fpt_str;
 
     let fret_timer = player.time.real.fastestReflash.timer;
     let fret_str = '';
-    if (fret_timer > 86399) fret_str += formatNumber(player.time.game.fastestReflash.days, 'floor') + ' ' + i18next.t('daysText') + ' ';
-    if (fret_timer > 3599) fret_str += formatNumber(player.time.game.fastestReflash.hours, 'floor') + ' ' + i18next.t('hoursText') + ' ';
+    if (fret_timer > 86399) fret_str += formatNumber(player.time.real.fastestReflash.days, 'floor') + ' ' + i18next.t('daysText') + ' ';
+    if (fret_timer > 3599) fret_str += formatNumber(player.time.real.fastestReflash.hours, 'floor') + ' ' + i18next.t('hoursText') + ' ';
     if (fret_timer > 59) fret_str += formatNumber(player.time.real.fastestReflash.minutes, 'floor') + ' ' + i18next.t('minutesText') + ' ';
     fret_str += (fret_timer >= 1 ? formatNumber(player.time.real.fastestReflash.seconds, 'floor') : formatNumber(fret_timer, 'boost')) + ' ' + i18next.t('secondsText');
     document.getElementById('stat_fret').textContent = fret_str;
@@ -1030,12 +1040,79 @@ function loadTranslationsSettings() {
     // Используем textContent для мгновенного обновления текста на переключателях
     document.getElementById('autoSavingGame').textContent = i18next.t('autosaveGame', {autoSave: player.settings.auto_save});
     document.getElementById('muteAudio').textContent = i18next.t('mutingAudio', {status: player.settings.mutedAudio});
+    document.getElementById('switchConfirmation').textContent = i18next.t('switchConfirmation', {status: player.settings.confirmations.reflash});
     document.getElementById('toggleOffline').textContent = i18next.t('offlineGainToggle', {offline: player.settings.offline});
     
     // Обновление текста ползунка автосохранения
     let sliderVal = mySlider.value / 1000;
     let formattedVal = sliderVal < 1 ? formatNumber(sliderVal, 'boost') : formatNumber(sliderVal);
     document.getElementById('autosaveSlider').textContent = i18next.t('autoSaveSlider', {x: formattedVal});
+
+    switch (player.got_export_reward) {
+        case false:
+            document.getElementById('expSave').innerHTML = i18next.t('exportGame2', {sc: formatNumber(GAIN.supercoin.export.reward())});
+            break;
+        case true:
+            document.getElementById('expSave').innerHTML = i18next.t('exportGame3', {
+            s: formatNumber(player.time.real.daily.seconds), 
+            m: formatNumber(player.time.real.daily.minutes), 
+            h: formatNumber(player.time.real.daily.hours)
+        });
+            break;
+        default:
+            break;
+    }
+}
+
+function loadTranslationsReflash() {
+    for (let i = 1; i <= 1; i++) {
+        document.getElementById(`rBuyableU${i}_amount`).textContent = formatNumber(player.reflash.upgrades[i]);
+        document.getElementById(`rBuyableU${i}_effect`).textContent = formatNumber(UPGS.reflash.buyables[i].effect(), 'boost');
+        document.getElementById(`rBuyableU${i}_cost`).textContent = formatNumber(UPGS.reflash.buyables[i].cost());
+    }
+
+    // 2. Единичные (Single) улучшения перепрошивания
+    const rSingleUpgIds = [11, 12, 13, 21, 22, 23];
+    for (let i = 1; i <= 3; i++) {
+        let upg_id = rSingleUpgIds[i - 1];
+        let isBought = player.reflash.singleUpgrades.includes(upg_id);
+        
+        // Скрываем цену, если куплено
+        document.getElementById(`rSingleU${i}_cost_cont`).style.display = isBought ? 'none' : 'inline';
+        if (!isBought) {
+            document.getElementById(`rSingleU${i}_cost`).textContent = formatNumber(UPGS.reflash.singles[upg_id].cost());
+        }
+        if (i == 1 || i == 2) {
+        document.getElementById(`rSingleU${i}_effect`).textContent = formatNumber(UPGS.reflash.singles[upg_id].effect(), 'boost');
+        }
+    }
+    // 3. Акселератор
+    for (let i = 1; i <= 5; i++) {
+        document.getElementById(`acceleratorU${i}_effect`).textContent = formatNumber(UPGS.reflash.accelerator[i].effect(), 'boost');
+        document.getElementById(`acceleratorU${i}_amount`).textContent = formatNumber(player.reflash.acceleratorUpgrades[i]);
+        document.getElementById(`acceleratorU${i}_cost`).textContent = formatNumber(UPGS.reflash.accelerator[i].cost());
+    }
+
+    // 4. Алгоритм древо
+        UPGS.reflash.algo.tree.forEach(node => {
+            let btn = document.getElementById('algoNode_' + node.id);
+            if (btn) {
+                // Достаем переводы
+                let name = i18next.t(`upg_algo_${node.id}_name`);
+                let desc = i18next.t(`upg_algo_${node.id}_desc`);
+                let costWord = i18next.t('word_cost');
+                let currencyWord = i18next.t('currency_bits');
+                
+                // Собираем всё в саму кнопку: Название (жирное) -> Описание -> Стоимость (тусклая)
+                btn.innerHTML = `
+                    <ut>${name}</ut>
+                    <span>${desc}</span>`;
+                if (!player.reflash.algo.includes(node.id)) btn.innerHTML += `<span>${costWord} ${node.cost} ${currencyWord}</span>`
+            }
+        });
+
+        const topBits = document.getElementById('top_ref_cur_val2');
+        if (topBits) topBits.textContent = formatNumber(player.reflash.currency, 'floor')
 }
 
 function loadTranslationsEvent() {
@@ -1127,6 +1204,12 @@ function updateStaticTranslations() {
     text.notification.dont_have_item = i18next.t('dontHaveItemNotification');
     text.notification.limit_item = i18next.t('limitItemNotification');
     text.notification.limit_item_2 = i18next.t('limitItemNotification2');
+
+    text.notification.reflash.copy = i18next.t('presetCopyNotification');
+    text.notification.reflash.paste = i18next.t('presetPasteNotification');
+    text.notification.reflash.save = i18next.t('presetSaveNotification');
+    text.notification.reflash.reset = i18next.t('presetResetNotification');
+    text.notification.reflash.import = i18next.t('presetImportNotification');
 
     text.changelog.start = i18next.t('startDescription');
     text.chapter.start = i18next.t('startLoreDescription');
@@ -1296,7 +1379,9 @@ setTimeout(() => {
 });
     renderSavedAchievements();
     renderSavedLore();
-}, 2000);
+    initAlgoTree();
+    renamePresets();
+}, 3500);
 
 codeInput.addEventListener("keydown", function(event) {
     if (event.key == "Enter") {

@@ -1123,3 +1123,174 @@ function toggleBadges(badgeIds, condition) {
         if (badge) badge.style.display = displayStyle;
     });
 }
+
+function getAcceleratorPower() {
+    if (!player.reflash.seed) {
+        player.reflash.seed = Math.floor(Math.random() * 4294967296);
+    }
+    let randomFloat = player.reflash.seed / 4294967296;
+    
+    return 0.25 + randomFloat * 0.75; // Returns a value between 0.25 and 1.0
+}
+
+function rollNextAcceleratorSeed() {
+    if (!player.reflash.seed) player.reflash.seed = Math.floor(Math.random() * 4294967296);
+    player.reflash.seed = (player.reflash.seed * 1664525 + 1013904223) % 4294967296;
+}
+
+function renamePresets() {
+    for (let i = 1; i <= 6; i++) {
+        document.getElementsByClassName('presetButton')[i-1].textContent = player.reflash.presets[i].name;
+    }
+}
+
+function presetRename(number) {
+    let promptMsg = player.settings.currentLanguage === 'ru' 
+        ? "Введите новое название набора (максимум 8 символов):" 
+        : "Enter a new name for the preset (max 8 characters):";
+    
+    let newName = prompt(promptMsg, player.reflash.presets[number].name);
+    if (newName === null) return; 
+    if (newName.length > 8) {
+        alert(player.settings.currentLanguage === 'ru' ? "Слишком длинное название!" : "Name is too long!");
+        return; 
+    }
+    player.reflash.presets[number].name = newName || player.reflash.presets[number].name;   
+    renamePresets();
+    document.getElementById('presetName').innerText = player.reflash.presets[number].name;
+}
+
+function copyPreset(number) {
+    let preset = player.reflash.presets[number].ids.join(', ');
+    notify(text.notification.reflash.copy, 'limegreen');
+    navigator.clipboard.writeText(preset);
+}
+
+async function pastePreset(number) {
+    let alertMsg = player.settings.currentLanguage === 'ru' 
+        ? "Неверный формат (нужно: 11, 21, 31...)"
+        : "Wrong format (should be: 11, 21, 31...)";
+    const paste = await navigator.clipboard.readText();
+    const regex = /^(\d+)(,\s*\d+)*$/;
+
+    if (regex.test(paste.trim())) {
+        document.getElementById('nodeOrderInput').value = paste.trim();
+        notify(text.notification.reflash.paste, 'limegreen');
+    } else {
+        alert(alertMsg);
+    }
+} 
+
+function resetPreset(number) {
+    player.reflash.presets[number].name = number
+    player.reflash.presets[number].ids = []
+    document.getElementById('presetName').innerText = player.reflash.presets[number].name;
+    document.getElementById('nodeOrderInput').value = player.reflash.presets[number].ids;
+    document.getElementsByClassName('presetButton')[number-1].textContent = player.reflash.presets[number].name;
+    notify(text.notification.reflash.reset, 'red');
+}
+
+function savePreset(number) {
+    let alertMsg = player.settings.currentLanguage === 'ru' 
+        ? "Неверный формат (нужно: 11, 21, 31...)"
+        : "Wrong format (should be: 11, 21, 31...)";
+    const paste = document.getElementById('nodeOrderInput').value;
+    const regex = /^(\d+)(,\s*\d+)*$/;
+    if (regex.test(paste.trim())) {
+        raw = paste.trim();
+        notify(text.notification.reflash.paste, 'limegreen');
+    } else {
+        alert(alertMsg);
+        return;
+    }
+
+    player.reflash.presets[number].ids = JSON.parse('[' + raw + ']')
+    notify(text.notification.reflash.save, 'limegreen');
+}
+
+function importPreset(number) {
+    let algo = player.reflash.algo //то что сейчас в древе куплено
+    let ids = player.reflash.presets[number].ids //то что будет куплено из буфера обмена
+
+    notify(text.notification.reflash.import, 'limegreen');
+
+    const uniqueIds = ids.filter(id => !algo.includes(id))
+
+    uniqueIds.forEach(id => UPGS.reflash.algo.buy(id))
+}
+
+function exportTree() {
+    let preset = player.reflash.algo.join(', ')
+    notify(text.notification.reflash.copy, 'limegreen');
+    navigator.clipboard.writeText(preset);
+}
+
+async function importTree() {
+    let algo = player.reflash.algo //то что сейчас в древе куплено
+    let ids = [] //то что будет куплено из буфера обмена
+    let raw = ''
+
+    let alertMsg = player.settings.currentLanguage === 'ru' 
+        ? "Неверный формат (нужно: 11, 21, 31...)"
+        : "Wrong format (should be: 11, 21, 31...)";
+    const paste = await navigator.clipboard.readText();
+    const regex = /^(\d+)(,\s*\d+)*$/;
+    if (regex.test(paste.trim())) {
+        raw = paste.trim();
+        notify(text.notification.reflash.import, 'limegreen');
+    } else {
+        alert(alertMsg);
+        return 0;
+    }
+    ids = raw.split(',').map(id => Number(id.trim()))
+    const uniqueIds = ids.filter(id => !algo.includes(id))
+
+    uniqueIds.forEach(id => UPGS.reflash.algo.buy(id))
+}
+
+function respecTree() {
+    if (!player.reflash.respecTree) {
+        document.getElementById('respecTree').classList.add('active')
+        player.reflash.respecTree = true
+    }
+    else {
+        document.getElementById('respecTree').classList.remove('active')
+        player.reflash.respecTree = false
+    }
+}
+
+function doReflash(showConfirm=player.settings.confirmations.reflash) {
+    if (player.coin.currency < 1.7e308 || !player.prestige.challenge.completed.includes(8)) return 0;
+    if (showConfirm) openWindow('reflashConfirm', true)
+    else LAYERS.reflash.doReset()
+}
+
+document.addEventListener("keydown", function(event) {
+    if ((event.key == "С" || event.key == "с" || event.key == "c" || event.key == "C")) {
+    changelog(this)
+    }
+});
+
+document.addEventListener("keydown", function(event) {
+    if ((event.key == "L" || event.key == "l" || event.key == "д" || event.key == "Д")) {
+    gameLoreOpen(this)
+    }
+});
+
+document.addEventListener("keydown", function(event) {
+    if ((event.key == "H" || event.key == "h" || event.key == "р" || event.key == "Р")) {
+    howToPlayOpen(this)
+    }
+});
+
+document.addEventListener("keydown", function(event) {
+    if ((event.key === "P" || event.key === "p" || event.key === "з" || event.key === "З") && player.prestige.total_currency >= 1) {
+        LAYERS.prestige.doReset();
+    }
+});
+
+document.addEventListener("keydown", function(event) {
+    if ((event.key == "R" || event.key == "r" || event.key == "к" || event.key == "К") && player.reflash.total_currency >= 1) {
+        doReflash(false)
+    }
+});

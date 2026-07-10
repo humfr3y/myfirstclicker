@@ -11,11 +11,12 @@ const TabUpdater = {
         achTab: ['achScreenDescription', 'shardAchsTab'],
         challengeTab: ['challengeCoinTab', 'challengePrestigeTab'],
         shopTab: [],
-        eventTab: []
+        eventTab: [],
+        reflashTab: [],
     },
     
     getActiveTab() {
-        const mainTabs = ['mainTab', 'prestigeTab', 'infoTab', 'settingsTab', 'achTab', 'eventTab', 'shopTab', 'challengeTab'];
+        const mainTabs = ['mainTab', 'prestigeTab', 'infoTab', 'settingsTab', 'achTab', 'eventTab', 'shopTab', 'challengeTab', 'reflashTab'];
         
         for (const tabId of mainTabs) {
             const tab = document.getElementById(tabId);

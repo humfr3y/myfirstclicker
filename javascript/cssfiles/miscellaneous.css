@@ -77,6 +77,35 @@ it {
     font-size: calc(16px * var(--font-scale))
 }
 
+.whiteButton {
+    border-style: solid;
+    border-radius: 3px;
+    max-height: 40px;
+    height: 4vw;
+    border-color:rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+    font-family: "Poly"; 
+    font-size: calc(18px * var(--font-scale));
+    margin-bottom: 10px;
+    cursor: pointer;
+    margin-right: 0.3vw;
+    white-space: nowrap;
+}
+.whiteButton:hover {
+    background-color: rgb(62, 62, 62)
+}
+.whiteButton::before {
+    color: black !important;
+}
+.whiteButtonThin {
+    opacity: 0.8;
+    max-height: 25px;
+    height: 3vw;
+    font-size: calc(15px * var(--font-scale));
+}
+
 .tooltip {
     background: #000000;
     color: white;

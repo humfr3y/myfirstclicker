@@ -72,7 +72,6 @@ function updateNestedProperties(targetObj, sourceObj) {
 function loadGame() {
     save_number = JSON.parse(localStorage.getItem('SAVE_NUMBER')) || 1;
     let storedData = localStorage.getItem(getSaveKey()); 
-
     if (localStorage.getItem('datasaving') != null && !storedData) {
         convert_save();
         updateNestedProperties(player, newData);
@@ -91,12 +90,12 @@ function loadGame() {
         player.supercoin.total_currency = player.supercoin.spent_currency + player.supercoin.currency;
     }
 
-    if (player.coin.this_reflash_currency == 0) {
+    if (player.reflash.total_currency == 0) {
         player.coin.this_reflash_currency = player.coin.total_currency
         player.supercoin.this_reflash_currency = player.supercoin.total_currency
         player.prestige.this_reflash_currency = player.prestige.total_currency
-        player.time.game.reflash.timer = player.time.game.total.timer
-        player.time.real.reflash.timer = player.time.real.total.timer
+        player.time.game.reflash = player.time.game.total
+        player.time.real.reflash = player.time.real.total
     }
 
     // Оффлайн прогресс
@@ -127,6 +126,10 @@ function loadGame() {
         setTimeout(() => notify(text.notification.dailyRewardRestart, 'mediumspringgreen'), 5000);
         toggleBadges(['badge-settings', 'badge-misc', 'badge-daily'], !player.got_daily_reward);
     } 
+
+    if (!player.got_export_reward) {
+        toggleBadges(['badge-settings', 'badge-save', 'badge-export'], !player.got_export_reward);
+    }
 
     // Логика первого захода
     if (player.coin.total_currency === 10) {
@@ -172,6 +175,13 @@ function loadGame() {
         }
     });
 
+    if (!player.reflash.respecTree) {
+        document.getElementById('respecTree').classList.add('active')
+    }
+    else {
+        document.getElementById('respecTree').classList.remove('active')
+    }
+
     player.settings.modernization_activated = false;
 }
 
@@ -183,6 +193,7 @@ function resetDailyReward() {
         nextDay.setHours(0, 0, 0, 0);
         player.time.next_daily = nextDay.getTime();
         player.got_daily_reward = false;
+        player.got_export_reward = false;
         player.fortune.daily_resets = player.fortune.upgrades.singles.includes(23) ? 30 + UPGS.shop.permanent[8].effect() : 15 + UPGS.shop.permanent[8].effect() ;
     }
 }
@@ -200,6 +211,14 @@ function exportSave() {
     a.download = `Digital-God-Save-${date}.txt`;
     a.href = URL.createObjectURL(new Blob([base64], {type: 'text/plain'}));
     a.click();
+
+    if (player.got_export_reward == false) {
+        player.got_export_reward = true;
+        player.supercoin.currency += GAIN.supercoin.export.reward()
+        player.supercoin.total_currency += GAIN.supercoin.export.reward();
+        player.supercoin.this_reflash_currency += GAIN.supercoin.export.reward();
+        toggleBadges(['badge-settings', 'badge-save', 'badge-export'], false);
+    }
 }
 
 function importSave() {

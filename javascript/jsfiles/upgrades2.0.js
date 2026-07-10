@@ -381,7 +381,11 @@ const UPGS = {
             { id: 4, power: 1.065, basePrice: 1.5, maxAmount: 100, elementId: 'shopBuyableU4', effect: function(x = player.shop.upgrades[4]) { return 1 + x / 100; }, next_effect: function(x = player.shop.upgrades[4] + this.bulk()) { return 1 + x / 100; } },
             { id: 5, power: 1.07, basePrice: 5, maxAmount: 50, elementId: 'shopBuyableU5', effect: function(x = player.shop.upgrades[5]) { return 1 + x / 2.5; }, next_effect: function(x = player.shop.upgrades[5] + this.bulk()) { return 1 + x / 2.5; } },
             { id: 6, power: 1.075, basePrice: 10, maxAmount: 100, elementId: 'shopBuyableU6', effect: function(x = player.shop.upgrades[6]) { return 1 + x / 50; }, next_effect: function(x = player.shop.upgrades[6] + this.bulk()) { return 1 + x / 50; } },
-            { id: 7, power: 1.2, basePrice: 15, maxAmount: 20, elementId: 'shopBuyableU7', effect: function(x = player.shop.upgrades[7]) { return 1 + x / 10; }, next_effect: function(x = player.shop.upgrades[7] + this.bulk()) { return 1 + x / 10; } }
+            { id: 7, power: 1.2, basePrice: 15, maxAmount: 20, elementId: 'shopBuyableU7', effect: function(x = player.shop.upgrades[7]) { return 1 + x / 10; }, next_effect: function(x = player.shop.upgrades[7] + this.bulk()) { return 1 + x / 10; } },
+            { id: 8, power: 1.09, basePrice: 5, maxAmount: 100, elementId: 'shopBuyableU8', effect: function(x = player.shop.upgrades[8]) { return 1 + x / 10; }, next_effect: function(x = player.shop.upgrades[8] + this.bulk()) { return 1 + x / 10; } },
+            { id: 9, power: 1.09, basePrice: 5, maxAmount: 100, elementId: 'shopBuyableU9', effect: function(x = player.shop.upgrades[9]) { return 1 + x / 10; }, next_effect: function(x = player.shop.upgrades[9] + this.bulk()) { return 1 + x / 10; } },
+            { id: 10, power: 1.1, basePrice: 5.5, maxAmount: 100, elementId: 'shopBuyableU10', effect: function(x = player.shop.upgrades[10]) { return 1 + x / 15; }, next_effect: function(x = player.shop.upgrades[10] + this.bulk()) { return 1 + x / 15; } },
+            { id: 11, power: 1.2, basePrice: 6, maxAmount: 100, elementId: 'shopBuyableU11', effect: function(x = player.shop.upgrades[11]) { return 1 + x / 75; }, next_effect: function(x = player.shop.upgrades[11] + this.bulk()) { return 1 + x / 75; } },
         ], 'upgrades'),
 
         unlockables: new ShopUnlockablesManager('shop', 'unlockables', [
@@ -402,7 +406,9 @@ const UPGS = {
             { id: 5, power: 5, basePrice: 1000, maxAmount: 3, elementId: 'shopPermanentU5', effect: function(x = player.shop.permanentUpgrades[5]) { return x == 0 ? 0 : Math.pow(2, x-1); }, next_effect: function(x = player.shop.permanentUpgrades[5] + 1) { return x == 0 ? 0 : Math.pow(2, x-1); } },
             { id: 6, power: 1.35, basePrice: 1400, maxAmount: 5, elementId: 'shopPermanentU6', effect: function(x = player.shop.permanentUpgrades[6]) { return 0.5 + 0.02 * x; }, next_effect: function(x = player.shop.permanentUpgrades[6] + 1) { return 0.5 + 0.02 * x; } },
             { id: 7, power: 1.25, basePrice: 1500, maxAmount: 5, elementId: 'shopPermanentU7', effect: function(x = player.shop.permanentUpgrades[7]) { return !x ? 1 : 75*x; }, next_effect: function(x = player.shop.permanentUpgrades[7] + 1) { return !x ? 1 : 75*x; } },
-            { id: 8, power: 1.33, basePrice: 100, maxAmount: 5, elementId: 'shopPermanentU8', effect: function(x = player.shop.permanentUpgrades[8]) { return !x ? 0 : x * 5; }, next_effect: function(x = player.shop.permanentUpgrades[8] + 1) { return !x ? 0 : x * 5; } }
+            { id: 8, power: 1.33, basePrice: 100, maxAmount: 5, elementId: 'shopPermanentU8', effect: function(x = player.shop.permanentUpgrades[8]) { return !x ? 0 : x * 5; }, next_effect: function(x = player.shop.permanentUpgrades[8] + 1) { return !x ? 0 : x * 5; } },
+            { id: 9, power: 1.35, basePrice: 250, maxAmount: 10, elementId: 'shopPermanentU9', effect: function(x = player.shop.permanentUpgrades[9]) { return 1 + x / 3; }, next_effect: function(x = player.shop.permanentUpgrades[9] + 1) { return 1 + x / 3; } },
+            { id: 10, power: 1.5, basePrice: 150, maxAmount: 10, elementId: 'shopPermanentU10', effect: function(x = player.shop.permanentUpgrades[10]) { return 1 + x / 40; }, next_effect: function(x = player.shop.permanentUpgrades[10] + 1) { return 1 + x / 40; } },
         ], 'permanentUpgrades'),
 
         items: new ShopItemsManager([
@@ -524,6 +530,133 @@ const UPGS = {
             { id: 32, elementIndex: 7, basePrice: 1e8 },
             { id: 33, elementIndex: 8, basePrice: 1e10 }
         ])
+    },
+    reflash: {
+        buyables: new UniversalBuyablesManager('reflash', [
+            {
+                id: 1, power: 4, basePrice: 8, elementId: 'rBuyableU1',
+                effect: function(x = player.reflash.upgrades[1]) { return Math.pow(2, x); }
+            },
+        ]),
+        singles: new UniversalSinglesManager('reflash', 'singleUpgrades', [
+            { id: 11, elementId: 'rSingleU1', basePrice: 8, effect: function(x = this.unl()) {
+                if (x == 0) return 1;
+                let eff = Math.pow(1 + player.reflash.resets, 5);
+                return eff;
+            }},
+            { id: 12, elementId: 'rSingleU2', basePrice: 128, effect: function(x = this.unl()) {
+                if (x == 0) return 1;
+                let eff = 1 + Math.pow(player.time.game.reflash.timer, 0.4);
+                return eff;
+            }},
+            { id: 13, elementId: 'rSingleU3', basePrice: 1024 },
+            { id: 21, elementId: 'rSingleU4', basePrice: 9999 },
+            { id: 22, elementId: 'rSingleU5', basePrice: 9999 },
+            { id: 23, elementId: 'rSingleU6', basePrice: 9999 },
+        ]),
+        accelerator: new AcceleratorManager('reflash', [
+            {
+                id: 1, power: 2, basePrice: 4, elementId: 'acceleratorU1',
+                effect: function(x = player.reflash.acceleratorUpgrades[1], y = UPGS.reflash.accelerator[3].effect()) { return x*0.05*y; }
+            },
+            {
+                id: 2, power: 2, basePrice: 4, elementId: 'acceleratorU2',
+                effect: function(x = player.reflash.acceleratorUpgrades[2], y = UPGS.reflash.accelerator[3].effect()) { return x*0.075*y; }
+            },
+            {
+                id: 3, power: 2, basePrice: 4, elementId: 'acceleratorU3',
+                effect: function(x = player.reflash.acceleratorUpgrades[3]) { return 1+x*0.15; }
+            },
+            {
+                id: 4, power: 2, basePrice: 4, elementId: 'acceleratorU4',
+                effect: function(x = player.reflash.acceleratorUpgrades[4]) { return 1+x*0.1; }
+            },
+            {
+                id: 5, power: 1.3, basePrice: 100, elementId: 'acceleratorU5',
+                effect: function(x = player.reflash.acceleratorUpgrades[5]) {
+                    if (x === 0) return 1;
+                    // 1. Получаем случайный множитель текущего забега (от 0.1 до 0.25)
+                    let basePower = getAcceleratorPower(); 
+                    // 2. Получаем бонус 4-го улучшения (+10% за каждый уровень)
+                    let bonusU4 = UPGS.reflash.accelerator[4].effect(); 
+                    // 3. Считаем: 1 + (Кол-во аксов * Силу) * Бонус 4-го улучшения
+                    return 1 + (x * basePower * bonusU4); 
+                }
+            },
+        ], 'acceleratorUpgrades'),
+        algo: {
+            tree: [
+                { id: 11, row: 1, col: 2, req: [], cost: 1, effect(x=player.reflash.algo.includes(this.id)) {return x ? 10 : 1} }, 
+                { id: 21, row: 2, col: 2, req: [11], cost: 2, effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 0}  },
+                { id: 22, row: 2, col: 3, req: [11], cost: 3, effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 1}  },
+                { id: 31, row: 3, col: 2, req: [21], cost: 4, effect(x=player.reflash.algo.includes(this.id)) {return x ? true : false}  },
+                { id: 32, row: 3, col: 3, req: [22], cost: 4, effect(x=player.reflash.algo.includes(this.id)) {return x ? 10 : 1}  },
+                { id: 41, row: 4, col: 2, req: [31], cost: 7, effect(x=player.reflash.algo.includes(this.id)) {return x ? 2 : 1}  },
+                { id: 42, row: 4, col: 3, req: [32], cost: 4, effect(x=player.reflash.algo.includes(this.id)) {return x ? 10 : 1}  },
+                { id: 43, row: 4, col: 4, req: [32], cost: 7, effect(x=player.reflash.algo.includes(this.id)) {return x ? 2 : 0}  },
+                { id: 51, row: 5, col: 3, req: [41, 42, 43], cost: 10 },
+            ],
+            buy(id) {
+                if (!player.reflash.algo) player.reflash.algo = [];
+                if (player.reflash.algo.includes(id)) return;
+                
+                let node = this.tree.find(n => n.id === id);
+                if (!node) return;
+                
+                let reqMet = node.req.length === 0 || node.req.every(r => player.reflash.algo.includes(r));
+                if (!reqMet) return;
+                
+                if (player.reflash.currency >= node.cost) {
+                    player.reflash.currency -= node.cost;
+                    node.id != 51 ? player.reflash.spent_currency_on_algo += node.cost : null;
+                    player.reflash.algo.push(id);
+                    this.updateStates();
+                }
+            },
+            updateStates() {
+                if (!player.reflash.algo) return;
+                this.tree.forEach(node => {
+                    let btn = document.getElementById('algoNode_' + node.id);
+                    if (!btn) return;
+                    
+                    let isBought = player.reflash.algo.includes(node.id);
+                    let reqMet = node.req.length === 0 || node.req.every(r => player.reflash.algo.includes(r));
+                    let canAfford = player.reflash.currency >= node.cost;
+
+                    if (isBought) {
+                        btn.classList.add('bought');
+                        btn.classList.remove('locked');
+                        btn.disabled = false;
+                    } else if (!reqMet) {
+                        btn.classList.add('locked');
+                        btn.classList.remove('bought');
+                        btn.disabled = true;
+                    } else {
+                        btn.classList.remove('locked');
+                        btn.classList.remove('bought');
+                        btn.disabled = !canAfford;
+                    }
+
+                    node.req.forEach(parentId => {
+                        let line = document.getElementById(`algoLine_${parentId}_${node.id}`);
+                        if (line) {
+                            if (isBought) line.setAttribute('stroke', '#115311');
+                            else if (player.reflash.algo.includes(parentId)) line.setAttribute('stroke', '#adabab');
+                            else line.setAttribute('stroke', '#333333');
+                        }
+                    });
+                });
+            },
+            respec() {
+                if (!player.reflash.algo || !player.reflash.respecTree) return;
+                let refund = player.reflash.spent_currency_on_algo;
+                player.reflash.currency += refund;
+                player.reflash.spent_currency_on_algo = 0;
+                if (player.reflash.algo.includes(51)) player.reflash.algo = [51];
+                else player.reflash.algo = [];
+                this.updateStates();
+            }
+        }
     }
 }
 
@@ -745,3 +878,75 @@ function submitTheBreak() {
         openWindow('falseSubmit', true);
     }
 }
+
+const treeObserver = new ResizeObserver(() => {
+    drawTreeLines();
+});
+
+function initAlgoTree() {
+    if (!player.reflash.algo) player.reflash.algo = [];
+    const grid = document.getElementById('treeGrid');
+    const container = document.getElementById('treeContainer');
+    if (!grid) return;
+    
+    grid.innerHTML = '';
+
+    // Берем данные из UPGS
+    UPGS.reflash.algo.tree.forEach(node => {
+        let btn = document.createElement('button');
+        btn.id = 'algoNode_' + node.id;
+        btn.className = 'treeNode';
+        
+        btn.style.gridRow = node.row;
+        if (node.id === 11) btn.style.gridColumn = '2 / 4';
+        else btn.style.gridColumn = node.col;
+
+        btn.onclick = () => UPGS.reflash.algo.buy(node.id); 
+        grid.appendChild(btn);
+    });
+
+    if (container) treeObserver.observe(container);
+    UPGS.reflash.algo.updateStates(); // Инициализация цветов
+}
+
+function drawTreeLines() {
+    const svg = document.getElementById('treeLines');
+    const container = document.getElementById('treeContainer');
+    if (!svg || !container) return;
+
+    svg.innerHTML = ''; 
+    const containerRect = container.getBoundingClientRect();
+
+    // Берем данные из UPGS!
+    UPGS.reflash.algo.tree.forEach(node => {
+        if (node.req.length === 0) return;
+
+        const childBtn = document.getElementById('algoNode_' + node.id);
+        if (!childBtn) return;
+        const childRect = childBtn.getBoundingClientRect();
+
+        const x2 = childRect.left - containerRect.left + (childRect.width / 2);
+        const y2 = childRect.top - containerRect.top + (childRect.height / 2);
+
+        node.req.forEach(parentId => {
+            const parentBtn = document.getElementById('algoNode_' + parentId);
+            if (!parentBtn) return;
+            const parentRect = parentBtn.getBoundingClientRect();
+
+            const x1 = parentRect.left - containerRect.left + (parentRect.width / 2);
+            const y1 = parentRect.top - containerRect.top + (parentRect.height / 2);
+
+            let line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.id = `algoLine_${parentId}_${node.id}`; // Обязательно добавляем ID для закраски
+            line.setAttribute('x1', x1);
+            line.setAttribute('y1', y1);
+            line.setAttribute('x2', x2);
+            line.setAttribute('y2', y2);
+            line.setAttribute('stroke-width', '20'); 
+            svg.appendChild(line);
+        });
+    });
+    
+    UPGS.reflash.algo.updateStates();
+}
+window.addEventListener('resize', drawTreeLines);

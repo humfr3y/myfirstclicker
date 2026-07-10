@@ -145,6 +145,31 @@
   color: black;
 }
 
+.reflashSingleButton{
+  background-color: #000000;
+  border-color: var(--reflash);
+  color: rgb(255, 255, 255);
+}
+.reflashSingleButton:hover:enabled {
+  background-color: var(--reflash);
+  box-shadow: 0 0 10px var(--reflash);
+  color: black;
+}
+.reflashSingleButton.purchased {
+  background-color: var(--reflash);
+  color: black;
+}
+.reflashBuyableButton{
+  background-color: #000000;
+  border-color: var(--reflash);
+  color: rgb(255, 255, 255);
+}
+.reflashBuyableButton:hover:enabled {
+  background-color: var(--reflash);
+  box-shadow: 0 0 10px var(--reflash);
+  color: black;
+}
+
 #harshUmulti {
   white-space: break-spaces;
   align-items: center;

@@ -1,7 +1,7 @@
 /*смена полоски прокрутки для хрома*/
 
 :root {
-  --reflash: #00ca00;
+  --reflash: #26a826;
   --coin: #ffd900;
   --crystal: aqua;
   --supercrystal: rgb(0, 180, 212);
@@ -10,12 +10,12 @@
   --neutral: rgb(190, 190, 190);
   --grey-text: #656565;
   --shard: rgb(138, 255, 249);
-  --supercoin: rgb(255, 174, 0);
+  --supercoin: rgb(235, 161, 2);
   --spirit: rgb(202, 255, 237);
   --critical: rgb(255, 0, 0);
   --rune: rgb(45, 202, 210);
 
-  --coin-upgrade: #23e019;
+  --coin-upgrade: #d1d411;
   --prestige-upgrade: rgb(0, 212, 212);
   --break-prestige-upgrade: rgb(18, 179, 179);
 
@@ -23,6 +23,10 @@
   --upower: palevioletred;
   --uadder: rgb(145, 248, 93);
   --ureducer: rgb(255, 255, 94);
+}
+
+button span {
+    pointer-events: none;
 }
 
 .text-hidden-mode * {
@@ -159,17 +163,6 @@ nt {
     background-repeat: no-repeat;
     cursor: pointer;
     border-radius: 200px;
-}
-
-#loadingScreen {
-  background-image: url("images/loadingscreen015.jpg");
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 100%;
-  height: 101%;
-  position: absolute;
-  z-index: 99999;
-  background-size: cover;
 }
 
 #coinGain:active, #shardsClick:active {
@@ -441,6 +434,9 @@ nt {
   align-items: center;
   padding: 10px;
   width: 780px;
+  overflow-x: auto;
+  flex-direction: row;
+  overflow-y: hidden;
 }
 
 .shopBottomButton {
@@ -674,7 +670,7 @@ st {
   opacity: 0;
 }
 
-#crystalCount {
+#crystalCount, #bitsCount {
   text-align: center;
   color: white;
   margin: 0 auto;
@@ -685,6 +681,12 @@ ct {
   color:var(--crystal);
   font-size: calc(20px * var(--font-scale));
   text-shadow: 0 0 5px var(--crystal);
+}
+
+rt {
+  color:var(--reflash);
+  font-size: calc(20px * var(--font-scale));
+  text-shadow: 0 0 5px var(--reflash);
 }
 
 #doPrestige, #doReflash {
@@ -860,8 +862,10 @@ ct {
 }
 
 .centeredDiv {
-  display:flex;
+  display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 #shardsClick {
@@ -1025,6 +1029,18 @@ rn {
 #shopBuyableU7 {
   background-image: url('images/energymaybe10.webp')
 }
+#shopBuyableU8 {
+  background-image: url('images/goldengloves2.png')
+}
+#shopBuyableU9 {
+  background-image: url('images/goldenwatch2.png')
+}
+#shopBuyableU10 {
+  background-image: url('images/goldenkey2.png')
+}
+#shopBuyableU11 {
+  background-image: url('images/goldenclover.png')
+}
 #shopPermanentU1 {
   background-image: url('images/diamondpersV3.webp')
 }
@@ -1049,6 +1065,16 @@ rn {
 #shopPermanentU8 {
   background-image: url('images/fortuneTicket.png')
 }
+#shopPermanentU9 {
+  background-image: url('images/creditcardplus.png');
+  background-position: -0.75px -4px;
+  image-rendering: pixelated;
+}
+#shopPermanentU10 {
+  background-image: url('images/reaper.png');
+  background-position: -0.75px -0.5px;
+  image-rendering: pixelated;
+}
 /* #shopSingleU2{
   background-image: url('images/brokenspeedometer.webp');
   background-position: -0.5px -0.5px;
@@ -1072,6 +1098,16 @@ rn {
 #shopSingleU4 {
   background-image: url('images/crystalclock.webp');
   background-position: -0.5px -0.5px;
+  image-rendering: pixelated;
+}
+#shopSingleU5 {
+  background-image: url('images/aqua_pickaxe.png');
+  background-position: -0.5px -0.5px;
+  image-rendering: pixelated;
+}
+#shopSingleU6 {
+  background-image: url('images/Paper.png');
+  background-position: -2px -0.5px;
   image-rendering: pixelated;
 }
 #shopItem1 {
@@ -1648,18 +1684,109 @@ img.disabled {
   width: 200px;
 }
 
+#algoTopBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
+.tree-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #060606;
+}
 
+/* Слой с линиями лежит позади кнопок */
+.tree-svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1; 
+    pointer-events: none; /* Чтобы клики проходили сквозь линии на фон */
+}
 
+.tree-grid {
+    display: grid;
+    /* Создаем сетку из 4 одинаковых колонок */
+    grid-template-columns: repeat(4, 1fr);
+    /* Размеры ячеек и отступы (подгони под себя) */
+    grid-auto-rows: 80px; 
+    gap: 40px 40px;
+    position: relative;
+    z-index: 2; /* Кнопки лежат поверх линий */
+}
 
+.treeNode {
+    background-color: black;
+    border: 1px solid var(--reflash);
+    color: white;
+    font-family: "Poly";
+    font-size: calc(13px * var(--font-scale)) !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition:  0.25s ease-in-out;
+}
 
+.treeNode:hover {
+    background-color: var(--reflash);
+    color: black;
+}
 
+.treeNode.bought {
+    background-color: var(--reflash);
+    color: black;
+}
 
+.treeNode:active:enabled {
+    transform: scale(0.95); 
+}
+.treeNode:disabled{
+    background-color: rgb(65, 65, 65) !important; 
+}
+.treeNode:disabled:hover{
+    background-color: rgb(241, 103, 103)  !important;
+    color: black  !important;
+}
 
+#nodeOrderInput {
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  width: 250px;
+  font-size: calc(18px * var(--font-scale));
+}
 
+#loadingScreen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Скрывает края, если они вылезают */
+}
 
+#introVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Оставляет заполнение экрана */
+    /* Если видео всё еще кажется «приближенным», 
+       попробуй убрать этот параметр или поставить 'none' */
+}
 
+#respecTree.active {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border-color: rgb(0, 0, 0);
+}
 
+#respecTree.active:hover {
+    background-color: rgb(230, 230, 230);
+}
 
 
 

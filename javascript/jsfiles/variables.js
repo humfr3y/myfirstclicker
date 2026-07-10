@@ -63,7 +63,8 @@ let player = {
         currency: 0, total_currency: 0, broken_currency: 0, resets: 0, this_reflash_currency: 0,
         prestigeTable: getPrestigeTable(),
         table_resets: 1,
-        challenge: { completed: [], activated: 0, time: getChallengeTime() }
+        challenge: { completed: [], activated: 0, time: getChallengeTime() },
+        true_resets: 0
     },
     shard: {
         upgrades: { 1: 0, 2: 0, 3: 0 }, singleUpgrades: [], currency: 0, unlockables: [],
@@ -71,8 +72,8 @@ let player = {
         achievements: generateEmptyObj(10, false) // 1-10 ключи со значением 0 (JS инициализирует пустые строки как 0 при мат. операциях, но лучше задать явно:
     },
     shop: {
-        upgrades: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 },
-        permanentUpgrades: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0 },
+        upgrades: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0 },
+        permanentUpgrades: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0 },
         unlockables: [],
         items: getShopItems(),
     },
@@ -91,8 +92,16 @@ let player = {
         upgrades: { buyables: { 1: 0, 2: 0, 3: 0 }, singles: [] }
     },
     reflash: {
-        currency: 0, total_currency: 0, resets: 0, table_resets: 1,
+        currency: 0, total_currency: 0, resets: 0, table_resets: 0, spent_currency_on_algo: 0,
         resetTable: getReflashTable(),
+        upgrades: {1: 0},
+        acceleratorUpgrades: {1: 0, 2: 0, 3: 0, 4: 0, 5: 0},
+        singleUpgrades: [],
+        seed: 0,
+        algo: [],
+        presets: { 1: {ids: [], name: '1',}, 2: {ids: [], name: '2',}, 3: {ids: [], name: '3',}, 4: {ids: [], name: '4',}, 5: {ids: [], name: '5',}, 6: {ids: [], name: '6',}},
+        selectedPreset: 0,
+        respecTree: false,
     },
     time: {
         savedTime: Date.now(), currentTime: 0,
@@ -111,7 +120,10 @@ let player = {
         font: 'option1', notation: 'option1',
         buy_max_activate: false, shard_buy_max_activate: false, breakprestige_buy_max_activate: false, balance_buy_max_activate: false, modernization_activated: false,
         loreBoolean: [], event: { spiritual: false, triplePower: false },
-        whichPrestigeMode: 'time', autosave_interval: 30000, offline: true
+        whichPrestigeMode: 'time', autosave_interval: 30000, offline: true,
+        confirmations: {
+            reflash: true
+        }
     },
     automation: {
         checkbox: { single: false, buyable: false, umultiplier: false, upower: false, prestige: false },
@@ -120,6 +132,7 @@ let player = {
         conditions: { umultiplier: 0, upower: { time: 0, x_of_umulti: 0 }, prestige: { time: 3600, coins: 1e15, prestige: 10000, crystals: 1e50 }, uadder: { time: 0, x_of_upower: 0 } }
     },
     got_daily_reward: false,
+    got_export_reward: false,
     checked: {
         lore: false,
         h2p: false
@@ -152,6 +165,13 @@ const text = {
     notification: {
         lore: '', load: '', save: '', export: '', import: '', hard: '', achievement: '', dailyRewardRestart: '',
         used_item: '', dont_have_item: '', limit_item: '', limit_item_2: '',
+        reflash: {
+            copy: '',
+            paste: '',
+            reset: '',
+            save: '',
+            import: ''
+        }
     },
     window: { hard: '', NaN: '' },
     automation: { prestige_req: '', coin_req: '', time_req: '', crystal_req: '' },

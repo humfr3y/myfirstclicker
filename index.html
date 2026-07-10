@@ -32,6 +32,9 @@
 </head>
 <body>
   <div id="loadingScreen">
+      <video autoplay muted loop playsinline id="introVideo">
+          <source src="javascript/cssfiles/images/matrix.mp4" type="video/mp4">
+      </video>
   </div>
   <div id="wholeGame" style="display: none">
 
@@ -46,12 +49,13 @@
   <footer id="autoTimer">It's text</footer>
     <div id="topValues">
       <div id="reflashGet" class="topVars">
-        <span id="bitsCount" style="display: none">У вас 10 кристаллов</span>
-        <button onclick="openWindow('reflashConfirm', true)" class="reflashButton" id="doReflash">Соберите Infinity монет и выполните Престижное Испытание 8</button>
+        <span id="bitsCount" style="display: none"><span data-i18n="top_you_have">You have</span> <rt id="top_ref_cur_val">0</rt> <span data-i18n="currency_bits">bits</span></span>
+        <button onclick="doReflash()" class="reflashButton" id="doReflash">Соберите Infinity монет и выполните Престижное Испытание 8</button>
       </div>
       <div id="coinGet" class="topVars">
         <span id="coinsCount"><span data-i18n="top_you_have">You have</span> <gt id="top_coins_val">10</gt> <span data-i18n="currency_acoins">α-coins</span></span>
         <span id="coinsGain"><span data-i18n="top_getting">You're getting</span>&nbsp;<span id="top_coins_gain_val">0</span>&nbsp;<span data-i18n="top_per_sec">α-coins per second</span></span>
+        <span id="worldSpeed" class="whiteText" style="font-size: calc(14px * var(--font-scale));"><span data-i18n="your_world">Your world is accelerated by x</span><span id="worldSpeedValue">0</span>&nbsp;<span data-i18n="times">times</span></span>
         <div id="worldTextDiv">
           <div id="worldText">
             <span class="whiteText" id="youAreInXWorld" style="font-size: calc(14px * var(--font-scale));"></span>
@@ -87,6 +91,7 @@
           <div class="notification-badge" id="badge-settings">!</div>
           <div class="notification-badge" id="badge-settings-1">!</div>
           <div class="notification-badge" id="badge-settings-2">!</div>
+          <div class="notification-badge" id="badge-settings-3">!</div>
         </div>
         <button onclick="selectTab(mainTab, false)" id="mainSelect" class="tabButton active" data-i18n="clickerButton">Clicker</button>
         <button onclick="selectTab(challengeTab, true)" id="challengeSelect" class="tabButton" style="display:none" data-i18n="challengeButton">Challenges</button>
@@ -133,7 +138,10 @@
   </div> -->
     <div id="settingsTab" style="display:none">
       <div id="settingSubButtons">
-        <button onclick="selectSubTab(settingsSaveTab, false, 'settings')" id="saveSelect" class="tabButton subButton active" data-i18n="saveButton">Saves</button>
+        <div class="button-wrapper">
+          <button onclick="selectSubTab(settingsSaveTab, false, 'settings')" id="saveSelect" class="tabButton subButton active has-badge" data-i18n="saveButton">Saves</button>
+          <span class="notification-badge" id="badge-save">!</span>
+        </div>
         <button onclick="selectSubTab(settingsGraphicTab, false, 'settings')" id="graphicSelect" class="tabButton subButton" data-i18n="graphicButton">Graphic</button>
         <div class="button-wrapper">
           <button onclick="selectSubTab(settingsOtherTab, false, 'settings')" id="otherSelect" class="tabButton subButton has-badge" data-i18n="otherButton">Other</button>
@@ -155,7 +163,10 @@
             <label id="fileUploader" for="file-upload" class="settingButton loadfile" data-i18n="importGameFromAFile">Import from file</label>
             <input type="file" id="file-upload">
             <p class="file-name"></p>
-            <button onclick="exportSave(this)" id="expSave" class="settingButton" data-i18n="exportGame">Export</button>
+            <div class="button-wrapper">
+              <button onclick="exportSave(this)" id="expSave" class="settingButton has-badge">Export</button>
+              <span class="notification-badge" id="badge-export">!</span>
+            </div>
           </div>
           <div id="thirdSaveSettingsRow" class="settingsRow">
             <div id="slider" class="settingButton loadfile" style="flex-direction: column;">
@@ -189,6 +200,7 @@
           <button onclick="muteTheAudio(this)" id="muteAudio" class="settingButton"></button>
         </div>
         <div id="secondGraphicSettingsRow" class="settingsRow">
+          <button onclick="switchConfirmation()" id="switchConfirmation" class="settingButton"></button>
           <select id="changeNotation" class="settingButton selectSetting">
               <option value="option1" class="notaSelector">Standard</option>
               <option value="option2" class="notaSelector">Scientific</option>
@@ -1713,10 +1725,123 @@
       <div id="reflashSubButtons">
         <button onclick="selectSubTab(reflashUpgradesTab, false, 'reflash')" id="reflashUpgradesSelect" class="tabButton subButton reflashButton active" data-i18n="reflashUpgradesButton">Улучшения</button>
         <button onclick="selectSubTab(acceleratorTab, true, 'reflash')" id="acceleratorSelect" class="tabButton subButton reflashButton" data-i18n="acceleratorButton">Ускоритель</button>
-        <button onclick="selectSubTab(algorithmTab, true, 'reflash')" id="algorithmSelect" class="tabButton subButton reflashButton" data-i18n="algorithmButton">АЛГОРИТМ. ДРЕВО</button>
-        <button onclick="" id="consoleSelect" class="tabButton subButton reflashButton" data-i18n="consoleButton">Консоль</button>
+        <button onclick="selectSubTab(algorithmTab, false, 'reflash')" id="algorithmSelect" class="tabButton subButton reflashButton" data-i18n="algorithmButton">АЛГОРИТМ. ДРЕВО</button>
+        <!-- <button onclick="" id="consoleSelect" class="tabButton subButton reflashButton" data-i18n="consoleButton">Консоль</button> -->
+      </div>
+      <div id="reflashUpgradesTab">
+        <div id="reflashSingleUpgrades" class="centeredDiv">
+          <div id="rSURow1" class="row">
+            <button onclick="UPGS.reflash.singles.buy(11)" id="rSingleU1" class="upgradeButton reflashSingleButton">
+              <ut data-i18n="upg_ref_s1_name">Money Pillow</ut><br>
+              <span data-i18n="upg_ref_s1_desc">Start U-Multipliers, U-Powers, Prestiges with 1000 α-coins</span><br>
+              <span data-i18n="word_currently">Currently:</span> x<span id="rSingleU1_effect">11</span><br>
+              <span id="rSingleU1_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU1_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+            </button>
+            <button onclick="UPGS.reflash.singles.buy(12)" id="rSingleU2" class="upgradeButton reflashSingleButton">
+              <ut data-i18n="upg_ref_s2_name">Activity 2.0</ut><br>
+              <span data-i18n="upg_ref_s2_desc">Increases exponent of α-coin gain based on spent time</span><br>
+              <span data-i18n="word_currently">Currently:</span> x<span id="rSingleU2_effect">0</span><br>
+              <span id="rSingleU2_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU2_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+            </button>
+            <button onclick="UPGS.reflash.singles.buy(13)" id="rSingleU3" class="upgradeButton reflashSingleButton">
+              <ut data-i18n="upg_ref_s3_name">Charisma</ut><br>
+              <span data-i18n="upg_ref_s3_desc">Increases multiplicative chance of Supercoins by 50% per click/second and by 100% offline</span><br>
+              <span id="rSingleU3_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU3_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+            </button>
+          </div>
+          <div id="rSURow2" class="row">
+            <button onclick="UPGS.reflash.singles.buy(21)" id="rSingleU4" class="upgradeButton reflashSingleButton">
+              <ut data-i18n="upg_ref_s4_name">Money Pillow</ut><br>
+              <span data-i18n="upg_ref_s4_desc">Start U-Multipliers, U-Powers, Prestiges with 1000 α-coins</span><br>
+              <span data-i18n="word_currently">Currently:</span> ^<span id="rSingleU4_effect">0</span><br>
+              <span id="rSingleU4_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU4_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+            </button>
+            <button onclick="UPGS.reflash.singles.buy(22)" id="rSingleU5" class="upgradeButton reflashSingleButton">
+              <ut data-i18n="upg_ref_s5_name">Activity 2.0</ut><br>
+              <span data-i18n="upg_ref_s5_desc">Increases exponent of α-coin gain based on spent time</span><br>
+              <span data-i18n="word_currently">Currently:</span> ^<span id="rSingleU5_effect">0</span><br>
+              <span id="rSingleU5_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU5_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+            </button>
+            <button onclick="UPGS.reflash.singles.buy(23)" id="rSingleU6" class="upgradeButton reflashSingleButton">
+              <ut data-i18n="upg_ref_s6_name">Charisma</ut><br>
+              <span data-i18n="upg_ref_s6_desc">Increases multiplicative chance of Supercoins by 50% per click/second and by 100% offline</span><br>
+              <span data-i18n="word_currently">Currently:</span> ^<span id="rSingleU6_effect">0</span><br>
+              <span id="rSingleU6_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU6_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+            </button>
+          </div>
+          <div id="rSURow3" class="row">
+            <button onclick="UPGS.reflash.buyables.buy(1)" id="rBuyableU1" class="upgradeButton reflashBuyableButton">
+              <ut data-i18n="upg_ref_b1_name">Money Pillow </ut> (<span id="rBuyableU1_amount">0</span>)<br>
+              <span data-i18n="upg_ref_b1_desc">Start U-Multipliers, U-Powers, Prestiges with 1000 α-coins</span><br>
+              <span data-i18n="word_currently">Currently:</span> x<span id="rBuyableU1_effect">0</span><br>
+              <span id="rBuyableU1_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rBuyableU1_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+            </button>
+          </div>
       </div>
     </div>
+      <div id="acceleratorTab" style="display:none">
+          <div id="acceleratorUpgrades" class="centeredDiv" style="width: 100%">
+            <div id="rSURow1" class="row" style="width: 100%; justify-content: space-around;">
+              <button onclick="UPGS.reflash.accelerator.buy(1)" id="acceleratorU1" class="upgradeButton reflashBuyableButton">
+                <ut data-i18n="upg_ref_acc1_name">Money Pillow</ut> (<span id="acceleratorU1_amount">0</span>)<br>
+                <span data-i18n="upg_ref_acc1_desc">Start U-Multipliers, U-Powers, Prestiges with 1000 α-coins</span><br>
+                <span data-i18n="word_currently">Currently:</span> +<span id="acceleratorU1_effect">0</span><br>
+                <span id="acceleratorU1_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU1_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+              </button>
+              <button onclick="UPGS.reflash.accelerator.buy(2)" id="acceleratorU2" class="upgradeButton reflashBuyableButton">
+                <ut data-i18n="upg_ref_acc2_name">Activity 2.0</ut> (<span id="acceleratorU2_amount">0</span>)<br>
+                <span data-i18n="upg_ref_acc2_desc">Increases exponent of α-coin gain based on spent time</span><br>
+                <span data-i18n="word_currently">Currently:</span> +<span id="acceleratorU2_effect">0</span><br>
+                <span id="acceleratorU2_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU2_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+              </button>
+            </div>
+            <div id="rSURow2" class="row" style="width: 100%; justify-content: center;">
+              <button onclick="UPGS.reflash.accelerator.buy(5)" id="acceleratorU5" class="upgradeButton reflashBuyableButton">
+          <ut><span data-i18n="upg_ref_acc5_name">U-multiplier</span></ut> (<span id="acceleratorU5_amount">0</span>)<br>
+          <span data-i18n="upg_ref_acc5_desc">Reset upgrades to give a x</span><br>
+          <span data-i18n="word_currently">Currently:</span> x<span id="acceleratorU5_effect">1</span><br>
+          <span data-i18n="word_requires">Requires:</span> <span id="acceleratorU5_cost">100</span> <span data-i18n="upg_ref_acc5_req">Small Investments</span>
+              </button>
+            </div>
+            <div id="rSURow3" class="row" style="width: 100%; justify-content: space-around;">
+              <button onclick="UPGS.reflash.accelerator.buy(3)" id="acceleratorU3" class="upgradeButton reflashBuyableButton">
+                <ut data-i18n="upg_ref_acc3_name">Money Pillow</ut> (<span id="acceleratorU3_amount">0</span>)<br>
+                <span data-i18n="upg_ref_acc3_desc">Start U-Multipliers, U-Powers, Prestiges with 1000 α-coins</span><br>
+                <span data-i18n="word_currently">Currently:</span> x<span id="acceleratorU3_effect">0</span><br>
+                <span id="acceleratorU3_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU3_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+              </button>
+              <button onclick="UPGS.reflash.accelerator.buy(4)" id="acceleratorU4" class="upgradeButton reflashBuyableButton">
+                <ut data-i18n="upg_ref_acc4_name">Activity 2.0</ut> (<span id="acceleratorU4_amount">0</span>)<br>
+                <span data-i18n="upg_ref_acc4_desc">Increases exponent of α-coin gain based on spent time</span><br>
+                <span data-i18n="word_currently">Currently:</span> x<span id="acceleratorU4_effect">0</span><br>
+                <span id="acceleratorU4_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU4_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+              </button>
+            </div>
+        </div>
+      </div>
+      <div id="algorithmTab" style="display:none">
+        <div id="algoTopBar">
+          <span id="bitsCount2" class="currencyCount" style="text-align: center;"><span data-i18n="top_you_have">You have</span> <rt id="top_ref_cur_val2">0</rt> <span data-i18n="currency_bits">bits</span></span>
+          <div class="centeredDiv" style="flex-direction: row;">
+            <button data-i18n="export_tree" class="whiteButton" onclick="exportTree()">Экспорт древа</button>
+            <button id="respecTree" data-i18n="respec_tree" class="whiteButton" onclick="respecTree()">Сброс древа после Перепрошивания</button>
+            <button data-i18n="import_tree" class="whiteButton" onclick="importTree()">Импорт древа</button>
+          </div>
+          <div class="centeredDiv" style="flex-direction: row;">
+            <button class="whiteButton presetButton" style="width: 90px" onclick="openWindow('presetEditor', true, 1)">1</button>
+            <button class="whiteButton presetButton" style="width: 90px" onclick="openWindow('presetEditor', true, 2)">2</button>
+            <button class="whiteButton presetButton" style="width: 90px" onclick="openWindow('presetEditor', true, 3)">3</button>
+            <button class="whiteButton presetButton" style="width: 90px" onclick="openWindow('presetEditor', true, 4)">4</button>
+            <button class="whiteButton presetButton" style="width: 90px" onclick="openWindow('presetEditor', true, 5)">5</button>
+            <button class="whiteButton presetButton" style="width: 90px" onclick="openWindow('presetEditor', true, 6)">6</button>
+          </div>
+        </div>
+        <div id="treeContainer" class="tree-container">
+          <svg id="treeLines" class="tree-svg"></svg>
+          <div id="treeGrid" class="tree-grid"></div>
+        </div>
+      </div>
+  </div>
     <div id="achTab" style="display:none">
       <div id="achSubButtons">
         <button onclick="selectSubTab(achScreenDescription, false, 'achievements')" id="achievementsSelect" class="tabButton subButton active" data-i18n="achButton">Достижения</button>
@@ -2458,6 +2583,7 @@
           <tr><th class="averageTable" data-i18n="averagePrestigesTitle">Average</th><th class="averageTable" id="rp_avg_pres"></th><th class="averageTable" id="rp_avg_crys"></th><th class="averageTable" id="rp_avg_gt"></th><th class="averageTable" id="rp_avg_rt"></th><th class="averageTable" id="rp_avg_ppm"></th><th class="averageTable" id="rp_avg_cpm"></th></tr>
         </tfoot>
     </table>
+    <div id="recentReflashes">
     <p class="titleTab" data-i18n="recentReflashesTitle">Recent reflashes</p>
       <table>
         <thead>
@@ -2481,6 +2607,7 @@
           <tr><th class="averageTable" data-i18n="averageReflashesTitle">Average</th><th class="averageTable" id="rr_avg_res"></th><th class="averageTable" id="rr_avg_bits"></th><th class="averageTable" id="rr_avg_gt"></th><th class="averageTable" id="rr_avg_rt"></th><th class="averageTable" id="rr_avg_rpm"></th><th class="averageTable" id="rr_avg_bpm"></th></tr>
         </tfoot>
     </table>
+    </div>
     </div>
 
     <div id="aboutGameTab" style="display:none">
@@ -2742,6 +2869,64 @@
                     <span id="shopBuyableU7Title" data-i18n="shop_b7_name">Energy Drink</span>
                     <span id="shopBuyableU7Req">0/20</span>
                   </div>
+                  <div id="postReflashShop">
+                    <div class="shopContainer">
+                      <button id="shopBuyableU8" class="shopButton"></button>
+                      <div id="tooltip-shopBuyableU8" class="tooltip" role="tooltip">
+                        <span class="tooltipShop">
+                          <ut><span data-i18n="shop_b8_name">Golden Glove II</span> (<span id="sb8_amt">0</span>/<span id="sb8_max">100</span>) [+<span id="sb8_bulk">1</span>]</ut><br>
+                          <span data-i18n="shop_b8_desc">Increase α-coins per click</span><br>
+                          <span data-i18n="word_currently">Currently:</span> +<span id="sb8_eff">0</span>% <span id="sb8_next_cont">=> +<span id="sb8_neff">0</span>%</span><br>
+                          <span id="sb8_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb8_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                        </span>
+                        <div class="arrow" data-popper-arrow></div>
+                      </div>
+                      <span id="shopBuyableU8Title" data-i18n="shop_b8_name">Golden Glove II</span>
+                      <span id="shopBuyableU8Req">0/100</span>
+                    </div>
+                      <div class="shopContainer">
+                      <button id="shopBuyableU9" class="shopButton"></button>
+                      <div id="tooltip-shopBuyableU9" class="tooltip" role="tooltip">
+                        <span class="tooltipShop">
+                          <ut><span data-i18n="shop_b9_name">Golden Watch II</span> (<span id="sb9_amt">0</span>/<span id="sb9_max">100</span>) [+<span id="sb9_bulk">1</span>]</ut><br>
+                          <span data-i18n="shop_b9_desc">Increase α-coins per second</span><br>
+                          <span data-i18n="word_currently">Currently:</span> +<span id="sb9_eff">0</span>% <span id="sb9_next_cont">=> +<span id="sb9_neff">0</span>%</span><br>
+                          <span id="sb9_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb9_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                        </span>
+                        <div class="arrow" data-popper-arrow></div>
+                      </div>
+                      <span id="shopBuyableU9Title" data-i18n="shop_b9_name">Golden Watch II</span>
+                      <span id="shopBuyableU9Req">0/100</span>
+                    </div>
+                    <div class="shopContainer">
+                      <button id="shopBuyableU10" class="shopButton"></button>
+                      <div id="tooltip-shopBuyableU10" class="tooltip" role="tooltip">
+                        <span class="tooltipShop">
+                          <ut><span data-i18n="shop_b10_name">Golden Key II</span> (<span id="sb10_amt">0</span>/<span id="sb10_max">100</span>) [+<span id="sb10_bulk">1</span>]</ut><br>
+                          <span data-i18n="shop_b10_desc">Increase α-coins per second</span><br>
+                          <span data-i18n="word_currently">Currently:</span> +<span id="sb10_eff">0</span>% <span id="sb10_next_cont">=> +<span id="sb10_neff">0</span>%</span><br>
+                          <span id="sb10_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb10_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                        </span>
+                        <div class="arrow" data-popper-arrow></div>
+                      </div>
+                      <span id="shopBuyableU10Title" data-i18n="shop_b10_name">Golden Key II</span>
+                      <span id="shopBuyableU10Req">0/100</span>
+                    </div>
+                    <div class="shopContainer">
+                      <button id="shopBuyableU11" class="shopButton"></button>
+                      <div id="tooltip-shopBuyableU11" class="tooltip" role="tooltip">
+                        <span class="tooltipShop">
+                          <ut><span data-i18n="shop_b11_name">Golden Clover</span> (<span id="sb11_amt">0</span>/<span id="sb11_max">100</span>) [+<span id="sb11_bulk">1</span>]</ut><br>
+                          <span data-i18n="shop_b11_desc">Increase supercoin chance</span><br>
+                          <span data-i18n="word_currently">Currently:</span> +<span id="sb11_eff">0</span>% <span id="sb11_next_cont">=> +<span id="sb11_neff">0</span>%</span><br>
+                          <span id="sb11_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb11_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                        </span>
+                        <div class="arrow" data-popper-arrow></div>
+                      </div>
+                      <span id="shopBuyableU11Title" data-i18n="shop_b11_name">Golden Clover</span>
+                      <span id="shopBuyableU11Req">0/100</span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <hr style="margin: 0">
@@ -2865,6 +3050,40 @@
                     <span id="shopPermanentU8Req">0/5</span>
                   </div>
                 </div>
+
+                <div id="postReflashShop2">
+                    <div class="shopContainer">
+                    <button id="shopPermanentU9" class="shopButton" onclick="UPGS.shop.permanent.buy(9)"></button>
+                    <div id="tooltip-shopPermanentU9" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut><span data-i18n="shop_p9_name">Credit Card PLUS</span> (<span id="sp9_amt">0</span>/<span id="sp9_max">10</span>)</ut><br>
+                        <span data-i18n="shop_p9_desc">Increase daily reward and export reward</span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sp9_eff">0</span>% <span id="sp9_next_cont">=> +<span id="sp9_neff">0</span>%</span><br>
+                        <span id="sp9_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp9_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopPermanentU9Title" data-i18n="shop_p9_name">Credit Card PLUS</span>
+                    <span id="shopPermanentU9Req">0/10</span>
+                  </div>
+
+                  <div class="shopContainer">
+                    <button id="shopPermanentU10" class="shopButton" onclick="UPGS.shop.permanent.buy(10)"></button>
+                    <div id="tooltip-shopPermanentU10" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut><span data-i18n="shop_p10_name">REAPER</span> (<span id="sp10_amt">0</span>/<span id="sp10_max">10</span>)</ut><br>
+                        <span data-i18n="shop_p10_desc">Reduce chance of viruses and reduce their requirements</span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sp10_eff">0</span>% <span id="sp10_next_cont">=> +<span id="sp10_neff">0</span>%</span><br>
+                        <span id="sp10_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp10_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopPermanentU10Title" data-i18n="shop_p10_name">REAPER</span>
+                    <span id="shopPermanentU10Req">0/10</span>
+                  </div>
+
+                  </div>
+
               </div>
               <hr style="margin: 0">
 
@@ -3079,9 +3298,9 @@
             <button onclick="hidePopup()" id="closeWindow2" class="closeWindow confClose" style="top: 0%; right: 0%"></button>
 
             <div id="confirmationButtons" class="windowDesc" style="display: none">
-              <button onclick="reloadPage()" id="yesHR" class="tabButton" data-i18n="yes">Да</button>
-              <button onclick="reloadPage2()" id="yesRP" class="tabButton" data-i18n="yes">Да</button>
-              <button onclick="hidePopup()" id="no" class="tabButton" data-i18n="no">Нет</button>
+              <button onclick="reloadPage()" id="yesHR" class="whiteButton" data-i18n="yes">Да</button>
+              <button onclick="reloadPage2()" id="yesRP" class="whiteButton" data-i18n="yes">Да</button>
+              <button onclick="hidePopup()" id="no" class="whiteButton" data-i18n="no">Нет</button>
             </div>
             <span id="whichCode" class="windowDesc" style="display: none">КОД</span>
             <span id="dailyDesc" class="windowDesc" style="display: none">ЕЖЕДНЕВКА</span>
@@ -3090,7 +3309,7 @@
               <span id="howMuchCrystals" data-i18n="breakCrystalTitle">СКОЛЬКО СБРОСИТЬ ТЕКСТ</span>
               <span id="howMuchCrystalsDesc" class="statsSlot" data-i18n="breakCrystalDesc">ОПИСАНИЕ ОКНА</span>
               <input type="text" id="howMuchCrystalsInput" class="prestigeInput">
-              <button onclick="submitTheBreak(this)" id="submitBreak" class="tabButton" data-i18n="doBreak"></button>
+              <button onclick="submitTheBreak(this)" id="submitBreak" class="whiteButton" data-i18n="doBreak"></button>
             </div>
             <span id="brokeCrystals" class="windowDesc" style="display: none">СКОЛЬКО ОСКОЛКОВ ПОЛУЧЕНО</span>
             <span id="falseBrokeCrystals" class="windowDesc" style="display: none"></span>
@@ -3101,35 +3320,56 @@
               <div id="saveButtons" style="display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 10px;"> 
                 
                 <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
-                  <button onclick="chooseSave(1)" id="save1" class="tabButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName1">Save 1</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
-                  <button onclick="editSaveName(1)" class="tabButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
+                  <button onclick="chooseSave(1)" id="save1" class="whiteButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName1">Save 1</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                  <button onclick="editSaveName(1)" class="whiteButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
                 </div>
                 <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
-                  <button onclick="chooseSave(2)" id="save2" class="tabButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName2">Save 2</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
-                  <button onclick="editSaveName(2)" class="tabButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
+                  <button onclick="chooseSave(2)" id="save2" class="whiteButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName2">Save 2</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                  <button onclick="editSaveName(2)" class="whiteButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
                 </div>
                 <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
-                  <button onclick="chooseSave(3)" id="save3" class="tabButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName3">Save 3</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
-                  <button onclick="editSaveName(3)" class="tabButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
+                  <button onclick="chooseSave(3)" id="save3" class="whiteButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName3">Save 3</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                  <button onclick="editSaveName(3)" class="whiteButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
                 </div>
                 <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
-                  <button onclick="chooseSave(4)" id="save4" class="tabButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName4">Save 4</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
-                  <button onclick="editSaveName(4)" class="tabButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
+                  <button onclick="chooseSave(4)" id="save4" class="whiteButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName4">Save 4</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                  <button onclick="editSaveName(4)" class="whiteButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
                 </div>
                 <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
-                  <button onclick="chooseSave(5)" id="save5" class="tabButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName5">Save 5</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
-                  <button onclick="editSaveName(5)" class="tabButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
+                  <button onclick="chooseSave(5)" id="save5" class="whiteButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName5">Save 5</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                  <button onclick="editSaveName(5)" class="whiteButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
                 </div>
 
               </div>
             </div>
 
             <div id="reflashConfirmation" class="windowDesc" style="display: none">
-              <ut><p data-i18n="reflasnConfirmTitle">Placeholder</p></ut>
-              <p data-i18n="reflasnConfirmDesc">Placeholder</p>
-              <button onclick="LAYERS.reflash.doReset()" class="tabButton" data-i18n="reflasnConfirmButton">OK</button>
+              <ut><p data-i18n="reflashConfirmTitle">Placeholder</p></ut>
+              <p data-i18n="reflashConfirmDesc">Placeholder</p>
+              <button onclick="LAYERS.reflash.doReset()" class="whiteButton" data-i18n="reflashConfirmButton">OK</button>
             </div>
+
+            <div id="presetEditor" class="windowDesc" style="display: none">
+              <div class="centeredDiv">
+                <ut><span data-i18n="presetTitle">Preset</span>: <span id="presetName">1</span></ut>
+                <button data-i18n="renamePreset" class="whiteButton whiteButtonThin" onclick="presetRename(player.reflash.selectedPreset)">Rename</button>
+              </div>
+              <div class="centeredDiv">
+                <span data-i18n="nodeOrder">Node order</span>
+                <input type="text" id="nodeOrderInput" placeholder="11, 21, 22, 31, 32, ...">
+              </div>
+              <br>
+              <div class="centeredDiv" style="flex-direction: row;">
+                <button data-i18n="copyOrder" class="whiteButton" style="width: 130px;" onclick="copyPreset(player.reflash.selectedPreset)">Copy</button>
+                <button data-i18n="pasteOrder" class="whiteButton" style="width: 130px;" onclick="pastePreset(player.reflash.selectedPreset)">Paste</button>
+              </div>
+              <div class="centeredDiv" style="flex-direction: row;">
+                <button data-i18n="resetOrder" class="whiteButton" style="width: 130px;" onclick="resetPreset(player.reflash.selectedPreset)">Reset</button>
+                <button data-i18n="saveOrder" class="whiteButton" style="width: 130px;" onclick="savePreset(player.reflash.selectedPreset)">Save</button>
+                <button data-i18n="importOrder" class="whiteButton" style="width: 130px;" onclick="importPreset(player.reflash.selectedPreset)">Import</button>
+              </div>
             </div>
+          </div>
         </div>
 
         <audio id="THEMEOFTHEGREAT">
