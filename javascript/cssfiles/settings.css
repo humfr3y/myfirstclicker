@@ -107,7 +107,7 @@
     flex: 0 0 auto;
 }
 
-.myPopupBackdrop {
+.myPopupBackdrop, .myPopupBackdropSub, #superPopupBackdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -116,6 +116,10 @@
     background-color: rgba(0, 0, 0, 0.5); /* цвет затемнения */
     z-index: 9900; /* должен быть меньше, чем у самого окна */
     display: none; /* начальное состояние - затемнение скрыто */
+}
+
+#superPopupBackdrop {
+    background-color: transparent;
 }
 
 .titleDivClass {
@@ -152,10 +156,11 @@
     display: block;
     width: 20px;
     height: 20px;
-    background-image: url("images/close.png");
+    background-image: url("images/misc/close.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
+
 #versionChooser {
     z-index: 9998;
     display: flex;
@@ -164,6 +169,11 @@
     border-color: #ffffff;
     width:100%;
     height:10%;
+}
+
+.versionButtons {
+    display: flex;
+    height: 100%;
     align-items: center;
     text-align: left;
     overflow-x: auto;
@@ -208,10 +218,7 @@
 }
 
 .unlockedChapter {
-    display: block;
-    min-width: 85px;
-    min-height: 40px;
-    border-width: 0 1px 1px 0;
+    display: block !important;
 }
 body {
     position: relative;
@@ -357,4 +364,27 @@ footer {
 }
 .notification-badge {
     animation: pulseBadge 2s infinite;
+}
+
+#majorVersionSelection {
+    top: 5px;
+    left: 10px;
+    z-index: 9998;
+    position: fixed;
+}
+
+#majorVersionSelection button {
+    width:40px;
+    height:40px;
+    border: solid 0px #ffffff;
+    color: white;
+    text-align: center;
+    border-width: 1px;
+    background-color: #000000;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#majorVersionSelection button:hover, .closeWindow:hover {
+    background-color: #313131;
 }

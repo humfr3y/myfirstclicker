@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="javascript/cssfiles/info.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/main.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/upgrades.css" type="text/css">
+    <link rel="stylesheet" href="javascript/cssfiles/template.css" type="text/css">
     <script src="https://cdn.jsdelivr.net/npm/break_infinity.js/dist/break_infinity.min.js"></script>
       <script>
           window.Decimal || document.write('<script src="node_modules/break_infinity.js/dist/break_infinity.min.js"><\/script>');
@@ -33,7 +34,7 @@
 <body>
   <div id="loadingScreen">
       <video autoplay muted loop playsinline id="introVideo">
-          <source src="javascript/cssfiles/images/matrix.mp4" type="video/mp4">
+          <source src="javascript/cssfiles/images/misc/matrix.mp4" type="video/mp4">
       </video>
   </div>
   <div id="wholeGame" style="display: none">
@@ -242,67 +243,108 @@
       <footer id="hotkeys" class="statsSlot" data-i18n="hotkeys">Hotkeys: M - Max Buy, P - Do Prestige</footer>
     </div>
         <div id="myPopupBackdrop1" class="myPopupBackdrop"></div>
+        <div id="myPopupBackdropSub" class="myPopupBackdropSub" style="display: none; z-index: 10000"></div>
         <div id="changelogWindow" class="gameWindow">
           <div id="titleDiv" class="titleDivClass">
+            <div id="majorVersionSelection">
+              <button onclick="switchVersion(0)">0.x</button>
+              <button onclick="switchVersion(1)">1.x</button>
+            </div>
             <p id="changelogTitle" class="windowTitle" data-i18n="changelog">Changelog</p>
             <button onclick="hidePopup()" class="closeWindow"></button>
           </div>
           <div id="versionChooser">
-            <button onclick='showChangelog(text.changelog["0.0"])' class="versionButton">0.0</button>
-            <button onclick='showChangelog(text.changelog["0.1"])' class="versionButton">0.1</button>
-            <button onclick='showChangelog(text.changelog["0.2"])' class="versionButton">0.2</button>
-            <button onclick='showChangelog(text.changelog["0.3"])' class="versionButton">0.3</button>
-            <button onclick='showChangelog(text.changelog["0.4"])' class="versionButton">0.4</button>
-            <button onclick='showChangelog(text.changelog["0.5"])' class="versionButton">0.5</button>
-            <button onclick='showChangelog(text.changelog["0.5.1"])' class="versionButton">0.5.1</button>
-            <button onclick='showChangelog(text.changelog["0.6"])' class="versionButton">0.6</button>
-            <button onclick='showChangelog(text.changelog["0.7"])' class="versionButton">0.7</button>
-            <button onclick='showChangelog(text.changelog["0.7.1"])' class="versionButton">0.7.1</button>
-            <button onclick='showChangelog(text.changelog["0.8"])' class="versionButton">0.8</button>
-            <button onclick='showChangelog(text.changelog["0.8.0.1"])' class="versionButton">0.8.0.1</button>
-            <button onclick='showChangelog(text.changelog["0.9"])' class="versionButton">0.9</button>
-            <button onclick='showChangelog(text.changelog["0.9.1"])' class="versionButton">0.9.1</button>
-            <button onclick='showChangelog(text.changelog["0.9.2"])' class="versionButton">0.9.2</button>
-            <button onclick='showChangelog(text.changelog["0.10"])' class="versionButton">0.10</button>
-            <button onclick='showChangelog(text.changelog["0.10.1"])' class="versionButton">0.10.1.x</button>
-            <button onclick='showChangelog(text.changelog["0.11"])' class="versionButton">0.11</button>
-            <button onclick='showChangelog(text.changelog["0.12"])' class="versionButton">0.12</button>
-            <button onclick='showChangelog(text.changelog["0.12.1"])' class="versionButton">0.12.1</button>
-            <button onclick='showChangelog(text.changelog["0.13"])' class="versionButton">0.13</button>
-            <button onclick='showChangelog(text.changelog["0.14"])' class="versionButton">0.14</button>
-            <button onclick='showChangelog(text.changelog["0.15"])' class="versionButton">0.15</button>
-            <button onclick='showChangelog(text.changelog["0.15.x"])' class="versionButton">0.15.x</button>
+            <div class="versionButtons">
+              <button onclick='showChangelog(text.changelog["0.0"])' class="versionButton">0.0</button>
+              <button onclick='showChangelog(text.changelog["0.1"])' class="versionButton">0.1</button>
+              <button onclick='showChangelog(text.changelog["0.2"])' class="versionButton">0.2</button>
+              <button onclick='showChangelog(text.changelog["0.3"])' class="versionButton">0.3</button>
+              <button onclick='showChangelog(text.changelog["0.4"])' class="versionButton">0.4</button>
+              <button onclick='showChangelog(text.changelog["0.5"])' class="versionButton">0.5</button>
+              <button onclick='showChangelog(text.changelog["0.5.1"])' class="versionButton">0.5.1</button>
+              <button onclick='showChangelog(text.changelog["0.6"])' class="versionButton">0.6</button>
+              <button onclick='showChangelog(text.changelog["0.7"])' class="versionButton">0.7</button>
+              <button onclick='showChangelog(text.changelog["0.7.1"])' class="versionButton">0.7.1</button>
+              <button onclick='showChangelog(text.changelog["0.8"])' class="versionButton">0.8</button>
+              <button onclick='showChangelog(text.changelog["0.8.0.1"])' class="versionButton">0.8.0.1</button>
+              <button onclick='showChangelog(text.changelog["0.9"])' class="versionButton">0.9</button>
+              <button onclick='showChangelog(text.changelog["0.9.1"])' class="versionButton">0.9.1</button>
+              <button onclick='showChangelog(text.changelog["0.9.2"])' class="versionButton">0.9.2</button>
+              <button onclick='showChangelog(text.changelog["0.10"])' class="versionButton">0.10</button>
+              <button onclick='showChangelog(text.changelog["0.10.1"])' class="versionButton">0.10.1.x</button>
+              <button onclick='showChangelog(text.changelog["0.11"])' class="versionButton">0.11</button>
+              <button onclick='showChangelog(text.changelog["0.12"])' class="versionButton">0.12</button>
+              <button onclick='showChangelog(text.changelog["0.12.1"])' class="versionButton">0.12.1</button>
+              <button onclick='showChangelog(text.changelog["0.13"])' class="versionButton">0.13</button>
+              <button onclick='showChangelog(text.changelog["0.14"])' class="versionButton">0.14</button>
+              <button onclick='showChangelog(text.changelog["0.15"])' class="versionButton">0.15</button>
+              <button onclick='showChangelog(text.changelog["0.15.x"])' class="versionButton">0.15.x</button>
+            </div>
+            <div class="versionButtons" style="display: none">
+              <button onclick='showChangelog(text.changelog["1.0"])' class="versionButton">1.0</button>
+            </div>
           </div>
         <div id="versionDiv" class="windowDesc">
           <p id="versionDescription">Choose version</p>
         </div>
         </div>
-        <div id="gameLoreWindow" class="gameWindow">
-          <div id="loreTitleDiv" class="titleDivClass">
-            <p id="loreTitle" class="windowTitle" data-i18n="gameLore">Changelog</p>
+        <div id="bookWindow">
+          <div class="page left-page">
+                <div class="leftPageTitle"><p class="leftLoreTitle whiteText" data-i18n="leftLoreTitle.1" style="display: none;">Placeholder1</p></div>
+                <div class="leftPageTitle" style="display: none;"><p class="leftLoreTitle whiteText" data-i18n="leftLoreTitle.2" style="display: none;">Placeholder2</p></div>
+                <div class="leftPageTitle" style="display: none;"><p class="leftLoreTitle whiteText" data-i18n="leftLoreTitle.3" style="display: none;">Placeholder3</p></div>
+                <div class="grid-buttons left-lore-page">
+                    <button id="chapter1Tab" class="btn paper-type paper-type-1 left-lore-chapter" onclick="showStory(text.chapter[1], text.chapterTitle[1])">Test</button>
+                    <button id="chapter2Tab" class="btn paper-type paper-type-2 left-lore-chapter" onclick="showStory(text.chapter[2], text.chapterTitle[2])">Test</button>
+                    <button id="chapter3Tab" class="btn paper-type paper-type-3 left-lore-chapter" onclick="showStory(text.chapter[3], text.chapterTitle[3])">Test</button>
+                    <button id="chapter4Tab" class="btn paper-type paper-type-4 left-lore-chapter" onclick="showStory(text.chapter[4], text.chapterTitle[4])">Test</button>
+                </div>
+                <div class="grid-buttons left-lore-page" style="display: none;">
+                    <button id="chapter9Tab" class="btn paper-type paper-type-2 left-lore-chapter" onclick="showStory(text.chapter[9], text.chapterTitle[9])">Test</button>
+                    <button id="chapter10Tab" class="btn paper-type paper-type-4 left-lore-chapter" onclick="showStory(text.chapter[10], text.chapterTitle[10])">Test</button>
+                    <button id="chapter11Tab" class="btn paper-type paper-type-1 left-lore-chapter" onclick="showStory(text.chapter[11], text.chapterTitle[11])">Test</button>
+                    <button id="chapter12Tab" class="btn paper-type paper-type-3 left-lore-chapter" onclick="showStory(text.chapter[12], text.chapterTitle[12])">Test</button>
+                </div>
+                <div class="grid-buttons left-lore-page" style="display: none;">
+                    <button id="chapter17Tab" class="btn paper-type paper-type-1 left-lore-chapter" onclick="showStory(text.chapter[17], text.chapterTitle[17])">Test</button>
+                    <button id="chapter18Tab" class="btn paper-type paper-type-3 left-lore-chapter" onclick="showStory(text.chapter[18], text.chapterTitle[18])">Test</button>
+                    <button id="chapter19Tab" class="btn paper-type paper-type-4 left-lore-chapter" onclick="showStory(text.chapter[19], text.chapterTitle[19])">Test</button>
+                    <button id="chapter20Tab" class="btn paper-type paper-type-2 left-lore-chapter" onclick="showStory(text.chapter[20], text.chapterTitle[20])">Test</button>
+                </div>
+                <button class="arrow-btn left-arrow" onclick="changePage('left')" style="display: none;"></button>
+            </div>
+
+            <div class="page right-page">
+                <div class="rightPageTitle"><p class="rightLoreTitle whiteText" data-i18n="rightLoreTitle.1" style="display: none;">Placeholder1</p></div>
+                <div class="rightPageTitle" style="display: none;"><p class="rightLoreTitle whiteText" data-i18n="rightLoreTitle.2" style="display: none;">Placeholder2</p></div>
+                <div class="rightPageTitle" style="display: none;"><p class="rightLoreTitle whiteText" data-i18n="rightLoreTitle.3" style="display: none;">Placeholder3</p></div>
+                <div class="grid-buttons right-lore-page">
+                    <button id="chapter5Tab" class="btn paper-type paper-type-3 right-lore-chapter" onclick="showStory(text.chapter[5], text.chapterTitle[5])">Test</button>
+                    <button id="chapter6Tab" class="btn paper-type paper-type-2 right-lore-chapter" onclick="showStory(text.chapter[6], text.chapterTitle[6])">Test</button>
+                    <button id="chapter7Tab" class="btn paper-type paper-type-1 right-lore-chapter" onclick="showStory(text.chapter[7], text.chapterTitle[7])">Test</button>
+                    <button id="chapter8Tab" class="btn paper-type paper-type-4 right-lore-chapter" onclick="showStory(text.chapter[8], text.chapterTitle[8])">Test</button>
+                </div>
+                <div class="grid-buttons right-lore-page" style="display: none;">
+                    <button id="chapter13Tab" class="btn paper-type paper-type-4 right-lore-chapter" onclick="showStory(text.chapter[13], text.chapterTitle[13])">Test</button>
+                    <button id="chapter14Tab" class="btn paper-type paper-type-1 right-lore-chapter" onclick="showStory(text.chapter[14], text.chapterTitle[14])">Test</button>
+                    <button id="chapter15Tab" class="btn paper-type paper-type-3 right-lore-chapter" onclick="showStory(text.chapter[15], text.chapterTitle[15])">Test</button>
+                    <button id="chapter16Tab" class="btn paper-type paper-type-2 right-lore-chapter" onclick="showStory(text.chapter[16], text.chapterTitle[16])">Test</button>
+                </div>
+                <div class="grid-buttons right-lore-page" style="display: none;">
+                    <button id="chapter21Tab" class="btn paper-type paper-type-2 right-lore-chapter" onclick="showStory(text.chapter[21], text.chapterTitle[21])">Test</button>
+                    <button id="chapter22Tab" class="btn paper-type paper-type-3 right-lore-chapter" onclick="showStory(text.chapter[22], text.chapterTitle[22])">Test</button>
+                    <button id="chapter23Tab" class="btn paper-type paper-type-4 right-lore-chapter" onclick="showStory(text.chapter[23], text.chapterTitle[23])">Test</button>
+                    <button id="chapter24Tab" class="btn paper-type paper-type-1 right-lore-chapter" onclick="showStory(text.chapter[24], text.chapterTitle[24])">Test</button>
+                </div>
+                <button class="arrow-btn right-arrow" onclick="changePage('right')" style="display: none;"></button>
+                <button class="close-btn" onclick="hidePopup()"></button>
+            </div>
           </div>
-          <button onclick="hidePopup()" class="closeWindow"></button>
-          <div id="chapterChooser">
-            <button onclick="showStory(text.chapter[1])" id="chapter1Tab" class="versionButton loreChapter">Начало</button>
-            <button onclick="showStory(text.chapter[2])" id="chapter2Tab" class="versionButton loreChapter">Улучшения</button>
-            <button onclick="showStory(text.chapter[3])" id="chapter3Tab" class="versionButton loreChapter">У-множение</button>
-            <button onclick="showStory(text.chapter[4])" id="chapter4Tab" class="versionButton loreChapter">У-силение</button>
-            <button onclick="showStory(text.chapter[5])" id="chapter5Tab" class="versionButton loreChapter">Престиж</button>
-            <button onclick="showStory(text.chapter[6])" id="chapter6Tab" class="versionButton loreChapter">Улучшения Престижа</button>
-            <button onclick="showStory(text.chapter[7])" id="chapter7Tab" class="versionButton loreChapter">Осколки</button>
-            <button onclick="showStory(text.chapter[8])" id="chapter8Tab" class="versionButton loreChapter">Автоматизация</button>
-            <button onclick="showStory(text.chapter[9])" id="chapter9Tab" class="versionButton loreChapter">Испытания</button>
-            <button onclick="showStory(text.chapter[10])" id="chapter10Tab" class="versionButton loreChapter">Суперкристаллы</button>
-            <button onclick="showStory(text.chapter[11])" id="chapter11Tab" class="versionButton loreChapter">Минералы</button>
-            <button onclick="showStory(text.chapter[12])" id="chapter12Tab" class="versionButton loreChapter">Достижения Осколков</button>
-            <button onclick="showStory(text.chapter[13])" id="chapter13Tab" class="versionButton loreChapter">Суперпрестиж</button>
-            <button onclick="showStory(text.chapter[14])" id="chapter14Tab" class="versionButton loreChapter">У-сложители</button>
-            <button onclick="showStory(text.chapter[15])" id="chapter15Tab" class="versionButton loreChapter">У-разнители</button>
-            <button onclick="showStory(text.chapter[16])" id="chapter16Tab" class="versionButton loreChapter">У-разнители</button>
-            <button onclick="showStory(text.chapter[17])" id="chapter17Tab" class="versionButton loreChapter">У-разнители</button>
-            <button onclick="showStory(text.chapter[18])" id="chapter18Tab" class="versionButton loreChapter">У-разнители</button>
-          </div>
+          
+        <div id="paperWindow" class="gameWindow" style="display: none; z-index: 10000">
+          <button id="exitPaper" onclick="hidePopupSub()" class="close-btn"></button>
           <div id="chapterDiv" class="windowDesc">
+            <p id="chapterTitle" style="font-weight: bold; font-size: calc(32px * var(--font-scale));">Choose chapter</p>
             <p id="chapterDescription">Choose chapter</p>
           </div>
         </div>
@@ -369,7 +411,7 @@
           <span data-i18n="word_requires">Requires:</span> <span id="uadder_cost">10</span> <span data-i18n="layer_uadder_req">Productivities and 6 U-powers</span>
         </button>
       </div>
-      <button onclick="getCoin(event)" id="coinGain" class="coinCss"><img src="javascript/cssfiles/images/CoinOff.png" style="width:0px" alt="" class="coinImage"></button>
+      <button onclick="getCoin(event)" id="coinGain" class="coinCss"><img src="javascript/cssfiles/images/misc/CoinOff.png" style="width:0px" alt="" class="coinImage"></button>
       <div id="upowerDiv">
         <button onclick="LAYERS.upower.doReset()" id="upowerBoost" class="upgradeButton">
           <ut><span data-i18n="layer_upower_name">U-power</span> (<span id="upower_amt">0</span><span id="upower_free"></span>)</ut><br>
@@ -1668,7 +1710,7 @@
               </div>
             </div>
           </div>
-          <img src="javascript/cssfiles/images/scales.png" height="477" width="345">
+          <img src="javascript/cssfiles/images/misc/scales.png" height="477" width="345">
         </div>
       </div>
       <div id="rightSideBalance" class="sideFortune">
@@ -1780,7 +1822,91 @@
       </div>
     </div>
       <div id="acceleratorTab" style="display:none">
-          <div id="acceleratorUpgrades" class="centeredDiv" style="width: 100%">
+        <div id="acceleratorMachine"> 
+          <div id="acceleratorMachineBar" class="progress-bar-base">
+            <div id="acceleratorMachineProgressBar" class="progress-bar">
+              </div>
+              <div id="acceleratorMachine-pbt-div">
+                <div id="acceleratorMachine-progress-bar-text">
+                <span data-i18n="upg_ref_acc5_req1">Currently:</span>&nbsp;<span id="acceleratorU5_current_utils"></span>/<span id="acceleratorU5_cost"></span>
+                <span data-i18n="upg_ref_acc5_req2">Currently:</span>
+                <br>
+                <span id="acceleratorMachineBarPercent">10</span>%
+              </div>
+              </div>
+          </div>
+          <div id="acceleratorMachinePanel">
+            <div id="acceleratorMachineMain">
+              <div id="acceleratorMachineMainDiv1">
+                <div id="acceleratorSpeedometerIcon">
+
+                </div>
+                <div id="acceleratorResetDiv">
+                  <button onclick="UPGS.reflash.accelerator.buy(5)" id="acceleratorU5" class="acceleratorUpgrade" >
+                    <ut><span data-i18n="upg_ref_acc5_name">U-multiplier</span></ut> (<span id="acceleratorU5_amount">0</span>)<br>
+                    <span data-i18n="upg_ref_acc5_desc1"></span>
+                    x<span id="acceleratorU5_effect_min">0</span>
+                    <span data-i18n="upg_ref_acc5_desc2"></span>
+                    x<span id="acceleratorU5_effect_max">0</span><br>
+                    <span data-i18n="upg_ref_acc5_desc3"></span><br>
+                  </button>
+                  <button onclick="UPGS.reflash.accelerator.buy(5)" id="acceleratorU5_1" class="acceleratorUpgrade" data-i18n="upg_ref_acc5_get"></button>
+                </div>
+              </div>
+              <div id="acceleratorCurrentSpeed" class="acceleratorUpgrade">
+                <span data-i18n="upg_ref_acc5_eff">Currently:</span>&nbsp;x<span id="acceleratorU5_effect">1</span><br>
+              </div>
+            </div>
+            <div id="acceleratorMachineUpgrades">
+              <div id="acceleratorMachineUpgradesDiv">
+                <button id="acceleratorU1" class="acceleratorUpgrade" onclick="UPGS.reflash.accelerator.buy(1)">
+                  <img src="/javascript/cssfiles/images/svg/plus-svgrepo-com.svg">
+                  <span data-i18n="upg_ref_acc1_name">Стабилизатор</span>
+                </button>
+                <div id="tooltip-acceleratorU1" class="tooltip" role="tooltip">
+                  <ut data-i18n="upg_ref_acc1_name">Money Pillow</ut> (<span id="acceleratorU1_amount">0</span>)<br>
+                  <span data-i18n="upg_ref_acc1_desc">Start U-Multipliers, U-Powers, Prestiges with 1000 α-coins</span><br>
+                  <span data-i18n="word_currently">Currently:</span> +<span id="acceleratorU1_effect">0</span><br>
+                  <span id="acceleratorU1_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU1_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+                  <div class="arrow" data-popper-arrow></div>
+                </div>
+                <button id="acceleratorU2" class="acceleratorUpgrade" onclick="UPGS.reflash.accelerator.buy(2)">
+                  <img src="/javascript/cssfiles/images/svg/minus-svgrepo-com.svg">
+                  <span data-i18n="upg_ref_acc2_name">Дестабилизатор</span>
+                </button>
+                <div id="tooltip-acceleratorU2" class="tooltip" role="tooltip">
+                  <ut data-i18n="upg_ref_acc2_name">Activity 2.0</ut> (<span id="acceleratorU2_amount">0</span>)<br>
+                  <span data-i18n="upg_ref_acc2_desc">Increases exponent of α-coin gain based on spent time</span><br>
+                  <span data-i18n="word_currently">Currently:</span> +<span id="acceleratorU2_effect">0</span><br>
+                  <span id="acceleratorU2_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU2_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+                  <div class="arrow" data-popper-arrow></div>
+                </div>
+                <button id="acceleratorU3" class="acceleratorUpgrade" onclick="UPGS.reflash.accelerator.buy(3)">
+                  <img src="/javascript/cssfiles/images/svg/speedometer-svgrepo-com.svg">
+                  <span data-i18n="upg_ref_acc3_name">Исход. скорость</span>
+                </button>
+                <div id="tooltip-acceleratorU3" class="tooltip" role="tooltip">
+                  <ut data-i18n="upg_ref_acc3_name">Money Pillow</ut> (<span id="acceleratorU3_amount">0</span>)<br>
+                  <span data-i18n="upg_ref_acc3_desc">Start U-Multipliers, U-Powers, Prestiges with 1000 α-coins</span><br>
+                  <span data-i18n="word_currently">Currently:</span> x<span id="acceleratorU3_effect">0</span><br>
+                  <span id="acceleratorU3_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU3_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+                </div>
+                <button id="acceleratorU4" class="acceleratorUpgrade" onclick="UPGS.reflash.accelerator.buy(4)">
+                  <img src="/javascript/cssfiles/images/svg/speed-fill-svgrepo-com.svg">
+                  <span data-i18n="upg_ref_acc4_name">Доп. ускорение</span>
+                </button>
+                <div id="tooltip-acceleratorU4" class="tooltip" role="tooltip">
+                  <ut data-i18n="upg_ref_acc4_name">Activity 2.0</ut> (<span id="acceleratorU4_amount">0</span>)<br>
+                  <span data-i18n="upg_ref_acc4_desc">Increases exponent of α-coin gain based on spent time</span><br>
+                  <span data-i18n="word_currently">Currently:</span> x<span id="acceleratorU4_effect">0</span><br>
+                  <span id="acceleratorU4_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU4_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+                  <div class="arrow" data-popper-arrow></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <!-- <div id="acceleratorUpgrades" class="centeredDiv" style="width: 100%">
             <div id="rSURow1" class="row" style="width: 100%; justify-content: space-around;">
               <button onclick="UPGS.reflash.accelerator.buy(1)" id="acceleratorU1" class="upgradeButton reflashBuyableButton">
                 <ut data-i18n="upg_ref_acc1_name">Money Pillow</ut> (<span id="acceleratorU1_amount">0</span>)<br>
@@ -1817,7 +1943,10 @@
                 <span id="acceleratorU4_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU4_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
               </button>
             </div>
-        </div>
+        </div> -->
+          <div>
+            
+          </div>
       </div>
       <div id="algorithmTab" style="display:none">
         <div id="algoTopBar">
@@ -2752,22 +2881,34 @@
         <p class="titleTab"><span data-i18n="superCoinCount_1">You have</span> <st id="top_shop_sc_val">0</st> <span data-i18n="currency_supercoins">supercoins</span></p>
         <span id="supercoinsGain"><span data-i18n="top_getting">You're getting</span><span id="top_scoins_gain_val">0</span><span data-i18n="top_sc_per_sec">α-coins per second</span></span>
       </div>
-      <p class="smallDesc" data-i18n="shopDesc">Welcome to Supershop! You can spend unique Supercoins for items...</p>
-      
+      <!-- <p class="smallDesc" data-i18n="shopDesc">Welcome to Supershop! You can spend unique Supercoins for items...</p> -->
+
       <div id="wholeShopDiv">
-        <div>
-          <div id="shopDiv2">
-            <div id="shopTitleDiv">
-              <p class="whiteText" data-i18n="shopTitle2">Upgrades</p>
+        <div id="shopCharacterDiv" onclick="openDialogueWindow(1, null, 'mrSuperChar')">
+          <div id="mrSuperChar" class="toHide" style="display: none"></div>
+        </div>
+        <div id="shopDiv">
+          <div id="supershopTitle">
+              <button id="respecShop" class="smallButton" onclick="respecBuyables()" data-i18n="respecShop" style="width: 70px">Respec</button>
+            <div> 
+              <span class="titleTab" data-i18n="shopButton_text">Supershop</span>
             </div>
-          <div id="shopDiv">
-            <div id="leftShopArrowDiv" class="shopArrowDiv" style="display: none">
-              <button onclick="nextShopPage('left')" id="leftShopArrow" class="shopArrow"><span class="whiteText" style="cursor: default;">←</span></button>
+            <div id="bulkBuyDiv">
+              <button class="smallButton bulkBuySelection active" onclick="changeInputValue(1)">x1</button>
+              <button class="smallButton bulkBuySelection" onclick="changeInputValue(10)">x10</button>
+              <button class="smallButton bulkBuySelection" onclick="changeInputValue(6767)" data-i18n="maxBulkBuyShop">Max</button>
             </div>
-            
-            <div id="shoppingDiv">
-              <div id="firstShopRow" class="shopRow">
-                <div class="shopContainer">
+          </div>
+          <div id="supershopButtons">
+            <button class="whiteButton shopSelection active" onclick="switchShopTab(0)" data-i18n="buyablesShop">Buyables</button>
+            <button class="whiteButton shopSelection" onclick="switchShopTab(1)" data-i18n="permanentShop">Permanent</button>
+            <button class="whiteButton shopSelection" onclick="switchShopTab(2)" data-i18n="specialShop">Special</button>
+            <button class="whiteButton shopSelection" onclick="switchShopTab(3)" data-i18n="itemsShop">Items</button>
+          </div>
+          <div id="supershopItems">
+            <div class="shopShelf"> 
+              <div class="shopShelfRow shopShelfRowTop shopBuyableRow">
+              <div class="shopContainer">
                   <button id="shopBuyableU1" class="shopButton"></button>
                   <div id="tooltip-shopBuyableU1" class="tooltip" role="tooltip">
                     <span class="tooltipShop">
@@ -2781,51 +2922,49 @@
                   <span id="shopBuyableU1Title" data-i18n="shop_b1_name">Golden Glove</span>
                   <span id="shopBuyableU1Req">0/100</span>
                 </div>
-                <div class="shopContainer">
-                  <button id="shopBuyableU2" class="shopButton"></button>
-                  <div id="tooltip-shopBuyableU2" class="tooltip" role="tooltip">
-                    <span class="tooltipShop">
-                      <ut><span data-i18n="shop_b2_name">Golden Watch</span> (<span id="sb2_amt">0</span>/<span id="sb2_max">100</span>) [+<span id="sb2_bulk">1</span>]</ut><br>
-                      <span data-i18n="shop_b2_desc">Increase α-coins per second</span><br>
-                      <span data-i18n="word_currently">Currently:</span> +<span id="sb2_eff">0</span>% <span id="sb2_next_cont">=> +<span id="sb2_neff">0</span>%</span><br>
-                      <span id="sb2_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb2_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                    </span>
-                    <div class="arrow" data-popper-arrow></div>
-                  </div>
-                  <span id="shopBuyableU2Title" data-i18n="shop_b2_name">Golden Watch</span>
-                  <span id="shopBuyableU2Req">0/100</span>
+              <div class="shopContainer">
+                <button id="shopBuyableU2" class="shopButton"></button>
+                <div id="tooltip-shopBuyableU2" class="tooltip" role="tooltip">
+                  <span class="tooltipShop">
+                    <ut><span data-i18n="shop_b2_name">Golden Watch</span> (<span id="sb2_amt">0</span>/<span id="sb2_max">100</span>) [+<span id="sb2_bulk">1</span>]</ut><br>
+                    <span data-i18n="shop_b2_desc">Increase α-coins per second</span><br>
+                    <span data-i18n="word_currently">Currently:</span> +<span id="sb2_eff">0</span>% <span id="sb2_next_cont">=> +<span id="sb2_neff">0</span>%</span><br>
+                    <span id="sb2_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb2_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                  </span>
+                  <div class="arrow" data-popper-arrow></div>
                 </div>
-                <div class="shopContainer">
-                  <button id="shopBuyableU3" class="shopButton"></button>
-                  <div id="tooltip-shopBuyableU3" class="tooltip" role="tooltip">
-                    <span class="tooltipShop">
-                      <ut><span data-i18n="shop_b3_name">Golden Key</span> (<span id="sb3_amt">0</span>/<span id="sb3_max">100</span>) [+<span id="sb3_bulk">1</span>]</ut><br>
-                      <span data-i18n="shop_b3_desc">Increase α-coin gain</span><br>
-                      <span data-i18n="word_currently">Currently:</span> +<span id="sb3_eff">0</span>% <span id="sb3_next_cont">=> +<span id="sb3_neff">0</span>%</span><br>
-                      <span id="sb3_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb3_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                    </span>
-                    <div class="arrow" data-popper-arrow></div>
-                  </div>
-                  <span id="shopBuyableU3Title" data-i18n="shop_b3_name">Golden Key</span>
-                  <span id="shopBuyableU3Req">0/100</span>
+                <span id="shopBuyableU2Title" data-i18n="shop_b2_name">Golden Watch</span>
+                <span id="shopBuyableU2Req">0/100</span>
                 </div>
-                <div class="shopContainer">
-                  <button id="shopBuyableU4" class="shopButton"></button>
-                  <div id="tooltip-shopBuyableU4" class="tooltip" role="tooltip">
-                    <span class="tooltipShop">
-                      <ut><span data-i18n="shop_b4_name">Clover</span> (<span id="sb4_amt">0</span>/<span id="sb4_max">100</span>) [+<span id="sb4_bulk">1</span>]</ut><br>
-                      <span data-i18n="shop_b4_desc">Increase the Super Coin chance</span><br>
-                      <span data-i18n="word_currently">Currently:</span> +<span id="sb4_eff">0</span>% <span id="sb4_next_cont">=> +<span id="sb4_neff">0</span>%</span><br>
-                      <span id="sb4_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb4_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                    </span>
-                    <div class="arrow" data-popper-arrow></div>
-                  </div>
-                  <span id="shopBuyableU4Title" data-i18n="shop_b4_name">Clover</span>
-                  <span id="shopBuyableU4Req">0/100</span>
+              <div class="shopContainer">
+                <button id="shopBuyableU3" class="shopButton"></button>
+                <div id="tooltip-shopBuyableU3" class="tooltip" role="tooltip">
+                  <span class="tooltipShop">
+                    <ut><span data-i18n="shop_b3_name">Golden Key</span> (<span id="sb3_amt">0</span>/<span id="sb3_max">100</span>) [+<span id="sb3_bulk">1</span>]</ut><br>
+                    <span data-i18n="shop_b3_desc">Increase α-coin gain</span><br>
+                    <span data-i18n="word_currently">Currently:</span> +<span id="sb3_eff">0</span>% <span id="sb3_next_cont">=> +<span id="sb3_neff">0</span>%</span><br>
+                    <span id="sb3_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb3_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                  </span>
+                  <div class="arrow" data-popper-arrow></div>
                 </div>
-                
-                <div id="post11challenge" style="display: none">
-                  <div class="shopContainer">
+                <span id="shopBuyableU3Title" data-i18n="shop_b3_name">Golden Key</span>
+                <span id="shopBuyableU3Req">0/100</span>
+                </div>
+              <div class="shopContainer shop_unlock_post_prestige" style="display: none">
+                <button id="shopBuyableU4" class="shopButton"></button>
+                <div id="tooltip-shopBuyableU4" class="tooltip" role="tooltip">
+                  <span class="tooltipShop">
+                    <ut><span data-i18n="shop_b4_name">Clover</span> (<span id="sb4_amt">0</span>/<span id="sb4_max">100</span>) [+<span id="sb4_bulk">1</span>]</ut><br>
+                    <span data-i18n="shop_b4_desc">Increase the Super Coin chance</span><br>
+                    <span data-i18n="word_currently">Currently:</span> +<span id="sb4_eff">0</span>% <span id="sb4_next_cont">=> +<span id="sb4_neff">0</span>%</span><br>
+                    <span id="sb4_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb4_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                  </span>
+                  <div class="arrow" data-popper-arrow></div>
+                </div>
+                <span id="shopBuyableU4Title" data-i18n="shop_b4_name">Clover</span>
+                <span id="shopBuyableU4Req">0/100</span>
+                </div>
+              <div class="shopContainer shop_unlock_post_shards" style="display: none">
                     <button id="shopBuyableU5" class="shopButton"></button>
                     <div id="tooltip-shopBuyableU5" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
@@ -2838,10 +2977,8 @@
                     </div>
                     <span id="shopBuyableU5Title" data-i18n="shop_b5_name">Shard Rain</span>
                     <span id="shopBuyableU5Req">0/50</span>
-                  </div>
                 </div>
-                <div id="postMinerals">
-                  <div class="shopContainer">
+              <div class="shopContainer shop_unlock_post_ach33" style="display: none">
                     <button id="shopBuyableU6" class="shopButton"></button>
                     <div id="tooltip-shopBuyableU6" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
@@ -2854,86 +2991,10 @@
                     </div>
                     <span id="shopBuyableU6Title" data-i18n="shop_b6_name">Precious Prestige</span>
                     <span id="shopBuyableU6Req">0/100</span>
-                  </div>
-                  <div class="shopContainer">
-                    <button id="shopBuyableU7" class="shopButton"></button>
-                    <div id="tooltip-shopBuyableU7" class="tooltip" role="tooltip">
-                      <span class="tooltipShop">
-                        <ut><span data-i18n="shop_b7_name">Energy Drink</span> (<span id="sb7_amt">0</span>/<span id="sb7_max">20</span>) [+<span id="sb7_bulk">1</span>]</ut><br>
-                        <span data-i18n="shop_b7_desc">Increase Overdrives effect</span><br>
-                        <span data-i18n="word_currently">Currently:</span> +<span id="sb7_eff">0</span>% <span id="sb7_next_cont">=> +<span id="sb7_neff">0</span>%</span><br>
-                        <span id="sb7_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb7_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                      </span>
-                      <div class="arrow" data-popper-arrow></div>
-                    </div>
-                    <span id="shopBuyableU7Title" data-i18n="shop_b7_name">Energy Drink</span>
-                    <span id="shopBuyableU7Req">0/20</span>
-                  </div>
-                  <div id="postReflashShop">
-                    <div class="shopContainer">
-                      <button id="shopBuyableU8" class="shopButton"></button>
-                      <div id="tooltip-shopBuyableU8" class="tooltip" role="tooltip">
-                        <span class="tooltipShop">
-                          <ut><span data-i18n="shop_b8_name">Golden Glove II</span> (<span id="sb8_amt">0</span>/<span id="sb8_max">100</span>) [+<span id="sb8_bulk">1</span>]</ut><br>
-                          <span data-i18n="shop_b8_desc">Increase α-coins per click</span><br>
-                          <span data-i18n="word_currently">Currently:</span> +<span id="sb8_eff">0</span>% <span id="sb8_next_cont">=> +<span id="sb8_neff">0</span>%</span><br>
-                          <span id="sb8_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb8_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                        </span>
-                        <div class="arrow" data-popper-arrow></div>
-                      </div>
-                      <span id="shopBuyableU8Title" data-i18n="shop_b8_name">Golden Glove II</span>
-                      <span id="shopBuyableU8Req">0/100</span>
-                    </div>
-                      <div class="shopContainer">
-                      <button id="shopBuyableU9" class="shopButton"></button>
-                      <div id="tooltip-shopBuyableU9" class="tooltip" role="tooltip">
-                        <span class="tooltipShop">
-                          <ut><span data-i18n="shop_b9_name">Golden Watch II</span> (<span id="sb9_amt">0</span>/<span id="sb9_max">100</span>) [+<span id="sb9_bulk">1</span>]</ut><br>
-                          <span data-i18n="shop_b9_desc">Increase α-coins per second</span><br>
-                          <span data-i18n="word_currently">Currently:</span> +<span id="sb9_eff">0</span>% <span id="sb9_next_cont">=> +<span id="sb9_neff">0</span>%</span><br>
-                          <span id="sb9_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb9_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                        </span>
-                        <div class="arrow" data-popper-arrow></div>
-                      </div>
-                      <span id="shopBuyableU9Title" data-i18n="shop_b9_name">Golden Watch II</span>
-                      <span id="shopBuyableU9Req">0/100</span>
-                    </div>
-                    <div class="shopContainer">
-                      <button id="shopBuyableU10" class="shopButton"></button>
-                      <div id="tooltip-shopBuyableU10" class="tooltip" role="tooltip">
-                        <span class="tooltipShop">
-                          <ut><span data-i18n="shop_b10_name">Golden Key II</span> (<span id="sb10_amt">0</span>/<span id="sb10_max">100</span>) [+<span id="sb10_bulk">1</span>]</ut><br>
-                          <span data-i18n="shop_b10_desc">Increase α-coins per second</span><br>
-                          <span data-i18n="word_currently">Currently:</span> +<span id="sb10_eff">0</span>% <span id="sb10_next_cont">=> +<span id="sb10_neff">0</span>%</span><br>
-                          <span id="sb10_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb10_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                        </span>
-                        <div class="arrow" data-popper-arrow></div>
-                      </div>
-                      <span id="shopBuyableU10Title" data-i18n="shop_b10_name">Golden Key II</span>
-                      <span id="shopBuyableU10Req">0/100</span>
-                    </div>
-                    <div class="shopContainer">
-                      <button id="shopBuyableU11" class="shopButton"></button>
-                      <div id="tooltip-shopBuyableU11" class="tooltip" role="tooltip">
-                        <span class="tooltipShop">
-                          <ut><span data-i18n="shop_b11_name">Golden Clover</span> (<span id="sb11_amt">0</span>/<span id="sb11_max">100</span>) [+<span id="sb11_bulk">1</span>]</ut><br>
-                          <span data-i18n="shop_b11_desc">Increase supercoin chance</span><br>
-                          <span data-i18n="word_currently">Currently:</span> +<span id="sb11_eff">0</span>% <span id="sb11_next_cont">=> +<span id="sb11_neff">0</span>%</span><br>
-                          <span id="sb11_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb11_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                        </span>
-                        <div class="arrow" data-popper-arrow></div>
-                      </div>
-                      <span id="shopBuyableU11Title" data-i18n="shop_b11_name">Golden Clover</span>
-                      <span id="shopBuyableU11Req">0/100</span>
-                    </div>
-                  </div>
                 </div>
               </div>
-              <hr style="margin: 0">
-              
-              <div id="secondShopRow" class="shopRow">
-                <div id="post11challenge2" style="display: none">
-                  <div class="shopContainer">
+              <div class="shopShelfRow shopShelfRowTop shopPermanentRow" style="display: none">
+                <div class="shopContainer shop_unlock_post_prestige" style="display: none">
                     <button id="shopPermanentU1" class="shopButton" onclick="UPGS.shop.permanent.buy(1)"></button>
                     <div id="tooltip-shopPermanentU1" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
@@ -2947,7 +3008,7 @@
                     <span id="shopPermanentU1Title" data-i18n="shop_p1_name">Crystal Booster</span>
                     <span id="shopPermanentU1Req">0/25</span>
                   </div>
-                  <div class="shopContainer">
+                <div class="shopContainer shop_unlock_post_prestige" style="display: none">
                     <button id="shopPermanentU2" class="shopButton" onclick="UPGS.shop.permanent.buy(2)"></button>
                     <div id="tooltip-shopPermanentU2" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
@@ -2961,9 +3022,7 @@
                     <span id="shopPermanentU2Title" data-i18n="shop_p2_name">Credit Card</span>
                     <span id="shopPermanentU2Req">0/5</span>
                   </div>
-                </div>
-                
-                <div class="shopContainer postAch33" style="display: none">
+                <div class="shopContainer shop_unlock_post_supercrystal" style="display: none">
                   <button id="shopPermanentU3" class="shopButton" onclick="UPGS.shop.permanent.buy(3)"></button>
                   <div id="tooltip-shopPermanentU3" class="tooltip" role="tooltip">
                     <span class="tooltipShop">
@@ -2976,8 +3035,8 @@
                   </div>
                   <span id="shopPermanentU3Title" data-i18n="shop_p3_name">Super Muscles</span>
                   <span id="shopPermanentU3Req">0/100</span>
-                </div>
-                <div class="shopContainer postAch33" style="display: none">
+                  </div>
+                <div class="shopContainer shop_unlock_post_supercrystal" style="display: none">
                   <button id="shopPermanentU4" class="shopButton" onclick="UPGS.shop.permanent.buy(4)"></button>
                   <div id="tooltip-shopPermanentU4" class="tooltip" role="tooltip">
                     <span class="tooltipShop">
@@ -2990,10 +3049,8 @@
                   </div>
                   <span id="shopPermanentU4Title" data-i18n="shop_p4_name">Flame Hand</span>
                   <span id="shopPermanentU4Req">0/100</span>
-                </div>
-
-                <div id="postBreakprestige">
-                  <div class="shopContainer">
+                  </div>
+                <div class="shopContainer shop_unlock_post_challenge11" style="display: none">
                     <button id="shopPermanentU5" class="shopButton" onclick="UPGS.shop.permanent.buy(5)"></button>
                     <div id="tooltip-shopPermanentU5" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
@@ -3007,7 +3064,7 @@
                     <span id="shopPermanentU5Title" data-i18n="shop_p5_name">Midas's Touch</span>
                     <span id="shopPermanentU5Req">0/3</span>
                   </div>
-                  <div class="shopContainer">
+                <div class="shopContainer shop_unlock_post_challenge11" style="display: none">
                     <button id="shopPermanentU6" class="shopButton" onclick="UPGS.shop.permanent.buy(6)"></button>
                     <div id="tooltip-shopPermanentU6" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
@@ -3021,75 +3078,10 @@
                     <span id="shopPermanentU6Title" data-i18n="shop_p6_name">Energy Shard</span>
                     <span id="shopPermanentU6Req">0/5</span>
                   </div>
-                  <div class="shopContainer">
-                    <button id="shopPermanentU7" class="shopButton" onclick="UPGS.shop.permanent.buy(7)"></button>
-                    <div id="tooltip-shopPermanentU7" class="tooltip" role="tooltip">
-                      <span class="tooltipShop">
-                        <ut><span data-i18n="shop_p7_name">Crystal Sword</span> (<span id="sp7_amt">0</span>/<span id="sp7_max">5</span>)</ut><br>
-                        <span data-i18n="shop_p7_desc">Reduces Supercrystal cost scaling</span><br>
-                        <span data-i18n="word_currently">Currently:</span> -<span id="sp7_eff">0</span> <span id="sp7_next_cont">=> -<span id="sp7_neff">0</span></span><br>
-                        <span id="sp7_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp7_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                      </span>
-                      <div class="arrow" data-popper-arrow></div>
-                    </div>
-                    <span id="shopPermanentU7Title" data-i18n="shop_p7_name">Crystal Sword</span>
-                    <span id="shopPermanentU7Req">0/5</span>
-                  </div>
-                  <div class="shopContainer">
-                    <button id="shopPermanentU8" class="shopButton" onclick="UPGS.shop.permanent.buy(8)"></button>
-                    <div id="tooltip-shopPermanentU8" class="tooltip" role="tooltip">
-                      <span class="tooltipShop">
-                        <ut><span data-i18n="shop_p8_name">Fortune Ticket</span> (<span id="sp8_amt">0</span>/<span id="sp8_max">5</span>)</ut><br>
-                        <span data-i18n="shop_p8_desc">Increase daily resets of Fortune Boosts by +2</span><br>
-                        <span data-i18n="word_currently">Currently:</span> +<span id="sp8_eff">0</span> <span id="sp8_next_cont">=> +<span id="sp8_neff">0</span></span><br>
-                        <span id="sp8_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp8_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                      </span>
-                      <div class="arrow" data-popper-arrow></div>
-                    </div>
-                    <span id="shopPermanentU8Title" data-i18n="shop_p8_name">Fortune Ticket</span>
-                    <span id="shopPermanentU8Req">0/5</span>
-                  </div>
-                </div>
-
-                <div id="postReflashShop2">
-                    <div class="shopContainer">
-                    <button id="shopPermanentU9" class="shopButton" onclick="UPGS.shop.permanent.buy(9)"></button>
-                    <div id="tooltip-shopPermanentU9" class="tooltip" role="tooltip">
-                      <span class="tooltipShop">
-                        <ut><span data-i18n="shop_p9_name">Credit Card PLUS</span> (<span id="sp9_amt">0</span>/<span id="sp9_max">10</span>)</ut><br>
-                        <span data-i18n="shop_p9_desc">Increase daily reward and export reward</span><br>
-                        <span data-i18n="word_currently">Currently:</span> +<span id="sp9_eff">0</span>% <span id="sp9_next_cont">=> +<span id="sp9_neff">0</span>%</span><br>
-                        <span id="sp9_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp9_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                      </span>
-                      <div class="arrow" data-popper-arrow></div>
-                    </div>
-                    <span id="shopPermanentU9Title" data-i18n="shop_p9_name">Credit Card PLUS</span>
-                    <span id="shopPermanentU9Req">0/10</span>
-                  </div>
-
-                  <div class="shopContainer">
-                    <button id="shopPermanentU10" class="shopButton" onclick="UPGS.shop.permanent.buy(10)"></button>
-                    <div id="tooltip-shopPermanentU10" class="tooltip" role="tooltip">
-                      <span class="tooltipShop">
-                        <ut><span data-i18n="shop_p10_name">REAPER</span> (<span id="sp10_amt">0</span>/<span id="sp10_max">10</span>)</ut><br>
-                        <span data-i18n="shop_p10_desc">Reduce chance of viruses and reduce their requirements</span><br>
-                        <span data-i18n="word_currently">Currently:</span> +<span id="sp10_eff">0</span>% <span id="sp10_next_cont">=> +<span id="sp10_neff">0</span>%</span><br>
-                        <span id="sp10_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp10_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                      </span>
-                      <div class="arrow" data-popper-arrow></div>
-                    </div>
-                    <span id="shopPermanentU10Title" data-i18n="shop_p10_name">REAPER</span>
-                    <span id="shopPermanentU10Req">0/10</span>
-                  </div>
-
-                  </div>
-
               </div>
-              <hr style="margin: 0">
-
-              <div id="thirdShopRow" class="shopRow">
-                <div class="shopContainer">
-                  <button id="shopSingleU6" class="shopButton" onclick="UPGS.shop.unlockables.buy(6)"></button>
+              <div class="shopShelfRow shopShelfRowTop shopUnlockableRow" style="display: none">
+                <div class="shopContainer shop_unlock_post_prestige" style="display: none">
+                  <button id="shopSingleU6" class="shopButton" onclick="UPGS.shop.special.buy(6)"></button>
                   <div id="tooltip-shopSingleU6" class="tooltip" role="tooltip">
                     <span class="tooltipShop">
                       <ut data-i18n="shop_u6_name">Golden Investment</ut><br>
@@ -3101,8 +3093,8 @@
                   <span id="shopSingleU6Title" data-i18n="shop_u6_name">Golden Investment</span>
                   <span id="shopSingleU6Req">0/1</span>
                 </div>
-                <div class="shopContainer" id="postAch32" style="display: none">
-                  <button id="shopSingleU1" class="shopButton" onclick="UPGS.shop.unlockables.buy(1)"></button>
+                <div class="shopContainer shop_unlock_post_ach32" style="display: none">
+                  <button id="shopSingleU1" class="shopButton" onclick="UPGS.shop.special.buy(1)"></button>
                   <div id="tooltip-shopSingleU1" class="tooltip" role="tooltip">
                     <span class="tooltipShop">
                       <ut data-i18n="shop_u1_name">Fragile Speedometer</ut><br>
@@ -3113,9 +3105,9 @@
                   </div>
                   <span id="shopSingleU1Title" data-i18n="shop_u1_name">Fragile Speedometer</span>
                   <span id="shopSingleU1Req">0/1</span>
-                </div>
-                <div class="shopContainer postAch33" style="display: none">
-                  <button id="shopSingleU2" class="shopButton" onclick="UPGS.shop.unlockables.buy(2)"></button>
+                  </div>
+                <div class="shopContainer shop_unlock_post_challenge11" style="display: none">
+                  <button id="shopSingleU2" class="shopButton" onclick="UPGS.shop.special.buy(2)"></button>
                   <div id="tooltip-shopSingleU2" class="tooltip" role="tooltip">
                     <span class="tooltipShop">
                       <ut data-i18n="shop_u2_name">Super-Machine</ut><br>
@@ -3126,10 +3118,9 @@
                   </div>
                   <span id="shopSingleU2Title" data-i18n="shop_u2_name">Super-Machine</span>
                   <span id="shopSingleU2Req">0/1</span>
-                </div>
-                <div id="postMinerals2">
-                  <div class="shopContainer">
-                    <button id="shopSingleU3" class="shopButton" onclick="UPGS.shop.unlockables.buy(3)"></button>
+                  </div>
+                <div class="shopContainer shop_unlock_post_challenge11" style="display: none">
+                    <button id="shopSingleU3" class="shopButton" onclick="UPGS.shop.special.buy(3)"></button>
                     <div id="tooltip-shopSingleU3" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
                         <ut data-i18n="shop_u3_name">Shard Trophy</ut><br>
@@ -3141,8 +3132,8 @@
                     <span id="shopSingleU3Title" data-i18n="shop_u3_name">Shard Trophy</span>
                     <span id="shopSingleU3Req">0/1</span>
                   </div>
-                  <div class="shopContainer">
-                    <button id="shopSingleU4" class="shopButton" onclick="UPGS.shop.unlockables.buy(4)"></button>
+                <div class="shopContainer shop_unlock_post_breakprestige" style="display: none">
+                    <button id="shopSingleU4" class="shopButton" onclick="UPGS.shop.special.buy(4)"></button>
                     <div id="tooltip-shopSingleU4" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
                         <ut data-i18n="shop_u4_name">Supercrystal Watch</ut><br>
@@ -3154,8 +3145,8 @@
                     <span id="shopSingleU4Title" data-i18n="shop_u4_name">Supercrystal Watch</span>
                     <span id="shopSingleU4Req">0/1</span>
                   </div>
-                  <div class="shopContainer" id="aquaticPick">
-                    <button id="shopSingleU5" class="shopButton" onclick="UPGS.shop.unlockables.buy(5)"></button>
+                <div class="shopContainer shop_unlock_post_fortune" style="display: none">
+                    <button id="shopSingleU5" class="shopButton" onclick="UPGS.shop.special.buy(5)"></button>
                     <div id="tooltip-shopSingleU5" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
                         <ut data-i18n="shop_u5_name">Aquatic Pickaxe</ut><br>
@@ -3167,13 +3158,9 @@
                     <span id="shopSingleU5Title" data-i18n="shop_u5_name">Aquatic Pickaxe</span>
                     <span id="shopSingleU5Req">0/1</span>
                   </div>
-                </div>
               </div>
-              <hr style="margin: 0">
-              
-              <div id="fourthShopRow" class="shopRow">
-                <div id="post11challenge3">
-                  <div class="shopContainer">
+              <div class="shopShelfRow shopShelfRowTop shopItemRow" style="display: none">
+                <div class="shopContainer shop_unlock_post_challenge11" style="display: none">
                     <button id="shopItem1" class="shopButton shopItemButton" onclick="UPGS.shop.items.buy(1)"></button>
                     <button id="useShopItem1" class="useButton" onclick="UPGS.shop.items[1].useItem()" data-i18n="useTitle">Use</button>
                     <div id="tooltip-shopItem1" class="tooltip" role="tooltip">
@@ -3187,7 +3174,7 @@
                     <span id="shopItem1Title" data-i18n="shop_i1_name">Free U-multiplier</span>
                     <span id="shopItem1Req">0/5</span>
                   </div>
-                  <div class="shopContainer">
+                <div class="shopContainer shop_unlock_post_challenge11" style="display: none">
                     <button id="shopItem2" class="shopButton shopItemButton" onclick="UPGS.shop.items.buy(2)"></button>
                     <button id="useShopItem2" class="useButton" onclick="UPGS.shop.items[2].useItem()" data-i18n="useTitle">Use</button>
                     <div id="tooltip-shopItem2" class="tooltip" role="tooltip">
@@ -3201,7 +3188,7 @@
                     <span id="shopItem2Title" data-i18n="shop_i2_name">Free U-power</span>
                     <span id="shopItem2Req">0/3</span>
                   </div>
-                  <div class="shopContainer">
+                <div class="shopContainer shop_unlock_post_challenge11" style="display: none">
                     <button id="shopItem3" class="shopButton shopItemButton" onclick="UPGS.shop.items.buy(3)"></button>
                     <button id="useShopItem3" class="useButton" onclick="UPGS.shop.items[3].useItem()" data-i18n="useTitle">Use</button>
                     <div id="tooltip-shopItem3" class="tooltip" role="tooltip">
@@ -3215,7 +3202,7 @@
                     <span id="shopItem3Title" data-i18n="shop_i3_name">Time Accelerator</span>
                     <span id="shopItem3Req">0/10</span>
                   </div>
-                  <!-- <div class="shopContainer">
+                <div class="shopContainer" style="display: none">
                     <button id="shopItem4" class="shopButton shopItemButton" onclick="UPGS.shop.items.buy(4)"></button>
                     <button id="useShopItem4" class="useButton" onclick="UPGS.shop.items[4].useItem()" data-i18n="useTitle">Use</button>
                     <div id="tooltip-shopItem4" class="tooltip" role="tooltip">
@@ -3228,10 +3215,8 @@
                     </div>
                     <span id="shopItem4Title" data-i18n="shop_i4_name">Time Accelerator+</span>
                     <span id="shopItem4Req">0/3</span>
-                  </div> -->
-                </div>
-                <div id="postBreakprestige2">
-                  <!-- <div class="shopContainer">
+                  </div>
+                <div class="shopContainer" style="display: none">
                     <button id="shopItem5" class="shopButton shopItemButton" onclick="UPGS.shop.items.buy(5)"></button>
                     <button id="useShopItem5" class="useButton" onclick="UPGS.shop.items[5].useItem()" data-i18n="useTitle">Use</button>
                     <div id="tooltip-shopItem5" class="tooltip" role="tooltip">
@@ -3244,8 +3229,8 @@
                     </div>
                     <span id="shopItem5Title" data-i18n="shop_i5_name">Golden Pound</span>
                     <span id="shopItem5Req">0/1</span>
-                  </div> -->
-                  <!-- <div class="shopContainer">
+                  </div>
+                <div class="shopContainer" style="display: none">
                     <button id="shopItem6" class="shopButton shopItemButton" onclick="UPGS.shop.items.buy(6)"></button>
                     <button id="useShopItem6" class="useButton" onclick="UPGS.shop.items[6].useItem()" data-i18n="useTitle">Use</button>
                     <div id="tooltip-shopItem6" class="tooltip" role="tooltip">
@@ -3258,126 +3243,280 @@
                     </div>
                     <span id="shopItem6Title" data-i18n="shop_i6_name">Math Analysis</span>
                     <span id="shopItem6Req">0/3</span>
-                  </div> -->
+                  </div>
+              </div>
+            </div>
+            <hr>
+            <div class="shopShelf"> 
+              <div class="shopShelfRow shopShelfRowBottom shopBuyableRow">
+              <div class="shopContainer shop_unlock_post_challenge11" style="display: none">
+                    <button id="shopBuyableU7" class="shopButton"></button>
+                    <div id="tooltip-shopBuyableU7" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut><span data-i18n="shop_b7_name">Energy Drink</span> (<span id="sb7_amt">0</span>/<span id="sb7_max">20</span>) [+<span id="sb7_bulk">1</span>]</ut><br>
+                        <span data-i18n="shop_b7_desc">Increase Overdrives effect</span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sb7_eff">0</span>% <span id="sb7_next_cont">=> +<span id="sb7_neff">0</span>%</span><br>
+                        <span id="sb7_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb7_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopBuyableU7Title" data-i18n="shop_b7_name">Energy Drink</span>
+                    <span id="shopBuyableU7Req">0/20</span>
                 </div>
+              <div class="shopContainer shop_unlock_post_reflash" style="display: none">
+                    <button id="shopBuyableU8" class="shopButton"></button>
+                    <div id="tooltip-shopBuyableU8" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut><span data-i18n="shop_b8_name">Golden Glove II</span> (<span id="sb8_amt">0</span>/<span id="sb8_max">100</span>) [+<span id="sb8_bulk">1</span>]</ut><br>
+                        <span data-i18n="shop_b8_desc">Increase α-coins per click</span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sb8_eff">0</span>% <span id="sb8_next_cont">=> +<span id="sb8_neff">0</span>%</span><br>
+                        <span id="sb8_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb8_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopBuyableU8Title" data-i18n="shop_b8_name">Golden Glove II</span>
+                    <span id="shopBuyableU8Req">0/100</span>
+                </div>
+              <div class="shopContainer shop_unlock_post_reflash" style="display: none">
+                    <button id="shopBuyableU9" class="shopButton"></button>
+                    <div id="tooltip-shopBuyableU9" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut><span data-i18n="shop_b9_name">Golden Watch II</span> (<span id="sb9_amt">0</span>/<span id="sb9_max">100</span>) [+<span id="sb9_bulk">1</span>]</ut><br>
+                        <span data-i18n="shop_b9_desc">Increase α-coins per second</span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sb9_eff">0</span>% <span id="sb9_next_cont">=> +<span id="sb9_neff">0</span>%</span><br>
+                        <span id="sb9_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb9_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopBuyableU9Title" data-i18n="shop_b9_name">Golden Watch II</span>
+                    <span id="shopBuyableU9Req">0/100</span>
+                </div>
+              <div class="shopContainer shop_unlock_post_reflash" style="display: none">
+                    <button id="shopBuyableU10" class="shopButton"></button>
+                    <div id="tooltip-shopBuyableU10" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut><span data-i18n="shop_b10_name">Golden Key II</span> (<span id="sb10_amt">0</span>/<span id="sb10_max">100</span>) [+<span id="sb10_bulk">1</span>]</ut><br>
+                        <span data-i18n="shop_b10_desc">Increase α-coins per second</span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sb10_eff">0</span>% <span id="sb10_next_cont">=> +<span id="sb10_neff">0</span>%</span><br>
+                        <span id="sb10_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb10_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopBuyableU10Title" data-i18n="shop_b10_name">Golden Key II</span>
+                    <span id="shopBuyableU10Req">0/100</span>
+                </div>
+              <div class="shopContainer shop_unlock_post_reflash" style="display: none">
+                    <button id="shopBuyableU11" class="shopButton"></button>
+                    <div id="tooltip-shopBuyableU11" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut><span data-i18n="shop_b11_name">Golden Clover</span> (<span id="sb11_amt">0</span>/<span id="sb11_max">100</span>) [+<span id="sb11_bulk">1</span>]</ut><br>
+                        <span data-i18n="shop_b11_desc">Increase supercoin chance</span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sb11_eff">0</span>% <span id="sb11_next_cont">=> +<span id="sb11_neff">0</span>%</span><br>
+                        <span id="sb11_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb11_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopBuyableU11Title" data-i18n="shop_b11_name">Golden Clover</span>
+                    <span id="shopBuyableU11Req">0/100</span>
+                </div>
+              </div>
+              <div class="shopShelfRow shopShelfRowBottom shopPermanentRow" style="display: none">
+                <div class="shopContainer shop_unlock_post_breakprestige" style="display: none">
+                    <button id="shopPermanentU7" class="shopButton" onclick="UPGS.shop.permanent.buy(7)"></button>
+                    <div id="tooltip-shopPermanentU7" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut><span data-i18n="shop_p7_name">Crystal Sword</span> (<span id="sp7_amt">0</span>/<span id="sp7_max">5</span>)</ut><br>
+                        <span data-i18n="shop_p7_desc">Reduces Supercrystal cost scaling</span><br>
+                        <span data-i18n="word_currently">Currently:</span> -<span id="sp7_eff">0</span> <span id="sp7_next_cont">=> -<span id="sp7_neff">0</span></span><br>
+                        <span id="sp7_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp7_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopPermanentU7Title" data-i18n="shop_p7_name">Crystal Sword</span>
+                    <span id="shopPermanentU7Req">0/5</span>
+                  </div>
+                <div class="shopContainer shop_unlock_post_fortune" style="display: none">
+                    <button id="shopPermanentU8" class="shopButton" onclick="UPGS.shop.permanent.buy(8)"></button>
+                    <div id="tooltip-shopPermanentU8" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut><span data-i18n="shop_p8_name">Fortune Ticket</span> (<span id="sp8_amt">0</span>/<span id="sp8_max">5</span>)</ut><br>
+                        <span data-i18n="shop_p8_desc">Increase daily resets of Fortune Boosts by +2</span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sp8_eff">0</span> <span id="sp8_next_cont">=> +<span id="sp8_neff">0</span></span><br>
+                        <span id="sp8_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp8_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopPermanentU8Title" data-i18n="shop_p8_name">Fortune Ticket</span>
+                    <span id="shopPermanentU8Req">0/5</span>
+                  </div>
+                <div class="shopContainer shop_unlock_post_reflash" style="display: none">
+                    <button id="shopPermanentU9" class="shopButton" onclick="UPGS.shop.permanent.buy(9)"></button>
+                    <div id="tooltip-shopPermanentU9" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut><span data-i18n="shop_p9_name">Credit Card PLUS</span> (<span id="sp9_amt">0</span>/<span id="sp9_max">10</span>)</ut><br>
+                        <span data-i18n="shop_p9_desc">Increase daily reward and export reward</span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sp9_eff">0</span>% <span id="sp9_next_cont">=> +<span id="sp9_neff">0</span>%</span><br>
+                        <span id="sp9_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp9_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopPermanentU9Title" data-i18n="shop_p9_name">Credit Card PLUS</span>
+                    <span id="shopPermanentU9Req">0/10</span>
+                  </div>
+                <div class="shopContainer shop_unlock_post_reflash" style="display: none">
+                    <button id="shopPermanentU10" class="shopButton" onclick="UPGS.shop.permanent.buy(10)"></button>
+                    <div id="tooltip-shopPermanentU10" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut><span data-i18n="shop_p10_name">REAPER</span> (<span id="sp10_amt">0</span>/<span id="sp10_max">10</span>)</ut><br>
+                        <span data-i18n="shop_p10_desc">Reduce chance of viruses and reduce their requirements</span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sp10_eff">0</span>% <span id="sp10_next_cont">=> +<span id="sp10_neff">0</span>%</span><br>
+                        <span id="sp10_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp10_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopPermanentU10Title" data-i18n="shop_p10_name">REAPER</span>
+                    <span id="shopPermanentU10Req">0/10</span>
+                  </div>
+              </div>
+              <div class="shopShelfRow shopShelfRowBottom shopUnlockableRow" style="display: none">
+
+              </div>
+              <div class="shopShelfRow shopShelfRowBottom shopItemRow" style="display: none">
               </div>
             </div>
           </div>
         </div>
-        
-        <div id="bottomDiv">
-          <button id="respecShop" onclick="respecBuyables()" class="shopBottomButton" data-i18n="respecShop">Respec</button>
-        </div>
+      </div>
       </div>
       
-      <div id="bulkShopBuy">
-        <span id="bulkBuyAmount" data-i18n="bulkBuy">Количество покупок</span>
-        <input id="shopBulkBuyInput" type="text">
-        <button id="bulkBuy10" onclick="changeInputValue2('10')" class="bulkShopBuyButton" data-i18n="buy10">Купить 10</button>
-        <button id="bulkBuyMax" onclick="changeInputValue2('1000')" class="bulkShopBuyButton" data-i18n="buyMax">Купить макс.</button>
-        <button id="bulkBuyClear" onclick="changeInputValue2('1')" class="bulkShopBuyButton" data-i18n="resetBulkBuy">Сбросить</button>
-      </div>
-    </div>
-    </div>
-        <div id="myPopupBackdrop2" class="myPopupBackdrop"></div>
-        <div id="offlineGainWindow" class="gameWindow offlineGainWindow2">
-          <div id="offTitleDiv" class="titleDivClass">
-            <span id="offlineGainTitle" class="windowTitle">С возвращением!</span>
+      <div id="myPopupBackdropDialogue" class="myPopupBackdrop" style="display: none; z-index: 10000"></div>
+      <div id="superPopupBackdrop" class="myPopupBackdrop" style="display: none; z-index: 99999"></div>
+      <div id="dialogueWindow" style="display: none; z-index: 10001">
+        <div id="dialogueDiv">
+          <div id="dialogueName">
+            <span id="dialogueNameSpan">
+              Test
+            </span>
           </div>
-            <button onclick="hidePopup()" id="closeOfflineWindow" class="closeWindow"></button>
-        <div id="offlineShowTime" class="windowDesc">
-          <p id="offlineShowGain">Loading...</p>
-        </div>
-        </div>
-
-
-        <div id="windowGame" class="gameWindow confirmationWindow centerText">
-          <div id="windowTitleDiv" class="titleDivClass">
-            <span id="windowTitle2" class="windowTitle">Вы точно хотите сбросить игру?</span>
-          </div>
-            <button onclick="hidePopup()" id="closeWindow2" class="closeWindow confClose" style="top: 0%; right: 0%"></button>
-
-            <div id="confirmationButtons" class="windowDesc" style="display: none">
-              <button onclick="reloadPage()" id="yesHR" class="whiteButton" data-i18n="yes">Да</button>
-              <button onclick="reloadPage2()" id="yesRP" class="whiteButton" data-i18n="yes">Да</button>
-              <button onclick="hidePopup()" id="no" class="whiteButton" data-i18n="no">Нет</button>
-            </div>
-            <span id="whichCode" class="windowDesc" style="display: none">КОД</span>
-            <span id="dailyDesc" class="windowDesc" style="display: none">ЕЖЕДНЕВКА</span>
-
-            <div id="breakCrystal" class="windowDesc" style="display: none">
-              <span id="howMuchCrystals" data-i18n="breakCrystalTitle">СКОЛЬКО СБРОСИТЬ ТЕКСТ</span>
-              <span id="howMuchCrystalsDesc" class="statsSlot" data-i18n="breakCrystalDesc">ОПИСАНИЕ ОКНА</span>
-              <input type="text" id="howMuchCrystalsInput" class="prestigeInput">
-              <button onclick="submitTheBreak(this)" id="submitBreak" class="whiteButton" data-i18n="doBreak"></button>
-            </div>
-            <span id="brokeCrystals" class="windowDesc" style="display: none">СКОЛЬКО ОСКОЛКОВ ПОЛУЧЕНО</span>
-            <span id="falseBrokeCrystals" class="windowDesc" style="display: none"></span>
-            <span id="welcomeToDigitalGod" class="windowDesc" style="display: none" data-i18n="welcomeToGame"></span>
-
-            <div id="chooseSaveDiv" class="windowDesc" style="display: none">
-              <span id="selectSave" data-i18n="chooseSaveTitle">СКОЛЬКО СБРОСИТЬ ТЕКСТ</span>
-              <div id="saveButtons" style="display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 10px;"> 
-                
-                <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
-                  <button onclick="chooseSave(1)" id="save1" class="whiteButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName1">Save 1</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
-                  <button onclick="editSaveName(1)" class="whiteButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
-                </div>
-                <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
-                  <button onclick="chooseSave(2)" id="save2" class="whiteButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName2">Save 2</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
-                  <button onclick="editSaveName(2)" class="whiteButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
-                </div>
-                <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
-                  <button onclick="chooseSave(3)" id="save3" class="whiteButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName3">Save 3</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
-                  <button onclick="editSaveName(3)" class="whiteButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
-                </div>
-                <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
-                  <button onclick="chooseSave(4)" id="save4" class="whiteButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName4">Save 4</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
-                  <button onclick="editSaveName(4)" class="whiteButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
-                </div>
-                <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
-                  <button onclick="chooseSave(5)" id="save5" class="whiteButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName5">Save 5</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
-                  <button onclick="editSaveName(5)" class="whiteButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
-                </div>
-
-              </div>
-            </div>
-
-            <div id="reflashConfirmation" class="windowDesc" style="display: none">
-              <ut><p data-i18n="reflashConfirmTitle">Placeholder</p></ut>
-              <p data-i18n="reflashConfirmDesc">Placeholder</p>
-              <button onclick="LAYERS.reflash.doReset()" class="whiteButton" data-i18n="reflashConfirmButton">OK</button>
-            </div>
-
-            <div id="presetEditor" class="windowDesc" style="display: none">
-              <div class="centeredDiv">
-                <ut><span data-i18n="presetTitle">Preset</span>: <span id="presetName">1</span></ut>
-                <button data-i18n="renamePreset" class="whiteButton whiteButtonThin" onclick="presetRename(player.reflash.selectedPreset)">Rename</button>
-              </div>
-              <div class="centeredDiv">
-                <span data-i18n="nodeOrder">Node order</span>
-                <input type="text" id="nodeOrderInput" placeholder="11, 21, 22, 31, 32, ...">
-              </div>
-              <br>
-              <div class="centeredDiv" style="flex-direction: row;">
-                <button data-i18n="copyOrder" class="whiteButton" style="width: 130px;" onclick="copyPreset(player.reflash.selectedPreset)">Copy</button>
-                <button data-i18n="pasteOrder" class="whiteButton" style="width: 130px;" onclick="pastePreset(player.reflash.selectedPreset)">Paste</button>
-              </div>
-              <div class="centeredDiv" style="flex-direction: row;">
-                <button data-i18n="resetOrder" class="whiteButton" style="width: 130px;" onclick="resetPreset(player.reflash.selectedPreset)">Reset</button>
-                <button data-i18n="saveOrder" class="whiteButton" style="width: 130px;" onclick="savePreset(player.reflash.selectedPreset)">Save</button>
-                <button data-i18n="importOrder" class="whiteButton" style="width: 130px;" onclick="importPreset(player.reflash.selectedPreset)">Import</button>
-              </div>
+          <div id="dialogueDesc">
+            <div id="dialogueText">
+              <span id="dialogueTextSpan">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis corrupti accusamus sint beatae amet! Cum sit eius similique tenetur ab vero nemo molestias libero vitae aliquam. Laudantium, reprehenderit. Alias earum aspernatur ratione perferendis quia repudiandae eaque. Quam natus architecto dolores quos? Minus, dolore exercitationem at officia enim sed error placeat.
+              </span>
             </div>
           </div>
         </div>
+      </div>
 
-        <audio id="THEMEOFTHEGREAT">
-          <source src="javascript/cssfiles/music/pprus.mp3" type="audio/mpeg">
-          ochko
-        </audio>
+
+      <div id="myPopupBackdrop2" class="myPopupBackdrop"></div>
+      <div id="offlineGainWindow" class="gameWindow offlineGainWindow2">
+        <div id="offTitleDiv" class="titleDivClass">
+          <span id="offlineGainTitle" class="windowTitle">С возвращением!</span>
+        </div>
+          <button onclick="hidePopup()" id="closeOfflineWindow" class="closeWindow"></button>
+      <div id="offlineShowTime" class="windowDesc">
+        <p id="offlineShowGain">Loading...</p>
       </div>
       </div>
+
+      <div id="windowGame" class="gameWindow confirmationWindow centerText">
+        <div id="windowTitleDiv" class="titleDivClass">
+          <span id="windowTitle2" class="windowTitle">Вы точно хотите сбросить игру?</span>
+        </div>
+          <button onclick="hidePopup()" id="closeWindow2" class="closeWindow confClose" style="top: 0%; right: 0%"></button>
+
+          <div id="confirmationButtons" class="windowDesc" style="display: none">
+            <button onclick="reloadPage()" id="yesHR" class="whiteButton" data-i18n="yes">Да</button>
+            <button onclick="reloadPage2()" id="yesRP" class="whiteButton" data-i18n="yes">Да</button>
+            <button onclick="hidePopup()" id="no" class="whiteButton" data-i18n="no">Нет</button>
+          </div>
+          <span id="whichCode" class="windowDesc" style="display: none">КОД</span>
+          <span id="dailyDesc" class="windowDesc" style="display: none">ЕЖЕДНЕВКА</span>
+
+          <div id="breakCrystal" class="windowDesc" style="display: none">
+            <span id="howMuchCrystals" data-i18n="breakCrystalTitle">СКОЛЬКО СБРОСИТЬ ТЕКСТ</span>
+            <span id="howMuchCrystalsDesc" class="statsSlot" data-i18n="breakCrystalDesc">ОПИСАНИЕ ОКНА</span>
+            <input type="text" id="howMuchCrystalsInput" class="prestigeInput">
+            <button onclick="submitTheBreak(this)" id="submitBreak" class="whiteButton" data-i18n="doBreak"></button>
+          </div>
+          <span id="brokeCrystals" class="windowDesc" style="display: none">СКОЛЬКО ОСКОЛКОВ ПОЛУЧЕНО</span>
+          <span id="falseBrokeCrystals" class="windowDesc" style="display: none"></span>
+          <span id="welcomeToDigitalGod" class="windowDesc" style="display: none" data-i18n="welcomeToGame"></span>
+
+          <div id="chooseSaveDiv" class="windowDesc" style="display: none">
+            <span id="selectSave" data-i18n="chooseSaveTitle">СКОЛЬКО СБРОСИТЬ ТЕКСТ</span>
+            <div id="saveButtons" style="display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 10px;"> 
+              
+              <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
+                <button onclick="chooseSave(1)" id="save1" class="whiteButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName1">Save 1</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                <button onclick="editSaveName(1)" class="whiteButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
+              </div>
+              <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
+                <button onclick="chooseSave(2)" id="save2" class="whiteButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName2">Save 2</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                <button onclick="editSaveName(2)" class="whiteButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
+              </div>
+              <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
+                <button onclick="chooseSave(3)" id="save3" class="whiteButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName3">Save 3</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                <button onclick="editSaveName(3)" class="whiteButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
+              </div>
+              <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
+                <button onclick="chooseSave(4)" id="save4" class="whiteButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName4">Save 4</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                <button onclick="editSaveName(4)" class="whiteButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
+              </div>
+              <div style="display: flex; flex-direction: row; height: 4vw; min-height: 35px; max-height: 45px;">
+                <button onclick="chooseSave(5)" id="save5" class="whiteButton save_slot" style="flex-grow: 1; margin: 0; height: 100%;"><span id="saveName5">Save 5</span><br><span class="save_coin_amount"></span>&nbsp;<span class="saveCurrency"></span></button>
+                <button onclick="editSaveName(5)" class="whiteButton" style="margin: 0 0 0 5px; height: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; font-size: 1.2em; max-height: 100%">✎</button>
+              </div>
+
+            </div>
+          </div>
+
+          <div id="reflashConfirmation" class="windowDesc" style="display: none">
+            <ut><p data-i18n="reflashConfirmTitle">Placeholder</p></ut>
+            <p data-i18n="reflashConfirmDesc">Placeholder</p>
+            <button onclick="LAYERS.reflash.doReset()" class="whiteButton" data-i18n="reflashConfirmButton">OK</button>
+          </div>
+
+          <div id="presetEditor" class="windowDesc" style="display: none">
+            <div class="centeredDiv">
+              <ut><span data-i18n="presetTitle">Preset</span>: <span id="presetName">1</span></ut>
+              <button data-i18n="renamePreset" class="whiteButton whiteButtonThin" onclick="presetRename(player.reflash.selectedPreset)">Rename</button>
+            </div>
+            <div class="centeredDiv">
+              <span data-i18n="nodeOrder">Node order</span>
+              <input type="text" id="nodeOrderInput" placeholder="11, 21, 22, 31, 32, ...">
+            </div>
+            <br>
+            <div class="centeredDiv" style="flex-direction: row;">
+              <button data-i18n="copyOrder" class="whiteButton" style="width: 130px;" onclick="copyPreset(player.reflash.selectedPreset)">Copy</button>
+              <button data-i18n="pasteOrder" class="whiteButton" style="width: 130px;" onclick="pastePreset(player.reflash.selectedPreset)">Paste</button>
+            </div>
+            <div class="centeredDiv" style="flex-direction: row;">
+              <button data-i18n="resetOrder" class="whiteButton" style="width: 130px;" onclick="resetPreset(player.reflash.selectedPreset)">Reset</button>
+              <button data-i18n="saveOrder" class="whiteButton" style="width: 130px;" onclick="savePreset(player.reflash.selectedPreset)">Save</button>
+              <button data-i18n="importOrder" class="whiteButton" style="width: 130px;" onclick="importPreset(player.reflash.selectedPreset)">Import</button>
+            </div>
+          </div>
+        </div>
+        <div id="additionalVirusWindow">
+
+        </div>
+        <div id="virusWindow">
+          <header>
+            
+          </header>
+          <footer>
+
+          </footer>
+        </div>
+  </div>
+  
+
+      <audio id="THEMEOFTHEGREAT">
+        <source src="javascript/cssfiles/music/pprus.mp3" type="audio/mpeg">
+        ochko
+      </audio>
     <script src="javascript/jsfiles/variables.js"></script>
     <script src="javascript/jsfiles/achievements.js"></script>
     <script src="javascript/jsfiles/clicker.js"></script>
@@ -3401,13 +3540,13 @@
     window.onload = loadGame();
 
     function showOfflineGain() {
-    offlineGainWindow.style.display = "block";
-    myPopupBackdrop1.style.display = "flex";
-    offlineGainWindow.style.width = "400px";
-    offlineGainWindow.style.height = "250px"
-    closeOfflineWindow.style.left = "90.5%"
-    closeOfflineWindow.style.bottom = "85%"
-    offlineShowTime.style.textAlign = "center"
+      offlineGainWindow.style.display = "block";
+      myPopupBackdrop1.style.display = "flex";
+      offlineGainWindow.style.width = "400px";
+      offlineGainWindow.style.height = "250px"
+      closeOfflineWindow.style.left = "90.5%"
+      closeOfflineWindow.style.bottom = "85%"
+      offlineShowTime.style.textAlign = "center"
     }
     if (player.settings.offline == true) window.onload = showOfflineGain()
     myPopupBackdrop2.addEventListener("click", hidePopup);

@@ -510,9 +510,9 @@ function loadTranslationsShop() {
 
     // 3. Разблокируемые (Unlockables / Singles 1-6)
     for (let i = 1; i <= 6; i++) {
-        let isBought = player.shop.unlockables.includes(i);
+        let isBought = player.shop.special.includes(i);
         document.getElementById(`su${i}s_cost_cont`).style.display = isBought ? 'none' : 'inline';
-        if (!isBought) document.getElementById(`su${i}s_cost`).textContent = formatNumber(UPGS.shop.unlockables[i].cost());
+        if (!isBought) document.getElementById(`su${i}s_cost`).textContent = formatNumber(UPGS.shop.special[i].cost());
         
         document.getElementById(`shopSingleU${i}Req`).textContent = `${isBought ? 1 : 0}/1`;
     }
@@ -1093,6 +1093,13 @@ function loadTranslationsReflash() {
         document.getElementById(`acceleratorU${i}_cost`).textContent = formatNumber(UPGS.reflash.accelerator[i].cost());
     }
 
+    document.getElementById('acceleratorU5_current_utils').textContent = formatNumber(MISC.sum_of_utils())
+    document.getElementById('acceleratorMachineBarPercent').textContent = formatNumber(MISC.acc_ratio(), 'boost')
+
+    document.getElementById('acceleratorU5_effect_min').textContent = formatNumber(UPGS.reflash.accelerator[5].min_effect(), 'boost')
+    document.getElementById('acceleratorU5_effect_max').textContent = formatNumber(UPGS.reflash.accelerator[5].max_effect(), 'boost')
+    
+
     // 4. Алгоритм древо
         UPGS.reflash.algo.tree.forEach(node => {
             let btn = document.getElementById('algoNode_' + node.id);
@@ -1161,7 +1168,8 @@ function updateStaticTranslations() {
 
     // 2. Инициализация массивов для Лора
     for (let i = 1; i <= 18; i++) {
-        text.chapter[i] = i18next.t(`chapter${i}`, globals); // Сюда
+        text.chapter[i] = i18next.t(`chapter${i}`, globals); 
+        text.chapterTitle[i] = i18next.t(`chapter${i}Name`, globals);
         let tab = document.getElementById(`chapter${i}Tab`);
         if (tab) tab.textContent = i18next.t(`chapter${i}Name`, globals);
     }
@@ -1233,13 +1241,13 @@ function updateStaticTranslations() {
         i18next.t('pbtitle1'), i18next.t('pbtitle2'), i18next.t('pbtitle3'), 
         i18next.t('pbtitle4'), i18next.t('pbtitle5'), i18next.t('pbtitle6'), 
         i18next.t('pbtitle7'), i18next.t('pbtitle8'), i18next.t('pbtitle9'), 
-        'Infinity?', i18next.t('pbtitle10')
+        'Infinity?', i18next.t('pbtitle10'), i18next.t('pbtitle11')
     ];
     PROGRESS.currency = [
         i18next.t('pbcurrency1'), i18next.t('pbcurrency1'), i18next.t('pbcurrency1'), 
         i18next.t('pbcurrency2'), i18next.t('pbcurrency3'), i18next.t('pbcurrency4'), 
         i18next.t('pbcurrency4'), i18next.t('pbcurrency3'), i18next.t('pbcurrency5'), 
-        i18next.t('pbcurrency1'), i18next.t('pbcurrency6')
+        i18next.t('pbcurrency1'), i18next.t('pbcurrency6'), i18next.t('pbcurrency7')
     ];
 
     // 5. Инициализация 50 Обычных Ачивок
@@ -1299,6 +1307,15 @@ function updateStaticTranslations() {
         const el = document.getElementById(id);
         if (el) el.innerHTML = i18next.t(key);
     });
+
+    text.talk[1].name = i18next.t(`talk.1.name`, { returnObjects: true });
+    for (let i = 1; i <= 5; i++) {
+        let array = i18next.t(`talk.1.${i}`, { returnObjects: true });
+        text.talk[1].stages[i].replies = []
+        for (let j = 0; j < array.length; j++) {
+            text.talk[1].stages[i].replies.push(i18next.t(`talk.1.${i}`, { returnObjects: true })[j])
+        }
+    }
 }
 
 function getGlobalNumbers() {
@@ -1324,7 +1341,6 @@ document.getElementById('changingLanguage').addEventListener('click', () => {
     i18next.changeLanguage(player.settings.currentLanguage, () => {
         updateStaticTranslations(); // Мгновенно переводит всю статику
         showChangelog(text.changelog.start);
-        showStory(text.chapter.start);
         showHelpPage(text.help.start, text.empty);
     });
 });
@@ -1381,7 +1397,7 @@ setTimeout(() => {
     renderSavedLore();
     initAlgoTree();
     renamePresets();
-}, 3500);
+}, 3200);
 
 codeInput.addEventListener("keydown", function(event) {
     if (event.key == "Enter") {

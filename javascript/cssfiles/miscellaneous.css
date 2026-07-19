@@ -60,6 +60,28 @@ button {
     background-color: rgb(230, 230, 230);
 }
 
+.shopSelection.active,
+.shopSelection[aria-selected="true"] {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border-color: rgb(0, 0, 0);
+}
+.shopSelection.active:hover,
+.shopSelection[aria-selected="true"]:hover {
+    background-color: rgb(230, 230, 230);
+}
+
+.bulkBuySelection.active,
+.bulkBuySelection[aria-selected="true"] {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border-color: rgb(0, 0, 0);
+}
+.bulkBuySelection.active:hover,
+.bulkBuySelection[aria-selected="true"]:hover {
+    background-color: rgb(230, 230, 230);
+}
+
 ut { /*title of upgrade */
     font-weight:900;
     pointer-events: none; /* текст сообщения не мешает кликать по кнопке */
@@ -377,4 +399,143 @@ button {
     font-size: calc(14px * var(--font-scale));
     margin: 5px;
     text-align: center;
+}
+
+#bookWindow {
+    width: 1152px; 
+    height: 768px; 
+    background: url('/javascript/cssfiles/images/Lore/Book\ png.png') no-repeat; 
+    background-size: cover; 
+    display: none;
+    justify-content: center; 
+    align-items: center; 
+    image-rendering: pixelated;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* width: 80vw;
+    height: 51vh; */
+    z-index: 9989;
+}
+
+.page { 
+    width: 39%; 
+    height: 100%; 
+    position: relative; 
+    padding: 0px; 
+    box-sizing: border-box; 
+}
+
+.grid-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 150px); /* 2 колонки по 180px */
+    grid-template-rows: repeat(2, 200px);    /* 2 строки по 240px */
+    gap: 50px; /* Расстояние между бумажками */
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.btn { 
+    width: 150px; 
+    height: 200px; 
+    cursor: pointer; 
+}
+
+/* Стрелки внизу */
+.arrow-btn { 
+    position: absolute; 
+    bottom: 130px; 
+    width: 80px; 
+    height: 50px; 
+}
+.left-arrow { 
+    background: url('/javascript/cssfiles/images/Lore/RightArrow.png') no-repeat; 
+    background-size: cover; 
+    image-rendering: pixelated;
+    border: 0px !important;
+    left: 30px; 
+}
+.right-arrow { 
+    background: url('/javascript/cssfiles/images/Lore/LeftArrow.png') no-repeat; 
+    background-size: cover; 
+    image-rendering: pixelated;
+    border: 0px !important;
+    right: 30px; 
+}
+
+/* Кнопка выхода сверху справа */
+.close-btn { 
+    background: url('/javascript/cssfiles/images/Lore/BackArrow.png') no-repeat; 
+    background-size: cover; 
+    image-rendering: pixelated;
+    border: 0px !important;
+    position: absolute; 
+    top: 50px; 
+    right: 10px; 
+    width: 60px; 
+    height: 40px; 
+}
+
+.paper-type {
+    border: 0px !important;
+    image-rendering: pixelated;
+    color: white;
+    text-align: center;
+    padding-bottom: 25px;
+    font-size: calc(16px * var(--font-scale));
+    font-weight: bold;
+    display: none;
+}
+
+.paper-type-1 {
+    background: url('/javascript/cssfiles/images/Lore/Piece1.png') no-repeat; 
+    background-size: cover; 
+}
+.paper-type-2 {
+    background: url('/javascript/cssfiles/images/Lore/Piece2.png') no-repeat; 
+    background-size: cover; 
+}
+.paper-type-3 {
+    background: url('/javascript/cssfiles/images/Lore/Piece3.png') no-repeat; 
+    background-size: cover; 
+}
+.paper-type-4 {
+    background: url('/javascript/cssfiles/images/Lore/Piece4.png') no-repeat; 
+    background-size: cover; 
+}
+
+.leftLoreTitle, .rightLoreTitle {
+    margin-top: 80px;
+    font-size: calc(20px * var(--font-scale)) !important;
+    font-weight: bold;
+}
+
+#paperWindow {
+    background: url('/javascript/cssfiles/images/Lore/BigPiece1.png') no-repeat; 
+    background-size: cover; 
+    border: 0px !important;
+    image-rendering: pixelated;
+    color: white;
+    text-align: center;
+    height: 71vh;
+    max-height: 1000px;
+    font-size: calc(26px * var(--font-scale));
+    display: none;
+    padding: 80px;
+}
+
+#chapterDiv {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#exitPaper {
+    top: 100px;
+    right: 80px;
+    height: 70px;
+    width: 90px;
 }

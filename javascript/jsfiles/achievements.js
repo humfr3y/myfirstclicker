@@ -145,7 +145,7 @@ const ACHS = {
 function setAchievementsBg() {
   for (let i = 11; i <= 70; i++) {
     const el = document.getElementById(`ach${i}`);
-    if (el) el.style.backgroundImage = `url("javascript/cssfiles/images/ach${i}.jpg")`;
+    if (el) el.style.backgroundImage = `url("javascript/cssfiles/images/achs/ach${i}.jpg")`;
   }
 }
 setAchievementsBg();

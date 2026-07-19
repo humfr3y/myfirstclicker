@@ -118,7 +118,7 @@ function loadGame() {
     setTimeout(() => {
         notify(text.notification.load, 'limegreen');        
         showChangelog(text.changelog.start);
-        showStory(text.chapter.start);
+        // showStory(text.chapter.start);
         showHelpPage(text.help.start, text.empty);
     }, 3000);
     
@@ -145,7 +145,6 @@ function loadGame() {
     changeFonts2(player.settings.font);
     changeFont.value = player.settings.font;
     changeNotation.value = player.settings.notation;
-    shopBulkBuyInput.value = player.settings.shop_bulkbuy;
     mySlider.value = player.settings.autosave_interval;
     mineralsBulkInput.value = player.settings.minerals_bulkbuy;
 
@@ -175,7 +174,7 @@ function loadGame() {
         }
     });
 
-    if (!player.reflash.respecTree) {
+    if (player.reflash.respecTree) {
         document.getElementById('respecTree').classList.add('active')
     }
     else {
@@ -183,6 +182,13 @@ function loadGame() {
     }
 
     player.settings.modernization_activated = false;
+
+    if (player.shop.unlockables) {
+        player.shop.unlockables.forEach(upg => {
+            player.shop.special.push(upg)
+        })
+        delete player.shop.unlockables
+    }
 }
 
 function resetDailyReward() {
@@ -281,7 +287,7 @@ function convert_save() {
         supercoin: { currency: 0, total_currency: 0, spent_currency: 0 },
         prestige: { upgrades: {1:0, 2:0}, singleUpgrades: [], break: { buyables: {1:0, 2:0, 3:0, 4:0, 5:0}, singles: [] }, milestones: [], currency: 0, total_currency: 0, broken_currency: 0, resets: 0, prestigeTable: {}, table_resets: 1 },
         shard: { upgrades: {1:0, 2:0, 3:0}, singleUpgrades: [], currency: 0, unlockables: [], consumed: { click: 0, second: 0, buyables: 0, singles: 0 }, achievements: {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0} },
-        shop: { upgrades: {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0}, permanentUpgrades: {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0}, unlockables: [], items: { amount: {1:0, 2:0, 3:0, 4:0, 5:0, 6:0}, used: {1:0, 2:0, 3:0, 4:0, 5:0, 6:0} } },
+        shop: { upgrades: {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0}, permanentUpgrades: {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0}, special: [], items: { amount: {1:0, 2:0, 3:0, 4:0, 5:0, 6:0}, used: {1:0, 2:0, 3:0, 4:0, 5:0, 6:0} } },
         supercrystal: { upgrades: [0], currency: 0, total_currency: 0, consumedShards: 0 },
         rune: { currency: 0, total_currency: 0 },
         minerals: { 1: 0, 2: 0, 3: 0 },

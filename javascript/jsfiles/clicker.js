@@ -327,7 +327,7 @@ const GAIN = {
                 [player.prestige.upgrades[1], UPGS.prestige.buyables[1].effect()],
                 [ACHS.has(28), 4],
                 [player.shard.singleUpgrades.includes(11), UPGS.shard.singles[11].effect()],
-                [player.shop.permanentUpgrades[1], UPGS.shop.permanent[1].effect()],
+                // [player.shop.permanentUpgrades[1], UPGS.shop.permanent[1].effect()],
                 [UNL.overdrive.type2.unl(), UNL.overdrive.type2.effect()],
                 [player.minerals[3], UPGS.minerals[3].effect1()],
                 [player.challenge.completed.includes(10) && player.challenge.activated === 0, CHALL[10].effect()],
@@ -467,7 +467,7 @@ const GAIN = {
             }
         },
         gain_per_second() {
-            if (!player.shop.unlockables.includes(6)) return 0
+            if (!player.shop.special.includes(6)) return 0
             return ((1 + this.chance() / 10) * (Math.log10(GAIN.coin.second.effect() * 1 + 1)/1000)) / 2
         }
     },
@@ -686,12 +686,12 @@ const UNL = {
             activate: false, blink: '', interval: ''
         },
         type2: {
-            unl() { return player.shop.unlockables.includes(1); },
+            unl() { return player.shop.special.includes(1); },
             cost() { return 1000 + Math.pow(10, this.percent() + 8); },
             percent() { return Math.min(Math.log10((player.overdrive.consumed.type2 / 1e8) + 1), 100); },
             effect() {
                 if (this.percent() === 0) return 1;
-                let eff = 1 + (Math.pow(1.75, this.percent() / 2));
+                let eff = (Math.pow(1.75, this.percent() / 2));
                 if (player.shop.upgrades[7]) eff *= UPGS.shop.buyables[7].effect();
                 return eff;
             },
@@ -742,7 +742,7 @@ const UNL = {
     },
     shard_achievements: {
         unl(x) {
-            if (this[x].current() >= this[x].goal() && player.shop.unlockables.includes(3)) {
+            if (this[x].current() >= this[x].goal() && player.shop.special.includes(3)) {
                 player.shard.achievements[x]++;
             }
         },
@@ -755,7 +755,7 @@ const UNL = {
             }
         },
         _effBase(reqLvl, val, isAdditive) {
-            if (!(player.shop.unlockables.includes(3) && player.shard_achievements.includes(reqLvl))) return 1;
+            if (!(player.shop.special.includes(3) && player.shard_achievements.includes(reqLvl))) return 1;
             const fBoost = player.fortune.activatedBoosts[9].activated ? UPGS.fortune.boosts[9].effect() : 1;
             const ach10 = UNL.shard_achievements[10].effect();
             return isAdditive ? (1 + val * ach10 * fBoost) : (val * ach10 * fBoost);
@@ -769,23 +769,35 @@ const UNL = {
         7: { id: 7, current() { return player.prestige.resets; }, goal(x = player.shard.achievements[7]) { return 1e6 * Math.pow(10, x); }, ratio() { return findRatio(this.current() + 0.00001, this.goal()); }, effect(x = player.shard.achievements[7]) { return UNL.shard_achievements._effBase(4, Math.pow(2.05, x), false); } },
         8: { id: 8, current() { return player.clicks.simulated; }, goal(x = player.shard.achievements[8]) { return 1000 * Math.pow(2, x); }, ratio() { return findRatio(this.current() + 0.00001, this.goal()); }, effect(x = player.shard.achievements[8]) { return UNL.shard_achievements._effBase(4, 0.04 * x, true); } },
         9: { id: 9, current() { return player.clicks.critical; }, goal(x = player.shard.achievements[9]) { return 100 * Math.pow(2, x); }, ratio() { return findRatio(this.current(), this.goal()); }, effect(x = player.shard.achievements[9]) { return UNL.shard_achievements._effBase(5, Math.pow(1.2, x), false); } },
-        10: { id: 10, current() { let sum = 0; for (let i = 1; i <= 10; i++) sum += player.shard.achievements[i]; return sum; }, goal(x = player.shard.achievements[10]) { return 10 + (10 * x); }, ratio() { return findRatio(this.current(), this.goal()); }, effect(x = player.shard.achievements[10]) { return (player.shop.unlockables.includes(3) && player.shard_achievements.includes(5)) ? Math.pow(1.1, x) : 1; } }
+        10: { id: 10, current() { let sum = 0; for (let i = 1; i <= 10; i++) sum += player.shard.achievements[i]; return sum; }, goal(x = player.shard.achievements[10]) { return 10 + (10 * x); }, ratio() { return findRatio(this.current(), this.goal()); }, effect(x = player.shard.achievements[10]) { return (player.shop.special.includes(3) && player.shard_achievements.includes(5)) ? Math.pow(1.1, x) : 1; } }
     },
     display: {
-        unl(x, y = 'none') {
+        unl(x, y = 'none', isArray = false) {
             let el = this[x].element;
             if (typeof el === 'function') el = el();
-            if (!el) return;
+            if (!el) return;   
             
             // ОПТИМИЗАЦИЯ ДОМ: Изменяем стиль только если он действительно другой
             const targetDisplay = this[x].req() ? this[x].type : y;
+            if (el instanceof HTMLCollection) {
+                Array.from(this[x].element()).forEach(element => {
+                    if (element.style.display !== targetDisplay) element.style.display = targetDisplay;
+                })
+                return
+            }
             if (el.style.display !== targetDisplay) el.style.display = targetDisplay;
         },
         check() {
             // Проходим по всем 83 элементам без вычисления длины ключей каждый раз
-            for (let i = 1; i <= 97; i++) {
+            for (let i = 1; i <= 93; i++) {
                 if (this[i]) {
-                    if (this[i].element().classList.contains('automationUpgrade')) this.unl(i, this[i].type !== 'none' ? 'none' : 'block') 
+                    let el = this[i].element();
+                    if (el instanceof HTMLCollection) {
+                        this.unl(i, this[i].type !== 'none' ? 'none' : 'flex', true) 
+                    }
+                    else if (this[i].element().classList.contains('automationUpgrade') || this[i].element().classList.contains('automationUpgrade2')) {
+                        this.unl(i, this[i].type !== 'none' ? 'none' : 'block') 
+                    }   
                     else this.unl(i, this[i].type !== 'none' ? 'none' : 'flex');
                 }
             }
@@ -806,92 +818,101 @@ const UNL = {
         13: { type: 'block', element: () => document.getElementById('superCrystalsSelect'), req: () => player.progressBarGoals.includes(3) },
         14: { type: 'block', element: () => document.getElementById('mineralsSelect'), req: () => player.progressBarGoals.includes(4) },
         15: { type: 'block', element: () => document.getElementById('challengeSelect'), req: () => player.progressBarGoals.includes(2) },
-        16: { type: 'flex', element: () => document.getElementById('post11challenge'), req: () => player.challenge.completed.includes(11) || player.reflash.resets >= 1 },
-        17: { type: 'flex', element: () => document.getElementById('post11challenge2'), req: () => player.challenge.completed.includes(11) || player.reflash.resets >= 1 },
-        18: { type: 'flex', element: () => document.getElementById('post11challenge3'), req: () => player.challenge.completed.includes(11) || player.reflash.resets >= 1 },
-        19: { type: 'flex', element: () => document.getElementById('postAch32'), req: () => ACHS.has(32) },
-        20: { type: 'flex', element: () => document.getElementsByClassName('postAch33')[0], req: () => ACHS.has(33) },
-        21: { type: 'flex', element: () => document.getElementsByClassName('postAch33')[1], req: () => ACHS.has(33) },
-        22: { type: 'flex', element: () => document.getElementsByClassName('postAch33')[2], req: () => ACHS.has(33) },
-        23: { type: 'block', element: () => document.getElementById('prestigeHelpDiv'), req: () => ACHS.has(21) },
-        24: { type: 'block', element: () => document.getElementById('modernizeButton'), req: () => UPGS.shop.unlockables[2].unl() },
-        25: { type: 'block', element: () => document.getElementById('harshUmulti'), req: () => [5, 7].includes(player.challenge.activated) || player.prestige.challenge.activated === 1 },
-        26: { type: 'flex', element: () => document.getElementById('postE13SoftcapClick'), req: () => GAIN.coin.click.effect() >= 1e13 },
-        27: { type: 'flex', element: () => document.getElementById('postE13SoftcapSecond'), req: () => GAIN.coin.second.effect() >= 1e13 },
-        28: { type: 'flex', element: () => document.getElementById('postE15SoftcapGain'), req: () => GAIN.coin.gain.effect() >= 1e15 },
-        29: { type: 'flex', element: () => document.getElementById('postE7SoftcapShard'), req: () => GAIN.shard.effect.effect() >= 1e7 },
-        30: { type: 'flex', element: () => document.getElementById('shardsPerSecondText'), req: () => UNL.shard.second.unl() },
-        31: { type: 'none', element: () => document.getElementById('shardUnlockableBase1'), req: () => UNL.shard.second.unl() },
-        32: { type: 'flex', element: () => document.getElementById('shardsClick'), req: () => UNL.shard.click.unl() },
-        33: { type: 'none', element: () => document.getElementById('shardUnlockableBase2'), req: () => UNL.shard.click.unl() },
-        34: { type: 'flex', element: () => document.getElementById('shardBuyables'), req: () => UNL.shard.buyables.unl() },
-        35: { type: 'none', element: () => document.getElementById('shardUnlockableBase3'), req: () => UNL.shard.buyables.unl() },
-        36: { type: 'flex', element: () => document.getElementById('shardSingles'), req: () => UNL.shard.singles.unl() },
-        37: { type: 'none', element: () => document.getElementById('shardUnlockableBase4'), req: () => UNL.shard.singles.unl() },
-        38: { type: 'none', element: () => ELS.automationUpgradesArray[0], req: () => MISC.automation.single.time() === 50 },
-        39: { type: 'none', element: () => ELS.automationUpgradesArray[1], req: () => MISC.automation.buyable.time() === 50 },
-        40: { type: 'none', element: () => ELS.automationUpgradesArray[2], req: () => MISC.automation.umultiplier.time() === 50 },
-        41: { type: 'none', element: () => ELS.automationUpgradesArray[3], req: () => MISC.automation.upower.time() === 50 },
-        42: { type: 'none', element: () => ELS.automationUpgradesArray[4], req: () => MISC.automation.prestige.time() === 50 },
-        43: { type: 'flex', element: () => document.getElementById('prestigeModeDiv'), req: () => MISC.automation.prestige.time() === 50 && MILESTONES.has(13) },
-        44: { type: 'flex', element: () => document.getElementById('increaseBulkBuyButton'), req: () => MISC.automation.buyable.time() === 50 && MILESTONES.has(6) && MISC.automation.buyable.bulk() !== 512 },
-        45: { type: 'flex', element: () => document.getElementById('umultiIntervalDiv'), req: () => MISC.automation.umultiplier.time() === 50 },
-        46: { type: 'flex', element: () => document.getElementById('upowerIntervalDiv'), req: () => MISC.automation.upower.time() === 50 },
-        47: { type: 'inline-block', element: () => document.getElementById('exitChallenge'), req: () => player.challenge.activated !== 0 },
-        48: { type: 'block', element: () => document.getElementById('overdriveSelect'), req: () => true },
-        49: { type: 'block', element: () => document.getElementById('overdriveType1'), req: () => true },
-        50: { type: 'block', element: () => document.getElementById('overdriveType2'), req: () => UPGS.shop.unlockables[1].unl() },
-        51: { type: 'block', element: () => document.getElementById('challengeHelpDiv'), req: () => player.progressBarGoals.includes(2) },
-        52: { type: 'block', element: () => document.getElementById('breakPrestigeSelect'), req: () => player.progressBarGoals.includes(5) },
-        53: { type: 'block', element: () => document.getElementById('uadderBoost'), req: () => player.prestige.break.singles.includes(25) },
-        54: { type: 'block', element: () => document.getElementById('ureducerBoost'), req: () => player.prestige.break.singles.includes(25) },
-        55: { type: 'none', element: () => ELS.automationUpgradesArray[5], req: () => MISC.automation.uadder.time() === 50 },
-        56: { type: 'flex', element: () => document.getElementById('uadderIntervalDiv'), req: () => MISC.automation.uadder.time() === 50 },
-        57: { type: 'flex', element: () => document.getElementById('shardAchBarDiv1'), req: () => player.shard_achievements.includes(1) },
-        58: { type: 'flex', element: () => document.getElementById('shardAchBarDiv2'), req: () => player.shard_achievements.includes(2) },
-        59: { type: 'flex', element: () => document.getElementById('shardAchBarDiv3'), req: () => player.shard_achievements.includes(3) },
-        60: { type: 'flex', element: () => document.getElementById('shardAchBarDiv4'), req: () => player.shard_achievements.includes(4) },
-        61: { type: 'flex', element: () => document.getElementById('shardAchBarDiv5'), req: () => player.shard_achievements.includes(5) },
-        62: { type: 'none', element: () => document.getElementById('shardAchUnlockable1'), req: () => player.shard_achievements.includes(1) },
-        63: { type: 'none', element: () => document.getElementById('shardAchUnlockable2'), req: () => player.shard_achievements.includes(2) },
-        64: { type: 'none', element: () => document.getElementById('shardAchUnlockable3'), req: () => player.shard_achievements.includes(3) },
-        65: { type: 'none', element: () => document.getElementById('shardAchUnlockable4'), req: () => player.shard_achievements.includes(4) },
-        66: { type: 'none', element: () => document.getElementById('shardAchUnlockable5'), req: () => player.shard_achievements.includes(5) },
-        67: { type: 'block', element: () => document.getElementById('shardAchievementsSelect'), req: () => player.shop.unlockables.includes(3) },
-        68: { type: 'block', element: () => document.getElementById('challengesTimeSelect'), req: () => player.progressBarGoals.includes(2) },
-        69: { type: 'block', element: () => document.getElementById('recentPrestigesSelect'), req: () => player.progressBarGoals.includes(1) },
-        70: { type: 'flex', element: () => document.getElementById('postMinerals'), req: () => player.progressBarGoals.includes(4) },
-        71: { type: 'flex', element: () => document.getElementById('postMinerals2'), req: () => player.progressBarGoals.includes(4) },
-        72: { type: 'flex', element: () => document.getElementById('postBreakprestige'), req: () => player.progressBarGoals.includes(5) },
-        73: { type: 'flex', element: () => document.getElementById('postBreakprestige2'), req: () => player.progressBarGoals.includes(5) },
-        74: { type: 'flex', element: () => document.getElementById('uadderAutomationContainer'), req: () => player.progressBarGoals.includes(5) },
-        75: { type: 'block', element: () => document.getElementById('fortuneSelect'), req: () => player.progressBarGoals.includes(6) },
-        76: { type: 'block', element: () => document.getElementById('balanceSelect'), req: () => player.fortune.upgrades.singles.includes(31) },
-        77: { type: 'flex', element: () => document.getElementById('A-rarity-block'), req: () => player.fortune.upgrades.singles.includes(12) },
-        78: { type: 'flex', element: () => document.getElementById('S-rarity-block'), req: () => player.fortune.upgrades.singles.includes(21) },
-        79: { type: 'flex', element: () => document.getElementById('EX-rarity-block'), req: () => player.fortune.upgrades.singles.includes(32) },
-        80: { type: 'flex', element: () => document.getElementById('aquamarineMineral'), req: () => player.shop.unlockables.includes(5) },
+        // 16: { type: 'flex', element: () => document.getElementById('post11challenge'), req: () => player.challenge.completed.includes(11) || player.reflash.resets >= 1 },
+        // 17: { type: 'flex', element: () => document.getElementById('post11challenge2'), req: () => player.challenge.completed.includes(11) || player.reflash.resets >= 1 },
+        // 18: { type: 'flex', element: () => document.getElementById('post11challenge3'), req: () => player.challenge.completed.includes(11) || player.reflash.resets >= 1 },
+        // 19: { type: 'flex', element: () => document.getElementById('postAch32'), req: () => ACHS.has(32) },
+        // 20: { type: 'flex', element: () => document.getElementsByClassName('postAch33')[0], req: () => ACHS.has(33) },
+        // 21: { type: 'flex', element: () => document.getElementsByClassName('postAch33')[1], req: () => ACHS.has(33) },
+        // 22: { type: 'flex', element: () => document.getElementsByClassName('postAch33')[2], req: () => ACHS.has(33) },
+        16: { type: 'block', element: () => document.getElementById('prestigeHelpDiv'), req: () => ACHS.has(21) },
+        17: { type: 'block', element: () => document.getElementById('modernizeButton'), req: () => UPGS.shop.special[2].unl() },
+        18: { type: 'block', element: () => document.getElementById('harshUmulti'), req: () => [5, 7].includes(player.challenge.activated) || player.prestige.challenge.activated === 1 },
+        19: { type: 'flex', element: () => document.getElementById('postE13SoftcapClick'), req: () => GAIN.coin.click.effect() >= 1e13 },
+        20: { type: 'flex', element: () => document.getElementById('postE13SoftcapSecond'), req: () => GAIN.coin.second.effect() >= 1e13 },
+        21: { type: 'flex', element: () => document.getElementById('postE15SoftcapGain'), req: () => GAIN.coin.gain.effect() >= 1e15 },
+        22: { type: 'flex', element: () => document.getElementById('postE7SoftcapShard'), req: () => GAIN.shard.effect.effect() >= 1e7 },
+        23: { type: 'flex', element: () => document.getElementById('shardsPerSecondText'), req: () => UNL.shard.second.unl() },
+        24: { type: 'none', element: () => document.getElementById('shardUnlockableBase1'), req: () => UNL.shard.second.unl() },
+        25: { type: 'flex', element: () => document.getElementById('shardsClick'), req: () => UNL.shard.click.unl() },
+        26: { type: 'none', element: () => document.getElementById('shardUnlockableBase2'), req: () => UNL.shard.click.unl() },
+        27: { type: 'flex', element: () => document.getElementById('shardBuyables'), req: () => UNL.shard.buyables.unl() },
+        28: { type: 'none', element: () => document.getElementById('shardUnlockableBase3'), req: () => UNL.shard.buyables.unl() },
+        29: { type: 'flex', element: () => document.getElementById('shardSingles'), req: () => UNL.shard.singles.unl() },
+        30: { type: 'none', element: () => document.getElementById('shardUnlockableBase4'), req: () => UNL.shard.singles.unl() },
+        31: { type: 'none', element: () => ELS.automationUpgradesArray[0], req: () => MISC.automation.single.time() === 50 },
+        32: { type: 'none', element: () => ELS.automationUpgradesArray[1], req: () => MISC.automation.buyable.time() === 50 },
+        33: { type: 'none', element: () => ELS.automationUpgradesArray[2], req: () => MISC.automation.umultiplier.time() === 50 },
+        34: { type: 'none', element: () => ELS.automationUpgradesArray[3], req: () => MISC.automation.upower.time() === 50 },
+        35: { type: 'none', element: () => ELS.automationUpgradesArray[4], req: () => MISC.automation.prestige.time() === 50 },
+        36: { type: 'flex', element: () => document.getElementById('prestigeModeDiv'), req: () => MISC.automation.prestige.time() === 50 && MILESTONES.has(13) },
+        37: { type: 'block', element: () => document.getElementById('increaseBulkBuyButton'), req: () => MISC.automation.buyable.time() === 50 && MILESTONES.has(6) && MISC.automation.buyable.bulk() !== 512 },
+        38: { type: 'flex', element: () => document.getElementById('umultiIntervalDiv'), req: () => MISC.automation.umultiplier.time() === 50 },
+        39: { type: 'flex', element: () => document.getElementById('upowerIntervalDiv'), req: () => MISC.automation.upower.time() === 50 },
+        40: { type: 'inline-block', element: () => document.getElementById('exitChallenge'), req: () => player.challenge.activated !== 0 },
+        41: { type: 'block', element: () => document.getElementById('overdriveSelect'), req: () => true },
+        42: { type: 'block', element: () => document.getElementById('overdriveType1'), req: () => true },
+        43: { type: 'block', element: () => document.getElementById('overdriveType2'), req: () => UPGS.shop.special[1].unl() },
+        44: { type: 'block', element: () => document.getElementById('challengeHelpDiv'), req: () => player.progressBarGoals.includes(2) },
+        45: { type: 'block', element: () => document.getElementById('breakPrestigeSelect'), req: () => player.progressBarGoals.includes(5) },
+        46: { type: 'block', element: () => document.getElementById('uadderBoost'), req: () => player.prestige.break.singles.includes(25) },
+        47: { type: 'block', element: () => document.getElementById('ureducerBoost'), req: () => player.prestige.break.singles.includes(25) },
+        48: { type: 'none', element: () => ELS.automationUpgradesArray[5], req: () => MISC.automation.uadder.time() === 50 },
+        49: { type: 'flex', element: () => document.getElementById('uadderIntervalDiv'), req: () => MISC.automation.uadder.time() === 50 },
+        50: { type: 'flex', element: () => document.getElementById('shardAchBarDiv1'), req: () => player.shard_achievements.includes(1) },
+        51: { type: 'flex', element: () => document.getElementById('shardAchBarDiv2'), req: () => player.shard_achievements.includes(2) },
+        52: { type: 'flex', element: () => document.getElementById('shardAchBarDiv3'), req: () => player.shard_achievements.includes(3) },
+        53: { type: 'flex', element: () => document.getElementById('shardAchBarDiv4'), req: () => player.shard_achievements.includes(4) },
+        54: { type: 'flex', element: () => document.getElementById('shardAchBarDiv5'), req: () => player.shard_achievements.includes(5) },
+        55: { type: 'none', element: () => document.getElementById('shardAchUnlockable1'), req: () => player.shard_achievements.includes(1) },
+        56: { type: 'none', element: () => document.getElementById('shardAchUnlockable2'), req: () => player.shard_achievements.includes(2) },
+        56: { type: 'none', element: () => document.getElementById('shardAchUnlockable3'), req: () => player.shard_achievements.includes(3) },
+        57: { type: 'none', element: () => document.getElementById('shardAchUnlockable4'), req: () => player.shard_achievements.includes(4) },
+        58: { type: 'none', element: () => document.getElementById('shardAchUnlockable5'), req: () => player.shard_achievements.includes(5) },
+        59: { type: 'block', element: () => document.getElementById('shardAchievementsSelect'), req: () => player.shop.special.includes(3) },
+        60: { type: 'block', element: () => document.getElementById('challengesTimeSelect'), req: () => player.progressBarGoals.includes(2) },
+        61: { type: 'block', element: () => document.getElementById('recentPrestigesSelect'), req: () => player.progressBarGoals.includes(1) },
+        // 70: { type: 'flex', element: () => document.getElementById('postMinerals'), req: () => player.progressBarGoals.includes(4) },
+        // 71: { type: 'flex', element: () => document.getElementById('postMinerals2'), req: () => player.progressBarGoals.includes(4) },
+        // 72: { type: 'flex', element: () => document.getElementById('postBreakprestige'), req: () => player.progressBarGoals.includes(5) },
+        // 73: { type: 'flex', element: () => document.getElementById('postBreakprestige2'), req: () => player.progressBarGoals.includes(5) },
+        62: { type: 'flex', element: () => document.getElementById('uadderAutomationContainer'), req: () => player.progressBarGoals.includes(5) },
+        63: { type: 'block', element: () => document.getElementById('fortuneSelect'), req: () => player.progressBarGoals.includes(6) },
+        64: { type: 'block', element: () => document.getElementById('balanceSelect'), req: () => player.fortune.upgrades.singles.includes(31) },
+        65: { type: 'flex', element: () => document.getElementById('A-rarity-block'), req: () => player.fortune.upgrades.singles.includes(12) },
+        66: { type: 'flex', element: () => document.getElementById('S-rarity-block'), req: () => player.fortune.upgrades.singles.includes(21) },
+        67: { type: 'flex', element: () => document.getElementById('EX-rarity-block'), req: () => player.fortune.upgrades.singles.includes(32) },
+        68: { type: 'flex', element: () => document.getElementById('aquamarineMineral'), req: () => player.shop.special.includes(5) },
         // 81: { type: 'flex', element: () => document.getElementById('crystalgainsc'), req: () => player.prestige.total_currency >= 1e50 },
         // 82: { type: 'flex', element: () => document.getElementById('shardeffectsc'), req: () => player.shard.currency >= 1e10 },
-        81: { type: 'inline-block', element: () => document.getElementById('exitPChallenge'), req: () => player.prestige.challenge.activated !== 0 },
-        82: { type: 'flex', element: () => document.getElementById('breakPUs'), req: () => player.prestige.break.singles.includes(25)},
-        83: { type: 'flex', element: () => document.getElementById('doReflash'), req: () => player.prestige.challenge.completed.length >= 4 || player.reflash.resets >= 1},
-        84: { type: 'block', element: () => document.getElementById('challengePrestigeSelect'), req: () => player.progressBarGoals.includes(8)},
-        85: { type: 'flex', element: () => document.getElementById('prestigeChallengePair2'), req: () => player.prestige.challenge.completed.length >= 1 },
-        86: { type: 'flex', element: () => document.getElementById('prestigeChallengePair3'), req: () => player.prestige.challenge.completed.length >= 2 },
-        87: { type: 'flex', element: () => document.getElementById('prestigeChallengePair4'), req: () => player.prestige.challenge.completed.length >= 3 },
-        88: { type: 'block', element: () => document.getElementById('helpTab22'), req: () => player.progressBarGoals.includes(8) },
-        89: { type: 'block', element: () => document.getElementById('aquaticPick'), req: () => ACHS.has(51) },
-        90: { type: 'block', element: () => document.getElementById('supercoinsGain'), req: () => player.shop.unlockables.includes(6) },
-        91: { type: 'block', element: () => document.getElementById('reflashSelect'), req: () => player.reflash.resets >= 1 },
-        92: { type: 'block', element: () => document.getElementById('recentReflashes'), req: () => player.reflash.resets >= 1 },
-        93: { type: 'block', element: () => document.getElementById('reflashSection'), req: () => player.reflash.resets >= 1 },
-        94: { type: 'block', element: () => document.getElementById('bitsCount'), req: () => player.reflash.resets >= 1 }, 
-        95: { type: 'flex', element: () => document.getElementById('postReflashShop'), req: () => player.reflash.resets >= 1 }, 
-        96: { type: 'flex', element: () => document.getElementById('postReflashShop2'), req: () => player.reflash.resets >= 1 }, 
-        97: { type: 'block', element: () => document.getElementById('worldSpeed'), req: () => player.reflash.acceleratorUpgrades[5] >= 1 }, 
-        
-        
+        69: { type: 'inline-block', element: () => document.getElementById('exitPChallenge'), req: () => player.prestige.challenge.activated !== 0 },
+        70: { type: 'flex', element: () => document.getElementById('breakPUs'), req: () => player.prestige.break.singles.includes(25)},
+        71: { type: 'flex', element: () => document.getElementById('doReflash'), req: () => player.prestige.challenge.completed.length >= 4 || player.reflash.resets >= 1},
+        72: { type: 'block', element: () => document.getElementById('challengePrestigeSelect'), req: () => player.progressBarGoals.includes(8)},
+        73: { type: 'flex', element: () => document.getElementById('prestigeChallengePair2'), req: () => player.prestige.challenge.completed.length >= 1 },
+        74: { type: 'flex', element: () => document.getElementById('prestigeChallengePair3'), req: () => player.prestige.challenge.completed.length >= 2 },
+        75: { type: 'flex', element: () => document.getElementById('prestigeChallengePair4'), req: () => player.prestige.challenge.completed.length >= 3 },
+        76: { type: 'block', element: () => document.getElementById('helpTab22'), req: () => player.progressBarGoals.includes(8) },
+        // 77: { type: 'block', element: () => document.getElementById('aquaticPick'), req: () => ACHS.has(51) },
+        77: { type: 'block', element: () => document.getElementById('supercoinsGain'), req: () => player.shop.special.includes(6) },
+        78: { type: 'block', element: () => document.getElementById('reflashSelect'), req: () => player.reflash.resets >= 1 },
+        79: { type: 'block', element: () => document.getElementById('recentReflashes'), req: () => player.reflash.resets >= 1 },
+        80: { type: 'block', element: () => document.getElementById('reflashSection'), req: () => player.reflash.resets >= 1 },
+        81: { type: 'block', element: () => document.getElementById('bitsCount'), req: () => player.reflash.resets >= 1 }, 
+        // 95: { type: 'flex', element: () => document.getElementById('postReflashShop'), req: () => player.reflash.resets >= 1 }, 
+        // 96: { type: 'flex', element: () => document.getElementById('postReflashShop2'), req: () => player.reflash.resets >= 1 }, 
+        82: { type: 'block', element: () => document.getElementById('worldSpeed'), req: () => player.reflash.acceleratorUpgrades[5] >= 1 }, 
+        83: { type: 'flex', element: () => document.getElementsByClassName('shop_unlock_post_prestige'), req: () => player.prestige.resets >= 1 || player.reflash.resets >= 1}, 
+        84: { type: 'flex', element: () => document.getElementsByClassName('shop_unlock_post_shards'), req: () => player.shard.unlockables.length >= 1 || player.reflash.resets >= 1}, 
+        85: { type: 'flex', element: () => document.getElementsByClassName('shop_unlock_post_ach33'), req: () => ACHS.has(33) || player.reflash.resets >= 1}, 
+        86: { type: 'flex', element: () => document.getElementsByClassName('shop_unlock_post_supercrystal'), req: () => player.supercrystal.total_currency >= 1 || player.reflash.resets >= 1}, 
+        87: { type: 'flex', element: () => document.getElementsByClassName('shop_unlock_post_challenge11'), req: () => CHALL[11].completed() || player.reflash.resets >= 1}, 
+        88: { type: 'flex', element: () => document.getElementsByClassName('shop_unlock_post_ach32'), req: () => ACHS.has(32) || player.reflash.resets >= 1}, 
+        89: { type: 'flex', element: () => document.getElementsByClassName('shop_unlock_post_breakprestige'), req: () => player.prestige.break.singles.includes(25) || player.reflash.resets >= 1}, 
+        90: { type: 'flex', element: () => document.getElementsByClassName('shop_unlock_post_fortune'), req: () => player.fortune.total_tokens >= 1 || player.reflash.resets >= 1}, 
+        91: { type: 'flex', element: () => document.getElementsByClassName('shop_unlock_post_reflash'), req: () => player.reflash.resets >= 1}, 
+        92: { type: 'block', element: () => document.getElementById('acceleratorU5_1'), req: () => MISC.acc_ratio() >= 100}, 
+        93: { type: 'block', element: () => document.getElementById('acceleratorU5'), req: () => MISC.acc_ratio() < 100}, 
     }
 };
 
@@ -975,7 +996,8 @@ const MISC = {
         if (!player.settings.offline) return 0;
         let max = ACHS.has(22) ? 28800 : 21600
         let time = Math.max(Math.min((y - x) / 1000, max), 0);
-        return UPGS.supercrystal[31].unl() ? time * 2 * UPGS.reflash.accelerator[5].effect() : time * UPGS.reflash.accelerator[5].effect();
+        //* UPGS.reflash.accelerator[5].effect()
+        return UPGS.supercrystal[31].unl() ? time * 2  : time
     },
     free_upgrade: {
         1() { 
@@ -1147,6 +1169,9 @@ const MISC = {
     },
     sum_of_utils() {
         return (player.uadders + player.ureducers + player.umultipliers + player.upowers)
+    },
+    acc_ratio() {
+        return Math.min(MISC.sum_of_utils()/UPGS.reflash.accelerator[5].cost()*100, 100)
     }
 };
 
@@ -1161,8 +1186,8 @@ const PROGRESS = {
     add(x) { if (!player.progressBarGoals.includes(x) && this.unl(x)) player.progressBarGoals.push(x); },
     
     // Оставляем пустыми, они заполнятся из languages.js
-    name: ['', '', '', '', '', '', '', '', '', '',''],
-    currency: ['', '', '', '', '', '', '', '', '', '',''],
+    name: ['', '', '', '', '', '', '', '', '', '','', ''],
+    currency: ['', '', '', '', '', '', '', '', '', '','', ''],
     
     check_progress() {
         for (let i = 1; i <= this.name.length; i++) this.add(i); 
@@ -1209,7 +1234,35 @@ const PROGRESS = {
     // Вот наш новый 9-й пункт с кастомной функцией:
     9: { current: () => player.prestige.challenge.completed.length, req: () => 4, linear: true },
     10: { layer: "coin", type: "currency", req: () => 1.79e308 }, // Infinity
-    11: { layer: "reflash", type: "resets", req: () => 1 }
+    11: { layer: "reflash", type: "resets", req: () => 1 },
+    12: { current: () => Number(player.reflash.algo.includes(51)), req: () => 1, linear: true },
+
+    accelerator: {
+        update() {
+        let current = MISC.sum_of_utils();
+        let required = UPGS.reflash.accelerator[5].cost();
+        
+        let height = 0;
+        let ratio = 0;
+        
+        // Линейный режим для маленьких цифр (как 4 испытания) и логарифмический для огромных
+        // if (this[x].linear) {
+            height = (current / required) * 100;
+            ratio = height;
+        // } else {
+        //     if (current > 0) { // Защита от Math.log(0) = -Infinity
+        //         height = (Math.log(current) / Math.log(required)) * 100;
+        //         ratio = findRatio(current, required);
+        //     }
+        // }
+        
+        // Жестко ограничиваем от 0 до 100%
+        height = Math.min(Math.max(height, 0), 100);
+        ratio = Math.min(Math.max(ratio, 0), 100);
+        
+        acceleratorMachineProgressBar.style.height = height + "%";
+    },
+    }
 };
 let new_date = 0, time = 0
 
@@ -1272,6 +1325,7 @@ function loop() {
 
     update_overdrive();
     PROGRESS.update();
+    PROGRESS.accelerator.update();
     ACHS.checkAchievements();
     ACHS.checkRows();
 
@@ -1292,7 +1346,7 @@ function loop() {
     UPGS.shard.singles.checkDisable();
     UPGS.shop.buyables.checkDisable();
     UPGS.shop.permanent.checkDisable();
-    UPGS.shop.unlockables.checkDisable();
+    UPGS.shop.special.checkDisable();
     UPGS.shop.items.checkDisable();
     UPGS.supercrystal.checkDisable();
     UPGS.minerals.checkDisable();
@@ -1649,7 +1703,7 @@ function notify(notiString, notiColor, notiWidth = '350px') {
 }
 
 function changelog() { changelogWindow.style.display = "block"; myPopupBackdrop1.style.display = "flex"; }
-function gameLoreOpen() { gameLoreWindow.style.display = "block"; myPopupBackdrop1.style.display = "flex"; toggleBadges(['badge-settings-2', 'badge-misc-2', 'badge-lore'], false)}
+function gameLoreOpen() { bookWindow.style.display = "flex"; myPopupBackdrop1.style.display = "flex"; toggleBadges(['badge-settings-2', 'badge-misc-2', 'badge-lore'], false)}
 function howToPlayOpen() { gameHelpWindow.style.display = "flex"; myPopupBackdrop1.style.display = "flex"; toggleBadges(['badge-settings-1', 'badge-misc-1', 'badge-h2p'], false)}
 
 function openWindow(arg, isFlex, number) {
@@ -1701,12 +1755,20 @@ function openWindow(arg, isFlex, number) {
 }
 
 function hidePopup() {
-    [changelogWindow, gameLoreWindow, gameHelpWindow, windowGame, myPopupBackdrop1, myPopupBackdrop2, offlineGainWindow, reflashConfirmation].forEach(el => {
+    [changelogWindow, bookWindow, gameHelpWindow, windowGame, myPopupBackdrop1, myPopupBackdrop2, offlineGainWindow, reflashConfirmation].forEach(el => {
         if (el) el.style.display = "none";
     });
-    showChangelog(text.changelog.start); showStory(text.chapter.start); showHelpPage(text.help.start, text.empty);
+    showChangelog(text.changelog.start); showHelpPage(text.help.start, text.empty);
 }
+
+function hidePopupSub() {
+    [paperWindow, myPopupBackdropSub].forEach(el => {
+        if (el) el.style.display = "none";
+    });
+}
+
 myPopupBackdrop1.addEventListener("click", hidePopup);
+myPopupBackdropSub.addEventListener("click", hidePopupSub);
 
 // --- ЗВУК И ШРИФТЫ ---
 
@@ -1787,7 +1849,7 @@ if (versionDiv) {
 }
 
 // Универсальный биндинг всплывающих подсказок Popper.js
-const tooltipElements = document.querySelectorAll('.ach, .shopButton, .mineralButton, .coinUpgradeButton');
+const tooltipElements = document.querySelectorAll('.ach, .shopButton, .mineralButton, .coinUpgradeButton, .acceleratorUpgrade');
 tooltipElements.forEach(el => {
     const tooltip = document.getElementById('tooltip-' + el.id);
     if (!tooltip) return;

@@ -95,11 +95,10 @@ function checkCompletedChallenges() {
     }
 }
 
-function changeInputValue2(arg) {
-    shopBulkBuyInput.value = arg;
+// СМЕНА КОЛИЧЕСТВА ОПТОВОЙ ПОКУПКИ В СУПЕРШОПЕ
+function changeInputValue(arg) {
     player.settings.shop_bulkbuy = arg;
 }
-shopBulkBuyInput.addEventListener("blur", () => player.settings.shop_bulkbuy = shopBulkBuyInput.value);
 
 // --- ФУНКЦИИ ОТРИСОВКИ ГРАФИКОВ (ПОЛОСОК) ---
 
@@ -1294,3 +1293,213 @@ document.addEventListener("keydown", function(event) {
         doReflash(false)
     }
 });
+
+function switchVersion(version) {
+    const buttons = [...document.getElementsByClassName('versionButtons')];
+    buttons.forEach(el => {
+        if (el) el.style.display = "none";
+    });
+    document.getElementsByClassName('versionButtons')[version].style.display = 'flex'
+}
+
+// АКТИВИРОВАТЬ КНОПКУ ПЕРЕКЛЮЧЕНИЯ ВКЛАДКИ В СУПЕРШОПЕ
+document.addEventListener('click', function(e) {
+    const btn = e.target.closest && e.target.closest('.shopSelection');
+    if (!btn) return;
+
+    let parent = btn.parentElement;
+    if (!parent) return;
+
+    parent.querySelectorAll('.shopSelection.active').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+}, false);
+
+// АКТИВИРОВАТЬ КНОПКУ ПЕРЕКЛЮЧЕНИЯ ОПТ ПОКУПКИ В СУПЕРШОПЕ
+document.addEventListener('click', function(e) {
+    const btn = e.target.closest && e.target.closest('.bulkBuySelection');
+    if (!btn) return;
+
+    let parent = btn.parentElement;
+    if (!parent) return;
+
+    parent.querySelectorAll('.bulkBuySelection.active').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+}, false);
+
+// ПЕРЕКЛЮЧЕНИЕ ВКЛАДКИ В СУПЕРШОПЕ
+function switchShopTab(tab) {
+    const shopTop = [...document.getElementsByClassName('shopShelfRowTop')], shopBottom = [...document.getElementsByClassName('shopShelfRowBottom')];
+    shopTop.forEach(el => {
+        if (el) el.style.display = "none";
+    });
+    shopBottom.forEach(el => {
+        if (el) el.style.display = "none";
+    });
+    document.getElementsByClassName('shopShelfRowTop')[tab].style.display = 'flex'
+    document.getElementsByClassName('shopShelfRowBottom')[tab].style.display = 'flex'
+}
+
+// ВЫВЕДЕНИЕ ТЕКСТА ПОСИМВОЛЬНО
+let currentTimer = null; // ID таймера
+let isTyping = false;     // Флаг печати
+let currentIsLast = false; // Флаг конца диалога
+
+function typeEffect(element, textContent, speed = 20) {
+  if (currentTimer) clearTimeout(currentTimer);
+  
+  element.textContent = "";
+  isTyping = true;
+  let i = 0;
+
+  function type() {
+    if (i < textContent.length) {
+      element.textContent += textContent.charAt(i);
+      i++;
+      currentTimer = setTimeout(type, speed);
+    } else {
+      isTyping = false;
+      currentTimer = null;
+    }
+  }
+  type();
+}
+
+// ЗАПУСК РЕПЛИКИ
+function getTalk(charName, stageId = null) {
+  const char = text.talk[charName];
+  if (!char) return { text: "Ошибка", isLast: true };
+
+  // Рандомный режим (всегда последняя)
+  if (stageId === null) {
+    let allAvailable = [];
+    Object.entries(char.stages).forEach(([id, stage]) => {
+      if (stage.condition()) allAvailable.push(...stage.replies);
+    });
+    const line = allAvailable.length > 0 ? allAvailable[Math.floor(Math.random() * allAvailable.length)] : "Нечего сказать.";
+    return { text: line, isLast: true };
+  }
+
+  // Линейный режим
+  const stage = char.stages[stageId];
+  if (!stage || !stage.condition()) return { text: "Условие не выполнено", isLast: true };
+  
+  const line = stage.replies[char.progress[stageId]];
+  const nextIndex = (char.progress[stageId] + 1) % stage.replies.length;
+  
+  // Если следующий индекс 0 — значит, текущая фраза была последней
+  const isLast = (nextIndex === 0);
+  
+  char.progress[stageId] = nextIndex;
+  return { text: line, isLast: isLast };
+}
+
+function runDialogue(charName, stageId = null) {
+  const displayElement = document.getElementById('dialogueTextSpan');
+  const result = getTalk(charName, stageId); 
+  
+  currentIsLast = result.isLast;
+  displayElement.dataset.fullText = result.text; // Сохраняем полный текст тут
+  
+  typeEffect(displayElement, result.text);
+}
+
+document.getElementById('superPopupBackdrop').addEventListener('click', () => {
+  const displayElement = document.getElementById('dialogueTextSpan');
+
+  if (isTyping) {
+    // 1. Быстрое открытие (допечатываем текст)
+    if (currentTimer) clearTimeout(currentTimer);
+    displayElement.textContent = displayElement.dataset.fullText;
+    isTyping = false;
+  } else {
+    // 2. Если текст напечатан, решаем: закрыть или показать следующую
+    if (currentIsLast) {
+      hideDialogueWindow();
+    } else {
+      // ИЛИ: Если это не последняя фраза — вызываем следующую
+      // Нам нужно знать, какого персонажа и какой stage мы сейчас ведем.
+      // Для этого сохраним их в глобальные переменные при открытии окна.
+      runDialogue(window.activeChar, window.activeStage); 
+    }
+  }
+});
+
+function openDialogueWindow(character, stage, mainImage) {
+    // Сохраняем текущий контекст диалога для обработчика клика
+    window.activeChar = character;
+    window.activeStage = stage;
+
+    const el = document.getElementById('dialogueWindow'), 
+          backdrop = document.getElementById('myPopupBackdropDialogue'), 
+          superbackdrop = document.getElementById('superPopupBackdrop');
+    
+    const characterImage = document.getElementById(mainImage);
+    
+    if (el.style.display === "flex") return;
+    
+    el.style.display = "flex";
+    backdrop.style.display = "flex";
+    superbackdrop.style.display = "flex"; 
+    
+    if (characterImage) characterImage.style.display = "flex"; 
+
+    document.getElementById('dialogueNameSpan').textContent = text.talk[character].name
+    
+    runDialogue(character, stage);
+}
+
+function hideDialogueWindow() {
+    const el = document.getElementById('dialogueWindow'), backdrop = document.getElementById('myPopupBackdropDialogue'), superbackdrop = document.getElementById('superPopupBackdrop')
+    el.style.display = "none", backdrop.style.display = "none", superbackdrop.style.display = "none";
+    Array.from(document.getElementsByClassName('toHide')).forEach(element => {
+        element.style.display = 'none'
+    })
+}
+
+// function openWindow(arg, isFlex, number) {
+//     ['confirmationButtons', 'whichCode', 'dailyDesc', 'breakCrystal', 'brokeCrystals', 'falseBrokeCrystals', 'welcomeToDigitalGod', 'chooseSaveDiv', 'reflashConfirmation', 'presetEditor'].forEach(id => {
+//         const el = document.getElementById(id);
+//         if (el) el.style.display = "none";
+//     });
+//     windowGame.removeAttribute('style');
+//     windowGame.style.display = isFlex ? "flex" : "block";
+//     windowTitleDiv.style.display = 'none'; windowTitle2.innerHTML = '';
+    
+    
+//     if (arg === 'hardReset' || arg === 'gotNaNed') {
+//         confirmationButtons.style.display = "flex"; windowTitleDiv.style.display = 'block';
+//         yesHR.style.display = "none"; yesRP.style.display = "none";
+//         if (arg === 'hardReset') { windowTitle2.innerHTML = text.window.hard; windowTitle2.style.fontSize = 'calc(24px * var(--font-scale))'; yesHR.style.display = "block"; }
+//         else { windowTitle2.innerHTML = text.window.NaN; windowTitle2.style.fontSize = 'calc(14px * var(--font-scale))'; yesRP.style.display = "block"; }
+//     } else {
+//         const map = { 'code': whichCode, 'daily': dailyDesc, 'break': breakCrystal, 'submit': brokeCrystals, 'falseSubmit': falseBrokeCrystals, 'welcome': welcomeToDigitalGod, 'chooseSave': chooseSaveDiv, 'reflashConfirm': reflashConfirmation, 'presetEditor': presetEditor };
+//         if (map[arg]) map[arg].style.display = arg === 'break' ? 'flex' : 'block';
+//     }
+//     switch (arg) {
+//         case 'chooseSave':
+//             windowGame.style.height = '400px'
+//             changeSaveSlotsText()
+//             break;
+//         case 'hardReset':
+//             windowGame.style.height = '200px'
+//             break;
+//         case 'break':
+//         case 'brokeCrystals':    
+//         case 'falseBrokeCrystals':
+//             windowGame.style.height = '250px'
+//         case 'presetEditor':
+//             windowGame.style.height = '320px'
+//             player.reflash.selectedPreset = number;
+//             document.getElementById('presetName').innerText = player.reflash.presets[number].name;
+//             document.getElementById('nodeOrderInput').value = player.reflash.presets[number].ids.join(', ');
+//             break;
+//         case 'reflashConfirm':
+//             windowGame.style.height = '400px'
+//             windowGame.style.width = '500px'
+//             windowGame.style.fontSize = 'calc(16px * var(--font-scale))'
+//             break;
+//         default:
+//             break;
+//     }
+//     myPopupBackdrop1.style.display = "flex";
+// }

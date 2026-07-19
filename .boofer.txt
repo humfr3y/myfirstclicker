@@ -3003,3 +3003,33 @@ function buyShardSingle(single) {
 function buySuperCrystalSingle(single) {
         single.updateText.classList.add('purchased')
 }
+
+<!-- <div id="gameLoreWindow" class="gameWindow">
+          <div id="loreTitleDiv" class="titleDivClass">
+            <p id="loreTitle" class="windowTitle" data-i18n="gameLore">Changelog</p>
+          </div>
+          <button onclick="hidePopup()" class="closeWindow"></button>
+          <div id="chapterChooser">
+            <button onclick="showStory(text.chapter[1])" id="chapter1Tab" class="versionButton loreChapter">Начало</button>
+            <button onclick="showStory(text.chapter[2])" id="chapter2Tab" class="versionButton loreChapter">Улучшения</button>
+            <button onclick="showStory(text.chapter[3])" id="chapter3Tab" class="versionButton loreChapter">У-множение</button>
+            <button onclick="showStory(text.chapter[4])" id="chapter4Tab" class="versionButton loreChapter">У-силение</button>
+            <button onclick="showStory(text.chapter[5])" id="chapter5Tab" class="versionButton loreChapter">Престиж</button>
+            <button onclick="showStory(text.chapter[6])" id="chapter6Tab" class="versionButton loreChapter">Улучшения Престижа</button>
+            <button onclick="showStory(text.chapter[7])" id="chapter7Tab" class="versionButton loreChapter">Осколки</button>
+            <button onclick="showStory(text.chapter[8])" id="chapter8Tab" class="versionButton loreChapter">Автоматизация</button>
+            <button onclick="showStory(text.chapter[9])" id="chapter9Tab" class="versionButton loreChapter">Испытания</button>
+            <button onclick="showStory(text.chapter[10])" id="chapter10Tab" class="versionButton loreChapter">Суперкристаллы</button>
+            <button onclick="showStory(text.chapter[11])" id="chapter11Tab" class="versionButton loreChapter">Минералы</button>
+            <button onclick="showStory(text.chapter[12])" id="chapter12Tab" class="versionButton loreChapter">Достижения Осколков</button>
+            <button onclick="showStory(text.chapter[13])" id="chapter13Tab" class="versionButton loreChapter">Суперпрестиж</button>
+            <button onclick="showStory(text.chapter[14])" id="chapter14Tab" class="versionButton loreChapter">У-сложители</button>
+            <button onclick="showStory(text.chapter[15])" id="chapter15Tab" class="versionButton loreChapter">У-разнители</button>
+            <button onclick="showStory(text.chapter[16])" id="chapter16Tab" class="versionButton loreChapter">У-разнители</button>
+            <button onclick="showStory(text.chapter[17])" id="chapter17Tab" class="versionButton loreChapter">У-разнители</button>
+            <button onclick="showStory(text.chapter[18])" id="chapter18Tab" class="versionButton loreChapter">У-разнители</button>
+          </div>
+          <div id="chapterDiv" class="windowDesc">
+            <p id="chapterDescription">Choose chapter</p>
+          </div>
+        </div> -->

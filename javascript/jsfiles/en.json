@@ -26,7 +26,7 @@
     "pbcurrency4": "total supercrystals",
     "pbcurrency5": "prestige challenge completions",
     "pbcurrency6": "reflashes",
-    "pbcurrency7": "node",
+    "pbcurrency7": "51 node",
 
     "prestigeDisabled": "Collect {{n1e15}} α-coins",
     "prestigeEnabled": "Reset everything for {{crystalsTemp}} crystals {{prestigeCountMultiplierText}}",
@@ -122,7 +122,7 @@
     "save5": "Save 5",
 
     "reflashConfirmTitle": "Warning!",
-    "reflashConfirmDesc": "You are going to do Reflash! <br> This will reset ALL your progress except completed Achievements, unlocked tabs and Unlockables in supershop. <br> You also lose SUPERCOINS, so we recommend to buy all necessary upgrades and complete missing achievements. <br> After reset you will unlock new Reflash tab, new unique abilities and BITs. <br> Press \"OK\" if you are confident in your choice.",
+    "reflashConfirmDesc": "You are going to do Reflash! <br> This will reset ALL your progress except completed Achievements, unlocked tabs and Special upgrades in supershop. <br> You also lose SUPERCOINS, so we recommend to buy all necessary upgrades and complete missing achievements. <br> After reset you will unlock new Reflash tab, new unique abilities and BITs. <br> Press \"OK\" if you are confident in your choice.",
 
     "harshUmulti": "Decrease U-multiplier by 1",
 
@@ -634,8 +634,13 @@
     "upg_ref_acc4_name": "Additional Speed",
     "upg_ref_acc4_desc": "Increases additional Accelerator effect",
     "upg_ref_acc5_name": "Accelerator",
-    "upg_ref_acc5_desc": "Speeds up time in game.",
-    "upg_ref_acc5_req": "U-tils in total",
+    "upg_ref_acc5_desc1": "Speed ups time from ",
+    "upg_ref_acc5_desc2": "to ",
+    "upg_ref_acc5_desc3": "Changes every Reflash",
+    "upg_ref_acc5_eff": "Current Accelerator speed: ",
+    "upg_ref_acc5_get": "Get Accelerator",
+    "upg_ref_acc5_req1": "Next Accelerator requires",
+    "upg_ref_acc5_req2": "total U-tils",
 
     "upg_algo_11_name": "Node 11",
     "upg_algo_11_desc": "Increase coin gain per click and second by x3 (not affected by softcaps)",
@@ -963,7 +968,7 @@
     "telegramChannelText": "Join to telegram channel (russian)",
     "gmailText": "Send e-mail",
 
-    "shopDesc": "Welcome to Supershop! You can spend unique Supercoins for items from other dimensions here! <br> Their power allows save them between Prestiges, but you can respec Buyables anytime too! <br> Sadly, you are too weak to respec rest upgrades. <br> There is 4 types of them: Buyables - you can always respec them, Permanent - you can't respec them and they don't have bulk buy, <br>Unlockables - unlock new in-game features and Items - may improve your progress with various bonuses, but they have limit per Prestige.",
+    "shopDesc": "Welcome to Supershop! You can spend unique Supercoins for items from other dimensions here! <br> Their power allows save them between Prestiges, but you can respec Buyables anytime too! <br> Sadly, you are too weak to respec rest upgrades. <br> There is 4 types of them: Buyables - you can always respec them, Permanent - you can't respec them and they don't have bulk buy, <br>Special - unlock new in-game features and Items - may improve your progress with various bonuses, but they have limit per Prestige.",
     "shopTitle2": "Upgrades",
     "respecShop": "Respec",
 
@@ -1041,6 +1046,11 @@
     "shop_i6_desc": "Gives +20 Multipliers",
 
     "useTitle": "Use",
+    "maxBulkBuyShop": "Max.",
+    "buyablesShop": "Buyables",
+    "permanentShop": "Permanent",
+    "specialShop": "Special",
+    "itemsShop": "Items",
 
     "bulkBuy": "Bulk buy amount",
     "buy10": "Buy 10",
@@ -1168,6 +1178,17 @@
     "chapter17": "<b> January 5, 2177. </b> <br> This stage seemed terribly difficult to me, I thought it was better when I controlled the progress myself <br> However, recently I discovered a new stage - <ut>Balance</ut>... <br> That unpleasant voice from a certain Fortune rang out again, who was insanely happy that I passed this test... too insane. <br> A new white machine appeared in the hall, along with mysterious scales with plus and minus signs drawn on them. <br> I only saw the shadow of this individual for an instant... <br> I was horrified... It was like it had two heads... <br> It's nearby... <br> It's watching me... <br> It knows why I'm here. <br>I need to know all the answers.",
     "chapter18": "<b>April 10, 2177.</b> <br> After a stormy controversy between Fortune and Balance <br> Where I had to balance Fortune tokens between these two branches <br> I finally saw the true face of Fortune, who was shocked that I made their ability neutral <br> Fortunately, Balance, although neutral, helped me put this snide individual in their place <br> In the end, all their random values and buffs were destroyed by stability <br> After long attempts to build a fine gain of Crystals, another gate appeared in front of me... <br> They were similar to ones that called me to pass Challenges... <br> However, these ones glowed a bright blue color, and this time, they did not call me to themselves, but checked whether I was worthy of them or not... <br> <ut>Prestige Challenges</ut>, I will show you what it means to be worthy.",
 
+    "leftLoreTitle": {
+        "1": "1 - The Beginning of Journey",
+        "2": "3 - A Test of Will",
+        "3": "5 - The Final Chord?"
+    },
+    "rightLoreTitle": {
+        "1": "2 - I'll start again and Become Stronger",
+        "2": "4 - Breaking the Fate",
+        "3": "6 - Not Simple As It Seems"
+    },
+
     "help1Name": "Beginning",
     "help2Name": "Tabs",
     "help3Name": "Upgrades",
@@ -1196,7 +1217,7 @@
     "help3": "<ut>Upgrades</ut> it's a kind of bonuses which has different effects. They can increase α-coin gain separately for clicks and per second or increase effect of other upgrade, and it'll give even more α-coins! There is 15.<br><br>There is two types of upgrades: Buyables and Singles.<br><br><ut>Buyable upgrades</ut> can be bought infinity times. Their effect oftenly depends on amount of purchases. Cost scaling with every purchasing and every upgrades has his own scaling.<br><br><ut>Single upgrades</ut> can be bought only once, and their effect oftenly depends on amount of some resource. Their cost always stays the same and do not increase.",
     "help4": "<ut>U-multiplier</ut> it's a first prestige mini-layer which resets all α-coins and upgrades in exchange for doubling the whole α-coin gain. After every reset you'll get x2 boost for α-coins (multiplicative (x2 -> x4 -> x8)) and requirement increases by 50 Small Investments.<br> <br>Starting requirement is 100 Small Investments, formula of req scaling is: <it>100+50*m</it>, where m - amount of U-multipliers.",
     "help5": "<ut>U-power</ut> it's a second prestige mini-layer which resets not only α-coins and upgrades, but also U-multipliers. After reset you'll increase exponent of α-coin gain by +0.01 (additive). Reset requirement is not only Small Investments, but also 4 U-multipliers. <br><br>Starting requirement for reset: 250 Small Investments and 4 U-multiplers. Req scaling increases only for Small Investment by formula: <it>250+100*p</it>, where p - amount of U-powers. , U-multiplier req stays the same.",
-    "help6": "<ut>Supercoins</ut> it's currency, which you can spend in Supershop. You can get them clicking on α-coin with 1% chance and passively, while having Golden Investment, which you can buy in Supershop. Supercoin generation based on current coins per second and multiplied with supercoin chance. <br> Also they can be obtained offline wtih same speed as passive.<br><br>Supershop it's tab in which you can buy exclusive things to speed up progress, all items cost Supercoins. There is 4 types of items: Buyables, Permanent, Unlockables and Items. You can respec only Buyables and refund all spent Supercoins, but it does not work with the rest.<br><br>P.S.: Increasing of chance works like: if your chance increased by +50% then your chance of getting Super-coin will be 1.5/100 or 1/75.",
+    "help6": "<ut>Supercoins</ut> it's currency, which you can spend in Supershop. You can get them clicking on α-coin with 1% chance and passively, while having Golden Investment, which you can buy in Supershop. Supercoin generation based on current coins per second and multiplied with supercoin chance. <br> Also they can be obtained offline wtih same speed as passive.<br><br>Supershop it's tab in which you can buy exclusive things to speed up progress, all items cost Supercoins. There is 4 types of items: Buyables, Permanent, Special and Items. You can respec only Buyables and refund all spent Supercoins, but it does not work with the rest.<br><br>P.S.: Increasing of chance works like: if your chance increased by +50% then your chance of getting Super-coin will be 1.5/100 or 1/75.",
     "help7":"<ut>Overdrive</ut> that's one more way to increase α-coin gain. It does look like scale, which you fill with your α-coins by clicking on it. You spend more α-coins based on percent, but you will get bigger multiplier which increases exponentially. <br> <br> First Overdrive is free, but second one requires 500 supercoins. <br> Don't forget Overdrive Type I resets after prestige, so you can just enable it and leave until page refresh.",
     "help8": "<ut>Prestige</ut> - the first full layer of prestige. <br><br>To do Prestige, you need a minimum of {{n1e15}} α-coins. It resets all α-coins, upgrades, U-multiplier and U-powers. <br>In return, you will receive a new currency - <ut>Crystals</ut>. They don't anything, but you can use them to buy new Prestige Upgrades, break them into Shards, or upgrade automation.<br><br>After the first reset, you will unlock a new tab, \"Prestige\" as well as 4 sub-tabs: Prestige Upgrades, Milestones, Automation, and Shards.<br><br><ut>Prestige Upgrades.</ut> There are a total of 18 upgrades, there is two types of them: 16 single upgrades and 2 buyable ones. They differ slightly from α-coin upgrades in that they mostly have static effects and don't reset on Prestiges.<br><ut>Milestones</ut>. Every one require a certain number of Prestige resets and has various rewards to speed up your game progress.<br><ut>Automation</ut>. It helps automate the gameplay by buying upgrades or doing resets at some intervals.<br><ut>Shards</ut>. Increases α-coin gain by breaking Crystals and accumulating Shards.",
     "help9": "<ut>Shards</ut> - some kind of mini incremental game with its own clicker and generator, but you must collect them from Shards, which you can currently obtain only by breaking Crystals.<br>Shards also increase α-coin gain based on their amount.<br><br><ut>Breaking Crystals</ut> is the way to get Shards by destroying X amount of Crystals, which you specify in the corresponding window. Each Crystal can give from 1 to 100 Shards (value increases).<br><ut>Clicker and Shard Generator</ut> are unlocked when you pour {{n1000}} Shards into each slot. They provide 1 Shard per click/second, and the value can be further increased.<br><ut>Buyable and Single Shard Upgrades</ut> are unlocked when you pour {{n10000}} and {{n100000}} Shards into each slot, respectively. There are only 3 Buyable upgrades, and they increase Shard gain from various factors. Single upgrades, on the other hand, provide different effects.",
@@ -1408,5 +1429,16 @@
             "desc": "Shards effect",
             "starts": "Starts from {{x}} Shards effect"
         }
-    ]
+    ],
+
+    "talk": {
+        "1": {
+        "name": "Mr. Super",
+        "1": ["Welcome to the Supershop! I am Mr. Super, the merchant here.", "Who am I, you ask? I am Mr. Super!", "Please buy an item.", "There are 4 types of goods in shop: Buyables, Permanent, Unlockable, and Items. Click me again to learn more.", "Buyable items can be bought in bulk and reset using special button in upper left.", "Permanent upgrades can only be bought one-by-one and they don't reset. They have good effects.", "Unlockable items are also not reset and often provide a special bonus or unlock a new thing. They have a significant impact on coin gain.", "Don't touch my supercoins!", "I've been here long enough. I've been waiting for you and your supercoins, my friend.", "Spend your supercoins here.", "You can unlock supercoin generation with a special permanent upgrade."],
+        "2": ["Items - you probably haven't unlocked them yet, my friend. You'll be able to buy them after completing Challenge 11. They have their own buy and use limit per prestige.", "Long time no see, you seem to have gotten stronger.", "You have so many supercoins! Don't you want to become more powerful?", "Why the Supershop? Because it's named after me, Mr. Super!", "Supercoins!", "I recommend buying the Super-modernization upgrade, it will allow you to get additional effects from Coin upgrades, but they also cost supercoins.", "Do you know why an Overdrive is called an Overdrive? I don't know, I only sell speedometers.", "I think I used to have another speedometer, but I lost it, sorry."],
+        "3": ["You're clearly no ordinary person. You have a hidden... desire to spend fresh Supercoins!", "Where have I been all this time? Here.", "They say export gives you free supercoins, which you can spend elsewhere to become stronger...", "You've probably noticed that I have a shield, crown, and sword on my shelf. They're just decorations; I'm not selling them, because they're useless in this world.", "What? You've already broken prestige barrier? In honor of that, I'll show you some new goods!", "You'll soon have to meet a nasty creature. They call her Fortune; it would be better if there was a chance to avoid her."],
+        "4": ["Have you noticed that I'm not a completely lonely old man standing behind stall? No, in fact, I really am a completely lonely old man standing behind stall.", "To defeat Fortune, you need to become neutral.", "Sorry, unfortunately I only have two new items that will help you in your adventure.", "Aquatic Pickaxe will give you access to a very powerful mineral, but to get the mineral itself, you need a lot, a lot of shards and runes.", "Do you know why I have ^ and x? Does that really mean something.", "You want to hear secrets of this place from me? I'm just a simple old man, I can't help you."],
+        "5": ["Great, great, you finally got to the point where I had to reopen my shop, well, welcome to Supershop 2.", "You know, this place is really unusual, coins, supercoins, upgrades, prestige, fortune, reflash... Is this a coincidence?", "You know, I like you, I think the past me was also very happy to see you, and especially your supercoins.", "Have they replaced me? No, I'm still same lonely old man standing behind stall.", "What? Are my lines different? I don't understand what you're talking about.", "I'm Mr. Super.", "It seems like I've been here for a very long time.", "I wonder if the past me was this handsome?", "Are you fed up with these Viruses? No problem! We have the first REAPER antivirus in stock, did you know it once defeated CREEPER?", "We've released a Credit Card PLUS especially for regular customers, like you! It gives even more daily rewards and export bonuses!", "It seems Reflash is just the beginning. Although, how would I know the name... I think you told me.", "Meeting Fortune a second time is like visiting the nine circles of hell again, I'm used to it. Did I say Nine Circles?"]
+        }
+    }
 }

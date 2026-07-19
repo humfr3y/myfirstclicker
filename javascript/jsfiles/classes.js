@@ -56,6 +56,9 @@ class UniversalBuyableUpgrade {
 
         // Возвращаем из логарифма в обычное число
         let finalCost = Math.pow(10, logCost);
+        if (this.layer === 'reflash') {
+            finalCost = Math.round(finalCost)
+        }
         return isFinite(finalCost) ? finalCost : 1.79e308;
     }
 
@@ -366,7 +369,7 @@ class ShopBuyableUpgrade extends UniversalBuyableUpgrade {
         let maxAffordable = upgradesPurchasableCustom(y, x, this.cost(), this.power);
         
         // Сколько мы ХОТИМ купить (из поля ввода)
-        let bulkBuyAmount = parseInt(shopBulkBuyInput.value);
+        let bulkBuyAmount = parseInt(player.settings.shop_bulkbuy);
         if (isNaN(bulkBuyAmount) || bulkBuyAmount < 1) bulkBuyAmount = 1;
         
         // Сколько нам ОСТАЛОСЬ купить до максимума
@@ -439,7 +442,7 @@ class ShopPermanentManager extends ShopBuyablesManager {
 }
 
 // Менеджер разблокировок (синглы)
-class ShopUnlockablesManager extends UniversalSinglesManager {
+class ShopSpecialManager extends UniversalSinglesManager {
     canAfford(x) { return player.supercoin.currency >= this[x].cost() && !this.targetArray.includes(x); }
     buy(x) {
         if (this.canAfford(x)) {
@@ -815,12 +818,25 @@ class BalanceSinglesManager extends UniversalSinglesManager {
 }
 
 class AcceleratorBuyableUpgrade extends UniversalBuyableUpgrade {
+    constructor(upg, layerName, arrayName) {
+        super(upg, layerName, arrayName);
+        
+        // "Принудительно" назначаем функции из конфига методами этого экземпляра
+        if (typeof upg.min_effect === 'function') {
+            this.min_effect = upg.min_effect;
+        }
+        if (typeof upg.max_effect === 'function') {
+            this.max_effect = upg.max_effect;
+        }
+    }
+
     bulk(x, y = this.targetArray[this.id]) {
-        // Для 5-го улучшения подменяем кошелек на сумму У-телей
         if (this.id == 5) {
             x = player.uadders + player.ureducers + player.umultipliers + player.upowers;
         } else {
-            x = this.state.currency; // Для остальных 1-4 берем обычную валюту
+            // Убедись, что state.currency существует. 
+            // Если он ссылается на player, возможно, лучше обращаться к нему напрямую:
+            x = player.reflash.currency; 
         }
         return super.bulk(x, y);
     }

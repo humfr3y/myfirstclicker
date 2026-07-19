@@ -1,7 +1,9 @@
 function showChangelog(desc){
     ELS.verDesc.innerHTML = desc;
 }
-function showStory(chapter) {
+function showStory(chapter, title) {
+    paperWindow.style.display = "flex"; myPopupBackdropSub.style.display = "flex";
+    ELS.chapTitle.innerHTML = title;
     ELS.chapDesc.innerHTML = chapter;
 }
 function showHelpPage(help, helpName) {
@@ -16,6 +18,8 @@ const LORE = {
         if (!this.has(id)) {
             player.settings.loreBoolean.push(id);
             notify(text.notification.lore, 'mediumpurple', '500px'); 
+
+            renderSavedLore()
             
             // Красим кнопку ТОЛЬКО один раз при получении
             let element = document.getElementsByClassName("loreChapter")[id - 1];
@@ -48,7 +52,7 @@ const LORE = {
         9() { return player.coin.currency > 1e25 },
         10() { return player.supercrystal.currency > 0},
         11() { return player.minerals[1] > 0 || player.minerals[2] > 0 || player.minerals[3] > 0},
-        12() { return player.shop.unlockables.includes(3)},
+        12() { return player.shop.special.includes(3)},
         13() { return player.prestige.break.singles.includes(25) },
         14() { return player.uadders > 0 },
         15() { return player.ureducers > 0 },
@@ -60,10 +64,64 @@ const LORE = {
 
 // --- ОТРИСОВКА СОХРАНЕННЫХ ГЛАВ ПРИ ЗАГРУЗКЕ ---
 function renderSavedLore() {
-    player.settings.loreBoolean.forEach(id => {
-        let element = document.getElementsByClassName("loreChapter")[id - 1];
-        if (element) element.classList.add("unlockedChapter");
+    const allChapters = document.querySelectorAll(".left-lore-chapter, .right-lore-chapter");
+    
+    allChapters.forEach(btn => {
+        const match = btn.getAttribute("onclick").match(/\[(\d+)\]/);
+        const id = match ? parseInt(match[1]) : null;
+
+        if (id !== null && player.settings.loreBoolean.includes(id)) {
+            btn.classList.add("unlockedChapter");
+        }
+        let key = Math.max(...player.settings.loreBoolean)
+
+        switch (true) {
+            case (key >= 21):
+                document.getElementsByClassName("rightLoreTitle")[2].style.display = "block";
+            case (key >= 17):
+                document.getElementsByClassName("leftLoreTitle")[2].style.display = "block";
+            case (key >= 13):
+                document.getElementsByClassName("rightLoreTitle")[1].style.display = "block";
+            case (key >= 9):
+                document.getElementsByClassName("leftLoreTitle")[1].style.display = "block";
+            case (key >= 5):
+                document.getElementsByClassName("rightLoreTitle")[0].style.display = "block";
+            case (key >= 1):
+                document.getElementsByClassName("leftLoreTitle")[0].style.display = "block";
+                break;
+            default:
+                break;
+        }
     });
+    let maxPage = Math.ceil(Math.max(...player.settings.loreBoolean) / 8)
+    if (maxPage > 1) document.getElementsByClassName("right-arrow")[0].style.display = "block";
 }
 
-// Не забудь вызвать renderSavedLore() в функции загрузки сохранений (там же, где и renderSavedAchievements)
+function changePage(direction) { //пусть первая страница будет 1, а вторая 2 
+
+    //смена страниц
+    let minPage = 1, maxPage = Math.ceil(Math.max(...player.settings.loreBoolean) / 8)
+    document.getElementsByClassName('left-lore-page')[ELS.page-1].style.display = 'none'
+    document.getElementsByClassName('right-lore-page')[ELS.page-1].style.display = 'none'
+    document.getElementsByClassName("leftPageTitle")[ELS.page-1].style.display = "none";
+    document.getElementsByClassName("rightPageTitle")[ELS.page-1].style.display = "none";
+    direction == 'right' ? ELS.page++ : ELS.page--;
+    document.getElementsByClassName('left-lore-page')[ELS.page-1].style.display = 'grid'
+    document.getElementsByClassName('right-lore-page')[ELS.page-1].style.display = 'grid'
+    document.getElementsByClassName("leftPageTitle")[ELS.page-1].style.display = "block";
+    document.getElementsByClassName("rightPageTitle")[ELS.page-1].style.display = "block";
+
+    //чек максимума и минимума страниц и показывать стрелку
+    if (ELS.page < maxPage)
+        document.getElementsByClassName("right-arrow")[0].style.display = "block";
+    else
+        document.getElementsByClassName("right-arrow")[0].style.display = "none";
+    if (ELS.page > minPage)
+        document.getElementsByClassName("left-arrow")[0].style.display = "block";
+    else   
+        document.getElementsByClassName("left-arrow")[0].style.display = "none";
+
+    //смена бумажек на страницах
+    let leftPageButtons = document.getElementsByClassName("left-lore-page");
+    let rightPageButtons = document.getElementsByClassName("right-lore-page");
+}

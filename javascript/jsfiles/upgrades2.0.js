@@ -388,7 +388,7 @@ const UPGS = {
             { id: 11, power: 1.2, basePrice: 6, maxAmount: 100, elementId: 'shopBuyableU11', effect: function(x = player.shop.upgrades[11]) { return 1 + x / 75; }, next_effect: function(x = player.shop.upgrades[11] + this.bulk()) { return 1 + x / 75; } },
         ], 'upgrades'),
 
-        unlockables: new ShopUnlockablesManager('shop', 'unlockables', [
+        special: new ShopSpecialManager('shop', 'special', [
             // { id: 1, elementId: 'shopSingleU1', basePrice: 250 },
             { id: 1, elementId: 'shopSingleU1', basePrice: 500 },
             { id: 2, elementId: 'shopSingleU2', basePrice: 1000 },
@@ -572,7 +572,7 @@ const UPGS = {
                 effect: function(x = player.reflash.acceleratorUpgrades[4]) { return 1+x*0.1; }
             },
             {
-                id: 5, power: 1.3, basePrice: 100, elementId: 'acceleratorU5',
+                id: 5, power: 1.5, basePrice: 50, elementId: 'acceleratorU5',
                 effect: function(x = player.reflash.acceleratorUpgrades[5]) {
                     if (x === 0) return 1;
                     // 1. Получаем случайный множитель текущего забега (от 0.1 до 0.25)
@@ -581,6 +581,12 @@ const UPGS = {
                     let bonusU4 = UPGS.reflash.accelerator[4].effect(); 
                     // 3. Считаем: 1 + (Кол-во аксов * Силу) * Бонус 4-го улучшения
                     return 1 + (x * basePower * bonusU4); 
+                },
+                min_effect: function(x=UPGS.reflash.accelerator[1].effect(), y=UPGS.reflash.accelerator[4].effect(), z=player.reflash.acceleratorUpgrades[5]) {
+                    return (1+0.25*(z+x))*y
+                },
+                max_effect: function(x=UPGS.reflash.accelerator[2].effect(), y=UPGS.reflash.accelerator[4].effect(), z=player.reflash.acceleratorUpgrades[5]) {
+                    return (1+1*(z+x))*y
                 }
             },
         ], 'acceleratorUpgrades'),

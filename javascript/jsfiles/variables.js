@@ -74,7 +74,7 @@ let player = {
     shop: {
         upgrades: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0 },
         permanentUpgrades: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0 },
-        unlockables: [],
+        special: [],
         items: getShopItems(),
     },
     supercrystal: { upgrades: [], currency: 0, total_currency: 0, spent_currency_on_fortune_upgrades: 0, consumedShards: 0 },
@@ -149,10 +149,12 @@ for (let i = 1; i <= 10; i++) player.shard.achievements[i] = 0;
 const ELS = {
     automationUpgradesArray: document.getElementsByClassName('automationUpgrade'),
     verDesc: document.getElementById("versionDescription"),
+    chapTitle: document.getElementById("chapterTitle"),
     chapDesc: document.getElementById("chapterDescription"),
     helpDesc: document.getElementById("helpDescription"),
     mediaQuery: window.matchMedia('screen and (max-width: 600px)'),
-    isAch60Opened: false
+    isAch60Opened: false,
+    page: 1
 };
 
 const text = {
@@ -184,10 +186,44 @@ const text = {
         "0.8.0.1":'', "0.9":'', "0.9.1":'', "0.9.2":'', "0.10":'', "0.10.1":'', "0.11":'', "0.11.1":'', "0.12":'', "0.12.1": '', "0.13": '', "0.14": '', "0.15": '', "0.15.x": ""
     },
     // Генерируем повторяющиеся тексты с помощью функции
-    chapter: generateEmptyObj(17, true),
+    chapter: generateEmptyObj(18, true),
+    chapterTitle: generateEmptyObj(18, true),
     helpTitle: generateEmptyObj(21, true),
     help: generateEmptyObj(21, true),
     empty: '',
+    talk: {
+        1: { //MrSuper
+            name: '',
+            progress: {
+                1: 0,
+                2: 0
+            },
+            stages: {
+                1: {
+                    condition: () => true,
+                    replies:[]
+                },
+                2: {
+                    condition: () => player.prestige.resets >= 1 || player.reflash.resets >= 1,
+                    replies: []
+                },
+                3: {
+                    condition: () => player.prestige.break.singles.includes(25) || player.reflash.resets >= 1,
+                    replies: []
+                },
+                4: {
+                    condition: () => player.fortune.total_tokens >= 1 || player.reflash.resets >= 1,
+                    replies: []
+                },
+                5: {
+                    condition: () => player.reflash.resets >= 1,
+                    replies: []
+                }
+            }
+        }
+    },
+    isLast: false,
+    isTyping: false
 };
 
 const PRES_CHALL = {
