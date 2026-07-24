@@ -646,7 +646,9 @@ const UPGS = {
                     node.req.forEach(parentId => {
                         let line = document.getElementById(`algoLine_${parentId}_${node.id}`);
                         if (line) {
-                            if (isBought) line.setAttribute('stroke', '#115311');
+                            if (isBought) {
+                                line.setAttribute('stroke', 'color-mix(in srgb, var(--reflash) 80%, black 60%)');
+                            }
                             else if (player.reflash.algo.includes(parentId)) line.setAttribute('stroke', '#adabab');
                             else line.setAttribute('stroke', '#333333');
                         }
@@ -878,6 +880,7 @@ function submitTheBreak() {
         openWindow('submit', true);
         player.shard.currency += brokenData.gain;
         player.prestige.broken_currency += brokenData.broken_crystals;
+        if (player.virus.activated && player.virus.type == 3) player.virus.current++
     } else {
         // --- ДИНАМИЧЕСКИЙ ПЕРЕВОД ОШИБКИ ---
         document.getElementById('falseBrokeCrystals').innerHTML = i18next.t('didNotBreakCrystal');
@@ -885,74 +888,3 @@ function submitTheBreak() {
     }
 }
 
-const treeObserver = new ResizeObserver(() => {
-    drawTreeLines();
-});
-
-function initAlgoTree() {
-    if (!player.reflash.algo) player.reflash.algo = [];
-    const grid = document.getElementById('treeGrid');
-    const container = document.getElementById('treeContainer');
-    if (!grid) return;
-    
-    grid.innerHTML = '';
-
-    // Берем данные из UPGS
-    UPGS.reflash.algo.tree.forEach(node => {
-        let btn = document.createElement('button');
-        btn.id = 'algoNode_' + node.id;
-        btn.className = 'treeNode';
-        
-        btn.style.gridRow = node.row;
-        if (node.id === 11) btn.style.gridColumn = '2 / 4';
-        else btn.style.gridColumn = node.col;
-
-        btn.onclick = () => UPGS.reflash.algo.buy(node.id); 
-        grid.appendChild(btn);
-    });
-
-    if (container) treeObserver.observe(container);
-    UPGS.reflash.algo.updateStates(); // Инициализация цветов
-}
-
-function drawTreeLines() {
-    const svg = document.getElementById('treeLines');
-    const container = document.getElementById('treeContainer');
-    if (!svg || !container) return;
-
-    svg.innerHTML = ''; 
-    const containerRect = container.getBoundingClientRect();
-
-    // Берем данные из UPGS!
-    UPGS.reflash.algo.tree.forEach(node => {
-        if (node.req.length === 0) return;
-
-        const childBtn = document.getElementById('algoNode_' + node.id);
-        if (!childBtn) return;
-        const childRect = childBtn.getBoundingClientRect();
-
-        const x2 = childRect.left - containerRect.left + (childRect.width / 2);
-        const y2 = childRect.top - containerRect.top + (childRect.height / 2);
-
-        node.req.forEach(parentId => {
-            const parentBtn = document.getElementById('algoNode_' + parentId);
-            if (!parentBtn) return;
-            const parentRect = parentBtn.getBoundingClientRect();
-
-            const x1 = parentRect.left - containerRect.left + (parentRect.width / 2);
-            const y1 = parentRect.top - containerRect.top + (parentRect.height / 2);
-
-            let line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-            line.id = `algoLine_${parentId}_${node.id}`; // Обязательно добавляем ID для закраски
-            line.setAttribute('x1', x1);
-            line.setAttribute('y1', y1);
-            line.setAttribute('x2', x2);
-            line.setAttribute('y2', y2);
-            line.setAttribute('stroke-width', '20'); 
-            svg.appendChild(line);
-        });
-    });
-    
-    UPGS.reflash.algo.updateStates();
-}
-window.addEventListener('resize', drawTreeLines);

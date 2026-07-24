@@ -139,7 +139,39 @@ const ACHS = {
             if (!player.coin.superUpgrades.includes(35)) return 1;
             return ACHS.getBoost(0.05, 0.6, 0.075, 1);
         }
-    }
+    },
+    generateAchievements() {
+    const list = document.getElementById('achievementsList');
+    const rows = [
+        { id: 'firstAchievementRow', start: 11, end: 20 },
+        { id: 'secondAchievementRow', start: 21, end: 30 },
+        { id: 'thirdAchievementRow', start: 31, end: 40 },
+        { id: 'fourthAchievementRow', start: 41, end: 50 },
+        { id: 'fifthAchievementRow', start: 51, end: 60 },
+        { id: 'sixthAchievementRow', start: 61, end: 70 }
+    ];
+
+    list.innerHTML = '';
+
+    rows.forEach(row => {
+        let rowHTML = `<div id="${row.id}" class="achRow">`;
+        
+        for (let i = row.start; i <= row.end; i++) {
+            rowHTML += `
+                <div id="ach${i}" class="ach">
+                    <span id="achName${i}" class="achievementName">Without</span>
+                </div>
+                <div id="tooltip-ach${i}" class="tooltip" role="tooltip">
+                    <span id="tooltipAch${i}" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
+                    <div class="arrow" data-popper-arrow></div>
+                </div>
+            `;
+        }
+        
+        rowHTML += `</div>`;
+        list.insertAdjacentHTML('beforeend', rowHTML);
+    });
+}
 };
 
 function setAchievementsBg() {
@@ -148,6 +180,7 @@ function setAchievementsBg() {
     if (el) el.style.backgroundImage = `url("javascript/cssfiles/images/achs/ach${i}.jpg")`;
   }
 }
+ACHS.generateAchievements()
 setAchievementsBg();
 
 function renderSavedAchievements() {
@@ -166,3 +199,4 @@ function renderSavedAchievements() {
 
 // Запускаем один раз при старте
 renderSavedAchievements();
+

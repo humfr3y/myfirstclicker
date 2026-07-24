@@ -358,10 +358,10 @@ function modernize() {
         allUpgrades.forEach(upgrade => {
             upgrade.element.classList.remove('buyableButton', 'singleButton');
             if (upgrade.unl_super()) {
-                upgrade.element.style.backgroundColor = 'rgb(255, 174, 0)'; 
+                upgrade.element.style.backgroundColor = 'var(--supercoin)'; 
                 upgrade.element.style.color = 'black';
             } else if (!upgrade.element.disabled) {
-                upgrade.element.style.borderColor = 'rgb(255, 174, 0)';
+                upgrade.element.style.borderColor = 'var(--supercoin)';
             }
         });
 
@@ -370,14 +370,16 @@ function modernize() {
             allUpgrades.forEach(upgrade => {
                 if (!upgrade.unl_super() && !upgrade.element.disabled) {
                     upgrade.element.style.color = 'white';
-                    upgrade.element.style.backgroundColor = upgrade.element.style.backgroundColor === 'rgb(106, 73, 0)' ? '#000000' : 'rgb(106, 73, 0)';
-                    upgrade.element.style.borderColor = 'rgb(255, 174, 0)';
+                    const darkBg = 'color-mix(in srgb, var(--supercoin) 40%, black 60%)';
+                    
+                    upgrade.element.style.backgroundColor = upgrade.element.style.backgroundColor === darkBg ? '#000000' : darkBg;
+                    upgrade.element.style.borderColor = 'var(--supercoin)';
                 } else if (upgrade.element.disabled) {
                     upgrade.element.style.removeProperty('color');
                     upgrade.element.style.removeProperty('border-color');
                     upgrade.element.style.removeProperty('background-color');
                 } else if (upgrade.unl_super()) {
-                    upgrade.element.style.backgroundColor = 'rgb(255, 174, 0)'; 
+                    upgrade.element.style.backgroundColor = 'var(--supercoin)'; 
                     upgrade.element.style.color = 'black';
                 }
             });
@@ -1054,6 +1056,7 @@ document.addEventListener('click', function(e) {
 function unlockShardAch(id) {
     if (player.supercrystal.currency >= 1 && !player.shard_achievements.includes(id)) {
         player.supercrystal.currency--;
+        if (player.virus.activated && player.virus.type == 5) player.virus.current++
         player.shard_achievements.push(id);
     }
 }
@@ -1456,50 +1459,212 @@ function hideDialogueWindow() {
     })
 }
 
-// function openWindow(arg, isFlex, number) {
-//     ['confirmationButtons', 'whichCode', 'dailyDesc', 'breakCrystal', 'brokeCrystals', 'falseBrokeCrystals', 'welcomeToDigitalGod', 'chooseSaveDiv', 'reflashConfirmation', 'presetEditor'].forEach(id => {
-//         const el = document.getElementById(id);
-//         if (el) el.style.display = "none";
-//     });
-//     windowGame.removeAttribute('style');
-//     windowGame.style.display = isFlex ? "flex" : "block";
-//     windowTitleDiv.style.display = 'none'; windowTitle2.innerHTML = '';
+
+function togglePanel() {
+  const panel = document.getElementById('temporaryBonuses');
+  panel.classList.toggle('open');
+}
+
+function generateEventTreasures() {
+    const container = document.getElementById('eventTreasuresDiv'); // Замени на ID твоего общего родителя
+    container.innerHTML = '';
+
+    for (let i = 1; i <= 5; i++) {
+        if (player.treasure.digitalization[i].amount != 0) {
+            const html = `
+              <div class="eventTreasureContainer" onclick="openWindow('treasureDetails', true, ${i})">
+                <div id="eventTreasure${i}" class="treasure eventTreasure"></div>
+                <div class="treasuneName">
+                  <span class="eventTreasureName" data-i18n="eventTreasure.${i}.name">Прыжок веры</span>
+                </div>
+              </div>
+              <div id="tooltip-eventTreasure${i}" class="tooltip" role="tooltip">
+                <ut data-i18n="eventTreasure.${i}.name">Activity 2.0</ut><br>
+                <span data-i18n="eventTreasure.${i}.effect.permanent">Currently:</span><br>
+                <div class="temporaryTreasure">
+                  <span data-i18n="eventTreasure.${i}.effect.temporary">Currently:</span><br>
+                </div>
+                <div class="arrow" data-popper-arrow></div>
+              </div>
+            `;
+            container.insertAdjacentHTML('beforeend', html);
+            document.getElementById(`eventTreasure${i}`).style.backgroundImage = `url("/javascript/cssfiles/images/treasure/event_treasure_${i}.png")`
+        }
+    }
+}
+
+function switchProgressBar(selectedValue) {
+    player.cosmetics.progressBars.current = selectedValue
+    changeProgressBar(selectedValue)
+}
+
+function changeProgressBar(selectedValue) {
+    const bar = document.getElementById("progress-bar")
+
+    function reset() {
+        bar.classList.remove('progressbar-option2')
+        bar.classList.remove('progressbar-option3')
+        bar.classList.remove('progressbar-option4')
+        bar.classList.remove('progressbar-option5')
+        bar.classList.remove('progressbar-option6')
+        bar.classList.remove('progressbar-option7')
+        bar.classList.remove('progressbar-option8')
+    }
+    reset()
+
+    switch (selectedValue) {
+        case 'option2':
+            bar.classList.add('progressbar-option2')
+            break;
+        case 'option3':
+            bar.classList.add('progressbar-option3')
+            break;
+        case 'option4':
+            bar.classList.add('progressbar-option4')
+            break;
+        case 'option5':
+            bar.classList.add('progressbar-option5')
+            break;
+        case 'option6':
+            bar.classList.add('progressbar-option6')
+            break;
+        case 'option7':
+            bar.classList.add('progressbar-option7')
+            break;
+        case 'option8':
+            bar.classList.add('progressbar-option8')
+            break;
+        default:
+            break;
+    }
+}
+
+function switchTheme(selectedValue) {
+    player.cosmetics.themes.current = selectedValue
+    changeTheme(selectedValue)
+}
+
+
+function changeTheme(selectedValue) {
+    const body = document.getElementsByTagName('body')[0]
+
+    function reset() {
+        body.classList.remove('theme-option2')
+        body.classList.remove('theme-option3')
+        document.documentElement.style.removeProperty('--crystal');
+        document.documentElement.style.removeProperty('--prestige-upgrade');
+        document.documentElement.style.removeProperty('--break-prestige-upgrade');
+        document.documentElement.style.removeProperty('--supercrystal');
+        document.documentElement.style.removeProperty('--reflash');
+        document.documentElement.style.removeProperty('--shard');
+        document.documentElement.style.removeProperty('--coin');
+        document.documentElement.style.removeProperty('--rune');
+        document.documentElement.style.removeProperty('--settings');
+        document.documentElement.style.removeProperty('--coin-upgrade');
+        document.documentElement.style.removeProperty('--supercoin');
+    }
+    reset()
+
+    switch (selectedValue) {
+        case 'option2':
+            body.classList.add('theme-option2')
+            document.documentElement.style.setProperty('--crystal', '#b67f33');
+            document.documentElement.style.setProperty('--prestige-upgrade', '#b67f33');
+            document.documentElement.style.setProperty('--break-prestige-upgrade', '#ca7e14');
+            document.documentElement.style.setProperty('--supercrystal', '#a86b15');
+            document.documentElement.style.setProperty('--reflash', '#b341e0');
+            document.documentElement.style.setProperty('--shard', '#f1b663');
+            document.documentElement.style.setProperty('--coin', '#df5050')
+            document.documentElement.style.setProperty('--rune', '#dd9632');
+            break;
+        case 'option3':
+            body.classList.add('theme-option3')
+            document.documentElement.style.setProperty('--coin', 'limegreen')
+            document.documentElement.style.setProperty('--settings', 'lightgray');
+            document.documentElement.style.setProperty('--coin-upgrade', 'limegreen');
+            document.documentElement.style.setProperty('--supercoin', 'forestgreen');
+            document.documentElement.style.setProperty('--crystal', 'lightskyblue');
+            document.documentElement.style.setProperty('--prestige-upgrade', 'lightskyblue');
+            document.documentElement.style.setProperty('--shard', 'lightblue');
+            document.documentElement.style.setProperty('--supercrystal', 'royalblue');
+            document.documentElement.style.setProperty('--rune', 'royalblue');
+            document.documentElement.style.setProperty('--break-prestige-upgrade', 'royalblue');
+            document.documentElement.style.setProperty('--reflash', 'mediumspringgreen');
+            break;
+        default:
+            break;
+    }
+    UPGS.reflash.algo.updateStates()
+}
+
+const treeObserver = new ResizeObserver(() => {
+    drawTreeLines();
+});
+
+function initAlgoTree() {
+    if (!player.reflash.algo) player.reflash.algo = [];
+    const grid = document.getElementById('treeGrid');
+    const container = document.getElementById('treeContainer');
+    if (!grid) return;
     
+    grid.innerHTML = '';
+
+    // Берем данные из UPGS
+    UPGS.reflash.algo.tree.forEach(node => {
+        let btn = document.createElement('button');
+        btn.id = 'algoNode_' + node.id;
+        btn.className = 'treeNode';
+        
+        btn.style.gridRow = node.row;
+        if (node.id === 11) btn.style.gridColumn = '2 / 4';
+        else btn.style.gridColumn = node.col;
+
+        btn.onclick = () => UPGS.reflash.algo.buy(node.id); 
+        grid.appendChild(btn);
+    });
+
+    if (container) treeObserver.observe(container);
+    UPGS.reflash.algo.updateStates(); // Инициализация цветов
+}
+
+function drawTreeLines() {
+    const svg = document.getElementById('treeLines');
+    const container = document.getElementById('treeContainer');
+    if (!svg || !container) return;
+
+    svg.innerHTML = ''; 
+    const containerRect = container.getBoundingClientRect();
+
+    // Берем данные из UPGS!
+    UPGS.reflash.algo.tree.forEach(node => {
+        if (node.req.length === 0) return;
+
+        const childBtn = document.getElementById('algoNode_' + node.id);
+        if (!childBtn) return;
+        const childRect = childBtn.getBoundingClientRect();
+
+        const x2 = childRect.left - containerRect.left + (childRect.width / 2);
+        const y2 = childRect.top - containerRect.top + (childRect.height / 2);
+
+        node.req.forEach(parentId => {
+            const parentBtn = document.getElementById('algoNode_' + parentId);
+            if (!parentBtn) return;
+            const parentRect = parentBtn.getBoundingClientRect();
+
+            const x1 = parentRect.left - containerRect.left + (parentRect.width / 2);
+            const y1 = parentRect.top - containerRect.top + (parentRect.height / 2);
+
+            let line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.id = `algoLine_${parentId}_${node.id}`; // Обязательно добавляем ID для закраски
+            line.setAttribute('x1', x1);
+            line.setAttribute('y1', y1);
+            line.setAttribute('x2', x2);
+            line.setAttribute('y2', y2);
+            line.setAttribute('stroke-width', '20'); 
+            svg.appendChild(line);
+        });
+    });
     
-//     if (arg === 'hardReset' || arg === 'gotNaNed') {
-//         confirmationButtons.style.display = "flex"; windowTitleDiv.style.display = 'block';
-//         yesHR.style.display = "none"; yesRP.style.display = "none";
-//         if (arg === 'hardReset') { windowTitle2.innerHTML = text.window.hard; windowTitle2.style.fontSize = 'calc(24px * var(--font-scale))'; yesHR.style.display = "block"; }
-//         else { windowTitle2.innerHTML = text.window.NaN; windowTitle2.style.fontSize = 'calc(14px * var(--font-scale))'; yesRP.style.display = "block"; }
-//     } else {
-//         const map = { 'code': whichCode, 'daily': dailyDesc, 'break': breakCrystal, 'submit': brokeCrystals, 'falseSubmit': falseBrokeCrystals, 'welcome': welcomeToDigitalGod, 'chooseSave': chooseSaveDiv, 'reflashConfirm': reflashConfirmation, 'presetEditor': presetEditor };
-//         if (map[arg]) map[arg].style.display = arg === 'break' ? 'flex' : 'block';
-//     }
-//     switch (arg) {
-//         case 'chooseSave':
-//             windowGame.style.height = '400px'
-//             changeSaveSlotsText()
-//             break;
-//         case 'hardReset':
-//             windowGame.style.height = '200px'
-//             break;
-//         case 'break':
-//         case 'brokeCrystals':    
-//         case 'falseBrokeCrystals':
-//             windowGame.style.height = '250px'
-//         case 'presetEditor':
-//             windowGame.style.height = '320px'
-//             player.reflash.selectedPreset = number;
-//             document.getElementById('presetName').innerText = player.reflash.presets[number].name;
-//             document.getElementById('nodeOrderInput').value = player.reflash.presets[number].ids.join(', ');
-//             break;
-//         case 'reflashConfirm':
-//             windowGame.style.height = '400px'
-//             windowGame.style.width = '500px'
-//             windowGame.style.fontSize = 'calc(16px * var(--font-scale))'
-//             break;
-//         default:
-//             break;
-//     }
-//     myPopupBackdrop1.style.display = "flex";
-// }
+    UPGS.reflash.algo.updateStates();
+}
+window.addEventListener('resize', drawTreeLines);

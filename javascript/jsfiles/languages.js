@@ -186,6 +186,38 @@ function loadTranslationsAlways() {
     } else {
         btnReflash.textContent = i18next.t('reflashDisabled', globals); // И СЮДА!
     }
+
+    // == VIRUS ==
+    document.getElementById('virus-percent').textContent = formatNumber(VIRUS.ratio(), 'boost') + '%'
+    
+    document.getElementById('virusType').textContent = player.virus.type
+    document.getElementById('virusLevel').textContent = player.virus.level
+    document.getElementById('virusTime').textContent = formatNumber(player.virus.time, 'boost')
+
+    document.getElementById('virusReq').textContent = i18next.t(`virus.${player.virus.type}`, {
+        x: player.virus.current,
+        y: player.virus.goal
+    })
+
+    let virusSeconds = convert_time_temp(player.virus.effect.time).seconds
+    let virusMinutes = convert_time_temp(player.virus.effect.time).minutes
+
+    document.getElementById('bonus-virus-timer').textContent = player.virus.effect.time >= 60 ? 
+    i18next.t('tempBoostTimer_1', {
+        m: convertToTwoDigits(virusMinutes),
+        s: convertToTwoDigits(virusSeconds)
+    }):
+    i18next.t('tempBoostTimer_2', {
+        s: formatNumber(virusSeconds, 'boost')
+    })
+
+    document.getElementById('bonus-virus').textContent = formatNumber(player.virus.effect.multiplier, 'boost')
+    document.getElementById('virus-effect-status').textContent = player.virus.effect.status == 'buff' ?
+    'x':'/'
+
+    document.getElementById('virus-effect-type').textContent = i18next.t(`virus_effects.${player.virus.effect.type}`)
+    
+
 }
 
 // ============================================================
@@ -546,6 +578,8 @@ function loadTranslationsSuperCrystal() {
             document.getElementById(`scs${i}_cost`).textContent = formatNumber(UPGS.supercrystal[upg].cost());
         }
     }
+
+    document.getElementById('shards_currency_val_2').textContent = formatNumber(player.shard.currency);
 
     document.getElementById('sc_poured_val').textContent = formatNumber(player.supercrystal.consumedShards);
     document.getElementById('sc_req_val').textContent = formatNumber(UNL.supercrystal.cost());
@@ -1123,7 +1157,90 @@ function loadTranslationsReflash() {
 }
 
 function loadTranslationsEvent() {
-    // События обновляются вместе с Always
+    if (player.event.digitalization.activated) {
+        document.getElementById('digitalizationEventTimer').textContent = 
+        DIGITALIZATION.time_left().timer >= 86400 ? i18next.t('digitalization.eventEnds_1', { d: Math.floor(DIGITALIZATION.time_left().days), h: Math.floor(DIGITALIZATION.time_left().hours) }) :
+        DIGITALIZATION.time_left().timer >= 3600 ? i18next.t('digitalization.eventEnds_2', { h: Math.floor(DIGITALIZATION.time_left().hours), m: Math.floor(DIGITALIZATION.time_left().minutes) }) :
+        i18next.t('digitalization.eventEnds_3', { m: Math.floor(DIGITALIZATION.time_left().minutes), s: Math.floor(DIGITALIZATION.time_left().seconds) });
+
+        for (let i = 0; i < 4; i++) {
+            document.getElementsByClassName('digitalizationDailyQuestTitle')[i].textContent = i18next.t(`digitalization.dailyQuests.${i+1}.name`, { 
+                x: formatNumber(
+                    Math.min(
+                        findRatio2(player.event.digitalization.quests.daily.progress[i], DIGITALIZATION.quests.daily[i+1].requirement())
+                        , 100)
+                    , 'boost')
+                })
+            document.getElementsByClassName('digitalizationDailyQuestReward')[i].textContent = i18next.t(`digitalization.dailyQuests.${i+1}.reward`)
+            if (i != 1)
+            document.getElementsByClassName('digitalizationDailyQuestDesc')[i].textContent = i18next.t(`digitalization.dailyQuests.${i+1}.desc`, { x: Math.floor(player.event.digitalization.quests.daily.progress[i]) })
+            else
+            document.getElementsByClassName('digitalizationDailyQuestDesc')[i].textContent = i18next.t(`digitalization.dailyQuests.${i+1}.desc`, { x: Math.floor(convert_time_temp(player.event.digitalization.quests.daily.progress[i]).minutes) })
+        } 
+        for (let i = 0; i < 5; i++) {
+            document.getElementsByClassName('digitalizationWeeklyQuestTitle')[i].textContent = i18next.t(`digitalization.weeklyQuests.${i+1}.name`, { 
+                x: formatNumber(
+                    Math.min(
+                        findRatio2(player.event.digitalization.quests.weekly.progress[i], DIGITALIZATION.quests.weekly[i+1].requirement())
+                        , 100)
+                    , 'boost')
+                })
+            document.getElementsByClassName('digitalizationWeeklyQuestReward')[i].textContent = i18next.t(`digitalization.weeklyQuests.${i+1}.reward`)
+            if (i != 1)
+            document.getElementsByClassName('digitalizationWeeklyQuestDesc')[i].textContent = i18next.t(`digitalization.weeklyQuests.${i+1}.desc`, { x: Math.floor(player.event.digitalization.quests.weekly.progress[i]) })
+            else 
+            document.getElementsByClassName('digitalizationWeeklyQuestDesc')[i].textContent = i18next.t(`digitalization.weeklyQuests.${i+1}.desc`, { x: Math.floor(convert_time_temp(player.event.digitalization.quests.weekly.progress[i]).hours) })
+        } 
+
+        document.getElementById('digitalizationQuestTimerDaily').textContent = 
+        DIGITALIZATION.quests.daily.left().timer >= 3600 ? i18next.t('digitalization.questReset_2', { 
+            h: Math.floor(DIGITALIZATION.quests.daily.left().hours), 
+            m: Math.floor(DIGITALIZATION.quests.daily.left().minutes),
+            s: Math.floor(DIGITALIZATION.quests.daily.left().seconds) 
+        }) :
+        i18next.t('digitalization.questReset_3', { 
+            m: Math.floor(DIGITALIZATION.quests.daily.left().minutes), 
+            s: Math.floor(DIGITALIZATION.quests.daily.left().seconds) 
+        });
+
+        document.getElementById('digitalizationQuestTimerWeekly').textContent = 
+        DIGITALIZATION.quests.weekly.left().timer >= 86400 ? i18next.t('digitalization.questReset_1', { 
+            d: Math.floor(DIGITALIZATION.quests.weekly.left().days), 
+            h: Math.floor(DIGITALIZATION.quests.weekly.left().hours),
+            m: Math.floor(DIGITALIZATION.quests.weekly.left().minutes) 
+        }) :
+        DIGITALIZATION.quests.weekly.left().timer >= 3600 ? i18next.t('digitalization.questReset_2', { 
+            h: Math.floor(DIGITALIZATION.quests.weekly.left().hours), 
+            m: Math.floor(DIGITALIZATION.quests.weekly.left().minutes),
+            s: Math.floor(DIGITALIZATION.quests.weekly.left().seconds) 
+        }) :
+        i18next.t('digitalization.questReset_3', { 
+            m: Math.floor(DIGITALIZATION.quests.weekly.left().minutes), 
+            s: Math.floor(DIGITALIZATION.quests.weekly.left().seconds) 
+        });
+
+        document.getElementById ('digitalizationPassPoints').textContent = i18next.t(`digitalization.points`, { 
+            x: formatNumber(player.event.digitalization.pass_points),
+            y: formatNumber(DIGITALIZATION.pass.requirement()) 
+        })
+
+        document.getElementById('digitalizationPassLevel').textContent = player.event.digitalization.pass_level
+        document.getElementById('digitalization-pass-percent').textContent = formatNumber(
+                    Math.min(
+                        findRatio2(player.event.digitalization.pass_points, DIGITALIZATION.pass.requirement())
+                        , 100)
+                    )
+                
+        
+
+
+    }
+    else {
+        document.getElementById('digitalizationEventTimer2').textContent = 
+        DIGITALIZATION.time_left_to_start().timer >= 86400 ? i18next.t('digitalization.eventStarts_1', { d: formatNumber(DIGITALIZATION.time_left_to_start().days), h: formatNumber(DIGITALIZATION.time_left_to_start().hours) }) :
+        DIGITALIZATION.time_left_to_start().timer >= 3600 ? i18next.t('digitalization.eventStarts_2', { h: formatNumber(DIGITALIZATION.time_left_to_start().hours), m: formatNumber(DIGITALIZATION.time_left_to_start().minutes) }) :
+        i18next.t('digitalization.eventStarts_3', { m: formatNumber(DIGITALIZATION.time_left_to_start().minutes), s: formatNumber(DIGITALIZATION.time_left_to_start().seconds) });
+    }
 }
 
 function loadTranslationsCode() {
@@ -1218,6 +1335,9 @@ function updateStaticTranslations() {
     text.notification.reflash.save = i18next.t('presetSaveNotification');
     text.notification.reflash.reset = i18next.t('presetResetNotification');
     text.notification.reflash.import = i18next.t('presetImportNotification');
+
+    text.notification.digitalization.daily = i18next.t('digitalization.weeklyQuests.notify');
+    text.notification.digitalization.weekly = i18next.t('digitalization.weeklyQuests.notify');
 
     text.changelog.start = i18next.t('startDescription');
     text.chapter.start = i18next.t('startLoreDescription');
@@ -1397,6 +1517,7 @@ setTimeout(() => {
     renderSavedLore();
     initAlgoTree();
     renamePresets();
+    changeFonts2(player.cosmetics.fonts.current);
 }, 3200);
 
 codeInput.addEventListener("keydown", function(event) {

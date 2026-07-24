@@ -53,8 +53,16 @@ const LAYERS = {
             
             if (!MILESTONES.has(11) || player.challenge.activated !== 0 || player.prestige.challenge.activated !== 0) {
                 player.umultipliers++;
+                if (player.event.digitalization.activated) {
+                    if (!player.event.digitalization.quests.weekly.completed.includes(3)) player.event.digitalization.quests.weekly.progress[2]++
+                }
             } else {
-                while (player.coin.upgrades[1] >= this.cost()) player.umultipliers++;
+                while (player.coin.upgrades[1] >= this.cost()) {
+                    player.umultipliers++;
+                    if (player.event.digitalization.activated) {
+                        if (!player.event.digitalization.quests.weekly.completed.includes(3)) player.event.digitalization.quests.weekly.progress[2]++
+                    }
+                }
             }
             
             if (!MILESTONES.has(18) || player.challenge.activated !== 0 || player.prestige.challenge.activated !== 0) {
@@ -93,8 +101,16 @@ const LAYERS = {
             
             if (!MILESTONES.has(12) || player.challenge.activated !== 0 || player.prestige.challenge.activated !== 0) {
                 player.upowers++;
+                if (player.event.digitalization.activated) {
+                    if (!player.event.digitalization.quests.weekly.completed.includes(3)) player.event.digitalization.quests.weekly.progress[2]++
+                }
             } else {
-                while (player.coin.upgrades[1] >= this.cost()) player.upowers++;
+                while (player.coin.upgrades[1] >= this.cost()) {
+                    player.upowers++;
+                    if (player.event.digitalization.activated) {
+                        if (!player.event.digitalization.quests.weekly.completed.includes(3)) player.event.digitalization.quests.weekly.progress[2]++
+                    }
+                }
             }
             
             if (!MILESTONES.has(19) || player.challenge.activated !== 0 || player.prestige.challenge.activated !== 0) {
@@ -125,6 +141,9 @@ const LAYERS = {
         doReset() {
             if (player.coin.upgrades[2] < this.cost()) return 1;
             player.uadders++;
+            if (player.event.digitalization.activated) {
+                if (!player.event.digitalization.quests.weekly.completed.includes(3)) player.event.digitalization.quests.weekly.progress[2]++
+            }
             if (!MILESTONES.has(20) || player.challenge.activated !== 0 || player.prestige.challenge.activated !== 0) {
                 LAYERS.doReset();
                 restoreSavedUtils(2); 
@@ -145,6 +164,9 @@ const LAYERS = {
         doReset() {
             if (player.coin.upgrades[2] < this.cost()) return 1;
             player.ureducers++;
+            if (player.event.digitalization.activated) {
+                if (!player.event.digitalization.quests.weekly.completed.includes(3)) player.event.digitalization.quests.weekly.progress[2]++
+            }
             LAYERS.doReset();
             restoreSavedUtils(3); // Сбрасывает multi, powers и adders
         },
@@ -179,6 +201,11 @@ const LAYERS = {
             player.prestige.this_reflash_currency += cr_gain;
             player.prestige.resets += GAIN.prestige.reset();
             player.prestige.true_resets++
+            if (player.virus.activated && player.virus.type == 2) player.virus.current++
+            if (player.event.digitalization.activated) {
+                if (!player.event.digitalization.quests.weekly.completed.includes(4)) player.event.digitalization.quests.weekly.progress[3]++
+                if (!player.event.digitalization.quests.daily.completed.includes(3)) player.event.digitalization.quests.daily.progress[2]++
+            }
 
             PROGRESS.add(1);
     

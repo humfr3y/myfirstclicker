@@ -74,6 +74,12 @@ const GAIN = {
                 if (player.reflash.algo.includes(11)) {
                     val = val.mul(UPGS.reflash.algo.tree[0].effect());
                 }
+                if (player.virus.effect.time > 0 && player.virus.effect.type == 1) {
+                    if (player.virus.effect.status == 'buff') {
+                        val = val.mul(player.virus.effect.multiplier)
+                    }
+                    else val = val.div(player.virus.effect.multiplier)
+                }
                 return Decimal.min(val, new Decimal("1.79e308")); 
             },
             softcap() {
@@ -137,6 +143,12 @@ const GAIN = {
                 // Оставляем объект Decimal, просто ограничиваем его через встроенный min
                 if (player.reflash.algo.includes(11)) {
                     val = val.mul(UPGS.reflash.algo.tree[0].effect());
+                }
+                if (player.virus.effect.time > 0 && player.virus.effect.type == 1) {
+                    if (player.virus.effect.status == 'buff') {
+                        val = val.mul(player.virus.effect.multiplier)
+                    }
+                    else val = val.div(player.virus.effect.multiplier)
                 }
                 return Decimal.min(val, new Decimal("1.79e308")); 
             },
@@ -221,6 +233,12 @@ const GAIN = {
                 [player.reflash.algo.includes(42), UPGS.reflash.algo.tree[6].effect()]
             ];
             mults.forEach(([cond, val]) => { if (cond) effect = effect * val; });
+            if (player.virus.effect.time > 0 && player.virus.effect.type == 3) {
+                if (player.virus.effect.status == 'buff') {
+                    val *= player.virus.effect.multiplier
+                }
+                else val /= player.virus.effect.multiplier
+            }
             return Math.min(effect, 1.79e308);
         },
         second() {
@@ -238,6 +256,12 @@ const GAIN = {
                 [player.reflash.algo.includes(42), UPGS.reflash.algo.tree[6].effect()]
             ];
             mults.forEach(([cond, val]) => { if (cond) effect = effect * val; });
+            if (player.virus.effect.time > 0 && player.virus.effect.type == 3) {
+                if (player.virus.effect.status == 'buff') {
+                    val *= player.virus.effect.multiplier
+                }
+                else val /= player.virus.effect.multiplier
+            }
             return Math.min(effect, 1.79e308);
         },
         offline(x = GAIN.shard.second(), y = MISC.offline()) {
@@ -311,6 +335,12 @@ const GAIN = {
             if (player.fortune.activatedBoosts[3].activated) gain *= UPGS.fortune.boosts[3].effect();
             if (player.prestige.break.buyables[3]) gain *= UPGS.prestige.break.buyables[3].effect()
             if (player.reflash.algo.includes(42)) gain *= UPGS.reflash.algo.tree[6].effect()
+            if (player.virus.effect.time > 0 && player.virus.effect.type == 3) {
+            if (player.virus.effect.status == 'buff') {
+                gain *= player.virus.effect.multiplier
+            }
+            else gain /= player.virus.effect.multiplier
+            }
             
             return { gain: Math.min(gain, 1.7e308), broken_crystals };
         }
@@ -349,6 +379,12 @@ const GAIN = {
             const { softcap_start, softcap_power } = this.softcap();
             let gain = softCap(this.no_softcap_reset(), softcap_start, softcap_power);
             if (UPGS.reflash.singles[12].unl()) gain *= UPGS.reflash.singles[12].effect()
+            if (player.virus.effect.time > 0 && player.virus.effect.type == 2) {
+                if (player.virus.effect.status == 'buff') {
+                    gain *= player.virus.effect.multiplier
+                }
+                else gain /= player.virus.effect.multiplier
+            }
             return gain;
         },
         offline_calc() {
@@ -423,7 +459,12 @@ const GAIN = {
                 [player.balance.upgrades.singles.includes(31), MISC.balance.plusCoins.buff().chanceBuffer]
             ];
             mults.forEach(([cond, val]) => { if (cond) chance *= val; });
-            
+            if (player.virus.effect.time > 0 && player.virus.effect.type == 4) {
+                if (player.virus.effect.status == 'buff') {
+                    chance *= player.virus.effect.multiplier
+                }
+                else chance /= player.virus.effect.multiplier
+            }
             if (ACHS.has(37)) chance += 1;
             return chance;
         },
@@ -653,8 +694,14 @@ const GAIN = {
     balance: {
         generation() {
             const scalesBase = Math.pow(MISC.balance.scales_of_balance() + player.balance.scales_of_balance, 3);
-            
-            return scalesBase * UPGS.balance.buyables[3].effect();
+            let effect = scalesBase * UPGS.balance.buyables[3].effect()
+            if (player.virus.effect.time > 0 && player.virus.effect.type == 6) {
+                if (player.virus.effect.status == 'buff') {
+                    effect *= player.virus.effect.multiplier
+                }
+                else effect /= player.virus.effect.multiplier
+            }
+            return effect;
         },
         offline(x = GAIN.balance.generation(), y = MISC.offline()) {
             return UNL.display[76].req() ? x * y : 0;
@@ -743,7 +790,7 @@ const UNL = {
     shard_achievements: {
         unl(x) {
             if (this[x].current() >= this[x].goal() && player.shop.special.includes(3)) {
-                player.shard.achievements[x]++;
+                player.shard.achievements[x] <= 9 ? player.shard.achievements[x]++ : null;
             }
         },
         _barsCache: null,
@@ -758,7 +805,23 @@ const UNL = {
             if (!(player.shop.special.includes(3) && player.shard_achievements.includes(reqLvl))) return 1;
             const fBoost = player.fortune.activatedBoosts[9].activated ? UPGS.fortune.boosts[9].effect() : 1;
             const ach10 = UNL.shard_achievements[10].effect();
-            return isAdditive ? (1 + val * ach10 * fBoost) : (val * ach10 * fBoost);
+            let effect = 0
+            if (player.virus.effect.time > 0 && player.virus.effect.type == 5) {
+                if ((player.virus.effect.status == 'buff')) {
+                    if (isAdditive) {
+                        effect = 1 + val * ach10 * fBoost * player.virus.effect.multiplier
+                    }
+                    else effect = val * ach10 * fBoost * player.virus.effect.multiplier
+                }
+                else {
+                    if (isAdditive) {
+                        effect = 1 + val * ach10 * fBoost / player.virus.effect.multiplier
+                    }
+                    else effect = val * ach10 * fBoost / player.virus.effect.multiplier
+                }
+            }
+            else effect = 1 + val * ach10 * fBoost
+            return effect
         },
         1: { id: 1, current() { return player.coin.total_currency; }, goal(x = player.shard.achievements[1]) { return 1e50 * Math.pow(1e20, x); }, ratio() { return findRatio(this.current(), this.goal()); }, effect(x = player.shard.achievements[1]) { let e = UNL.shard_achievements._effBase(1, Math.pow(7, x), false); return player.prestige.challenge.activated === 8 ? 1: e; } },
         2: { id: 2, current() { return player.supercoin.total_currency; }, goal(x = player.shard.achievements[2]) { return 1000 * Math.pow(2, x); }, ratio() { return findRatio(this.current(), this.goal()); }, effect(x = player.shard.achievements[2]) { return UNL.shard_achievements._effBase(1, x / 25, true); } },
@@ -789,7 +852,7 @@ const UNL = {
         },
         check() {
             // Проходим по всем 83 элементам без вычисления длины ключей каждый раз
-            for (let i = 1; i <= 93; i++) {
+            for (let i = 1; i <= 97; i++) {
                 if (this[i]) {
                     let el = this[i].element();
                     if (el instanceof HTMLCollection) {
@@ -865,7 +928,7 @@ const UNL = {
         53: { type: 'flex', element: () => document.getElementById('shardAchBarDiv4'), req: () => player.shard_achievements.includes(4) },
         54: { type: 'flex', element: () => document.getElementById('shardAchBarDiv5'), req: () => player.shard_achievements.includes(5) },
         55: { type: 'none', element: () => document.getElementById('shardAchUnlockable1'), req: () => player.shard_achievements.includes(1) },
-        56: { type: 'none', element: () => document.getElementById('shardAchUnlockable2'), req: () => player.shard_achievements.includes(2) },
+        97: { type: 'none', element: () => document.getElementById('shardAchUnlockable2'), req: () => player.shard_achievements.includes(2) },
         56: { type: 'none', element: () => document.getElementById('shardAchUnlockable3'), req: () => player.shard_achievements.includes(3) },
         57: { type: 'none', element: () => document.getElementById('shardAchUnlockable4'), req: () => player.shard_achievements.includes(4) },
         58: { type: 'none', element: () => document.getElementById('shardAchUnlockable5'), req: () => player.shard_achievements.includes(5) },
@@ -913,6 +976,9 @@ const UNL = {
         91: { type: 'flex', element: () => document.getElementsByClassName('shop_unlock_post_reflash'), req: () => player.reflash.resets >= 1}, 
         92: { type: 'block', element: () => document.getElementById('acceleratorU5_1'), req: () => MISC.acc_ratio() >= 100}, 
         93: { type: 'block', element: () => document.getElementById('acceleratorU5'), req: () => MISC.acc_ratio() < 100}, 
+        94: { type: 'block', element: () => document.getElementById('temporaryBonuses'), req: () => player.virus.effect.time > 0},
+        95: { type: 'flex', element: () => document.getElementById('digitalizationPreStart'), req: () => !player.event.digitalization.activated},
+        96: { type: 'flex', element: () => document.getElementById('digitalizationEvent'), req: () => player.event.digitalization.activated},
     }
 };
 
@@ -1097,8 +1163,18 @@ const MISC = {
     balance: {
         exchange(x) {
             if (player.fortune.tokens <= 0) return 0;
-            if (x === 'plus' && player.balance.coins.plus < 10) { player.balance.total_coins.plus++; player.balance.coins.plus++; player.fortune.tokens--;}
-            if (x === 'minus' && player.balance.coins.minus < 10) { player.balance.total_coins.minus++; player.balance.coins.minus++; player.fortune.tokens--;}
+            if (x === 'plus' && player.balance.coins.plus < 10) { 
+                player.balance.total_coins.plus++; 
+                player.balance.coins.plus++; 
+                player.fortune.tokens--;
+                if (player.virus.activated && player.virus.type == 6) player.virus.current++
+            }
+            if (x === 'minus' && player.balance.coins.minus < 10) { 
+                player.balance.total_coins.minus++; 
+                player.balance.coins.minus++; 
+                player.fortune.tokens--;
+                if (player.virus.activated && player.virus.type == 6) player.virus.current++
+            }
         },
         respec() {
             player.fortune.tokens += player.balance.total_coins.minus + player.balance.total_coins.plus;
@@ -1264,6 +1340,263 @@ const PROGRESS = {
     },
     }
 };
+
+const VIRUS = {
+    check() {
+        if (player.virus.activated) return 0
+
+        let maxChance = Math.round(24000*UPGS.shop.permanent[10].effect())
+        let randomNum = randomNumber(0, maxChance)
+
+        if (randomNum == maxChance) this.activate()
+    },
+    activate() {
+        document.getElementById('additionalVirusWindow').style.display = 'block'
+        document.getElementById('virusWindow').style.display = 'block'
+
+        player.virus.type = this.current_type()
+        player.virus.level = this[player.virus.type].current_level.req()
+        player.virus.goal = this[player.virus.type].req(player.virus.level) / UPGS.shop.permanent[10].effect()
+        player.virus.time = 60
+        player.virus.activated = true
+    },
+    check_goal() {
+        if (!player.virus.activated) return 0
+        if (player.virus.current >= player.virus.goal) {
+            this.win()
+            this.finish()
+        }
+        else if (player.virus.time < 0) {
+            this.lose()
+            this.finish()
+        }
+    },
+    finish() {
+        document.getElementById('additionalVirusWindow').style.display = 'none'
+        document.getElementById('virusWindow').style.display = 'none'
+
+        player.virus.effect.multiplier = this.multiplier_calc()
+        player.virus.effect.type = player.virus.type
+        player.virus.effect.time = 300
+
+        player.virus.activated = false
+        player.virus.current = 0
+        player.virus.time = 0
+        player.virus.goal = 0
+        player.virus.level = 0
+        player.virus.type = 0
+    },
+    win() {
+        player.virus.effect.status = 'buff'
+    },
+    lose() {
+        player.virus.effect.status = 'debuff'
+    },
+    multiplier_calc(x=player.virus.type, y=player.virus.level) {
+        let effect = 0
+        switch (x) {
+            case 1: //монеты в секунду и нажатия вне софткапа
+                effect = Math.pow(2, y)
+                break;
+            case 2: //кристаллы за сброс вне софткапа
+                effect = Math.pow(1.35, y)
+                break;
+            case 3: //доход осколков
+                effect = Math.pow(5, y)
+                break;
+            case 4: //шанс супермонет
+                effect = 1+0.075*y
+                break;
+            case 5: //увеличивает эффект всех достижений осколков
+                effect = 1+0.1*y
+                break;
+            case 6: //доход нейтрали
+                effect = Math.pow(1.25, y)
+                break;
+            default:
+                break;
+        }
+        return effect
+    },
+    current_type() {
+        let type_array = []
+        for (let i = 1; i <= 6; i++) {
+            if (this[i].current_level.req() != 0) {
+                type_array.push(i)
+            }
+        }
+        const randomIndex = Math.floor(Math.random() * type_array.length);
+        return type_array[randomIndex];
+    },
+    update() {
+        if (!player.virus.activated) return 0
+        
+        let current = player.virus.current;
+        let required = player.virus.goal;
+        
+        let width = 0;
+        let ratio = 0;
+        
+        width = (current / required) * 100;
+        ratio = width;
+
+        width = Math.min(Math.max(width, 0), 100);
+        ratio = Math.min(Math.max(ratio, 0), 100);
+        
+        document.getElementById('virus-progressbar').style.width = width + "%";
+    },
+    ratio() {
+        if (!player.virus.activated) return 0
+
+        let current = player.virus.current;
+        let required = player.virus.goal;
+
+        return (current / required) * 100;
+    },
+    1: { //coin clicks
+        req(x=this.current_level.req()) {
+            let base = 100, multiplier = 1+0.5*(x-1)
+            return base*multiplier
+        },
+        current_level: {
+            req(x=player.coin.this_reflash_currency){
+                let level_array = []
+                    switch (true) {
+                        case x > 1e200:
+                            level_array.push(5);
+                        case x > 1e150:
+                            level_array.push(4);
+                        case x > 1e100:
+                            level_array.push(3);
+                        case x > 1e50:
+                            level_array.push(2);
+                        case x > 0:
+                            level_array.push(1);
+                            break;
+                    }
+                    const randomIndex = Math.floor(Math.random() * level_array.length);
+                    return level_array[randomIndex];
+                }
+
+        },
+    },
+    2: { //prestige resets
+        req(x=this.current_level.req()) {
+            let base = 100, multiplier = 1+0.75*(x-1)
+            return base*multiplier
+        },
+        current_level: {
+            req(x=player.prestige.this_reflash_currency){
+                let level_array = []
+                    switch (true) {
+                        case x > 1e50:
+                            level_array.push(4);
+                        case x > 1e30:
+                            level_array.push(3);
+                        case x > 1e15:
+                            level_array.push(2);
+                        case x > 1e6:
+                            level_array.push(1);
+                            break;
+                    }
+                    const randomIndex = Math.floor(Math.random() * level_array.length);
+                    return level_array == false ? 0 : level_array[randomIndex];
+                }
+
+        },
+    },
+    3: { //crystal breaks
+        req(x=this.current_level.req()) {
+            let base = 10, multiplier = 1+0.75*(x-1)
+            return base*multiplier
+        },
+        current_level: {
+            req(x=player.shard.currency){
+                let level_array = []
+                    switch (true) {
+                        case x > 1e100:
+                            level_array.push(3);
+                        case x > 1e50:
+                            level_array.push(2);
+                        case x > 1e15:
+                            level_array.push(1);
+                            break;
+                    }
+                    const randomIndex = Math.floor(Math.random() * level_array.length);
+                    return level_array == false ? 0 : level_array[randomIndex];
+                }
+
+        },
+    },
+    4: { //spent supercoins
+        req(x=this.current_level.req()) {
+            let base = 1000, multiplier = 10*(x-1)
+            return base*multiplier
+        },
+        current_level: {
+            req(x=player.supercoin.this_reflash_currency){
+                let level_array = []
+                    switch (true) {
+                        case x > 100000:
+                            level_array.push(3);
+                        case x > 50000:
+                            level_array.push(2);
+                        case x > 10000:
+                            level_array.push(1);
+                            break;
+                    }
+                    const randomIndex = Math.floor(Math.random() * level_array.length);
+                    return level_array == false ? 0 : level_array[randomIndex];
+                }
+
+        },
+    },
+    5: { //spent supercrystals
+        req(x=this.current_level.req()) {
+            let base = 30, multiplier = 2*(x-1)
+            return base*multiplier
+        },
+        current_level: {
+            req(x=player.supercrystal.total_currency){
+                let level_array = []
+                    switch (true) {
+                        case x > 50:
+                            level_array.push(3);
+                        case x > 25:
+                            level_array.push(2);
+                        case x > 10:
+                            level_array.push(1);
+                            break;
+                    }
+                    const randomIndex = Math.floor(Math.random() * level_array.length);
+                    return level_array == false ? 0 : level_array[randomIndex];
+                }
+
+        },
+    },
+    6: { //spent fortune tokens
+        req(x=this.current_level.req()) {
+            let base = 25, multiplier = 2*(x-1)
+            return base*multiplier
+        },
+        current_level: {
+            req(x=player.fortune.total_tokens){
+                let level_array = []
+                    switch (true) {
+                        case x > 15:
+                            level_array.push(2);
+                        case x > 10:
+                            level_array.push(1);
+                            break;
+                    }
+                    const randomIndex = Math.floor(Math.random() * level_array.length);
+                    return level_array == false ? 0 : level_array[randomIndex];
+                }
+
+        },
+    },
+}
+
 let new_date = 0, time = 0
 
 function loop() {
@@ -1314,6 +1647,11 @@ function loop() {
     player.time.upower += time * UPGS.reflash.accelerator[5].effect();
     player.time.uadder += time * UPGS.reflash.accelerator[5].effect();
     player.time.ureducer += time * UPGS.reflash.accelerator[5].effect();
+
+    if (player.event.digitalization.activated) {
+        if (!player.event.digitalization.quests.daily.completed.includes(2)) player.event.digitalization.quests.daily.progress[1] += time
+        if (!player.event.digitalization.quests.weekly.completed.includes(2)) player.event.digitalization.quests.weekly.progress[1] += time
+    }
     
     player.time.real.daily.timer = Math.max((player.time.next_daily - player.time.currentTime) / 1000, 0);
     convert_time('real', 'daily');
@@ -1371,6 +1709,16 @@ function loop() {
     UPGS.reflash.singles.checkPurchased();
     UPGS.reflash.algo.updateStates();
     
+    if (player.reflash.resets >= 1) {
+        if (player.virus.activated) {
+            VIRUS.check_goal()
+            player.virus.time -= time
+            VIRUS.update()
+        }
+        else VIRUS.check()
+    
+        if (player.virus.effect.time > 0) player.virus.effect.time -= time
+    }
 
     MISC.balance.ratio();
     UNL.shard_achievements.check();
@@ -1399,6 +1747,8 @@ function loop() {
 
     player.time.savedTime = Date.now();
     UNL.display.check();
+
+    DIGITALIZATION.check_event()
 }
 
 mySlider.oninput = function() { player.settings.autosave_interval = this.value; };
@@ -1537,7 +1887,7 @@ setInterval(() => { GAIN.clicksPerSecond = 0; }, 1000);
 
 // --- ГЕНЕРАТОР ВСПЛЫВАЮЩИХ ТЕКСТОВ ---
 function spawnFloatingText(e, text, isCrit, cssClass) {
-    if (player.settings.font === 'option11') { return 0 }
+    if (player.cosmetics.fonts.current === 'option11') { return 0 }
     // Берем событие из переданного параметра ИЛИ из глобального окна (как было в старом коде)
     const evt = e || window.event;
     
@@ -1564,13 +1914,27 @@ function spawnFloatingText(e, text, isCrit, cssClass) {
 // --- КЛИКИ И ДОБЫЧА ---
 function getCoin(e) {
     if (GAIN.clicksPerSecond >= 10) return;
-    
-    player.clicks.real++; player.clicks.prestige++; GAIN.clicksPerSecond++;
-    
+
     if (!coinGain.dataset.enterHandler) {
         coinGain.dataset.enterHandler = '1';
         coinGain.addEventListener("keydown", (evt) => { if (evt.key === "Enter") evt.preventDefault(); });
     }
+    
+    player.clicks.real++; player.clicks.prestige++; GAIN.clicksPerSecond++; 
+    if (player.virus.activated && player.virus.type == 1) player.virus.current++
+    if (player.event.digitalization.activated) {
+        if (!player.event.digitalization.quests.daily.completed.includes(1)) player.event.digitalization.quests.daily.progress[0]++
+        if (!player.event.digitalization.quests.weekly.completed.includes(1)) player.event.digitalization.quests.weekly.progress[0]++  
+        if (!player.event.digitalization.quests.daily.completed.includes(4)) {
+            let randomNum = randomNumber(1, 20)
+            if (randomNum == 1) {
+                player.event.digitalization.quests.daily.progress[3]++
+                player.event.digitalization.pass_points++
+                spawnFloatingText(e, "+" + '1', false, 'spiritText');
+            }
+        }
+    }
+    
     
     for (let i = 1; i <= GAIN.simulation.multiplier(); i++) {
         player.clicks.simulated++;
@@ -1648,11 +2012,11 @@ function selectTab(argument, isFlex) {
 
 function selectSubTab(argument, isFlex, mainTabType) {
     const tabsMap = {
-        settings: ['settingsSaveTab', 'settingsGraphicTab', 'settingsOtherTab'],
+        settings: ['settingsSaveTab', 'settingsGraphicTab', 'settingsOtherTab', 'settingsCosmeticsTab' ],
         clicker: ['coinsTab', 'overdriveTab'],
         info: ['aboutGameTab', 'statisticsTab', 'multipliersTab', 'challengesTimeTab', 'recentPrestigesTab', 'softcapsTab'],
         prestige: ['upgradesTab', 'milestonesTab', 'automationTab', 'shardsTab', 'superCrystalsTab', 'mineralsTab', 'breakPrestigeTab', 'fortuneTab', 'balanceTab'],
-        achievements: ['achScreenDescription', 'shardAchsTab'],
+        achievements: ['achScreenDescription', 'shardAchsTab', 'treasureTab'],
         challenge: ['challengeCoinTab', 'challengePrestigeTab'],
         reflash: ['reflashUpgradesTab', 'acceleratorTab', 'algorithmTab']
     };
@@ -1707,7 +2071,7 @@ function gameLoreOpen() { bookWindow.style.display = "flex"; myPopupBackdrop1.st
 function howToPlayOpen() { gameHelpWindow.style.display = "flex"; myPopupBackdrop1.style.display = "flex"; toggleBadges(['badge-settings-1', 'badge-misc-1', 'badge-h2p'], false)}
 
 function openWindow(arg, isFlex, number) {
-    ['confirmationButtons', 'whichCode', 'dailyDesc', 'breakCrystal', 'brokeCrystals', 'falseBrokeCrystals', 'welcomeToDigitalGod', 'chooseSaveDiv', 'reflashConfirmation', 'presetEditor'].forEach(id => {
+    ['confirmationButtons', 'whichCode', 'dailyDesc', 'breakCrystal', 'brokeCrystals', 'falseBrokeCrystals', 'welcomeToDigitalGod', 'chooseSaveDiv', 'reflashConfirmation', 'presetEditor', 'treasureDetails' ].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = "none";
     });
@@ -1722,7 +2086,7 @@ function openWindow(arg, isFlex, number) {
         if (arg === 'hardReset') { windowTitle2.innerHTML = text.window.hard; windowTitle2.style.fontSize = 'calc(24px * var(--font-scale))'; yesHR.style.display = "block"; }
         else { windowTitle2.innerHTML = text.window.NaN; windowTitle2.style.fontSize = 'calc(14px * var(--font-scale))'; yesRP.style.display = "block"; }
     } else {
-        const map = { 'code': whichCode, 'daily': dailyDesc, 'break': breakCrystal, 'submit': brokeCrystals, 'falseSubmit': falseBrokeCrystals, 'welcome': welcomeToDigitalGod, 'chooseSave': chooseSaveDiv, 'reflashConfirm': reflashConfirmation, 'presetEditor': presetEditor };
+        const map = { 'code': whichCode, 'daily': dailyDesc, 'break': breakCrystal, 'submit': brokeCrystals, 'falseSubmit': falseBrokeCrystals, 'welcome': welcomeToDigitalGod, 'chooseSave': chooseSaveDiv, 'reflashConfirm': reflashConfirmation, 'presetEditor': presetEditor, 'treasureDetails': treasureDetails };
         if (map[arg]) map[arg].style.display = arg === 'break' ? 'flex' : 'block';
     }
     switch (arg) {
@@ -1747,6 +2111,17 @@ function openWindow(arg, isFlex, number) {
             windowGame.style.height = '400px'
             windowGame.style.width = '500px'
             windowGame.style.fontSize = 'calc(16px * var(--font-scale))'
+            break;
+        case 'treasureDetails':
+            let i = number
+            windowGame.style.height = '500px'
+            windowGame.style.width = '800px'
+            document.getElementById('treasureIconBig').style.backgroundImage = `url("javascript/cssfiles/images/treasure/event_treasure_${i}.png")`
+            document.getElementById('treasureDetailsName').textContent = i18next.t(`eventTreasure.${i}.name`)
+            document.getElementById('treasureDetailsPermEffect').textContent = i18next.t(`eventTreasure.${i}.effect.permanent`)
+            document.getElementById('treasureDetailsTempEffect').textContent = i18next.t(`eventTreasure.${i}.effect.temporary`)
+            document.getElementById('treasureDescriptionText').textContent = i18next.t(`eventTreasure.${i}.desc`)
+            document.getElementById('treasureDescriptionDate').textContent = i18next.t(`eventTreasure.date`) + player.treasure.digitalization[i].date
             break;
         default:
             break;
@@ -1782,7 +2157,7 @@ const FONTS = {
     option4: { name: 'Courier', scale: 0.9 }, option5: { name: 'Verdana', scale: 0.85 }, option6: { name: 'system-ui', scale: 0.9 },
     option7: { name: 'PAPYRUS THE GREAT', scale: 0.85 }, option8: { name: 'Comic Sans', scale: 0.85 }, option9: { name: 'monotyper', scale: 0.9 },
     option10: { name: 'swkeys', scale: 0.8 }, option11: { name: 'serif', scale: 1 }, option12: { name: 'minecraft', scale: 0.92 },
-    option13: { name: 'SaiyanSans', scale: 1.1 }
+    option13: { name: 'SaiyanSans', scale: 1.1 }, option14: { name: 'bit', scale: 1.25 }
 };
 
 function applyFont(val, isInit = false) {
@@ -1803,7 +2178,7 @@ function applyFont(val, isInit = false) {
     
     document.body.style.fontFamily = config.name;
     document.querySelectorAll("select, label, button, div").forEach(el => el.style.fontFamily = config.name);
-    player.settings.font = val;
+    player.cosmetics.fonts.current = val;
 }
 function changeFonts(option) { applyFont(option.value, false); }
 function changeFonts2(optionVal) { applyFont(optionVal, true); }
@@ -1812,7 +2187,7 @@ function changeFonts2(optionVal) { applyFont(optionVal, true); }
 function muteTheAudio() {
     player.settings.mutedAudio = !player.settings.mutedAudio;
     player.settings.isMuted = player.settings.mutedAudio ? 'yes' : 'no';
-    if (player.settings.font === 'option7' && !player.settings.mutedAudio) setTimeout(playSong1, 1000);
+    if (player.cosmetics.fonts.current  === 'option7' && !player.settings.mutedAudio) setTimeout(playSong1, 1000);
     else { THEMEOFTHEGREAT.currentTime = 0; THEMEOFTHEGREAT.pause(); }
 }
 
@@ -1849,12 +2224,14 @@ if (versionDiv) {
 }
 
 // Универсальный биндинг всплывающих подсказок Popper.js
-const tooltipElements = document.querySelectorAll('.ach, .shopButton, .mineralButton, .coinUpgradeButton, .acceleratorUpgrade');
-tooltipElements.forEach(el => {
-    const tooltip = document.getElementById('tooltip-' + el.id);
-    if (!tooltip) return;
-    const popperInstance = Popper.createPopper(el, tooltip, { modifiers: [{ name: 'offset', options: { offset: [0, 8] } }], placement: 'top' });
-    
-    ['mouseenter', 'focus'].forEach(evt => el.addEventListener(evt, () => { tooltip.setAttribute('data-show', ''); popperInstance.update(); }));
-    ['mouseleave', 'blur'].forEach(evt => el.addEventListener(evt, () => tooltip.removeAttribute('data-show')));
-});
+function tooltipGeneration() {
+    const tooltipElements = document.querySelectorAll('.ach, .shopButton, .mineralButton, .coinUpgradeButton, .acceleratorUpgrade, .eventTreasure');
+    tooltipElements.forEach(el => {
+        const tooltip = document.getElementById('tooltip-' + el.id);
+        if (!tooltip) return;
+        const popperInstance = Popper.createPopper(el, tooltip, { modifiers: [{ name: 'offset', options: { offset: [0, 8] } }], placement: 'top' });
+        
+        ['mouseenter', 'focus'].forEach(evt => el.addEventListener(evt, () => { tooltip.setAttribute('data-show', ''); popperInstance.update(); }));
+        ['mouseleave', 'blur'].forEach(evt => el.addEventListener(evt, () => tooltip.removeAttribute('data-show')));
+    });
+}

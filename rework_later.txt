@@ -61,3 +61,35 @@ function buyTripleEventGreyUpgrade() {
 }
 
 
+ <div id="spiritualEvent" style="display:none">
+      <p id="spiritualEventTitle" class="titleTab">Добро пожаловать на Событие Восхождения Духов!</p>
+      <span id="spiritualEventDesc" class="statsSlot">Этот мир был охвачен неизвестной энергией что-то наподобие той, которую могли излучать только духи-лисицы сотни лет назад, и теперь ваши нажатия вырабатывают Духов, которые усиливают различные эффекты!</span>
+      <span id="spiritualEventCurrency" class="whiteText" style="font-size: calc(18px * var(--font-scale))">У вас <spn>10</spn> Духов, которые дают следующие эффекты:</span>
+      <span id="spiritualEventEffects" class="statsSlot"> 
+        х2 к доходу монет<br>
+        х1.2 к шансу Супер-монет<br>
+        х1.5 к получению Кристаллов<br>
+        х3 к Осколкам в секунду<br>
+        Также в период события ежедневные Супер-монеты удвоены
+      </span>
+      <footer id="spiritualEventTime" class="statsSlot">Событие действует с 05.10.2023 00:00 по 12.10.2023 23:59</footer>
+    </div>
+      <div id="triplePowerEvent" style="display:none">
+        <p id="triplePowerEventTitle" class="titleTab">Добро пожаловать на Событие Тройной Силы!</p>
+      <span id="triplePowerEventDesc" class="statsSlot">В Цифровом Мире начало происходить что-то странное и вдалеке загорелся Алтарь в котором ярко сияли три цвета: <br>Розовый излучающий некое чувство, которое хочет заставить работать ваш мозг на 110%; <br> Зелёный, излучающий такое тепло, что оно пробирается сквозь вашу душу, и как будто греет её; <br> Синий, излучение которого заставляло тратить всю энергию до последней капли. <br>Кажется, вы им должны что-то принести в жертву, и может Алтарь вас наградит. </span>
+      <span id="triplePowerEventCurrency1" class="whiteText" style="font-size: calc(18px * var(--font-scale))">У вас <pn>8</pn> Розовых Монет, которые увеличивают Кристаллы на <pn>40%</pn>. </span>
+      <span id="triplePowerEventCurrency2" class="whiteText" style="font-size: calc(18px * var(--font-scale))">У вас <gn>4</gn> Зелёных Монет, которые увеличивают генерацию Осколков на <gn>80%</gn>. </span>
+      <span id="triplePowerEventCurrency3" class="whiteText" style="font-size: calc(18px * var(--font-scale))">У вас <bn>2</bn> Синих Монет, которые увеличивают шанс Супер Монет на <bn>10%</bn>. </span>
+      <div id="sacrificeButtons" style="margin-top: 15px">
+        <button id="sacrificePink" class="upgradeButton pinkButton" onclick="sacrifice(pinkCoin)">Пожертвовать 1000 сбросов Престижа для Розовой монеты</button>
+        <button id="sacrificeGreen" class="upgradeButton greenButton" onclick="sacrifice(greenCoin)">Пожертвовать 10 часов Престижа для Зелёной монеты</button>
+        <button id="sacrificeBlue" class="upgradeButton blueButton" onclick="sacrifice(blueCoin)"> Пожертвовать 10000 нажатий для Синей монеты</button>
+      </div>
+      <div id="tripleEventUpgradeButtons">
+        <button id="upgradePink" class="upgradeButton pinkButton" onclick="buyTripleEventUpgrade(pinkCoin)">Увеличивает бонус Розовых Монет на 10% <br> Стоимость: 3 Розовые Монеты</button>
+        <button id="upgradeGreen" class="upgradeButton greenButton" onclick="buyTripleEventUpgrade(greenCoin)">Увеличивает бонус Зелёных Монет на 10% <br> Стоимость: 3 Зелёных Монеты</button>
+        <button id="upgradeBlue" class="upgradeButton blueButton" onclick="buyTripleEventUpgrade(blueCoin)">Увеличивает бонус Синих Монет на 10% <br> Стоимость 3: Синих Монеты</button>
+      </div>
+      <button id="upgradeGrey" onclick="buyTripleEventGreyUpgrade()" class="upgradeButton greyButton">Уменьшить требования на 10% <br> Стоимость: 3 всех монет</button>
+      <footer id="triplePowerEventTime" class="statsSlot">Событие действует с 15.03.2024 00:00 по 23.03.2024 23:59</footer>
+      </div>

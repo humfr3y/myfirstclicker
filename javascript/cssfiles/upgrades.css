@@ -77,16 +77,16 @@
 }
 .singleButton.purchased {
     background-color: var(--coin-upgrade);
-    color: black;
+    color: black !important;
 }
 .coinUpgradeButton.superPurchased {
-  background-color: var(--supercoin);
-  color: black;
-  border-color: var(--supercoin);
+  background-color: var(--supercoin) !important;
+  color: black !important;
+  border-color: var(--supercoin) !important;
 }
 .coinUpgradeButton.superPurchasedBuyable {
   background-color: rgb(0, 0, 0);
-  border-color: var(--supercoin);
+  border-color: var(--supercoin) !important;
 }
 .coinUpgradeButton.superPurchasedBuyable:hover:enabled, .coinUpgradeButton.superPurchased:hover:enabled  {
   background-color: var(--supercoin);
@@ -107,7 +107,7 @@
   color: black;
 }
 .prestigeSingleButton.purchased {
-  background-color: var(--prestige-upgrade);
+  background-color: var(--prestige-upgrade) !important;
   color: black;
 }
 .prestigeBuyableButton{
@@ -126,12 +126,12 @@
   color: rgb(255, 255, 255);
 }
 .breakPrestigeSingleButton:hover:enabled {
-  background-color: var(--break-prestige-upgrade);
-  box-shadow: 0 0 10px var(--break-prestige-upgrade);
-  color: black;
+  background-color: var(--break-prestige-upgrade) !important;
+  box-shadow: 0 0 10px var(--break-prestige-upgrade) !important;
+  color: black !important;
 }
 .breakPrestigeSingleButton.purchased {
-  background-color: var(--break-prestige-upgrade);
+  background-color: var(--break-prestige-upgrade) !important;
   color: black;
 }
 .breakPrestigeBuyableButton{
@@ -151,12 +151,12 @@
   color: rgb(255, 255, 255);
 }
 .reflashSingleButton:hover:enabled {
-  background-color: var(--reflash);
-  box-shadow: 0 0 10px var(--reflash);
+  background-color: var(--reflash) !important;
+  box-shadow: 0 0 10px var(--reflash) !important;
   color: black;
 }
 .reflashSingleButton.purchased {
-  background-color: var(--reflash);
+  background-color: var(--reflash) !important; 
   color: black;
 }
 .reflashBuyableButton{
@@ -248,7 +248,7 @@
 }
 
 .shardSingleButton.purchased {
-  background-color: var(--shard);
+  background-color: var(--shard) !important;
   color: black;
 }
 
@@ -312,7 +312,7 @@
   color: black;
 }
 .superCrystalUpgradeButton.purchased {
-  background-color: var(--supercrystal);
+  background-color: var(--supercrystal) !important;
   color: black;
 }
 
@@ -337,7 +337,7 @@
 }
 
 .fortuneSingleButton.purchased {
-  background-color: var(--fortune);
+  background-color: var(--fortune) !important;
   color: black;
 }
 
@@ -362,6 +362,6 @@
 }
 
 .balanceSingleButton.purchased {
-  background-color: var(--balance);
+  background-color: var(--balance) !important; 
   color: black;
 }

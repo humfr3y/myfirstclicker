@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital God</title>
-    <link rel="icon" type="image/x-con" href="javascript/cssfiles/images/game.ico">
+    <link rel="icon" type="image/x-con" href="javascript/cssfiles/images/misc/game.ico">
     <link rel="stylesheet" href="javascript/cssfiles/achievements.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/buttons.css" type="text/css">
     <link rel="stylesheet" href="javascript/cssfiles/fonts.css" type="text/css">
@@ -39,7 +39,7 @@
   </div>
   <div id="wholeGame" style="display: none">
 
-  <div class="progress-bar-base">
+  <div id="progress-bar" class="progress-bar-base">
     <div id="progressbar" class="progress-bar">
     </div>
     <div id="progress-bar-text">
@@ -102,41 +102,185 @@
         <button onclick="selectTab(infoTab, false)" id="infoSelect" class="tabButton" data-i18n="informationSubButton">Information</button>
         <button onclick="selectTab(shopTab, false)" id="shopSelect" class="tabButton"><span data-i18n="shopButton_text">Supershop</span> (<span id="top_supercoins_val">0</span>)</button>
     </div>
-    <!-- <div id="eventTab" style="display:none">
-      <div id="spiritualEvent" style="display:none">
-      <p id="spiritualEventTitle" class="titleTab">Добро пожаловать на Событие Восхождения Духов!</p>
-      <span id="spiritualEventDesc" class="statsSlot">Этот мир был охвачен неизвестной энергией что-то наподобие той, которую могли излучать только духи-лисицы сотни лет назад, и теперь ваши нажатия вырабатывают Духов, которые усиливают различные эффекты!</span>
-      <span id="spiritualEventCurrency" class="whiteText" style="font-size: calc(18px * var(--font-scale))">У вас <spn>10</spn> Духов, которые дают следующие эффекты:</span>
-      <span id="spiritualEventEffects" class="statsSlot"> 
-        х2 к доходу монет<br>
-        х1.2 к шансу Супер-монет<br>
-        х1.5 к получению Кристаллов<br>
-        х3 к Осколкам в секунду<br>
-        Также в период события ежедневные Супер-монеты удвоены
-      </span>
-      <footer id="spiritualEventTime" class="statsSlot">Событие действует с 05.10.2023 00:00 по 12.10.2023 23:59</footer>
+    <div id="eventTab" style="display:none">
+      <div id="digitalizationPreStart">
+        <div id="digitalizationLogo2">
+        </div>
+          <div id="digitalizationEventTime2">
+            <span id="digitalizationEventTimer2" class="titleTab">Event ends in 21d 11h</span>
+          </div>
+
+      </div>
+      <div id="digitalizationEvent">
+        <div id="digitalizationLogo">
+
+        </div>
+        <div id="digitalizationEventTime">
+          <span id="digitalizationEventTimer" class="titleTab">Event ends in 21d 11h</span>
+        </div>
+        <div id="digitalizationContent">
+          <div class="digitalizationHalf">
+            <div id="digitalizationQuest">
+              <div id="digitalizationQuestTitle">
+                <span data-i18n="digitalization.eventQuests" class="titleTab" style="font-weight: bold;">Quests</span>
+              </div>
+              <div id="digitalizationQuestSelection">
+                <button class="normalButton" data-i18n="digitalization.daily" onclick="DIGITALIZATION.selectQuest('daily')">Daily</button>
+                <button class="normalButton" data-i18n="digitalization.weekly" onclick="DIGITALIZATION.selectQuest('weekly')">Weekly</button>
+              </div>
+              <div id="digitalizationQuestList">
+                <div id="digitalizationQuestListDaily">
+                  <div id="digitalizationQuestDailyTitleDiv">
+                    <span data-i18n="digitalization.daily" class="titleTab" style="font-weight: bold;">Daily</span>
+                  </div>
+                  <div id="digitalizationQuestTimerDailyDiv">
+                    <span id="digitalizationQuestTimerDaily" class="statsSlot">Quests reset in 13h 47m</span>
+                  </div>
+
+
+                  <div class="digitalizationQuest digitalizationQuestDaily">
+                    <div id="digitalizationDailyQuestIcon1" class="iconSlot"></div>
+                    <div class="digitalizationQuestDescDiv">
+                      <div class="digitalizationQuestDesc">
+                        <span class="digitalizationDailyQuestTitle" data-i18n="digitalization.dailyQuests.1.name">Мастер-кликер</span>
+                        <span class="digitalizationDailyQuestDesc" data-i18n="digitalization.dailyQuests.1.desc">Выполнить 10000 нажатий</span>
+                      </div>
+                      <div class="digitalizationQuestProgressBar digitalizationDailyQuestProgressBar"></div>
+                      <span class="digitalizationDailyQuestReward" data-i18n="digitalization.dailyQuests.1.reward">500 очков</span>
+                    </div>
+                  </div>
+
+
+                  <div class="digitalizationQuest digitalizationQuestDaily">
+                    <div id="digitalizationDailyQuestIcon2" class="iconSlot"></div>
+                    <div class="digitalizationQuestDescDiv">
+                      <div class="digitalizationQuestDesc">
+                        <span class="digitalizationDailyQuestTitle" data-i18n="digitalization.dailyQuests.2.name">Мастер-кликер</span>
+                        <span class="digitalizationDailyQuestDesc" data-i18n="digitalization.dailyQuests.2.desc">Выполнить 10000 нажатий</span>
+                      </div>
+                      <div class="digitalizationQuestProgressBar digitalizationDailyQuestProgressBar"></div>
+                      <span class="digitalizationDailyQuestReward" data-i18n="digitalization.dailyQuests.2.reward">500 очков</span>
+                    </div>
+                  </div>
+                  <div class="digitalizationQuest digitalizationQuestDaily">
+                    <div id="digitalizationDailyQuestIcon3" class="iconSlot"></div>
+                    <div class="digitalizationQuestDescDiv">
+                      <div class="digitalizationQuestDesc">
+                        <span class="digitalizationDailyQuestTitle" data-i18n="digitalization.dailyQuests.3.name">Мастер-кликер</span>
+                        <span class="digitalizationDailyQuestDesc" data-i18n="digitalization.dailyQuests.3.desc">Выполнить 10000 нажатий</span>
+                      </div>
+                      <div class="digitalizationQuestProgressBar digitalizationDailyQuestProgressBar"></div>
+                      <span class="digitalizationDailyQuestReward" data-i18n="digitalization.dailyQuests.3.reward">500 очков</span>
+                    </div>
+                  </div>
+                  <div class="digitalizationQuest digitalizationQuestDaily">
+                    <div id="digitalizationDailyQuestIcon4" class="iconSlot"></div>
+                    <div class="digitalizationQuestDescDiv">
+                      <div class="digitalizationQuestDesc">
+                        <span class="digitalizationDailyQuestTitle" data-i18n="digitalization.dailyQuests.4.name">Мастер-кликер</span>
+                        <span class="digitalizationDailyQuestDesc" data-i18n="digitalization.dailyQuests.4.desc">Выполнить 10000 нажатий</span>
+                      </div>
+                      <div class="digitalizationQuestProgressBar digitalizationDailyQuestProgressBar"></div>
+                      <span class="digitalizationDailyQuestReward" data-i18n="digitalization.dailyQuests.4.reward">500 очков</span>
+                    </div>
+                  </div>
+                </div>
+                <div id="digitalizationQuestListWeekly" style="display: none">
+                  <div id="digitalizationQuestWeeklyTitleDiv">
+                    <span data-i18n="digitalization.weekly" class="titleTab" style="font-weight: bold;">Weekly</span>
+                  </div>
+                  <div id="digitalizationQuestTimerWeeklyDiv">
+                    <span id="digitalizationQuestTimerWeekly" class="statsSlot">Quests reset in 6d 13h 47m</span>
+                  </div>
+                  <div class="digitalizationQuest digitalizationQuestWeekly">
+                    <div id="digitalizationWeeklyQuestIcon1" class="iconSlot"></div>
+                    <div class="digitalizationQuestDescDiv">
+                      <div class="digitalizationQuestDesc">
+                        <span class="digitalizationWeeklyQuestTitle" data-i18n="digitalization.weeklyQuests.1.name">Мастер-кликер</span>
+                        <span class="digitalizationWeeklyQuestDesc" data-i18n="digitalization.weeklyQuests.1.desc">Выполнить 10000 нажатий</span>
+                      </div>
+                      <div class="digitalizationQuestProgressBar digitalizationWeeklyQuestProgressBar"></div>
+                      <span class="digitalizationWeeklyQuestReward" data-i18n="digitalization.WeeklyQuests.3.reward">500 очков</span>
+                    </div>
+                  </div>
+                  <div class="digitalizationQuest digitalizationQuestWeekly">
+                    <div id="digitalizationWeeklyQuestIcon2" class="iconSlot"></div>
+                    <div class="digitalizationQuestDescDiv">
+                      <div class="digitalizationQuestDesc">
+                        <span class="digitalizationWeeklyQuestTitle" data-i18n="digitalization.weeklyQuests.1.name">Мастер-кликер</span>
+                        <span class="digitalizationWeeklyQuestDesc" data-i18n="digitalization.weeklyQuests.1.desc">Выполнить 10000 нажатий</span>
+                      </div>
+                      <div class="digitalizationQuestProgressBar digitalizationWeeklyQuestProgressBar"></div>
+                      <span class="digitalizationWeeklyQuestReward" data-i18n="digitalization.WeeklyQuests.3.reward">500 очков</span>
+                    </div>
+                  </div>
+                  <div class="digitalizationQuest digitalizationQuestWeekly">
+                    <div id="digitalizationWeeklyQuestIcon3" class="iconSlot"></div>
+                    <div class="digitalizationQuestDescDiv">
+                      <div class="digitalizationQuestDesc">
+                        <span class="digitalizationWeeklyQuestTitle" data-i18n="digitalization.weeklyQuests.1.name">Мастер-кликер</span>
+                        <span class="digitalizationWeeklyQuestDesc" data-i18n="digitalization.weeklyQuests.1.desc">Выполнить 10000 нажатий</span>
+                      </div>
+                      <div class="digitalizationQuestProgressBar digitalizationWeeklyQuestProgressBar"></div>
+                      <span class="digitalizationWeeklyQuestReward" data-i18n="digitalization.WeeklyQuests.3.reward">500 очков</span>
+                    </div>
+                  </div>
+                  <div class="digitalizationQuest digitalizationQuestWeekly">
+                    <div id="digitalizationWeeklyQuestIcon4" class="iconSlot"></div>
+                    <div class="digitalizationQuestDescDiv">
+                      <div class="digitalizationQuestDesc">
+                        <span class="digitalizationWeeklyQuestTitle" data-i18n="digitalization.weeklyQuests.1.name">Мастер-кликер</span>
+                        <span class="digitalizationWeeklyQuestDesc" data-i18n="digitalization.weeklyQuests.1.desc">Выполнить 10000 нажатий</span>
+                      </div>
+                      <div class="digitalizationQuestProgressBar digitalizationWeeklyQuestProgressBar"></div>
+                      <span class="digitalizationWeeklyQuestReward" data-i18n="digitalization.WeeklyQuests.3.reward">500 очков</span>
+                    </div>
+                  </div>
+                  <div class="digitalizationQuest digitalizationQuestWeekly">
+                    <div id="digitalizationWeeklyQuestIcon5" class="iconSlot"></div>
+                    <div class="digitalizationQuestDescDiv">
+                      <div class="digitalizationQuestDesc">
+                        <span class="digitalizationWeeklyQuestTitle" data-i18n="digitalization.weeklyQuests.1.name">Мастер-кликер</span>
+                        <span class="digitalizationWeeklyQuestDesc" data-i18n="digitalization.weeklyQuests.1.desc">Выполнить 10000 нажатий</span>
+                      </div>
+                      <div class="digitalizationQuestProgressBar digitalizationWeeklyQuestProgressBar"></div>
+                      <span class="digitalizationWeeklyQuestReward" data-i18n="digitalization.WeeklyQuests.3.reward">500 очков</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> 
+            </div>
+            <div class="digitalizationHalf">
+              <div id="digitalizationPass">
+                <div id="digitalizationPassTop">
+                  <div id="digitalizationPassTitle">
+                    <span data-i18n="digitalization.freePass" class="titleTab" style="font-weight: bold;">FREE PASS</span>
+                  </div>
+                  <div id="digitalizationPassPointsDiv">
+                    <span id="digitalizationPassLevel" class="titleTab">1</span>
+                    <div id="digitalization-pass-progress-bar-base" class="progress-bar-base">
+                      <div id="digitalization-pass-progressbar" class="progress-bar">
+                      </div>
+                      <div id="digitalization-pass-progress-bar-text">
+                        <span id="digitalization-pass-percent"></span>%
+                      </div>
+                    </div>
+                    <span id="digitalizationPassPoints" class="titleTab">100/500 points</span>
+                  </div>
+                </div>
+                <div id="digitalizationPassList">
+                  <div id="digitalizationPassLevels">
+    
+                  </div>
+                </div>
+              </div>      
+            </div>
+        </div>
+        
+      </div>
+      <p id="noEvent" class="titleTab" style="display:none">There is no event right now</p>
     </div>
-      <div id="triplePowerEvent" style="display:none">
-        <p id="triplePowerEventTitle" class="titleTab">Добро пожаловать на Событие Тройной Силы!</p>
-      <span id="triplePowerEventDesc" class="statsSlot">В Цифровом Мире начало происходить что-то странное и вдалеке загорелся Алтарь в котором ярко сияли три цвета: <br>Розовый излучающий некое чувство, которое хочет заставить работать ваш мозг на 110%; <br> Зелёный, излучающий такое тепло, что оно пробирается сквозь вашу душу, и как будто греет её; <br> Синий, излучение которого заставляло тратить всю энергию до последней капли. <br>Кажется, вы им должны что-то принести в жертву, и может Алтарь вас наградит. </span>
-      <span id="triplePowerEventCurrency1" class="whiteText" style="font-size: calc(18px * var(--font-scale))">У вас <pn>8</pn> Розовых Монет, которые увеличивают Кристаллы на <pn>40%</pn>. </span>
-      <span id="triplePowerEventCurrency2" class="whiteText" style="font-size: calc(18px * var(--font-scale))">У вас <gn>4</gn> Зелёных Монет, которые увеличивают генерацию Осколков на <gn>80%</gn>. </span>
-      <span id="triplePowerEventCurrency3" class="whiteText" style="font-size: calc(18px * var(--font-scale))">У вас <bn>2</bn> Синих Монет, которые увеличивают шанс Супер Монет на <bn>10%</bn>. </span>
-      <div id="sacrificeButtons" style="margin-top: 15px">
-        <button id="sacrificePink" class="upgradeButton pinkButton" onclick="sacrifice(pinkCoin)">Пожертвовать 1000 сбросов Престижа для Розовой монеты</button>
-        <button id="sacrificeGreen" class="upgradeButton greenButton" onclick="sacrifice(greenCoin)">Пожертвовать 10 часов Престижа для Зелёной монеты</button>
-        <button id="sacrificeBlue" class="upgradeButton blueButton" onclick="sacrifice(blueCoin)"> Пожертвовать 10000 нажатий для Синей монеты</button>
-      </div>
-      <div id="tripleEventUpgradeButtons">
-        <button id="upgradePink" class="upgradeButton pinkButton" onclick="buyTripleEventUpgrade(pinkCoin)">Увеличивает бонус Розовых Монет на 10% <br> Стоимость: 3 Розовые Монеты</button>
-        <button id="upgradeGreen" class="upgradeButton greenButton" onclick="buyTripleEventUpgrade(greenCoin)">Увеличивает бонус Зелёных Монет на 10% <br> Стоимость: 3 Зелёных Монеты</button>
-        <button id="upgradeBlue" class="upgradeButton blueButton" onclick="buyTripleEventUpgrade(blueCoin)">Увеличивает бонус Синих Монет на 10% <br> Стоимость 3: Синих Монеты</button>
-      </div>
-      <button id="upgradeGrey" onclick="buyTripleEventGreyUpgrade()" class="upgradeButton greyButton">Уменьшить требования на 10% <br> Стоимость: 3 всех монет</button>
-      <footer id="triplePowerEventTime" class="statsSlot">Событие действует с 15.03.2024 00:00 по 23.03.2024 23:59</footer>
-      </div>
-    <p id="noEvent" class="titleTab" style="display:none">There is no event right now</p>
-  </div> -->
     <div id="settingsTab" style="display:none">
       <div id="settingSubButtons">
         <div class="button-wrapper">
@@ -150,6 +294,7 @@
           <span class="notification-badge" id="badge-misc-1">!</span>
           <span class="notification-badge" id="badge-misc-2">!</span>
         </div>
+        <button onclick="selectSubTab(settingsCosmeticsTab, false, 'settings')" id="cosmeticsSelect" class="tabButton subButton" data-i18n="cosmeticsButton">Cosmetics</button>
       </div>
       <div class="settingButtonsWindow">
         <div id="settingsSaveTab">
@@ -182,21 +327,6 @@
       <div id="settingsGraphicTab" style="display: none;">
         <p id="settingsTitle2" class="titleTab" data-i18n="graphicTitle">Graphic settings</p>
         <div id="firstGraphicSettingsRow" class="settingsRow">
-          <select id="changeFont" class="settingButton selectSetting">
-              <option value="option1" class="fontSelector">Poly</option>
-              <option value="option2" class="fontSelector">Serif</option>
-              <option value="option3" class="fontSelector">Impact</option>
-              <option value="option4" class="fontSelector">Courier</option>
-              <option value="option5" class="fontSelector">Verdana</option>
-              <option value="option6" class="fontSelector">System-Ui</option>
-              <option value="option7" class="fontSelector">PAPYRUS</option>
-              <option value="option8" class="fontSelector">Comic Sans</option>
-              <option value="option9" class="fontSelector">Monospace (English)</option>
-              <option value="option10" class="fontSelector">Swkeys (English)</option>
-              <option value="option11" class="fontSelector">Empty</option>
-              <option value="option12" class="fontSelector">Minecraft</option>
-              <option value="option13" class="fontSelector">Dragonball (English)</option>
-          </select>
           <button id="changingLanguage" class="settingButton" data-i18n="changeLanguage">Change language</button>
           <button onclick="muteTheAudio(this)" id="muteAudio" class="settingButton"></button>
         </div>
@@ -238,6 +368,68 @@
             <span class="notification-badge" id="badge-daily">!</span>
           </div>
           <button onclick="toggleOfflineGain()" id="toggleOffline" class="settingButton"></button>
+        </div>
+      </div>
+      <div id="settingsCosmeticsTab" style="display: none;">
+        <p id="settingsTitle4" class="titleTab" data-i18n="cosmeticsTitle">Cosmetic settings</p>
+        <div id="firstCosmeticSettingsRow" class="settingsRow">
+          <div class="settingButton">
+            <span class="ghostSettingsText">Font</span>
+            <select id="changeFont" class="settingButton selectSetting">
+              <option value="option1" class="fontSelector">Poly</option>
+              <option value="option2" class="fontSelector">Serif</option>
+              <option value="option3" class="fontSelector">Impact</option>
+              <option value="option4" class="fontSelector">Courier</option>
+              <option value="option5" class="fontSelector">Verdana</option>
+              <option value="option6" class="fontSelector">System-Ui</option>
+              <option value="option7" class="fontSelector">PAPYRUS</option>
+              <option value="option8" class="fontSelector">Comic Sans</option>
+              <option value="option9" class="fontSelector">Monospace (English)</option>
+              <option value="option10" class="fontSelector">Swkeys (English)</option>
+              <option value="option11" class="fontSelector">Empty</option>
+              <option value="option12" class="fontSelector">Minecraft</option>
+              <option value="option13" class="fontSelector">Dragonball (English)</option>
+              <option value="option14" class="fontSelector">8-bit</option>
+            </select>
+          </div>
+          
+          <div class="settingButton">
+            <span class="ghostSettingsText">Progress bar</span>
+            <select id="changeProgressBar" class="settingButton selectSetting" onchange="switchProgressBar(this.value)">
+              <option value="option1" class="fontSelector">Green</option>
+              <option value="option2" class="fontSelector">Coin</option>
+              <option value="option3" class="fontSelector">Prestige</option>
+              <option value="option4" class="fontSelector">Forest green</option>
+              <option value="option5" class="fontSelector">Fortune</option>
+              <option value="option6" class="fontSelector">Black-and-white</option>
+              <option value="option7" class="fontSelector">DIGITALIZATION</option>
+              <option value="option8" class="fontSelector">Virus</option>
+            </select>
+          </div>
+          <div class="settingButton">
+            <span class="ghostSettingsText">Background</span>
+            <select id="changeBackground" class="settingButton selectSetting">
+              <option value="option1" class="fontSelector">None</option>
+              <option value="option2" class="fontSelector">DIGITALIZATION</option>
+            </select>
+          </div>
+          </div>
+        <div id="secondCosmeticSettingsRow" class="settingsRow">
+          <div class="settingButton">
+            <span class="ghostSettingsText">Theme</span>
+            <select id="changeTheme" class="settingButton selectSetting" onchange="switchTheme(this.value)">
+              <option value="option1" class="fontSelector">Digital God</option>
+              <option value="option2" class="fontSelector">Antimatter</option>
+              <option value="option3" class="fontSelector">OLED</option>
+            </select>
+          </div>
+          <div class="settingButton">
+            <span class="ghostSettingsText">Coin icon</span>
+            <select id="changeCoinIcon" class="settingButton selectSetting">
+              <option value="option1" class="fontSelector">Alpha-coin</option>
+              <option value="option2" class="fontSelector">Pixel coin</option>
+            </select>
+          </div>
         </div>
       </div>
       <footer id="hotkeys" class="statsSlot" data-i18n="hotkeys">Hotkeys: M - Max Buy, P - Do Prestige</footer>
@@ -856,14 +1048,14 @@
         </div>
         <div id="prestigeChallenges">
           <div id="prestigeChallengePair1" class="prestigeChallengePair">
-          <div class="challengePDiv" style="border-color: aqua">
+          <div class="challengePDiv">
             <p class="challengePTitle" data-i18n="challengePTitle_1">Prestige Challenge 1</p>
             <span class="challengePDesc challengePCond statsSlot" data-i18n="challengePConditionText1"></span>
             <span class="challengePDesc challengePGoal statsSlot"><span data-i18n="cp_goal">Goal: Collect </span><span id="pc1_goal">0</span><span data-i18n="currency_acoins_space"> α-coins.</span></span>
             <button onclick="startPChallenge(1)" class="challengePStart tabButton" id="pChallenge1Start">Start</button>
             <span class="challengePDesc challengePReward statsSlot"><span data-i18n="cp_rew_1"></span><span id="cp1_eff">1</span></span>
           </div>
-          <div class="challengePDiv" style="border-color: aqua">
+          <div class="challengePDiv" >
             <p class="challengePTitle" data-i18n="challengePTitle_2">Prestige Challenge 2</p>
             <span class="challengePDesc challengePCond statsSlot" data-i18n="challengePConditionText2"></span>
             <span class="challengePDesc challengePGoal statsSlot"><span data-i18n="cp_goal">Goal: Collect </span><span id="pc2_goal">0</span><span data-i18n="currency_acoins_space"> α-coins.</span></span>
@@ -872,14 +1064,14 @@
             </div>
           </div>
           <div id="prestigeChallengePair2" class="prestigeChallengePair">
-            <div class="challengePDiv" style="border-color: aqua">
+            <div class="challengePDiv" >
               <p class="challengePTitle" data-i18n="challengePTitle_3">Prestige Challenge 3</p>
               <span class="challengePDesc challengePCond statsSlot" data-i18n="challengePConditionText3"></span>
               <span class="challengePDesc challengePGoal statsSlot"><span data-i18n="cp_goal">Goal: Collect </span><span id="pc3_goal">0</span><span data-i18n="currency_acoins_space"> α-coins.</span></span>
               <button onclick="startPChallenge(3)" class="challengePStart tabButton" id="pChallenge3Start">Start</button>
               <span class="challengePDesc challengePReward statsSlot"><span data-i18n="cp_rew_3"></span><span id="cp3_eff">1</span></span>
             </div>
-            <div class="challengePDiv" style="border-color: aqua">
+            <div class="challengePDiv" >
               <p class="challengePTitle" data-i18n="challengePTitle_4">Prestige Challenge 4</p>
               <span class="challengePDesc challengePCond statsSlot" data-i18n="challengePConditionText4"></span>
               <span class="challengePDesc challengePGoal statsSlot"><span data-i18n="cp_goal">Goal: Collect </span><span id="pc4_goal">0</span><span data-i18n="currency_acoins_space"> α-coins.</span></span>
@@ -888,14 +1080,14 @@
             </div>
           </div>
           <div id="prestigeChallengePair3" class="prestigeChallengePair">
-          <div class="challengePDiv" style="border-color: aqua">
+          <div class="challengePDiv" >
             <p class="challengePTitle" data-i18n="challengePTitle_5">Prestige Challenge 5</p>
             <span class="challengePDesc challengePCond statsSlot" data-i18n="challengePConditionText5"></span>
             <span class="challengePDesc challengePGoal statsSlot"><span data-i18n="cp_goal">Goal: Collect </span><span id="pc5_goal">0</span><span data-i18n="currency_acoins_space"> α-coins.</span></span>
             <button onclick="startPChallenge(5)" class="challengePStart tabButton" id="pChallenge5Start">Start</button>
             <span class="challengePDesc challengePReward statsSlot"><span data-i18n="cp_rew_5"></span><span id="cp5_eff">1</span></span>
           </div>
-          <div class="challengePDiv" style="border-color: aqua">
+          <div class="challengePDiv" >
             <p class="challengePTitle" data-i18n="challengePTitle_6">Prestige Challenge 6</p>
             <span class="challengePDesc challengePCond statsSlot" data-i18n="challengePConditionText6"></span>
             <span class="challengePDesc challengePGoal statsSlot"><span data-i18n="cp_goal">Goal: Collect </span><span id="pc6_goal">0</span><span data-i18n="currency_acoins_space"> α-coins.</span></span>
@@ -904,14 +1096,14 @@
           </div>
           </div>
           <div id="prestigeChallengePair4" class="prestigeChallengePair">
-          <div class="challengePDiv" style="border-color: aqua">
+          <div class="challengePDiv" >
             <p class="challengePTitle" data-i18n="challengePTitle_7">Prestige Challenge 7</p>
             <span class="challengePDesc challengePCond statsSlot" data-i18n="challengePConditionText7"></span>
             <span class="challengePDesc challengePGoal statsSlot"><span data-i18n="cp_goal">Goal: Collect </span><span id="pc7_goal">0</span><span data-i18n="currency_acoins_space"> α-coins.</span></span>
             <button onclick="startPChallenge(7)" class="challengePStart tabButton" id="pChallenge7Start">Start</button>
             <span class="challengePDesc challengePReward statsSlot"><span data-i18n="cp_rew_7"></span><span id="cp7_eff">1</span></span>
           </div>
-          <div class="challengePDiv" style="border-color: aqua">
+          <div class="challengePDiv" >
             <p class="challengePTitle" data-i18n="challengePTitle_8">Prestige Challenge 8</p>
             <span class="challengePDesc challengePCond statsSlot" data-i18n="challengePConditionText8"></span>
             <span class="challengePDesc challengePGoal statsSlot"><span data-i18n="cp_goal">Goal: Collect </span><span id="pc8_goal">0</span><span data-i18n="currency_acoins_space"> α-coins.</span></span>
@@ -1044,7 +1236,7 @@
           </button> -->
         </div>
         <div id="prestigeSpecialRow" class="centeredDiv" style="display: none">
-          <button onclick="maxBuyAllPrestige()" id="maxBuyPrestige" class="upgradeButton maxBuy" style="width: 200px; border-color: rgb(0, 124, 124)" data-i18n="buyMax">Купить все</button>
+          <button onclick="maxBuyAllPrestige()" id="maxBuyPrestige" class="upgradeButton maxBuy" style="width: 200px;" data-i18n="buyMax">Купить все</button>
         </div>
       </div>
       <div id="milestonesTab" style="display:none">
@@ -1204,14 +1396,14 @@
           <ut><span data-i18n="shardUnlockable1_name">Shard Generator</span> (<span id="su1_perc">0</span>%):</ut> <br> <span id="su1_cons">0</span>/<span id="su1_cost">1000</span>
         </div>
       </div>
-      <button onclick="getShardPerClick(event)" id="shardsClick" style="display: none" data-i18n="doBreakCrystal">Click</button>
+      <button onclick="getShardPerClick(event)" id="shardsClick" style="display: none"></button>
       <div id="shardUnlockableBase2" class="shardUnlockableBase">
         <div id="shardUnlock2" class="shardUnlockable"></div>
         <div class="shardUnlockableText">
           <ut><span data-i18n="shardUnlockable2_name">Clicker</span> (<span id="su2_perc">0</span>%):</ut> <br> <span id="su2_cons">0</span>/<span id="su2_cost">1000</span>
         </div>
       </div>
-      <button onclick="openWindow('break', true)" id="doBreakCrystal" class="upgradeButton" data-i18n="doBreakCrystal">Break crystals</button>
+      <button onclick="openWindow('break', true)" id="doBreakCrystal" class="upgradeButton" data-i18n="doBreakCrystal"></button>
       <div class="centeredDiv">
           <button onclick="maxBuyAllShards()" id="maxBuyShards" class="upgradeButton maxBuy" data-i18n="buyMax">Купить все</button>
         </div>
@@ -1296,11 +1488,14 @@
     </div>
     <div id="superCrystalsTab" style="display: none">
       <div id="superCrystalGen">
-          <div id="superCrystalBarBase">
-            <div id="superCrystalBarGhost">
-              <span id="superCrystalPour">10%</span>
-            </div>
-            <div id="superCrystalBar"></div>
+        <span id="shardsCountText_2" class="whiteText">
+          <span data-i18n="shardsCountForMinerals_1">You have</span> <span id="shards_currency_val_2">0</span> <span data-i18n="shardsCountForMinerals_2">shards</span>
+          </span>
+        <div id="superCrystalBarBase">
+          <div id="superCrystalBarGhost">
+            <span id="superCrystalPour">10%</span>
+          </div>
+          <div id="superCrystalBar"></div>
         </div>
         <div id="superCrystalText">
           <span class="whiteText"><span data-i18n="pourShards_1">Poured Shards:</span> <span id="sc_poured_val">0</span>/<span id="sc_req_val">0</span></span>
@@ -1549,11 +1744,11 @@
         <span class="currencyCount"><span data-i18n="fort_tokens_count">You have</span> <span id="ft_tokens_val">0</span> <span data-i18n="fort_tokens">Fortune Tokens</span></span>
         <div id="fortuneConvert">
           <div class="halfButton left" onclick="MISC.fortune.convert('coin')">
-            <div style="width: 35%; margin-left: 6px; color: gold"><span data-i18n="fort_convert_1">Spend</span> <span id="ft_coin_cost">0</span> <span data-i18n="fort_convert_coins">α-coins for 1 Fortune Token</span></div>
+            <div id="coinConvert" style="width: 35%; margin-left: 6px;"><span data-i18n="fort_convert_1">Spend</span> <span id="ft_coin_cost">0</span> <span data-i18n="fort_convert_coins">α-coins for 1 Fortune Token</span></div>
           </div>
           <div id="whiteLine"></div>
           <div class="halfButton right" onclick="MISC.fortune.convert('crystal')">
-            <div style="width: 35%; margin-right: 6px; color:aqua"><span data-i18n="fort_convert_1">Spend</span> <span id="ft_cryst_cost">0</span> <span data-i18n="fort_convert_crys">crystals for 1 Fortune Token</span></div>
+            <div id="crystalConvert" style="width: 35%; margin-right: 6px;"><span data-i18n="fort_convert_1">Spend</span> <span id="ft_cryst_cost">0</span> <span data-i18n="fort_convert_crys">crystals for 1 Fortune Token</span></div>
           </div>
           <div class="donut-center" style="display: flex; flex-direction: column">
             <span data-i18n="fort_tokens_short" id="fortuneTokensCount2" style="margin: 0">Tokens</span><pt id="ft_tokens_val2">0</pt>
@@ -1975,6 +2170,7 @@
       <div id="achSubButtons">
         <button onclick="selectSubTab(achScreenDescription, false, 'achievements')" id="achievementsSelect" class="tabButton subButton active" data-i18n="achButton">Достижения</button>
         <button onclick="selectSubTab(shardAchsTab, true, 'achievements')" id="shardAchievementsSelect" class="tabButton subButton prestigeButton" data-i18n="shardAchButton">Дост. Осколков</button>
+        <button onclick="selectSubTab(treasureTab, false, 'achievements')" id="treasureSelect" class="tabButton subButton" data-i18n="treasureButton">Сокровища</button>
       </div>
       <div id="achScreenDescription">
         <p id="achievementsTitle" class="titleTab" data-i18n="achievementsTitle">Достижения</p>
@@ -1984,494 +2180,7 @@
         <p id="achBonus" class="achievementPageDescription statsSlot">
           <span data-i18n="achievementsBonus_1">Achievements provides a: x</span><span id="ach_coin_eff">1</span> <span data-i18n="achievementsBonus_2">multiplier for α-coins</span><span id="ach_cryst_cont" style="display:none">, x<span id="ach_cryst_eff">1</span> <span data-i18n="achievementsBonus_3">for crystal multiplier</span></span><span id="ach_shard_cont" style="display:none">, x<span id="ach_shard_eff">1</span> <span data-i18n="achievementsBonus_4">for shards generation</span></span>
         </p>
-        <div id="achievementsList">
-          <div id="firstAchievementRow" class="achRow">
-            <div id="ach11" class="ach">
-              <span id="achName11" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach11" class="tooltip" role="tooltip">
-              <span id="tooltipAch11" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-            
-            <div id="ach12" class="ach">
-              <span id="achName12" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach12" class="tooltip" role="tooltip">
-              <span id="tooltipAch12" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-            
-            <div id="ach13" class="ach">
-              <span id="achName13" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach13" class="tooltip" role="tooltip">
-              <span id="tooltipAch13" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach14" class="ach">
-              <span id="achName14" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach14" class="tooltip" role="tooltip">
-              <span id="tooltipAch14" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach15" class="ach">
-              <span id="achName15" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach15" class="tooltip" role="tooltip">
-              <span id="tooltipAch15" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach16" class="ach">
-              <span id="achName16" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach16" class="tooltip" role="tooltip">
-              <span id="tooltipAch16" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach17" class="ach">
-              <span id="achName17" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach17" class="tooltip" role="tooltip">
-              <span id="tooltipAch17" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach18" class="ach">
-              <span id="achName18" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach18" class="tooltip" role="tooltip">
-              <span id="tooltipAch18" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach19" class="ach">
-              <span id="achName19" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach19" class="tooltip" role="tooltip">
-              <span id="tooltipAch19" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach20" class="ach">
-              <span id="achName20" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach20" class="tooltip" role="tooltip">
-              <span id="tooltipAch20" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-          </div>
-          <div id="secondAchievementRow" class="achRow">
-            <div id="ach21" class="ach">
-              <span id="achName21" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach21" class="tooltip" role="tooltip">
-              <span id="tooltipAch21" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach22" class="ach">
-              <span id="achName22" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach22" class="tooltip" role="tooltip">
-              <span id="tooltipAch22" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach23" class="ach">
-              <span id="achName23" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach23" class="tooltip" role="tooltip">
-              <span id="tooltipAch23" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach24" class="ach">
-              <span id="achName24" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach24" class="tooltip" role="tooltip">
-              <span id="tooltipAch24" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach25" class="ach">
-              <span id="achName25" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach25" class="tooltip" role="tooltip">
-              <span id="tooltipAch25" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach26" class="ach">
-              <span id="achName26" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach26" class="tooltip" role="tooltip">
-              <span id="tooltipAch26" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach27" class="ach">
-              <span id="achName27" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach27" class="tooltip" role="tooltip">
-              <span id="tooltipAch27" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach28" class="ach">
-              <span id="achName28" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach28" class="tooltip" role="tooltip">
-              <span id="tooltipAch28" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach29" class="ach">
-              <span id="achName29" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach29" class="tooltip" role="tooltip">
-              <span id="tooltipAch29" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach30" class="ach">
-              <span id="achName30" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach30" class="tooltip" role="tooltip">
-              <span id="tooltipAch30" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-          </div>
-          <div id="thirdAchievementRow" class="achRow">
-            <div id="ach31" class="ach">
-              <span id="achName31" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach31" class="tooltip" role="tooltip">
-              <span id="tooltipAch31" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach32" class="ach">
-              <span id="achName32" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach32" class="tooltip" role="tooltip">
-              <span id="tooltipAch32" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach33" class="ach">
-              <span id="achName33" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach33" class="tooltip" role="tooltip">
-              <span id="tooltipAch33" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach34" class="ach">
-              <span id="achName34" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach34" class="tooltip" role="tooltip">
-              <span id="tooltipAch34" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach35" class="ach">
-              <span id="achName35" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach35" class="tooltip" role="tooltip">
-              <span id="tooltipAch35" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach36" class="ach">
-              <span id="achName36" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach36" class="tooltip" role="tooltip">
-              <span id="tooltipAch36" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach37" class="ach">
-              <span id="achName37" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach37" class="tooltip" role="tooltip">
-              <span id="tooltipAch37" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach38" class="ach">
-              <span id="achName38" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach38" class="tooltip" role="tooltip">
-              <span id="tooltipAch38" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach39" class="ach">
-              <span id="achName39" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach39" class="tooltip" role="tooltip">
-              <span id="tooltipAch39" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach40" class="ach">
-              <span id="achName40" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach40" class="tooltip" role="tooltip">
-              <span id="tooltipAch40" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-          </div>
-          <div id="fourthAchievementRow" class="achRow">
-            <div id="ach41" class="ach">
-              <span id="achName41" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach41" class="tooltip" role="tooltip">
-              <span id="tooltipAch41" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach42" class="ach">
-              <span id="achName42" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach42" class="tooltip" role="tooltip">
-              <span id="tooltipAch42" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach43" class="ach">
-              <span id="achName43" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach43" class="tooltip" role="tooltip">
-              <span id="tooltipAch43" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach44" class="ach">
-              <span id="achName44" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach44" class="tooltip" role="tooltip">
-              <span id="tooltipAch44" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach45" class="ach">
-              <span id="achName45" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach45" class="tooltip" role="tooltip">
-              <span id="tooltipAch45" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach46" class="ach">
-              <span id="achName46" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach46" class="tooltip" role="tooltip">
-              <span id="tooltipAch46" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach47" class="ach">
-              <span id="achName47" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach47" class="tooltip" role="tooltip">
-              <span id="tooltipAch47" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach48" class="ach">
-              <span id="achName48" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach48" class="tooltip" role="tooltip">
-              <span id="tooltipAch48" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach49" class="ach">
-              <span id="achName49" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach49" class="tooltip" role="tooltip">
-              <span id="tooltipAch49" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach50" class="ach">
-              <span id="achName50" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach50" class="tooltip" role="tooltip">
-              <span id="tooltipAch50" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-          </div>
-          <div id="fifthAchievementRow" class="achRow">
-            <div id="ach51" class="ach">
-              <span id="achName51" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach51" class="tooltip" role="tooltip">
-              <span id="tooltipAch51" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach52" class="ach">
-              <span id="achName52" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach52" class="tooltip" role="tooltip">
-              <span id="tooltipAch52" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach53" class="ach">
-              <span id="achName53" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach53" class="tooltip" role="tooltip">
-              <span id="tooltipAch53" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach54" class="ach">
-              <span id="achName54" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach54" class="tooltip" role="tooltip">
-              <span id="tooltipAch54" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach55" class="ach">
-              <span id="achName55" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach55" class="tooltip" role="tooltip">
-              <span id="tooltipAch55" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach56" class="ach">
-              <span id="achName56" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach56" class="tooltip" role="tooltip">
-              <span id="tooltipAch56" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach57" class="ach">
-              <span id="achName57" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach57" class="tooltip" role="tooltip">
-              <span id="tooltipAch57" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach58" class="ach">
-              <span id="achName58" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach58" class="tooltip" role="tooltip">
-              <span id="tooltipAch58" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach59" class="ach">
-              <span id="achName59" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach59" class="tooltip" role="tooltip">
-              <span id="tooltipAch59" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach60" class="ach">
-              <span id="achName60" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach60" class="tooltip" role="tooltip">
-              <span id="tooltipAch60" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-          </div>
-          <div id="sixthAchievementRow" class="achRow">
-            <div id="ach61" class="ach">
-              <span id="achName61" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach61" class="tooltip" role="tooltip">
-              <span id="tooltipAch61" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach62" class="ach">
-              <span id="achName62" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach62" class="tooltip" role="tooltip">
-              <span id="tooltipAch62" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach63" class="ach">
-              <span id="achName63" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach63" class="tooltip" role="tooltip">
-              <span id="tooltipAch63" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach64" class="ach">
-              <span id="achName64" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach64" class="tooltip" role="tooltip">
-              <span id="tooltipAch64" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach65" class="ach">
-              <span id="achName65" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach65" class="tooltip" role="tooltip">
-              <span id="tooltipAch65" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach66" class="ach">
-              <span id="achName66" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach66" class="tooltip" role="tooltip">
-              <span id="tooltipAch66" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach67" class="ach">
-              <span id="achName67" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach67" class="tooltip" role="tooltip">
-              <span id="tooltipAch67" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach68" class="ach">
-              <span id="achName58" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach68" class="tooltip" role="tooltip">
-              <span id="tooltipAch68" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach69" class="ach">
-              <span id="achName69" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach69" class="tooltip" role="tooltip">
-              <span id="tooltipAch69" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-
-            <div id="ach70" class="ach">
-              <span id="achName70" class="achievementName">Without</span>
-            </div>
-            <div id="tooltip-ach70" class="tooltip" role="tooltip">
-              <span id="tooltipAch70" class="tooltipAch"><ut> Без ходуль (11) </ut> <br> <br> Начать производство монет!</span>
-              <div class="arrow" data-popper-arrow></div>
-            </div>
-          </div>
-        </div>
+        <div id="achievementsList"></div>
       </div>
       <div id="shardAchsTab" style="display:none">
         <button id="shardAchUnlockable1" class="shardUnlockableBase shardAchUnlBase" onclick="unlockShardAch(1)">Разблокировать Достижения Осколков для монет <br> Стоимость: 1 суперкристалл
@@ -2635,6 +2344,14 @@
         </div>
         </div>
         <button onclick="respecShardAchs()" id="respecShardAchsButton" class="tabButton" data-i18n="respecShop">Respec</button>
+      </div>
+      <div id="treasureTab" style="display:none">
+        <p class="titleTab" data-i18n="treasureName1">Сокровища</p>
+        <div id="treasuresDiv"></div>
+        <p class="titleTab" data-i18n="treasureName2">Сокровища событий</p>
+        <div id="eventTreasuresDiv">
+          
+        </div>
       </div>
     </div>
     <div id="infoTab" style="display:none">
@@ -3498,17 +3215,56 @@
               <button data-i18n="importOrder" class="whiteButton" style="width: 130px;" onclick="importPreset(player.reflash.selectedPreset)">Import</button>
             </div>
           </div>
+
+          <div id="treasureDetails" class="windowDesc" style="display: none">
+            <div id="treasureIconAndName">
+              <div id="treasureIconBig"></div>
+              <div id="treasureDetailsText">
+                <span id="treasureDetailsName" class="titleTab">DIGITALIZATION</span>
+                <span data-i18n="eventTreasure.effect.permanent" class="whiteText">Permanent effect</span>
+                <span id="treasureDetailsPermEffect" class="whiteText">Effect</span>
+                <span data-i18n="eventTreasure.effect.temporary" class="whiteText temporaryTreasure">Temporary effect</span>
+                <span id="treasureDetailsTempEffect" class="whiteText temporaryTreasure">Effect</span>
+              </div>
+            </div>
+            <div id="treasureDescription">
+              <span id="treasureDescriptionText" class="whiteText">Description</span>
+              <p id="treasureDescriptionDate" class="whiteText">Obtained: 23.07.2026</p>
+            </div>
+          </div>
         </div>
-        <div id="additionalVirusWindow">
+        <div id="additionalVirusWindow" style="display: none">
 
         </div>
-        <div id="virusWindow">
+        <div id="virusWindow" style="display: none">
           <header>
-            
+            <div id="virus-progress-bar-base" class="progress-bar-base" style="background-color: black;">
+              <div id="virus-progressbar" class="progress-bar">
+              </div>
+              <div id="virus-progress-bar-text">
+                <span id="virus-percent">10%</span>
+              </div>
+            </div>
           </header>
           <footer>
-
+            <div class="bigText">
+              <span data-i18n="virusTitle_1"> </span>&nbsp;<span id="virusType"></span>&nbsp;<span data-i18n="virusTitle_2"></span>&nbsp;<span id="virusLevel"></span> <span data-i18n="virusTitle_3"></span>
+            </div>
+            <div class="bigText">
+              <span data-i18n="virusTime_1"></span>&nbsp;<vn><span id="virusTime"></span></vn>&nbsp;<span data-i18n="virusTime_2"></span>
+            </div>
+            <div class="bigText">
+              <span id="virusReq"></span>
+            </div>
           </footer>
+        </div>
+        <div id="temporaryBonuses">
+          <div id="toggleBtn" onclick="togglePanel()">☰</div>
+          <div id="virusEffect" class="whiteText">
+            <ut><span data-i18n="virus-effect-title">Бонус вируса</span></ut><br>
+            <span id="virus-effect-status"></span><span id="bonus-virus"></span>&nbsp;<span id="virus-effect-type">к монетам</span><br>
+            <span id="bonus-virus-timer"></span>
+          </div>
         </div>
   </div>
   
@@ -3524,10 +3280,11 @@
     <script src="javascript/jsfiles/upgrades2.0.js"></script>
     <script src="javascript/jsfiles/layers.js"></script>
     <script src="javascript/jsfiles/changelog.js"></script>
-    <script src="javascript/jsfiles/saving.js"></script>
+    <script src="javascript/jsfiles/save.js"></script>
     <script src="javascript/jsfiles/translationsOptimizer.js"></script>
     <script type="module" src="javascript/jsfiles/languages.js"></script>
     <script src="javascript/jsfiles/functions.js"></script>
+    <script src="javascript/jsfiles/events.js"></script>
     <script>
     let select = document.getElementById("changeFont");
     let options = document.getElementsByClassName("fontSelector");

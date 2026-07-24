@@ -3033,3 +3033,6 @@ function buySuperCrystalSingle(single) {
             <p id="chapterDescription">Choose chapter</p>
           </div>
         </div> -->
+
+
+        if (player.virus.activated && player.virus.type == 1) player.virus.current++

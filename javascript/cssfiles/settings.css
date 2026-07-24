@@ -6,25 +6,31 @@
 }
 
 .settingButton{
-    border: solid 1px rgb(80, 82, 255); 
+    border: solid 1px var(--settings); 
     border-radius: 5px;
     max-width: 225px;
     max-height: 100px;
     width: 20vw;
     height: 7vw;
-    color: rgb(85, 88, 255);
+    color: var(--settings);
     background-color: rgb(0, 0, 0);
     text-align: center;
     font-size: calc(18px * var(--font-scale));
     transition:  0.25s ease-in-out;
+    position: relative;
+    cursor:pointer;
 }
 
-.settingButton:active {
+/* .settingButton:active {
     transform: scale(0.98); 
+} */
+
+.settingButton .settingButton {
+    border-width: 0px;
 }
 
 .settingButton:hover{
-    background-color: rgb(53, 55, 162);
+    background-color: var(--settings);
     color: #000000;
 }
 #hardRes {
@@ -291,13 +297,12 @@ footer {
 
 .selectSetting:hover {
     background-color: black;
-    color: rgb(53, 55, 162);
+    color: var(--settings);
 }
 
 .selectSetting:active {
     transform: scale(1); 
 }
-
 
 #inputBorder{
     border-style: solid;
@@ -305,8 +310,8 @@ footer {
     border-radius: 5px;
     width: 490px;
     height: 200px;
-    border-color:rgb(65, 68, 207);
-    color: rgb(65, 68, 207);
+    border-color:var(--settings);
+    color: var(--settings);
     background-color: rgb(0, 0, 0);
     text-align: center;
     font-family: "Poly"; 
@@ -318,7 +323,7 @@ footer {
 }
 
 #inputText {
-    color: rgb(65, 68, 207);
+    /* color: rgb(65, 68, 207); */
     margin-top: 0;
 }
 
@@ -387,4 +392,189 @@ footer {
 
 #majorVersionSelection button:hover, .closeWindow:hover {
     background-color: #313131;
+}
+
+.ghostSettingsText {
+    color:var(--settings);
+    position: absolute;
+    top: 0;
+    z-index: 9999;
+    font-weight: bold;
+    width: 100%;
+    border-bottom: 1px solid var(--settings);
+    pointer-events: none;
+}
+
+.progress-bar-base.progressbar-option2 #progressbar {
+    background-image: radial-gradient(yellow, #040000 170%);
+}
+
+.progress-bar-base.progressbar-option3 #progressbar {
+    background-image: radial-gradient(aqua, #040000 170%);
+}
+
+.progress-bar-base.progressbar-option4 #progressbar {
+    background-image: radial-gradient(forestgreen, #040000 170%);
+}
+
+.progress-bar-base.progressbar-option5 #progressbar {
+    background-image: radial-gradient(hotpink, #040000 170%);
+}
+
+.progress-bar-base.progressbar-option6 {
+    background-color: white;
+}
+
+.progress-bar-base.progressbar-option6 span {
+    color: white;
+    mix-blend-mode: difference;
+}
+
+.progress-bar-base.progressbar-option6 #progressbar {
+    background-image: radial-gradient(#000000, #040000 170%);
+}
+
+.progress-bar-base.progressbar-option7 {
+    background-color: rgb(1, 142, 185);
+}
+
+.progress-bar-base.progressbar-option7 #progressbar {
+    background-image: radial-gradient(#e9fa01, #040000 170%);
+}
+
+.progress-bar-base.progressbar-option8 {
+    background-color: black;
+    color: white;
+}
+
+.progress-bar-base.progressbar-option8 #progressbar {
+    background-image: radial-gradient(red, #040000 170%);
+}
+
+
+/* === ANTIMATTER THEME === */
+
+body.theme-option2 {
+    background-color: #141316
+}
+
+body.theme-option2 gt {
+    color: #df5050;
+    text-shadow: 0 0 0;
+}
+
+body.theme-option2 .coinUpgradeButton, body.theme-option2 .tabButton, body.theme-option2 .settingButton, body.theme-option2 #hardRes, body.theme-option2 .maxBuy, body.theme-option2 #inputBorder, body.theme-option2 .whiteButton, body.theme-option2 .closeWindow, body.theme-option2 .versionButton {
+    border-color: #1bbb36;
+    color: white;
+    background-color: #1d1b22;
+}
+
+body.theme-option2 .coinUpgradeButton:hover, body.theme-option2 .settingButton:hover, body.theme-option2 #hardRes:hover, body.theme-option2 .maxBuy:hover, body.theme-option2 .whiteButton:hover, body.theme-option2 .closeWindow:hover, body.theme-option2 .versionButton:hover {
+    color: rgb(0, 0, 0);
+    background-color: #1bbb36;
+    box-shadow: none;
+}
+
+body.theme-option2 .tabButton:hover {
+    color: rgb(0, 0, 0);
+    background-color: #1bbb36;
+}
+
+body.theme-option2 .coinUpgradeButton.purchased {
+    background-color: #1bbb36;
+}
+
+body.theme-option2 button:disabled {
+    border-color: #b84b5f !important;
+    background-color: #752626 !important;
+}
+
+body.theme-option2 .ghostSettingsText {
+    color: white;
+    border-color: white
+}
+
+body.theme-option2 .upgradeButton {
+    background-color: #1d1b22
+}
+
+body.theme-option2 .prestigeInput {
+    border-color: var(--shard)
+}
+
+body.theme-option2 .selectSetting:hover {
+    background-color: #1d1b22;
+    color: white;
+}
+
+body.theme-option2 .prestigeButton:hover {
+    background-color: var(--crystal) !important;
+    color: black !important;
+}
+
+body.theme-option2 .reflashButton:hover {
+    background-color: var(--reflash) !important;
+    color: black !important;
+}
+
+body.theme-option2 .acceleratorUpgrade:hover {
+    background-color: #9226a821 !important;
+}
+
+body.theme-option2 #acceleratorMachineProgressBar {
+    background-image: radial-gradient(#390044, #040000 170%) !important; 
+}
+
+body.theme-option2 .fortuneButton2:hover {
+  background-color: var(--fortune) !important;
+  color: rgb(0, 0, 0) !important;
+}
+
+body.theme-option2 #balanceSelect:hover {
+  background-color: white !important;
+  color: rgb(0, 0, 0) !important;
+}
+
+body.theme-option2 #windowGame, body.theme-option2 .gameWindow {
+    background-color: rgb(29, 27, 34);
+    border-color: #1bbb36 !important;
+}
+
+body.theme-option2 .tabButton.active,
+body.theme-option2 .tabButton[aria-selected="true"] {
+    background-color: #1bbb36;
+    color: rgb(0, 0, 0);
+    border-color: rgb(0, 0, 0);
+}
+body.theme-option2 .tabButton.active:hover,
+body.theme-option2 .tabButton[aria-selected="true"]:hover {
+    background-color: #1bbb36;
+}
+
+body.theme-option2 .shopSelection.active,
+body.theme-option2 .shopSelection[aria-selected="true"] {
+    background-color: #1bbb36;
+    color: rgb(0, 0, 0);
+    border-color: rgb(0, 0, 0);
+}
+.shopSelection.active:hover,
+.shopSelection[aria-selected="true"]:hover {
+    background-color: #1bbb36
+}
+
+body.theme-option2 .bulkBuySelection.active,
+body.theme-option2 .bulkBuySelection[aria-selected="true"] {
+    background-color: #1bbb36;
+    color: rgb(0, 0, 0);
+    border-color: rgb(0, 0, 0);
+}
+body.theme-option2 .bulkBuySelection.active:hover,
+body.theme-option2 .bulkBuySelection[aria-selected="true"]:hover {
+    background-color: #1bbb36;
+}
+
+/* === OLED THEME === */
+
+body.theme-option3 {
+    background-color: #000000;
 }

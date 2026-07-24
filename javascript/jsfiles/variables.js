@@ -103,6 +103,20 @@ let player = {
         selectedPreset: 0,
         respecTree: false,
     },
+    virus: {
+        current: 0,
+        goal: 0,
+        type: 0,
+        time: 0,
+        level: 0,
+        activated: false,
+        effect: {
+            multiplier: 0,
+            type: 0,
+            time: 0,
+            status: ''
+        }
+    },
     time: {
         savedTime: Date.now(), currentTime: 0,
         game: {
@@ -117,7 +131,7 @@ let player = {
     tabs: { main: [], settings_sub: [], clicker_sub: [], info_sub: [], prestige_sub: [], multi_breakdown_sub: [] },
     settings: {
         currentLanguage: 'en', auto_save: true, mutedAudio: false, shop_bulkbuy: 1, minerals_bulkbuy: 1,
-        font: 'option1', notation: 'option1',
+        notation: 'option1',
         buy_max_activate: false, shard_buy_max_activate: false, breakprestige_buy_max_activate: false, balance_buy_max_activate: false, modernization_activated: false,
         loreBoolean: [], event: { spiritual: false, triplePower: false },
         whichPrestigeMode: 'time', autosave_interval: 30000, offline: true,
@@ -139,7 +153,75 @@ let player = {
     },
     code: { activated: [], name: ['umultiplier', 'upower', 'timemachine', 'hardmachine', 'sorry'] },
     overdrive: { consumed: { type1: 0, type2: 0 } },
-    offline_gain: { time: '', coin: '', supercoin: '', crystal: '', prestige: '', shard: '' }
+    offline_gain: { time: '', coin: '', supercoin: '', crystal: '', prestige: '', shard: '' },
+    event: {
+        digitalization: {
+            activated: false,
+            quests: {
+                daily: {
+                    progress: Array(4).fill(0),
+                    completed: [],
+                },
+                weekly: {
+                    progress: Array(5).fill(0),
+                    completed: [],
+                }
+            },
+            pass_level: 0,
+            pass_points: 0,
+            taken_rewards: [],
+            time: {
+                next_daily: 0,
+                next_weekly: 0
+            }
+        },
+    },
+    treasure: {
+        digitalization: {
+            1: {
+                amount: 0,
+                date: ''
+            },
+            2: {
+                amount: 0,
+                date: ''
+            },
+            3: {
+                amount: 0,
+                date: ''
+            },
+            4: {
+                amount: 0,
+                date: ''
+            },
+            5: {
+                amount: 0,
+                date: ''
+            },
+        }
+    },
+    cosmetics: {
+        fonts: {
+            styles: [],
+            current: 'option1'
+        },
+        progressBars: {
+            styles: [],
+            current: 'option1'
+        },
+        themes: {
+            styles: [],
+            current: 'option1'
+        },
+        coins: {
+            styles: [],
+            current: 'option1'
+        },
+        backgrounds: {
+            styles: [],
+            current: 'option1'
+        },
+    }
 };
 
 // Явное выставление нулей для ачивок (чтобы не было проблем с пустыми строками)
@@ -173,6 +255,10 @@ const text = {
             reset: '',
             save: '',
             import: ''
+        },
+        digitalization: {
+            daily: '',
+            weekly: '',
         }
     },
     window: { hard: '', NaN: '' },

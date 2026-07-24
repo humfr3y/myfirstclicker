@@ -218,7 +218,7 @@ it {
     align-items: center;
 }
 .automationContainer {
-    border: 2px solid rgb(202, 255, 248);
+    border: 2px solid var(--shard);
     border-radius: 10px;
     display: flex;
     max-height: 150px;
@@ -232,10 +232,10 @@ it {
 }
 
 .automationUpgrade, .automationUpgrade2 {
-    border: 2px rgb(202, 255, 248) solid;
+    border: 2px var(--shard) solid;
     height: 50px;
     background-color:  #101010;
-    color: rgb(202, 255, 248);;
+    color: var(--shard);
     cursor:pointer;
     border-radius: 5px;
     font-size: calc(12px * var(--font-scale));
@@ -250,7 +250,7 @@ it {
 
 
 .automationUpgrade:hover, #autoPrestigeMode:hover, .automationUpgrade2:hover {
-    background-color: rgb(202, 255, 248);;
+    background-color: var(--shard);
     color: black
 }
 
@@ -314,6 +314,10 @@ input {
     padding: 5px;
     margin: 5px;
     height: 250px;
+}
+
+.challengePDiv {
+    border-color: var(--crystal)
 }
 
 #challenges, #prestigeChallenges {

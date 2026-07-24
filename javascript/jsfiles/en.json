@@ -69,12 +69,14 @@
     "challengeButton": "Challenges",
     "breakPrestigeButton": "Break Prestige",
     "achButton": "Achievements",
-    "shardAchButton": "Shard Ach.",
+    "shardAchButton": "Shard Achievements",
     "softcapsTitle": "Softcaps",
     "fortuneButton": "Fortune",
     "balanceButton": "Balance",
     "challengeCoinButton": "Challenges",
     "challengePrestigeButton": "Prestige Challenges",
+    "cosmeticsButton": "Cosmetics",
+    "treasureButton": "Treasures",
 
     "reflashButton": "Reflash",
     "reflashUpgradesButton": "Upgrades",
@@ -673,6 +675,9 @@
     "resetOrder": "Reset",
     "saveOrder": "Save",
     "importOrder": "Import",
+
+    "treasureName1": "Treasures",
+    "treasureName2": "Event treasures",
 
     "achievementsTitle": "Achievements",
 
@@ -1439,6 +1444,173 @@
         "3": ["You're clearly no ordinary person. You have a hidden... desire to spend fresh Supercoins!", "Where have I been all this time? Here.", "They say export gives you free supercoins, which you can spend elsewhere to become stronger...", "You've probably noticed that I have a shield, crown, and sword on my shelf. They're just decorations; I'm not selling them, because they're useless in this world.", "What? You've already broken prestige barrier? In honor of that, I'll show you some new goods!", "You'll soon have to meet a nasty creature. They call her Fortune; it would be better if there was a chance to avoid her."],
         "4": ["Have you noticed that I'm not a completely lonely old man standing behind stall? No, in fact, I really am a completely lonely old man standing behind stall.", "To defeat Fortune, you need to become neutral.", "Sorry, unfortunately I only have two new items that will help you in your adventure.", "Aquatic Pickaxe will give you access to a very powerful mineral, but to get the mineral itself, you need a lot, a lot of shards and runes.", "Do you know why I have ^ and x? Does that really mean something.", "You want to hear secrets of this place from me? I'm just a simple old man, I can't help you."],
         "5": ["Great, great, you finally got to the point where I had to reopen my shop, well, welcome to Supershop 2.", "You know, this place is really unusual, coins, supercoins, upgrades, prestige, fortune, reflash... Is this a coincidence?", "You know, I like you, I think the past me was also very happy to see you, and especially your supercoins.", "Have they replaced me? No, I'm still same lonely old man standing behind stall.", "What? Are my lines different? I don't understand what you're talking about.", "I'm Mr. Super.", "It seems like I've been here for a very long time.", "I wonder if the past me was this handsome?", "Are you fed up with these Viruses? No problem! We have the first REAPER antivirus in stock, did you know it once defeated CREEPER?", "We've released a Credit Card PLUS especially for regular customers, like you! It gives even more daily rewards and export bonuses!", "It seems Reflash is just the beginning. Although, how would I know the name... I think you told me.", "Meeting Fortune a second time is like visiting the nine circles of hell again, I'm used to it. Did I say Nine Circles?"]
+        }
+    },
+
+    "virusTitle_1": "You've got corrupted by virus of",
+    "virusTitle_2": "order",
+    "virusTitle_3": "level!",
+
+    "virusTime_1": "To defeat it you have left",
+    "virusTime_2": "seconds",
+
+    "virus": {
+        "1": "Do {{x}}/{{y}} clicks at coin",
+        "2": "Do {{x}}/{{y}} prestige resets",
+        "3": "Do {{x}}/{{y}} crystal breaks",
+        "4": "Spend {{x}}/{{y}} supercoins (respec doesn't reset goal)",
+        "5": "Spend {{x}}/{{y}} supercrystal (respec doesn't reset goal)",
+        "6": "Spend {{x}}/{{y}} fortune tokens (respec doesn't reset goal)"
+    },
+
+    "tempBoostTimer_1": "{{m}}:{{s}} left",
+    "tempBoostTimer_2": "{{s}}s. left",
+
+    "virus_effects": {
+        "1": "to coin gain (not affected by softcap)",
+        "2": "to crystal gain (not affected by softcap)",
+        "3": "to shard gain",
+        "4": "to supercoin chance",
+        "5": "to shard achievements bonuses",
+        "6": "to neutral gain"
+    },
+
+    "virus-effect-title": "Virus effect",
+
+    "digitalization": {
+        "eventName": "DIGITALIZATION",
+
+        "eventStarts_1": "Event starts in {{d}}d {{h}}h",
+        "eventStarts_2": "Event starts in {{h}}h {{m}}m",
+        "eventStarts_3": "Event starts in {{m}}m {{s}}s",
+
+        "eventEnds_1": "Event ends in {{d}}d {{h}}h",
+        "eventEnds_2": "Event ends in {{h}}h {{m}}m",
+        "eventEnds_3": "Event ends in {{m}}m {{s}}s",
+
+        "eventQuests": "Quests",
+        "daily": "Daily",
+        "weekly": "Weekly",
+
+        "questReset_1": "Quests reset in {{d}}d {{h}}h {{m}}m",
+        "questReset_2": "Quests reset in {{h}}h {{m}}m {{s}}s",
+        "questReset_3": "Quests reset in {{m}}m {{s}}s",
+
+        "dailyQuests": {
+            "1": {
+                "name": "Master-clicker",
+                "desc": "Do {{x}}/1000 clicks",
+                "reward": "100 points"
+            },
+            "2": {
+                "name": "Active player",
+                "desc": "Be online for {{x}}/60 minutes",
+                "reward": "100 points"
+            },
+            "3": {
+                "name": "Prestigious",
+                "desc": "Do {{x}}/5000 prestige resets",
+                "reward": "100 points"
+            },
+            "4": {
+                "name": "Dig it ({{x}}%)",
+                "desc": "Every click has 5% chance to give point (limit {{x}}/200)",
+                "reward": "1 point"
+            },
+            "notify": "You completed one of daily quests!"
+        },
+
+        "weeklyQuests": {
+            "1": {
+                "name": "Expert-clicker",
+                "desc": "Do {{x}}/10000 clicks",
+                "reward": "500 points"
+            },
+            "2": {
+                "name": "Always in game",
+                "desc": "Be online for {{x}}/12 hours",
+                "reward": "500 points"
+            },
+            "3": {
+                "name": "U-super!",
+                "desc": "Get {{x}}/50000 U-tils in total",
+                "reward": "500 points"
+            },
+            "4": {
+                "name": "Megaprestigious",
+                "desc": "Do {{x}}/50000 prestige resets",
+                "reward": "600 points"
+            },
+            "5": {
+                "name": "Shopaholic",
+                "desc": "Buy {{x}}/10000000 coin upgrades",
+                "reward": "1000 points"
+            },
+            "notify": "You completed one of weekly quests!"
+        },
+
+        "freePass": "FREE PASS",
+
+        "points": "{{x}}/{{y}} points",
+
+        "level": "Level",
+        "getReward": "You got reward: ",
+
+        "passRewards": [
+            "DIGITALIZATION", "1 Free U-multiplier", "1 Time Accelerator", "250 supercoins", "Custom font",
+            "2 Free U-multipliers", "First a-coin", "1 Free U-Power", "500 supercoins", "Custom progress-bar",
+            "4 Free U-multipliers", "5 Time Accelerator", "1000 supercoins", "3 Free U-Powers", "Custom background",
+            "8 Time Accelerator", "Supersupercoin", "6 Free U-multipliers", "2000 supercoins", "Custom theme",
+            "10 Time Accelerator", "5 Free U-Powers", "Legacy Prestige", "10 Free U-multipliers", "Custom theme",
+            "5000 supercoins", "20 Time Accelerator", "15 Free U-multipliers", "My1stClicker NULL", "Custom coin icon"
+        ] 
+    },
+
+    "eventTreasure": {
+        "effect": {
+            "permanent": "Permanent boost: ",
+            "temporary": "Temporary boost (event-only): "
+        },
+        "date": "Obtained: ",
+        "1": {
+            "name": "DIGITALIZATION",
+            "desc": "I discovered it only recently. The phrase \"digitalization\" probably means that my world has become digital, but I don't understand what that means. Wasn't it already digital? This treasure represents a revolution.",
+            "effect": {
+                "permanent": "Increase coin gain by 1% (not affected by softcap)",
+                "temporary": "Increase coin gain by 10% (not affected by softcap)"
+            }
+        },
+        "2": {
+            "name": "First alpha-coin",
+            "desc": "Could this really be the very first coin I mined in this unknown world? I don't believe it... it's one coin among countless others I've collected and spent on upgrades. But, apparently, that's true. This treasure represents the beginning of journey.",
+            "effect": {
+                "permanent": "Increase coin gain by 1% (not affected by softcap)",
+                "temporary": "Increase supercoin chance by 5% (multiplicative)"
+            }
+        },
+        "3": {
+            "name": "Supersupercoin",
+            "desc": "It would seem that nothing could surprise me among supercoins, super upgrades, and supercrystals, but I found... a super supercoin. Unfortunately, I won't show it to Mr. Super; it seems special to me. I'm sure it will bring me luck, like a clover. This treasure represents good fortune.",
+            "effect": {
+                "permanent": "Increase supercoin chance by 1% (multiplicative)",
+                "temporary": "Increase supercoin chance by +0.1% (additive)"
+            }
+        },
+        "4": {
+            "name": "Legacy Prestige",
+            "desc": "As soon as I found this treasure, memories came flooding back... Where Prestige was completely different. Only 12 upgrades and 3 categories: Prestige, Automation, and Super Prestige, I guess? I don't remember... Fortune only required 1 billion diamonds, not the 50 zeros of crystals it now requires... This treasure represents memory.",
+            "effect": {
+                "permanent": "Increase crystal gain by 1% (not affected by softcap)",
+                "temporary": "Increase crystal gain by 10% (not affected by softcap)"
+            }
+        },
+        "5": {
+            "name": "My1stClicker NULL",
+            "desc": "A null world, back when it wasn't even called a world. There was nothing here, just three upgrades, no styles. It seems crazy to me that this tiny idea has grown into a full-fledged virtual world, where I think I still have secrets to uncover. Thank you all so much for your support. This treasure represents the absolute beginning of the journey.",
+            "effect": {
+                "permanent": "Increase coin, crystal, shard and BITs gain by 1% (not affected by softcap)",
+                "temporary": "Increase coin, crystal, shard and BITs gain by 5% (not affected by softcap)"
+            }
         }
     }
 }

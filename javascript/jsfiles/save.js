@@ -131,7 +131,6 @@ function loadGame() {
         toggleBadges(['badge-settings', 'badge-save', 'badge-export'], !player.got_export_reward);
     }
 
-    // Логика первого захода
     if (player.coin.total_currency === 10) {
         let userLang = navigator.language || navigator.userLanguage;
         player.settings.currentLanguage = (userLang.includes('ru')) ? 'ru' : 'en';
@@ -142,34 +141,29 @@ function loadGame() {
     player.time.savedTime = Date.now();
 
     player.code.name = ['umultiplier', 'upower', 'timemachine', 'hardmachine', 'sorry'];
-    changeFonts2(player.settings.font);
-    changeFont.value = player.settings.font;
+    changeFonts2(player.cosmetics.fonts.current);
+    changeFont.value = player.cosmetics.fonts.current;
     changeNotation.value = player.settings.notation;
     mySlider.value = player.settings.autosave_interval;
     mineralsBulkInput.value = player.settings.minerals_bulkbuy;
 
-    // Восстановление условий автоматизации
     autoUmultiInput.value = player.automation.conditions.umultiplier;
     autoUpowerInput.value = player.automation.conditions.upower.time;
     autoUpowerInput2.value = player.automation.conditions.upower.x_of_umulti;
     autoUadderInput.value = player.automation.conditions.uadder.time;
     autoUadderInput2.value = player.automation.conditions.uadder.x_of_upower;
 
-    // Режим престижа
     const pModes = { time: 'time', prestige: 'prestige', crystals: 'crystals' };
     let modeKey = pModes[player.settings.whichPrestigeMode] || 'coins';
     autoPrestigeInput.value = player.automation.conditions.prestige[modeKey];
 
-    // ЗАПУСК АВТОМАТИЗАЦИИ ЧЕРЕЗ НАШИ НОВЫЕ КЛАССЫ
     const autoKeys = ['single', 'buyable', 'umultiplier', 'upower', 'prestige', 'uadder'];
     autoKeys.forEach(type => {
         if (player.automation.checkbox[type]) {
-            // Чекбоксы в HTML имеют вид autoSingleUpgradeCheckbox, autoBuyableUpgradeCheckbox и т.д.
             const checkboxId = `auto${type.charAt(0).toUpperCase() + type.slice(1)}${type === 'single' || type === 'buyable' ? 'Upgrade' : ''}Checkbox`;
             const checkboxEl = document.getElementById(checkboxId);
             if (checkboxEl) checkboxEl.checked = true;
             
-            // Запускаем через метод класса, который мы написали ранее!
             if (AUTO[type]) AUTO[type].start();
         }
     });
@@ -181,6 +175,13 @@ function loadGame() {
         document.getElementById('respecTree').classList.remove('active')
     }
 
+    if (player.virus.activated) {
+        document.getElementById('additionalVirusWindow').style.display = 'block'
+        document.getElementById('virusWindow').style.display = 'block'
+    }
+
+    if (player.event.digitalization.activated) DIGITALIZATION.generatePassList()
+
     player.settings.modernization_activated = false;
 
     if (player.shop.unlockables) {
@@ -189,6 +190,10 @@ function loadGame() {
         })
         delete player.shop.unlockables
     }
+    generateEventTreasures()
+    tooltipGeneration()
+    changeTheme(player.cosmetics.themes.current)
+    document.getElementById('changeTheme').value = player.cosmetics.themes.current;
 }
 
 function resetDailyReward() {

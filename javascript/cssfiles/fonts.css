@@ -62,3 +62,10 @@ body {
     font-style: normal; 
     font-weight: normal; 
 }
+
+@font-face {
+    font-family: "bit";
+    src: url("fonts/8bitoperatorJVE.ttf") format("truetype");
+    font-style: normal; 
+    font-weight: normal; 
+}

@@ -154,6 +154,9 @@ class UniversalBuyablesManager {
         if (this.canAfford(x)) {
             this.state.currency -= this[x].cost();
             this.targetArray[x]++;
+            if (player.event.digitalization.activated && this.layer === 'coin') {
+                if (!player.event.digitalization.quests.weekly.completed.includes(5)) player.event.digitalization.quests.weekly.progress[4]++
+            }
         }
     }
 
@@ -171,6 +174,9 @@ class UniversalBuyablesManager {
             let bulk = this[x].bulk();
             this.state.currency -= totalCost(bulk, this[x].cost(), this[x].power);
             this.targetArray[x] += bulk;
+            if (player.event.digitalization.activated && this.layer === 'coin') {
+                if (!player.event.digitalization.quests.weekly.completed.includes(5)) player.event.digitalization.quests.weekly.progress[4] += bulk
+            }
         }
     }
 
@@ -306,6 +312,7 @@ class UniversalSinglesManager {
     buy(x) {
         if (this.canAfford(x)) {
             this.state.currency -= this[x].cost();
+            if (player.virus.activated && player.virus.type == 5 && this.layer === 'supercrystal') player.virus.current++
             if (!this[x].unl()) this.targetArray.push(x);
         }
     }
@@ -397,6 +404,7 @@ class ShopBuyablesManager extends UniversalBuyablesManager {
             let cost = this[x].cost();
             player.supercoin.currency -= cost;
             player.supercoin.spent_currency += cost;
+            if (player.virus.activated && player.virus.type == 4) player.virus.current += cost
             this.targetArray[x]++;
         }
     }
@@ -407,6 +415,7 @@ class ShopBuyablesManager extends UniversalBuyablesManager {
             let cost = totalCost(bulk, this[x].cost(), this[x].power);
             player.supercoin.currency -= cost;
             player.supercoin.spent_currency += cost;
+            if (player.virus.activated && player.virus.type == 4) player.virus.current += cost
             this.targetArray[x] += bulk;
         }
     }
@@ -699,7 +708,11 @@ class FortuneBoostsManager {
                 default: return 0;
             }
             if (rarity != null) {
-                if (i == 1) { player.fortune.tokens -= 1; player.fortune.spent_tokens += 1; }
+                if (i == 1) {
+                    player.fortune.tokens -= 1; 
+                    player.fortune.spent_tokens += 1; 
+                    if (player.virus.activated && player.virus.type == 6) player.virus.current++
+                    }
                 this.activate(boost);
             }
         }
@@ -712,6 +725,7 @@ class FortuneBuyablesManager extends UniversalBuyablesManager {
             let cost = this[x].cost();
             player.supercrystal.currency -= cost;
             player.supercrystal.spent_currency_on_fortune_upgrades += cost;
+            if (player.virus.activated && player.virus.type == 5) player.virus.current += cost
             this.targetArray[x]++;
         }
     }
@@ -719,6 +733,7 @@ class FortuneBuyablesManager extends UniversalBuyablesManager {
     respec() {
         this._forEachBuyable(x => this.reset(x));
         player.supercrystal.currency += player.supercrystal.spent_currency_on_fortune_upgrades;
+        
         player.supercrystal.spent_currency_on_fortune_upgrades = 0;
     }
 }
