@@ -397,8 +397,8 @@ const LAYERS = {
         player.supercoin.currency = 0;
         player.supercoin.this_reflash_currency = 0;
         player.supercoin.spent_currency = 0;
-        for (let i = 1; i <= 7; i++) player.shop.upgrades[i] = 0;
-        for (let i = 1; i <= 8; i++) player.shop.permanentUpgrades[i] = 0;
+        for (let i = 1; i <= 11; i++) player.shop.upgrades[i] = 0;
+        for (let i = 1; i <= 10; i++) player.shop.permanentUpgrades[i] = 0;
 
         for (let i = 1; i <= 6; i++) {
             player.shop.items.amount[i] = 0;

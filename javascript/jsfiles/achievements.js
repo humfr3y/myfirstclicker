@@ -200,3 +200,85 @@ function renderSavedAchievements() {
 // Запускаем один раз при старте
 renderSavedAchievements();
 
+const TREASURES = {
+    global: {},
+    event: {
+        digitalization: {
+            1: {
+                permanent: {
+                    base: 0.01,
+                    effect(x=player.treasure.digitalization[1].amount) {
+                        return 1+this.base*x
+                    }
+                },
+                temporary: {
+                    base: 0.1,
+                    effect(x=player.treasure.digitalization[1].amount) {
+                        if (!player.event.digitalization.activated) return 1
+                        return 1+this.base*x
+                    }
+                }
+            },
+            2: {//perm - coin, temp - supercoin chance
+                permanent: {
+                    base: 0.01,
+                    effect(x=player.treasure.digitalization[2].amount) {
+                        return 1+this.base*x
+                    }
+                },
+                temporary: {
+                    base: 0.05,
+                    effect(x=player.treasure.digitalization[2].amount) {
+                        if (!player.event.digitalization.activated) return 1
+                        return 1+this.base*x
+                    }
+                }
+            },
+            3: { //perm - multi, temp - addi to supercoin chance
+                permanent: {
+                    base: 0.01,
+                    effect(x=player.treasure.digitalization[3].amount) {
+                        return 1+this.base*x
+                    }
+                },
+                temporary: {
+                    base: 0.1,
+                    effect(x=player.treasure.digitalization[3].amount) {
+                        if (!player.event.digitalization.activated) return 0
+                        return this.base*x
+                    }
+                }
+            },
+            4: { //crystals
+                permanent: {
+                    base: 0.01,
+                    effect(x=player.treasure.digitalization[4].amount) {
+                        return 1+this.base*x
+                    }
+                },
+                temporary: {
+                    base: 0.1,
+                    effect(x=player.treasure.digitalization[4].amount) {
+                        if (!player.event.digitalization.activated) return 1
+                        return 1+this.base*x
+                    }
+                }
+            },
+            5: { //coin, crystal, shards, bits
+                permanent: {
+                    base: 0.01,
+                    effect(x=player.treasure.digitalization[5].amount) {
+                        return 1+this.base*x
+                    }
+                },
+                temporary: {
+                    base: 0.05,
+                    effect(x=player.treasure.digitalization[5].amount) {
+                        if (!player.event.digitalization.activated) return 1
+                        return 1+this.base*x
+                    }
+                }
+            }
+        }
+    }
+}

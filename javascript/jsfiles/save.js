@@ -192,8 +192,19 @@ function loadGame() {
     }
     generateEventTreasures()
     tooltipGeneration()
+    updateFontSelector()
+    updateProgressBarSelector()
+    // updateBackgroundSelector()
+    updateThemeSelector()
+    updateCoinSelector()
+
     changeTheme(player.cosmetics.themes.current)
-    document.getElementById('changeTheme').value = player.cosmetics.themes.current;
+    changeCoin(player.cosmetics.coins.current)
+    changeProgressBar(player.cosmetics.progressBars.current)
+
+    document.getElementById('changeTheme').value = player.cosmetics.themes.current
+    document.getElementById('changeCoinIcon').value = player.cosmetics.coins.current
+    document.getElementById('changeProgressBar').value = player.cosmetics.progressBars.current
 }
 
 function resetDailyReward() {

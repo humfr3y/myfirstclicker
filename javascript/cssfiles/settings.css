@@ -403,6 +403,7 @@ footer {
     width: 100%;
     border-bottom: 1px solid var(--settings);
     pointer-events: none;
+    font-size: calc(16px * var(--font-scale));
 }
 
 .progress-bar-base.progressbar-option2 #progressbar {
@@ -445,12 +446,24 @@ footer {
 .progress-bar-base.progressbar-option8 {
     background-color: black;
     color: white;
+    text-shadow: 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
 }
 
 .progress-bar-base.progressbar-option8 #progressbar {
     background-image: radial-gradient(red, #040000 170%);
 }
 
+.progress-bar-base.progressbar-option9 {
+    color: white;
+    text-shadow: 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+}
+
+.progress-bar-base.progressbar-option9 #progressbar {
+    background-image: url('/javascript/cssfiles/images//svg/two-key-arrow-right-svgrepo-com.svg');
+    background-size: contain;
+    background-repeat: repeat;
+    background-color: black;
+}
 
 /* === ANTIMATTER THEME === */
 
@@ -577,4 +590,17 @@ body.theme-option2 .bulkBuySelection[aria-selected="true"]:hover {
 
 body.theme-option3 {
     background-color: #000000;
+}
+
+/* === PIXEL COIN === */
+
+#coinGain.coin-option2 {
+    background-image: url("images/misc/Coin2Off.png");
+    filter: drop-shadow(0 0 15px var(--coin));
+    image-rendering: pixelated;
+}
+
+#coinGain.coin-option2:hover {
+    background-image: url("images/misc/Coin2On.png");
+    filter: drop-shadow(0 0 15px var(--crystal));
 }

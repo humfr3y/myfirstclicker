@@ -541,7 +541,7 @@ const UPGS = {
         singles: new UniversalSinglesManager('reflash', 'singleUpgrades', [
             { id: 11, elementId: 'rSingleU1', basePrice: 8, effect: function(x = this.unl()) {
                 if (x == 0) return 1;
-                let eff = Math.pow(1 + player.reflash.resets, 5);
+                let eff = Math.pow(1 + player.reflash.resets, 1.9);
                 return eff;
             }},
             { id: 12, elementId: 'rSingleU2', basePrice: 128, effect: function(x = this.unl()) {

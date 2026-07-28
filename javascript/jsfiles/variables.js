@@ -202,23 +202,23 @@ let player = {
     },
     cosmetics: {
         fonts: {
-            styles: [],
+            styles: ['option1', 'option2', 'option3', 'option4', 'option5', 'option6', 'option7', 'option8', 'option9', 'option10', 'option11', 'option12', 'option13'],
             current: 'option1'
         },
         progressBars: {
-            styles: [],
+            styles: ['option1', 'option2', 'option3', 'option4', 'option5', 'option6'],
             current: 'option1'
         },
         themes: {
-            styles: [],
+            styles: ['option1'],
             current: 'option1'
         },
         coins: {
-            styles: [],
+            styles: ['option1'],
             current: 'option1'
         },
         backgrounds: {
-            styles: [],
+            styles: ['option1'],
             current: 'option1'
         },
     }
@@ -272,10 +272,10 @@ const text = {
         "0.8.0.1":'', "0.9":'', "0.9.1":'', "0.9.2":'', "0.10":'', "0.10.1":'', "0.11":'', "0.11.1":'', "0.12":'', "0.12.1": '', "0.13": '', "0.14": '', "0.15": '', "0.15.x": ""
     },
     // Генерируем повторяющиеся тексты с помощью функции
-    chapter: generateEmptyObj(18, true),
-    chapterTitle: generateEmptyObj(18, true),
-    helpTitle: generateEmptyObj(21, true),
-    help: generateEmptyObj(21, true),
+    chapter: generateEmptyObj(21, true),
+    chapterTitle: generateEmptyObj(21, true),
+    helpTitle: generateEmptyObj(24, true),
+    help: generateEmptyObj(24, true),
     empty: '',
     talk: {
         1: { //MrSuper

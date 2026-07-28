@@ -56,7 +56,7 @@
       <div id="coinGet" class="topVars">
         <span id="coinsCount"><span data-i18n="top_you_have">You have</span> <gt id="top_coins_val">10</gt> <span data-i18n="currency_acoins">α-coins</span></span>
         <span id="coinsGain"><span data-i18n="top_getting">You're getting</span>&nbsp;<span id="top_coins_gain_val">0</span>&nbsp;<span data-i18n="top_per_sec">α-coins per second</span></span>
-        <span id="worldSpeed" class="whiteText" style="font-size: calc(14px * var(--font-scale));"><span data-i18n="your_world">Your world is accelerated by x</span><span id="worldSpeedValue">0</span>&nbsp;<span data-i18n="times">times</span></span>
+        <span id="worldSpeed" class="whiteText" style="font-size: calc(14px * var(--font-scale));"><span data-i18n="your_world">Your world is accelerated by x</span><span id="worldSpeedValue">0</span>&nbsp;<span data-i18n="word_times">times</span></span>
         <div id="worldTextDiv">
           <div id="worldText">
             <span class="whiteText" id="youAreInXWorld" style="font-size: calc(14px * var(--font-scale));"></span>
@@ -95,7 +95,7 @@
           <div class="notification-badge" id="badge-settings-3">!</div>
         </div>
         <button onclick="selectTab(mainTab, false)" id="mainSelect" class="tabButton active" data-i18n="clickerButton">Clicker</button>
-        <button onclick="selectTab(challengeTab, true)" id="challengeSelect" class="tabButton" style="display:none" data-i18n="challengeButton">Challenges</button>
+        <button onclick="selectTab(challengeTab, false)" id="challengeSelect" class="tabButton" style="display:none" data-i18n="challengeButton">Challenges</button>
         <button onclick="selectTab(prestigeTab, false)" id="prestigeSelect" class="tabButton prestigeButton" style="display:none" data-i18n="prestigeButton">Prestige</button>
         <button onclick="selectTab(reflashTab, false)" id="reflashSelect" class="tabButton reflashButton" style="display:none" data-i18n="reflashButton">Prestige</button>
         <button onclick="selectTab(achTab, false)" id="achSelect" class="tabButton" data-i18n="achievementsButton">Achievements</button>
@@ -374,7 +374,7 @@
         <p id="settingsTitle4" class="titleTab" data-i18n="cosmeticsTitle">Cosmetic settings</p>
         <div id="firstCosmeticSettingsRow" class="settingsRow">
           <div class="settingButton">
-            <span class="ghostSettingsText">Font</span>
+            <span class="ghostSettingsText" data-i18n="ghostFont">Font</span>
             <select id="changeFont" class="settingButton selectSetting">
               <option value="option1" class="fontSelector">Poly</option>
               <option value="option2" class="fontSelector">Serif</option>
@@ -394,40 +394,41 @@
           </div>
           
           <div class="settingButton">
-            <span class="ghostSettingsText">Progress bar</span>
+            <span class="ghostSettingsText" data-i18n="ghostProgressBar">Progress bar</span>
             <select id="changeProgressBar" class="settingButton selectSetting" onchange="switchProgressBar(this.value)">
-              <option value="option1" class="fontSelector">Green</option>
-              <option value="option2" class="fontSelector">Coin</option>
-              <option value="option3" class="fontSelector">Prestige</option>
-              <option value="option4" class="fontSelector">Forest green</option>
-              <option value="option5" class="fontSelector">Fortune</option>
-              <option value="option6" class="fontSelector">Black-and-white</option>
-              <option value="option7" class="fontSelector">DIGITALIZATION</option>
-              <option value="option8" class="fontSelector">Virus</option>
+              <option value="option1" class="progressBarSelector">Green</option>
+              <option value="option2" class="progressBarSelector">Coin</option>
+              <option value="option3" class="progressBarSelector">Prestige</option>
+              <option value="option4" class="progressBarSelector">Forest green</option>
+              <option value="option5" class="progressBarSelector">Fortune</option>
+              <option value="option6" class="progressBarSelector">Black-and-white</option>
+              <option value="option7" class="progressBarSelector">DIGITALIZATION</option>
+              <option value="option8" class="progressBarSelector">Virus</option>
+              <option value="option9" class="progressBarSelector">Arrow</option>
             </select>
           </div>
-          <div class="settingButton">
+          <!-- <div class="settingButton">
             <span class="ghostSettingsText">Background</span>
             <select id="changeBackground" class="settingButton selectSetting">
-              <option value="option1" class="fontSelector">None</option>
-              <option value="option2" class="fontSelector">DIGITALIZATION</option>
+              <option value="option1" class="bgSelector">None</option>
+              <option value="option2" class="bgSelector">DIGITALIZATION</option>
             </select>
-          </div>
+          </div> -->
           </div>
         <div id="secondCosmeticSettingsRow" class="settingsRow">
           <div class="settingButton">
-            <span class="ghostSettingsText">Theme</span>
+            <span class="ghostSettingsText" data-i18n="ghostTheme">Theme</span>
             <select id="changeTheme" class="settingButton selectSetting" onchange="switchTheme(this.value)">
-              <option value="option1" class="fontSelector">Digital God</option>
-              <option value="option2" class="fontSelector">Antimatter</option>
-              <option value="option3" class="fontSelector">OLED</option>
+              <option value="option1" class="themeSelector">Digital God</option>
+              <option value="option2" class="themeSelector">Antimatter</option>
+              <option value="option3" class="themeSelector">OLED</option>
             </select>
           </div>
           <div class="settingButton">
-            <span class="ghostSettingsText">Coin icon</span>
-            <select id="changeCoinIcon" class="settingButton selectSetting">
-              <option value="option1" class="fontSelector">Alpha-coin</option>
-              <option value="option2" class="fontSelector">Pixel coin</option>
+            <span class="ghostSettingsText" data-i18n="ghostCoinIcon">Coin icon</span>
+            <select id="changeCoinIcon" class="settingButton selectSetting" onchange="switchCoin(this.value)">
+              <option value="option1" class="coinSelector">Alpha-coin</option>
+              <option value="option2" class="coinSelector">Pixel coin</option>
             </select>
           </div>
         </div>
@@ -572,6 +573,11 @@
               <button onclick="showHelpPage(text.help[20], text.helpTitle[20])" id="helpTab20" class="versionButton versionButtonVertical">У-сложители и У-разнители</button>
               <button onclick="showHelpPage(text.help[21], text.helpTitle[21])" id="helpTab21" class="versionButton versionButtonVertical">У-сложители и У-разнители</button>
               <button onclick="showHelpPage(text.help[22], text.helpTitle[22])" id="helpTab22" class="versionButton versionButtonVertical">У-сложители и У-разнители</button>
+            <div id="reflashHelpDiv">
+              <button onclick="showHelpPage(text.help[23], text.helpTitle[23])" id="helpTab23" class="versionButton versionButtonVertical">У-сложители и У-разнители</button>
+              <button onclick="showHelpPage(text.help[24], text.helpTitle[24])" id="helpTab24" class="versionButton versionButtonVertical">У-сложители и У-разнители</button>
+              <button onclick="showHelpPage(text.help[25], text.helpTitle[25])" id="helpTab25" class="versionButton versionButtonVertical">У-сложители и У-разнители</button>
+            </div>
             </div>
           </div>
           <div id="line"></div>
@@ -942,8 +948,8 @@
     </div>  
     <div id="challengeTab" style="display:none">
       <div id="challengeSubButtons">
-        <button onclick="selectSubTab(challengeCoinTab, false, 'challenge')" id="challengeCoinSelect" class="tabButton subButton active" data-i18n="challengeCoinButton">Challenges</button>
-        <button onclick="selectSubTab(challengePrestigeTab, false, 'challenge')" id="challengePrestigeSelect" class="prestigeButton tabButton subButton" data-i18n="challengePrestigeButton">Prestige Challenges</button>
+        <button onclick="selectSubTab(challengeCoinTab, true, 'challenge')" id="challengeCoinSelect" class="tabButton subButton active" data-i18n="challengeCoinButton">Challenges</button>
+        <button onclick="selectSubTab(challengePrestigeTab, true, 'challenge')" id="challengePrestigeSelect" class="prestigeButton tabButton subButton" data-i18n="challengePrestigeButton">Prestige Challenges</button>
       </div>
 
       <div id="challengeCoinTab">
@@ -1962,7 +1968,7 @@
       <div id="reflashSubButtons">
         <button onclick="selectSubTab(reflashUpgradesTab, false, 'reflash')" id="reflashUpgradesSelect" class="tabButton subButton reflashButton active" data-i18n="reflashUpgradesButton">Улучшения</button>
         <button onclick="selectSubTab(acceleratorTab, true, 'reflash')" id="acceleratorSelect" class="tabButton subButton reflashButton" data-i18n="acceleratorButton">Ускоритель</button>
-        <button onclick="selectSubTab(algorithmTab, false, 'reflash')" id="algorithmSelect" class="tabButton subButton reflashButton" data-i18n="algorithmButton">АЛГОРИТМ. ДРЕВО</button>
+        <button onclick="selectSubTab(algorithmTab, true, 'reflash')" id="algorithmSelect" class="tabButton subButton reflashButton" data-i18n="algorithmButton">АЛГОРИТМ. ДРЕВО</button>
         <!-- <button onclick="" id="consoleSelect" class="tabButton subButton reflashButton" data-i18n="consoleButton">Консоль</button> -->
       </div>
       <div id="reflashUpgradesTab">
@@ -2152,12 +2158,12 @@
             <button data-i18n="import_tree" class="whiteButton" onclick="importTree()">Импорт древа</button>
           </div>
           <div class="centeredDiv" style="flex-direction: row;">
-            <button class="whiteButton presetButton" style="width: 90px" onclick="openWindow('presetEditor', true, 1)">1</button>
-            <button class="whiteButton presetButton" style="width: 90px" onclick="openWindow('presetEditor', true, 2)">2</button>
-            <button class="whiteButton presetButton" style="width: 90px" onclick="openWindow('presetEditor', true, 3)">3</button>
-            <button class="whiteButton presetButton" style="width: 90px" onclick="openWindow('presetEditor', true, 4)">4</button>
-            <button class="whiteButton presetButton" style="width: 90px" onclick="openWindow('presetEditor', true, 5)">5</button>
-            <button class="whiteButton presetButton" style="width: 90px" onclick="openWindow('presetEditor', true, 6)">6</button>
+            <button class="whiteButton presetButton" onclick="openWindow('presetEditor', true, 1)">1</button>
+            <button class="whiteButton presetButton" onclick="openWindow('presetEditor', true, 2)">2</button>
+            <button class="whiteButton presetButton" onclick="openWindow('presetEditor', true, 3)">3</button>
+            <button class="whiteButton presetButton" onclick="openWindow('presetEditor', true, 4)">4</button>
+            <button class="whiteButton presetButton" onclick="openWindow('presetEditor', true, 5)">5</button>
+            <button class="whiteButton presetButton" onclick="openWindow('presetEditor', true, 6)">6</button>
           </div>
         </div>
         <div id="treeContainer" class="tree-container">
@@ -2484,51 +2490,51 @@
       </div>
       <div id="multiplierStats">
         <p id="multBreakdownTitle"></p>
-        <div id="gainPerClickStats" style="display:none">
+        <div id="gainPerClickStats" class="statsDiv" style="display:none">
           <!-- Содержимое генерируется динамически из JS (createGainPerClickUI) -->
         </div>
 
-        <div id="gainPerSecondStats" style="display:none">
+        <div id="gainPerSecondStats" class="statsDiv" style="display:none">
           <!-- Содержимое генерируется динамически из JS (createGainPerSecondUI) -->
         </div>
 
-        <div id="wholeGainStats" style="display:none">
+        <div id="wholeGainStats" class="statsDiv" style="display:none">
           <!-- Содержимое генерируется динамически из JS (createGainWholeUI) -->
         </div>
 
-        <div id="superCoinsChanceStats" style="display:none">
+        <div id="superCoinsChanceStats" class="statsDiv" style="display:none">
           <!-- Содержимое генерируется динамически из JS (createSuperCoinChanceUI) -->
         </div>
 
-        <div id="crystalsMultiplierStats" style="display:none">
+        <div id="crystalsMultiplierStats" class="statsDiv" style="display:none">
           <!-- Содержимое генерируется динамически из JS (createCrystalsUI) -->
         </div>
 
-        <div id="prestigeMultiplierStats" style="display:none">
+        <div id="prestigeMultiplierStats" class="statsDiv" style="display:none">
           <!-- Содержимое генерируется динамически из JS (createCrystalsUI) -->
         </div>
 
-        <div id="shardsPerClickStats" style="display:none">
+        <div id="shardsPerClickStats" class="statsDiv" style="display:none">
           <!-- Содержимое генерируется динамически из JS (createShardsUI) -->
         </div>
 
-        <div id="shardsPerSecondStats" style="display:none">
+        <div id="shardsPerSecondStats" class="statsDiv" style="display:none">
           <!-- Содержимое генерируется динамически из JS (createShardsUI) -->
         </div>
           
-        <div id="shardsEffectStats" style="display:none">
+        <div id="shardsEffectStats" class="statsDiv" style="display:none">
           <!-- Содержимое генерируется динамически из JS (createShardsUI) -->
         </div>
         
-        <div id="critChanceStats" style="display:none">
+        <div id="critChanceStats" class="statsDiv" style="display:none">
           <!-- Содержимое генерируется динамически из JS (createCritChanceUI) -->
         </div>
 
-        <div id="critMultiStats" style="display:none">
+        <div id="critMultiStats" class="statsDiv" style="display:none">
           <!-- Содержимое генерируется динамически из JS (createCritMultiUI) -->
         </div>
 
-          <div id="clickSimulationStats" style="display:none">
+          <div id="clickSimulationStats" class="statsDiv" style="display:none">
             <!-- Содержимое генерируется динамически из JS (createClickSimulationUI) -->
           </div>
 

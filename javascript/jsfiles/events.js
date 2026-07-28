@@ -1,5 +1,5 @@
 const DIGITALIZATION = {
-    start: new Date("2026-07-01T00:00:00Z").getTime(),
+    start: new Date("2026-08-01T00:00:00Z").getTime(),
     end: new Date("2026-08-31T23:59:00Z").getTime(),
     check_event() {
         const now = Date.now();
@@ -229,12 +229,12 @@ const DIGITALIZATION = {
         }
     },
     backgroundImageList: [
-        '/javascript/cssfiles/images/misc/digitalization_logo.png', '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '/javascript/cssfiles/images/items/TW1m.bmp', '', '', 
-        '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '', '/javascript/cssfiles/images/items/U1totallydonenow.bmp', '', '',
-        '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '', '', '/javascript/cssfiles/images/items/U1totallydonenow.bmp', '', 
-        '/javascript/cssfiles/images/items/TW1m.bmp', '', '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '', '',
-        '/javascript/cssfiles/images/items/TW1m.bmp', '/javascript/cssfiles/images/items/U1totallydonenow.bmp', '', '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '', 
-        '', '', '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '', ''
+        '/javascript/cssfiles/images/misc/digitalization_logo.png', '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '/javascript/cssfiles/images/items/TW1m.bmp', '/javascript/cssfiles/images/misc/supercoin.png', '/javascript/cssfiles/images/misc/8bit.png', 
+        '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '/javascript/cssfiles/images/misc/coin5.png', '/javascript/cssfiles/images/items/U1totallydonenow.bmp', '/javascript/cssfiles/images/misc/supercoin.png', '/javascript/cssfiles/images/misc/progress-bar2.png',
+        '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '/javascript/cssfiles/images/items/TW1m.bmp', '/javascript/cssfiles/images/misc/supercoin.png', '/javascript/cssfiles/images/items/U1totallydonenow.bmp', '/javascript/cssfiles/images/misc/progress-bar3.png', 
+        '/javascript/cssfiles/images/items/TW1m.bmp', '/javascript/cssfiles/images/treasure/event_treasure_3.png', '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '/javascript/cssfiles/images/misc/supercoin.png', '/javascript/cssfiles/images/misc/theme1.png',
+        '/javascript/cssfiles/images/items/TW1m.bmp', '/javascript/cssfiles/images/items/U1totallydonenow.bmp', '/javascript/cssfiles/images/treasure/event_treasure_4.png', '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '/javascript/cssfiles/images/misc/theme2.png', 
+        '/javascript/cssfiles/images/misc/supercoin.png', '/javascript/cssfiles/images/items/TW1m.bmp', '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '/javascript/cssfiles/images/treasure/event_treasure_5.png', '/javascript/cssfiles/images/misc/Coin2Off.png'
     ],
     generatePassList() {
         const list = document.getElementById('digitalizationPassLevels');
@@ -346,30 +346,35 @@ const DIGITALIZATION = {
                 7:  () => player.treasure.digitalization[2].amount++,
                 8:  () => player.shop.items.amount[2] += 1,
                 9:  () => addSupercoins(500),
-                10: () => player.cosmetics.progressBars.styles.push('reflash'),
+                10: () => player.cosmetics.progressBars.styles.push('option7'),
                 11: () => player.shop.items.amount[1] += 4,
                 12: () => player.shop.items.amount[3] += 5,
                 13: () => addSupercoins(1000),
                 14: () => player.shop.items.amount[2] += 3,
-                15: () => player.cosmetics.backgrounds.styles.push('coin'),
+                15: () => player.cosmetics.progressBars.styles.push('option9'),
                 16: () => player.shop.items.amount[3] += 8,
                 17: () => player.treasure.digitalization[3].amount++,
                 18: () => player.shop.items.amount[1] += 6,
                 19: () => addSupercoins(2000),
-                20: () => player.cosmetics.themes.styles.push('theme2'),
+                20: () => player.cosmetics.themes.styles.push('option3'),
                 21: () => player.shop.items.amount[3] += 10,
                 22: () => player.shop.items.amount[2] += 5,
                 23: () => player.treasure.digitalization[4].amount++,
                 24: () => player.shop.items.amount[1] += 10,
-                25: () => player.cosmetics.themes.styles.push('theme3'),
+                25: () => player.cosmetics.themes.styles.push('option2'),
                 26: () => addSupercoins(5000),
                 27: () => player.shop.items.amount[3] += 20,
                 28: () => player.shop.items.amount[1] += 15,
                 29: () => player.treasure.digitalization[5].amount++,
-                30: () => player.cosmetics.coins.styles.push('old')
+                30: () => player.cosmetics.coins.styles.push('option2')
             };
 
             if (rewards[level]) rewards[level]();
+
+            updateFontSelector()
+            updateProgressBarSelector()
+            updateThemeSelector()
+            updateCoinSelector()
 
             function addSupercoins(amount) {
                 player.supercoin.currency += amount;

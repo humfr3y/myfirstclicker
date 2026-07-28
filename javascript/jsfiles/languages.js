@@ -195,7 +195,7 @@ function loadTranslationsAlways() {
     document.getElementById('virusTime').textContent = formatNumber(player.virus.time, 'boost')
 
     document.getElementById('virusReq').textContent = i18next.t(`virus.${player.virus.type}`, {
-        x: player.virus.current,
+        x: formatNumber(player.virus.current),
         y: player.virus.goal
     })
 
@@ -1284,7 +1284,7 @@ function updateStaticTranslations() {
     });
 
     // 2. Инициализация массивов для Лора
-    for (let i = 1; i <= 18; i++) {
+    for (let i = 1; i <= 21; i++) {
         text.chapter[i] = i18next.t(`chapter${i}`, globals); 
         text.chapterTitle[i] = i18next.t(`chapter${i}Name`, globals);
         let tab = document.getElementById(`chapter${i}Tab`);
@@ -1292,7 +1292,7 @@ function updateStaticTranslations() {
     }
 
     // 3. Инициализация массивов для Помощи
-    for (let i = 1; i <= 22; i++) {
+    for (let i = 1; i <= 25; i++) {
         text.helpTitle[i] = i18next.t(`help${i}Name`, globals);
         if (i !== 13) {
             text.help[i] = i18next.t(`help${i}`, globals);
@@ -1387,46 +1387,6 @@ function updateStaticTranslations() {
 
     // 6. Безопасное обновление Мультипликаторов (графики из clicker.js)
     for (let i = 0; i < 12; i++) text.multiBreakdown[i] = i18next.t(`mbTitles.${i}`);
-    
-    const dynamicStats = [
-        ['postE15SoftcapGainStats', 'postE15CoinSoftcap'], ['doublerStats', 'doublerName'], ['midasCursorStats', 'midasCursorName'],
-        ['rewardForFeatsStats', 'rewardName'], ['goldenGloveStats', 'goldenGloveName'], ['gainClickStats', 'gainName'],
-        ['alphaPowerStats', 'alphaPowerName'], ['challenge6Stats', 'challenge6Name'], ['smallInvestmentStats', 'smallInvestmentName'],
-        ['multiplierUpgradeStats', 'multiplierName'], ['richFameStats', 'richFameName'], ['negativeAlphaStats', 'negativeAlphaName'],
-        ['gainSecondStats', 'gainName'], ['achievement15Stats', 'achievement15Name'], ['goldenClockStats', 'goldenClockName'],
-        ['challenge8Stats', 'challenge8Name'], ['challenge3Stats', 'challenge3Name'], ['doublerPlusStats', 'doublerPlusName'],
-        ['cashBackStats', 'cashBack'], ['goldenKeyStats', 'goldenKeyName'], ['overdriveType1Stats', 'overdrive'],
-        ['achievementsStats', 'achievementsName'], ['achievement28Stats', 'achievement28Name'], ['hourglassStats', 'pse9Name'],
-        ['antiHourglassStats', 'pse10Name'], ['shardsStats', 'shardsName'], ['secondMineralEffect1Stats', 'secondMineral2Name'],
-        ['umultiplierStats', 'umultiplierName'], ['upowerStats', 'upowerName'], ['activity2Stats', 'pse2Name'],
-        ['challenge1Stats', 'challenge1Name'], ['coinFactoryStats', 'coinFactoryName'], ['fortuneBoostCoinStats', 'coinBlessingName'],
-        ['plusCoinsForGainStats', 'plusCoinForCoinsName'], ['luckyCloverStats', 'luckyCloverName'], ['charismaStats', 'charismaName'],
-        ['thirdSingleSuperEffectStats', 'thirdSingleSuperEffectName'], ['firstSuperCrystalEffectStats', 'firstSuperCrystalEffectName'],
-        ['firstMineralEffect3Stats', 'firstMineralEffect3Name'], ['superDvorStats', 'superDvorName'], ['hercCursorStats', 'hercCursorName'],
-        ['achievement37Stats', 'achievement37Name'], ['fortuneBoostSupercoinStats', 'supercoinBlessingName'], ['plusCoinForSupercoinStats', 'plusCoinForSupercoinsName'],
-        ['baseCrystalStats', 'baseCrystalName'], ['achievement282Stats', 'achievement28Name'], ['brilliantDoublerStats', 'brilliantDoublerName'],
-        ['recyclingStats', 'recyclingName'], ['challenge10Stats', 'challenge10Name'], ['crystalBoostStats', 'crystalBoostName'],
-        ['overdrive2EffectStats', 'overdrive2Name'], ['thirdMineralEffect1Stats', 'thirdMineralEffect1Name'], ['secondSuperCrystalSingleEffectStats', 'secondSuperCrystalSingleEffectName'],
-        ['prestigeFameStats', 'prestigeFameName'], ['crystalShAchStats', 'crystalShAchName'], ['achievementBonus2Stats', 'achievementBonus2Name'],
-        ['fortuneBoostCrystalStats', 'crystalBlessingName'], ['minusCoinsForCrystalsStats', 'minusCoinForCrystalsName'], ['firstShardBuyableEffectStats', 'firstShardBuyableEffectName'],
-        ['fifthShopBuyableEffectStats', 'fifthShopBuyableEffect1Name'], ['ninthSuperCrystalSingleEffectStats', 'ninthSuperCrystalSingleEffectName'], ['fortuneBoostShardClickStats', 'shardBlessingName'],
-        ['secondShardBuyableEffectStats', 'secondShardBuyableEffectName'], ['fifthShopBuyableEffect2Stats', 'fifthShopBuyableEffectStats2Name'], ['thirdMineralEffect2Stats', 'thirdMineralEffect2Name'],
-        ['shardShAchStats', 'shardShAchName'], ['achievement39Stats', 'achievement39Name'], ['achievementBonus3Stats', 'achievementBonus3Name'],
-        ['fortuneBoostShardSecondStats', 'shardBlessingName'], ['shardStats', 'shardName'], ['achievement30Stats', 'achievement30Name'],
-        ['fourthShardSingleEffectStats', 'fourthShardSingleEffectName'], ['challengeReward7Stats', 'challengeReward7Name'], ['baseCriticalChanceEffectStats', 'baseCriticalChanceEffectName'],
-        ['fourthSuperCrystalSingleEffectStats', 'fourthSuperCrystalSingleEffectName'], ['eighthShopBuyableEffectStats', 'eighthShopBuyableEffectName'], ['firstMineralEffect1Stats', 'firstMineralEffect1Name'],
-        ['critChShAchStats', 'critChShAchName'], ['fortuneBoostCritChanceStats', 'critChanceBlessingName'], ['plusCoinsForCritChanceStats', 'plusCoinForCritChanceName'],
-        ['baseCriticalGainEffectStats', 'baseCriticalGainEffectName'], ['fifthSuperCrystalSingleEffectStats', 'fifthSuperCrystalSingleEffectName'], ['ninthShopBuyableEffectStats', 'ninthShopBuyableEffectName'],
-        ['firstMineralEffect2Stats', 'firstMineralEffect2Name'], ['critMuShAchStats', 'critMuShAchName'], ['thirdBuyableSuperEffectStats', 'thirdBuyableSuperEffectName'],
-        ['fortuneBoostCritMultiStats', 'critMultiplierBlessingName'], ['thirdSuperCrystalSingleEffectStats', 'thirdSuperCrystalSingleEffectName'], ['fortuneBoostSimulationStats', 'simulationBlessingName'],
-        ['prestigeBaseStats', 'basePrestigesName'], ['prestigeAch35Stats', 'achievement35Name'], ['prestigeBreakSingle13Stats', 'thirdBreakPrestigeSingleEffectName'],
-        ['prestigeShop6Stats', 'sixthShopBuyableEffectName'], ['prestigeShardAch7Stats', 'prestigeShAchName'], ['prestigeFortune22Stats', 'fifthFortuneSingleEffectName'],
-        ['pchall7Stats', 'pchall7Name'], ['pchall1Stats', 'pchall1Name'], ['pchall3Stats', 'pchall3Name'], ['breakPrestigeBuyable31Stats', 'triplerName'], ['breakPrestigeBuyable32Stats', 'triplerName'],
-    ];
-    dynamicStats.forEach(([id, key]) => {
-        const el = document.getElementById(id);
-        if (el) el.innerHTML = i18next.t(key);
-    });
 
     text.talk[1].name = i18next.t(`talk.1.name`, { returnObjects: true });
     for (let i = 1; i <= 5; i++) {
