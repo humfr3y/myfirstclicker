@@ -1696,7 +1696,7 @@ function generateEventTreasures() {
               </div>
             `;
             container.insertAdjacentHTML('beforeend', html);
-            document.getElementById(`eventTreasure${i}`).style.backgroundImage = `url("/javascript/cssfiles/images/treasure/event_treasure_${i}.png")`
+            document.getElementById(`eventTreasure${i}`).style.backgroundImage = `url("javascript/cssfiles/images/treasure/event_treasure_${i}.png")`
         }
     }
 }

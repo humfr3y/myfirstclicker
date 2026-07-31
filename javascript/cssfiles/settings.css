@@ -459,7 +459,7 @@ footer {
 }
 
 .progress-bar-base.progressbar-option9 #progressbar {
-    background-image: url('/javascript/cssfiles/images//svg/two-key-arrow-right-svgrepo-com.svg');
+    background-image: url('javascript/cssfiles/images//svg/two-key-arrow-right-svgrepo-com.svg');
     background-size: contain;
     background-repeat: repeat;
     background-color: black;

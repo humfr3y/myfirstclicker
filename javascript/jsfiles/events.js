@@ -228,12 +228,12 @@ const DIGITALIZATION = {
         }
     },
     backgroundImageList: [
-        '/javascript/cssfiles/images/misc/digitalization_logo.png', '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '/javascript/cssfiles/images/items/TW1m.bmp', '/javascript/cssfiles/images/misc/supercoin.png', '/javascript/cssfiles/images/misc/8bit.png', 
-        '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '/javascript/cssfiles/images/misc/coin5.png', '/javascript/cssfiles/images/items/U1totallydonenow.bmp', '/javascript/cssfiles/images/misc/supercoin.png', '/javascript/cssfiles/images/misc/progress-bar2.png',
-        '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '/javascript/cssfiles/images/items/TW1m.bmp', '/javascript/cssfiles/images/misc/supercoin.png', '/javascript/cssfiles/images/items/U1totallydonenow.bmp', '/javascript/cssfiles/images/misc/progress-bar3.png', 
-        '/javascript/cssfiles/images/items/TW1m.bmp', '/javascript/cssfiles/images/treasure/event_treasure_3.png', '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '/javascript/cssfiles/images/misc/supercoin.png', '/javascript/cssfiles/images/misc/theme1.png',
-        '/javascript/cssfiles/images/items/TW1m.bmp', '/javascript/cssfiles/images/items/U1totallydonenow.bmp', '/javascript/cssfiles/images/treasure/event_treasure_4.png', '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '/javascript/cssfiles/images/misc/theme2.png', 
-        '/javascript/cssfiles/images/misc/supercoin.png', '/javascript/cssfiles/images/items/TW1m.bmp', '/javascript/cssfiles/images/items/Uxtotallydonenow.bmp', '/javascript/cssfiles/images/treasure/event_treasure_5.png', '/javascript/cssfiles/images/misc/Coin2Off.png'
+        'javascript/cssfiles/images/misc/digitalization_logo.png', 'javascript/cssfiles/images/items/Uxtotallydonenow.bmp', 'javascript/cssfiles/images/items/TW1m.bmp', 'javascript/cssfiles/images/misc/supercoin.png', 'javascript/cssfiles/images/misc/8bit.png', 
+        'javascript/cssfiles/images/items/Uxtotallydonenow.bmp', 'javascript/cssfiles/images/misc/coin5.png', 'javascript/cssfiles/images/items/U1totallydonenow.bmp', 'javascript/cssfiles/images/misc/supercoin.png', 'javascript/cssfiles/images/misc/progress-bar2.png',
+        'javascript/cssfiles/images/items/Uxtotallydonenow.bmp', 'javascript/cssfiles/images/items/TW1m.bmp', 'javascript/cssfiles/images/misc/supercoin.png', 'javascript/cssfiles/images/items/U1totallydonenow.bmp', 'javascript/cssfiles/images/misc/progress-bar3.png', 
+        'javascript/cssfiles/images/items/TW1m.bmp', 'javascript/cssfiles/images/treasure/event_treasure_3.png', 'javascript/cssfiles/images/items/Uxtotallydonenow.bmp', 'javascript/cssfiles/images/misc/supercoin.png', 'javascript/cssfiles/images/misc/theme1.png',
+        'javascript/cssfiles/images/items/TW1m.bmp', 'javascript/cssfiles/images/items/U1totallydonenow.bmp', 'javascript/cssfiles/images/treasure/event_treasure_4.png', 'javascript/cssfiles/images/items/Uxtotallydonenow.bmp', 'javascript/cssfiles/images/misc/theme2.png', 
+        'javascript/cssfiles/images/misc/supercoin.png', 'javascript/cssfiles/images/items/TW1m.bmp', 'javascript/cssfiles/images/items/Uxtotallydonenow.bmp', 'javascript/cssfiles/images/treasure/event_treasure_5.png', 'javascript/cssfiles/images/misc/Coin2Off.png'
     ],
     generatePassList() {
         const list = document.getElementById('digitalizationPassLevels');
