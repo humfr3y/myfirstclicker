@@ -45,7 +45,7 @@
     width: 100%;
     height: 100%;
     background-color: rgb(107, 107, 107);
-    opacity: 0.6; 
+    opacity: 0.4; 
 } 
 
 .green::after {
@@ -67,7 +67,7 @@
   }
 
 .achievementName {
-    font-size: calc(10px * var(--font-scale));
+    font-size: calc(11px * var(--font-scale));
     white-space: normal;
     color: white;
     text-shadow: 0.75px 0.75px #000000, -0.75px -0.75px #000000, 0.75px -0.75px #000000, -0.75px 0.75px #000000;

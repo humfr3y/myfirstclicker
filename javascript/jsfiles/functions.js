@@ -480,20 +480,26 @@ function applyStatsUpdate(sources, summaryId, summaryValue, summaryFormat = 'boo
         let weight = 0;
         let isActive = false;
         try {
-            let val = graphicRaw;
-            let isDec = val && typeof val.gt === 'function' && typeof val.log10 === 'function';
-            
-            if (isDec) {
-                let num = Number(val.toString());
-                if (val.gt(1) || (src.effectPrefix === '+' && val.gt(0)) || (src.effectPrefix === '^' && !val.eq(1))) {
-                    isActive = true;
-                    weight = val.gt(1) ? val.log10() : Math.max(0, num);
-                }
+            // Жёстко разделяем проверку активности для плюсов и умножения
+            let numEffect = Number(effectRaw);
+            if (src.effectPrefix === '+') {
+                isActive = numEffect > 0;
+            } else if (src.effectPrefix === '^') {
+                isActive = numEffect !== 1;
             } else {
-                let num = Number(val);
-                if (isFinite(num)) {
-                    if (num > 1 || (src.effectPrefix === '+' && num > 0) || (src.effectPrefix === '^' && num !== 1)) {
-                        isActive = true;
+                isActive = numEffect > 1; // для обычных 'x' множителей
+            }
+
+            if (isActive) {
+                let val = graphicRaw;
+                let isDec = val && typeof val.gt === 'function' && typeof val.log10 === 'function';
+                
+                if (isDec) {
+                    let num = Number(val.toString());
+                    weight = val.gt(1) ? val.log10() : Math.max(0, num);
+                } else {
+                    let num = Number(val);
+                    if (isFinite(num)) {
                         weight = num > 1 ? Math.log10(num) : Math.max(0, num);
                     }
                 }
@@ -872,7 +878,7 @@ function statsCrystalsUpdate() {
         { effectValue: () => UPGS.fortune.boosts[2].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fortuneBoostCrystalStatsEffect', pieceId: 'fortuneBoostCrystalPiece', piecePercentId: 'fortuneBoostCrystalPiecePercent', summary: () => superSummary },
         { effectValue: () => MISC.balance.minusCoins.buff().crystalGainBuff, effectPrefix: 'x', effectMode: 'boost', effectId: 'minusCoinsForCrystalsStatsEffect', pieceId: 'minusCoinsForCrystalsPiece', piecePercentId: 'minusCoinsForCrystalsPiecePercent', summary: () => superSummary },
         { effectValue: () => player.prestige.challenge.completed.includes(1) ? PRES_CHALLENGE[1].effect() : 1, effectPrefix: 'x', effectMode: 'boost', effectId: 'pchall1StatsEffect', pieceId: 'pchall1Piece', piecePercentId: 'pchall1PiecePercent', summary: () => superSummary },
-        { effectValue: () => (player.reflash.algo.includes(22) && player.prestige.true_resets <= 10) ? UPGS.reflash.algo.tree[2].effect() : 1, effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalReflashAlgo22StatsEffect', pieceId: 'crystalReflashAlgo22Piece', piecePercentId: 'crystalReflashAlgo22PiecePercent', summary: () => superSummary },
+        { effectValue: () => UPGS.reflash.algo.tree[2].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalReflashAlgo22StatsEffect', pieceId: 'crystalReflashAlgo22Piece', piecePercentId: 'crystalReflashAlgo22PiecePercent', summary: () => superSummary },
         { effectValue: () => UPGS.reflash.singles[12].unl() ? UPGS.reflash.singles[12].effect() : 1, effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalReflashSingle12StatsEffect', pieceId: 'crystalReflashSingle12Piece', piecePercentId: 'crystalReflashSingle12PiecePercent', summary: () => superSummary },
         { effectValue: () => TREASURES.event.digitalization[4].permanent.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalDigiPerm4StatsEffect', pieceId: 'crystalDigiPerm4Piece', piecePercentId: 'crystalDigiPerm4PiecePercent', summary: () => superSummary },
         { effectValue: () => TREASURES.event.digitalization[4].temporary.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalDigiTemp4StatsEffect', pieceId: 'crystalDigiTemp4Piece', piecePercentId: 'crystalDigiTemp4PiecePercent', summary: () => superSummary },
@@ -947,7 +953,7 @@ function statsShardsPerClickUpdate() {
         { effectValue: () => Math.pow(UPGS.supercrystal[33].effect(), UPGS.supercrystal[33].unl()), effectPrefix: 'x', effectMode: 'boost', effectId: 'ninthSuperCrystalSingleEffectStatsEffect', pieceId: 'ninthSuperCrystalSingleEffectPiece', piecePercentId: 'ninthSuperCrystalSingleEffectPiecePercent', summary: () => totalClick },
         { effectValue: () => UPGS.fortune.boosts[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fortuneBoostShardClickStatsEffect', pieceId: 'fortuneBoostShardClickPiece', piecePercentId: 'fortuneBoostShardClickPiecePercent', summary: () => totalClick },
         { effectValue: () => UPGS.prestige.break.buyables[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'breakPrestigeBuyable31StatsEffect', pieceId: 'breakPrestigeBuyable31Piece', piecePercentId: 'breakPrestigeBuyable31PiecePercent', summary: () => totalClick },
-        { effectValue: () => player.reflash.algo.includes(42) ? UPGS.reflash.algo.tree[6].effect() : 1, effectPrefix: 'x', effectMode: 'boost', effectId: 'shardClickReflashAlgo42StatsEffect', pieceId: 'shardClickReflashAlgo42Piece', piecePercentId: 'shardClickReflashAlgo42PiecePercent', summary: () => totalClick },
+        { effectValue: () => UPGS.reflash.algo.tree[10].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'shardClickReflashAlgo42StatsEffect', pieceId: 'shardClickReflashAlgo42Piece', piecePercentId: 'shardClickReflashAlgo42PiecePercent', summary: () => totalClick },
         { effectValue: () => TREASURES.event.digitalization[5].permanent.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'shardClickDigiPerm5StatsEffect', pieceId: 'shardClickDigiPerm5Piece', piecePercentId: 'shardClickDigiPerm5PiecePercent', summary: () => totalClick },
         { effectValue: () => TREASURES.event.digitalization[5].temporary.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'shardClickDigiTemp5StatsEffect', pieceId: 'shardClickDigiTemp5Piece', piecePercentId: 'shardClickDigiTemp5PiecePercent', summary: () => totalClick },
         { effectValue: () => {
@@ -971,7 +977,7 @@ function statsShardsPerSecondUpdate() {
         { effectValue: () => ACHS.effect.shard(), effectPrefix: 'x', effectMode: 'boost', effectId: 'achievementBonus3StatsEffect', pieceId: 'achievementBonus3Piece', piecePercentId: 'achievementBonus3PiecePercent', summary: () => totalSecond },
         { effectValue: () => UPGS.fortune.boosts[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fortuneBoostShardSecondStatsEffect', pieceId: 'fortuneBoostShardSecondPiece', piecePercentId: 'fortuneBoostShardSecondPiecePercent', summary: () => totalSecond },
         { effectValue: () => UPGS.prestige.break.buyables[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'breakPrestigeBuyable32StatsEffect', pieceId: 'breakPrestigeBuyable32Piece', piecePercentId: 'breakPrestigeBuyable32PiecePercent', summary: () => totalSecond },
-        { effectValue: () => player.reflash.algo.includes(42) ? UPGS.reflash.algo.tree[6].effect() : 1, effectPrefix: 'x', effectMode: 'boost', effectId: 'shardSecReflashAlgo42StatsEffect', pieceId: 'shardSecReflashAlgo42Piece', piecePercentId: 'shardSecReflashAlgo42PiecePercent', summary: () => totalSecond },
+        { effectValue: () => UPGS.reflash.algo.tree[10].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'shardSecReflashAlgo42StatsEffect', pieceId: 'shardSecReflashAlgo42Piece', piecePercentId: 'shardSecReflashAlgo42PiecePercent', summary: () => totalSecond },
         { effectValue: () => TREASURES.event.digitalization[5].permanent.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'shardSecDigiPerm5StatsEffect', pieceId: 'shardSecDigiPerm5Piece', piecePercentId: 'shardSecDigiPerm5PiecePercent', summary: () => totalSecond },
         { effectValue: () => TREASURES.event.digitalization[5].temporary.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'shardSecDigiTemp5StatsEffect', pieceId: 'shardSecDigiTemp5Piece', piecePercentId: 'shardSecDigiTemp5PiecePercent', summary: () => totalSecond },
         { effectValue: () => {
@@ -1189,7 +1195,7 @@ function statsPrestigeUpdate() {
         { effectValue: () => (player.fortune.upgrades.singles.includes(22) ? 2 : 1), effectPrefix: 'x', effectMode: 'boost', effectId: 'prestigeFortune22StatsEffect', pieceId: 'prestigeFortune22Piece', piecePercentId: 'prestigeFortune22PiecePercent', summary: () => totalPrestige },
         
         // Новый источник рефлеша для престижей:
-        { effectValue: () => (player.reflash.algo.includes(32) && player.prestige.true_resets <= 5) ? UPGS.reflash.algo.tree[4].effect() : 1, effectPrefix: 'x', effectMode: 'boost', effectId: 'prestigeReflashAlgo32StatsEffect', pieceId: 'prestigeReflashAlgo32Piece', piecePercentId: 'prestigeReflashAlgo32PiecePercent', summary: () => totalPrestige }
+        { effectValue: () => UPGS.reflash.algo.tree[6].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'prestigeReflashAlgo32StatsEffect', pieceId: 'prestigeReflashAlgo32Piece', piecePercentId: 'prestigeReflashAlgo32PiecePercent', summary: () => totalPrestige }
     ], 'summaryPrestigeStatsEffect', totalPrestige, 'number', '');
 }
 

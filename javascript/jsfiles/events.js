@@ -1,6 +1,6 @@
 const DIGITALIZATION = {
     start: new Date("2026-08-01T00:00:00Z").getTime(),
-    end: new Date("2026-08-31T23:59:00Z").getTime(),
+    end: new Date("2026-08-30T23:59:00Z").getTime(),
     check_event() {
         const now = Date.now();
         if (limits(now, this.start, this.end)) {
@@ -17,7 +17,6 @@ const DIGITALIZATION = {
     },
     enable() {
         if (!player.event.digitalization.activated) return 0
-
         document.getElementById('digitalizationEvent').style.display = 'flex'
     },
     disable() {
@@ -289,11 +288,11 @@ const DIGITALIZATION = {
             }
         },
         update() {
+            if (document.getElementsByClassName('digitalizationPassItemContainer').length == 0) return;
             let current = player.event.digitalization.pass_points
             let required = DIGITALIZATION.pass.requirement()
 
             this.next_level()
-            this.checkReward()
             
             let width = 0;
             let ratio = 0;
@@ -323,7 +322,7 @@ const DIGITALIZATION = {
 
             player.event.digitalization.taken_rewards.push(level);
             element.classList.add('tookReward');
-            generateEventTreasures()
+            
             notify(notificationMessage, 'lime');
 
             const today = MISC.what_day_is_it_today();
@@ -338,34 +337,46 @@ const DIGITALIZATION = {
                     player.treasure.digitalization[1].amount++
                     player.treasure.digitalization[1].date = formattedDate
                 },
-                2:  () => player.shop.items.amount[1] += 1,
-                3:  () => player.shop.items.amount[3] += 1,
-                4:  () => addSupercoins(250),
+                2:  () => player.shop.items.amount[1] += 5,
+                3:  () => player.shop.items.amount[3] += 6,
+                4:  () => addSupercoins(1000),
                 5:  () => player.cosmetics.fonts.styles.push('option14'),
-                6:  () => player.shop.items.amount[1] += 2,
-                7:  () => player.treasure.digitalization[2].amount++,
-                8:  () => player.shop.items.amount[2] += 1,
-                9:  () => addSupercoins(500),
+                6:  () => player.shop.items.amount[1] += 6,
+                7:  () => { 
+                    player.treasure.digitalization[2].amount++
+                    player.treasure.digitalization[2].date = formattedDate
+                },
+                8:  () => player.shop.items.amount[2] += 2,
+                9:  () => addSupercoins(2500),
                 10: () => player.cosmetics.progressBars.styles.push('option7'),
-                11: () => player.shop.items.amount[1] += 4,
-                12: () => player.shop.items.amount[3] += 5,
-                13: () => addSupercoins(1000),
-                14: () => player.shop.items.amount[2] += 3,
+                11: () => player.shop.items.amount[1] += 7,
+                12: () => player.shop.items.amount[3] += 8,
+                13: () => addSupercoins(5000),
+                14: () => player.shop.items.amount[2] += 4,
                 15: () => player.cosmetics.progressBars.styles.push('option9'),
-                16: () => player.shop.items.amount[3] += 8,
-                17: () => player.treasure.digitalization[3].amount++,
-                18: () => player.shop.items.amount[1] += 6,
-                19: () => addSupercoins(2000),
+                16: () => player.shop.items.amount[3] += 10,
+                17: () => { 
+                    player.treasure.digitalization[3].amount++
+                    player.treasure.digitalization[3].date = formattedDate
+                },
+                18: () => player.shop.items.amount[1] += 10,
+                19: () => addSupercoins(10000),
                 20: () => player.cosmetics.themes.styles.push('option3'),
-                21: () => player.shop.items.amount[3] += 10,
-                22: () => player.shop.items.amount[2] += 5,
-                23: () => player.treasure.digitalization[4].amount++,
-                24: () => player.shop.items.amount[1] += 10,
+                21: () => player.shop.items.amount[3] += 15,
+                22: () => player.shop.items.amount[2] += 6,
+                23: () => { 
+                    player.treasure.digitalization[4].amount++
+                    player.treasure.digitalization[4].date = formattedDate
+                },
+                24: () => player.shop.items.amount[1] += 15,
                 25: () => player.cosmetics.themes.styles.push('option2'),
-                26: () => addSupercoins(5000),
-                27: () => player.shop.items.amount[3] += 20,
-                28: () => player.shop.items.amount[1] += 15,
-                29: () => player.treasure.digitalization[5].amount++,
+                26: () => addSupercoins(25000),
+                27: () => player.shop.items.amount[3] += 30,
+                28: () => player.shop.items.amount[2] += 10,
+                29: () => { 
+                    player.treasure.digitalization[5].amount++
+                    player.treasure.digitalization[5].date = formattedDate
+                },
                 30: () => player.cosmetics.coins.styles.push('option2')
             };
 
@@ -375,6 +386,7 @@ const DIGITALIZATION = {
             updateProgressBarSelector()
             updateThemeSelector()
             updateCoinSelector()
+            generateEventTreasures()
 
             function addSupercoins(amount) {
                 player.supercoin.currency += amount;

@@ -445,11 +445,11 @@ function loadTranslationsShards() {
 }
 
 function loadTranslationsAutomation() {
-    const types = ['single', 'buyable', 'umultiplier', 'upower', 'prestige', 'uadder'];
-    const pcts = [40, 40, 40, 40, 40, 33]; // Проценты скидки интервала
+    const types = ['single', 'buyable', 'umultiplier', 'upower', 'prestige', 'uadder', 'ureducer'];
+    const pcts = [40, 40, 40, 40, 40, 33, 50]; // Проценты скидки интервала
     
     // Обновляем интервалы и стоимость кнопок снижения интервала
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 7; i++) {
         let type = types[i];
         let intEl = document.getElementById(`auto_${type}_int`);
         if (intEl) intEl.textContent = formatNumber(MISC.automation[type].time() / 1000, 'power');
@@ -647,18 +647,18 @@ function loadTranslationsInfo() {
     document.getElementById('stat_total_crys').textContent = formatNumber(player.prestige.total_currency);
     document.getElementById('stat_total_pres').textContent = formatNumber(player.prestige.resets);
 
-    document.getElementById('stat_pt_d').textContent = formatNumber(player.time.game.prestige.days, 'floor');
-    document.getElementById('stat_pt_h').textContent = formatNumber(player.time.game.prestige.hours, 'floor');
-    document.getElementById('stat_pt_m').textContent = formatNumber(player.time.game.prestige.minutes, 'floor');
-    document.getElementById('stat_pt_s').textContent = formatNumber(player.time.game.prestige.seconds, 'floor');
+    document.getElementById('stat_pt_d').textContent = formatNumber(player.time.real.prestige.days, 'floor');
+    document.getElementById('stat_pt_h').textContent = formatNumber(player.time.real.prestige.hours, 'floor');
+    document.getElementById('stat_pt_m').textContent = formatNumber(player.time.real.prestige.minutes, 'floor');
+    document.getElementById('stat_pt_s').textContent = formatNumber(player.time.real.prestige.seconds, 'floor');
 
     document.getElementById('stat_total_bits').textContent = formatNumber(player.reflash.total_currency);
     document.getElementById('stat_total_refs').textContent = formatNumber(player.reflash.resets);
 
-    document.getElementById('stat_ret_d').textContent = formatNumber(player.time.game.reflash.days, 'floor');
-    document.getElementById('stat_ret_h').textContent = formatNumber(player.time.game.reflash.hours, 'floor');
-    document.getElementById('stat_ret_m').textContent = formatNumber(player.time.game.reflash.minutes, 'floor');
-    document.getElementById('stat_ret_s').textContent = formatNumber(player.time.game.reflash.seconds, 'floor');
+    document.getElementById('stat_ret_d').textContent = formatNumber(player.time.real.reflash.days, 'floor');
+    document.getElementById('stat_ret_h').textContent = formatNumber(player.time.real.reflash.hours, 'floor');
+    document.getElementById('stat_ret_m').textContent = formatNumber(player.time.real.reflash.minutes, 'floor');
+    document.getElementById('stat_ret_s').textContent = formatNumber(player.time.real.reflash.seconds, 'floor');
 
     let fpt_timer = player.time.real.fastestPrestige.timer;
     let fpt_str = '';
@@ -1132,16 +1132,16 @@ function loadTranslationsReflash() {
 
     document.getElementById('acceleratorU5_effect_min').textContent = formatNumber(UPGS.reflash.accelerator[5].min_effect(), 'boost')
     document.getElementById('acceleratorU5_effect_max').textContent = formatNumber(UPGS.reflash.accelerator[5].max_effect(), 'boost')
-    
 
     // 4. Алгоритм древо
         UPGS.reflash.algo.tree.forEach(node => {
             let btn = document.getElementById('algoNode_' + node.id);
             if (btn) {
                 // Достаем переводы
+                const globals = getGlobalNumbers()
                 let name = i18next.t(`upg_algo_${node.id}_name`);
-                let desc = i18next.t(`upg_algo_${node.id}_desc`);
-                let costWord = i18next.t('word_cost');
+                let desc = i18next.t(`upg_algo_${node.id}_desc`, globals);
+                let costWord = i18next.t('word_cost')
                 let currencyWord = i18next.t('currency_bits');
                 
                 // Собираем всё в саму кнопку: Название (жирное) -> Описание -> Стоимость (тусклая)
@@ -1237,9 +1237,9 @@ function loadTranslationsEvent() {
     }
     else {
         document.getElementById('digitalizationEventTimer2').textContent = 
-        DIGITALIZATION.time_left_to_start().timer >= 86400 ? i18next.t('digitalization.eventStarts_1', { d: formatNumber(DIGITALIZATION.time_left_to_start().days), h: formatNumber(DIGITALIZATION.time_left_to_start().hours) }) :
-        DIGITALIZATION.time_left_to_start().timer >= 3600 ? i18next.t('digitalization.eventStarts_2', { h: formatNumber(DIGITALIZATION.time_left_to_start().hours), m: formatNumber(DIGITALIZATION.time_left_to_start().minutes) }) :
-        i18next.t('digitalization.eventStarts_3', { m: formatNumber(DIGITALIZATION.time_left_to_start().minutes), s: formatNumber(DIGITALIZATION.time_left_to_start().seconds) });
+        DIGITALIZATION.time_left_to_start().timer >= 86400 ? i18next.t('digitalization.eventStarts_1', { d: Math.floor(DIGITALIZATION.time_left_to_start().days), h: Math.floor(DIGITALIZATION.time_left_to_start().hours) }) :
+        DIGITALIZATION.time_left_to_start().timer >= 3600 ? i18next.t('digitalization.eventStarts_2', { h: Math.floor(DIGITALIZATION.time_left_to_start().hours), m: Math.floor(DIGITALIZATION.time_left_to_start().minutes) }) :
+        i18next.t('digitalization.eventStarts_3', { m: Math.floor(DIGITALIZATION.time_left_to_start().minutes), s: Math.floor(DIGITALIZATION.time_left_to_start().seconds) });
     }
 }
 
@@ -1343,7 +1343,7 @@ function updateStaticTranslations() {
     text.chapter.start = i18next.t('startLoreDescription');
     text.help.start = i18next.t('startHelpDescription');
 
-    const versions = ['0.0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.5.1', '0.6', '0.7', '0.7.1', '0.8', '0.8.0.1', '0.9', '0.9.1', '0.9.2', '0.10', '0.10.1', '0.11', '0.12', '0.12.1', '0.13', '0.14', '0.15', '0.15.x'];
+    const versions = ['0.0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.5.1', '0.6', '0.7', '0.7.1', '0.8', '0.8.0.1', '0.9', '0.9.1', '0.9.2', '0.10', '0.10.1', '0.11', '0.12', '0.12.1', '0.13', '0.14', '0.15', '0.15.x', '1.0'];
     versions.forEach(v => {
         let key = 'version' + v.replace(/\./g, '');
         text.changelog[v] = i18next.t(key);
@@ -1409,6 +1409,7 @@ function getGlobalNumbers() {
         n1e9: formatNumber(1e9),
         n1e10: formatNumber(1e10),
         n1e15: formatNumber(1e15),
+        n1e21: formatNumber(1e21),
         n1e25: formatNumber(1e25),
         n1e50: formatNumber(1e50),
         n1e100: formatNumber(1e100),

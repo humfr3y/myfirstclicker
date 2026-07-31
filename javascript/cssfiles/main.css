@@ -394,7 +394,7 @@ nt {
   background-image: radial-gradient(#15fa01, #040000 170%);
 }
 #progress-bar-text {
-  font-size: calc(18px * var(--font-scale));
+  font-size: calc(16px * var(--font-scale));
   position: absolute;
   width: 100%;
   top: 0;
@@ -1673,11 +1673,6 @@ img.disabled {
   text-align: center;
 }
 
-#balanceSelect {
-  border-color: white !important;
-  color: white !important;
-}
-
 #mySlider {
   width: 80%;
 }
@@ -1713,7 +1708,8 @@ img.disabled {
 .tree-container {
   position: relative;
   width: 100%;
-  max-width: 900px;
+  max-width: 1250px;
+  max-height: 900px;
   margin-top: 20px;
   overflow-x: auto;
   overflow-y: auto;
@@ -1746,7 +1742,7 @@ img.disabled {
     grid-template-columns: repeat(4, 1fr);
     /* Размеры ячеек и отступы (подгони под себя) */
     grid-auto-rows: 80px; 
-    gap: 40px 40px;
+    gap: 60px 60px;
     position: relative;
     z-index: 2; /* Кнопки лежат поверх линий */
 }
@@ -1756,13 +1752,17 @@ img.disabled {
     border: 1px solid var(--reflash) !important;
     color: white;
     font-family: "Poly";
-    font-size: calc(13px * var(--font-scale)) !important;
+    font-size: calc(12px * var(--font-scale)) !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     transition:  0.25s ease-in-out;
+    height: 10vh;
+    width: 15vw;
+    max-height: 100px;
+    max-width: 220px;
 }
 
 .treeNode:hover {
@@ -2042,7 +2042,7 @@ img.disabled {
   height: 100vh;
   overflow: hidden;
   pointer-events: none;
-  z-index: 10;
+  z-index: 10000;
 }
 
 #virusWindow header {
@@ -2263,13 +2263,18 @@ vn {
   font-size: calc(17px * var(--font-scale));
   text-align: center;
   pointer-events: none;
-  cursor: pointer
+  cursor: pointer;
+  transition: ease-in-out 0.3s;
 }
 
 .digitalizationPassItemContainer.completed {
   border-color: yellow;
   box-shadow: inset 0 0 15px 0px yellow;
   pointer-events: all;
+}
+
+.digitalizationPassItemContainer.completed:hover {
+  background-color: rgba(255, 255, 0, 0.178);
 }
 
 .digitalizationPassItemContainer.completed .digitalizationPassItemIcon {
@@ -2476,6 +2481,11 @@ vn {
 
 .temporaryTreasure {
   text-shadow: 0 0 1px #ffee00;
+}
+
+.temporaryTreasure.disabled {
+  text-shadow: 0 0 1px #000000;
+  color: var(--grey-text);
 }
 
 #treasureDescriptionText {

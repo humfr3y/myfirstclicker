@@ -115,7 +115,8 @@ let player = {
             type: 0,
             time: 0,
             status: ''
-        }
+        },
+        times_completed: 0
     },
     time: {
         savedTime: Date.now(), currentTime: 0,
@@ -142,8 +143,8 @@ let player = {
     automation: {
         checkbox: { single: false, buyable: false, umultiplier: false, upower: false, prestige: false },
         setIntervals: { single: '', buyable: '', umultiplier: '', upower: '', prestige: '' },
-        upgrades: { single: 0, buyable: 0, umultiplier: 0, upower: 0, prestige: 0, uadder: 0 },
-        conditions: { umultiplier: 0, upower: { time: 0, x_of_umulti: 0 }, prestige: { time: 3600, coins: 1e15, prestige: 10000, crystals: 1e50 }, uadder: { time: 0, x_of_upower: 0 } }
+        upgrades: { single: 0, buyable: 0, umultiplier: 0, upower: 0, prestige: 0, uadder: 0, ureducer: 0 },
+        conditions: { umultiplier: 0, upower: { time: 0, x_of_umulti: 0 }, prestige: { time: 3600, coins: 1e15, prestige: 10000, crystals: 1e50 }, uadder: { time: 0, x_of_upower: 0 }, ureducer: {time: 0, x_of_uadder: 0} }
     },
     got_daily_reward: false,
     got_export_reward: false,
@@ -269,7 +270,7 @@ const text = {
     },
     changelog: {
         start: '', "0.0":'', "0.1":'', "0.2":'', "0.3":'', "0.4":'', "0.5":'', "0.5.1":'', "0.6":'', "0.7":'', "0.7.1":'', "0.8":'',
-        "0.8.0.1":'', "0.9":'', "0.9.1":'', "0.9.2":'', "0.10":'', "0.10.1":'', "0.11":'', "0.11.1":'', "0.12":'', "0.12.1": '', "0.13": '', "0.14": '', "0.15": '', "0.15.x": ""
+        "0.8.0.1":'', "0.9":'', "0.9.1":'', "0.9.2":'', "0.10":'', "0.10.1":'', "0.11":'', "0.11.1":'', "0.12":'', "0.12.1": '', "0.13": '', "0.14": '', "0.15": '', "0.15.x": "", "1.0": ""
     },
     // Генерируем повторяющиеся тексты с помощью функции
     chapter: generateEmptyObj(21, true),
@@ -314,6 +315,6 @@ const text = {
 
 const PRES_CHALL = {
     goals: {
-        1: 1e25, 2: 1e25, 3: 1e89, 4: 1e91, 5: 5e75, 6: 5e94, 7: 1e20, 8: 1e15,
+        1: 1e26, 2: 1e24, 3: 5e87, 4: 5e87, 5: 1e72, 6: 1e95, 7: 1e20, 8: 1e15,
     }
 };

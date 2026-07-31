@@ -108,7 +108,12 @@ const ACHS = {
         57() { return player.prestige.challenge.completed.length >= 1},
         58() { return player.challenge.time[12].timer < 10},
         59() { return player.prestige.challenge.completed.length >= 8 },
-        60() { return player.coin.currency >= 1.79e308}
+        60() { return player.coin.currency >= 1.79e308},
+        
+        63() { return UPGS.reflash.accelerator[5].effect() >= 3},
+        64() { return player.reflash.currency >= 8 },
+
+        66() { return player.time.real.fastestReflash.timer <= 3600 },
     },
 
     // --- УНИВЕРСАЛЬНАЯ ФУНКЦИЯ ДЛЯ ЭФФЕКТОВ АЧИВОК ---
@@ -278,7 +283,13 @@ const TREASURES = {
                         return 1+this.base*x
                     }
                 }
-            }
-        }
+            },
+            // array: document.getElementsByClassName('temporaryTreasure'),
+            // checkDisable() { 
+            //     Array.from(this.array).forEach(element => {
+            //         element.classList.add('disabled');
+            //     }); 
+            // }
+        },
     }
 }

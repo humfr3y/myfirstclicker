@@ -152,12 +152,14 @@ function loadGame() {
     autoUpowerInput2.value = player.automation.conditions.upower.x_of_umulti;
     autoUadderInput.value = player.automation.conditions.uadder.time;
     autoUadderInput2.value = player.automation.conditions.uadder.x_of_upower;
+    autoUreducerInput.value = player.automation.conditions.ureducer.time;
+    autoUreducerInput2.value = player.automation.conditions.ureducer.x_of_uadder;
 
     const pModes = { time: 'time', prestige: 'prestige', crystals: 'crystals' };
     let modeKey = pModes[player.settings.whichPrestigeMode] || 'coins';
     autoPrestigeInput.value = player.automation.conditions.prestige[modeKey];
 
-    const autoKeys = ['single', 'buyable', 'umultiplier', 'upower', 'prestige', 'uadder'];
+    const autoKeys = ['single', 'buyable', 'umultiplier', 'upower', 'prestige', 'uadder', 'ureducer'];
     autoKeys.forEach(type => {
         if (player.automation.checkbox[type]) {
             const checkboxId = `auto${type.charAt(0).toUpperCase() + type.slice(1)}${type === 'single' || type === 'buyable' ? 'Upgrade' : ''}Checkbox`;
@@ -180,7 +182,12 @@ function loadGame() {
         document.getElementById('virusWindow').style.display = 'block'
     }
 
-    if (player.event.digitalization.activated) DIGITALIZATION.generatePassList()
+    DIGITALIZATION.check_event()
+    if (player.event.digitalization.activated) {
+        DIGITALIZATION.generatePassList()
+        DIGITALIZATION.pass.checkReward()
+    } 
+    // else TREASURES.event.digitalization.checkDisable()
 
     player.settings.modernization_activated = false;
 

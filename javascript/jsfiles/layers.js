@@ -331,20 +331,26 @@ const LAYERS = {
 
             if (player.reflash.respecTree) {
                 UPGS.reflash.algo.respec()
+                document.getElementById('respecTree').classList.remove('active')
                 player.reflash.respecTree = false
             }
-//[player.reflash.algo.includes(11), UPGS.reflash.algo[0].effect()],
-            if (player.reflash.algo.includes(21)) {
-                player.supercrystal.currency += 3
-                player.supercrystal.total_currency += 3
+
+            for (let i = 0; i < player.reflash.algo.length; i++) {
+                const element = player.reflash.algo[i];
+                UPGS.reflash.algo.update_if_bought(element)
             }
-            if (player.reflash.algo.includes(31)) {
-                player.prestige.singleUpgrades = [41, 42, 43, 44]
-            }
-            if (player.reflash.algo.includes(43)) {
-                player.fortune.tokens += 2
-                player.fortune.total_tokens += 2
-            }
+// //[player.reflash.algo.includes(11), UPGS.reflash.algo[0].effect()],
+//             if (player.reflash.algo.includes(21)) {
+//                 player.supercrystal.currency += UPGS.reflash.algo.tree[1].effect()
+//                 player.supercrystal.total_currency += UPGS.reflash.algo.tree[1].effect()
+//             }
+//             if (player.reflash.algo.includes(31)) {
+//                 player.prestige.singleUpgrades = [41, 42, 43, 44]
+//             }
+//             if (player.reflash.algo.includes(43)) {
+//                 player.fortune.tokens += 2
+//                 player.fortune.total_tokens += 2
+//             }
         },
     },
     
@@ -463,7 +469,7 @@ const LAYERS = {
             player.prestige.challenge.time[i] = getMaxTime();
         }
         player.overdrive.consumed = { type1: 0, type2: 0 };
-        const autoTypes = ['single', 'buyable', 'umultiplier', 'upower', 'prestige', 'uadder'];
+        const autoTypes = ACHS.has(66) ? ['uadder', 'ureducer'] : ['single', 'buyable', 'umultiplier', 'upower', 'prestige', 'uadder', 'ureducer'];
         autoTypes.forEach(type => {
             player.automation.checkbox[type] = false;
             player.automation.upgrades[type] = 0;
@@ -480,7 +486,7 @@ const LAYERS = {
         player.time.uadder = 0;
         player.time.ureducer = 0;
 
-        const autoKeys = ['single', 'buyable', 'umultiplier', 'upower', 'prestige', 'uadder'];
+        const autoKeys = ACHS.has(66) ? ['uadder', 'ureducer'] : ['single', 'buyable', 'umultiplier', 'upower', 'prestige', 'uadder', 'ureducer'];
         autoKeys.forEach(type => {
             if (player.automation.checkbox[type]) {
                 const checkboxEl = document.getElementById(checkboxId);

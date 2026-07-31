@@ -48,11 +48,16 @@ button {
     color: black !important;
 }
 
+#balanceSelect {
+  border-color: white !important;
+  color: white;
+}
+
 /* Active/selected tab: swap background and text colors */
 .tabButton.active,
 .tabButton[aria-selected="true"] {
     background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
+    color: rgb(0, 0, 0) !important;
     border-color: rgb(0, 0, 0);
 }
 .tabButton.active:hover,
@@ -256,7 +261,8 @@ it {
 .automationRow {
     display:flex;
     flex-direction: row;
-    margin-bottom:20px
+    margin-bottom:20px;
+    gap: 20px;
 }
 
 #prestigeModeDiv input {
@@ -286,7 +292,7 @@ it {
     color: white;
 }
 
-#autoUmultiInterval, #autoUpowerInterval, #autoUpowerInterval2, #mineralsBulkBuy, #autoUadderInterval, #autoUadderInterval2 {
+#autoUmultiInterval, #autoUpowerInterval, #autoUpowerInterval2, #mineralsBulkBuy, #autoUadderInterval, #autoUadderInterval2, #autoUreducerInterval, #autoUreducerInterval2 {
     font-size: calc(12px * var(--font-scale));
     color: white;
 }

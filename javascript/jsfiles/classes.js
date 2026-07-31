@@ -546,20 +546,58 @@ class MineralUpgrade {
 
     // Вшитая функция массовой покупки, которая сама берет нужные формулы цены
     bulk(x = player.minerals[this.id]) {
-        let bulk1 = 0, bulk2 = 0, costLimit = Math.min(100, player.settings.minerals_bulkbuy), it1 = 0, it2 = 0;
+        let rawBulkLimit = player.settings.minerals_bulkbuy;
+        let isZeroOrInvalid = (!rawBulkLimit || rawBulkLimit <= 0);
+        let costLimit = isZeroOrInvalid ? 1 : Math.min(100, rawBulkLimit);
         
+        let bulk1 = 0, bulk2 = 0;
+        let it1 = 0, it2 = 0;
+
+        // 1. Считаем, сколько уровней можем купить по рунам
+        let tempRuneCurrency = player.rune.currency;
         for (let i = 0; i < costLimit; i++) {
-            bulk1 += this.cost1(x + i);
+            let currentCost1 = this.cost1(x + i);
+            if (bulk1 + currentCost1 > tempRuneCurrency) break;
+            bulk1 += currentCost1;
             it1++;
-            if (bulk1 + this.cost1(x + i) > player.rune.currency) break; 
         }
+
+        // Если не хватает даже на 1 уровень или лимит 0 — показываем цену ровно 1 минерала для информации
+        if (it1 === 0) {
+            return { 
+                bulk1: this.cost1(x), 
+                bulk2: this.cost2(x), 
+                iter: 0 
+            };
+        }
+
+        // 2. Считаем по осколкам для доступных по рунам уровней
+        let tempShardCurrency = player.shard.currency;
         for (let i = 0; i < it1; i++) {
-            bulk2 += this.cost2(x + i);
+            let currentCost2 = this.cost2(x + i);
+            if (bulk2 + currentCost2 > tempShardCurrency) break;
+            bulk2 += currentCost2;
             it2++;
-            if (this.cost2(x + i + 1) > player.shard.currency) break; 
         }
-        
-        let iter = Math.min(it1, it2);
+
+        let iter = it2;
+
+        // Если по итогу из-за лимита (0) или нехватки осколков iter стал равен 0, 
+        // но на 1 уровень рун хватало — на всякий случай тоже показываем ценник 1 штуки
+        if (iter === 0) {
+            return { 
+                bulk1: this.cost1(x), 
+                bulk2: this.cost2(x), 
+                iter: 0 
+            };
+        }
+
+        // 3. Пересчитываем точный суммарный расход рун строго под итоговый iter
+        bulk1 = 0;
+        for (let i = 0; i < iter; i++) {
+            bulk1 += this.cost1(x + i);
+        }
+
         return { bulk1, bulk2, iter };
     }
 }
@@ -586,8 +624,8 @@ class MineralManager {
     reset(x) { if (player.minerals[x] >= 1) player.minerals[x] = 0; }
 
     respec() {
-        player.rune.currency = 0
-        player.rune.total_currency = 0;
+        player.rune.currency = player.reflash.algo.includes(31) ? 2 : 0
+        player.rune.total_currency = player.reflash.algo.includes(31) ? 2 : 0;
         this._keys.forEach(x => this.reset(x));
     }
 
@@ -642,6 +680,7 @@ class FortuneBoostsManager {
             player.fortune.activatedBoosts[x].activated = false;
             player.fortune.activatedBoosts[x].time = 0;
             if (player.fortune.spent_tokens > 0) { player.fortune.tokens += 1; player.fortune.spent_tokens -= 1; }
+            notify(i18next.t('fortuneBoostNotification'), 'hotpink'); 
             let idx = player.fortune.activatedBoosts.list.indexOf(x);
             if (idx > -1) player.fortune.activatedBoosts.list.splice(idx, 1);
         }
