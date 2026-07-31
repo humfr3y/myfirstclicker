@@ -162,7 +162,7 @@
     display: block;
     width: 20px;
     height: 20px;
-    background-image: url("images/misc/close.png");
+    background-image: url("./images/misc/close.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -595,12 +595,12 @@ body.theme-option3 {
 /* === PIXEL COIN === */
 
 #coinGain.coin-option2 {
-    background-image: url("images/misc/Coin2Off.png");
+    background-image: url("./images/misc/Coin2Off.png");
     filter: drop-shadow(0 0 15px var(--coin));
     image-rendering: pixelated;
 }
 
 #coinGain.coin-option2:hover {
-    background-image: url("images/misc/Coin2On.png");
+    background-image: url("./images/misc/Coin2On.png");
     filter: drop-shadow(0 0 15px var(--crystal));
 }

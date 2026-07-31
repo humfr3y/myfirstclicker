@@ -104,7 +104,7 @@ hr {
 }
 
 #modernizeButton {
-  background-image: url('images/items/modernize.webp');
+  background-image: url('./images/items/modernize.webp');
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -160,7 +160,7 @@ nt {
     display: block;
     width: 250px;
     height: 250px;
-    background-image: url("images/misc/CoinOff.png");
+    background-image: url("./images/misc/CoinOff.png");
     background-size: contain;
     background-repeat: no-repeat;
     cursor: pointer;
@@ -173,7 +173,7 @@ nt {
 }
 
 #coinGain:hover {
-    background-image: url("images/misc/CoinOn.png");
+    background-image: url("./images/misc/CoinOn.png");
 }
 
 .notification {
@@ -418,7 +418,7 @@ nt {
   max-width: 824px;
   aspect-ratio: 2 / 1; 
   
-  background-image: url('images/misc/MrSuper.png');
+  background-image: url('./images/misc/MrSuper.png');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center bottom; 
@@ -427,7 +427,7 @@ nt {
 }
 
 #mrSuperChar {
-  background: url('images/misc/MrSuperChar.png') no-repeat;
+  background: url('./images/misc/MrSuperChar.png') no-repeat;
   background-size: contain;
   position: relative;
   z-index: 10001;
@@ -889,14 +889,14 @@ rt {
   border: none;
   cursor: pointer;
   transition: background-image 0.2s ease-in-out;
-  background-image: url('images/misc/shardoff2.png');
+  background-image: url('./images/misc/shardoff2.png');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
 }
 
 #shardsClick:hover {
-  background-image: url('images/misc/shard.png');
+  background-image: url('./images/misc/shard.png');
 }
 
 #shardsCountText {
@@ -1023,143 +1023,143 @@ rn {
 }
 
 #shopBuyableU1 {
-  background-image: url('images/items/goldengloves.png')
+  background-image: url('./images/items/goldengloves.png')
 }
 #shopBuyableU2 {
-  background-image: url('images/items/goldenwatch.png')
+  background-image: url('./images/items/goldenwatch.png')
 }
 #shopBuyableU3 {
-  background-image: url('images/items/goldenkey.png')
+  background-image: url('./images/items/goldenkey.png')
 }
 #shopBuyableU4 {
-  background-image: url('images/items/clover.png')
+  background-image: url('./images/items/clover.png')
 }
 #shopBuyableU5 {
-  background-image: url('images/items/shardrain.png')
+  background-image: url('./images/items/shardrain.png')
 }
 #shopBuyableU6 {
-  background-image: url('images/items/P.webp')
+  background-image: url('./images/items/P.webp')
 }
 #shopBuyableU7 {
-  background-image: url('images/items/energymaybe10.webp')
+  background-image: url('./images/items/energymaybe10.webp')
 }
 #shopBuyableU8 {
-  background-image: url('images/items/goldengloves2.png')
+  background-image: url('./images/items/goldengloves2.png')
 }
 #shopBuyableU9 {
-  background-image: url('images/items/goldenwatch2.png')
+  background-image: url('./images/items/goldenwatch2.png')
 }
 #shopBuyableU10 {
-  background-image: url('images/items/goldenkey2.png')
+  background-image: url('./images/items/goldenkey2.png')
 }
 #shopBuyableU11 {
-  background-image: url('images/items/goldenclover.png')
+  background-image: url('./images/items/goldenclover.png')
 }
 #shopPermanentU1 {
-  background-image: url('images/items/diamondpersV3.webp')
+  background-image: url('./images/items/diamondpersV3.webp')
 }
 #shopPermanentU2 {
-  background-image: url('images/items/creditcard.png')
+  background-image: url('./images/items/creditcard.png')
 }
 #shopPermanentU3 {
-  background-image: url('images/items/cursorwhitepercent.bmp')
+  background-image: url('./images/items/cursorwhitepercent.bmp')
 }
 #shopPermanentU4 {
-  background-image: url('images/items/cursorredX.bmp')
+  background-image: url('./images/items/cursorredX.bmp')
 }
 #shopPermanentU5 {
-  background-image: url('images/items/glowhand.webp')
+  background-image: url('./images/items/glowhand.webp')
 }
 #shopPermanentU6 {
-  background-image: url('images/items/lightningcrystalfinish.webp')
+  background-image: url('./images/items/lightningcrystalfinish.webp')
 }
 #shopPermanentU7 {
-  background-image: url('images/items/swordcrystal.webp')
+  background-image: url('./images/items/swordcrystal.webp')
 }
 #shopPermanentU8 {
-  background-image: url('images/items/fortuneTicket.png')
+  background-image: url('./images/items/fortuneTicket.png')
 }
 #shopPermanentU9 {
-  background-image: url('images/items/creditcardplus.png');
+  background-image: url('./images/items/creditcardplus.png');
   background-position: -0.75px -4px;
   image-rendering: pixelated;
 }
 #shopPermanentU10 {
-  background-image: url('images/items/reaper.png');
+  background-image: url('./images/items/reaper.png');
   background-position: -0.75px -0.5px;
   image-rendering: pixelated;
 }
 /* #shopSingleU2{
-  background-image: url('images/brokenspeedometer.webp');
+  background-image: url('./images/brokenspeedometer.webp');
   background-position: -0.5px -0.5px;
   image-rendering: pixelated;
 } */
 #shopSingleU1 {
-  background-image: url('images/items/crystalactualspeedometer.webp');
+  background-image: url('./images/items/crystalactualspeedometer.webp');
   background-position: -0.5px -0.5px;
   image-rendering: pixelated;
 }
 #shopSingleU2 {
-  background-image: url('images/items/modernize.webp');
+  background-image: url('./images/items/modernize.webp');
   background-position: -0.5px -0.5px;
   image-rendering: pixelated;
 }
 #shopSingleU3 {
-  background-image: url('images/items/trophy.webp');
+  background-image: url('./images/items/trophy.webp');
   background-position: -0.5px -0.5px;
   image-rendering: pixelated;
 }
 #shopSingleU4 {
-  background-image: url('images/items/crystalclock.webp');
+  background-image: url('./images/items/crystalclock.webp');
   background-position: -0.5px -0.5px;
   image-rendering: pixelated;
 }
 #shopSingleU5 {
-  background-image: url('images/items/aqua_pickaxe.png');
+  background-image: url('./images/items/aqua_pickaxe.png');
   background-position: -0.5px -0.5px;
   image-rendering: pixelated;
 }
 #shopSingleU6 {
-  background-image: url('images/items/Paper.png');
+  background-image: url('./images/items/Paper.png');
   background-position: -2px -0.5px;
   image-rendering: pixelated;
 }
 #shopItem1 {
-  background-image: url('images/items/Uxtotallydonenow.bmp');
+  background-image: url('./images/items/Uxtotallydonenow.bmp');
   background-position: -1.5px;
   image-rendering: pixelated;
 }
 #shopItem2 {
-  background-image: url('images/items/U1totallydonenow.bmp');
+  background-image: url('./images/items/U1totallydonenow.bmp');
   background-position: -1.5px;
   image-rendering: pixelated;
 }
 #shopItem3 {
-  background-image: url('images/items/TW1m.bmp');
+  background-image: url('./images/items/TW1m.bmp');
   image-rendering: pixelated;
 }
 #shopItem4 {
-  background-image: url('images/items/Tw10m.bmp');
+  background-image: url('./images/items/Tw10m.bmp');
   image-rendering: pixelated;
 }
 #shopItem5 {
-  background-image: url('images/items/goldmeshok.webp');
+  background-image: url('./images/items/goldmeshok.webp');
 }
 #shopItem6 {
-  background-image: url('images/items/integral.webp');
+  background-image: url('./images/items/integral.webp');
 }
 #mineral1 {
-  background-image: url('images/mins/opalfinished.webp');
+  background-image: url('./images/mins/opalfinished.webp');
 }
 #mineral2 {
-  background-image: url('images/mins/topazfinished.webp');
+  background-image: url('./images/mins/topazfinished.webp');
 }
 #mineral3 {
-  background-image: url('images/mins/jadeshiny.webp');
+  background-image: url('./images/mins/jadeshiny.webp');
   background-position: -1px -1px;
 }
 #mineral4 {
-  background-image: url('images/mins/aquamarine.png');
+  background-image: url('./images/mins/aquamarine.png');
   background-position: -1px -1px;
 }
 
@@ -1866,7 +1866,7 @@ img.disabled {
 }
 
 #acceleratorSpeedometerIcon {
-  background: url('images/misc/accelerator_speedometer.png') no-repeat; 
+  background: url('./images/misc/accelerator_speedometer.png') no-repeat; 
   background-size: cover; 
   image-rendering: pixelated;
   height: 100px;
@@ -2141,7 +2141,7 @@ vn {
 #digitalizationLogo, #digitalizationLogo2 {
   width: 450px;
   height: 70px;
-  background: url('images/misc/digitalization_logo.png') no-repeat;
+  background: url('./images/misc/digitalization_logo.png') no-repeat;
   background-size: cover; 
 }
 
