@@ -419,7 +419,7 @@ button {
 #bookWindow {
     width: 1152px; 
     aspect-ratio: 1.5 / 1;
-    background: url('javascript/cssfiles/images/Lore/Book\ png.png') no-repeat; 
+    background: url('./images/Lore/Book\ png.png') no-repeat; 
     background-size: cover; 
     display: none;
     justify-content: center; 
@@ -465,14 +465,14 @@ button {
     height: 50px; 
 }
 .left-arrow { 
-    background: url('javascript/cssfiles/images/Lore/RightArrow.png') no-repeat; 
+    background: url('./images/Lore/RightArrow.png') no-repeat; 
     background-size: cover; 
     image-rendering: pixelated;
     border: 0px !important;
     left: 30px; 
 }
 .right-arrow { 
-    background: url('javascript/cssfiles/images/Lore/LeftArrow.png') no-repeat; 
+    background: url('./images/Lore/LeftArrow.png') no-repeat; 
     background-size: cover; 
     image-rendering: pixelated;
     border: 0px !important;
@@ -481,7 +481,7 @@ button {
 
 /* Кнопка выхода сверху справа */
 .close-btn { 
-    background: url('javascript/cssfiles/images/Lore/BackArrow.png') no-repeat; 
+    background: url('./images/Lore/BackArrow.png') no-repeat; 
     background-size: cover; 
     image-rendering: pixelated;
     border: 0px !important;
@@ -504,19 +504,19 @@ button {
 }
 
 .paper-type-1 {
-    background: url('javascript/cssfiles/images/Lore/Piece1.png') no-repeat; 
+    background: url('./images/Lore/Piece1.png') no-repeat; 
     background-size: cover; 
 }
 .paper-type-2 {
-    background: url('javascript/cssfiles/images/Lore/Piece2.png') no-repeat; 
+    background: url('./images/Lore/Piece2.png') no-repeat; 
     background-size: cover; 
 }
 .paper-type-3 {
-    background: url('javascript/cssfiles/images/Lore/Piece3.png') no-repeat; 
+    background: url('./images/Lore/Piece3.png') no-repeat; 
     background-size: cover; 
 }
 .paper-type-4 {
-    background: url('javascript/cssfiles/images/Lore/Piece4.png') no-repeat; 
+    background: url('./images/Lore/Piece4.png') no-repeat; 
     background-size: cover; 
 }
 
@@ -527,7 +527,7 @@ button {
 }
 
 #paperWindow {
-    background: url('javascript/cssfiles/images/Lore/BigPiece1.png') no-repeat; 
+    background: url('./images/Lore/BigPiece1.png') no-repeat; 
     background-size: cover; 
     border: 0px !important;
     image-rendering: pixelated;

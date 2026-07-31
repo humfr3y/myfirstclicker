@@ -959,7 +959,7 @@ shn {
 
 .shardUnlockable {
   height: 100%;
-  background-image: url('javascript/cssfiles/images/misc/shardspb.png');
+  background-image: url('./images/misc/shardspb.png');
   background-size: auto 100%;
 }
 
