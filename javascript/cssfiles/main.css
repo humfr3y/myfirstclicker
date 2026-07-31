@@ -418,7 +418,7 @@ nt {
   max-width: 824px;
   aspect-ratio: 2 / 1; 
   
-  background-image: url('javascript/cssfiles/images/misc/MrSuper.png');
+  background-image: url('images/misc/MrSuper.png');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center bottom; 
@@ -427,7 +427,7 @@ nt {
 }
 
 #mrSuperChar {
-  background: url('javascript/cssfiles/images/misc/MrSuperChar.png') no-repeat;
+  background: url('images/misc/MrSuperChar.png') no-repeat;
   background-size: contain;
   position: relative;
   z-index: 10001;
@@ -1866,7 +1866,7 @@ img.disabled {
 }
 
 #acceleratorSpeedometerIcon {
-  background: url('javascript/cssfiles/images/misc/accelerator_speedometer.png') no-repeat; 
+  background: url('images/misc/accelerator_speedometer.png') no-repeat; 
   background-size: cover; 
   image-rendering: pixelated;
   height: 100px;
