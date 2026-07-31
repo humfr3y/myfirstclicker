@@ -1848,7 +1848,7 @@ function loop() {
     player.time.savedTime = Date.now();
     UNL.display.check();
 
-    // DIGITALIZATION.check_event()
+    DIGITALIZATION.check_event()
 }
 
 mySlider.oninput = function() { player.settings.autosave_interval = this.value; };
