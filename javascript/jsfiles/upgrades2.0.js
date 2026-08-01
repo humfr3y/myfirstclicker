@@ -286,7 +286,7 @@ const UPGS = {
         break: {
             buyables: new UniversalBuyablesManager('prestige', [
                 {
-                    id: 1, power: 4.25, basePrice: 1e13, elementId: 'breakPBuyableU1',
+                    id: 1, power: 4, basePrice: 1e13, elementId: 'breakPBuyableU1',
                     cost: function(x = player.prestige.break.buyables[1]) {
                         let logCost = Math.log10(this.basePrice) + x * Math.log10(this.power);
                         let finalCost = Math.pow(10, logCost);
@@ -300,7 +300,7 @@ const UPGS = {
                     effect: function(x = player.prestige.break.buyables[1]) { return x * 0.1 * UPGS.prestige.break.buyables[2].effect(); },
                 },
                 {
-                    id: 2, power: 8.5, basePrice: 1e15, elementId: 'breakPBuyableU2',
+                    id: 2, power: 8, basePrice: 1e15, elementId: 'breakPBuyableU2',
                     cost: function(x = player.prestige.break.buyables[2]) {
                         let logCost = Math.log10(this.basePrice) + x * Math.log10(this.power);
                         let finalCost = Math.pow(10, logCost);
@@ -330,7 +330,7 @@ const UPGS = {
                     effect: function(x = player.prestige.break.buyables[3]) { return Math.pow(3, x); },
                 },
                 {
-                    id: 4, power: 21, basePrice: 1e20, elementId: 'breakPBuyableU4',
+                    id: 4, power: 16, basePrice: 1e20, elementId: 'breakPBuyableU4',
                     cost: function(x = player.prestige.break.buyables[4]) {
                         let logCost = Math.log10(this.basePrice) + x * Math.log10(this.power);
                         let finalCost = Math.pow(10, logCost);
@@ -342,7 +342,7 @@ const UPGS = {
                         return finalCost
                     },
                     customCostMod: function() { return player.reflash.algo.includes(43) ? 0.9 : 1; },
-                    effect: function(x = player.prestige.break.buyables[4]) { return Math.pow(1.15, x); },
+                    effect: function(x = player.prestige.break.buyables[4]) { return Math.pow(1.5, x); },
                 },
                 {
                     id: 5, power: 10000, basePrice: 5e22, elementId: 'breakPBuyableU5',

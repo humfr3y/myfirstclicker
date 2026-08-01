@@ -189,6 +189,9 @@ class UniversalBuyablesManager {
             let bulk = Math.min(this[x].bulk(), MISC.automation.buyable.bulk());
             this.state.currency -= totalCost(bulk, this[x].cost(), this[x].power);
             this.targetArray[x] += bulk;
+            if (player.event.digitalization.activated && this.layer === 'coin') {
+                if (!player.event.digitalization.quests.weekly.completed.includes(5)) player.event.digitalization.quests.weekly.progress[4] += bulk
+            }
         }
     }
 

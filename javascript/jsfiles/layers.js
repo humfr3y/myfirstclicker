@@ -501,7 +501,7 @@ const LAYERS = {
 };
 
 const MILESTONES = {
-    reqs: [0, 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50, 60, 75, 100, 1000, 1e6, 1e7, 1e10, 1e15],
+    reqs: [0, 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50, 60, 75, 100, 1000, 10000, 1e6, 1e9, 1e15],
     milestones: 20,
     
     has(id) { return player.prestige.milestones.includes(id); },

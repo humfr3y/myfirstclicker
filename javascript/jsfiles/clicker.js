@@ -870,31 +870,31 @@ const UNL = {
             current() { return player.coin.this_reflash_currency; }, 
             goal(x = player.shard.achievements[1]) { return 1e50 * Math.pow(1e20, x); }, 
             ratio() { return findRatio(this.current(), this.goal()); }, 
-            effect(x = player.shard.achievements[1]) { let e = UNL.shard_achievements._effBase(1, Math.pow(7, x), false); return player.prestige.challenge.activated === 8 ? 1: e; } 
+            effect(x = player.shard.achievements[1]) { let e = UNL.shard_achievements._effBase(1, Math.pow(8, x), false); return player.prestige.challenge.activated === 8 ? 1: e; } 
         },
         2: { id: 2, 
             current() { return player.supercoin.this_reflash_currency; }, 
             goal(x = player.shard.achievements[2]) { return 1000 * Math.pow(2, x); }, 
             ratio() { return findRatio(this.current(), this.goal()); }, 
-            effect(x = player.shard.achievements[2]) { return UNL.shard_achievements._effBase(1, x / 25, true); } 
+            effect(x = player.shard.achievements[2]) { return UNL.shard_achievements._effBase(1, x / 15, true); } 
         },
         3: { id: 3, 
             current() { return player.prestige.this_reflash_currency; }, 
             goal(x = player.shard.achievements[3]) { return 1e10 * Math.pow(1e10, x); }, 
             ratio() { return findRatio(this.current() + 0.00001, this.goal()); }, 
-            effect(x = player.shard.achievements[3]) { return UNL.shard_achievements._effBase(2, Math.pow(2.33, x), false); } 
+            effect(x = player.shard.achievements[3]) { return UNL.shard_achievements._effBase(2, Math.pow(4.33, x), false); } 
         },
         4: { id: 4, 
             current() { return player.shard.currency; }, 
             goal(x = player.shard.achievements[4]) { return 1e25 * Math.pow(1e25, x); }, 
             ratio() { return findRatio(this.current() + 0.00001, this.goal()); }, 
-            effect(x = player.shard.achievements[4]) { return UNL.shard_achievements._effBase(2, Math.pow(7, x), false); } 
+            effect(x = player.shard.achievements[4]) { return UNL.shard_achievements._effBase(2, Math.pow(10, x), false); } 
         },
         5: { id: 5, 
             current() { return player.achievements.length; }, 
             goal(x = player.shard.achievements[5]) { return 10 + (10 * x); }, 
             ratio() { return findRatio(this.current(), this.goal()); }, 
-            effect(x = player.shard.achievements[5]) { return UNL.shard_achievements._effBase(3, Math.pow(1.85, x), false); } 
+            effect(x = player.shard.achievements[5]) { return UNL.shard_achievements._effBase(3, Math.pow(1.95, x), false); } 
         },
         6: { id: 6, 
             current() { return player.time.real.total.days; }, 
@@ -905,7 +905,7 @@ const UNL = {
         7: { id: 7, current() { return player.prestige.resets; }, 
             goal(x = player.shard.achievements[7]) { return 1e6 * Math.pow(10, x); }, 
             ratio() { return findRatio(this.current() + 0.00001, this.goal()); }, 
-            effect(x = player.shard.achievements[7]) { return UNL.shard_achievements._effBase(4, Math.pow(2.05, x), false); } 
+            effect(x = player.shard.achievements[7]) { return UNL.shard_achievements._effBase(4, Math.pow(2.1, x), false); } 
         },
         8: { id: 8, 
             current() { return player.clicks.simulated; }, 
@@ -917,13 +917,13 @@ const UNL = {
             current() { return player.clicks.critical; }, 
             goal(x = player.shard.achievements[9]) { return 100 * Math.pow(2, x); }, 
             ratio() { return findRatio(this.current(), this.goal()); }, 
-            effect(x = player.shard.achievements[9]) { return UNL.shard_achievements._effBase(5, Math.pow(1.2, x), false); } 
+            effect(x = player.shard.achievements[9]) { return UNL.shard_achievements._effBase(5, Math.pow(1.25, x), false); } 
         },
         10: { id: 10, 
             current() { let sum = 0; for (let i = 1; i <= 10; i++) sum += player.shard.achievements[i]; return sum; }, 
             goal(x = player.shard.achievements[10]) { return 10 + (10 * x); }, 
             ratio() { return findRatio(this.current(), this.goal()); }, 
-            effect(x = player.shard.achievements[10]) { return (player.shop.special.includes(3) && player.shard_achievements.includes(5)) ? Math.pow(1.1, x) : 1; } 
+            effect(x = player.shard.achievements[10]) { return (player.shop.special.includes(3) && player.shard_achievements.includes(5)) ? Math.pow(1.2, x) : 1; } 
         }
     },
     display: {

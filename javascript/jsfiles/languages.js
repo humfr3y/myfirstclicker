@@ -1343,7 +1343,7 @@ function updateStaticTranslations() {
     text.chapter.start = i18next.t('startLoreDescription');
     text.help.start = i18next.t('startHelpDescription');
 
-    const versions = ['0.0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.5.1', '0.6', '0.7', '0.7.1', '0.8', '0.8.0.1', '0.9', '0.9.1', '0.9.2', '0.10', '0.10.1', '0.11', '0.12', '0.12.1', '0.13', '0.14', '0.15', '0.15.x', '1.0'];
+    const versions = ['0.0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.5.1', '0.6', '0.7', '0.7.1', '0.8', '0.8.0.1', '0.9', '0.9.1', '0.9.2', '0.10', '0.10.1', '0.11', '0.12', '0.12.1', '0.13', '0.14', '0.15', '0.15.x', '1.0', '1.0.x'];
     versions.forEach(v => {
         let key = 'version' + v.replace(/\./g, '');
         text.changelog[v] = i18next.t(key);
@@ -1403,6 +1403,7 @@ function getGlobalNumbers() {
         n1000: formatNumber(1000),
         n2500: formatNumber(2500),
         n10000: formatNumber(10000),
+        n100000: formatNumber(100000),
         n1e6: formatNumber(1e6),
         n1e7: formatNumber(1e7),
         n1e8: formatNumber(1e8),
