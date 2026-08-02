@@ -350,7 +350,7 @@
     "upg_bp_s10_desc": "Breaks Prestige barrier, makes able to gain more Crystals per Prestige than 1.",
     
     "upg_bp_b1_name": "Big Investment",
-    "upg_bp_b1_desc": "Improve formula of Break Prestige crystals ((1.225)^log10(coins)+x)",
+    "upg_bp_b1_desc": "Improve formula of Break Prestige crystals ((1.2)^log10(coins)+x)",
     "upg_bp_b2_name": "Precious Shares",
     "upg_bp_b2_desc": "Increase effect of Big Investment",
     "upg_bp_b3_name": "Tripler",

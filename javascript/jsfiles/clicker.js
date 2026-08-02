@@ -373,7 +373,7 @@ const GAIN = {
     },
     crystal: {
         base() {
-            return player.prestige.break.singles.includes(25) ? Math.pow(1.225, Math.log10((Math.max(GAIN.coin.click.effect(), GAIN.coin.second.effect()) + 10) / 1e15) + UPGS.prestige.break.buyables[1].effect()) : 1
+            return player.prestige.break.singles.includes(25) ? Math.pow(1.2, Math.log10((Math.max(GAIN.coin.click.effect(), GAIN.coin.second.effect()) + 10) / 1e15) + UPGS.prestige.break.buyables[1].effect()) : 1
         },
         offline(x = GAIN.crystal.offline_calc(), y = MISC.offline()) {
             let gain = x * y;
@@ -386,7 +386,7 @@ const GAIN = {
                 [player.prestige.upgrades[1], UPGS.prestige.buyables[1].effect()],
                 [ACHS.has(28), 4],
                 [player.shard.singleUpgrades.includes(11), UPGS.shard.singles[11].effect()],
-                // [player.shop.permanentUpgrades[1], UPGS.shop.permanent[1].effect()],
+                [player.shop.permanentUpgrades[1], UPGS.shop.permanent[1].effect()],
                 [UNL.overdrive.type2.unl(), UNL.overdrive.type2.effect()],
                 [player.minerals[3], UPGS.minerals[3].effect1()],
                 [player.challenge.completed.includes(10) && player.challenge.activated === 0, CHALL[10].effect()],
