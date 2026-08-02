@@ -293,6 +293,7 @@ const DIGITALIZATION = {
             let required = DIGITALIZATION.pass.requirement()
 
             this.next_level()
+            this.checkReward()
             
             let width = 0;
             let ratio = 0;

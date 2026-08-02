@@ -30,9 +30,9 @@ const getFortuneBoosts = () => {
 };
 
 const getShopItems = () => {
-    let amount = {}, used = {};
-    for (let i = 1; i <= 6; i++) { amount[i] = 0; used[i] = 0; }
-    return { amount, used };
+    let amount = {}, used = {}, timer = {};
+    for (let i = 1; i <= 6; i++) { amount[i] = 0; used[i] = 0; timer[i] = 0; }
+    return { amount, used, timer };
 };
 
 const generateEmptyObj = (count, hasStart = false) => {

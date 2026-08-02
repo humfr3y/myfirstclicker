@@ -373,7 +373,7 @@ const GAIN = {
     },
     crystal: {
         base() {
-            return player.prestige.break.singles.includes(25) ? Math.pow(1.2, Math.log10((Math.max(GAIN.coin.click.effect(), GAIN.coin.second.effect()) + 10) / 1e15) + UPGS.prestige.break.buyables[1].effect()) : 1
+            return player.prestige.break.singles.includes(25) ? Math.pow(1.225, Math.log10((Math.max(GAIN.coin.click.effect(), GAIN.coin.second.effect()) + 10) / 1e15) + UPGS.prestige.break.buyables[1].effect()) : 1
         },
         offline(x = GAIN.crystal.offline_calc(), y = MISC.offline()) {
             let gain = x * y;
@@ -481,7 +481,7 @@ const GAIN = {
 
     supercoin: {
         offline(x = GAIN.supercoin.gain_per_second(), y = MISC.offline()) {
-            return x * y
+            return x / 10 * y
         },
         chance() {
             let chance = 1;
@@ -551,10 +551,10 @@ const GAIN = {
         },
         gain_per_second() {
             if (!player.shop.special.includes(6)) return 0
-            return (((1 + this.chance() / 100) * (Math.log10(GAIN.coin.second.effect() * 1 + 1)/1000)) / 2) * this.gain()
+            return (Math.pow(Math.log10(GAIN.coin.second.effect() * 1 + 1) / 10 * (this.chance()), 0.33)) / 10 * this.gain()
         }
     },
-
+//(((1 + this.chance() / 70) * ())) * this.gain()
     critical: {
         baseMult: 2,
         baseChance: 1,
@@ -876,7 +876,7 @@ const UNL = {
             current() { return player.supercoin.this_reflash_currency; }, 
             goal(x = player.shard.achievements[2]) { return 1000 * Math.pow(2, x); }, 
             ratio() { return findRatio(this.current(), this.goal()); }, 
-            effect(x = player.shard.achievements[2]) { return UNL.shard_achievements._effBase(1, x / 15, true); } 
+            effect(x = player.shard.achievements[2]) { return UNL.shard_achievements._effBase(1, x / 50, true); } 
         },
         3: { id: 3, 
             current() { return player.prestige.this_reflash_currency; }, 
@@ -923,7 +923,7 @@ const UNL = {
             current() { let sum = 0; for (let i = 1; i <= 10; i++) sum += player.shard.achievements[i]; return sum; }, 
             goal(x = player.shard.achievements[10]) { return 10 + (10 * x); }, 
             ratio() { return findRatio(this.current(), this.goal()); }, 
-            effect(x = player.shard.achievements[10]) { return (player.shop.special.includes(3) && player.shard_achievements.includes(5)) ? Math.pow(1.2, x) : 1; } 
+            effect(x = player.shard.achievements[10]) { return (player.shop.special.includes(3) && player.shard_achievements.includes(5)) ? Math.pow(1.1, x) : 1; } 
         }
     },
     display: {
@@ -942,7 +942,7 @@ const UNL = {
             if (el.style.display !== targetDisplay) el.style.display = targetDisplay;
         },
         check() {
-            for (let i = 1; i <= 101; i++) {
+            for (let i = 1; i <= 104; i++) {
                 if (this[i]) {
                     let el = this[i].element();
                     if (el instanceof HTMLCollection) {
@@ -1065,7 +1065,10 @@ const UNL = {
         91: { type: 'flex', element: () => document.getElementsByClassName('shop_unlock_post_reflash'), req: () => player.reflash.resets >= 1}, 
         92: { type: 'block', element: () => document.getElementById('acceleratorU5_1'), req: () => MISC.acc_ratio() >= 100}, 
         93: { type: 'block', element: () => document.getElementById('acceleratorU5'), req: () => MISC.acc_ratio() < 100}, 
-        94: { type: 'block', element: () => document.getElementById('temporaryBonuses'), req: () => player.virus.effect.time > 0},
+        94: { type: 'flex', element: () => document.getElementById('temporaryBonuses'), req: () => player.virus.effect.time > 0 || player.shop.items.timer[1] > 0 || player.shop.items.timer[2] > 0},
+        102: {type: 'block', element: () => document.getElementById('virusEffect'), req: () => player.virus.effect.time > 0},
+        103: {type: 'block', element: () => document.getElementById('shopItem1Effect'), req: () => player.shop.items.timer[1] > 0},
+        104: {type: 'block', element: () => document.getElementById('shopItem2Effect'), req: () => player.shop.items.timer[2] > 0},
         95: { type: 'flex', element: () => document.getElementById('digitalizationPreStart'), req: () => !player.event.digitalization.activated},
         96: { type: 'flex', element: () => document.getElementById('digitalizationEvent'), req: () => player.event.digitalization.activated},
         //тут 98 потому что блок второго достижения осколков имеет номер 97, он где-то там выше
@@ -1342,8 +1345,16 @@ const MISC = {
     },
     acc_ratio() {
         return Math.min(MISC.sum_of_utils()/UPGS.reflash.accelerator[5].cost()*100, 100)
+    },
+    item_effect() {
+        if (player.shop.items.used[1] > 0 && player.shop.items.timer[1] < 0) {
+            player.shop.items.used[1] = 0
+        }
+        if (player.shop.items.used[2] > 0 && player.shop.items.timer[2] < 0) {
+            player.shop.items.used[2] = 0
+        }
     }
-};
+}
 
 // --- СИСТЕМА ПРОГРЕССА (PROGRESS) ---
 
@@ -1819,6 +1830,11 @@ function loop() {
     
         if (player.virus.effect.time > 0) player.virus.effect.time -= time
     }
+
+    if (player.shop.items.timer[1] > 0) player.shop.items.timer[1] -= time
+    if (player.shop.items.timer[2] > 0) player.shop.items.timer[2] -= time
+
+    MISC.item_effect()
 
     MISC.balance.ratio();
     UNL.shard_achievements.check();

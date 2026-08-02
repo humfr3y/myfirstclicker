@@ -2094,6 +2094,8 @@ vn {
 }
 
 #temporaryBonuses {
+  display: flex;
+  flex-direction: column;
   position: fixed; 
   top: 20%;        
   right: 0;        
@@ -2106,6 +2108,7 @@ vn {
   transition: transform 0.5s ease-in-out;
   transform: translateX(100%); 
   z-index: 1000;
+  gap: 15px;
 }
 
 #temporaryBonuses.open {

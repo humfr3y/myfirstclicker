@@ -217,7 +217,15 @@ function loadTranslationsAlways() {
 
     document.getElementById('virus-effect-type').textContent = i18next.t(`virus_effects.${player.virus.effect.type}`)
     
+    document.getElementById('shop_item_1_timer').textContent = i18next.t('tempBoostTimer_2', {
+        s: formatNumber(player.shop.items.timer[1], 'boost')
+    })
+    document.getElementById('shop_item_2_timer').textContent = i18next.t('tempBoostTimer_2', {
+        s: formatNumber(player.shop.items.timer[2], 'boost')
+    })
 
+    document.getElementById('shop_item_1_eff').textContent = formatNumber(player.shop.items.used[1])
+    document.getElementById('shop_item_2_eff').textContent = formatNumber(player.shop.items.used[2])
 }
 
 // ============================================================

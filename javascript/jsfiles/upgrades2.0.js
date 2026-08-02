@@ -306,7 +306,7 @@ const UPGS = {
                         let finalCost = Math.pow(10, logCost);
 
                         if (player.reflash.algo.includes(43)) {
-                            finalCost = Math.pow(finalCost, 0.98);
+                            finalCost = Math.pow(finalCost, 0.975);
                         }
 
                         return finalCost
@@ -321,7 +321,7 @@ const UPGS = {
                         let finalCost = Math.pow(10, logCost);
 
                         if (player.reflash.algo.includes(43)) {
-                            finalCost = Math.pow(finalCost, 0.98);
+                            finalCost = Math.pow(finalCost, 0.975);
                         }
 
                         return finalCost
@@ -336,7 +336,7 @@ const UPGS = {
                         let finalCost = Math.pow(10, logCost);
 
                         if (player.reflash.algo.includes(43)) {
-                            finalCost = Math.pow(finalCost, 0.98);
+                            finalCost = Math.pow(finalCost, 0.975);
                         }
 
                         return finalCost
@@ -351,7 +351,7 @@ const UPGS = {
                         let finalCost = Math.pow(10, logCost);
 
                         if (player.reflash.algo.includes(43)) {
-                            finalCost = Math.pow(finalCost, 0.98);
+                            finalCost = Math.pow(finalCost, 0.975);
                         }
 
                         return finalCost
@@ -466,8 +466,8 @@ const UPGS = {
         ], 'permanentUpgrades'),
 
         items: new ShopItemsManager([
-            { id: 1, maxAmount: 5, elementId: 'shopItem1', cost: () => 80, effect: () => 0},
-            { id: 2, maxAmount: 3, elementId: 'shopItem2', cost: () => 250, effect: () => 0 },
+            { id: 1, maxAmount: 5, elementId: 'shopItem1', cost: () => 80, effect: () => { 0; if (player.shop.items.used[1] == 1) player.shop.items.timer[1] = 60 } },
+            { id: 2, maxAmount: 3, elementId: 'shopItem2', cost: () => 250, effect: () => { 0; if (player.shop.items.used[2] == 1) player.shop.items.timer[2] = 60 } },
             { id: 3, maxAmount: 10, elementId: 'shopItem3', cost: () => 120, effect: () => GAIN.offline_gain_time_warp(180) },
             // { id: 4, maxAmount: 3, elementId: 'shopItem4', cost: () => 400, effect: () => GAIN.offline_gain_time_warp(1800) },
             // { id: 5, maxAmount: 25, elementId: 'shopItem5', cost: () => 50, effect: () => { player.coin.currency += player.coin.total_currency / 1e25; } },

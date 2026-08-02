@@ -277,7 +277,7 @@ const LAYERS = {
             player.time.game.prestige.timer = 0;
             player.time.real.prestige.timer = 0;
 
-            for (let i = 1; i <= 6; i++) player.shop.items.used[i] = 0;
+            for (let i = 3; i <= 6; i++) player.shop.items.used[i] = 0;
 
             LAYERS.doReset();
         },
@@ -359,7 +359,7 @@ const LAYERS = {
         restoreSavedUtils(4); // И тут уровень 4
         player.coin.currency = 10;
         player.clicks.prestige = 0;
-        for (let i = 1; i <= 6; i++) player.shop.items.used[i] = 0;
+        for (let i = 3; i <= 6; i++) player.shop.items.used[i] = 0;
         LAYERS.doReset();
     },
     
@@ -409,6 +409,7 @@ const LAYERS = {
         for (let i = 1; i <= 6; i++) {
             player.shop.items.amount[i] = 0;
             player.shop.items.used[i] = 0;
+            player.shop.items.timer[i] = 0;
         }
 
         player.prestige.currency = 0;

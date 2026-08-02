@@ -72,7 +72,7 @@ const ACHS = {
         19() { return UPGS.coin.buyables[3].effect() >= 1e6},
         20() { return player.coin.singleUpgrades.includes(25)},
 
-        22() { return player.time.game.total.days >= 3 },
+        22() { return player.time.game.total.days >= 1 },
         23() { return player.prestige.broken_currency >= 100 },
         25() { return player.umultipliers >= 10 },
         26() { return UNL.shard.click.percent() == 100 && UNL.shard.second.percent() == 100 },
@@ -94,7 +94,7 @@ const ACHS = {
         43() { return UNL.shard_achievements[10].current() >= 10 && player.shard_achievements.includes(5)},
         44() { return player.coin.superUpgrades.length == 15},
         45() { return player.supercoin.total_currency >= 10000},
-        46() { return player.challenge.activated == 8 && player.time.game.prestige.timer >= 28800},
+        46() { return player.challenge.activated == 8 && player.time.game.prestige.timer >= 7200},
         48() { return player.shard.currency >= 1e100},
         49() { return player.prestige.resets >= 1e8},
         50() { return MISC.sum_of_utils() >= 100},
