@@ -1344,7 +1344,7 @@ function updateStaticTranslations() {
     text.notification.reflash.reset = i18next.t('presetResetNotification');
     text.notification.reflash.import = i18next.t('presetImportNotification');
 
-    text.notification.digitalization.daily = i18next.t('digitalization.weeklyQuests.notify');
+    text.notification.digitalization.daily = i18next.t('digitalization.dailyQuests.notify');
     text.notification.digitalization.weekly = i18next.t('digitalization.weeklyQuests.notify');
 
     text.changelog.start = i18next.t('startDescription');

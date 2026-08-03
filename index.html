@@ -332,7 +332,9 @@
         </div>
         <div id="secondGraphicSettingsRow" class="settingsRow">
           <button onclick="switchConfirmation()" id="switchConfirmation" class="settingButton"></button>
-          <select id="changeNotation" class="settingButton selectSetting">
+          <div class="settingButton">
+            <span class="ghostSettingsText" data-i18n="ghostNotation">Coin icon</span>
+            <select id="changeNotation" class="settingButton selectSetting" onchange="switchCoin(this.value)">
               <option value="option1" class="notaSelector">Standard</option>
               <option value="option2" class="notaSelector">Scientific</option>
               <option value="option3" class="notaSelector">Engineer</option>
@@ -340,7 +342,8 @@
               <option value="option5" class="notaSelector">True</option>
               <option value="option6" class="notaSelector">Empty</option>
               <option value="option7" class="notaSelector">Letter</option>
-          </select>
+            </select>
+          </div>
         </div>
       </div>
       <div id="settingsOtherTab" style="display: none;">
