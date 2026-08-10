@@ -747,11 +747,11 @@ const GAIN = {
             return effect;
         },
         offline(x = GAIN.balance.generation(), y = MISC.offline()) {
-            return UNL.display[76].req() ? x * y : 0;
+            return x * y;
         },
         scales_of_balance() {
             if (!player.balance.upgrades.singles.includes(23)) return 0;
-            return MISC.balance.scales_of_balance() / 50000;
+            return MISC.balance.scales_of_balance() / 15000;
         },
         sob_offline(x = GAIN.balance.scales_of_balance(), y = MISC.offline()) {
             return player.balance.upgrades.singles.includes(23) ? x * y : 0;
