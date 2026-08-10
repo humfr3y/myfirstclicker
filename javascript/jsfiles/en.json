@@ -620,13 +620,13 @@
     "maxBuy": "Buy All (M)",
 
     "currency_bits": {
-        "bits": "BITs",
-        "bytes": "Bytes",
-        "kilobytes": "Kilobytes",
-        "megabytes": "Megabytes",
-        "gigabytes": "Gigabytes",
-        "terabytes": "Terabytes",
-        "petabytes": "Petabytes"
+        "bit": "BITs",
+        "byte": "bytes",
+        "kilobyte": "kilobytes",
+        "megabyte": "megabytes",
+        "gigabyte": "gigabytes",
+        "terabyte": "terabytes",
+        "petabyte": "petabytes"
     },
 
     "upg_ref_s1_name": "Heritage",

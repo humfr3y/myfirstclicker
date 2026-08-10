@@ -1353,6 +1353,13 @@ const MISC = {
         if (player.shop.items.used[2] > 0 && player.shop.items.timer[2] < 0) {
             player.shop.items.used[2] = 0
         }
+    },
+    sum_watt() {
+        let total = 0;
+        for (let i = 1; i <= 5; i++) {
+            if (i != 2) total += UPGS.reflash.computer[i].consumation();
+        }
+        return total;
     }
 }
 
@@ -1808,6 +1815,7 @@ function loop() {
     UPGS.reflash.buyables.checkDisable();
     UPGS.reflash.singles.checkDisable();
     UPGS.reflash.accelerator.checkDisable();
+    UPGS.reflash.computer.checkDisable();
 
     UPGS.coin.buyables.checkPurchased();
     UPGS.coin.singles.checkPurchased();
@@ -1856,7 +1864,7 @@ function loop() {
     statsCritMultiUpdate();
     statsClickSimulationUpdate();
 
-    updateBitToByteUI()
+    // updateBitToByteUI()
 
     player.time.game.average.timer = MISC.average.game_time();
     convert_time('game', 'average');

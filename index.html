@@ -50,7 +50,7 @@
   <footer id="autoTimer">It's text</footer>
     <div id="topValues">
       <div id="reflashGet" class="topVars">
-        <span id="bitsCount" style="display: none"><span data-i18n="top_you_have">You have</span> <rt id="top_ref_cur_val">0</rt> <span data-i18n="currency_bits">bits</span></span>
+        <span id="bitsCount" style="display: none"><span data-i18n="top_you_have">You have</span> <rt id="top_ref_cur_val">0</rt> <span id="bitsCount_currency">bits</span></span>
         <button onclick="doReflash()" class="reflashButton" id="doReflash">Соберите Infinity монет и выполните Престижное Испытание 8</button>
       </div>
       <div id="coinGet" class="topVars">
@@ -2002,18 +2002,18 @@
               <ut data-i18n="upg_ref_s1_name">Money Pillow</ut><br>
               <span data-i18n="upg_ref_s1_desc">Start U-Multipliers, U-Powers, Prestiges with 1000 α-coins</span><br>
               <span data-i18n="word_currently">Currently:</span> x<span id="rSingleU1_effect">11</span><br>
-              <span id="rSingleU1_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU1_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+              <span id="rSingleU1_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU1_cost">0</span> <span id="rSingleU1_currency">crystals</span></span>
             </button>
             <button onclick="UPGS.reflash.singles.buy(12)" id="rSingleU2" class="upgradeButton reflashSingleButton">
               <ut data-i18n="upg_ref_s2_name">Activity 2.0</ut><br>
               <span data-i18n="upg_ref_s2_desc">Increases exponent of α-coin gain based on spent time</span><br>
               <span data-i18n="word_currently">Currently:</span> x<span id="rSingleU2_effect">0</span><br>
-              <span id="rSingleU2_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU2_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+              <span id="rSingleU2_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU2_cost">0</span> <span id="rSingleU2_currency">crystals</span></span>
             </button>
             <button onclick="UPGS.reflash.singles.buy(13)" id="rSingleU3" class="upgradeButton reflashSingleButton">
               <ut data-i18n="upg_ref_s3_name">Charisma</ut><br>
               <span data-i18n="upg_ref_s3_desc">Increases multiplicative chance of Supercoins by 50% per click/second and by 100% offline</span><br>
-              <span id="rSingleU3_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU3_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+              <span id="rSingleU3_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU3_cost">0</span> <span id="rSingleU3_currency">crystals</span></span>
             </button>
           </div>
           <div id="rSURow2" class="row">
@@ -2021,19 +2021,19 @@
               <ut data-i18n="upg_ref_s4_name">Money Pillow</ut><br>
               <span data-i18n="upg_ref_s4_desc">Start U-Multipliers, U-Powers, Prestiges with 1000 α-coins</span><br>
               <span data-i18n="word_currently">Currently:</span> ^<span id="rSingleU4_effect">0</span><br>
-              <span id="rSingleU4_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU4_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+              <span id="rSingleU4_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU4_cost">0</span> <span id="rSingleU4_currency">crystals</span></span>
             </button>
             <button onclick="UPGS.reflash.singles.buy(22)" id="rSingleU5" class="upgradeButton reflashSingleButton">
               <ut data-i18n="upg_ref_s5_name">Activity 2.0</ut><br>
               <span data-i18n="upg_ref_s5_desc">Increases exponent of α-coin gain based on spent time</span><br>
               <span data-i18n="word_currently">Currently:</span> ^<span id="rSingleU5_effect">0</span><br>
-              <span id="rSingleU5_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU5_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+              <span id="rSingleU5_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU5_cost">0</span> <span id="rSingleU5_currency">crystals</span></span>
             </button>
             <button onclick="UPGS.reflash.singles.buy(23)" id="rSingleU6" class="upgradeButton reflashSingleButton">
               <ut data-i18n="upg_ref_s6_name">Charisma</ut><br>
               <span data-i18n="upg_ref_s6_desc">Increases multiplicative chance of Supercoins by 50% per click/second and by 100% offline</span><br>
               <span data-i18n="word_currently">Currently:</span> ^<span id="rSingleU6_effect">0</span><br>
-              <span id="rSingleU6_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU6_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+              <span id="rSingleU6_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rSingleU6_cost">0</span> <span id="rSingleU6_currency">crystals</span></span>
             </button>
           </div>
           <div id="rSURow3" class="row">
@@ -2041,7 +2041,7 @@
               <ut data-i18n="upg_ref_b1_name">Money Pillow </ut> (<span id="rBuyableU1_amount">0</span>)<br>
               <span data-i18n="upg_ref_b1_desc">Start U-Multipliers, U-Powers, Prestiges with 1000 α-coins</span><br>
               <span data-i18n="word_currently">Currently:</span> x<span id="rBuyableU1_effect">0</span><br>
-              <span id="rBuyableU1_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rBuyableU1_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+              <span id="rBuyableU1_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="rBuyableU1_cost">0</span> <span id="rBuyableU1_currency">crystals</span></span>
             </button>
           </div>
       </div>
@@ -2092,7 +2092,7 @@
                   <ut data-i18n="upg_ref_acc1_name">Money Pillow</ut> (<span id="acceleratorU1_amount">0</span>)<br>
                   <span data-i18n="upg_ref_acc1_desc">Start U-Multipliers, U-Powers, Prestiges with 1000 α-coins</span><br>
                   <span data-i18n="word_currently">Currently:</span> +<span id="acceleratorU1_effect">0</span><br>
-                  <span id="acceleratorU1_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU1_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+                  <span id="acceleratorU1_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU1_cost">0</span> <span id="acceleratorU1_currency">crystals</span></span>
                   <div class="arrow" data-popper-arrow></div>
                 </div>
                 <button id="acceleratorU2" class="acceleratorUpgrade" onclick="UPGS.reflash.accelerator.buy(2)">
@@ -2103,7 +2103,7 @@
                   <ut data-i18n="upg_ref_acc2_name">Activity 2.0</ut> (<span id="acceleratorU2_amount">0</span>)<br>
                   <span data-i18n="upg_ref_acc2_desc">Increases exponent of α-coin gain based on spent time</span><br>
                   <span data-i18n="word_currently">Currently:</span> +<span id="acceleratorU2_effect">0</span><br>
-                  <span id="acceleratorU2_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU2_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+                  <span id="acceleratorU2_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU2_cost">0</span> <span id="acceleratorU2_currency">crystals</span></span>
                   <div class="arrow" data-popper-arrow></div>
                 </div>
                 <button id="acceleratorU3" class="acceleratorUpgrade" onclick="UPGS.reflash.accelerator.buy(3)">
@@ -2114,7 +2114,7 @@
                   <ut data-i18n="upg_ref_acc3_name">Money Pillow</ut> (<span id="acceleratorU3_amount">0</span>)<br>
                   <span data-i18n="upg_ref_acc3_desc">Start U-Multipliers, U-Powers, Prestiges with 1000 α-coins</span><br>
                   <span data-i18n="word_currently">Currently:</span> x<span id="acceleratorU3_effect">0</span><br>
-                  <span id="acceleratorU3_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU3_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+                  <span id="acceleratorU3_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU3_cost">0</span> <span id="acceleratorU3_currency">crystals</span></span>
                 </div>
                 <button id="acceleratorU4" class="acceleratorUpgrade" onclick="UPGS.reflash.accelerator.buy(4)">
                   <img src="javascript/cssfiles/images/svg/speed-fill-svgrepo-com.svg">
@@ -2124,7 +2124,7 @@
                   <ut data-i18n="upg_ref_acc4_name">Activity 2.0</ut> (<span id="acceleratorU4_amount">0</span>)<br>
                   <span data-i18n="upg_ref_acc4_desc">Increases exponent of α-coin gain based on spent time</span><br>
                   <span data-i18n="word_currently">Currently:</span> x<span id="acceleratorU4_effect">0</span><br>
-                  <span id="acceleratorU4_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU4_cost">0</span> <span data-i18n="currency_bits">crystals</span></span>
+                  <span id="acceleratorU4_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU4_cost">0</span> <span id="acceleratorU4_currency">crystals</span></span>
                   <div class="arrow" data-popper-arrow></div>
                 </div>
               </div>
@@ -2175,7 +2175,7 @@
       </div>
       <div id="algorithmTab" style="display:none">
         <div id="algoTopBar">
-          <span id="bitsCount2" class="currencyCount" style="text-align: center;"><span data-i18n="top_you_have">You have</span> <rt id="top_ref_cur_val2">0</rt> <span data-i18n="currency_bits">bits</span></span>
+          <span id="bitsCount2" class="currencyCount" style="text-align: center;"><span data-i18n="top_you_have">You have</span> <rt id="top_ref_cur_val2">0</rt> <span id="bitsCount2_currency">bits</span></span>
           <div class="centeredDiv" style="flex-direction: row;">
             <button data-i18n="export_tree" class="whiteButton" onclick="exportTree()">Экспорт древа</button>
             <button id="respecTree" data-i18n="respec_tree" class="whiteButton" onclick="respecTree()">Сброс древа после Перепрошивания</button>
@@ -2199,128 +2199,131 @@
         <div id="computerTopBar">
           <div id="computerLogo"></div>
           <div>
-            <span id="bitsCount3" class="currencyCount" style="text-align: center;"><span data-i18n="top_you_have">You have</span> <rt id="top_ref_cur_val3">0</rt> <span data-i18n="currency_bits">bits</span></span>
+            <span id="bitsCount3" class="currencyCount" style="text-align: center;"><span data-i18n="top_you_have">You have</span> <rt id="top_ref_cur_val3">0</rt> <span id="bitsCount3_currency">bits</span></span>
           </div>
         </div>
-        <div id="computerComponents">
-          <div class="computerComponentContainer" id="computerComponent1">
-            <div class="computerComponentImage">
+        <div id="computerComponentsDiv">
+          <span class="currencyCount" style="text-align: center;"><span data-i18n="uses">You have</span> <gt id="cur_watt_val">0</gt>/<gt id="max_watt_val">0</gt> <span data-i18n="wattUsage2">bits</span></span>
+          <div id="computerComponents">
+            <div class="computerComponentContainer" id="computerComponent1">
+              <div class="computerComponentImage">
+              </div>
+              <div class="computerComponentText">
+                <b><span class="computerComponentSpan" data-i18n="computer.component.name.1">Мат. плата</span></b>
+                <span class="computerComponentSpan">
+                  <span data-i18n="level">Уровень</span>
+                  <span class="computerComponentLevel">2</span>
+                <span class="computerComponentSpan">
+                  <span data-i18n="word_cost">Стоимость</span>
+                  <span class="computerComponentPrice">8</span>
+                  <span class="computerComponentCurrency">БИТов</span>
+                </span>
+              </div>
             </div>
-            <div class="computerComponentText">
-              <b><span class="computerComponentSpan" data-i18n="computer.component.name.1">Мат. плата</span></b>
-              <span class="computerComponentSpan">
-                <span data-i18n="level">Уровень</span>
-                <span class="computerComponentLevel">2</span>
-              <span class="computerComponentSpan">
-                <span data-i18n="word_cost">Стоимость</span>
-                <span class="computerComponentPrice">8</span>
-                <span data-i18n="currency_bits">БИТов</span>
-              </span>
+            <div id="tooltip-computerComponent1" class="tooltip" role="tooltip">
+              <ut class="computerComponentName">Money Pillow</ut><br><br>
+              <ut data-i18n="computer.component.name.1">Money Pillow</ut><br>
+              <span data-i18n="computer.component.desc.1">Открывает новые уровни компонентов</span><br>
+              <span data-i18n="word_currently">Currently:</span> <span class="computerComponentEffect">0</span> => <span class="computerComponentEffect_next">0</span><br>
+              <span data-i18n="wattUsage">Currently:</span> <span class="computerComponentUsage">0</span> <span data-i18n="wattUsage2">W</span> => <span class="computerComponentUsage_next">0</span> <span data-i18n="wattUsage2">W</span><br>
+              <div class="arrow" data-popper-arrow></div>
             </div>
-          </div>
-          <div id="tooltip-computerComponent1" class="tooltip" role="tooltip">
-            <ut id="computerComponent1_name">Money Pillow</ut><br><br>
-            <ut data-i18n="computer.component.name.1">Money Pillow</ut><br>
-            <span data-i18n="computer.component.desc.1">Открывает новые уровни компонентов</span><br>
-            <span data-i18n="word_currently">Currently:</span> <span id="computerComponent1_effect">0</span><br>
-            <span data-i18n="wattUsage">Currently:</span> <span id="computerComponent1_usage">0</span> <span data-i18n="wattUsage2">W</span><br>
-            <div class="arrow" data-popper-arrow></div>
-          </div>
-
-          <div class="computerComponentContainer" id="computerComponent2">
-            <div class="computerComponentImage">
+  
+            <div class="computerComponentContainer" id="computerComponent2">
+              <div class="computerComponentImage">
+              </div>
+              <div class="computerComponentText">
+                <b><span class="computerComponentSpan" data-i18n="computer.component.name.2">Мат. плата</span></b>
+                <span class="computerComponentSpan">
+                  <span data-i18n="level">Уровень</span>
+                  <span class="computerComponentLevel">2</span>
+                <span class="computerComponentSpan">
+                  <span data-i18n="word_cost">Стоимость</span>
+                  <span class="computerComponentPrice">8</span>
+                  <span class="computerComponentCurrency">БИТов</span>
+                </span>
+              </div>
             </div>
-            <div class="computerComponentText">
-              <b><span class="computerComponentSpan" data-i18n="computer.component.name.2">Мат. плата</span></b>
-              <span class="computerComponentSpan">
-                <span data-i18n="level">Уровень</span>
-                <span class="computerComponentLevel">2</span>
-              <span class="computerComponentSpan">
-                <span data-i18n="word_cost">Стоимость</span>
-                <span class="computerComponentPrice">8</span>
-                <span data-i18n="currency_bits">БИТов</span>
-              </span>
+            <div id="tooltip-computerComponent2" class="tooltip" role="tooltip">
+              <ut class="computerComponentName">Money Pillow</ut><br><br>
+              <ut data-i18n="computer.component.name.2">Money Pillow</ut><br>
+              <span data-i18n="computer.component.desc.2">Открывает новые уровни компонентов</span><br>
+              <span data-i18n="word_currently">Currently:</span> <span class="computerComponentEffect">0</span> => <span class="computerComponentEffect_next">0</span><br>
+              <span></span> <span class="computerComponentUsage"></span> <span></span><span class="computerComponentUsage_next"></span> <span></span>
+              <div class="arrow" data-popper-arrow></div>
             </div>
-          </div>
-          <div id="tooltip-computerComponent2" class="tooltip" role="tooltip">
-            <ut id="computerComponent2_name">Money Pillow</ut><br><br>
-            <ut data-i18n="computer.component.name.2">Money Pillow</ut><br>
-            <span data-i18n="computer.component.desc.2">Открывает новые уровни компонентов</span><br>
-            <span data-i18n="word_currently">Currently:</span> <span id="computerComponent2_effect">0</span><br>
-            <span data-i18n="wattUsage">Currently:</span> <span id="computerComponent2_usage">0</span> <span data-i18n="wattUsage2">W</span><br>
-            <div class="arrow" data-popper-arrow></div>
-          </div>
-
-          <div class="computerComponentContainer" id="computerComponent3">
-            <div class="computerComponentImage">
+  
+            <div class="computerComponentContainer" id="computerComponent3">
+              <div class="computerComponentImage">
+              </div>
+              <div class="computerComponentText">
+                <b><span class="computerComponentSpan" data-i18n="computer.component.name.3">Мат. плата</span></b>
+                <span class="computerComponentSpan">
+                  <span data-i18n="level">Уровень</span>
+                  <span class="computerComponentLevel">2</span>
+                <span class="computerComponentSpan">
+                  <span data-i18n="word_cost">Стоимость</span>
+                  <span class="computerComponentPrice">8</span>
+                  <span class="computerComponentCurrency">БИТов</span>
+                </span>
+              </div>
             </div>
-            <div class="computerComponentText">
-              <b><span class="computerComponentSpan" data-i18n="computer.component.name.3">Мат. плата</span></b>
-              <span class="computerComponentSpan">
-                <span data-i18n="level">Уровень</span>
-                <span class="computerComponentLevel">2</span>
-              <span class="computerComponentSpan">
-                <span data-i18n="word_cost">Стоимость</span>
-                <span class="computerComponentPrice">8</span>
-                <span data-i18n="currency_bits">БИТов</span>
-              </span>
+            <div id="tooltip-computerComponent3" class="tooltip" role="tooltip">
+              <ut class="computerComponentName">Money Pillow</ut><br><br>
+              <ut data-i18n="computer.component.name.3">Money Pillow</ut><br>
+              <span data-i18n="computer.component.desc.3">Открывает новые уровни компонентов</span><br>
+              <span></span> <span class="computerComponentEffect"></span><span class="computerComponentEffect_next"></span>
+              <span data-i18n="wattUsage">Currently:</span> <span class="computerComponentUsage">0</span> <span data-i18n="wattUsage2">W</span> => <span class="computerComponentUsage_next">0</span> <span data-i18n="wattUsage2">W</span><br>
+              <div class="arrow" data-popper-arrow></div>
             </div>
-          </div>
-          <div id="tooltip-computerComponent3" class="tooltip" role="tooltip">
-            <ut id="computerComponent3_name">Money Pillow</ut><br><br>
-            <ut data-i18n="computer.component.name.3">Money Pillow</ut><br>
-            <span data-i18n="computer.component.desc.3">Открывает новые уровни компонентов</span><br>
-            <span data-i18n="word_currently">Currently:</span> <span id="computerComponent3_effect">0</span><br>
-            <span data-i18n="wattUsage">Currently:</span> <span id="computerComponent3_usage">0</span> <span data-i18n="wattUsage2">W</span><br>
-            <div class="arrow" data-popper-arrow></div>
-          </div>
-
-          <div class="computerComponentContainer" id="computerComponent4">
-            <div class="computerComponentImage">
+  
+            <div class="computerComponentContainer" id="computerComponent4">
+              <div class="computerComponentImage">
+              </div>
+              <div class="computerComponentText">
+                <b><span class="computerComponentSpan" data-i18n="computer.component.name.4">Мат. плата</span></b>
+                <span class="computerComponentSpan">
+                  <span data-i18n="level">Уровень</span>
+                  <span class="computerComponentLevel">2</span>
+                <span class="computerComponentSpan">
+                  <span data-i18n="word_cost">Стоимость</span>
+                  <span class="computerComponentPrice">8</span>
+                  <span class="computerComponentCurrency">БИТов</span>
+                </span>
+              </div>
             </div>
-            <div class="computerComponentText">
-              <b><span class="computerComponentSpan" data-i18n="computer.component.name.4">Мат. плата</span></b>
-              <span class="computerComponentSpan">
-                <span data-i18n="level">Уровень</span>
-                <span class="computerComponentLevel">2</span>
-              <span class="computerComponentSpan">
-                <span data-i18n="word_cost">Стоимость</span>
-                <span class="computerComponentPrice">8</span>
-                <span data-i18n="currency_bits">БИТов</span>
-              </span>
+            <div id="tooltip-computerComponent4" class="tooltip" role="tooltip">
+              <ut class="computerComponentName">Money Pillow</ut><br><br>
+              <ut data-i18n="computer.component.name.4">Money Pillow</ut><br>
+              <span data-i18n="computer.component.desc.4">Открывает новые уровни компонентов</span><br>
+              <span data-i18n="word_currently">Currently:</span> <span class="computerComponentEffect">0</span> <span id="computerComponentEffect4_currency_1"></span> => <span class="computerComponentEffect_next">0</span> <span id="computerComponentEffect4_currency_2"></span><br>
+              <span data-i18n="wattUsage">Currently:</span> <span class="computerComponentUsage">0</span> <span data-i18n="wattUsage2">W</span> => <span class="computerComponentUsage_next">0</span> <span data-i18n="wattUsage2">W</span><br>
+              <div class="arrow" data-popper-arrow></div>
             </div>
-          </div>
-          <div id="tooltip-computerComponent4" class="tooltip" role="tooltip">
-            <ut id="computerComponent4_name">Money Pillow</ut><br><br>
-            <ut data-i18n="computer.component.name.4">Money Pillow</ut><br>
-            <span data-i18n="computer.component.desc.4">Открывает новые уровни компонентов</span><br>
-            <span data-i18n="word_currently">Currently:</span> <span id="computerComponent4_effect">0</span><br>
-            <span data-i18n="wattUsage">Currently:</span> <span id="computerComponent4_usage">0</span> <span data-i18n="wattUsage2">W</span><br>
-            <div class="arrow" data-popper-arrow></div>
-          </div>
-
-          <div class="computerComponentContainer" id="computerComponent5">
-            <div class="computerComponentImage">
+  
+            <div class="computerComponentContainer" id="computerComponent5">
+              <div class="computerComponentImage">
+              </div>
+              <div class="computerComponentText">
+                <b><span class="computerComponentSpan" data-i18n="computer.component.name.5">Мат. плата</span></b>
+                <span class="computerComponentSpan">
+                  <span data-i18n="level">Уровень</span>
+                  <span class="computerComponentLevel">2</span>
+                <span class="computerComponentSpan">
+                  <span data-i18n="word_cost">Стоимость</span>
+                  <span class="computerComponentPrice">8</span>
+                  <span class="computerComponentCurrency">БИТов</span>
+                </span>
+              </div>
             </div>
-            <div class="computerComponentText">
-              <b><span class="computerComponentSpan" data-i18n="computer.component.name.5">Мат. плата</span></b>
-              <span class="computerComponentSpan">
-                <span data-i18n="level">Уровень</span>
-                <span class="computerComponentLevel">2</span>
-              <span class="computerComponentSpan">
-                <span data-i18n="word_cost">Стоимость</span>
-                <span class="computerComponentPrice">8</span>
-                <span data-i18n="currency_bits">БИТов</span>
-              </span>
+            <div id="tooltip-computerComponent5" class="tooltip" role="tooltip">
+              <ut class="computerComponentName">Money Pillow</ut><br><br>
+              <ut data-i18n="computer.component.name.5">Money Pillow</ut><br>
+              <span data-i18n="computer.component.desc.5">Открывает новые уровни компонентов</span><br>
+              <span data-i18n="word_currently">Currently:</span> <span class="computerComponentEffect">0</span> <span id="computerComponentEffect5_currency_1"></span> => <span class="computerComponentEffect_next">0</span> <span id="computerComponentEffect5_currency_2"></span><br>
+              <span data-i18n="wattUsage">Currently:</span> <span class="computerComponentUsage">0</span> <span data-i18n="wattUsage2">W</span> => <span class="computerComponentUsage_next">0</span> <span data-i18n="wattUsage2">W</span><br>
+              <div class="arrow" data-popper-arrow></div>
             </div>
-          </div>
-          <div id="tooltip-computerComponent5" class="tooltip" role="tooltip">
-            <ut id="computerComponent5_name">Money Pillow</ut><br><br>
-            <ut data-i18n="computer.component.name.5">Money Pillow</ut><br>
-            <span data-i18n="computer.component.desc.5">Открывает новые уровни компонентов</span><br>
-            <span data-i18n="word_currently">Currently:</span> <span id="computerComponent5_effect">0</span><br>
-            <span data-i18n="wattUsage">Currently:</span> <span id="computerComponent5_usage">0</span> <span data-i18n="wattUsage2">W</span><br>
-            <div class="arrow" data-popper-arrow></div>
           </div>
         </div>
       </div>
@@ -3210,7 +3213,7 @@
                     </div>
                     <span id="shopPermanentU7Title" data-i18n="shop_p7_name">Crystal Sword</span>
                     <span id="shopPermanentU7Req">0/5</span>
-                  </div>
+                  </div>getBitOrByteKey(node.cost)
                 <div class="shopContainer shop_unlock_post_fortune" style="display: none">
                     <button id="shopPermanentU8" class="shopButton" onclick="UPGS.shop.permanent.buy(8)"></button>
                     <div id="tooltip-shopPermanentU8" class="tooltip" role="tooltip">

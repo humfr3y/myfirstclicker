@@ -155,7 +155,7 @@ function formatSmallNumber(number, mode, x) {
 }
 
 function formatNumber(number, mode = 'number', x = 3, isReflash = false) {
-    if (isReflash && player.reflash.computer[3] >= 1) {
+    if (isReflash && player.reflash.computer[3] >= 1 && number >= 8) {
         number /= 8
     }  
     if (number >= 1.79e308) return "Infinity";
@@ -1972,8 +1972,17 @@ function updateBitToByteUI() {
     
     // 1. Меняем текст валюты везде, где в JSON завязаны биты/байты
     // Ищем элементы с определенными ключами или атрибутами
-    document.querySelectorAll('[data-i18n="currency_bits"], [data-i18n="currency_bits.bits"], [data-i18n="currency_bits.bytes"]').forEach(el => {
-        el.textContent = isBytes ? i18next.t('currency_bits.bytes') : i18next.t('currency_bits.bits');
+    document.querySelectorAll('[data-i18n="currency_bits"], [data-i18n="currency_bits.bit"], [data-i18n="currency_bits.byte"]').forEach(el => {
+        el.textContent = isBytes ? i18next.t('currency_bits.byte') : i18next.t('currency_bits.bit');
     });
     return isBytes ? 'byte' : 'bit'
+}
+
+function getBitOrByteKey(number) {
+    const isComputerUnlocked = player && player.reflash && player.reflash.computer && player.reflash.computer[3] >= 1;
+    
+    if (isComputerUnlocked && number >= 8) {
+        return 'currency_bits.byte'; // Вернет "Bytes" / "Байтов"
+    }
+    return 'currency_bits.bit'; // Вернет "BITs" / "БИТов"
 }

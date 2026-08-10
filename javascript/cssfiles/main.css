@@ -2520,14 +2520,24 @@ vn {
   width: 50%;
 }
 
-#computerComponents {
+#computerComponentsDiv {
   width: 50%;
   display: flex;
   align-items: center;
-  height: 30vh;
+  height: 32vh;
+  max-height: 400px;
+  flex-direction: column;
+  border: 2px solid var(--reflash);
+  justify-content: space-evenly;
+}
+
+#computerComponents {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 90%;
   max-height: 400px;
   flex-direction: row;
-  border: 2px solid var(--reflash);
   justify-content: space-evenly;
 }
 
@@ -2548,7 +2558,7 @@ vn {
 .computerComponentText {
   display: flex;
   flex-direction: column;
-  color: var(--reflash);
+  color: white;
   text-align: center;
   font-size: calc(14px * var(--font-scale));
 }
@@ -2557,9 +2567,13 @@ vn {
   display: block;
 }
 
+.computerComponentName {
+  font-size: calc(18px * var(--font-scale));
+}
 
-
-
+.computerComponentContainer.disabled {
+  border-color: red;
+}
 
 
 

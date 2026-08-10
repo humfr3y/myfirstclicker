@@ -958,15 +958,32 @@ class AcceleratorManager extends UniversalBuyablesManager {
             }
         }
     }
+
+    disable(x) {
+        let can = this.canAfford(x);
+        if (x === 5) {
+            let btn1 = document.getElementById('acceleratorU5');
+            let btn2 = document.getElementById('acceleratorU5_1');
+            if (btn1) btn1.disabled = !can;
+            if (btn2) btn2.disabled = !can;
+        } else {
+            let el = this[x].element;
+            if (el) el.disabled = !can;
+        }
+    }
 }
 
 class ComputerBuyableUpgrade extends UniversalBuyableUpgrade {
     constructor(config, layerName, arrayName) {
         super(config, layerName, arrayName);
         this.customConsumation = config.consumation ? config.consumation.bind(this) : () => 1;
+        this.next_effect = config.next_effect ? config.next_effect.bind(this) : () => 0;
+        this.next_consumation = config.next_consumation ? config.next_consumation.bind(this) : () => 0;
     }
 
     consumation(...args) { return this.customConsumation(...args); }
+    next_effect(...args) { return this.next_effect(...args); }
+    next_consumation(...args) { return this.next_consumation(...args); }
 }
 
 class ComputerManager extends UniversalBuyablesManager {
@@ -974,10 +991,31 @@ class ComputerManager extends UniversalBuyablesManager {
         super(layerName, upgradesArray, arrayName);
         this._keys = [];
         upgradesArray.forEach(upg => {
-            // Создаем именно наш кастомный класс апгрейда
             this[upg.id] = new ComputerBuyableUpgrade(upg, layerName, arrayName);
             this._keys.push(upg.id);
         });
+    }
+
+    canAfford(x) {
+        return this.state.currency >= this[x].cost();
+    }
+
+    buy(x) {
+        if (this.canAfford(x)) {
+            if (x == 5) {
+                this.state.currency -= this[x].cost(); 
+                this.targetArray[x]++;
+            } else {
+                super.buy(x);
+            }
+        }
+    }
+
+    disable(x) {
+        let el = this[x].element;
+        if (el) {
+            el.disabled = !this.canAfford(x);
+        }
     }
 }
 

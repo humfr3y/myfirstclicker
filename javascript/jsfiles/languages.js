@@ -137,6 +137,7 @@ function loadTranslationsAlways() {
 
     const topBits = document.getElementById('top_ref_cur_val');
     if (topBits) topBits.textContent = formatNumber(player.reflash.currency, 'boost', 2, true)
+    document.getElementById('bitsCount_currency').textContent = i18next.t(getBitOrByteKey(player.reflash.currency))
 
     document.getElementById('top_supercoins_val').textContent = formatNumber(player.supercoin.currency);
     
@@ -227,11 +228,6 @@ function loadTranslationsAlways() {
     document.getElementById('shop_item_1_eff').textContent = formatNumber(player.shop.items.used[1])
     document.getElementById('shop_item_2_eff').textContent = formatNumber(player.shop.items.used[2])
 }
-
-// ============================================================
-// Функция для Вкладки Настроек
-// ============================================================
-
 
 // ============================================================
 // Функция для вкладки COINS (монеты) — 100% ОПТИМИЗИРОВАНА
@@ -1111,6 +1107,7 @@ function loadTranslationsReflash() {
         document.getElementById(`rBuyableU${i}_amount`).textContent = formatNumber(player.reflash.upgrades[i]);
         document.getElementById(`rBuyableU${i}_effect`).textContent = formatNumber(UPGS.reflash.buyables[i].effect(), 'boost');
         document.getElementById(`rBuyableU${i}_cost`).textContent = formatNumber(UPGS.reflash.buyables[i].cost(), 'boost', 2, true);
+        document.getElementById(`rBuyableU${i}_currency`).textContent = i18next.t(getBitOrByteKey(UPGS.reflash.buyables[i].cost()))
     }
 
     // 2. Единичные (Single) улучшения перепрошивания
@@ -1123,6 +1120,7 @@ function loadTranslationsReflash() {
         document.getElementById(`rSingleU${i}_cost_cont`).style.display = isBought ? 'none' : 'inline';
         if (!isBought) {
             document.getElementById(`rSingleU${i}_cost`).textContent = formatNumber(UPGS.reflash.singles[upg_id].cost(), 'boost', 2, true);
+            document.getElementById(`rSingleU${i}_currency`).textContent = i18next.t(getBitOrByteKey(UPGS.reflash.singles[upg_id].cost()))
         }
         if (i == 1 || i == 2) {
         document.getElementById(`rSingleU${i}_effect`).textContent = formatNumber(UPGS.reflash.singles[upg_id].effect(), 'boost');
@@ -1132,7 +1130,11 @@ function loadTranslationsReflash() {
     for (let i = 1; i <= 5; i++) {
         document.getElementById(`acceleratorU${i}_effect`).textContent = formatNumber(UPGS.reflash.accelerator[i].effect(), 'boost');
         document.getElementById(`acceleratorU${i}_amount`).textContent = formatNumber(player.reflash.acceleratorUpgrades[i]);
-        if (i != 5) document.getElementById(`acceleratorU${i}_cost`).textContent = formatNumber(UPGS.reflash.accelerator[i].cost(), 'boost', 2, true)
+        
+        if (i != 5) {
+            document.getElementById(`acceleratorU${i}_cost`).textContent = formatNumber(UPGS.reflash.accelerator[i].cost(), 'boost', 2, true)
+            document.getElementById(`acceleratorU${i}_currency`).textContent = i18next.t(getBitOrByteKey(UPGS.reflash.accelerator[i].cost()))
+        }
         else document.getElementById(`acceleratorU${i}_cost`).textContent = formatNumber(UPGS.reflash.accelerator[i].cost())
     }
 
@@ -1151,7 +1153,7 @@ function loadTranslationsReflash() {
                 let name = i18next.t(`upg_algo_${node.id}_name`);
                 let desc = i18next.t(`upg_algo_${node.id}_desc`, globals);
                 let costWord = i18next.t('word_cost')
-                let currencyWord = i18next.t('currency_bits');
+                let currencyWord = i18next.t(getBitOrByteKey(node.cost));
                 
                 // Собираем всё в саму кнопку: Название (жирное) -> Описание -> Стоимость (тусклая)
                 btn.innerHTML = `
@@ -1163,9 +1165,40 @@ function loadTranslationsReflash() {
 
         const topBits = document.getElementById('top_ref_cur_val2');
         if (topBits) topBits.textContent = formatNumber(player.reflash.currency, 'boost', 2, true)
+        document.getElementById('bitsCount2_currency').textContent = i18next.t(getBitOrByteKey(player.reflash.currency))
 
         const topBits2 = document.getElementById('top_ref_cur_val3');
         if (topBits2) topBits2.textContent = formatNumber(player.reflash.currency, 'boost', 2, true)
+        document.getElementById('bitsCount3_currency').textContent = i18next.t(getBitOrByteKey(player.reflash.currency))
+
+        // 5, Компуктер
+        for (let i = 0; i < 5; i++) {
+            document.getElementsByClassName('computerComponentLevel')[i].textContent = formatNumber(player.reflash.computer[i+1]);
+            document.getElementsByClassName('computerComponentPrice')[i].textContent = formatNumber(UPGS.reflash.computer[i+1].cost());
+            document.getElementsByClassName('computerComponentCurrency')[i].textContent = i18next.t(getBitOrByteKey(UPGS.reflash.computer[i+1].cost()))
+
+            //tooltip
+            document.getElementsByClassName('computerComponentName')[i].textContent = i18next.t(`computer.component.names.${i+1}.${player.reflash.computer[i+1]}`)
+            if (i+1 != 3) {
+                document.getElementsByClassName('computerComponentEffect')[i].textContent = formatNumber(UPGS.reflash.computer[i+1].effect());
+                document.getElementsByClassName('computerComponentEffect_next')[i].textContent = formatNumber(UPGS.reflash.computer[i+1].next_effect());
+            }
+            if (i+1 != 2) {
+                document.getElementsByClassName('computerComponentUsage')[i].textContent = formatNumber(UPGS.reflash.computer[i+1].consumation());
+                document.getElementsByClassName('computerComponentUsage_next')[i].textContent = formatNumber(UPGS.reflash.computer[i+1].next_consumation());
+            }
+            if (i+1 == 4 || i+1 == 5) {
+                document.getElementsByClassName('computerComponentEffect')[i].textContent = formatNumber(UPGS.reflash.computer[i+1].effect(), 'boost', 2, true);
+                document.getElementById('computerComponentEffect4_currency_1').textContent = i18next.t(getBitOrByteKey(UPGS.reflash.computer[4].effect()))
+                document.getElementById('computerComponentEffect4_currency_2').textContent = i18next.t(getBitOrByteKey(UPGS.reflash.computer[4].next_effect()))
+                document.getElementsByClassName('computerComponentEffect_next')[i].textContent = formatNumber(UPGS.reflash.computer[i+1].next_effect(), 'boost', 2, true);
+                document.getElementById('computerComponentEffect5_currency_1').textContent = i18next.t(getBitOrByteKey(UPGS.reflash.computer[5].effect()))
+                document.getElementById('computerComponentEffect5_currency_2').textContent = i18next.t(getBitOrByteKey(UPGS.reflash.computer[5].next_effect()))
+            }
+        }
+
+        document.getElementById('cur_watt_val').textContent = formatNumber(MISC.sum_watt())
+        document.getElementById('max_watt_val').textContent = formatNumber(UPGS.reflash.computer[2].effect())
 }
 
 function loadTranslationsEvent() {
@@ -1427,7 +1460,9 @@ function getGlobalNumbers() {
         n1e25: formatNumber(1e25),
         n1e50: formatNumber(1e50),
         n1e100: formatNumber(1e100),
-        nInf: formatNumber(1.79e308) 
+        nInf: formatNumber(1.79e308),
+
+        ref_cur: i18next.t('currency_bits.' + updateBitToByteUI())
     };
 }
 

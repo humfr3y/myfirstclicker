@@ -766,26 +766,34 @@ const UPGS = {
             {
                 id: 1, power: 2, basePrice: 8, elementId: 'computerComponent1',
                 effect: function(x = player.reflash.computer[1]) { return Math.pow(2, x); },
-                consumation: function(x = player.reflash.computer[1]) { return x * 5; }
+                consumation: function(x = player.reflash.computer[1]) { return x * 6; },
+                next_effect: function() { return this.effect(x = player.reflash.computer[1] + 1) },
+                next_consumation: function() { return this.consumation(x = player.reflash.computer[1] + 1) },
             },
             {
                 id: 2, power: 2, basePrice: 8, elementId: 'computerComponent2',
-                effect: function(x = player.reflash.computer[2]) { return Math.pow(x * 5 + 3 * Math.pow(1.2, x) + x + x * 1.5, 1.05); }
+                effect: function(x = player.reflash.computer[2]) { return 20 * x; },
+                next_effect: function() { return this.effect(x = player.reflash.computer[2] + 1) },
             },
             {
                 id: 3, power: 4, basePrice: 8, elementId: 'computerComponent3',
-                effect: function(x = player.reflash.computer[3]) { return Math.pow(2, x); },
-                consumation: function(x = player.reflash.computer[3]) { return 3 * Math.pow(1.2, x); }
+                // effect: function(x = player.reflash.computer[3]) { return Math.pow(2, x); },
+                consumation: function(x = player.reflash.computer[3]) { return x * 5; },
+                next_consumation: function() { return this.consumation(x = player.reflash.computer[3] + 1) },
             },
             {
                 id: 4, power: 4, basePrice: 8, elementId: 'computerComponent4',
-                effect: function(x = player.reflash.computer[4]) { return 8 * Math.pow(4, x); },
-                consumation: function(x = player.reflash.computer[4]) { return x; }
+                effect: function(x = player.reflash.computer[4]) { return 4 * Math.pow(4, x); },
+                consumation: function(x = player.reflash.computer[4]) { return x * 2; },
+                next_effect: function() { return this.effect(x = player.reflash.computer[4] + 1) },
+                next_consumation: function() { return this.consumation(x = player.reflash.computer[4] + 1) },
             },
             {
                 id: 5, power: 4, basePrice: 8, elementId: 'computerComponent5',
                 effect: function(x = player.reflash.computer[5]) { return 32 * Math.pow(4, x); },
-                consumation: function(x = player.reflash.computer[5]) { return x * 1.5; }
+                consumation: function(x = player.reflash.computer[5]) { return x * 3; },
+                next_effect: function() { return this.effect(x = player.reflash.computer[5] + 1) },
+                next_consumation: function() { return this.consumation(x = player.reflash.computer[5] + 1) },
             },
         ], 'computer'),
     }
