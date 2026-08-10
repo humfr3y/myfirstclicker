@@ -1341,6 +1341,7 @@ function updateStaticTranslations() {
     text.notification.dont_have_item = i18next.t('dontHaveItemNotification');
     text.notification.limit_item = i18next.t('limitItemNotification');
     text.notification.limit_item_2 = i18next.t('limitItemNotification2');
+    text.notification.challenge_item = i18next.t('challengeItemNotification');
 
     text.notification.reflash.copy = i18next.t('presetCopyNotification');
     text.notification.reflash.paste = i18next.t('presetPasteNotification');

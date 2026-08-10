@@ -51,27 +51,27 @@ html::-webkit-scrollbar-track {
 }
 
 html::-webkit-scrollbar-thumb, #versionDiv::-webkit-scrollbar-thumb, #helpDiv::-webkit-scrollbar-thumb{
-  background-color: #252525;
+  background-color: #3a3a3a;
   border-radius: 5px;
 }
 html, #versionDiv, #helpDiv {
   overflow-x:hidden;
 }
 /*смена полоски прокрутки для огнелиса*/
-html{
+html {
   scrollbar-width: thin;
-  scrollbar-color: #252525  #060606;
+  scrollbar-color: #3a3a3a  #060606;
   overflow-y: hidden;
 }
 
 #versionDiv {
   scrollbar-width: thin;
-  scrollbar-color: #252525  #000000;
+  scrollbar-color: #3a3a3a  #000000;
 }
 
 #helpDiv {
   scrollbar-width: thin;
-  scrollbar-color: #252525  #000000;
+  scrollbar-color: #3a3a3a  #000000;
 }
 
 .mainSettings {

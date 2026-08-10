@@ -355,7 +355,7 @@ const LAYERS = {
     },
     
     doForcedReset() {
-        player.overdrive.consumed.type1 = 0;
+        if (player.challenge.activated != 0 || !ACHS.has(55)) player.overdrive.consumed.type1 = 0;
         restoreSavedUtils(4); // И тут уровень 4
         player.coin.currency = 10;
         player.clicks.prestige = 0;
@@ -400,8 +400,8 @@ const LAYERS = {
         player.coin.singleUpgrades = [];
         player.coin.superUpgrades = [];
 
-        player.supercoin.currency = 0;
-        player.supercoin.this_reflash_currency = 0;
+        player.supercoin.currency *= UPGS.reflash.algo.tree[8].effect();
+        player.supercoin.this_reflash_currency *= UPGS.reflash.algo.tree[8].effect();
         player.supercoin.spent_currency = 0;
         for (let i = 1; i <= 11; i++) player.shop.upgrades[i] = 0;
         for (let i = 1; i <= 10; i++) player.shop.permanentUpgrades[i] = 0;
