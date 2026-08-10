@@ -1992,6 +1992,7 @@
         <button onclick="selectSubTab(reflashUpgradesTab, false, 'reflash')" id="reflashUpgradesSelect" class="tabButton subButton reflashButton active" data-i18n="reflashUpgradesButton">Улучшения</button>
         <button onclick="selectSubTab(acceleratorTab, true, 'reflash')" id="acceleratorSelect" class="tabButton subButton reflashButton" data-i18n="acceleratorButton">Ускоритель</button>
         <button onclick="selectSubTab(algorithmTab, true, 'reflash')" id="algorithmSelect" class="tabButton subButton reflashButton" data-i18n="algorithmButton">АЛГОРИТМ. ДРЕВО</button>
+        <button onclick="selectSubTab(computerTab, true, 'reflash')" id="computerSelect" class="tabButton subButton reflashButton" data-i18n="computerButton">Компьютер</button>
         <!-- <button onclick="" id="consoleSelect" class="tabButton subButton reflashButton" data-i18n="consoleButton">Консоль</button> -->
       </div>
       <div id="reflashUpgradesTab">
@@ -2192,6 +2193,135 @@
         <div id="treeContainer" class="tree-container">
           <svg id="treeLines" class="tree-svg"></svg>
           <div id="treeGrid" class="tree-grid"></div>
+        </div>
+      </div>
+      <div id="computerTab" style="display:none">
+        <div id="computerTopBar">
+          <div id="computerLogo"></div>
+          <div>
+            <span id="bitsCount3" class="currencyCount" style="text-align: center;"><span data-i18n="top_you_have">You have</span> <rt id="top_ref_cur_val3">0</rt> <span data-i18n="currency_bits">bits</span></span>
+          </div>
+        </div>
+        <div id="computerComponents">
+          <div class="computerComponentContainer" id="computerComponent1">
+            <div class="computerComponentImage">
+            </div>
+            <div class="computerComponentText">
+              <b><span class="computerComponentSpan" data-i18n="computer.component.name.1">Мат. плата</span></b>
+              <span class="computerComponentSpan">
+                <span data-i18n="level">Уровень</span>
+                <span class="computerComponentLevel">2</span>
+              <span class="computerComponentSpan">
+                <span data-i18n="word_cost">Стоимость</span>
+                <span class="computerComponentPrice">8</span>
+                <span data-i18n="currency_bits">БИТов</span>
+              </span>
+            </div>
+          </div>
+          <div id="tooltip-computerComponent1" class="tooltip" role="tooltip">
+            <ut id="computerComponent1_name">Money Pillow</ut><br><br>
+            <ut data-i18n="computer.component.name.1">Money Pillow</ut><br>
+            <span data-i18n="computer.component.desc.1">Открывает новые уровни компонентов</span><br>
+            <span data-i18n="word_currently">Currently:</span> <span id="computerComponent1_effect">0</span><br>
+            <span data-i18n="wattUsage">Currently:</span> <span id="computerComponent1_usage">0</span> <span data-i18n="wattUsage2">W</span><br>
+            <div class="arrow" data-popper-arrow></div>
+          </div>
+
+          <div class="computerComponentContainer" id="computerComponent2">
+            <div class="computerComponentImage">
+            </div>
+            <div class="computerComponentText">
+              <b><span class="computerComponentSpan" data-i18n="computer.component.name.2">Мат. плата</span></b>
+              <span class="computerComponentSpan">
+                <span data-i18n="level">Уровень</span>
+                <span class="computerComponentLevel">2</span>
+              <span class="computerComponentSpan">
+                <span data-i18n="word_cost">Стоимость</span>
+                <span class="computerComponentPrice">8</span>
+                <span data-i18n="currency_bits">БИТов</span>
+              </span>
+            </div>
+          </div>
+          <div id="tooltip-computerComponent2" class="tooltip" role="tooltip">
+            <ut id="computerComponent2_name">Money Pillow</ut><br><br>
+            <ut data-i18n="computer.component.name.2">Money Pillow</ut><br>
+            <span data-i18n="computer.component.desc.2">Открывает новые уровни компонентов</span><br>
+            <span data-i18n="word_currently">Currently:</span> <span id="computerComponent2_effect">0</span><br>
+            <span data-i18n="wattUsage">Currently:</span> <span id="computerComponent2_usage">0</span> <span data-i18n="wattUsage2">W</span><br>
+            <div class="arrow" data-popper-arrow></div>
+          </div>
+
+          <div class="computerComponentContainer" id="computerComponent3">
+            <div class="computerComponentImage">
+            </div>
+            <div class="computerComponentText">
+              <b><span class="computerComponentSpan" data-i18n="computer.component.name.3">Мат. плата</span></b>
+              <span class="computerComponentSpan">
+                <span data-i18n="level">Уровень</span>
+                <span class="computerComponentLevel">2</span>
+              <span class="computerComponentSpan">
+                <span data-i18n="word_cost">Стоимость</span>
+                <span class="computerComponentPrice">8</span>
+                <span data-i18n="currency_bits">БИТов</span>
+              </span>
+            </div>
+          </div>
+          <div id="tooltip-computerComponent3" class="tooltip" role="tooltip">
+            <ut id="computerComponent3_name">Money Pillow</ut><br><br>
+            <ut data-i18n="computer.component.name.3">Money Pillow</ut><br>
+            <span data-i18n="computer.component.desc.3">Открывает новые уровни компонентов</span><br>
+            <span data-i18n="word_currently">Currently:</span> <span id="computerComponent3_effect">0</span><br>
+            <span data-i18n="wattUsage">Currently:</span> <span id="computerComponent3_usage">0</span> <span data-i18n="wattUsage2">W</span><br>
+            <div class="arrow" data-popper-arrow></div>
+          </div>
+
+          <div class="computerComponentContainer" id="computerComponent4">
+            <div class="computerComponentImage">
+            </div>
+            <div class="computerComponentText">
+              <b><span class="computerComponentSpan" data-i18n="computer.component.name.4">Мат. плата</span></b>
+              <span class="computerComponentSpan">
+                <span data-i18n="level">Уровень</span>
+                <span class="computerComponentLevel">2</span>
+              <span class="computerComponentSpan">
+                <span data-i18n="word_cost">Стоимость</span>
+                <span class="computerComponentPrice">8</span>
+                <span data-i18n="currency_bits">БИТов</span>
+              </span>
+            </div>
+          </div>
+          <div id="tooltip-computerComponent4" class="tooltip" role="tooltip">
+            <ut id="computerComponent4_name">Money Pillow</ut><br><br>
+            <ut data-i18n="computer.component.name.4">Money Pillow</ut><br>
+            <span data-i18n="computer.component.desc.4">Открывает новые уровни компонентов</span><br>
+            <span data-i18n="word_currently">Currently:</span> <span id="computerComponent4_effect">0</span><br>
+            <span data-i18n="wattUsage">Currently:</span> <span id="computerComponent4_usage">0</span> <span data-i18n="wattUsage2">W</span><br>
+            <div class="arrow" data-popper-arrow></div>
+          </div>
+
+          <div class="computerComponentContainer" id="computerComponent5">
+            <div class="computerComponentImage">
+            </div>
+            <div class="computerComponentText">
+              <b><span class="computerComponentSpan" data-i18n="computer.component.name.5">Мат. плата</span></b>
+              <span class="computerComponentSpan">
+                <span data-i18n="level">Уровень</span>
+                <span class="computerComponentLevel">2</span>
+              <span class="computerComponentSpan">
+                <span data-i18n="word_cost">Стоимость</span>
+                <span class="computerComponentPrice">8</span>
+                <span data-i18n="currency_bits">БИТов</span>
+              </span>
+            </div>
+          </div>
+          <div id="tooltip-computerComponent5" class="tooltip" role="tooltip">
+            <ut id="computerComponent5_name">Money Pillow</ut><br><br>
+            <ut data-i18n="computer.component.name.5">Money Pillow</ut><br>
+            <span data-i18n="computer.component.desc.5">Открывает новые уровни компонентов</span><br>
+            <span data-i18n="word_currently">Currently:</span> <span id="computerComponent5_effect">0</span><br>
+            <span data-i18n="wattUsage">Currently:</span> <span id="computerComponent5_usage">0</span> <span data-i18n="wattUsage2">W</span><br>
+            <div class="arrow" data-popper-arrow></div>
+          </div>
         </div>
       </div>
   </div>

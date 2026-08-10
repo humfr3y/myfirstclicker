@@ -951,6 +951,27 @@ class AcceleratorManager extends UniversalBuyablesManager {
     }
 }
 
+class ComputerBuyableUpgrade extends UniversalBuyableUpgrade {
+    constructor(config, layerName, arrayName) {
+        super(config, layerName, arrayName);
+        this.customConsumation = config.consumation ? config.consumation.bind(this) : () => 1;
+    }
+
+    consumation(...args) { return this.customConsumation(...args); }
+}
+
+class ComputerManager extends UniversalBuyablesManager {
+    constructor(layerName, upgradesArray, arrayName = 'upgrades') {
+        super(layerName, upgradesArray, arrayName);
+        this._keys = [];
+        upgradesArray.forEach(upg => {
+            // Создаем именно наш кастомный класс апгрейда
+            this[upg.id] = new ComputerBuyableUpgrade(upg, layerName, arrayName);
+            this._keys.push(upg.id);
+        });
+    }
+}
+
 // --- КЛАСС АВТОМАТИЗАЦИИ ---
 
 class AutomationTask {

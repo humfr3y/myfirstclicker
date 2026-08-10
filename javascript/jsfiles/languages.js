@@ -136,7 +136,7 @@ function loadTranslationsAlways() {
     if (topCrystals) topCrystals.textContent = formatNumber(player.prestige.currency, 'floor');
 
     const topBits = document.getElementById('top_ref_cur_val');
-    if (topBits) topBits.textContent = formatNumber(player.reflash.currency, 'floor')
+    if (topBits) topBits.textContent = formatNumber(player.reflash.currency, 'boost', 2, true)
 
     document.getElementById('top_supercoins_val').textContent = formatNumber(player.supercoin.currency);
     
@@ -1110,7 +1110,7 @@ function loadTranslationsReflash() {
     for (let i = 1; i <= 1; i++) {
         document.getElementById(`rBuyableU${i}_amount`).textContent = formatNumber(player.reflash.upgrades[i]);
         document.getElementById(`rBuyableU${i}_effect`).textContent = formatNumber(UPGS.reflash.buyables[i].effect(), 'boost');
-        document.getElementById(`rBuyableU${i}_cost`).textContent = formatNumber(UPGS.reflash.buyables[i].cost());
+        document.getElementById(`rBuyableU${i}_cost`).textContent = formatNumber(UPGS.reflash.buyables[i].cost(), 'boost', 2, true);
     }
 
     // 2. Единичные (Single) улучшения перепрошивания
@@ -1122,7 +1122,7 @@ function loadTranslationsReflash() {
         // Скрываем цену, если куплено
         document.getElementById(`rSingleU${i}_cost_cont`).style.display = isBought ? 'none' : 'inline';
         if (!isBought) {
-            document.getElementById(`rSingleU${i}_cost`).textContent = formatNumber(UPGS.reflash.singles[upg_id].cost());
+            document.getElementById(`rSingleU${i}_cost`).textContent = formatNumber(UPGS.reflash.singles[upg_id].cost(), 'boost', 2, true);
         }
         if (i == 1 || i == 2) {
         document.getElementById(`rSingleU${i}_effect`).textContent = formatNumber(UPGS.reflash.singles[upg_id].effect(), 'boost');
@@ -1132,7 +1132,8 @@ function loadTranslationsReflash() {
     for (let i = 1; i <= 5; i++) {
         document.getElementById(`acceleratorU${i}_effect`).textContent = formatNumber(UPGS.reflash.accelerator[i].effect(), 'boost');
         document.getElementById(`acceleratorU${i}_amount`).textContent = formatNumber(player.reflash.acceleratorUpgrades[i]);
-        document.getElementById(`acceleratorU${i}_cost`).textContent = formatNumber(UPGS.reflash.accelerator[i].cost());
+        if (i != 5) document.getElementById(`acceleratorU${i}_cost`).textContent = formatNumber(UPGS.reflash.accelerator[i].cost(), 'boost', 2, true)
+        else document.getElementById(`acceleratorU${i}_cost`).textContent = formatNumber(UPGS.reflash.accelerator[i].cost())
     }
 
     document.getElementById('acceleratorU5_current_utils').textContent = formatNumber(MISC.sum_of_utils())
@@ -1156,12 +1157,15 @@ function loadTranslationsReflash() {
                 btn.innerHTML = `
                     <ut>${name}</ut>
                     <span>${desc}</span>`;
-                if (!player.reflash.algo.includes(node.id)) btn.innerHTML += `<span>${costWord} ${node.cost} ${currencyWord}</span>`
+                if (!player.reflash.algo.includes(node.id)) btn.innerHTML += `<span>${costWord} ${formatNumber(node.cost, 'boost', 2, true)} ${currencyWord}</span>`
             }
         });
 
         const topBits = document.getElementById('top_ref_cur_val2');
-        if (topBits) topBits.textContent = formatNumber(player.reflash.currency, 'floor')
+        if (topBits) topBits.textContent = formatNumber(player.reflash.currency, 'boost', 2, true)
+
+        const topBits2 = document.getElementById('top_ref_cur_val3');
+        if (topBits2) topBits2.textContent = formatNumber(player.reflash.currency, 'boost', 2, true)
 }
 
 function loadTranslationsEvent() {
@@ -1562,3 +1566,4 @@ function changeText() {
         document.getElementsByClassName("tooltipAch")[49].innerHTML = ''
     }
 }
+

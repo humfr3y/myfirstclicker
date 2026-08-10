@@ -143,7 +143,7 @@ function formatSmallNumber(number, mode, x) {
     switch (mode) {
         case 'number': return number.toFixed(0);
         case 'floor': return Math.floor(number).toString();
-        case 'boost': return number < 100 ? number.toFixed(2) : number.toFixed(0);
+        case 'boost': return number < 100 ? parseFloat(number.toFixed(2)).toString() : number.toFixed(0);
         case 'power': return number < 10 ? number.toFixed(x) : (number < 100 ? number.toFixed(2) : number.toFixed(0));
         case 'percent': 
             let p = number * 100 - 100;
@@ -154,7 +154,10 @@ function formatSmallNumber(number, mode, x) {
     }
 }
 
-function formatNumber(number, mode = 'number', x = 3) {
+function formatNumber(number, mode = 'number', x = 3, isReflash = false) {
+    if (isReflash && player.reflash.computer[3] >= 1) {
+        number /= 8
+    }  
     if (number >= 1.79e308) return "Infinity";
     const notation = player.settings.notation;
 
@@ -1962,4 +1965,15 @@ function updateCoinSelector() {
             option.style.display = 'none';
         }
     });
+}
+
+function updateBitToByteUI() {
+    const isBytes = player.reflash.computer[3] >= 1;
+    
+    // 1. Меняем текст валюты везде, где в JSON завязаны биты/байты
+    // Ищем элементы с определенными ключами или атрибутами
+    document.querySelectorAll('[data-i18n="currency_bits"], [data-i18n="currency_bits.bits"], [data-i18n="currency_bits.bytes"]').forEach(el => {
+        el.textContent = isBytes ? i18next.t('currency_bits.bytes') : i18next.t('currency_bits.bits');
+    });
+    return isBytes ? 'byte' : 'bit'
 }

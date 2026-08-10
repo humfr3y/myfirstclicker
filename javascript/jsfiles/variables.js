@@ -102,6 +102,9 @@ let player = {
         presets: { 1: {ids: [], name: '1',}, 2: {ids: [], name: '2',}, 3: {ids: [], name: '3',}, 4: {ids: [], name: '4',}, 5: {ids: [], name: '5',}, 6: {ids: [], name: '6',}},
         selectedPreset: 0,
         respecTree: false,
+        computer: {
+            1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0
+        }
     },
     virus: {
         current: 0,

@@ -1856,6 +1856,8 @@ function loop() {
     statsCritMultiUpdate();
     statsClickSimulationUpdate();
 
+    updateBitToByteUI()
+
     player.time.game.average.timer = MISC.average.game_time();
     convert_time('game', 'average');
     player.time.real.average.timer = MISC.average.real_time();
@@ -2134,7 +2136,7 @@ function selectSubTab(argument, isFlex, mainTabType) {
         prestige: ['upgradesTab', 'milestonesTab', 'automationTab', 'shardsTab', 'superCrystalsTab', 'mineralsTab', 'breakPrestigeTab', 'fortuneTab', 'balanceTab'],
         achievements: ['achScreenDescription', 'shardAchsTab', 'treasureTab'],
         challenge: ['challengeCoinTab', 'challengePrestigeTab'],
-        reflash: ['reflashUpgradesTab', 'acceleratorTab', 'algorithmTab']
+        reflash: ['reflashUpgradesTab', 'acceleratorTab', 'algorithmTab', 'computerTab']
     };
     (tabsMap[mainTabType] || []).forEach(id => {
         const el = document.getElementById(id);
@@ -2344,7 +2346,7 @@ if (versionDiv) {
 
 // Универсальный биндинг всплывающих подсказок Popper.js
 function tooltipGeneration() {
-    const tooltipElements = document.querySelectorAll('.ach, .shopButton, .mineralButton, .coinUpgradeButton, .acceleratorUpgrade, .eventTreasure');
+    const tooltipElements = document.querySelectorAll('.ach, .shopButton, .mineralButton, .coinUpgradeButton, .acceleratorUpgrade, .eventTreasure, .computerComponentContainer');
     tooltipElements.forEach(el => {
         const tooltip = document.getElementById('tooltip-' + el.id);
         if (!tooltip) return;

@@ -2499,6 +2499,123 @@ vn {
   font-size: calc(18px * var(--font-scale));
 }
 
+#computerTab {
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+#computerTopBar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 25vh;
+  max-height: 400px;
+  flex-direction: column;
+}
+
+#computerLogo {
+  background-color: purple;
+  height: 80%;
+  width: 50%;
+}
+
+#computerComponents {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  height: 30vh;
+  max-height: 400px;
+  flex-direction: row;
+  border: 2px solid var(--reflash);
+  justify-content: space-evenly;
+}
+
+.computerComponentContainer {
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--reflash);
+  cursor: pointer;
+}
+
+.computerComponentImage {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-bottom: 1px solid var(--reflash);
+}
+
+.computerComponentText {
+  display: flex;
+  flex-direction: column;
+  color: var(--reflash);
+  text-align: center;
+  font-size: calc(14px * var(--font-scale));
+}
+
+.computerComponentSpan {
+  display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

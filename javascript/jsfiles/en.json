@@ -36,10 +36,10 @@
     "prestigeInChallengeCompleted": "Complete the Prestige Challenge",
     "prestigeCountMultiplierText": "and {{prestigeCountMultiplier}} prestiges",
 
-    "reflashCount": "You have <rt>{{reflashes}}</rt> bits",
+    "reflashCount": "You have <rt>{{reflashes}}</rt> {{ref_cur}}",
     "reflashDisabled": "Collect Infinity α-coins and complete Prestige Challenge 8",
     "reflashFirst": "The limit has been reached, time to Reflash this world!",
-    "reflashEnabled": "Reset everything to get {{reflashesTemp}} bits",
+    "reflashEnabled": "Reset everything to get {{reflashesTemp}} {{ref_cur}}",
 
     "maxUpgradesTrue": "Buy All",
     "maxUpgradesFalse": "Buy One",
@@ -619,7 +619,15 @@
 
     "maxBuy": "Buy All (M)",
 
-    "currency_bits": "BITs",
+    "currency_bits": {
+        "bits": "BITs",
+        "bytes": "Bytes",
+        "kilobytes": "Kilobytes",
+        "megabytes": "Megabytes",
+        "gigabytes": "Gigabytes",
+        "terabytes": "Terabytes",
+        "petabytes": "Petabytes"
+    },
 
     "upg_ref_s1_name": "Heritage",
     "upg_ref_s1_desc": "Reflashes increase coin gain (not affected by softcaps)",
@@ -635,7 +643,7 @@
     "upg_ref_s6_desc": "Coming soon...",
 
     "upg_ref_b1_name": "Data Transfer",
-    "upg_ref_b1_desc": "Doubles BITs gain",
+    "upg_ref_b1_desc": "Doubles {{ref_cur}} gain",
 
     "upg_ref_acc1_name": "Stabilizer",
     "upg_ref_acc1_desc": "Increases minimum Accelerator effect",
@@ -693,6 +701,39 @@
     "resetOrder": "Reset",
     "saveOrder": "Save",
     "importOrder": "Import",
+
+    "computer": {
+        "component": {
+            "name": {
+                "1": "Motherboard",
+                "2": "Power Unit",
+                "3": "CPU",
+                "4": "RAM",
+                "5": "Hard disk",
+                "6": "Videocard"
+            },
+            "desc": {
+                "1": "Increase max level of components to ",
+                "2": "Increase max Watt to ",
+                "3": "Unlocks new nodes in ALGORITHM TREE: ",
+                "4": "Increase max amount of {{ref_cur}} per reset up to ",
+                "5": "Increase max amount of {{ref_cur}} up to ",
+                "6": "..."
+            },
+            "names": {
+                "1": ["Imtel SIM4-01", "Imtel SIM4-02", "Imtel SIM8-01", "Epple I", "MMD-1", "MMD-2"],
+                "2": ["5 VDC PSU", "Epple I PSU", "110/230 VAC PSU"],
+                "3": ["Imtel 4004", "Imtel 8008", "MOS Tech 6502", "Imtel 8080a"],
+                "4": ["4 BIT chip", "2 byte chip", "8 byte chip", "32 byte chip"],
+                "5": ["4 byte PROM", "64 byte PROM", "256 byte EPROM", "1 KB EPROM"]
+            }
+        } 
+    },
+
+    "motherboardRequirment": "A newer motherboard is required!",
+    "wattRequirement": "Not enough Watts for upgrade!",
+    "wattUsage": "Consumes: ",
+    "wattUsage2": "W",
 
     "treasureName1": "Treasures",
     "treasureName2": "Event treasures",
@@ -834,7 +875,7 @@
     "softcap_effect": "Softcap:",
 
     "totalReflashCurrency_1": "Total you collected",
-    "totalReflashCurrency_2": "BITs",
+    "totalReflashCurrency_2": "{{ref_cur}}",
     "totalReflashResets_1": "You reflashed Digital World",
     "totalReflashResets_2": "times",
     "reflashTime_1": "You've been in this Reflash for",
@@ -1449,18 +1490,18 @@
 
     "titleRTable1": "Runs",
     "titleRTable2": "Reflashes",
-    "titleRTable3": "BITs",
+    "titleRTable3": "{{ref_cur}}",
     "titleRTable4": "Game time",
     "titleRTable5": "Real time",
     "titleRTable6": "Reflashes per min.",
-    "titleRTable7": "BITs per min.",
+    "titleRTable7": "{{ref_cur}} per min.",
 
     "reflashesAgo": "{{i}} reflashes ago",
     "reflashesAgoZero": "Last reflash",
     "reflashResetCountTable": "{{x}} Reflashes",
     "reflashResetPerMinCountTable": "{{x}} Reflashes/min.",
-    "reflashCurrencyCountTable": "{{x}} BITs",
-    "reflashCurrencyPerMinCountTable": "{{x}} BITs/min.",
+    "reflashCurrencyCountTable": "{{x}} {{ref_cur}}",
+    "reflashCurrencyPerMinCountTable": "{{x}} {{ref_cur}}/min.",
 
     "softcaps": [
         {
@@ -1662,8 +1703,8 @@
             "name": "My1stClicker NULL",
             "desc": "A null world, back when it wasn't even called a world. There was nothing here, just three upgrades, no styles. It seems crazy to me that this tiny idea has grown into a full-fledged virtual world, where I think I still have secrets to uncover. Thank you all so much for your support. This treasure represents the absolute beginning of the journey.",
             "effect": {
-                "permanent": "Increase coin, crystal, shard and BITs gain by 1% (not affected by softcap)",
-                "temporary": "Increase coin, crystal, shard and BITs gain by 5% (not affected by softcap)"
+                "permanent": "Increase coin, crystal, shard and {{ref_cur}} gain by 1% (not affected by softcap)",
+                "temporary": "Increase coin, crystal, shard and {{ref_cur}} gain by 5% (not affected by softcap)"
             }
         }
     }
