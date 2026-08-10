@@ -362,7 +362,7 @@ const UPGS = {
             ], 'break.buyables'),
             singles: new UniversalSinglesManager('prestige', 'break.singles', [
                 { id: 11, elementId: 'breakPSingleU1', basePrice: 1e25, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(Math.log10(player.prestige.this_reflash_currency + 1), 1.5); } },
-                { id: 12, elementId: 'breakPSingleU2', basePrice: 1e30, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.log10(Math.log10(player.clicks.critical/2)); } },
+                { id: 12, elementId: 'breakPSingleU2', basePrice: 1e30, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.log10(Math.log10(10+player.clicks.critical/2)); } },
                 { id: 13, elementId: 'breakPSingleU3', basePrice: 1e35, effect: function(x = this.unl()) { return x == 0 ? 1 : 6; } },
                 { id: 14, elementId: 'breakPSingleU4', basePrice: 1e40, effect: function(x = this.unl()) {
                     if (x == 0) return 0;
@@ -588,7 +588,7 @@ const UPGS = {
     reflash: {
         buyables: new UniversalBuyablesManager('reflash', [
             {
-                id: 1, power: 4, basePrice: 128, elementId: 'rBuyableU1',
+                id: 1, power: 8, basePrice: 8, elementId: 'rBuyableU1',
                 effect: function(x = player.reflash.upgrades[1]) { return Math.pow(2, x); }
             },
         ]),
@@ -611,19 +611,19 @@ const UPGS = {
         accelerator: new AcceleratorManager('reflash', [
             {
                 id: 1, power: 2, basePrice: 4, elementId: 'acceleratorU1',
-                effect: function(x = player.reflash.acceleratorUpgrades[1], y = UPGS.reflash.accelerator[3].effect()) { return x*0.05*y; }
+                effect: function(x = player.reflash.acceleratorUpgrades[1], y = UPGS.reflash.accelerator[3].effect()) { return x*0.2*y; }
             },
             {
                 id: 2, power: 2, basePrice: 4, elementId: 'acceleratorU2',
-                effect: function(x = player.reflash.acceleratorUpgrades[2], y = UPGS.reflash.accelerator[3].effect()) { return x*0.075*y; }
+                effect: function(x = player.reflash.acceleratorUpgrades[2], y = UPGS.reflash.accelerator[3].effect()) { return x*0.25*y; }
             },
             {
                 id: 3, power: 2, basePrice: 4, elementId: 'acceleratorU3',
-                effect: function(x = player.reflash.acceleratorUpgrades[3]) { return 1+x*0.15; }
+                effect: function(x = player.reflash.acceleratorUpgrades[3]) { return 1+x*0.25; }
             },
             {
                 id: 4, power: 2, basePrice: 4, elementId: 'acceleratorU4',
-                effect: function(x = player.reflash.acceleratorUpgrades[4]) { return 1+x*0.1; }
+                effect: function(x = player.reflash.acceleratorUpgrades[4]) { return 1+x*0.125; }
             },
             {
                 id: 5, power: 1.5, basePrice: 50, elementId: 'acceleratorU5',
@@ -637,10 +637,12 @@ const UPGS = {
                     return 1 + (x * basePower * bonusU4); 
                 },
                 min_effect: function(x=UPGS.reflash.accelerator[1].effect(), y=UPGS.reflash.accelerator[4].effect(), z=player.reflash.acceleratorUpgrades[5]) {
-                    return (1+0.25*(z+x))*y
+                    x *= z
+                    return (1+1*(z+x))*y
                 },
                 max_effect: function(x=UPGS.reflash.accelerator[2].effect(), y=UPGS.reflash.accelerator[4].effect(), z=player.reflash.acceleratorUpgrades[5]) {
-                    return (1+1*(z+x))*y
+                    x *= z
+                    return (1+2*(z+x))*y
                 }
             },
         ], 'acceleratorUpgrades'),
@@ -654,10 +656,11 @@ const UPGS = {
                 { id: 31, row: 3, col: 1, req: [21], cost: 4, effect(x=player.reflash.algo.includes(this.id)) {return x ? { shard: 1e6, rune: 2} : { shard: 0, rune: 0} } },
                 { id: 32, row: 3, col: 2, req: [22], cost: 1, effect(x=player.reflash.algo.includes(this.id)) {return x ? 10 : 1}  },
                 { id: 33, row: 3, col: 3, req: [23], cost: 2, effect(x=player.reflash.algo.includes(this.id)) {return x ? true : false}  },
-                { id: 34, row: 3, col: 4, req: [23], cost: 4, effect(x=player.reflash.algo.includes(this.id)) {return x ? 2 : 1}  },
-                { id: 41, row: 4, col: 1, req: [31], cost: 6, effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 0 }  },
+                { id: 34, row: 3, col: 4, req: [23], cost: 1, effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.1 : 0}  },
+                { id: 41, row: 4, col: 1, req: [31], cost: 4, effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 0 }  },
                 { id: 42, row: 4, col: 2, req: [32], cost: 3, effect(x=player.reflash.algo.includes(this.id)) {return x ? 100 : 1}  },
-                { id: 43, row: 4, col: 3, req: [33], cost: 8, effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.9 : 1}  },
+                { id: 43, row: 4, col: 3, req: [33], cost: 6, effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.9 : 1}  },
+                { id: 44, row: 4, col: 4, req: [34], cost: 3, effect(x=player.reflash.algo.includes(this.id)) {return x ? 2 : 1}  },
                 { id: 51, row: 5, col: 2, req: [41, 42, 43], cost: 8 },
             ],
             buy(id) {
@@ -713,7 +716,7 @@ const UPGS = {
                         }
                     });
                 });
-                const targetIds = [11, 23, 22, 21, 31, 32, 33, 41, 24, 43, 42, 34];
+                const targetIds = [11, 23, 22, 21, 31, 32, 33, 41, 24, 43, 42, 34, 44];
                 let hasAll = targetIds.every(id => player.reflash.algo.includes(id));
                 if (hasAll && !ACHS.has(65)) ACHS.unl(65)
             },
@@ -872,7 +875,7 @@ const AUTO = {
 
     ureducer: new AutomationTask('ureducer', function() {
         if (this.misc.time() != 50 && player.prestige.challenge.activated != 3 && player.uadders >= 4) LAYERS.ureducer.doReset();
-        else if (player.time.ureducer >= player.automation.conditions.ureducer.time && player.uadders >= player.automation.conditions.ureducer.x_of_upower && player.uadders >= 4 && player.prestige.challenge.activated != 3) LAYERS.ureducer.doReset();
+        else if (player.time.ureducer >= player.automation.conditions.ureducer.time && player.uadders >= player.automation.conditions.ureducer.x_of_uadder && player.uadders >= 4 && player.prestige.challenge.activated != 3) LAYERS.ureducer.doReset();
     })
 };
 
@@ -959,7 +962,7 @@ autoUreducerInput.addEventListener("blur", () => {
     AUTO.ureducer.restart();
 });
 autoUreducerInput2.addEventListener("blur", () => {
-    player.automation.conditions.ureducer.x_of_upower = parseFloat(autoUreducerInput2.value);
+    player.automation.conditions.ureducer.x_of_uadder = parseFloat(autoUreducerInput2.value);
     AUTO.ureducer.restart();
 });
 

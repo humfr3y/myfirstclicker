@@ -517,7 +517,7 @@ const GAIN = {
             let gain = 1;
             const mults = [
                 [ACHS.has(44), 2],
-                [player.reflash.algo.includes(34), UPGS.reflash.algo.tree[8].effect()],
+                [player.reflash.algo.includes(44), UPGS.reflash.algo.tree[12].effect()],
             ];
             mults.forEach(([cond, val]) => { if (cond) gain *= val; });
             return gain;
@@ -1506,22 +1506,22 @@ const VIRUS = {
         let effect = 0
         switch (x) {
             case 1: //монеты в секунду и нажатия вне софткапа
-                effect = Math.pow(15, y)
+                effect = Math.pow(25, y)
                 break;
             case 2: //кристаллы за сброс вне софткапа
-                effect = Math.pow(3, y)
+                effect = Math.pow(5, y)
                 break;
             case 3: //доход осколков
                 effect = Math.pow(5, y)
                 break;
             case 4: //шанс супермонет
-                effect = 1+0.15*y
+                effect = 1+0.2*y
                 break;
             case 5: //увеличивает эффект всех достижений осколков
-                effect = 1+0.1*y
+                effect = 1+0.15*y
                 break;
             case 6: //доход нейтрали
-                effect = Math.pow(1.25, y)
+                effect = Math.pow(1.35, y)
                 break;
             default:
                 break;

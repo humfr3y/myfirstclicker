@@ -490,6 +490,8 @@ class ShopItemUpgrade {
             notify(text.notification.used_item + text.itemNames[this.id - 1], "limegreen", "550px");
         } else if (player.shop.items.used[this.id] == this.maxAmount) {
             notify(text.notification.limit_item + this.maxAmount + " " + text.itemNames[this.id - 1] + text.notification.limit_item_2, "red", "550px");
+        } else if (player.challenge.activated != 0 || player.prestige.challenge.activated != 0) {
+            notify(text.notification.challenge_item + text.itemNames[this.id - 1] + "!", "red", "550px");
         } else {
             notify(text.notification.dont_have_item + text.itemNames[this.id - 1] + "!", "red", "550px");
         }
@@ -885,6 +887,13 @@ class AcceleratorBuyableUpgrade extends UniversalBuyableUpgrade {
         if (typeof upg.max_effect === 'function') {
             this.max_effect = upg.max_effect;
         }
+    }
+
+    cost(x = this.targetArray[this.id]) {
+        if (this.id === 5) {
+            return 25 * (x + 1);
+        }
+        return super.cost(x);
     }
 
     bulk(x, y = this.targetArray[this.id]) {

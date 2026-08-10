@@ -1340,7 +1340,7 @@ function getAcceleratorPower() {
     }
     let randomFloat = player.reflash.seed / 4294967296;
     
-    return 0.25 + randomFloat * 0.75; // Returns a value between 0.25 and 1.0
+    return 1 + randomFloat * 2; // Returns a value between 1 and 3
 }
 
 function rollNextAcceleratorSeed() {
