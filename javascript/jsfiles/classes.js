@@ -65,7 +65,7 @@ class UniversalBuyableUpgrade {
     effect(...args) { return this.customEffect(...args); }
     effect2(...args) { return this.customEffect2 ? this.customEffect2(...args) : null; }
 
-    bulk(x = this.state.currency, y = this.targetArray[this.id]) {
+    bulk(x = this.state.currency, y = this.targetArray[this.id], forceBulk = false) {
         // Условие Испытания 5 для синхронизации оптовой покупки
         if (this.layer === 'coin' && (player.challenge.activated == 5 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 7)) {
             if (y === this.targetArray[this.id]) {
@@ -103,7 +103,7 @@ class UniversalBuyableUpgrade {
         if (this.layer === 'balance') isMaxActive = player.settings.balance_buy_max_activate;
 
         // Если кнопка выключена, мы хотим купить только 1 штуку (если хватает денег)
-        if (!isMaxActive) {
+        if (!isMaxActive && !forceBulk) {
             return affordable >= 1 ? 1 : 0;
         }
 
@@ -169,9 +169,9 @@ class UniversalBuyablesManager {
         }
     }
 
-    max(x) {
+    max(x, forceBulk = false) {
         if (this.canAfford(x)) {
-            let bulk = this[x].bulk();
+            let bulk = this[x].bulk(undefined, undefined, forceBulk);
             this.state.currency -= totalCost(bulk, this[x].cost(), this[x].power);
             this.targetArray[x] += bulk;
             if (player.event.digitalization.activated && this.layer === 'coin') {
@@ -181,12 +181,12 @@ class UniversalBuyablesManager {
     }
 
     buy_auto() { [...this._keys].reverse().forEach(x => this.buy(x)); }
-    buyMax() { [...this._keys].reverse().forEach(x => this.max(x)); }
-    buyMax_auto() { [...this._keys].reverse().forEach(x => this.max_auto(x)); }
+    buyMax(forceBulk = false) { [...this._keys].reverse().forEach(x => this.max(x, forceBulk)); }
+    buyMax_auto(forceBulk = false) { [...this._keys].reverse().forEach(x => this.max_auto(x, forceBulk)); }
 
-    max_auto(x) {
+    max_auto(x, forceBulk = false) {
         if (this.canAfford(x)) {
-            let bulk = Math.min(this[x].bulk(), MISC.automation.buyable.bulk());
+            let bulk = Math.min(this[x].bulk(), MISC.automation.buyable.bulk(), forceBulk);
             this.state.currency -= totalCost(bulk, this[x].cost(), this[x].power);
             this.targetArray[x] += bulk;
             if (player.event.digitalization.activated && this.layer === 'coin') {
@@ -958,19 +958,6 @@ class AcceleratorManager extends UniversalBuyablesManager {
             }
         }
     }
-
-    disable(x) {
-        let can = this.canAfford(x);
-        if (x === 5) {
-            let btn1 = document.getElementById('acceleratorU5');
-            let btn2 = document.getElementById('acceleratorU5_1');
-            if (btn1) btn1.disabled = !can;
-            if (btn2) btn2.disabled = !can;
-        } else {
-            let el = this[x].element;
-            if (el) el.disabled = !can;
-        }
-    }
 }
 
 class ComputerBuyableUpgrade extends UniversalBuyableUpgrade {
@@ -979,6 +966,7 @@ class ComputerBuyableUpgrade extends UniversalBuyableUpgrade {
         this.customConsumation = config.consumation ? config.consumation.bind(this) : () => 1;
         this.next_effect = config.next_effect ? config.next_effect.bind(this) : () => 0;
         this.next_consumation = config.next_consumation ? config.next_consumation.bind(this) : () => 0;
+        this.maxAmount = config.maxAmount;
     }
 
     consumation(...args) { return this.customConsumation(...args); }
@@ -995,26 +983,30 @@ class ComputerManager extends UniversalBuyablesManager {
             this._keys.push(upg.id);
         });
     }
-
     canAfford(x) {
-        return this.state.currency >= this[x].cost();
+        return this.state.currency >= this[x].cost() && 
+        (MISC.sum_watt() + this[x].next_consumation() - this[x].consumation()) <= UPGS.reflash.computer[2].effect() && 
+        player.reflash.computer[x] < this[x].maxAmount &&
+        player.reflash.computer[x] < UPGS.reflash.computer[1].effect();
     }
 
     buy(x) {
         if (this.canAfford(x)) {
-            if (x == 5) {
-                this.state.currency -= this[x].cost(); 
-                this.targetArray[x]++;
-            } else {
-                super.buy(x);
-            }
+            this.state.currency -= this[x].cost(); 
+            this.targetArray[x]++;
         }
     }
 
     disable(x) {
         let el = this[x].element;
         if (el) {
-            el.disabled = !this.canAfford(x);
+            let isDisabled = !this.canAfford(x);
+            
+            if (isDisabled) {
+                el.classList.add('disabled');
+            } else {
+                el.classList.remove('disabled');
+            }
         }
     }
 }

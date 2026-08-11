@@ -942,7 +942,7 @@ const UNL = {
             if (el.style.display !== targetDisplay) el.style.display = targetDisplay;
         },
         check() {
-            for (let i = 1; i <= 104; i++) {
+            for (let i = 1; i <= 105; i++) {
                 if (this[i]) {
                     let el = this[i].element();
                     if (el instanceof HTMLCollection) {
@@ -992,15 +992,15 @@ const UNL = {
         28: { type: 'none', element: () => document.getElementById('shardUnlockableBase3'), req: () => UNL.shard.buyables.unl() },
         29: { type: 'flex', element: () => document.getElementById('shardSingles'), req: () => UNL.shard.singles.unl() },
         30: { type: 'none', element: () => document.getElementById('shardUnlockableBase4'), req: () => UNL.shard.singles.unl() },
-        31: { type: 'none', element: () => ELS.automationUpgradesArray[0], req: () => MISC.automation.single.time() === 50 },
-        32: { type: 'none', element: () => ELS.automationUpgradesArray[1], req: () => MISC.automation.buyable.time() === 50 },
-        33: { type: 'none', element: () => ELS.automationUpgradesArray[2], req: () => MISC.automation.umultiplier.time() === 50 },
-        34: { type: 'none', element: () => ELS.automationUpgradesArray[3], req: () => MISC.automation.upower.time() === 50 },
-        35: { type: 'none', element: () => ELS.automationUpgradesArray[4], req: () => MISC.automation.prestige.time() === 50 },
-        36: { type: 'flex', element: () => document.getElementById('prestigeModeDiv'), req: () => MISC.automation.prestige.time() === 50 && MILESTONES.has(13) },
-        37: { type: 'block', element: () => document.getElementById('increaseBulkBuyButton'), req: () => MISC.automation.buyable.time() === 50 && MILESTONES.has(6) && MISC.automation.buyable.bulk() !== 512 },
-        38: { type: 'flex', element: () => document.getElementById('umultiIntervalDiv'), req: () => MISC.automation.umultiplier.time() === 50 },
-        39: { type: 'flex', element: () => document.getElementById('upowerIntervalDiv'), req: () => MISC.automation.upower.time() === 50 },
+        31: { type: 'none', element: () => ELS.automationUpgradesArray[0], req: () => MISC.automation.single.time() <= 50 },
+        32: { type: 'none', element: () => ELS.automationUpgradesArray[1], req: () => MISC.automation.buyable.time() <= 50 },
+        33: { type: 'none', element: () => ELS.automationUpgradesArray[2], req: () => MISC.automation.umultiplier.time() <= 50 },
+        34: { type: 'none', element: () => ELS.automationUpgradesArray[3], req: () => MISC.automation.upower.time() <= 50 },
+        35: { type: 'none', element: () => ELS.automationUpgradesArray[4], req: () => MISC.automation.prestige.time() <= 50 },
+        36: { type: 'flex', element: () => document.getElementById('prestigeModeDiv'), req: () => MISC.automation.prestige.time() <= 50 && MILESTONES.has(13) },
+        37: { type: 'block', element: () => document.getElementById('increaseBulkBuyButton'), req: () => MISC.automation.buyable.time() <= 50 && MILESTONES.has(6) && MISC.automation.buyable.bulk() !== 512 },
+        38: { type: 'flex', element: () => document.getElementById('umultiIntervalDiv'), req: () => MISC.automation.umultiplier.time() <= 50 },
+        39: { type: 'flex', element: () => document.getElementById('upowerIntervalDiv'), req: () => MISC.automation.upower.time() <= 50 },
         40: { type: 'inline-block', element: () => document.getElementById('exitChallenge'), req: () => player.challenge.activated !== 0 },
         41: { type: 'block', element: () => document.getElementById('overdriveSelect'), req: () => true },
         42: { type: 'block', element: () => document.getElementById('overdriveType1'), req: () => true },
@@ -1009,8 +1009,8 @@ const UNL = {
         45: { type: 'block', element: () => document.getElementById('breakPrestigeSelect'), req: () => player.progressBarGoals.includes(5) },
         46: { type: 'block', element: () => document.getElementById('uadderBoost'), req: () => player.prestige.break.singles.includes(25) },
         47: { type: 'block', element: () => document.getElementById('ureducerBoost'), req: () => player.prestige.break.singles.includes(25) },
-        48: { type: 'none', element: () => ELS.automationUpgradesArray[5], req: () => MISC.automation.uadder.time() === 50 },
-        49: { type: 'flex', element: () => document.getElementById('uadderIntervalDiv'), req: () => MISC.automation.uadder.time() === 50 },
+        48: { type: 'none', element: () => ELS.automationUpgradesArray[5], req: () => MISC.automation.uadder.time() <= 50 },
+        49: { type: 'flex', element: () => document.getElementById('uadderIntervalDiv'), req: () => MISC.automation.uadder.time() <= 50 },
         50: { type: 'flex', element: () => document.getElementById('shardAchBarDiv1'), req: () => player.shard_achievements.includes(1) },
         51: { type: 'flex', element: () => document.getElementById('shardAchBarDiv2'), req: () => player.shard_achievements.includes(2) },
         52: { type: 'flex', element: () => document.getElementById('shardAchBarDiv3'), req: () => player.shard_achievements.includes(3) },
@@ -1073,9 +1073,11 @@ const UNL = {
         96: { type: 'flex', element: () => document.getElementById('digitalizationEvent'), req: () => player.event.digitalization.activated},
         //тут 98 потому что блок второго достижения осколков имеет номер 97, он где-то там выше
         98: { type: 'flex', element: () => document.getElementById('ureducerAutomationContainer'), req: () => player.prestige.break.singles.includes(25) && player.reflash.resets >= 1},
-        99: { type: 'none', element: () => ELS.automationUpgradesArray[6], req: () => MISC.automation.ureducer.time() === 50 },
-        100: { type: 'flex', element: () => document.getElementById('ureducerIntervalDiv'), req: () => MISC.automation.ureducer.time() === 50 },
+        99: { type: 'none', element: () => ELS.automationUpgradesArray[6], req: () => MISC.automation.ureducer.time() <= 50 },
+        100: { type: 'flex', element: () => document.getElementById('ureducerIntervalDiv'), req: () => MISC.automation.ureducer.time() <= 50 },
         101: { type: 'block', element: () => document.getElementById('reflashHelpDiv'), req: () => player.reflash.resets >= 1 },
+        105: { type: 'block', element: () => document.getElementById('maxBuyShards'), req: () => UNL.shard.buyables.unl()},
+        
     }
 };
 
@@ -1146,13 +1148,99 @@ const MISC = {
     set_intervals: { auto_save: '', update_game: '' },
     
     automation: {
-        single: { divider: 1.6666667, cost: (x = player.automation.upgrades.single) => Math.pow(2, x), time(x = player.automation.upgrades.single) { return Math.max(2000 / Math.pow(this.divider, x), 50); }, charged: false, interval: '', activateTime() { return Date.now() + this.time(); } },
-        buyable: { divider: 1.6666667, cost: (x = player.automation.upgrades.buyable) => Math.pow(2, x), time(x = player.automation.upgrades.buyable) { return Math.max(1000 / Math.pow(this.divider, x), 50); }, bulk(x = player.automation.upgrades.buyable) { return this.time() === 50 ? Math.min(Math.pow(2, x - 6), 512) : 1; }, charged: false, interval: '', activateTime() { return Date.now() + this.time(); } },
-        umultiplier: { divider: 1.6666667, cost: (x = player.automation.upgrades.umultiplier) => Math.pow(2, x), time(x = player.automation.upgrades.umultiplier) { return Math.max(15000 / Math.pow(this.divider, x), 50); }, charged: false, interval: '', activateTime() { return Date.now() + this.time(); } },
-        upower: { divider: 1.6666667, cost: (x = player.automation.upgrades.upower) => Math.pow(2, x), time(x = player.automation.upgrades.upower) { return Math.max(30000 / Math.pow(this.divider, x), 50); }, charged: false, interval: '', activateTime() { return Date.now() + this.time(); } },
-        prestige: { divider: 1.6666667, cost: (x = player.automation.upgrades.prestige) => Math.pow(2, x), time(x = player.automation.upgrades.prestige) { return Math.max(60000 / Math.pow(this.divider, x), 50); }, charged: false, interval: '', activateTime() { return Date.now() + this.time(); } },
-        uadder: { divider: 1.5, cost: (x = player.automation.upgrades.uadder) => 1e15 * Math.pow(100, x), time(x = player.automation.upgrades.uadder) { return Math.max(30000 / Math.pow(this.divider, x), 50); }, charged: false, interval: '', activateTime() { return Date.now() + this.time(); } },
-        ureducer: { divider: 2, cost: (x = player.automation.upgrades.ureducer) => 1e50 * Math.pow(1000, x), time(x = player.automation.upgrades.ureducer) { return Math.max(60000 / Math.pow(this.divider, x), 50); }, charged: false, interval: '', activateTime() { return Date.now() + this.time(); } },
+        max(){
+            return player.reflash.singleUpgrades.includes(13) ? 25 : 50
+        },
+        single: { 
+            divider: 1.6666667, 
+            cost: (x = player.automation.upgrades.single) => Math.pow(2, x), 
+            time(x = player.automation.upgrades.single) { 
+                let interval = Math.max(2000 / Math.pow(this.divider, x), 50)
+                return interval == 50 ? interval : MISC.automation.max()
+            }, 
+            charged: false, 
+            interval: '', 
+            activateTime() { return Date.now() + this.time(); } 
+        },
+        buyable: { 
+            divider: 1.6666667, 
+            cost: (x = player.automation.upgrades.buyable) => Math.pow(2, x), 
+            time(x = player.automation.upgrades.single) { 
+                let interval = Math.max(1000 / Math.pow(this.divider, x), 50)
+                return interval == 50 ? interval : MISC.automation.max()
+            }, 
+            bulk(x = player.automation.upgrades.buyable) { 
+                return this.time() <= 50 ? Math.min(Math.pow(2, x - 6), 512) : 1; 
+            }, 
+            charged: false, 
+            interval: '', 
+            activateTime() { return Date.now() + this.time(); } 
+        },
+        umultiplier: { 
+            divider: 1.6666667, 
+            cost: (x = player.automation.upgrades.umultiplier) => Math.pow(2, x), 
+            time(x = player.automation.upgrades.single) { 
+                let interval = Math.max(15000 / Math.pow(this.divider, x), 50)
+                return interval == 50 ? interval : MISC.automation.max()
+            }, 
+            charged: false, 
+            interval: '', 
+            activateTime() { 
+                return Date.now() + this.time(); 
+            } 
+        },
+        upower: { 
+            divider: 1.6666667, 
+            cost: (x = player.automation.upgrades.upower) => Math.pow(2, x), 
+            time(x = player.automation.upgrades.single) { 
+                let interval = Math.max(30000 / Math.pow(this.divider, x), 50)
+                return interval == 50 ? interval : MISC.automation.max()
+            }, 
+            charged: false, 
+            interval: '', 
+            activateTime() { 
+                return Date.now() + this.time(); 
+            } 
+        },
+        prestige: { 
+            divider: 1.6666667, 
+            cost: (x = player.automation.upgrades.prestige) => Math.pow(2, x), 
+            time(x = player.automation.upgrades.single) { 
+                let interval = Math.max(60000 / Math.pow(this.divider, x), 50)
+                return interval == 50 ? interval : MISC.automation.max()
+            }, 
+            charged: false, 
+            interval: '', 
+            activateTime() { 
+                return Date.now() + this.time(); 
+            } 
+        },
+        uadder: { 
+            divider: 1.5, 
+            cost: (x = player.automation.upgrades.uadder) => 1e15 * Math.pow(100, x), 
+            time(x = player.automation.upgrades.single) { 
+                let interval = Math.max(30000 / Math.pow(this.divider, x), 50)
+                return interval == 50 ? interval : MISC.automation.max()
+            }, 
+            charged: false, 
+            interval: '', 
+            activateTime() { 
+                return Date.now() + this.time(); 
+            } 
+        },
+        ureducer: { 
+            divider: 2, 
+            cost: (x = player.automation.upgrades.ureducer) => 1e50 * Math.pow(1000, x), 
+            time(x = player.automation.upgrades.single) { 
+                let interval = Math.max(60000 / Math.pow(this.divider, x), 50)
+                return interval == 50 ? interval : MISC.automation.max()
+            }, 
+            charged: false, 
+            interval: '', 
+            activateTime() { 
+                return Date.now() + this.time(); 
+            } 
+        },
     },
     
     offline(x = player.time.savedTime, y = Date.now()) {

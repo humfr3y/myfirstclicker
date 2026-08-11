@@ -588,7 +588,7 @@ const UPGS = {
     reflash: {
         buyables: new UniversalBuyablesManager('reflash', [
             {
-                id: 1, power: 8, basePrice: 8, elementId: 'rBuyableU1',
+                id: 1, power: 4, basePrice: 8, elementId: 'rBuyableU1',
                 effect: function(x = player.reflash.upgrades[1]) { return Math.pow(2, x); }
             },
         ]),
@@ -648,6 +648,7 @@ const UPGS = {
         ], 'acceleratorUpgrades'),
         algo: {
             tree: [
+                //bit tree
                 { id: 11, row: 1, col: 1, req: [], cost: 1, effect(x=player.reflash.algo.includes(this.id)) {return x ? 10 : 1} }, 
                 { id: 21, row: 2, col: 1, req: [11], cost: 1, effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 0}  },
                 { id: 22, row: 2, col: 2, req: [11], cost: 1, effect(x=player.reflash.algo.includes(this.id)) {return x ? 5 : 1}  },
@@ -662,6 +663,31 @@ const UPGS = {
                 { id: 43, row: 4, col: 3, req: [33], cost: 6, effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.9 : 1}  },
                 { id: 44, row: 4, col: 4, req: [34], cost: 3, effect(x=player.reflash.algo.includes(this.id)) {return x ? 2 : 1}  },
                 { id: 51, row: 5, col: 2, req: [41, 42, 43], cost: 8 },
+                // byte tree
+                { id: 61, row: 6, col: 2, req: [41, 42, 43, 51], cpu_req: 1, cost: 8 },
+                { id: 62, row: 6, col: 3, req: [61], cpu_req: 2, cost: 16 },
+                { id: 63, row: 6, col: 4, req: [62], cpu_req: 3, cost: 64 },
+                { id: 71, row: 7, col: 1, req: [61], cpu_req: 1, not_req: [72, 73], cost: 8 },
+                { id: 81, row: 8, col: 1, req: [71], cpu_req: 1, cost: 8 },
+                { id: 91, row: 9, col: 1, req: [81], cpu_req: 1, cost: 8 },
+                { id: 72, row: 7, col: 2, req: [61], cpu_req: 1, not_req: [71, 73], cost: 16 },
+                { id: 82, row: 8, col: 2, req: [72], cpu_req: 2, cost: 16 },
+                { id: 92, row: 9, col: 2, req: [82], cpu_req: 2, cost: 16 },
+                { id: 73, row: 7, col: 3, req: [61], cpu_req: 1, not_req: [71, 72], cost: 32 },
+                { id: 83, row: 8, col: 3, req: [73], cpu_req: 2, cost: 32 },
+                { id: 93, row: 9, col: 3, req: [83], cpu_req: 2, cost: 32 },
+                { id: 101, row: 10, col: 2, cpu_req: 3, at_least_one_req: [73, 83, 93], cost: 24 },
+
+                //пример
+                // { 
+                //     id: 62, 
+                //     row: 6, 
+                //     col: 3, 
+                //     cpu_req: 2,                 
+                //     not_req: [24, 34],          
+                //     at_least_one_req: [61, 51], 
+                //     cost: 16 
+                // }
             ],
             buy(id) {
                 if (!player.reflash.algo) player.reflash.algo = [];
@@ -670,8 +696,10 @@ const UPGS = {
                 let node = this.tree.find(n => n.id === id);
                 if (!node) return;
                 
-                let reqMet = node.req.length === 0 || node.req.every(r => player.reflash.algo.includes(r));
-                if (!reqMet) return;
+                let maxNodes = UPGS.reflash.computer && UPGS.reflash.computer[5] ? UPGS.reflash.computer[5].effect() : Infinity;
+                if (player.reflash.algo.length >= maxNodes) return;
+
+                if (!this.checkRequirements(node)) return;
                 
                 if (player.reflash.currency >= node.cost) {
                     player.reflash.currency -= node.cost;
@@ -681,21 +709,52 @@ const UPGS = {
                     this.update_if_bought(id)
                 }
             },
+
+            checkRequirements(node) {
+
+                if (node.cpu_req !== undefined) {
+                    let currentCpu = player.reflash.computer && player.reflash.computer[3] ? player.reflash.computer[3] : 0;
+                    if (currentCpu < node.cpu_req) return false;
+                }
+
+                if (node.not_req !== undefined) {
+                    let notArray = Array.isArray(node.not_req) ? node.not_req : [node.not_req];
+                    let hasForbidden = notArray.some(r => player.reflash.algo.includes(r));
+                    if (hasForbidden) return false;
+                }
+
+                if (node.at_least_one_req !== undefined && Array.isArray(node.at_least_one_req)) {
+                    let hasOne = node.at_least_one_req.some(r => player.reflash.algo.includes(r));
+                    if (!hasOne) return false;
+                }
+
+                if (node.req !== undefined) {
+                    let reqMet = node.req.length === 0 || node.req.every(r => player.reflash.algo.includes(r));
+                    if (!reqMet) return false;
+                }
+
+                return true;
+            },
+
             updateStates() {
                 if (!player.reflash.algo) return;
+                
+                let maxNodes = UPGS.reflash.computer && UPGS.reflash.computer[5] ? UPGS.reflash.computer[5].effect() : Infinity;
+                let reachedNodeLimit = player.reflash.algo.length >= maxNodes;
+
                 this.tree.forEach(node => {
                     let btn = document.getElementById('algoNode_' + node.id);
                     if (!btn) return;
                     
                     let isBought = player.reflash.algo.includes(node.id);
-                    let reqMet = node.req.length === 0 || node.req.every(r => player.reflash.algo.includes(r));
+                    let reqMet = this.checkRequirements(node);
                     let canAfford = player.reflash.currency >= node.cost;
 
                     if (isBought) {
                         btn.classList.add('bought');
                         btn.classList.remove('locked');
                         btn.disabled = false;
-                    } else if (!reqMet) {
+                    } else if (!reqMet || reachedNodeLimit) {
                         btn.classList.add('locked');
                         btn.classList.remove('bought');
                         btn.disabled = true;
@@ -705,7 +764,12 @@ const UPGS = {
                         btn.disabled = !canAfford;
                     }
 
-                    node.req.forEach(parentId => {
+                    let parentIds = [];
+                    if (node.draw && Array.isArray(node.draw)) {
+                        parentIds = node.draw;
+                    }
+
+                    parentIds.forEach(parentId => {
                         let line = document.getElementById(`algoLine_${parentId}_${node.id}`);
                         if (line) {
                             if (isBought) {
@@ -716,9 +780,10 @@ const UPGS = {
                         }
                     });
                 });
+
                 const targetIds = [11, 23, 22, 21, 31, 32, 33, 41, 24, 43, 42, 34, 44];
                 let hasAll = targetIds.every(id => player.reflash.algo.includes(id));
-                if (hasAll && !ACHS.has(65)) ACHS.unl(65)
+                if (hasAll && !ACHS.has(65)) ACHS.unl(65);
             },
             respec() {
                 if (!player.reflash.algo || !player.reflash.respecTree) return;
@@ -764,33 +829,33 @@ const UPGS = {
         },
         computer: new ComputerManager('reflash', [
             {
-                id: 1, power: 2, basePrice: 8, elementId: 'computerComponent1',
-                effect: function(x = player.reflash.computer[1]) { return Math.pow(2, x); },
+                id: 1, power: 4, basePrice: 3, elementId: 'computerComponent1', maxAmount: 4,
+                effect: function(x = player.reflash.computer[1]) { return 1 + x; },
                 consumation: function(x = player.reflash.computer[1]) { return x * 6; },
                 next_effect: function() { return this.effect(x = player.reflash.computer[1] + 1) },
                 next_consumation: function() { return this.consumation(x = player.reflash.computer[1] + 1) },
             },
             {
-                id: 2, power: 2, basePrice: 8, elementId: 'computerComponent2',
-                effect: function(x = player.reflash.computer[2]) { return 20 * x; },
+                id: 2, power: 4, basePrice: 3, elementId: 'computerComponent2', maxAmount: 2,
+                effect: function(x = player.reflash.computer[2]) { return 25 * (x + 1); },
                 next_effect: function() { return this.effect(x = player.reflash.computer[2] + 1) },
             },
             {
-                id: 3, power: 4, basePrice: 8, elementId: 'computerComponent3',
+                id: 3, power: 4, basePrice: 4, elementId: 'computerComponent3', maxAmount: 3,
                 // effect: function(x = player.reflash.computer[3]) { return Math.pow(2, x); },
                 consumation: function(x = player.reflash.computer[3]) { return x * 5; },
                 next_consumation: function() { return this.consumation(x = player.reflash.computer[3] + 1) },
             },
             {
-                id: 4, power: 4, basePrice: 8, elementId: 'computerComponent4',
+                id: 4, power: 3, basePrice: 4, elementId: 'computerComponent4', maxAmount: 3,
                 effect: function(x = player.reflash.computer[4]) { return 4 * Math.pow(4, x); },
                 consumation: function(x = player.reflash.computer[4]) { return x * 2; },
                 next_effect: function() { return this.effect(x = player.reflash.computer[4] + 1) },
                 next_consumation: function() { return this.consumation(x = player.reflash.computer[4] + 1) },
             },
             {
-                id: 5, power: 4, basePrice: 8, elementId: 'computerComponent5',
-                effect: function(x = player.reflash.computer[5]) { return 32 * Math.pow(4, x); },
+                id: 5, power: 3, basePrice: 4, elementId: 'computerComponent5', maxAmount: 3,
+                effect: function(x = player.reflash.computer[5]) { return 15 + x * 5 },
                 consumation: function(x = player.reflash.computer[5]) { return x * 3; },
                 next_effect: function() { return this.effect(x = player.reflash.computer[5] + 1) },
                 next_consumation: function() { return this.consumation(x = player.reflash.computer[5] + 1) },
@@ -801,7 +866,7 @@ const UPGS = {
 
 document.addEventListener("keydown", function(event) {
     if ((event.key == "M" || event.key == "m" || event.key == "ь" || event.key == "Ь") && player.clicks.real >= 1000) {
-    maxBuyAll();
+    maxBuyAll(true);
     }
 });
 
@@ -815,19 +880,19 @@ document.addEventListener("keydown", function(event) {
 // }
 
 function maxBuyAllPrestige() {
-    UPGS.prestige.buyables.buyMax()
+    UPGS.prestige.buyables.buyMax(true)
 }
 
 function maxBuyAllShards() {
-    UPGS.shard.buyables.buyMax()
+    UPGS.shard.buyables.buyMax(true)
 }
 
 function maxBuyAllBalance() {
-    UPGS.balance.buyables.buyMax()
+    UPGS.balance.buyables.buyMax(true)
 }
 
 function maxBuyAllBreakPrestige() {
-    UPGS.prestige.break.buyables.buyMax()
+    UPGS.prestige.break.buyables.buyMax(true)
 }
 
 // --- ДИНАМИЧЕСКАЯ ПРИВЯЗКА КНОПОК УЛУЧШЕНИЙ ---
@@ -850,7 +915,7 @@ UPGS.shop.buyables._keys.forEach(id => {
 
 function maxBuyAll() {
     UPGS.coin.singles._keys.forEach(id => UPGS.coin.singles.buy(id));
-    UPGS.coin.buyables.buyMax();
+    UPGS.coin.buyables.buyMax(true);
 }
 
 const AUTO = {
@@ -874,7 +939,7 @@ const AUTO = {
 
     buyable: new AutomationTask('buyable', function() {
         if (this.misc.time() != 50) UPGS.coin.buyables.buy_auto();
-        else UPGS.coin.buyables.buyMax_auto();
+        else UPGS.coin.buyables.buyMax_auto(true);
     }),
 
     umultiplier: new AutomationTask('umultiplier', function() {

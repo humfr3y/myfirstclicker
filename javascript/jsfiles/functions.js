@@ -1874,25 +1874,26 @@ function drawTreeLines() {
 
     // Берем данные из UPGS!
     UPGS.reflash.algo.tree.forEach(node => {
-        if (node.req.length === 0) return;
+        // Проверяем кастомную переменную draw (массив ID родителей для отрисовки линий)
+        if (!node.draw || !Array.isArray(node.draw) || node.draw.length === 0) return;
 
         const childBtn = document.getElementById('algoNode_' + node.id);
         if (!childBtn) return;
         const childRect = childBtn.getBoundingClientRect();
 
-        const x2 = childRect.left - containerRect.left + (childRect.width / 2);
-        const y2 = childRect.top - containerRect.top + (childRect.height / 2);
+        const x2 = childRect.left - containerRect.left + container.scrollLeft + (childRect.width / 2);
+        const y2 = childRect.top - containerRect.top + container.scrollTop + (childRect.height / 2);
 
-        node.req.forEach(parentId => {
+        node.draw.forEach(parentId => {
             const parentBtn = document.getElementById('algoNode_' + parentId);
             if (!parentBtn) return;
             const parentRect = parentBtn.getBoundingClientRect();
 
-            const x1 = parentRect.left - containerRect.left + (parentRect.width / 2);
-            const y1 = parentRect.top - containerRect.top + (parentRect.height / 2);
+            const x1 = parentRect.left - containerRect.left + container.scrollLeft + (parentRect.width / 2);
+            const y1 = parentRect.top - containerRect.top + container.scrollTop + (parentRect.height / 2);
 
             let line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-            line.id = `algoLine_${parentId}_${node.id}`; // Обязательно добавляем ID для закраски
+            line.id = `algoLine_${parentId}_${node.id}`; // Уникальный ID линии для закраски
             line.setAttribute('x1', x1);
             line.setAttribute('y1', y1);
             line.setAttribute('x2', x2);
@@ -1902,7 +1903,9 @@ function drawTreeLines() {
         });
     });
     
-    UPGS.reflash.algo.updateStates();
+    if (UPGS.reflash && UPGS.reflash.algo) {
+        UPGS.reflash.algo.updateStates();
+    }
 }
 window.addEventListener('resize', drawTreeLines);
 

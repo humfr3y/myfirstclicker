@@ -78,6 +78,7 @@
     "challengePrestigeButton": "Prestige Challenges",
     "cosmeticsButton": "Cosmetics",
     "treasureButton": "Treasures",
+    "computerButton": "Computer",
 
     "reflashButton": "Reflash",
     "reflashUpgradesButton": "Upgrades",
@@ -715,11 +716,11 @@
                 "6": "Videocard"
             },
             "desc": {
-                "1": "Increase max level of components to ",
-                "2": "Increase max Watt to ",
-                "3": "Unlocks new nodes in ALGORITHM TREE: ",
-                "4": "Increase max amount of {{ref_cur}} per reset up to ",
-                "5": "Increase max amount of {{ref_cur}} up to ",
+                "1": "Increase max level of components",
+                "2": "Increase max Watt usage",
+                "3": "Unlocks new nodes in ALGORITHM TREE",
+                "4": "Increase max gain per Reflash",
+                "5": "Increase max amount of Nodes you can activate",
                 "6": "..."
             },
             "names": {
@@ -727,7 +728,7 @@
                 "2": ["5 VDC PSU", "Epple I PSU", "110/230 VAC PSU"],
                 "3": ["Imtel 4004", "Imtel 8008", "MOS Tech 6502", "Imtel 8080a"],
                 "4": ["4 BIT chip", "2 byte chip", "8 byte chip", "32 byte chip"],
-                "5": ["4 byte PROM", "64 byte PROM", "256 byte EPROM", "1 KB EPROM"]
+                "5": ["4 byte PROM", "16 byte PROM", "64 byte EPROM", "256 byte EPROM"]
             }
         } 
     },
@@ -736,6 +737,8 @@
     "wattRequirement": "Not enough Watts for upgrade!",
     "wattUsage": "Consumes: ",
     "wattUsage2": "W",
+    "uses": "Usage: ",
+    "level": "Level",
 
     "treasureName1": "Treasures",
     "treasureName2": "Event treasures",

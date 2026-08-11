@@ -763,15 +763,18 @@ function loadTranslationsInfo() {
 
     //Таблица Перепрошиваний
 
+
     for (let i = 0; i < 10; i++) {
+
         document.getElementById(`rr_run_${i}`).textContent = i === 0 ? i18next.t('reflashesAgoZero') : i18next.t('reflashesAgo', {i});
         let rt = player.reflash.resetTable[i];
+        let currencyName = i18next.t(getBitOrByteKey(rt.currency));
         
         document.getElementById(`rr_res_${i}`).textContent = rt.resets !== '' 
             ? i18next.t('reflashResetCountTable', { x: formatNumber(rt.resets) }) : '';
             
         document.getElementById(`rr_bits_${i}`).textContent = rt.currency !== '' 
-            ? i18next.t('reflashCurrencyCountTable', { x: formatNumber(rt.currency) }) : '';
+            ? i18next.t('reflashCurrencyCountTable', { x: formatNumber(rt.currency), ref_cur: currencyName }) : '';
         
         if (rt.time.game.timer !== '') {
             document.getElementById(`rr_gt_${i}`).textContent = rt.time.game.timer >= 1 
@@ -793,7 +796,7 @@ function loadTranslationsInfo() {
             ? i18next.t('reflashResetPerMinCountTable', { x: formatNumber(rt.resets * 60 / rt.time.real.timer) }) : '';
             
         document.getElementById(`rr_bpm_${i}`).textContent = rt.currency !== '' && rt.time.real.timer > 0 
-            ? i18next.t('reflashCurrencyPerMinCountTable', { x: formatNumber(rt.currency * 60 / rt.time.real.timer) }) : '';
+            ? i18next.t('reflashCurrencyPerMinCountTable', { x: formatNumber(rt.currency * 60 / rt.time.real.timer), ref_cur: currencyName }) : '';
     }
     
     document.getElementById(`rr_avg_res`).textContent = i18next.t('reflashResetCountTable', { x: formatNumber(MISC.average.reflash.resets(), 'boost') });
@@ -1174,7 +1177,7 @@ function loadTranslationsReflash() {
         // 5, Компуктер
         for (let i = 0; i < 5; i++) {
             document.getElementsByClassName('computerComponentLevel')[i].textContent = formatNumber(player.reflash.computer[i+1]);
-            document.getElementsByClassName('computerComponentPrice')[i].textContent = formatNumber(UPGS.reflash.computer[i+1].cost());
+            document.getElementsByClassName('computerComponentPrice')[i].textContent = formatNumber(UPGS.reflash.computer[i+1].cost(), undefined, undefined, true);
             document.getElementsByClassName('computerComponentCurrency')[i].textContent = i18next.t(getBitOrByteKey(UPGS.reflash.computer[i+1].cost()))
 
             //tooltip
@@ -1187,13 +1190,11 @@ function loadTranslationsReflash() {
                 document.getElementsByClassName('computerComponentUsage')[i].textContent = formatNumber(UPGS.reflash.computer[i+1].consumation());
                 document.getElementsByClassName('computerComponentUsage_next')[i].textContent = formatNumber(UPGS.reflash.computer[i+1].next_consumation());
             }
-            if (i+1 == 4 || i+1 == 5) {
+            if (i+1 == 4) {
                 document.getElementsByClassName('computerComponentEffect')[i].textContent = formatNumber(UPGS.reflash.computer[i+1].effect(), 'boost', 2, true);
                 document.getElementById('computerComponentEffect4_currency_1').textContent = i18next.t(getBitOrByteKey(UPGS.reflash.computer[4].effect()))
                 document.getElementById('computerComponentEffect4_currency_2').textContent = i18next.t(getBitOrByteKey(UPGS.reflash.computer[4].next_effect()))
                 document.getElementsByClassName('computerComponentEffect_next')[i].textContent = formatNumber(UPGS.reflash.computer[i+1].next_effect(), 'boost', 2, true);
-                document.getElementById('computerComponentEffect5_currency_1').textContent = i18next.t(getBitOrByteKey(UPGS.reflash.computer[5].effect()))
-                document.getElementById('computerComponentEffect5_currency_2').textContent = i18next.t(getBitOrByteKey(UPGS.reflash.computer[5].next_effect()))
             }
         }
 
