@@ -355,7 +355,7 @@ const LAYERS = {
     },
     
     doForcedReset() {
-        if (player.challenge.activated != 0 || !ACHS.has(55)) player.overdrive.consumed.type1 = 0;
+        if (player.challenge.activated != 0 || !ACHS.has(55) || player.prestige.challenge.activated != 0) player.overdrive.consumed.type1 = 0;
         restoreSavedUtils(4); // И тут уровень 4
         player.coin.currency = 10;
         player.clicks.prestige = 0;
