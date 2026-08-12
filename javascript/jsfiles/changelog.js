@@ -128,3 +128,22 @@ function changePage(direction) { //пусть первая страница бу
     let leftPageButtons = document.getElementsByClassName("left-lore-page");
     let rightPageButtons = document.getElementsByClassName("right-lore-page");
 }
+
+function changeShopPage(direction) { //пусть первая страница будет 1, а вторая 2 
+
+    //смена страниц
+    let minPage = 1, maxPage = Math.ceil(Math.max(...Object.keys(player.shop.upgrades)) / 12)
+    document.getElementsByClassName('shop-page')[ELS.page-1].style.display = 'none'
+    direction == 'right' ? ELS.page++ : ELS.page--;
+    document.getElementsByClassName('shop-page')[ELS.page-1].style.display = 'flex'
+
+    //чек максимума и минимума страниц и показывать стрелку
+    if (ELS.page < maxPage)
+        document.getElementsByClassName("right-shop-arrow")[0].style.display = "block";
+    else
+        document.getElementsByClassName("right-shop-arrow")[0].style.display = "none";
+    if (ELS.page > minPage)
+        document.getElementsByClassName("left-shop-arrow")[0].style.display = "block";
+    else   
+        document.getElementsByClassName("left-shop-arrow")[0].style.display = "none";
+}

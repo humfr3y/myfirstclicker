@@ -293,7 +293,7 @@ const LAYERS = {
             rollNextAcceleratorSeed();
 
             // Исправлено начисление валюты перепрошивания
-            let refl_gain = 1;
+            let refl_gain = GAIN.reflash.reset();
             player.reflash.currency += refl_gain;
             player.reflash.total_currency += refl_gain;
             player.reflash.resets += 1;

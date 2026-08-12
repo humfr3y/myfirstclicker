@@ -186,7 +186,7 @@ class UniversalBuyablesManager {
 
     max_auto(x, forceBulk = false) {
         if (this.canAfford(x)) {
-            let bulk = Math.min(this[x].bulk(), MISC.automation.buyable.bulk(), forceBulk);
+            let bulk = Math.min(this[x].bulk(undefined, undefined, forceBulk), MISC.automation.buyable.bulk());
             this.state.currency -= totalCost(bulk, this[x].cost(), this[x].power);
             this.targetArray[x] += bulk;
             if (player.event.digitalization.activated && this.layer === 'coin') {

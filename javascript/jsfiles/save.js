@@ -199,6 +199,7 @@ function loadGame() {
     }
     generateEventTreasures()
     tooltipGeneration()
+    // separateTooltipGeneration()
     updateFontSelector()
     updateProgressBarSelector()
     // updateBackgroundSelector()

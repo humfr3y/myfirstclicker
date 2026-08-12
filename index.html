@@ -2094,6 +2094,12 @@
                   <span data-i18n="word_currently">Currently:</span> +<span id="acceleratorU1_effect">0</span><br>
                   <span id="acceleratorU1_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU1_cost">0</span> <span id="acceleratorU1_currency">crystals</span></span>
                   <div class="arrow" data-popper-arrow></div>
+                </div><div id="tooltip-acceleratorU1" class="tooltip" role="tooltip">
+                  <ut data-i18n="upg_ref_acc1_name">Money Pillow</ut> (<span id="acceleratorU1_amount">0</span>)<br>
+                  <span data-i18n="upg_ref_acc1_desc">Start U-Multipliers, U-Powers, Prestiges with 1000 α-coins</span><br>
+                  <span data-i18n="word_currently">Currently:</span> +<span id="acceleratorU1_effect">0</span><br>
+                  <span id="acceleratorU1_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="acceleratorU1_cost">0</span> <span id="acceleratorU1_currency">crystals</span></span>
+                  <div class="arrow" data-popper-arrow></div>
                 </div>
                 <button id="acceleratorU2" class="acceleratorUpgrade" onclick="UPGS.reflash.accelerator.buy(2)">
                   <img src="javascript/cssfiles/images/svg/minus-svgrepo-com.svg">
@@ -2193,17 +2199,16 @@
         <div id="treeContainer" class="tree-container">
           <svg id="treeLines" class="tree-svg"></svg>
           <div id="treeGrid" class="tree-grid"></div>
+          <div id="treeGrid2" class="tree-grid"></div>
         </div>
       </div>
       <div id="computerTab" style="display:none">
         <div id="computerTopBar">
           <div id="computerLogo"></div>
-          <div>
-            <span id="bitsCount3" class="currencyCount" style="text-align: center;"><span data-i18n="top_you_have">You have</span> <rt id="top_ref_cur_val3">0</rt> <span id="bitsCount3_currency">bits</span></span>
-          </div>
         </div>
         <div id="computerComponentsDiv">
           <span class="currencyCount" style="text-align: center;"><span data-i18n="uses">You have</span> <gt id="cur_watt_val">0</gt>/<gt id="max_watt_val">0</gt> <span data-i18n="wattUsage2">bits</span></span>
+          <span class="currencyCount" style="text-align: center;"><span data-i18n="maxLevel">You have</span> <bt id="cur_comp_lvl">0</bt></span>
           <div id="computerComponents">
             <div class="computerComponentContainer" id="computerComponent1" onclick="UPGS.reflash.computer.buy(1)">
               <div class="computerComponentImage">

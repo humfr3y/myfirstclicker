@@ -1583,7 +1583,6 @@ function getTalk(charName, stageId = null) {
   const char = text.talk[charName];
   if (!char) return { text: "Ошибка", isLast: true };
 
-  // Рандомный режим (всегда последняя)
   if (stageId === null) {
     let allAvailable = [];
     Object.entries(char.stages).forEach(([id, stage]) => {
@@ -1593,14 +1592,12 @@ function getTalk(charName, stageId = null) {
     return { text: line, isLast: true };
   }
 
-  // Линейный режим
   const stage = char.stages[stageId];
   if (!stage || !stage.condition()) return { text: "Условие не выполнено", isLast: true };
   
   const line = stage.replies[char.progress[stageId]];
   const nextIndex = (char.progress[stageId] + 1) % stage.replies.length;
-  
-  // Если следующий индекс 0 — значит, текущая фраза была последней
+
   const isLast = (nextIndex === 0);
   
   char.progress[stageId] = nextIndex;
@@ -1621,25 +1618,19 @@ document.getElementById('superPopupBackdrop').addEventListener('click', () => {
   const displayElement = document.getElementById('dialogueTextSpan');
 
   if (isTyping) {
-    // 1. Быстрое открытие (допечатываем текст)
     if (currentTimer) clearTimeout(currentTimer);
     displayElement.textContent = displayElement.dataset.fullText;
     isTyping = false;
   } else {
-    // 2. Если текст напечатан, решаем: закрыть или показать следующую
     if (currentIsLast) {
       hideDialogueWindow();
     } else {
-      // ИЛИ: Если это не последняя фраза — вызываем следующую
-      // Нам нужно знать, какого персонажа и какой stage мы сейчас ведем.
-      // Для этого сохраним их в глобальные переменные при открытии окна.
       runDialogue(window.activeChar, window.activeStage); 
     }
   }
 });
 
 function openDialogueWindow(character, stage, mainImage) {
-    // Сохраняем текущий контекст диалога для обработчика клика
     window.activeChar = character;
     window.activeStage = stage;
 
@@ -1841,23 +1832,39 @@ const treeObserver = new ResizeObserver(() => {
 function initAlgoTree() {
     if (!player.reflash.algo) player.reflash.algo = [];
     const grid = document.getElementById('treeGrid');
+    const grid2 = document.getElementById('treeGrid2');
     const container = document.getElementById('treeContainer');
     if (!grid) return;
     
     grid.innerHTML = '';
+    grid2.innerHTML = '';
 
     // Берем данные из UPGS
     UPGS.reflash.algo.tree.forEach(node => {
         let btn = document.createElement('button');
+        let div = document.createElement('div')
         btn.id = 'algoNode_' + node.id;
         btn.className = 'treeNode';
+
+        div.id = 'algoNodeGhost_' + node.id;
+        div.className = 'treeNodeGhost';
         
         btn.style.gridRow = node.row;
-        if (node.id === 11) btn.style.gridColumn = '2 / 4';
-        else btn.style.gridColumn = node.col;
+        div.style.gridRow = node.row;
+        if (node.id === 11) {
+            btn.style.gridColumn = '2 / 4';
+            div.style.gridColumn = '2 / 4';
+        }
+        else {
+            btn.style.gridColumn = node.col;
+            div.style.gridColumn = node.col;
+        }
+
+        div.textContent = i18next.t('upg_algo_cpu_req', { cpu_lvl: node.cpu_req })
 
         btn.onclick = () => UPGS.reflash.algo.buy(node.id); 
         grid.appendChild(btn);
+        grid2.appendChild(div)
     });
 
     if (container) treeObserver.observe(container);

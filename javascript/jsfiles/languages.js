@@ -181,9 +181,12 @@ function loadTranslationsAlways() {
     document.getElementById('maxOrNoBreakPrestigeUpgrades').textContent = player.settings.breakprestige_buy_max_activate ? i18next.t('maxUpgradesTrue') : i18next.t('maxUpgradesFalse');
     document.getElementById('maxOrNoBalanceUpgrades').textContent = player.settings.balance_buy_max_activate ? i18next.t('maxUpgradesTrue') : i18next.t('maxUpgradesFalse');
 
+    let bGain = GAIN.reflash.reset();
     const btnReflash = document.getElementById('doReflash');
     if ((player.coin.currency >= 1.79e308 || player.coin.currency == Infinity) && player.prestige.challenge.completed.includes(8)) {
-        btnReflash.textContent = i18next.t('reflashFirst', globals);
+        btnReflash.textContent = bGain > 1 ? 
+        i18next.t('reflashEnabled', {reflashesTemp: formatNumber(bGain, 'boost', 2, true), ref_cur: i18next.t(getBitOrByteKey(bGain))}) :
+        i18next.t('reflashFirst', globals);
     } else {
         btnReflash.textContent = i18next.t('reflashDisabled', globals); // И СЮДА!
     }
@@ -1170,10 +1173,6 @@ function loadTranslationsReflash() {
         if (topBits) topBits.textContent = formatNumber(player.reflash.currency, 'boost', 2, true)
         document.getElementById('bitsCount2_currency').textContent = i18next.t(getBitOrByteKey(player.reflash.currency))
 
-        const topBits2 = document.getElementById('top_ref_cur_val3');
-        if (topBits2) topBits2.textContent = formatNumber(player.reflash.currency, 'boost', 2, true)
-        document.getElementById('bitsCount3_currency').textContent = i18next.t(getBitOrByteKey(player.reflash.currency))
-
         // 5, Компуктер
         for (let i = 0; i < 5; i++) {
             document.getElementsByClassName('computerComponentLevel')[i].textContent = formatNumber(player.reflash.computer[i+1]);
@@ -1200,6 +1199,7 @@ function loadTranslationsReflash() {
 
         document.getElementById('cur_watt_val').textContent = formatNumber(MISC.sum_watt())
         document.getElementById('max_watt_val').textContent = formatNumber(UPGS.reflash.computer[2].effect())
+        document.getElementById('cur_comp_lvl').textContent = formatNumber(UPGS.reflash.computer[1].effect())
 }
 
 function loadTranslationsEvent() {
@@ -1473,6 +1473,7 @@ document.getElementById('changingLanguage').addEventListener('click', () => {
         updateStaticTranslations(); // Мгновенно переводит всю статику
         showChangelog(text.changelog.start);
         showHelpPage(text.help.start, text.empty);
+        initAlgoTree()
     });
 });
 

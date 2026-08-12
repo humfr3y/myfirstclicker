@@ -681,13 +681,13 @@ st {
 
 ct {
   color:var(--crystal);
-  font-size: calc(20px * var(--font-scale));
+  font-size: calc(25px * var(--font-scale));
   text-shadow: 0 0 5px var(--crystal);
 }
 
 rt {
   color:var(--reflash);
-  font-size: calc(20px * var(--font-scale));
+  font-size: calc(25px * var(--font-scale));
   text-shadow: 0 0 5px var(--reflash);
 }
 
@@ -1745,6 +1745,14 @@ img.disabled {
     z-index: 2; /* Кнопки лежат поверх линий */
 }
 
+#treeGrid2 {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
 .treeNode {
     background-color: black;
     border: 1px solid var(--reflash) !important;
@@ -1756,7 +1764,7 @@ img.disabled {
     justify-content: center;
     align-items: center;
     text-align: center;
-    transition:  0.25s ease-in-out;
+    transition: 0.25s ease-in-out;
     height: 10vh;
     width: 15vw;
     max-height: 100px;
@@ -1782,6 +1790,28 @@ img.disabled {
 .treeNode:disabled:hover{
     background-color: rgb(241, 103, 103)  !important;
     color: black  !important;
+}
+
+.treeNodeGhost {
+  border: solid 1px black;
+  display: none;
+  font-weight: bold;
+  text-align: center;
+  align-items: center;
+  background-color: rgb(148, 147, 147);
+  color: black;
+  font-size: calc(16px * var(--font-scale)) !important;
+  height: 10vh;
+  width: 15vw;
+  max-height: 100px;
+  max-width: 220px;
+  opacity: 0.8;
+  pointer-events: none;
+  justify-content: center;
+}
+
+.treeNodeGhost.locked {
+  display: flex;
 }
 
 #nodeOrderInput {
@@ -2507,14 +2537,14 @@ vn {
   width: 100%;
   display: flex;
   align-items: center;
-  height: 25vh;
+  height: 20vh;
   max-height: 400px;
   flex-direction: column;
 }
 
 #computerLogo {
   background-color: purple;
-  height: 80%;
+  height: 100%;
   width: 50%;
 }
 
@@ -2522,8 +2552,8 @@ vn {
   width: 50%;
   display: flex;
   align-items: center;
-  height: 32vh;
-  max-height: 400px;
+  height: 42vh;
+  max-height: 420px;
   flex-direction: column;
   border: 2px solid var(--reflash);
   justify-content: space-evenly;
@@ -2533,7 +2563,7 @@ vn {
   width: 100%;
   display: flex;
   align-items: center;
-  height: 90%;
+  height: 100%;
   max-height: 400px;
   flex-direction: row;
   justify-content: space-evenly;

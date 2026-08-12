@@ -175,8 +175,8 @@ it {
 .arrow::before {
     visibility: visible;
     transform: rotate(45deg);
-    border-bottom-width: 1.8px;
-    border-right-width: 1.8px;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
     content: '';
     right: 0px;
     top: 4px
@@ -187,7 +187,19 @@ it {
 }
 
 .tooltip[data-popper-placement^='bottom'] > .arrow {
-    top: -4px;
+    top: -6px; /* Поднимаем стрелку на самую верхнюю границу рамки */
+    bottom: auto;
+    transform: rotate(45deg); /* Поворачиваем уголок вверх */
+}
+
+.tooltip[data-popper-placement^='bottom'] > .arrow::before {
+    transform: rotate(45deg); /* Сбрасываем лишние вращения */
+    top: 0px;
+    right: 0px;
+    border-bottom-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 2px;   /* Рисуем верхнюю и левую границу уголка */
+    border-left-width: 2px;
 }
 
 .tooltip[data-popper-placement^='left'] > .arrow {

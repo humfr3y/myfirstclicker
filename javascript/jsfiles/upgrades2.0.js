@@ -610,19 +610,19 @@ const UPGS = {
         ]),
         accelerator: new AcceleratorManager('reflash', [
             {
-                id: 1, power: 2, basePrice: 4, elementId: 'acceleratorU1',
+                id: 1, power: 3, basePrice: 4, elementId: 'acceleratorU1',
                 effect: function(x = player.reflash.acceleratorUpgrades[1], y = UPGS.reflash.accelerator[3].effect()) { return x*0.2*y; }
             },
             {
-                id: 2, power: 2, basePrice: 4, elementId: 'acceleratorU2',
+                id: 2, power: 3, basePrice: 4, elementId: 'acceleratorU2',
                 effect: function(x = player.reflash.acceleratorUpgrades[2], y = UPGS.reflash.accelerator[3].effect()) { return x*0.25*y; }
             },
             {
-                id: 3, power: 2, basePrice: 4, elementId: 'acceleratorU3',
+                id: 3, power: 3, basePrice: 4, elementId: 'acceleratorU3',
                 effect: function(x = player.reflash.acceleratorUpgrades[3]) { return 1+x*0.25; }
             },
             {
-                id: 4, power: 2, basePrice: 4, elementId: 'acceleratorU4',
+                id: 4, power: 3, basePrice: 4, elementId: 'acceleratorU4',
                 effect: function(x = player.reflash.acceleratorUpgrades[4]) { return 1+x*0.125; }
             },
             {
@@ -647,36 +647,36 @@ const UPGS = {
             },
         ], 'acceleratorUpgrades'),
         algo: {
-            tree: [
-                //bit tree
-                { id: 11, row: 1, col: 1, req: [], cost: 1, effect(x=player.reflash.algo.includes(this.id)) {return x ? 10 : 1} }, 
-                { id: 21, row: 2, col: 1, req: [11], cost: 1, effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 0}  },
-                { id: 22, row: 2, col: 2, req: [11], cost: 1, effect(x=player.reflash.algo.includes(this.id)) {return x ? 5 : 1}  },
-                { id: 23, row: 2, col: 3, req: [11], cost: 1, effect(x=player.reflash.algo.includes(this.id)) {return x ? true : false}  },
-                { id: 24, row: 2, col: 4, req: [23], cost: 8, effect(x=player.reflash.algo.includes(this.id)) {return x ? true : false } },
-                { id: 31, row: 3, col: 1, req: [21], cost: 4, effect(x=player.reflash.algo.includes(this.id)) {return x ? { shard: 1e6, rune: 2} : { shard: 0, rune: 0} } },
-                { id: 32, row: 3, col: 2, req: [22], cost: 1, effect(x=player.reflash.algo.includes(this.id)) {return x ? 10 : 1}  },
-                { id: 33, row: 3, col: 3, req: [23], cost: 2, effect(x=player.reflash.algo.includes(this.id)) {return x ? true : false}  },
-                { id: 34, row: 3, col: 4, req: [23], cost: 1, effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.1 : 0}  },
-                { id: 41, row: 4, col: 1, req: [31], cost: 4, effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 0 }  },
-                { id: 42, row: 4, col: 2, req: [32], cost: 3, effect(x=player.reflash.algo.includes(this.id)) {return x ? 100 : 1}  },
-                { id: 43, row: 4, col: 3, req: [33], cost: 6, effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.9 : 1}  },
-                { id: 44, row: 4, col: 4, req: [34], cost: 3, effect(x=player.reflash.algo.includes(this.id)) {return x ? 2 : 1}  },
-                { id: 51, row: 5, col: 2, req: [41, 42, 43], cost: 8 },
-                // byte tree
-                { id: 61, row: 6, col: 2, req: [41, 42, 43, 51], cpu_req: 1, cost: 8 },
-                { id: 62, row: 6, col: 3, req: [61], cpu_req: 2, cost: 16 },
-                { id: 63, row: 6, col: 4, req: [62], cpu_req: 3, cost: 64 },
-                { id: 71, row: 7, col: 1, req: [61], cpu_req: 1, not_req: [72, 73], cost: 8 },
-                { id: 81, row: 8, col: 1, req: [71], cpu_req: 1, cost: 8 },
-                { id: 91, row: 9, col: 1, req: [81], cpu_req: 1, cost: 8 },
-                { id: 72, row: 7, col: 2, req: [61], cpu_req: 1, not_req: [71, 73], cost: 16 },
-                { id: 82, row: 8, col: 2, req: [72], cpu_req: 2, cost: 16 },
-                { id: 92, row: 9, col: 2, req: [82], cpu_req: 2, cost: 16 },
-                { id: 73, row: 7, col: 3, req: [61], cpu_req: 1, not_req: [71, 72], cost: 32 },
-                { id: 83, row: 8, col: 3, req: [73], cpu_req: 2, cost: 32 },
-                { id: 93, row: 9, col: 3, req: [83], cpu_req: 2, cost: 32 },
-                { id: 101, row: 10, col: 2, cpu_req: 3, at_least_one_req: [73, 83, 93], cost: 24 },
+            tree: [ // lmao looks weird and fine at same time
+                //bit tree                  nodes to draw line btwn required nodes              cpu req level   required to not have    required to have at least one           cost of node
+                { id: 11, row: 1, col: 1,   draw: [],               req: [],                                                                                                    cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 10 : 1} }, 
+                { id: 21, row: 2, col: 1,   draw: [11],             req: [11],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 0}  },
+                { id: 22, row: 2, col: 2,   draw: [11],             req: [11],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 5 : 1}  },
+                { id: 23, row: 2, col: 3,   draw: [11],             req: [11],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? true : false}  },
+                { id: 24, row: 2, col: 4,   draw: [23],             req: [23],                                                                                                  cost: 8,    effect(x=player.reflash.algo.includes(this.id)) {return x ? true : false } },
+                { id: 31, row: 3, col: 1,   draw: [21],             req: [21],                                                                                                  cost: 4,    effect(x=player.reflash.algo.includes(this.id)) {return x ? { shard: 1e6, rune: 2} : { shard: 0, rune: 0} } },
+                { id: 32, row: 3, col: 2,   draw: [22],             req: [22],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 10 : 1}  },
+                { id: 33, row: 3, col: 3,   draw: [23],             req: [23],                                                                                                  cost: 2,    effect(x=player.reflash.algo.includes(this.id)) {return x ? true : false}  },
+                { id: 34, row: 3, col: 4,   draw: [23],             req: [23],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.1 : 0}  },
+                { id: 41, row: 4, col: 1,   draw: [31],             req: [31],                                                                                                  cost: 4,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 0 }  },
+                { id: 42, row: 4, col: 2,   draw: [32],             req: [32],                                                                                                  cost: 3,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 100 : 1}  },
+                { id: 43, row: 4, col: 3,   draw: [33],             req: [33],                                                                                                  cost: 6,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.9 : 1}  },
+                { id: 44, row: 4, col: 4,   draw: [34],             req: [34],                                                                                                  cost: 3,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 2 : 1}  },
+                { id: 51, row: 5, col: 2,   draw: [41, 42, 43],     req: [41, 42, 43],                                                                                          cost: 8     },
+                // byte tree                nodes to draw line btwn required nodes              cpu req level   required to not have    required to have at least one           cost of node
+                { id: 61, row: 6, col: 2,   draw: [51],             req: [51],                  cpu_req: 1,                             at_least_one_req: [41, 42, 43],         cost: 8     },
+                { id: 62, row: 6, col: 3,   draw: [61],             req: [61],                  cpu_req: 2,                                                                     cost: 16    },
+                { id: 63, row: 6, col: 4,   draw: [62],             req: [62],                  cpu_req: 3,                                                                     cost: 64    },
+                { id: 71, row: 7, col: 1,   draw: [61],             req: [61],                  cpu_req: 1,     not_req: [72, 73],                                              cost: 8     },
+                { id: 81, row: 8, col: 1,   draw: [71],             req: [71],                  cpu_req: 1,                                                                     cost: 8     },
+                { id: 91, row: 9, col: 1,   draw: [81],             req: [81],                  cpu_req: 1,                                                                     cost: 8     },
+                { id: 72, row: 7, col: 2,   draw: [61],             req: [61],                  cpu_req: 2,     not_req: [71, 73],                                              cost: 16    },
+                { id: 82, row: 8, col: 2,   draw: [72],             req: [72],                  cpu_req: 2,                                                                     cost: 16    },
+                { id: 92, row: 9, col: 2,   draw: [82],             req: [82],                  cpu_req: 2,                                                                     cost: 16    },
+                { id: 73, row: 7, col: 3,   draw: [61],             req: [61],                  cpu_req: 3,     not_req: [71, 72],                                              cost: 32    },
+                { id: 83, row: 8, col: 3,   draw: [73],             req: [73],                  cpu_req: 3,                                                                     cost: 32    },
+                { id: 93, row: 9, col: 3,   draw: [83],             req: [83],                  cpu_req: 3,                                                                     cost: 32    },
+                { id: 101, row: 10, col: 2, draw: [91, 92, 93],                                 cpu_req: 3,                             at_least_one_req: [91, 92, 93],         cost: 24    },
 
                 //пример
                 // { 
@@ -711,7 +711,6 @@ const UPGS = {
             },
 
             checkRequirements(node) {
-
                 if (node.cpu_req !== undefined) {
                     let currentCpu = player.reflash.computer && player.reflash.computer[3] ? player.reflash.computer[3] : 0;
                     if (currentCpu < node.cpu_req) return false;
@@ -744,11 +743,13 @@ const UPGS = {
 
                 this.tree.forEach(node => {
                     let btn = document.getElementById('algoNode_' + node.id);
+                    let div = document.getElementById('algoNodeGhost_' + node.id);
                     if (!btn) return;
                     
                     let isBought = player.reflash.algo.includes(node.id);
                     let reqMet = this.checkRequirements(node);
                     let canAfford = player.reflash.currency >= node.cost;
+                    let cpuLocked = player.reflash.computer[3] < node.cpu_req
 
                     if (isBought) {
                         btn.classList.add('bought');
@@ -764,6 +765,14 @@ const UPGS = {
                         btn.disabled = !canAfford;
                     }
 
+                    if (cpuLocked) {
+                        div.classList.add('locked')
+                    }
+                    else div.classList.remove('locked')
+                    if (isBought) {
+                        div.classList.remove('locked')
+                    } 
+
                     let parentIds = [];
                     if (node.draw && Array.isArray(node.draw)) {
                         parentIds = node.draw;
@@ -772,11 +781,29 @@ const UPGS = {
                     parentIds.forEach(parentId => {
                         let line = document.getElementById(`algoLine_${parentId}_${node.id}`);
                         if (line) {
-                            if (isBought) {
-                                line.setAttribute('stroke', 'color-mix(in srgb, var(--reflash) 80%, black 60%)');
+                            let parentBought = player.reflash.algo.includes(parentId);
+                            let isAtLeastOne = node.at_least_one_req && node.at_least_one_req.includes(parentId);
+
+                            if (isAtLeastOne) {
+                                if (isBought && parentBought) {
+                                    line.setAttribute('stroke', 'color-mix(in srgb, var(--reflash) 80%, black 60%)');
+                                } else {
+                                    line.setAttribute('stroke', '#333333');
+                                }
+                            } else {
+                                let childCanBeUnlocked = this.checkRequirements(node);
+
+                                if (isBought && parentBought) {
+                                    line.setAttribute('stroke', 'color-mix(in srgb, var(--reflash) 80%, black 60%)');
+                                }
+                                else if (parentBought && childCanBeUnlocked) {
+
+                                    line.setAttribute('stroke', '#adabab');
+                                }
+                                else {
+                                    line.setAttribute('stroke', '#333333');
+                                }
                             }
-                            else if (player.reflash.algo.includes(parentId)) line.setAttribute('stroke', '#adabab');
-                            else line.setAttribute('stroke', '#333333');
                         }
                     });
                 });
@@ -855,7 +882,7 @@ const UPGS = {
             },
             {
                 id: 5, power: 3, basePrice: 4, elementId: 'computerComponent5', maxAmount: 3,
-                effect: function(x = player.reflash.computer[5]) { return 15 + x * 5 },
+                effect: function(x = player.reflash.computer[5]) { return 12 + x * 3 },
                 consumation: function(x = player.reflash.computer[5]) { return x * 3; },
                 next_effect: function() { return this.effect(x = player.reflash.computer[5] + 1) },
                 next_consumation: function() { return this.consumation(x = player.reflash.computer[5] + 1) },
@@ -938,22 +965,22 @@ const AUTO = {
     }),
 
     buyable: new AutomationTask('buyable', function() {
-        if (this.misc.time() != 50) UPGS.coin.buyables.buy_auto();
+        if (this.misc.time() > 50) UPGS.coin.buyables.buy_auto();
         else UPGS.coin.buyables.buyMax_auto(true);
     }),
 
     umultiplier: new AutomationTask('umultiplier', function() {
-        if (this.misc.time() != 50 && player.prestige.challenge.activated != 3) LAYERS.umultiplier.doReset();
+        if (this.misc.time() > 50 && player.prestige.challenge.activated != 3) LAYERS.umultiplier.doReset();
         else if (player.time.umultiplier >= player.automation.conditions.umultiplier && player.prestige.challenge.activated != 3) LAYERS.umultiplier.doReset();
     }),
 
     upower: new AutomationTask('upower', function() {
-        if (this.misc.time() != 50 && player.prestige.challenge.activated != 3 && player.umultipliers >= 4) LAYERS.upower.doReset();
+        if (this.misc.time() > 50 && player.prestige.challenge.activated != 3 && player.umultipliers >= 4) LAYERS.upower.doReset();
         else if (player.time.upower >= player.automation.conditions.upower.time && player.umultipliers >= player.automation.conditions.upower.x_of_umulti && player.prestige.challenge.activated != 3) LAYERS.upower.doReset();
     }),
 
     prestige: new AutomationTask('prestige', function() {
-        if (this.misc.time() != 50 || !MILESTONES.has(14)) {
+        if (this.misc.time() > 50 || !MILESTONES.has(14)) {
             LAYERS.prestige.doReset();
             return;
         }
@@ -968,12 +995,12 @@ const AUTO = {
     }),
 
     uadder: new AutomationTask('uadder', function() {
-        if (this.misc.time() != 50 && player.prestige.challenge.activated != 3 && player.upowers >= 6) LAYERS.uadder.doReset();
+        if (this.misc.time() > 50 && player.prestige.challenge.activated != 3 && player.upowers >= 6) LAYERS.uadder.doReset();
         else if (player.time.uadder >= player.automation.conditions.uadder.time && player.upowers >= player.automation.conditions.uadder.x_of_upower && player.upowers >= 6 && player.prestige.challenge.activated != 3) LAYERS.uadder.doReset();
     }),
 
     ureducer: new AutomationTask('ureducer', function() {
-        if (this.misc.time() != 50 && player.prestige.challenge.activated != 3 && player.uadders >= 4) LAYERS.ureducer.doReset();
+        if (this.misc.time() > 50 && player.prestige.challenge.activated != 3 && player.uadders >= 4) LAYERS.ureducer.doReset();
         else if (player.time.ureducer >= player.automation.conditions.ureducer.time && player.uadders >= player.automation.conditions.ureducer.x_of_uadder && player.uadders >= 4 && player.prestige.challenge.activated != 3) LAYERS.ureducer.doReset();
     })
 };

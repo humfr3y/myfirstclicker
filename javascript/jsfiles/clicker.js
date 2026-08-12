@@ -70,6 +70,8 @@ const GAIN = {
             },
             effect() { 
                 let val = applyDecimalSoftcap(this);
+
+                val = val.mul(this.post_softcap_effect())
                 // Оставляем объект Decimal, просто ограничиваем его через встроенный min
                 
                 return Decimal.min(val, new Decimal("1.79e308")); 
@@ -151,6 +153,8 @@ const GAIN = {
             effect() { 
                 let val = applyDecimalSoftcap(this);
                 // Оставляем объект Decimal, просто ограничиваем его через встроенный min
+
+                val = val.mul(this.post_softcap_effect())
                 
                 return Decimal.min(val, new Decimal("1.79e308")); 
             },
@@ -757,6 +761,17 @@ const GAIN = {
             return player.balance.upgrades.singles.includes(23) ? x * y : 0;
         }
     },
+    reflash: {
+        reset() {
+            let gain = 1;
+            const mults = [
+                [player.reflash.upgrades[1], UPGS.reflash.buyables[1].effect()],
+                [player.reflash.algo.includes(101), 3],
+            ];
+            mults.forEach(([cond, val]) => { if (cond) gain *= val; });
+            return Math.floor(gain);
+        }
+    },
     
     clicksPerSecond: 0
 };
@@ -1148,15 +1163,12 @@ const MISC = {
     set_intervals: { auto_save: '', update_game: '' },
     
     automation: {
-        max(){
-            return player.reflash.singleUpgrades.includes(13) ? 25 : 50
-        },
         single: { 
             divider: 1.6666667, 
             cost: (x = player.automation.upgrades.single) => Math.pow(2, x), 
             time(x = player.automation.upgrades.single) { 
                 let interval = Math.max(2000 / Math.pow(this.divider, x), 50)
-                return interval == 50 ? interval : MISC.automation.max()
+                return interval
             }, 
             charged: false, 
             interval: '', 
@@ -1165,9 +1177,9 @@ const MISC = {
         buyable: { 
             divider: 1.6666667, 
             cost: (x = player.automation.upgrades.buyable) => Math.pow(2, x), 
-            time(x = player.automation.upgrades.single) { 
+            time(x = player.automation.upgrades.buyable) { 
                 let interval = Math.max(1000 / Math.pow(this.divider, x), 50)
-                return interval == 50 ? interval : MISC.automation.max()
+                return interval
             }, 
             bulk(x = player.automation.upgrades.buyable) { 
                 return this.time() <= 50 ? Math.min(Math.pow(2, x - 6), 512) : 1; 
@@ -1179,9 +1191,9 @@ const MISC = {
         umultiplier: { 
             divider: 1.6666667, 
             cost: (x = player.automation.upgrades.umultiplier) => Math.pow(2, x), 
-            time(x = player.automation.upgrades.single) { 
+            time(x = player.automation.upgrades.umultiplier) { 
                 let interval = Math.max(15000 / Math.pow(this.divider, x), 50)
-                return interval == 50 ? interval : MISC.automation.max()
+                return interval
             }, 
             charged: false, 
             interval: '', 
@@ -1192,9 +1204,9 @@ const MISC = {
         upower: { 
             divider: 1.6666667, 
             cost: (x = player.automation.upgrades.upower) => Math.pow(2, x), 
-            time(x = player.automation.upgrades.single) { 
+            time(x = player.automation.upgrades.upower) { 
                 let interval = Math.max(30000 / Math.pow(this.divider, x), 50)
-                return interval == 50 ? interval : MISC.automation.max()
+                return interval
             }, 
             charged: false, 
             interval: '', 
@@ -1205,9 +1217,9 @@ const MISC = {
         prestige: { 
             divider: 1.6666667, 
             cost: (x = player.automation.upgrades.prestige) => Math.pow(2, x), 
-            time(x = player.automation.upgrades.single) { 
+            time(x = player.automation.upgrades.prestige) { 
                 let interval = Math.max(60000 / Math.pow(this.divider, x), 50)
-                return interval == 50 ? interval : MISC.automation.max()
+                return interval
             }, 
             charged: false, 
             interval: '', 
@@ -1218,9 +1230,9 @@ const MISC = {
         uadder: { 
             divider: 1.5, 
             cost: (x = player.automation.upgrades.uadder) => 1e15 * Math.pow(100, x), 
-            time(x = player.automation.upgrades.single) { 
+            time(x = player.automation.upgrades.uadder) { 
                 let interval = Math.max(30000 / Math.pow(this.divider, x), 50)
-                return interval == 50 ? interval : MISC.automation.max()
+                return interval
             }, 
             charged: false, 
             interval: '', 
@@ -1231,9 +1243,9 @@ const MISC = {
         ureducer: { 
             divider: 2, 
             cost: (x = player.automation.upgrades.ureducer) => 1e50 * Math.pow(1000, x), 
-            time(x = player.automation.upgrades.single) { 
+            time(x = player.automation.upgrades.ureducer) { 
                 let interval = Math.max(60000 / Math.pow(this.divider, x), 50)
-                return interval == 50 ? interval : MISC.automation.max()
+                return interval
             }, 
             charged: false, 
             interval: '', 
@@ -1601,10 +1613,10 @@ const VIRUS = {
         let effect = 0
         switch (x) {
             case 1: //монеты в секунду и нажатия вне софткапа
-                effect = Math.pow(25, y)
+                effect = Math.pow(15, y)
                 break;
             case 2: //кристаллы за сброс вне софткапа
-                effect = Math.pow(5, y)
+                effect = Math.pow(4, y)
                 break;
             case 3: //доход осколков
                 effect = Math.pow(5, y)
@@ -2452,3 +2464,28 @@ function tooltipGeneration() {
         ['mouseleave', 'blur'].forEach(evt => el.addEventListener(evt, () => tooltip.removeAttribute('data-show')));
     });
 }
+
+function separateTooltipGeneration() {
+    const tooltipElementIds = ['bitsCount'];
+    tooltipElementIds.forEach(id => {
+        const el = document.getElementById(id);
+        const tooltip = document.getElementById('tooltip-' + id);
+        if (!el || !tooltip) return;
+        const popperInstance = Popper.createPopper(el, tooltip, { 
+            modifiers: [{ name: 'offset', options: { offset: [0, 8] } }], 
+            placement: 'bottom' 
+        });
+        ['mouseenter', 'focus'].forEach(evt => {
+            el.addEventListener(evt, () => { 
+                tooltip.setAttribute('data-show', ''); 
+                popperInstance.update(); 
+            });
+        });
+        ['mouseleave', 'blur'].forEach(evt => {
+            el.addEventListener(evt, () => {
+                tooltip.removeAttribute('data-show');
+            });
+        });
+    });
+}  
+  // Если следующий индекс 0 — значит, текущая фраза была последней
