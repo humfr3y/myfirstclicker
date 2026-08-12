@@ -70,6 +70,8 @@ const GAIN = {
             },
             effect() { 
                 let val = applyDecimalSoftcap(this);
+
+                val = val.mul(this.post_softcap_effect())
                 // Оставляем объект Decimal, просто ограничиваем его через встроенный min
                 
                 return Decimal.min(val, new Decimal("1.79e308")); 
@@ -150,6 +152,8 @@ const GAIN = {
             },
             effect() { 
                 let val = applyDecimalSoftcap(this);
+
+                val = val.mul(this.post_softcap_effect())
                 // Оставляем объект Decimal, просто ограничиваем его через встроенный min
                 
                 return Decimal.min(val, new Decimal("1.79e308")); 
@@ -1506,7 +1510,7 @@ const VIRUS = {
         let effect = 0
         switch (x) {
             case 1: //монеты в секунду и нажатия вне софткапа
-                effect = Math.pow(25, y)
+                effect = Math.pow(15, y)
                 break;
             case 2: //кристаллы за сброс вне софткапа
                 effect = Math.pow(5, y)
