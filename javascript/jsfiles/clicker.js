@@ -747,7 +747,7 @@ const GAIN = {
                 }
                 else effect /= player.virus.effect.multiplier
             }
-            if (ACHS.has(64)) effect *= 3
+            effect *= UPGS.reflash.algo.tree[7].effect()
             return effect;
         },
         offline(x = GAIN.balance.generation(), y = MISC.offline()) {
@@ -946,7 +946,7 @@ const UNL = {
             if (el.style.display !== targetDisplay) el.style.display = targetDisplay;
         },
         check() {
-            for (let i = 1; i <= 104; i++) {
+            for (let i = 1; i <= 106; i++) {
                 if (this[i]) {
                     let el = this[i].element();
                     if (el instanceof HTMLCollection) {
@@ -965,7 +965,7 @@ const UNL = {
         4: { type: 'block', element: () => document.getElementById('crystalCount'), req: () => ACHS.has(21) },
         5: { type: 'block', element: () => document.getElementById('prestigeSelect'), req: () => ACHS.has(21) },
         6: { type: 'block', element: () => document.getElementById('prestigeSection'), req: () => ACHS.has(21) },
-        7: { type: 'flex', element: () => document.getElementById('prestigeSpecialRow'), req: () => MILESTONES.has(10) },
+        7: { type: 'block', element: () => document.getElementById('maxBuyPrestige'), req: () => MILESTONES.has(10) && player.reflash.resets == 0 },
         8: { type: 'flex', element: () => document.getElementById('singleAutomationContainer'), req: () => MILESTONES.has(2) },
         9: { type: 'flex', element: () => document.getElementById('buyableAutomationContainer'), req: () => MILESTONES.has(3) },
         10: { type: 'flex', element: () => document.getElementById('umultiplierAutomationContainer'), req: () => MILESTONES.has(4) },
@@ -1080,6 +1080,8 @@ const UNL = {
         99: { type: 'none', element: () => ELS.automationUpgradesArray[6], req: () => MISC.automation.ureducer.time() === 50 },
         100: { type: 'flex', element: () => document.getElementById('ureducerIntervalDiv'), req: () => MISC.automation.ureducer.time() === 50 },
         101: { type: 'block', element: () => document.getElementById('reflashHelpDiv'), req: () => player.reflash.resets >= 1 },
+        105: { type: 'block', element: () => document.getElementById('maxBuyShards'), req: () => UNL.shard.buyables.unl() }, 
+        106: { type: 'block', element: () => document.getElementById('autoMaxBuyPrestige'), req: () => MILESTONES.has(10) && player.reflash.resets > 0 },
     }
 };
 

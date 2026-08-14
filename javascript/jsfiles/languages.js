@@ -378,6 +378,8 @@ function loadTranslationsPrestige() {
         document.getElementById(`pBuyableU${i}_cost`).textContent = formatNumber(UPGS.prestige.buyables[i].cost());
     }
 
+    document.getElementById('autoBuyPrestigeEnabled').textContent = player.automation.small.prestige
+
     // 2. Единичные (Single) улучшения престижа
     const pSingleUpgIds = [11, 12, 13, 14, 21, 22, 23, 24, 31, 32, 33, 34, 41, 42, 43, 44];
     for (let i = 1; i <= 16; i++) {

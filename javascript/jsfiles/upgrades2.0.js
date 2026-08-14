@@ -595,12 +595,12 @@ const UPGS = {
         singles: new UniversalSinglesManager('reflash', 'singleUpgrades', [
             { id: 11, elementId: 'rSingleU1', basePrice: 2, effect: function(x = this.unl()) {
                 if (x == 0) return 1;
-                let eff = Math.pow(1 + player.reflash.resets, 4.33);
+                let eff = Math.pow(1 + player.reflash.resets, 6);
                 return eff;
             }},
-            { id: 12, elementId: 'rSingleU2', basePrice: 32, effect: function(x = this.unl()) {
+            { id: 12, elementId: 'rSingleU2', basePrice: 16, effect: function(x = this.unl()) {
                 if (x == 0) return 1;
-                let eff = 1 + Math.pow(player.time.game.reflash.timer, 0.4);
+                let eff = 1 + Math.pow(player.time.game.reflash.timer, 0.45);
                 return eff;
             }},
             { id: 13, elementId: 'rSingleU3', basePrice: 128 },
@@ -652,15 +652,15 @@ const UPGS = {
                 { id: 21, row: 2, col: 1, req: [11], cost: 1, effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 0}  },
                 { id: 22, row: 2, col: 2, req: [11], cost: 1, effect(x=player.reflash.algo.includes(this.id)) {return x ? 5 : 1}  },
                 { id: 23, row: 2, col: 3, req: [11], cost: 1, effect(x=player.reflash.algo.includes(this.id)) {return x ? true : false}  },
-                { id: 24, row: 2, col: 4, req: [23], cost: 8, effect(x=player.reflash.algo.includes(this.id)) {return x ? true : false } },
-                { id: 31, row: 3, col: 1, req: [21], cost: 4, effect(x=player.reflash.algo.includes(this.id)) {return x ? { shard: 1e6, rune: 2} : { shard: 0, rune: 0} } },
+                { id: 24, row: 2, col: 4, req: [23], cost: 6, effect(x=player.reflash.algo.includes(this.id)) {return x ? true : false } },
+                { id: 31, row: 3, col: 1, req: [21], cost: 2, effect(x=player.reflash.algo.includes(this.id)) {return x ? { shard: 1e6, rune: 2} : { shard: 0, rune: 0} } },
                 { id: 32, row: 3, col: 2, req: [22], cost: 1, effect(x=player.reflash.algo.includes(this.id)) {return x ? 10 : 1}  },
-                { id: 33, row: 3, col: 3, req: [23], cost: 2, effect(x=player.reflash.algo.includes(this.id)) {return x ? true : false}  },
+                { id: 33, row: 3, col: 3, req: [23], cost: 2, effect(x=player.reflash.algo.includes(this.id)) {return x ? 10 : 1}  },
                 { id: 34, row: 3, col: 4, req: [23], cost: 1, effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.1 : 0}  },
-                { id: 41, row: 4, col: 1, req: [31], cost: 4, effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 0 }  },
-                { id: 42, row: 4, col: 2, req: [32], cost: 3, effect(x=player.reflash.algo.includes(this.id)) {return x ? 100 : 1}  },
+                { id: 41, row: 4, col: 1, req: [31], cost: 3, effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 0 }  },
+                { id: 42, row: 4, col: 2, req: [32], cost: 2, effect(x=player.reflash.algo.includes(this.id)) {return x ? 100 : 1}  },
                 { id: 43, row: 4, col: 3, req: [33], cost: 6, effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.9 : 1}  },
-                { id: 44, row: 4, col: 4, req: [34], cost: 3, effect(x=player.reflash.algo.includes(this.id)) {return x ? 2 : 1}  },
+                { id: 44, row: 4, col: 4, req: [34], cost: 4, effect(x=player.reflash.algo.includes(this.id)) {return x ? 2 : 1}  },
                 { id: 51, row: 5, col: 2, req: [41, 42, 43], cost: 8 },
             ],
             buy(id) {
@@ -737,6 +737,8 @@ const UPGS = {
                         break;
                     case 23:
                         player.prestige.singleUpgrades = [11,12,13,14,21,22,23,24,31,32,33,34,41,42,43,44]
+                        player.shard.singleUpgrades = [11,12,13,21,22]
+                        player.shard.unlockables = [1,2,3,4]
                         break;
                     case 24:
                         player.challenge.completed = [1,2,3,4,5,6,7,8,9,10,11,12]
@@ -750,8 +752,7 @@ const UPGS = {
                         player.rune.total_currency += UPGS.reflash.algo.tree[5].effect().rune
                         break;
                     case 33:
-                        player.shard.singleUpgrades = [11,12,13,21,22]
-                        player.shard.unlockables = [1,2,3,4]
+                        player.fortune.upgrades.singles.push(31)
                         break;
                     case 41:
                         player.fortune.tokens += 3
@@ -783,6 +784,18 @@ document.addEventListener("keydown", function(event) {
 function maxBuyAllPrestige() {
     UPGS.prestige.buyables.buyMax()
 }
+
+let buyAllPrestige_interval = ''
+function enableMaxBuyAllPrestigeAutomation(change=true) {
+    if (change) player.automation.small.prestige = !player.automation.small.prestige
+    if (player.automation.small.prestige) {
+        buyAllPrestige_interval = setInterval(() => UPGS.prestige.buyables.buyMax(), 50)
+    }
+    else {
+        clearInterval(buyAllPrestige_interval)
+        buyAllPrestige_interval = null
+    }
+} 
 
 function maxBuyAllShards() {
     UPGS.shard.buyables.buyMax()
