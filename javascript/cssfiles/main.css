@@ -499,6 +499,7 @@ nt {
   width: 100%;
   border: solid white;
   border-width: 0px 0px 2px 0px;
+  position: relative;
 }
 
 .shopShelf, .shopShelfRow {
@@ -639,6 +640,10 @@ st {
 #overdriveType2ProgressBar{
   height: 100%;
   background-image:radial-gradient( var(--crystal), black 210%);
+}
+#overdriveType3ProgressBar{
+  height: 100%;
+  background-image:radial-gradient( var(--supercoin), black 210%);
 }
 .overdriveTypeGhost {
   position: absolute;
@@ -2613,6 +2618,26 @@ vn {
   padding: 10px;
 }
 
+.shop-arrow {
+  position: absolute;
+  border: white 0px solid;
+  background-color: transparent;
+  color: white;
+  height: 100px;
+  width: 100px;
+  font-size: calc(100px * var(--font-scale));
+  text-align: center;
+}
+
+.left-shop-arrow {
+  left: -12%;
+  top: 30%;
+}
+
+.right-shop-arrow {
+  right: -12%;
+  top: 30%;
+}
 
 
 

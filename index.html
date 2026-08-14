@@ -948,6 +948,26 @@
           </div>
         </div>
       </div>
+      <div id="overdriveType3" class="overdriveType" style="display:none">
+        <div id="overdriveType3Title" class="overdriveTypeTitle">
+          <p id="overdriveType3Name" class="whiteText overdriveTypeName" data-i18n="overdriveType3Name">Overdrive Type 3</p>
+        </div>
+        <div id="overdriveType3Div" class="overdriveTypeDiv">
+          <div id="overdriveType3ProgressBarBase" class="overdriveTypeProgressBarBase">
+            <div id="overdriveType3ProgressBar" class="overdriveTypeProgressBar">
+            </div>
+            <div id="overdriveType3ProgressBarActive" class="overdriveTypeProgressBarActive">
+            </div>
+            <div id="overdriveType3Ghost" class="overdriveTypeGhost">
+              <span id="progressBarGain3">
+                <span id="od3_percent">0</span>% <br>
+                <span data-i18n="word_currently">Currently:</span> x<span id="od3_effect">1</span> <span data-i18n="od3_gain_text">to crystal gain</span> <br>
+                <span data-i18n="word_cost">Cost:</span> <span id="od3_cost">1000</span> <span data-i18n="currency_supercoins">crystals</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     </div>  
     <div id="challengeTab" style="display:none">
@@ -2963,7 +2983,7 @@
                     <span id="shopPermanentU6Req">0/5</span>
                   </div>
               </div>
-              <div class="shopShelfRow shopShelfRowTop shopUnlockableRow" style="display: none">
+              <div class="shopShelfRow shopShelfRowTop shopSpecialRow" style="display: none">
                 <div class="shopContainer shop_unlock_post_prestige" style="display: none">
                   <button id="shopSingleU6" class="shopButton" onclick="UPGS.shop.special.buy(6)"></button>
                   <div id="tooltip-shopSingleU6" class="tooltip" role="tooltip">
@@ -3086,7 +3106,7 @@
                     <span id="shopItem3Title" data-i18n="shop_i3_name">Time Warper</span>
                     <span id="shopItem3Req">0/10</span>
                   </div>
-                <div class="shopContainer" style="display: none">
+                <div class="shopContainer shop_unlock_post_computer" style="display: none">
                     <button id="shopItem4" class="shopButton shopItemButton" onclick="UPGS.shop.items.buy(4)"></button>
                     <button id="useShopItem4" class="useButton" onclick="UPGS.shop.items[4].useItem()" data-i18n="useTitle">Use</button>
                     <div id="tooltip-shopItem4" class="tooltip" role="tooltip">
@@ -3098,9 +3118,9 @@
                       <div class="arrow" data-popper-arrow></div>
                     </div>
                     <span id="shopItem4Title" data-i18n="shop_i4_name">Time Warper+</span>
-                    <span id="shopItem4Req">0/3</span>
+                    <span id="shopItem4Req">0/1</span>
                   </div>
-                <div class="shopContainer" style="display: none">
+                <div class="shopContainer shop_unlock_post_computer" style="display: none">
                     <button id="shopItem5" class="shopButton shopItemButton" onclick="UPGS.shop.items.buy(5)"></button>
                     <button id="useShopItem5" class="useButton" onclick="UPGS.shop.items[5].useItem()" data-i18n="useTitle">Use</button>
                     <div id="tooltip-shopItem5" class="tooltip" role="tooltip">
@@ -3114,7 +3134,7 @@
                     <span id="shopItem5Title" data-i18n="shop_i5_name">Golden Pound</span>
                     <span id="shopItem5Req">0/1</span>
                   </div>
-                <div class="shopContainer" style="display: none">
+                <div class="shopContainer shop_unlock_post_computer" style="display: none">
                     <button id="shopItem6" class="shopButton shopItemButton" onclick="UPGS.shop.items.buy(6)"></button>
                     <button id="useShopItem6" class="useButton" onclick="UPGS.shop.items[6].useItem()" data-i18n="useTitle">Use</button>
                     <div id="tooltip-shopItem6" class="tooltip" role="tooltip">
@@ -3126,8 +3146,61 @@
                       <div class="arrow" data-popper-arrow></div>
                     </div>
                     <span id="shopItem6Title" data-i18n="shop_i6_name">Math Analysis</span>
-                    <span id="shopItem6Req">0/3</span>
+                    <span id="shopItem6Req">0/1</span>
                   </div>
+              </div>
+              <div class="shopShelfRow shopBuyableRow" style="display: none">
+                <div class="shopContainer shop_unlock_post_computer" style="display: none">
+                    <button id="shopBuyableU13" class="shopButton"></button>
+                    <div id="tooltip-shopBuyableU13" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut><span data-i18n="shop_b13_name">Golden Clover</span> (<span id="sb13_amt">0</span>/<span id="sb13_max">100</span>) [+<span id="sb13_bulk">1</span>]</ut><br>
+                        <span data-i18n="shop_b13_desc">Increase supercoin chance</span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sb13_eff">0</span>% <span id="sb13_next_cont">=> +<span id="sb13_neff">0</span>%</span><br>
+                        <span id="sb13_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb13_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopBuyableU13Title" data-i18n="shop_b13_name">Golden Clover</span>
+                    <span id="shopBuyableU13Req">0/25</span>
+                </div>
+                <div class="shopContainer shop_unlock_post_computer" style="display: none">
+                    <button id="shopBuyableU14" class="shopButton"></button>
+                    <div id="tooltip-shopBuyableU14" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut><span data-i18n="shop_b14_name">Golden Clover</span> (<span id="sb14_amt">0</span>/<span id="sb14_max">100</span>) [+<span id="sb14_bulk">1</span>]</ut><br>
+                        <span data-i18n="shop_b14_desc">Increase supercoin chance</span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sb14_eff">0</span>% <span id="sb14_next_cont">=> +<span id="sb14_neff">0</span>%</span><br>
+                        <span id="sb14_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb14_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopBuyableU14Title" data-i18n="shop_b14_name">Golden Clover</span>
+                    <span id="shopBuyableU14Req">0/50</span>
+                </div>
+                <div class="shopContainer shop_unlock_post_computer" style="display: none">
+                    <button id="shopBuyableU15" class="shopButton"></button>
+                    <div id="tooltip-shopBuyableU15" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut><span data-i18n="shop_b15_name">Golden Clover</span> (<span id="sb15_amt">0</span>/<span id="sb15_max">100</span>) [+<span id="sb15_bulk">1</span>]</ut><br>
+                        <span data-i18n="shop_b15_desc">Increase supercoin chance</span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sb15_eff">0</span>% <span id="sb15_next_cont">=> +<span id="sb15_neff">0</span>%</span><br>
+                        <span id="sb15_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb15_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopBuyableU15Title" data-i18n="shop_b15_name">Golden Clover</span>
+                    <span id="shopBuyableU15Req">0/10</span>
+                </div>
+              </div>
+              <div class="shopShelfRow shopPermanentRow" style="display: none">
+                
+              </div>
+              <div class="shopShelfRow shopSpecialRow" style="display: none">
+
+              </div>
+              <div class="shopShelfRow shopItemRow" style="display: none">
+
               </div>
             </div>
             <hr>
@@ -3203,6 +3276,20 @@
                     <span id="shopBuyableU11Title" data-i18n="shop_b11_name">Golden Clover</span>
                     <span id="shopBuyableU11Req">0/100</span>
                 </div>
+                <div class="shopContainer shop_unlock_post_computer" style="display: none">
+                    <button id="shopBuyableU12" class="shopButton"></button>
+                    <div id="tooltip-shopBuyableU12" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut><span data-i18n="shop_b12_name">Golden Clover</span> (<span id="sb12_amt">0</span>/<span id="sb12_max">100</span>) [+<span id="sb12_bulk">1</span>]</ut><br>
+                        <span data-i18n="shop_b12_desc">Increase supercoin chance</span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sb12_eff">0</span> <span id="sb12_next_cont">=> +<span id="sb12_neff">0</span></span><br>
+                        <span id="sb12_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb12_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopBuyableU12Title" data-i18n="shop_b12_name">Golden Clover</span>
+                    <span id="shopBuyableU12Req">0/100</span>
+                </div>
               </div>
               <div class="shopShelfRow shopShelfRowBottom shopPermanentRow" style="display: none">
                 <div class="shopContainer shop_unlock_post_breakprestige" style="display: none">
@@ -3218,7 +3305,7 @@
                     </div>
                     <span id="shopPermanentU7Title" data-i18n="shop_p7_name">Crystal Sword</span>
                     <span id="shopPermanentU7Req">0/5</span>
-                  </div>getBitOrByteKey(node.cost)
+                  </div>
                 <div class="shopContainer shop_unlock_post_fortune" style="display: none">
                     <button id="shopPermanentU8" class="shopButton" onclick="UPGS.shop.permanent.buy(8)"></button>
                     <div id="tooltip-shopPermanentU8" class="tooltip" role="tooltip">
@@ -3261,13 +3348,84 @@
                     <span id="shopPermanentU10Title" data-i18n="shop_p10_name">REAPER</span>
                     <span id="shopPermanentU10Req">0/10</span>
                   </div>
+                  <div class="shopContainer shop_unlock_post_computer" style="display: none">
+                  <button id="shopPermanentU11" class="shopButton" onclick="UPGS.shop.permanent.buy(11)"></button>
+                  <div id="tooltip-shopPermanentU11" class="tooltip" role="tooltip">
+                    <span class="tooltipShop">
+                      <ut><span data-i18n="shop_p11_name">Energy Shard</span> (<span id="sp11_amt">0</span>/<span id="sp11_max">5</span>)</ut><br>
+                      <span data-i18n="shop_p11_desc">Reduces shards effect softcap</span><br>
+                      <span data-i18n="word_currently">Currently:</span> x<span id="sp11_eff">0</span> <span id="sp11_next_cont">=> x<span id="sp11_neff">0</span></span><br>
+                      <span id="sp11_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp11_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                    </span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopPermanentU11Title" data-i18n="shop_p11_name">Energy Shard</span>
+                  <span id="shopPermanentU11Req">0/10</span>
+                </div>
+                <div class="shopContainer shop_unlock_post_computer" style="display: none">
+                  <button id="shopPermanentU12" class="shopButton" onclick="UPGS.shop.permanent.buy(12)"></button>
+                  <div id="tooltip-shopPermanentU12" class="tooltip" role="tooltip">
+                    <span class="tooltipShop">
+                      <ut><span data-i18n="shop_p12_name">Energy Shard</span> (<span id="sp12_amt">0</span>/<span id="sp12_max">5</span>)</ut><br>
+                      <span data-i18n="shop_p12_desc">Reduces shards effect softcap</span><br>
+                      <span data-i18n="word_currently">Currently:</span> x<span id="sp12_eff">0</span> <span id="sp12_next_cont">=> x<span id="sp12_neff">0</span></span><br>
+                      <span id="sp12_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp12_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                    </span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopPermanentU12Title" data-i18n="shop_p12_name">Energy Shard</span>
+                  <span id="shopPermanentU12Req">0/20</span>
+                </div>
               </div>
-              <div class="shopShelfRow shopShelfRowBottom shopUnlockableRow" style="display: none">
-
+              <div class="shopShelfRow shopShelfRowBottom shopSpecialRow" style="display: none">
+                <div class="shopContainer shop_unlock_post_computer" style="display: none">
+                  <button id="shopSingleU7" class="shopButton" onclick="UPGS.shop.special.buy(7)"></button>
+                  <div id="tooltip-shopSingleU7" class="tooltip" role="tooltip">
+                    <span class="tooltipShop">
+                      <ut data-i18n="shop_u7_name">Fragile Speedometer</ut><br>
+                      <span data-i18n="shop_u7_desc">Unlock Overdrive II</span><br>
+                      <span id="su7s_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="su7s_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                    </span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopSingleU7Title" data-i18n="shop_u7_name">Fragile Speedometer</span>
+                  <span id="shopSingleU7Req">0/1</span>
+                </div>
+                <div class="shopContainer shop_unlock_post_computer" style="display: none">
+                  <button id="shopSingleU8" class="shopButton" onclick="UPGS.shop.special.buy(8)"></button>
+                  <div id="tooltip-shopSingleU8" class="tooltip" role="tooltip">
+                    <span class="tooltipShop">
+                      <ut data-i18n="shop_u8_name">Fragile Speedometer</ut><br>
+                      <span data-i18n="shop_u8_desc">Unlock Overdrive II</span><br>
+                      <span id="su8s_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="su8s_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                    </span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopSingleU8Title" data-i18n="shop_u8_name">Fragile Speedometer</span>
+                  <span id="shopSingleU8Req">0/1</span>
+                </div>
               </div>
               <div class="shopShelfRow shopShelfRowBottom shopItemRow" style="display: none">
               </div>
+              <div class="shopShelfRow shopBuyableRow" style="display: none">
+                
+              </div>
+              <div class="shopShelfRow shopPermanentRow" style="display: none">
+
+              </div>
+              <div class="shopShelfRow shopSpecialRow" style="display: none">
+
+              </div>
+              <div class="shopShelfRow shopItemRow" style="display: none">
+                
+              </div>
             </div>
+            <button class="left-shop-arrow shop-arrow" onclick="changeShopPage('left')" style="display: none;">
+              ◄
+            </button>
+            <button class="right-shop-arrow shop-arrow" onclick="changeShopPage('right')">
+              ►
+            </button>
           </div>
         </div>
       </div>
@@ -3443,6 +3601,24 @@
             <ut><span data-i18n="shop_item_2_title">Бесплатный У-силитель</span></ut><br>
             +<span id="shop_item_2_eff">2</span>&nbsp;<span data-i18n="shop_item_2_effect"> к бесплатным У-силителям</span><br>
             <span id="shop_item_2_timer"></span>
+            <br>
+          </div>
+          <div id="shopItem4Effect" class="whiteText">
+            <ut><span data-i18n="shop_item_4_title">Бесплатный У-силитель</span></ut><br>
+            +<span id="shop_item_4_eff">2</span>&nbsp;<span data-i18n="shop_item_4_effect"> к бесплатным У-силителям</span><br>
+            <span id="shop_item_4_timer"></span>
+            <br>
+          </div>
+          <div id="shopItem5Effect" class="whiteText">
+            <ut><span data-i18n="shop_item_5_title">Бесплатный У-силитель</span></ut><br>
+            +<span id="shop_item_5_eff">2</span>&nbsp;<span data-i18n="shop_item_5_effect"> к бесплатным У-силителям</span><br>
+            <span id="shop_item_5_timer"></span>
+            <br>
+          </div>
+          <div id="shopItem6Effect" class="whiteText">
+            <ut><span data-i18n="shop_item_6_title">Бесплатный У-силитель</span></ut><br>
+            +<span id="shop_item_6_eff">2</span>&nbsp;<span data-i18n="shop_item_6_effect"> к бесплатным У-силителям</span><br>
+            <span id="shop_item_6_timer"></span>
             <br>
           </div>
         </div>

@@ -109,6 +109,8 @@ const GAIN = {
                     }
                     else val = val.div(player.virus.effect.multiplier)
                 }
+
+                if (player.challenge.activated != 0 || player.prestige.challenge.activated != 0) val *= UPGS.shop.permanent[12].effect()
                 return val
             }
         },
@@ -192,6 +194,8 @@ const GAIN = {
                     }
                     else val = val.div(player.virus.effect.multiplier)
                 }
+
+                if (player.challenge.activated != 0 || player.prestige.challenge.activated != 0) val *= UPGS.shop.permanent[12].effect()
                 return val
             }
         },
@@ -226,6 +230,7 @@ const GAIN = {
                 let upowerEff = GAIN.upower.effect();
                 if (upowerEff) effect = effect.pow(upowerEff);
                 if (UPGS.prestige.singles[12].unl()) effect = effect.pow(UPGS.prestige.singles[12].effect());
+                if (player.shop.items.used[4]) effect = effect.pow(1.1);
 
                 if (UPGS.reflash.singles[11].unl()) effect = effect.mul(UPGS.reflash.singles[11].effect());
 
@@ -371,6 +376,7 @@ const GAIN = {
             }
             gain *= TREASURES.event.digitalization[5].permanent.effect()
             gain *= TREASURES.event.digitalization[5].temporary.effect()
+            gain *= UPGS.shop.permanent[11].effect()
             
             return { gain: Math.min(gain, 1.7e308), broken_crystals };
         }
@@ -406,6 +412,8 @@ const GAIN = {
             mults.forEach(([cond, val]) => { if (cond) gain *= val; });
 
             if (player.balance.coins.plus) gain /= MISC.balance.plusCoins.nerf().crystalGainNerf;
+
+            if (player.shop.items.used[5]) effect = effect.pow(1.05);
             return gain;
         },
         reset() {
@@ -748,6 +756,7 @@ const GAIN = {
                 else effect /= player.virus.effect.multiplier
             }
             if (ACHS.has(64)) effect *= 3
+            effect *= UPGS.shop.buyables[14].effect()
             return effect;
         },
         offline(x = GAIN.balance.generation(), y = MISC.offline()) {
@@ -769,7 +778,7 @@ const GAIN = {
                 [player.reflash.algo.includes(101), 3],
             ];
             mults.forEach(([cond, val]) => { if (cond) gain *= val; });
-            return Math.floor(gain);
+            return Math.min(Math.floor(gain), UPGS.reflash.computer[4].effect());
         }
     },
     
@@ -780,8 +789,16 @@ const UNL = {
     overdrive: {
         type1: {
             unl() { return true },
-            cost() { return 1000 + Math.pow(10, this.percent()) / 20 * 2; },
-            percent() { return Math.min(Math.log10(player.overdrive.consumed.type1 + 1), 100); },
+            max() {
+                let max = 100
+                if (player.shop.special.includes(7)) max = 500
+                return max
+            },
+            cost() { 
+                let scale = this.max() == 500 && this.percent > 100 ? this.percent() - 100 : 0
+                let base = Math.pow(10, this.percent() + scale)
+                return 1000 + base / 10; },
+            percent() { return Math.min(Math.log10(player.overdrive.consumed.type1 + 1), this.max()); },
             effect() {
                 if (this.percent() === 0) return 1;
                 let eff = 1 + (Math.pow(2, this.percent() / 2.75) / 2);
@@ -792,13 +809,33 @@ const UNL = {
         },
         type2: {
             unl() { return player.shop.special.includes(1); },
+            max() {
+                let max = 100
+                return max
+            },
             cost() { return 1000 + Math.pow(10, this.percent() + 8); },
-            percent() { return Math.min(Math.log10((player.overdrive.consumed.type2 / 1e8) + 1), 100); },
+            percent() { return Math.min(Math.log10((player.overdrive.consumed.type2 / 1e8) + 1), this.max()); },
             effect() {
                 if (this.percent() === 0) return 1;
                 let eff = (Math.pow(1.75, this.percent() / 2));
                 if (player.shop.upgrades[7]) eff *= UPGS.shop.buyables[7].effect();
                 return eff;
+            },
+            activate: false, blink: '', interval: ''
+        },
+        type3: {
+            unl() { return player.shop.special.includes(8); },
+            max() {
+                let max = 100
+                return max
+            },
+            cost() { return 100 + Math.pow(10, this.percent() / 10) * 10 },
+            percent() { return Math.min(Math.log10(player.overdrive.consumed.type3+1)*10, this.max()); },
+            effect() {
+                if (this.percent() === 0) return 1;
+                let eff = this.percent() / 40
+                if (player.shop.upgrades[7]) eff *= UPGS.shop.buyables[7].effect();
+                return 1 + eff;
             },
             activate: false, blink: '', interval: ''
         }
@@ -957,7 +994,7 @@ const UNL = {
             if (el.style.display !== targetDisplay) el.style.display = targetDisplay;
         },
         check() {
-            for (let i = 1; i <= 105; i++) {
+            for (let i = 1; i <= 110; i++) {
                 if (this[i]) {
                     let el = this[i].element();
                     if (el instanceof HTMLCollection) {
@@ -1092,6 +1129,11 @@ const UNL = {
         100: { type: 'flex', element: () => document.getElementById('ureducerIntervalDiv'), req: () => MISC.automation.ureducer.time() <= 50 },
         101: { type: 'block', element: () => document.getElementById('reflashHelpDiv'), req: () => player.reflash.resets >= 1 },
         105: { type: 'block', element: () => document.getElementById('maxBuyShards'), req: () => UNL.shard.buyables.unl()},
+        106: { type: 'flex', element: () => document.getElementsByClassName('shop_unlock_post_computer'), req: () => player.reflash.computer[3] >= 1 },
+        107: {type: 'block', element: () => document.getElementById('shopItem4Effect'), req: () => player.shop.items.timer[4] > 0},
+        108: {type: 'block', element: () => document.getElementById('shopItem5Effect'), req: () => player.shop.items.timer[5] > 0},
+        109: {type: 'block', element: () => document.getElementById('shopItem6Effect'), req: () => player.shop.items.timer[6] > 0},
+        110: { type: 'block', element: () => document.getElementById('overdriveType3'), req: () => UPGS.shop.special[8].unl() },
         
     }
 };
@@ -1287,6 +1329,10 @@ const MISC = {
             let effect = (player.uadders && player.prestige.break.singles.includes(15)) ? GAIN.uadder.effect2() : 0
             return player.prestige.challenge.activated == 8 ? 0 : effect + player.shop.items.used[2]
         },
+        uadder: () => {
+            let effect = 0
+            return player.prestige.challenge.activated == 8 ? 0 : effect + player.shop.items.used[6]
+        },
     },
     auto_save_timer: 0,
     
@@ -1453,6 +1499,15 @@ const MISC = {
         if (player.shop.items.used[2] > 0 && player.shop.items.timer[2] < 0) {
             player.shop.items.used[2] = 0
         }
+        if (player.shop.items.used[4] > 0 && player.shop.items.timer[4] < 0) {
+            player.shop.items.used[4] = 0
+        }
+        if (player.shop.items.used[5] > 0 && player.shop.items.timer[5] < 0) {
+            player.shop.items.used[5] = 0
+        }
+        if (player.shop.items.used[6] > 0 && player.shop.items.timer[6] < 0) {
+            player.shop.items.used[6] = 0
+        }
     },
     sum_watt() {
         let total = 0;
@@ -1557,7 +1612,8 @@ const VIRUS = {
     check() {
         if (player.virus.activated) return 0
 
-        let maxChance = Math.round(24000*UPGS.shop.permanent[10].effect())
+        let chance = 24000*UPGS.shop.permanent[10].effect()/UPGS.shop.buyables[10].effect()
+        let maxChance = Math.round(chance)
         let randomNum = randomNumber(0, maxChance)
 
         if (randomNum == maxChance) this.activate()
@@ -1568,7 +1624,7 @@ const VIRUS = {
 
         player.virus.type = this.current_type()
         player.virus.level = this[player.virus.type].current_level.req()
-        player.virus.goal = this[player.virus.type].req(player.virus.level) / UPGS.shop.permanent[10].effect()
+        player.virus.goal = this[player.virus.type].req(player.virus.level) / UPGS.shop.permanent[15].effect()
         player.virus.time = 60
         player.virus.activated = true
     },
@@ -1941,6 +1997,9 @@ function loop() {
 
     if (player.shop.items.timer[1] > 0) player.shop.items.timer[1] -= time
     if (player.shop.items.timer[2] > 0) player.shop.items.timer[2] -= time
+    if (player.shop.items.timer[4] > 0) player.shop.items.timer[4] -= time
+    if (player.shop.items.timer[5] > 0) player.shop.items.timer[5] -= time
+    if (player.shop.items.timer[6] > 0) player.shop.items.timer[6] -= time
 
     MISC.item_effect()
 
@@ -1951,18 +2010,18 @@ function loop() {
     checkCompletedChallenges();
     checkSuperUpgradesForTooltips();
 
-    statsPerClickUpdate();
-    statsPerSecondUpdate();
-    statsGainUpdate();
-    statsSuperCoinChanceUpdate();
-    statsCrystalsUpdate();
-    statsPrestigeUpdate();
-    statsShardsPerClickUpdate();
-    statsShardsPerSecondUpdate();
-    statsShardsEffectUpdate();
-    statsCritChanceUpdate();
-    statsCritMultiUpdate();
-    statsClickSimulationUpdate();
+    // statsPerClickUpdate();
+    // statsPerSecondUpdate();
+    // statsGainUpdate();
+    // statsSuperCoinChanceUpdate();
+    // statsCrystalsUpdate();
+    // statsPrestigeUpdate();
+    // statsShardsPerClickUpdate();
+    // statsShardsPerSecondUpdate();
+    // statsShardsEffectUpdate();
+    // statsCritChanceUpdate();
+    // statsCritMultiUpdate();
+    // statsClickSimulationUpdate();
 
     // updateBitToByteUI()
 
@@ -2004,13 +2063,17 @@ function update_overdrive() {
     const overdriveWidth = overdriveTypeEl ? overdriveTypeEl.getBoundingClientRect().width : 800;
     const widthMultiplier = overdriveWidth / 100;
     
-    let w1 = (UNL.overdrive.type1.percent() * widthMultiplier) + "px";
+    let w1 = (UNL.overdrive.type1.percent() * overdriveWidth / UNL.overdrive.type1.max()) + "px";
     overdriveType1ProgressBarActive.style.width = w1;
     overdriveType1ProgressBar.style.width = w1;
     
-    let w2 = (UNL.overdrive.type2.percent() * widthMultiplier) + "px";
+    let w2 = (UNL.overdrive.type2.percent() * overdriveWidth / UNL.overdrive.type2.max()) + "px";
     overdriveType2ProgressBarActive.style.width = w2;
     overdriveType2ProgressBar.style.width = w2;
+
+    let w3 = (UNL.overdrive.type3.percent() * overdriveWidth / UNL.overdrive.type3.max()) + "px";
+    overdriveType3ProgressBarActive.style.width = w3;
+    overdriveType3ProgressBar.style.width = w3;
 
     shardUnlock1.style.width = UNL.shard.second.percent() + "%";
     shardUnlock2.style.width = UNL.shard.click.percent() + "%";
@@ -2020,7 +2083,7 @@ function update_overdrive() {
     superCrystalBar.style.clipPath = `inset(${100 - UNL.supercrystal.pour() / 1.05}% 0 0 0)`;
 }
 
-function setupOverdriveButton(baseId, typeObj, activeBarId, consumeCurrency, costFunc) {
+function setupOverdriveButton(baseId, typeObj, activeBarId, consumeCurrency, type) {
     const baseEl = document.getElementById(baseId);
     const activeBarEl = document.getElementById(activeBarId);
     if (!baseEl || !activeBarEl) return;
@@ -2032,9 +2095,9 @@ function setupOverdriveButton(baseId, typeObj, activeBarId, consumeCurrency, cos
                 activeBarEl.style.opacity = activeBarEl.style.opacity == 1 ? 0 : 1;
             }, 500);
             typeObj.interval = setInterval(() => {
-                if (player[consumeCurrency].currency >= typeObj.cost() && typeObj.percent() !== 100) {
+                if (player[consumeCurrency].currency >= typeObj.cost() && typeObj.percent() !== typeObj.max()) {
                     let sub = player[consumeCurrency].currency / 100;
-                    player.overdrive.consumed[consumeCurrency === 'coin' ? 'type1' : 'type2'] += sub;
+                    player.overdrive.consumed[type] += sub;
                     player[consumeCurrency].currency -= sub;
                 }
             }, 50);
@@ -2045,8 +2108,9 @@ function setupOverdriveButton(baseId, typeObj, activeBarId, consumeCurrency, cos
         }
     });
 }
-setupOverdriveButton('overdriveType1ProgressBarBase', UNL.overdrive.type1, 'overdriveType1ProgressBarActive', 'coin');
-setupOverdriveButton('overdriveType2ProgressBarBase', UNL.overdrive.type2, 'overdriveType2ProgressBarActive', 'prestige');
+setupOverdriveButton('overdriveType1ProgressBarBase', UNL.overdrive.type1, 'overdriveType1ProgressBarActive', 'coin', 'type1');
+setupOverdriveButton('overdriveType2ProgressBarBase', UNL.overdrive.type2, 'overdriveType2ProgressBarActive', 'prestige', 'type2');
+setupOverdriveButton('overdriveType3ProgressBarBase', UNL.overdrive.type3, 'overdriveType3ProgressBarActive', 'supercoin', 'type3');
 
 function fillTheProgressBar(type, number) {
     let sub = UNL.shard[type].cost / 500;

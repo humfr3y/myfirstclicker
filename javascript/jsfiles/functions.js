@@ -1542,7 +1542,16 @@ document.addEventListener('click', function(e) {
 
 // ПЕРЕКЛЮЧЕНИЕ ВКЛАДКИ В СУПЕРШОПЕ
 function switchShopTab(tab) {
+    ELS.selectedShopTab = tab
     const shopTop = [...document.getElementsByClassName('shopShelfRowTop')], shopBottom = [...document.getElementsByClassName('shopShelfRowBottom')];
+    const rowTypes = ['shopBuyableRow', 'shopPermanentRow', 'shopSpecialRow', 'shopItemRow']
+    for (let i = 0; i < rowTypes.length; i++) {
+        const elements = document.getElementsByClassName(rowTypes[i])
+        for (let j = 0; j < elements.length; j++) {
+            elements[j].style.display = "none";
+        }
+    }
+
     shopTop.forEach(el => {
         if (el) el.style.display = "none";
     });
@@ -1551,6 +1560,8 @@ function switchShopTab(tab) {
     });
     document.getElementsByClassName('shopShelfRowTop')[tab].style.display = 'flex'
     document.getElementsByClassName('shopShelfRowBottom')[tab].style.display = 'flex'
+
+    changeShopPage(null, true)
 }
 
 // ВЫВЕДЕНИЕ ТЕКСТА ПОСИМВОЛЬНО

@@ -200,7 +200,7 @@ function loadTranslationsAlways() {
 
     document.getElementById('virusReq').textContent = i18next.t(`virus.${player.virus.type}`, {
         x: formatNumber(player.virus.current),
-        y: player.virus.goal
+        y: formatNumber(player.virus.goal)
     })
 
     let virusSeconds = convert_time_temp(player.virus.effect.time).seconds
@@ -226,6 +226,17 @@ function loadTranslationsAlways() {
     })
     document.getElementById('shop_item_2_timer').textContent = i18next.t('tempBoostTimer_2', {
         s: formatNumber(player.shop.items.timer[2], 'boost')
+    })
+
+
+    document.getElementById('shop_item_4_timer').textContent = i18next.t('tempBoostTimer_2', {
+        s: formatNumber(player.shop.items.timer[4], 'boost')
+    })
+    document.getElementById('shop_item_5_timer').textContent = i18next.t('tempBoostTimer_2', {
+        s: formatNumber(player.shop.items.timer[5], 'boost')
+    })
+    document.getElementById('shop_item_6_timer').textContent = i18next.t('tempBoostTimer_2', {
+        s: formatNumber(player.shop.items.timer[6], 'boost')
     })
 
     document.getElementById('shop_item_1_eff').textContent = formatNumber(player.shop.items.used[1])
@@ -350,6 +361,10 @@ function loadTranslationsCoins() {
     document.getElementById('od2_percent').textContent = formatNumber(UNL.overdrive.type2.percent(), 'boost');
     document.getElementById('od2_effect').textContent = formatNumber(UNL.overdrive.type2.effect(), 'boost');
     document.getElementById('od2_cost').textContent = formatNumber(UNL.overdrive.type2.cost());
+
+    document.getElementById('od3_percent').textContent = formatNumber(UNL.overdrive.type3.percent(), 'boost');
+    document.getElementById('od3_effect').textContent = formatNumber(UNL.overdrive.type3.effect(), 'boost');
+    document.getElementById('od3_cost').textContent = formatNumber(UNL.overdrive.type3.cost());
 
     // 4. ТЕКСТ УСЛОВИЯ ИСПЫТАНИЯ
     const ccEl = document.getElementById('challengeCondition');
@@ -494,15 +509,21 @@ function loadTranslationsShop() {
     document.getElementById('top_scoins_gain_val').textContent = formatNumber(GAIN.supercoin.gain_per_second(), 'power', 3);
 
     // 1. Покупаемые улучшения (Buyables 1-11)
-    for (let i = 1; i <= 11; i++) {
+    for (let i = 1; i <= 15; i++) {
         let max = UPGS.shop.buyables[i].maxAmount;
         let amt = player.shop.upgrades[i];
         
         document.getElementById(`sb${i}_amt`).textContent = formatNumber(amt);
         document.getElementById(`sb${i}_max`).textContent = max;
         document.getElementById(`sb${i}_bulk`).textContent = formatNumber(UPGS.shop.buyables[i].bulk());
-        document.getElementById(`sb${i}_eff`).textContent = formatNumber(UPGS.shop.buyables[i].effect(), 'percent');
-        document.getElementById(`sb${i}_neff`).textContent = formatNumber(UPGS.shop.buyables[i].next_effect(), 'percent');
+        if (i != 12) {
+            document.getElementById(`sb${i}_eff`).textContent = formatNumber(UPGS.shop.buyables[i].effect(), 'percent');
+            document.getElementById(`sb${i}_neff`).textContent = formatNumber(UPGS.shop.buyables[i].next_effect(), 'percent');
+        }
+        else {
+            document.getElementById(`sb${i}_eff`).textContent = formatNumber(UPGS.shop.buyables[i].effect());
+            document.getElementById(`sb${i}_neff`).textContent = formatNumber(UPGS.shop.buyables[i].next_effect());
+        }
         
         // Скрываем "=>" и цену, если макс. уровень
         document.getElementById(`sb${i}_next_cont`).style.display = (amt === max) ? 'none' : 'inline';
@@ -524,10 +545,12 @@ function loadTranslationsShop() {
         8: 'number',   // Fortune Ticket (+2)
         9: 'percent',
         10: 'percent',
+        11: 'number',
+        12: 'number'
     };
 
     // 2. Постоянные улучшения (Permanents 1-10)
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 12; i++) {
         let max = UPGS.shop.permanent[i].maxAmount;
         let amt = player.shop.permanentUpgrades[i];
         let fmt = fmtMap[i];
@@ -548,7 +571,7 @@ function loadTranslationsShop() {
     }
 
     // 3. Разблокируемые (Unlockables / Singles 1-6)
-    for (let i = 1; i <= 6; i++) {
+    for (let i = 1; i <= 8; i++) {
         let isBought = player.shop.special.includes(i);
         document.getElementById(`su${i}s_cost_cont`).style.display = isBought ? 'none' : 'inline';
         if (!isBought) document.getElementById(`su${i}s_cost`).textContent = formatNumber(UPGS.shop.special[i].cost());
@@ -557,7 +580,7 @@ function loadTranslationsShop() {
     }
 
     // 4. Предметы (Items 1-6)
-    for (let i = 1; i <= 3; i++) {
+    for (let i = 1; i <= 6; i++) {
         let max = UPGS.shop.items[i].maxAmount;
         let amt = player.shop.items.amount[i];
         

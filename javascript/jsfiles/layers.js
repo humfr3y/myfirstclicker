@@ -31,7 +31,10 @@ function applyUtilsCostModifiers(cost, type="none") {
     if (player.balance.upgrades.singles.includes(21)) cost *= MISC.balance.plusCoins.nerf().utilsCostIncreaser;
     if (player.prestige.challenge.activated === 4) cost = Math.pow(cost, 1.25);
     if (player.minerals[4]) cost -= UPGS.minerals[4].effect3();
-    if (type == "none") cost -= GAIN.ureducer.effect();
+    if (type == "none") {
+        cost -= GAIN.ureducer.effect();
+        cost -= UPGS.shop.buyables[12].effect()
+    }
     cost = Math.max(cost, 0);
     return cost;
 }

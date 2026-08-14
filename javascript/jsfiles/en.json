@@ -193,6 +193,7 @@
     "currency_crystals": "crystals",
     "od1_gain_text": "to α-coin gain",
     "od2_gain_text": "to crystal gain",
+    "od3_gain_text": "to supercoin gain",
 
     "upg_coin_s1_name": "Rich Fame",
     "upg_coin_s1_desc": "Increase α-coins per second based on total α-coins",
@@ -384,6 +385,8 @@
     "overdriveType1Name": "Overdrive I",
 
     "overdriveType2Name": "Overdrive II",
+
+    "overdriveType3Name": "Overdrive III",
 
     "prestigeMilestone1": "<ut>Milestone 1</ut> Requirement: 1 prestige <it>Reward: Unlock Shards</it>",
     "prestigeMilestone2": "<ut>Milestone 2</ut> Requirement: 2 prestige <it>Reward: Unlock Single Upgrades Automation</it>",
@@ -767,6 +770,7 @@
     "wattUsage2": "W",
     "uses": "Usage: ",
     "level": "Level",
+    "maxLevel": "Max level: ",
 
     "treasureName1": "Treasures",
     "treasureName2": "Event treasures",
