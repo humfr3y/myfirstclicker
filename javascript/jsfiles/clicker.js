@@ -154,6 +154,8 @@ const GAIN = {
             },
             effect() { 
                 let val = applyDecimalSoftcap(this);
+
+                val = val.mul(this.post_softcap_effect())
                 // Оставляем объект Decimal, просто ограничиваем его через встроенный min
 
                 val = val.mul(this.post_softcap_effect())
@@ -755,16 +757,16 @@ const GAIN = {
                 }
                 else effect /= player.virus.effect.multiplier
             }
-            if (ACHS.has(64)) effect *= 3
             effect *= UPGS.shop.buyables[14].effect()
+            effect *= UPGS.reflash.algo.tree[7].effect()
             return effect;
         },
         offline(x = GAIN.balance.generation(), y = MISC.offline()) {
-            return UNL.display[76].req() ? x * y : 0;
+            return x * y;
         },
         scales_of_balance() {
             if (!player.balance.upgrades.singles.includes(23)) return 0;
-            return MISC.balance.scales_of_balance() / 50000;
+            return MISC.balance.scales_of_balance() / 15000;
         },
         sob_offline(x = GAIN.balance.scales_of_balance(), y = MISC.offline()) {
             return player.balance.upgrades.singles.includes(23) ? x * y : 0;
@@ -994,7 +996,7 @@ const UNL = {
             if (el.style.display !== targetDisplay) el.style.display = targetDisplay;
         },
         check() {
-            for (let i = 1; i <= 110; i++) {
+            for (let i = 1; i <= 111; i++) {
                 if (this[i]) {
                     let el = this[i].element();
                     if (el instanceof HTMLCollection) {
@@ -1013,7 +1015,7 @@ const UNL = {
         4: { type: 'block', element: () => document.getElementById('crystalCount'), req: () => ACHS.has(21) },
         5: { type: 'block', element: () => document.getElementById('prestigeSelect'), req: () => ACHS.has(21) },
         6: { type: 'block', element: () => document.getElementById('prestigeSection'), req: () => ACHS.has(21) },
-        7: { type: 'flex', element: () => document.getElementById('prestigeSpecialRow'), req: () => MILESTONES.has(10) },
+        7: { type: 'block', element: () => document.getElementById('maxBuyPrestige'), req: () => MILESTONES.has(10) && player.reflash.resets == 0 },
         8: { type: 'flex', element: () => document.getElementById('singleAutomationContainer'), req: () => MILESTONES.has(2) },
         9: { type: 'flex', element: () => document.getElementById('buyableAutomationContainer'), req: () => MILESTONES.has(3) },
         10: { type: 'flex', element: () => document.getElementById('umultiplierAutomationContainer'), req: () => MILESTONES.has(4) },
@@ -1134,7 +1136,7 @@ const UNL = {
         108: {type: 'block', element: () => document.getElementById('shopItem5Effect'), req: () => player.shop.items.timer[5] > 0},
         109: {type: 'block', element: () => document.getElementById('shopItem6Effect'), req: () => player.shop.items.timer[6] > 0},
         110: { type: 'block', element: () => document.getElementById('overdriveType3'), req: () => UPGS.shop.special[8].unl() },
-        
+        111: { type: 'block', element: () => document.getElementById('autoMaxBuyPrestige'), req: () => MILESTONES.has(10) && player.reflash.resets > 0 },
     }
 };
 

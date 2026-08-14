@@ -1265,8 +1265,11 @@
             <span data-i18n="word_cost">Cost:</span> <span id="pBuyableU2_cost">0</span> <span data-i18n="currency_crystals">crystals</span>
           </button> -->
         </div>
-        <div id="prestigeSpecialRow" class="centeredDiv" style="display: none">
+        <div id="prestigeSpecialRow" class="centeredDiv">
           <button onclick="maxBuyAllPrestige()" id="maxBuyPrestige" class="upgradeButton maxBuy" style="width: 200px;" data-i18n="buyMax">Купить все</button>
+          <button onclick="enableMaxBuyAllPrestigeAutomation()" id="autoMaxBuyPrestige" class="upgradeButton maxBuy" style="width: 200px;">
+            <span data-i18n="autoBuy">Авто-покупка</span>
+            <span id="autoBuyPrestigeEnabled">false</span></button>
         </div>
       </div>
       <div id="milestonesTab" style="display:none">
@@ -1690,10 +1693,11 @@
         <span data-i18n="upg_bp_s10_desc">Breaks Prestige barrier, makes able to gain more Crystals per Prestige than 1.</span><br>
         <span id="bps10_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="bps10_cost">0</span> <span data-i18n="currency_crystals">crystals</span></span>
       </button>
-      <div class="centeredDiv">
+      
+      <div id="breakPUs" style="display: flex; flex-direction: column; align-items: center">
+        <div class="centeredDiv">
           <button onclick="maxBuyAllBreakPrestige()" id="maxBuyBreakPrestige" class="upgradeButton maxBuy" data-i18n="buyMax">Купить все</button>
         </div>
-      <div id="breakPUs" style="display: flex; flex-direction: column; align-items: center">
       <div id="breakPRow1" class="row">
         <button onclick="buyBreakPrestigeUpgrade(1)" id="breakPBuyableU1" class="upgradeButton breakPrestigeBuyableButton">
           <ut data-i18n="upg_bp_b1_name">Big Investment</ut> (<span id="bpb1_amt">0</span>) [+<span id="bpb1_bulk">1</span>]<br>

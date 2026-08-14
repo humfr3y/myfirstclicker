@@ -147,7 +147,10 @@ let player = {
         checkbox: { single: false, buyable: false, umultiplier: false, upower: false, prestige: false },
         setIntervals: { single: '', buyable: '', umultiplier: '', upower: '', prestige: '' },
         upgrades: { single: 0, buyable: 0, umultiplier: 0, upower: 0, prestige: 0, uadder: 0, ureducer: 0 },
-        conditions: { umultiplier: 0, upower: { time: 0, x_of_umulti: 0 }, prestige: { time: 3600, coins: 1e15, prestige: 10000, crystals: 1e50 }, uadder: { time: 0, x_of_upower: 0 }, ureducer: {time: 0, x_of_uadder: 0} }
+        conditions: { umultiplier: 0, upower: { time: 0, x_of_umulti: 0 }, prestige: { time: 3600, coins: 1e15, prestige: 10000, crystals: 1e50 }, uadder: { time: 0, x_of_upower: 0 }, ureducer: {time: 0, x_of_uadder: 0} },
+        small: {
+            prestige: false
+        }
     },
     got_daily_reward: false,
     got_export_reward: false,

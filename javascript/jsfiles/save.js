@@ -197,6 +197,7 @@ function loadGame() {
         })
         delete player.shop.unlockables
     }
+    enableMaxBuyAllPrestigeAutomation(false) 
     generateEventTreasures()
     tooltipGeneration()
     // separateTooltipGeneration()
