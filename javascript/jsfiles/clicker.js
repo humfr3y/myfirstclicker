@@ -761,6 +761,18 @@ const GAIN = {
             return player.balance.upgrades.singles.includes(23) ? x * y : 0;
         }
     },
+    reflash: {
+        reset() {
+            let gain = 1;
+            const mults = [
+                [player.reflash.upgrades[1], UPGS.reflash.buyables[1].effect()],
+                // [player.reflash.algo.includes(101), 3],
+            ];
+            mults.forEach(([cond, val]) => { if (cond) gain *= val; });
+            return gain
+            // return Math.min(Math.floor(gain), UPGS.reflash.computer[4].effect());
+        }
+    },
     
     clicksPerSecond: 0
 };
