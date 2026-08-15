@@ -239,8 +239,12 @@ function loadTranslationsAlways() {
         s: formatNumber(player.shop.items.timer[6], 'boost')
     })
 
-    document.getElementById('shop_item_1_eff').textContent = formatNumber(player.shop.items.used[1])
-    document.getElementById('shop_item_2_eff').textContent = formatNumber(player.shop.items.used[2])
+    for (let i = 1; i <= 6; i++) {
+        if (i != 3) {
+            const element = document.getElementById(`shop_item_${i}_eff`);
+            element.textContent = formatNumber(player.shop.items.used[i])
+        }
+    }
 }
 
 // ============================================================
@@ -1401,6 +1405,7 @@ function updateStaticTranslations() {
     text.notification.limit_item = i18next.t('limitItemNotification');
     text.notification.limit_item_2 = i18next.t('limitItemNotification2');
     text.notification.challenge_item = i18next.t('challengeItemNotification');
+    text.notification.total_limit_item = i18next.t('totalLimitItemNotification'); 
 
     text.notification.reflash.copy = i18next.t('presetCopyNotification');
     text.notification.reflash.paste = i18next.t('presetPasteNotification');

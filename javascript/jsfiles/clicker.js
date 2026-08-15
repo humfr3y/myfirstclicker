@@ -261,6 +261,7 @@ const GAIN = {
                 [UPGS.supercrystal[33].unl(), UPGS.supercrystal[33].effect()],
                 [player.fortune.activatedBoosts[3].activated, UPGS.fortune.boosts[3].effect()],
                 [player.prestige.break.buyables[3], UPGS.prestige.break.buyables[3].effect()],
+                [UPGS.shard.singles[23].unl(), UPGS.shard.singles[23].effect()],
                 [player.reflash.algo.includes(42), UPGS.reflash.algo.tree[10].effect()]
             ];
             mults.forEach(([cond, val]) => { if (cond) effect = effect * val; });
@@ -286,6 +287,7 @@ const GAIN = {
                 [player.shard.achievements[4], UNL.shard_achievements[4].effect()],
                 [player.fortune.activatedBoosts[3].activated, UPGS.fortune.boosts[3].effect()],
                 [player.prestige.break.buyables[3], UPGS.prestige.break.buyables[3].effect()],
+                [UPGS.shard.singles[23].unl(), UPGS.shard.singles[23].effect()],
                 [player.reflash.algo.includes(42), UPGS.reflash.algo.tree[10].effect()]
             ];
             mults.forEach(([cond, val]) => { if (cond) effect = effect * val; });
@@ -370,6 +372,7 @@ const GAIN = {
             if (player.fortune.activatedBoosts[3].activated) gain *= UPGS.fortune.boosts[3].effect();
             if (player.prestige.break.buyables[3]) gain *= UPGS.prestige.break.buyables[3].effect()
             if (player.reflash.algo.includes(42)) gain *= UPGS.reflash.algo.tree[10].effect()
+            if (UPGS.shard.singles[23].unl()) gain *= UPGS.shard.singles[23].effect()
             if (player.virus.effect.time > 0 && player.virus.effect.type == 3) {
             if (player.virus.effect.status == 'buff') {
                 gain *= player.virus.effect.multiplier
@@ -415,7 +418,7 @@ const GAIN = {
 
             if (player.balance.coins.plus) gain /= MISC.balance.plusCoins.nerf().crystalGainNerf;
 
-            if (player.shop.items.used[5]) effect = effect.pow(1.05);
+            if (player.shop.items.used[5]) gain = Math.pow(gain, 1.05);
             return gain;
         },
         reset() {
@@ -532,6 +535,7 @@ const GAIN = {
             const mults = [
                 [ACHS.has(44), 2],
                 [player.reflash.algo.includes(44), UPGS.reflash.algo.tree[12].effect()],
+                [UPGS.shop.special[7].unl(), UNL.overdrive.type3.effect()]
             ];
             mults.forEach(([cond, val]) => { if (cond) gain *= val; });
             return gain;
@@ -792,18 +796,30 @@ const UNL = {
         type1: {
             unl() { return true },
             max() {
-                let max = 100
-                if (player.shop.special.includes(7)) max = 500
-                return max
+                let max = 100;
+                if (player.shop.special.includes(7)) max = 500;
+                return max;
             },
             cost() { 
-                let scale = this.max() == 500 && this.percent > 100 ? this.percent() - 100 : 0
-                let base = Math.pow(10, this.percent() + scale)
-                return 1000 + base / 10; },
-            percent() { return Math.min(Math.log10(player.overdrive.consumed.type1 + 1), this.max()); },
+                let p = this.percent();
+                let scale = this.max() == 500 && p > 100 ? p - 100 : 0;
+                let base = Math.pow(10, p + scale);
+                return 1000 + base / 10; 
+            },
+            rawPercent() { 
+                return Math.log10(player.overdrive.consumed.type1 + 1); 
+            },
+            percent() {
+                let raw = this.rawPercent();
+                if (this.max() == 500 && raw > 100) {
+                    return 100 + (raw - 100) / 2;
+                }
+                return Math.min(raw, this.max());
+            },
             effect() {
-                if (this.percent() === 0) return 1;
-                let eff = 1 + (Math.pow(2, this.percent() / 2.75) / 2);
+                let p = this.percent();
+                if (p === 0) return 1;
+                let eff = 1 + (Math.pow(2, p / 2.75) / 2);
                 if (player.shop.upgrades[7]) eff *= UPGS.shop.buyables[7].effect();
                 return eff;
             },
@@ -835,9 +851,9 @@ const UNL = {
             percent() { return Math.min(Math.log10(player.overdrive.consumed.type3+1)*10, this.max()); },
             effect() {
                 if (this.percent() === 0) return 1;
-                let eff = this.percent() / 40
+                let eff = 1 + Math.pow(Math.pow(1.05, this.percent()), 2) / 50
                 if (player.shop.upgrades[7]) eff *= UPGS.shop.buyables[7].effect();
-                return 1 + eff;
+                return eff;
             },
             activate: false, blink: '', interval: ''
         }
@@ -1119,7 +1135,7 @@ const UNL = {
         91: { type: 'flex', element: () => document.getElementsByClassName('shop_unlock_post_reflash'), req: () => player.reflash.resets >= 1}, 
         92: { type: 'block', element: () => document.getElementById('acceleratorU5_1'), req: () => MISC.acc_ratio() >= 100}, 
         93: { type: 'block', element: () => document.getElementById('acceleratorU5'), req: () => MISC.acc_ratio() < 100}, 
-        94: { type: 'flex', element: () => document.getElementById('temporaryBonuses'), req: () => player.virus.effect.time > 0 || player.shop.items.timer[1] > 0 || player.shop.items.timer[2] > 0},
+        94: { type: 'flex', element: () => document.getElementById('temporaryBonuses'), req: () => player.virus.effect.time > 0 || player.shop.items.timer[1] > 0 || player.shop.items.timer[2] > 0 || player.shop.items.timer[4] > 0 || player.shop.items.timer[5] > 0 || player.shop.items.timer[6] > 0},
         102: {type: 'block', element: () => document.getElementById('virusEffect'), req: () => player.virus.effect.time > 0},
         103: {type: 'block', element: () => document.getElementById('shopItem1Effect'), req: () => player.shop.items.timer[1] > 0},
         104: {type: 'block', element: () => document.getElementById('shopItem2Effect'), req: () => player.shop.items.timer[2] > 0},
@@ -1144,20 +1160,21 @@ const UNL = {
 
 // Хелперы для сокращения кода испытаний
 const fb8 = () => player.fortune.activatedBoosts[8].activated ? UPGS.fortune.boosts[8].effect() : 1;
+const vb7 = () => player.virus.effect.type == 7 && player.virus.effect.time > 0 ? player.virus.effect.status == 'buff' ? player.virus.effect.multiplier : 1/player.virus.effect.multiplier : 1
 const isChallComp = (id) => player.challenge.completed.includes(id);
 const isPChallComp = (id) => player.prestige.challenge.completed.includes(id);
 
 const CHALL = {
-    1: { id: 1, completed: () => isChallComp(1), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.pow(player.challenge.completed.length+1, 3.5) * fb8() },
-    2: { id: 2, completed: () => isChallComp(2), effect: () => player.prestige.challenge.activated == 8 ? 1 : 1000 * fb8() },
-    3: { id: 3, completed: () => isChallComp(3), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.pow(1 + player.prestige.resets, 0.35) * fb8() },
-    4: { id: 4, completed: () => isChallComp(4), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.pow(1.2, player.achievements.length) * fb8() },
+    1: { id: 1, completed: () => isChallComp(1), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.pow(player.challenge.completed.length+1, 3.5) * fb8() * vb7() },
+    2: { id: 2, completed: () => isChallComp(2), effect: () => player.prestige.challenge.activated == 8 ? 1 : 1000 * fb8() * vb7() },
+    3: { id: 3, completed: () => isChallComp(3), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.pow(1 + player.prestige.resets, 0.35) * fb8() * vb7() },
+    4: { id: 4, completed: () => isChallComp(4), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.pow(1.2, player.achievements.length) * fb8() * vb7() },
     5: { id: 5, completed: () => isChallComp(5), effect: () => player.prestige.challenge.activated == 8 ? 1 : CHALL[5].completed() ? 0.9 : 1 },
-    6: { id: 6, completed: () => isChallComp(6), effect: () => player.prestige.challenge.activated == 8 ? 1 : (1 + 0.1 * fb8()) },
-    7: { id: 7, completed: () => isChallComp(7), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.log2(1+ player.shard.currency + 1) * fb8() },
-    8: { id: 8, completed: () => isChallComp(8), effect: () => player.prestige.challenge.activated == 8 ? 1 : (1 + player.time.real.prestige.timer) * fb8() },
-    9: { id: 9, completed: () => isChallComp(9), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.pow(1 + player.supercoin.total_currency, 1.5) * fb8() },
-    10: { id: 10, completed: () => isChallComp(10), effect: () => player.prestige.challenge.activated == 8 ? 1 : 1 + MISC.amount_of_upgrades.coin()/2 * fb8() },
+    6: { id: 6, completed: () => isChallComp(6), effect: () => player.prestige.challenge.activated == 8 ? 1 : (1 + 0.1 * fb8() * vb7()) },
+    7: { id: 7, completed: () => isChallComp(7), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.log2(1+ player.shard.currency + 1) * fb8() * vb7() },
+    8: { id: 8, completed: () => isChallComp(8), effect: () => player.prestige.challenge.activated == 8 ? 1 : (1 + player.time.real.prestige.timer) * fb8() * vb7() },
+    9: { id: 9, completed: () => isChallComp(9), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.pow(1 + player.supercoin.total_currency, 1.5) * fb8() * vb7() },
+    10: { id: 10, completed: () => isChallComp(10), effect: () => player.prestige.challenge.activated == 8 ? 1 : 1 + MISC.amount_of_upgrades.coin()/2 * fb8() * vb7() },
     11: { id: 11, completed: () => isChallComp(11) }, // new items in shop
     12: { id: 12, completed: () => isChallComp(12) }, // decrease umulti and upower scaling
     
@@ -1614,7 +1631,7 @@ const VIRUS = {
     check() {
         if (player.virus.activated) return 0
 
-        let chance = 24000*UPGS.shop.permanent[10].effect()/UPGS.shop.buyables[10].effect()
+        let chance = 24000*UPGS.shop.permanent[10].effect()/UPGS.shop.buyables[15].effect()
         let maxChance = Math.round(chance)
         let randomNum = randomNumber(0, maxChance)
 
@@ -1626,7 +1643,7 @@ const VIRUS = {
 
         player.virus.type = this.current_type()
         player.virus.level = this[player.virus.type].current_level.req()
-        player.virus.goal = this[player.virus.type].req(player.virus.level) / UPGS.shop.permanent[15].effect()
+        player.virus.goal = this[player.virus.type].req(player.virus.level) / UPGS.shop.permanent[10].effect()
         player.virus.time = 60
         player.virus.activated = true
     },
@@ -1688,6 +1705,9 @@ const VIRUS = {
             case 6: //доход нейтрали
                 effect = Math.pow(1.35, y)
                 break;
+            case 7:
+                effect = Math.pow(10, y)
+                break;
             default:
                 break;
         }
@@ -1695,7 +1715,7 @@ const VIRUS = {
     },
     current_type() {
         let type_array = []
-        for (let i = 1; i <= 6; i++) {
+        for (let i = 1; i <= 7; i++) {
             if (this[i].current_level.req() != 0) {
                 type_array.push(i)
             }
@@ -1870,6 +1890,27 @@ const VIRUS = {
 
         },
     },
+    7: { //completed challenges
+        req(x=this.current_level.req()) {
+            let base = 50, multiplier = x
+            return base*multiplier
+        },
+        current_level: {
+            req(x=player.coin.this_reflash_currency){
+                let level_array = []
+                    switch (true) {
+                        case x > 1e220:
+                            level_array.push(2);
+                        case x > 1e150:
+                            level_array.push(1);
+                            break;
+                    }
+                    const randomIndex = Math.floor(Math.random() * level_array.length);
+                    return level_array == false ? 0 : level_array[randomIndex];
+                }
+
+        },
+    },
 }
 
 let new_date = 0, time = 0
@@ -2012,18 +2053,18 @@ function loop() {
     checkCompletedChallenges();
     checkSuperUpgradesForTooltips();
 
-    // statsPerClickUpdate();
-    // statsPerSecondUpdate();
-    // statsGainUpdate();
-    // statsSuperCoinChanceUpdate();
-    // statsCrystalsUpdate();
-    // statsPrestigeUpdate();
-    // statsShardsPerClickUpdate();
-    // statsShardsPerSecondUpdate();
-    // statsShardsEffectUpdate();
-    // statsCritChanceUpdate();
-    // statsCritMultiUpdate();
-    // statsClickSimulationUpdate();
+    statsPerClickUpdate();
+    statsPerSecondUpdate();
+    statsGainUpdate();
+    statsSuperCoinChanceUpdate();
+    statsCrystalsUpdate();
+    statsPrestigeUpdate();
+    statsShardsPerClickUpdate();
+    statsShardsPerSecondUpdate();
+    statsShardsEffectUpdate();
+    statsCritChanceUpdate();
+    statsCritMultiUpdate();
+    statsClickSimulationUpdate();
 
     // updateBitToByteUI()
 

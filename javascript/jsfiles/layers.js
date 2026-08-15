@@ -205,6 +205,7 @@ const LAYERS = {
             player.prestige.resets += GAIN.prestige.reset();
             player.prestige.true_resets++
             if (player.virus.activated && player.virus.type == 2) player.virus.current++
+            if (player.virus.activated && player.virus.type == 7 && player.challenge.activated != 0) player.virus.current++
             if (player.event.digitalization.activated) {
                 if (!player.event.digitalization.quests.weekly.completed.includes(4)) player.event.digitalization.quests.weekly.progress[3]++
                 if (!player.event.digitalization.quests.daily.completed.includes(3)) player.event.digitalization.quests.daily.progress[2]++
@@ -280,7 +281,7 @@ const LAYERS = {
             player.time.game.prestige.timer = 0;
             player.time.real.prestige.timer = 0;
 
-            for (let i = 3; i <= 6; i++) player.shop.items.used[i] = 0;
+            player.shop.items.used[3] = 0;
 
             LAYERS.doReset();
         },

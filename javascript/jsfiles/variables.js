@@ -257,7 +257,7 @@ const text = {
     itemNames: Array(6).fill(''),
     notification: {
         lore: '', load: '', save: '', export: '', import: '', hard: '', achievement: '', dailyRewardRestart: '',
-        used_item: '', dont_have_item: '', limit_item: '', limit_item_2: '', challenge_item: '',
+        used_item: '', dont_have_item: '', limit_item: '', limit_item_2: '', challenge_item: '', total_limit_item: '',
         reflash: {
             copy: '',
             paste: '',

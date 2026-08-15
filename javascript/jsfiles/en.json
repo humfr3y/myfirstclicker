@@ -472,8 +472,8 @@
     "upg_shard_s4_desc": "Total amount of Runes increase Shard effect",
     "upg_shard_s5_name": "Crystalize",
     "upg_shard_s5_desc": "Increase all minerals power based on total Supercrystals",
-    "upg_shard_s6_name": "???",
-    "upg_shard_s6_desc": "Locked",
+    "upg_shard_s6_name": "Prestigium Blade",
+    "upg_shard_s6_desc": "Increase shard gain based on total Runes, Supercrystals, Crystals and Prestiges",
 
     "shardAchUnlockable": [
         "Unlock Shard Achievements for α-coins and supercoins <br> Cost: 1 supercrystal",
@@ -688,7 +688,7 @@
     "upg_algo_41_name": "Node 41",
     "upg_algo_41_desc": "Start Reflashes with 3 Fortune Tokens",
     "upg_algo_42_name": "Node 42",
-    "upg_algo_42_desc": "Increases Shard gain by x{n1000}",
+    "upg_algo_42_desc": "Increases Shard gain by x{{n1000}}",
     "upg_algo_43_name": "Node 43",
     "upg_algo_43_desc": "Reduce Break Prestige upgrades cost by ^0.975",
     "upg_algo_44_name": "Node 44",

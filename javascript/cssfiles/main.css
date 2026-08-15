@@ -1060,6 +1060,18 @@ rn {
 #shopBuyableU11 {
   background-image: url('./images/items/goldenclover.png')
 }
+#shopBuyableU12 {
+  background-image: url('./images/items/MiniUReducer.png')
+}
+#shopBuyableU13 {
+  background-image: url('./images/items/tarotcards.png')
+}
+#shopBuyableU14 {
+  background-image: url('./images/items/minisob.png')
+}
+#shopBuyableU15 {
+  background-image: url('./images/items/adrenaline.png')
+}
 #shopPermanentU1 {
   background-image: url('./images/items/diamondpersV3.webp')
 }
@@ -1093,6 +1105,12 @@ rn {
   background-image: url('./images/items/reaper.png');
   background-position: -0.75px -0.5px;
   image-rendering: pixelated;
+}
+#shopPermanentU11 {
+  background-image: url('./images/items/shardhammer.png')
+}
+#shopPermanentU12 {
+  background-image: url('./images/items/winnerheadband.png')
 }
 /* #shopSingleU2{
   background-image: url('./images/brokenspeedometer.webp');
@@ -1129,6 +1147,11 @@ rn {
   background-position: -2px -0.5px;
   image-rendering: pixelated;
 }
+#shopSingleU8 {
+  background-image: url('./images/items/goldenspeedomoter.png');
+  background-position: -0.5px -0.5px;
+  image-rendering: pixelated;
+}
 #shopItem1 {
   background-image: url('./images/items/Uxtotallydonenow.bmp');
   background-position: -1.5px;
@@ -1144,14 +1167,14 @@ rn {
   image-rendering: pixelated;
 }
 #shopItem4 {
-  background-image: url('./images/items/Tw10m.bmp');
+  background-image: url('./images/items/coinrain.png');
   image-rendering: pixelated;
 }
 #shopItem5 {
-  background-image: url('./images/items/goldmeshok.webp');
+  background-image: url('./images/items/crystalrain.png');
 }
 #shopItem6 {
-  background-image: url('./images/items/integral.webp');
+  background-image: url('./images/items/FreeUAdder.png');
 }
 #mineral1 {
   background-image: url('./images/mins/opalfinished.webp');

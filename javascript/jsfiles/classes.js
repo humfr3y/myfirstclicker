@@ -479,7 +479,7 @@ class ShopItemUpgrade {
     effect() { return this.customEffect(); }
     
     canUseItem(x = player.shop.items.amount[this.id], y = player.shop.items.used[this.id]) {
-        return !(x == 0 || y == this.maxAmount || player.challenge.activated != 0 || player.prestige.challenge.activated != 0);
+        return !(x == 0 || y == this.maxAmount || player.challenge.activated != 0 || player.prestige.challenge.activated != 0 || UPGS.shop.items_limit());
     }
     
     useItem() {
@@ -492,6 +492,8 @@ class ShopItemUpgrade {
             notify(text.notification.limit_item + this.maxAmount + " " + text.itemNames[this.id - 1] + text.notification.limit_item_2, "red", "550px");
         } else if (player.challenge.activated != 0 || player.prestige.challenge.activated != 0) {
             notify(text.notification.challenge_item + text.itemNames[this.id - 1] + "!", "red", "550px");
+        } else if (UPGS.shop.items_limit()) {
+            notify(text.notification.total_limit_item + text.itemNames[this.id - 1] + "!", "red", "550px");
         } else {
             notify(text.notification.dont_have_item + text.itemNames[this.id - 1] + "!", "red", "550px");
         }
