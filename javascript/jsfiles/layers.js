@@ -443,7 +443,7 @@ const LAYERS = {
         player.fortune.tokens = 0;
         player.fortune.total_tokens = 0;
         player.fortune.spent_tokens = 0;
-        player.fortune.daily_resets = 10;
+        player.fortune.daily_resets = 15
         player.fortune.converted = { coins: 0, crystals: 0 };
         for (let i = 1; i <= 3; i++) player.fortune.upgrades.buyables[i] = 0;
         player.fortune.upgrades.singles = [];
