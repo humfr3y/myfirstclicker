@@ -62,7 +62,7 @@ const GAIN = {
 
                 // 5. Глобальные срезы
                 if (pcAct !== 0 && pcAct !== 8) effect = effect.pow(0.5);
-                if (pcAct == 8) effect = effect.pow(0.6);
+                if (pcAct == 8) effect = effect.pow(0.55);
                 if (cAct !== 0) effect = effect.pow(0.75);
                 if (cAct === 10) effect = effect.pow(0.67);
 
@@ -146,7 +146,7 @@ const GAIN = {
                 if (pcAct === 1 || pcAct === 7) effect = effect.sqrt();
 
                 if (pcAct !== 0 && pcAct !== 8) effect = effect.pow(0.5);
-                if (pcAct == 8) effect = effect.pow(0.6)
+                if (pcAct == 8) effect = effect.pow(0.55)
                 if (cAct !== 0) effect = effect.pow(0.67);
                 if (cAct === 10) effect = effect.pow(0.67);
 
@@ -1170,7 +1170,7 @@ const CHALL = {
     3: { id: 3, completed: () => isChallComp(3), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.pow(1 + player.prestige.resets, 0.35) * fb8() * vb7() },
     4: { id: 4, completed: () => isChallComp(4), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.pow(1.2, player.achievements.length) * fb8() * vb7() },
     5: { id: 5, completed: () => isChallComp(5), effect: () => player.prestige.challenge.activated == 8 ? 1 : CHALL[5].completed() ? 0.9 : 1 },
-    6: { id: 6, completed: () => isChallComp(6), effect: () => player.prestige.challenge.activated == 8 ? 1 : (1 + 0.1 * fb8() * vb7()) },
+    6: { id: 6, completed: () => isChallComp(6), effect: () => player.prestige.challenge.activated == 8 ? 1 : (1 + 0.1) },
     7: { id: 7, completed: () => isChallComp(7), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.log2(1+ player.shard.currency + 1) * fb8() * vb7() },
     8: { id: 8, completed: () => isChallComp(8), effect: () => player.prestige.challenge.activated == 8 ? 1 : (1 + player.time.real.prestige.timer) * fb8() * vb7() },
     9: { id: 9, completed: () => isChallComp(9), effect: () => player.prestige.challenge.activated == 8 ? 1 : Math.pow(1 + player.supercoin.total_currency, 1.5) * fb8() * vb7() },

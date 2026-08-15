@@ -420,11 +420,14 @@ const LAYERS = {
         player.prestige.this_reflash_currency = 0;
         player.prestige.broken_currency = 0;
         player.prestige.resets = 0;
+        player.prestige.table_resets = 0
+        player.prestige.prestigeTable = getPrestigeTable()
         player.prestige.upgrades[1] = 0;
         player.prestige.singleUpgrades = [];
         player.prestige.milestones = [];
         for (let i = 1; i <= 5; i++) player.prestige.break.buyables[i] = 0;
         player.prestige.break.singles = [];
+        
 
         player.shard.currency = 0;
         for (let i = 1; i <= 3; i++) player.shard.upgrades[i] = 0;

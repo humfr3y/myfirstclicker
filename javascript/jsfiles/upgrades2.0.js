@@ -426,7 +426,7 @@ const UPGS = {
             { id: 22, elementId: 'shSingleU5', basePrice: 1e100, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + player.supercrystal.total_currency * 0.0005; } },
             { id: 23, elementId: 'shSingleU6', basePrice: 1e200, effect: function(x = this.unl()) {
                 if (x == 0) return 1
-                let r = 1 + player.rune.total_currency * 1.8, s = 1 + player.supercrystal.total_currency * 2.5, p = 1 + Math.pow(player.prestige.resets, 0.23), c = 1 + Math.log10(player.prestige.this_reflash_currency+10)
+                let r = 1 + player.rune.total_currency * 1.25, s = 1 + player.supercrystal.total_currency * 1.75, p = 1 + Math.pow(player.prestige.resets, 0.225), c = 1 + Math.log10(player.prestige.this_reflash_currency+10)/1.2
                 return r*s*p*c} 
             }
         ])
@@ -445,7 +445,7 @@ const UPGS = {
             { id: 10, power: 1.08, basePrice: 5.5, maxAmount: 100, elementId: 'shopBuyableU10', effect: function(x = player.shop.upgrades[10]) { return 1 + x / 15; }, next_effect: function(x = player.shop.upgrades[10] + this.bulk()) { return 1 + x / 15; } },
             { id: 11, power: 1.09, basePrice: 6, maxAmount: 100, elementId: 'shopBuyableU11', effect: function(x = player.shop.upgrades[11]) { return 1 + x / 75; }, next_effect: function(x = player.shop.upgrades[11] + this.bulk()) { return 1 + x / 75; } },
 
-            { id: 12, power: 1.1, basePrice: 15, maxAmount: 100, elementId: 'shopBuyableU12', effect: function(x = player.shop.upgrades[12]) { return x * 50; }, next_effect: function(x = player.shop.upgrades[12] + this.bulk()) { return x * 50; } },
+            { id: 12, power: 1.25, basePrice: 20, maxAmount: 100, elementId: 'shopBuyableU12', effect: function(x = player.shop.upgrades[12]) { return x * 40; }, next_effect: function(x = player.shop.upgrades[12] + this.bulk()) { return x * 40; } },
             { id: 13, power: 1.4, basePrice: 45, maxAmount: 25, elementId: 'shopBuyableU13', effect: function(x = player.shop.upgrades[13]) { return 1 + x / 50; }, next_effect: function(x = player.shop.upgrades[13] + this.bulk()) { return 1 + x / 50; } },
             { id: 14, power: 1.4, basePrice: 25, maxAmount: 50, elementId: 'shopBuyableU14', effect: function(x = player.shop.upgrades[14]) { return 1 + x / 50; }, next_effect: function(x = player.shop.upgrades[14] + this.bulk()) { return 1 + x / 50; } },
             { id: 15, power: 1.5, basePrice: 120, maxAmount: 10, elementId: 'shopBuyableU15', effect: function(x = player.shop.upgrades[15]) { return 1 + x / 10; }, next_effect: function(x = player.shop.upgrades[15] + this.bulk()) { return 1 + x / 10; } },
@@ -495,12 +495,12 @@ const UPGS = {
         },
 
         items: new ShopItemsManager([
-            { id: 1, maxAmount: 5, elementId: 'shopItem1', cost: () => 80, effect: () => { 0; if (player.shop.items.used[1] == 1) player.shop.items.timer[1] = 60 } },
-            { id: 2, maxAmount: 3, elementId: 'shopItem2', cost: () => 250, effect: () => { 0; if (player.shop.items.used[2] == 1) player.shop.items.timer[2] = 60 } },
+            { id: 1, maxAmount: 5, elementId: 'shopItem1', cost: () => 80, effect: () => { 0; if (player.shop.items.used[1] == 1) player.shop.items.timer[1] = 60; return player.shop.items.used[1]} },
+            { id: 2, maxAmount: 3, elementId: 'shopItem2', cost: () => 250, effect: () => { 0; if (player.shop.items.used[2] == 1) player.shop.items.timer[2] = 60; return player.shop.items.used[2] } },
             { id: 3, maxAmount: 10, elementId: 'shopItem3', cost: () => 120, effect: () => GAIN.offline_gain_time_warp(180) },
-            { id: 4, maxAmount: 1, elementId: 'shopItem4', cost: () => 300, effect: () => { 0; if (player.shop.items.used[4] == 1) player.shop.items.timer[4] = 60 }},
-            { id: 5, maxAmount: 1, elementId: 'shopItem5', cost: () => 500, effect: () => { 0; if (player.shop.items.used[5] == 1) player.shop.items.timer[5] = 60 }},
-            { id: 6, maxAmount: 1, elementId: 'shopItem6', cost: () => 300, effect: () => { 0; if (player.shop.items.used[6] == 1) player.shop.items.timer[6] = 60 }}
+            { id: 4, maxAmount: 1, elementId: 'shopItem4', cost: () => 300, effect: () => { 0; if (player.shop.items.used[4] == 1) player.shop.items.timer[4] = 60; return player.shop.items.used[4]*1.05 }},
+            { id: 5, maxAmount: 1, elementId: 'shopItem5', cost: () => 500, effect: () => { 0; if (player.shop.items.used[5] == 1) player.shop.items.timer[5] = 60; return player.shop.items.used[5]*1.05 }},
+            { id: 6, maxAmount: 1, elementId: 'shopItem6', cost: () => 300, effect: () => { 0; if (player.shop.items.used[6] == 1) player.shop.items.timer[6] = 60; return player.shop.items.used[6] }}
         ])
     },
     supercrystal: new UniversalSinglesManager('supercrystal', 'upgrades', [
@@ -617,7 +617,7 @@ const UPGS = {
     reflash: {
         buyables: new UniversalBuyablesManager('reflash', [
             {
-                id: 1, power: 4, basePrice: 8, elementId: 'rBuyableU1',
+                id: 1, power: 4, basePrice: 4, elementId: 'rBuyableU1',
                 effect: function(x = player.reflash.upgrades[1]) { return Math.pow(2, x); }
             },
         ]),
@@ -682,7 +682,7 @@ const UPGS = {
                 { id: 21, row: 2, col: 1,   draw: [11],             req: [11],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 0}  },
                 { id: 22, row: 2, col: 2,   draw: [11],             req: [11],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 5 : 1}  },
                 { id: 23, row: 2, col: 3,   draw: [11],             req: [11],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? true : false}  },
-                { id: 24, row: 2, col: 4,   draw: [23],             req: [23],                                                                                                  cost: 6,    effect(x=player.reflash.algo.includes(this.id)) {return x ? true : false } },
+                { id: 24, row: 2, col: 4,   draw: [23],             req: [23],                                                                                                  cost: 5,    effect(x=player.reflash.algo.includes(this.id)) {return x ? true : false } },
                 { id: 31, row: 3, col: 1,   draw: [21],             req: [21],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? { shard: 1e6, rune: 2} : { shard: 0, rune: 0} } },
                 { id: 32, row: 3, col: 2,   draw: [22],             req: [22],                                                                                                  cost: 2,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 10 : 1}  },
                 { id: 33, row: 3, col: 3,   draw: [23],             req: [23],                                                                                                  cost: 2,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 10 : 1}  },
@@ -691,7 +691,7 @@ const UPGS = {
                 { id: 42, row: 4, col: 2,   draw: [32],             req: [32],                                                                                                  cost: 2,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 100 : 1}  },
                 { id: 43, row: 4, col: 3,   draw: [33],             req: [33],                                                                                                  cost: 6,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.9 : 1}  },
                 { id: 44, row: 4, col: 4,   draw: [34],             req: [34],                                                                                                  cost: 4,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 2 : 1}  },
-                { id: 51, row: 5, col: 2,   draw: [41, 42, 43],     req: [41, 42, 43],                                                                                          cost: 8     },
+                { id: 51, row: 5, col: 2,   draw: [41, 42, 43],     req: [41, 42, 43],                                                                                          cost: 6     },
                 // byte tree                nodes to draw line btwn required nodes              cpu req level   required to not have    required to have at least one           cost of node
                 { id: 61, row: 6, col: 2,   draw: [51],             req: [51],                  cpu_req: 1,                             at_least_one_req: [41, 42, 43],         cost: 8     },
                 { id: 62, row: 6, col: 3,   draw: [61],             req: [61],                  cpu_req: 2,                                                                     cost: 16    },
@@ -858,7 +858,7 @@ const UPGS = {
                         break;
                     case 23:
                         player.prestige.singleUpgrades = [11,12,13,14,21,22,23,24,31,32,33,34,41,42,43,44]
-                        player.shard.singleUpgrades = [11,12,13,21,22]
+                        player.shard.singleUpgrades = [11,12,13,21,22,23]
                         player.shard.unlockables = [1,2,3,4]
                         break;
                     case 24:

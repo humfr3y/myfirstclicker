@@ -1147,6 +1147,10 @@ rn {
   background-position: -2px -0.5px;
   image-rendering: pixelated;
 }
+#shopSingleU7 {
+  background-image: url('./images/items/overdriveexpansion1.png');
+  image-rendering: pixelated;
+}
 #shopSingleU8 {
   background-image: url('./images/items/goldenspeedomoter.png');
   background-position: -0.5px -0.5px;
