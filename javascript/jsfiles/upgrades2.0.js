@@ -414,7 +414,10 @@ const UPGS = {
             }
         ]),
         singles: new UniversalSinglesManager('shard', 'singleUpgrades', [
-            { id: 11, elementId: 'shSingleU1', basePrice: 500000, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.shard.currency + 1, 0.04) * 6; } },
+            { id: 11, elementId: 'shSingleU1', basePrice: 500000, effect: function(x = this.unl()) { 
+                let safeTotal = Math.min(player.shard.currency || 0, 1e308);
+                return x == 0 ? 1 : 1 + Math.pow(safeTotal + 1, 0.04) * 6; } 
+            },
             { id: 12, elementId: 'shSingleU2', basePrice: 1e12, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.prestige.broken_currency + 1, 0.055) * 3 } },
             { id: 13, elementId: 'shSingleU3', basePrice: 1e18, effect: function(x = this.unl()) { return x == 0 ? 1 : 1 + Math.pow(player.prestige.currency + 1, 0.0515) * 4; } },
             { id: 21, elementId: 'shSingleU4', basePrice: 1e24, effect: function(x = this.unl()) {
@@ -446,8 +449,8 @@ const UPGS = {
             { id: 11, power: 1.09, basePrice: 6, maxAmount: 100, elementId: 'shopBuyableU11', effect: function(x = player.shop.upgrades[11]) { return 1 + x / 75; }, next_effect: function(x = player.shop.upgrades[11] + this.bulk()) { return 1 + x / 75; } },
 
             { id: 12, power: 1.25, basePrice: 20, maxAmount: 100, elementId: 'shopBuyableU12', effect: function(x = player.shop.upgrades[12]) { return x * 40; }, next_effect: function(x = player.shop.upgrades[12] + this.bulk()) { return x * 40; } },
-            { id: 13, power: 1.4, basePrice: 45, maxAmount: 25, elementId: 'shopBuyableU13', effect: function(x = player.shop.upgrades[13]) { return 1 + x / 50; }, next_effect: function(x = player.shop.upgrades[13] + this.bulk()) { return 1 + x / 50; } },
-            { id: 14, power: 1.4, basePrice: 25, maxAmount: 50, elementId: 'shopBuyableU14', effect: function(x = player.shop.upgrades[14]) { return 1 + x / 50; }, next_effect: function(x = player.shop.upgrades[14] + this.bulk()) { return 1 + x / 50; } },
+            { id: 13, power: 1.4, basePrice: 50, maxAmount: 20, elementId: 'shopBuyableU13', effect: function(x = player.shop.upgrades[13]) { return 1 + x / 30; }, next_effect: function(x = player.shop.upgrades[13] + this.bulk()) { return 1 + x / 30; } },
+            { id: 14, power: 1.4, basePrice: 25, maxAmount: 50, elementId: 'shopBuyableU14', effect: function(x = player.shop.upgrades[14]) { return 1 + x / 10; }, next_effect: function(x = player.shop.upgrades[14] + this.bulk()) { return 1 + x / 10; } },
             { id: 15, power: 1.5, basePrice: 120, maxAmount: 10, elementId: 'shopBuyableU15', effect: function(x = player.shop.upgrades[15]) { return 1 + x / 10; }, next_effect: function(x = player.shop.upgrades[15] + this.bulk()) { return 1 + x / 10; } },
         ], 'upgrades'),
 
@@ -495,12 +498,12 @@ const UPGS = {
         },
 
         items: new ShopItemsManager([
-            { id: 1, maxAmount: 5, elementId: 'shopItem1', cost: () => 80, effect: () => { 0; if (player.shop.items.used[1] == 1) player.shop.items.timer[1] = 60; return player.shop.items.used[1]} },
-            { id: 2, maxAmount: 3, elementId: 'shopItem2', cost: () => 250, effect: () => { 0; if (player.shop.items.used[2] == 1) player.shop.items.timer[2] = 60; return player.shop.items.used[2] } },
+            { id: 1, maxAmount: 5, elementId: 'shopItem1', cost: () => 80, effect: () => { return player.shop.items.used[1]} },
+            { id: 2, maxAmount: 3, elementId: 'shopItem2', cost: () => 250, effect: () => { return player.shop.items.used[2] } },
             { id: 3, maxAmount: 10, elementId: 'shopItem3', cost: () => 120, effect: () => GAIN.offline_gain_time_warp(180) },
-            { id: 4, maxAmount: 1, elementId: 'shopItem4', cost: () => 300, effect: () => { 0; if (player.shop.items.used[4] == 1) player.shop.items.timer[4] = 60; return player.shop.items.used[4]*1.05 }},
-            { id: 5, maxAmount: 1, elementId: 'shopItem5', cost: () => 500, effect: () => { 0; if (player.shop.items.used[5] == 1) player.shop.items.timer[5] = 60; return player.shop.items.used[5]*1.05 }},
-            { id: 6, maxAmount: 1, elementId: 'shopItem6', cost: () => 300, effect: () => { 0; if (player.shop.items.used[6] == 1) player.shop.items.timer[6] = 60; return player.shop.items.used[6] }}
+            { id: 4, maxAmount: 1, elementId: 'shopItem4', cost: () => 600, effect: () => { return player.shop.items.used[4]*1.05 }},
+            { id: 5, maxAmount: 1, elementId: 'shopItem5', cost: () => 1000, effect: () => { return player.shop.items.used[5]*1.05 }},
+            { id: 6, maxAmount: 2, elementId: 'shopItem6', cost: () => 300, effect: () => { return player.shop.items.used[6] }}
         ])
     },
     supercrystal: new UniversalSinglesManager('supercrystal', 'upgrades', [
@@ -550,18 +553,41 @@ const UPGS = {
     ]),
     fortune: {
         boosts: new FortuneBoostsManager([
-            { id: 1, generatorType: 'digits', min: () => Math.pow(10, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), max: () => Math.pow(1500, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
-            { id: 2, generatorType: 'digits', min: () => Math.pow(1.5, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), max: () => Math.pow(5, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
-            { id: 3, generatorType: 'digits', min: () => Math.pow(2, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), max: () => Math.pow(8, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
-            { id: 4, generatorType: 'float2', min: () => Math.pow(1.01, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), max: () => Math.pow(1.045, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
-            { id: 5, generatorType: 'float2', min: () => Math.pow(1.01, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), max: () => Math.pow(1.065, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
-            { id: 6, generatorType: 'digits', min: () => Math.pow(1.5, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), max: () => Math.pow(4, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
-            { id: 7, generatorType: 'float3', min: () => Math.pow(1.015, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), max: () => Math.pow(1.095, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
-            { id: 8, generatorType: 'float2', min: () => Math.pow(2.5, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), max: () => Math.pow(4.5, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()) * (ACHS.has(54) ? 1.05 : 1) },
-            { id: 9, generatorType: 'float3', min: () => Math.pow(1.055, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), max: () => Math.pow(1.115, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
-            { id: 10, generatorType: 'int', min: () => 2, max: () => 2 },
-            { id: 11, generatorType: 'float3', min: () => Math.pow(1.005, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), max: () => Math.pow(1.0125, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
-            { id: 12, generatorType: 'float3', min: () => Math.pow(1.01, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), max: () => Math.pow(1.03, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()) * (ACHS.has(54) ? 1.05 : 1) }
+            { id: 1, generatorType: 'digits', 
+                min: () => Math.pow(Math.pow(10, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
+                max: () => Math.pow(Math.pow(1500, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+            { id: 2, generatorType: 'digits', 
+                min: () => Math.pow(Math.pow(1.5, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
+                max: () => Math.pow(Math.pow(5, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+            { id: 3, generatorType: 'digits', 
+                min: () => Math.pow(Math.pow(2, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
+                max: () => Math.pow(Math.pow(8, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+            { id: 4, generatorType: 'float2', 
+                min: () => Math.pow(Math.pow(1.01, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
+                max: () => Math.pow(Math.pow(1.045, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+            { id: 5, generatorType: 'float2', 
+                min: () => Math.pow(Math.pow(1.01, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
+                max: () => Math.pow(Math.pow(1.065, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+            { id: 6, generatorType: 'digits', 
+                min: () => Math.pow(Math.pow(1.5, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
+                max: () => Math.pow(Math.pow(4, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+            { id: 7, generatorType: 'float3', 
+                min: () => Math.pow(Math.pow(1.015, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
+                max: () => Math.pow(Math.pow(1.095, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+            { id: 8, generatorType: 'float2', 
+                min: () => Math.pow(Math.pow(2.5, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
+                max: () => Math.pow(Math.pow(4.5, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) },
+            { id: 9, generatorType: 'float3', 
+                min: () => Math.pow(Math.pow(1.055, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
+                max: () => Math.pow(Math.pow(1.115, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+            { id: 10, generatorType: 'int', 
+                min: () => 2, max: () => 2 },
+            { id: 11, generatorType: 'float3', 
+                min: () => Math.pow(Math.pow(1.005, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
+                max: () => Math.pow(Math.pow(1.0125, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+            { id: 12, generatorType: 'float3', 
+                min: () => Math.pow(Math.pow(1.01, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
+                max: () => Math.pow(Math.pow(1.03, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) }
         ]),
         upgrades: {
             buyables: new FortuneBuyablesManager('supercrystal', [
@@ -671,7 +697,7 @@ const UPGS = {
                 },
                 max_effect: function(x=UPGS.reflash.accelerator[2].effect(), y=UPGS.reflash.accelerator[4].effect(), z=player.reflash.acceleratorUpgrades[5]) {
                     x *= z
-                    return (1+2*(z+x))*y
+                    return (1+3*(z+x))*y
                 }
             },
         ], 'acceleratorUpgrades'),
@@ -689,23 +715,23 @@ const UPGS = {
                 { id: 34, row: 3, col: 4,   draw: [23],             req: [23],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.1 : 0}  },
                 { id: 41, row: 4, col: 1,   draw: [31],             req: [31],                                                                                                  cost: 3,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 0 }  },
                 { id: 42, row: 4, col: 2,   draw: [32],             req: [32],                                                                                                  cost: 2,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 100 : 1}  },
-                { id: 43, row: 4, col: 3,   draw: [33],             req: [33],                                                                                                  cost: 6,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.9 : 1}  },
+                { id: 43, row: 4, col: 3,   draw: [33],             req: [33],                                                                                                  cost: 6,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.975 : 1}  },
                 { id: 44, row: 4, col: 4,   draw: [34],             req: [34],                                                                                                  cost: 4,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 2 : 1}  },
                 { id: 51, row: 5, col: 2,   draw: [41, 42, 43],     req: [41, 42, 43],                                                                                          cost: 6     },
                 // byte tree                nodes to draw line btwn required nodes              cpu req level   required to not have    required to have at least one           cost of node
-                { id: 61, row: 6, col: 2,   draw: [51],             req: [51],                  cpu_req: 1,                             at_least_one_req: [41, 42, 43],         cost: 8     },
-                { id: 62, row: 6, col: 3,   draw: [61],             req: [61],                  cpu_req: 2,                                                                     cost: 16    },
-                { id: 63, row: 6, col: 4,   draw: [62],             req: [62],                  cpu_req: 3,                                                                     cost: 64    },
-                { id: 71, row: 7, col: 1,   draw: [61],             req: [61],                  cpu_req: 1,     not_req: [72, 73],                                              cost: 8     },
-                { id: 81, row: 8, col: 1,   draw: [71],             req: [71],                  cpu_req: 1,                                                                     cost: 8     },
-                { id: 91, row: 9, col: 1,   draw: [81],             req: [81],                  cpu_req: 1,                                                                     cost: 8     },
+                { id: 61, row: 6, col: 2,   draw: [51],             req: [51],                  cpu_req: 1,                             at_least_one_req: [41, 42, 43],         cost: 8,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 1.25 : 1}},
+                { id: 62, row: 6, col: 3,   draw: [61],             req: [61],                  cpu_req: 2,                                                                     cost: 16,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 2 : 1} },
+                { id: 63, row: 6, col: 4,   draw: [62],             req: [62],                  cpu_req: 3,                                                                     cost: 64,   effect(x=player.reflash.algo.includes(this.id)) {return x ? player.supercrystal.currency : 1}},
+                { id: 71, row: 7, col: 1,   draw: [61],             req: [61],                  cpu_req: 1,     not_req: [72, 73],                                              cost: 8,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 1e15 : 1}},
+                { id: 81, row: 8, col: 1,   draw: [71],             req: [71],                  cpu_req: 1,                                                                     cost: 8,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 1e9 : 1}},
+                { id: 91, row: 9, col: 1,   draw: [81],             req: [81],                  cpu_req: 1,                                                                     cost: 8,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 1e10 : 1}},
                 { id: 72, row: 7, col: 2,   draw: [61],             req: [61],                  cpu_req: 2,     not_req: [71, 73],                                              cost: 16    },
-                { id: 82, row: 8, col: 2,   draw: [72],             req: [72],                  cpu_req: 2,                                                                     cost: 16    },
-                { id: 92, row: 9, col: 2,   draw: [82],             req: [82],                  cpu_req: 2,                                                                     cost: 16    },
-                { id: 73, row: 7, col: 3,   draw: [61],             req: [61],                  cpu_req: 3,     not_req: [71, 72],                                              cost: 32    },
-                { id: 83, row: 8, col: 3,   draw: [73],             req: [73],                  cpu_req: 3,                                                                     cost: 32    },
-                { id: 93, row: 9, col: 3,   draw: [83],             req: [83],                  cpu_req: 3,                                                                     cost: 32    },
-                { id: 101, row: 10, col: 2, draw: [91, 92, 93],                                 cpu_req: 3,                             at_least_one_req: [91, 92, 93],         cost: 24    },
+                { id: 82, row: 8, col: 2,   draw: [72],             req: [72],                  cpu_req: 2,                                                                     cost: 16,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 2.5 : 1}},
+                { id: 92, row: 9, col: 2,   draw: [82],             req: [82],                  cpu_req: 2,                                                                     cost: 16,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 2 : 1}},
+                { id: 73, row: 7, col: 3,   draw: [61],             req: [61],                  cpu_req: 3,     not_req: [71, 72],                                              cost: 32,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.8 : 1}},
+                { id: 83, row: 8, col: 3,   draw: [73],             req: [73],                  cpu_req: 3,                                                                     cost: 32,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.95 : 1} },
+                { id: 93, row: 9, col: 3,   draw: [83],             req: [83],                  cpu_req: 3,                                                                     cost: 32,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.6 : 1} },
+                { id: 101, row: 10, col: 2, draw: [91, 92, 93],                                 cpu_req: 3,                             at_least_one_req: [91, 92, 93],         cost: 24,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 1}},
 
                 //пример
                 // { 

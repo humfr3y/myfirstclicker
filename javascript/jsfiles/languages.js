@@ -242,7 +242,7 @@ function loadTranslationsAlways() {
     for (let i = 1; i <= 6; i++) {
         if (i != 3) {
             const element = document.getElementById(`shop_item_${i}_eff`);
-            element.textContent = formatNumber(UPGS.shop.items[i].effect())
+            element.textContent = formatNumber(UPGS.shop.items[i].effect(), 'boost')
         }
     }
 }

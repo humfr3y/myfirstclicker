@@ -479,11 +479,24 @@ class ShopItemUpgrade {
     effect() { return this.customEffect(); }
     
     canUseItem(x = player.shop.items.amount[this.id], y = player.shop.items.used[this.id]) {
-        return !(x == 0 || y == this.maxAmount || player.challenge.activated != 0 || player.prestige.challenge.activated != 0 || UPGS.shop.items_limit());
+        if (player.challenge.activated != 0 || player.prestige.challenge.activated != 0) return false
+        if (x == 0 || y == this.maxAmount) return false
+        let used_array = []
+        console.log(used_array)
+        for (let i = 1; i <= 6; i++) {
+            if (player.shop.items.used[i] >= 1) used_array.push(i)
+        }
+        console.log(used_array)
+        console.log(!UPGS.shop.items_limit())
+        if (used_array.includes(this.id)) {
+            return true
+        }
+        else return !UPGS.shop.items_limit()
     }
     
     useItem() {
         if (this.canUseItem()) {
+            if (this.id != 3) player.shop.items.timer[this.id] = 60
             player.shop.items.amount[this.id]--;
             player.shop.items.used[this.id]++;
             this.effect();

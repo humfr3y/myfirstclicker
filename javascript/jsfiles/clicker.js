@@ -79,6 +79,7 @@ const GAIN = {
             softcap() {
                 let softcap_start = 1e13;
                 let softcap_power = player.prestige.singleUpgrades.includes(11) ? 0.45 : 0.4;
+                if (player.reflash.algo.includes(72)) softcap_power = 0.5
                 
                 if (player.challenge.activated === 9 || player.prestige.challenge.activated === 2 || player.prestige.challenge.activated === 7) {
                     softcap_start = 1e6;
@@ -91,6 +92,8 @@ const GAIN = {
                 softcap_start *= UPGS.minerals[2].effect2();
                 if (player.balance.upgrades.singles.includes(11)) softcap_start *= MISC.balance.plusCoins.buff().coinGainSoftcapPusher;
                 if (player.balance.upgrades.singles.includes(12)) softcap_start /= MISC.balance.minusCoins.nerf().coinGainSoftcapPuller;
+
+                
                 return { softcap_start, softcap_power };
             },
             post_softcap_effect() {
@@ -165,6 +168,7 @@ const GAIN = {
             softcap() {
                 let softcap_start = 1e13;
                 let softcap_power = player.prestige.singleUpgrades.includes(11) ? 0.55 : 0.5;
+                if (player.reflash.algo.includes(72)) softcap_power = 0.6
                 
                 if (player.challenge.activated === 9 || player.prestige.challenge.activated === 2 || player.prestige.challenge.activated === 7) {
                     softcap_start = 1e6;
@@ -177,6 +181,8 @@ const GAIN = {
                 softcap_start *= UPGS.minerals[2].effect2();
                 if (player.balance.upgrades.singles.includes(11)) softcap_start *= MISC.balance.plusCoins.buff().coinGainSoftcapPusher;
                 if (player.balance.upgrades.singles.includes(12)) softcap_start /= MISC.balance.minusCoins.nerf().coinGainSoftcapPuller;
+
+                
                 
                 return { softcap_start, softcap_power };
             },
@@ -236,6 +242,8 @@ const GAIN = {
 
                 if (UPGS.reflash.singles[11].unl()) effect = effect.mul(UPGS.reflash.singles[11].effect());
 
+                if (player.reflash.algo.includes(71)) effect = effect.mul(1e15);
+
                 return effect;
             },
             effect() { 
@@ -273,6 +281,7 @@ const GAIN = {
                 }
                 else effect /= player.virus.effect.multiplier
             }
+            if (player.reflash.algo.includes(91)) effect *= 1e12;
             return Math.min(effect, 1.79e308);
         },
         second() {
@@ -299,6 +308,7 @@ const GAIN = {
                 }
                 else effect /= player.virus.effect.multiplier
             }
+            if (player.reflash.algo.includes(91)) effect *= 1e12;
             return Math.min(effect, 1.79e308);
         },
         offline(x = GAIN.shard.second(), y = MISC.offline()) {
@@ -382,13 +392,18 @@ const GAIN = {
             gain *= TREASURES.event.digitalization[5].permanent.effect()
             gain *= TREASURES.event.digitalization[5].temporary.effect()
             gain *= UPGS.shop.permanent[11].effect()
+            if (player.reflash.algo.includes(91)) gain *= 1e12;
             
             return { gain: Math.min(gain, 1.7e308), broken_crystals };
         }
     },
     crystal: {
         base() {
-            return player.prestige.break.singles.includes(25) ? Math.pow(1.2, Math.log10((Math.max(GAIN.coin.click.effect(), GAIN.coin.second.effect()) + 10) / 1e15) + UPGS.prestige.break.buyables[1].effect()) : 1
+            if (!player.prestige.break.singles.includes(25)) return 1
+            let coin_formula = player.reflash.algo.includes(82) ? 
+            Math.pow(1.2, Math.log10((Math.max(GAIN.coin.click.effect(), GAIN.coin.second.effect()) + 10) * UPGS.reflash.algo.tree[21].effect() / 10)+ UPGS.prestige.break.buyables[1].effect()) : 
+            Math.pow(1.2, Math.log10((Math.max(GAIN.coin.click.effect(), GAIN.coin.second.effect()) + 10) / 1e15) + UPGS.prestige.break.buyables[1].effect())
+            return coin_formula 
         },
         offline(x = GAIN.crystal.offline_calc(), y = MISC.offline()) {
             let gain = x * y;
@@ -418,7 +433,10 @@ const GAIN = {
 
             if (player.balance.coins.plus) gain /= MISC.balance.plusCoins.nerf().crystalGainNerf;
 
+            if (player.reflash.algo.includes(81)) gain *= 1e9
+
             if (player.shop.items.used[5]) gain = Math.pow(gain, 1.05);
+            
             return gain;
         },
         reset() {
@@ -1012,7 +1030,7 @@ const UNL = {
             if (el.style.display !== targetDisplay) el.style.display = targetDisplay;
         },
         check() {
-            for (let i = 1; i <= 111; i++) {
+            for (let i = 1; i <= 112; i++) {
                 if (this[i]) {
                     let el = this[i].element();
                     if (el instanceof HTMLCollection) {
@@ -1153,6 +1171,8 @@ const UNL = {
         109: {type: 'block', element: () => document.getElementById('shopItem6Effect'), req: () => player.shop.items.timer[6] > 0},
         110: { type: 'block', element: () => document.getElementById('overdriveType3'), req: () => UPGS.shop.special[8].unl() },
         111: { type: 'block', element: () => document.getElementById('autoMaxBuyPrestige'), req: () => MILESTONES.has(10) && player.reflash.resets > 0 },
+        112: { type: 'block', element: () => document.getElementById('computerSelect'), req: () => player.reflash.algo.includes(51) },
+        
     }
 };
 
@@ -2304,7 +2324,7 @@ function getCoin(e) {
 }
 
 function getShardPerClick(e) {
-    if (GAIN.clicksPerSecond >= 10 || UNL.shard.click.percent() !== 100) return;
+    if (GAIN.clicksPerSecond >= 10 || !player.shard.unlockables.includes(2)) return;
     
     player.clicks.real++; GAIN.clicksPerSecond++;
     

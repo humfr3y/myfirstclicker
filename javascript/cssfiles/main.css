@@ -2575,7 +2575,11 @@ vn {
 }
 
 #computerLogo {
-  background-color: purple;
+  background-image: url('./images/computer/os1.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  image-rendering: pixelated;
   height: 100%;
   width: 50%;
 }
@@ -2634,6 +2638,15 @@ vn {
 
 .computerComponentContainer.disabled, .computerComponentContainer.disabled .computerComponentImage {
   box-shadow: inset 0 0 0 0 !important;
+}
+
+.computerComponentImage img{
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  image-rendering: pixelated;
 }
 
 #algoTopBar {

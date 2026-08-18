@@ -476,7 +476,7 @@ const LAYERS = {
         for (let i = 1; i <= 8; i++) {
             player.prestige.challenge.time[i] = getMaxTime();
         }
-        player.overdrive.consumed = { type1: 0, type2: 0 };
+        player.overdrive.consumed = { type1: 0, type2: 0, type3: 0 };
         const autoTypes = ACHS.has(66) ? ['uadder', 'ureducer'] : ['single', 'buyable', 'umultiplier', 'upower', 'prestige', 'uadder', 'ureducer'];
         autoTypes.forEach(type => {
             player.automation.checkbox[type] = false;
