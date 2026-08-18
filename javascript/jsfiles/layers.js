@@ -419,6 +419,8 @@ const LAYERS = {
         player.prestige.currency = 0;
         player.prestige.this_reflash_currency = 0;
         player.prestige.broken_currency = 0;
+        player.prestige.table_resets = 0
+        player.prestige.prestigeTable = getPrestigeTable()
         player.prestige.resets = 0;
         player.prestige.table_resets = 0
         player.prestige.prestigeTable = getPrestigeTable()
@@ -450,7 +452,7 @@ const LAYERS = {
         player.fortune.tokens = 0;
         player.fortune.total_tokens = 0;
         player.fortune.spent_tokens = 0;
-        player.fortune.daily_resets = 10;
+        player.fortune.daily_resets = 15
         player.fortune.converted = { coins: 0, crystals: 0 };
         for (let i = 1; i <= 3; i++) player.fortune.upgrades.buyables[i] = 0;
         player.fortune.upgrades.singles = [];

@@ -441,6 +441,7 @@ class ShopPermanentManager extends ShopBuyablesManager {
         if (this.canAfford(x)) {
             player.supercoin.currency -= this[x].cost();
             this.targetArray[x]++;
+            if (x == 8) player.fortune.daily_resets += 5
         }
     }
     max(x) {
@@ -708,8 +709,10 @@ class FortuneBoostsManager {
     
     respec(free=false) { 
         if (player.fortune.daily_resets == 0 && free == false) return 0;
-        this._keys.forEach(x => this.reset(x, true));
-        free ? 0 : player.fortune.daily_resets -= 1;
+        if (player.fortune.activatedBoosts.list.length != 0) {
+            this._keys.forEach(x => this.reset(x, true));
+            free ? null : player.fortune.daily_resets -= 1;
+        }
     }
     
     finishedBoost(x) { if (player.fortune.activatedBoosts[x].time < 0) this.reset(x); }
@@ -803,7 +806,7 @@ class FortuneSinglesManager extends UniversalSinglesManager {
             this.state.currency -= this[x].cost(); // Для fortune это 0, так как валюта не списывается (только req)
             if (!this[x].unl()) {
                 this.targetArray.push(x);
-                if (x === 23) player.fortune.daily_resets += 10; // Уникальное событие покупки 23
+                if (x === 23) player.fortune.daily_resets += 15; // Уникальное событие покупки 23
             }
         }
     }

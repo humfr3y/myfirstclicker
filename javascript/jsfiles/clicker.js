@@ -1209,7 +1209,7 @@ const PRES_CHALLENGE = {
     2: { id: 2, completed: () => isPChallComp(2), effect: () => player.prestige.challenge.activated == 8 || !isPChallComp(2) ? 1 : ACHS.has(59) ? 1 + 1.1 * (Math.log10(player.umultipliers + 1) / 10) : 1 + (Math.log10(player.umultipliers + 1) / 10) },
     3: { id: 3, completed: () => isPChallComp(3), effect: () => player.prestige.challenge.activated == 8 || !isPChallComp(3) ? 1 : ACHS.has(59) ? 1.1*Math.pow(4, player.prestige.challenge.completed.length) : Math.pow(4, player.prestige.challenge.completed.length) },
     4: { id: 4, completed: () => isPChallComp(4), effect: () => player.prestige.challenge.activated == 8 || !isPChallComp(4) ? 1 : ACHS.has(59) ? 1.1*13 * player.supercrystal.total_currency : 13 * player.supercrystal.total_currency },
-    5: { id: 5, completed: () => isPChallComp(5), effect: () => player.prestige.challenge.activated == 8 || !isPChallComp(5) ? 1 : ACHS.has(59) ? 1+(1.1*(Math.pow(player.balance.scales_of_balance, 0.005)-1)) : Math.pow(player.balance.scales_of_balance, 0.005) },
+    5: { id: 5, completed: () => isPChallComp(5), effect: () => player.prestige.challenge.activated == 8 || !isPChallComp(5) ? 1 : ACHS.has(59) ? 1 + (1.1*(Math.pow(player.balance.scales_of_balance+1, 0.005)-1)) : Math.pow(player.balance.scales_of_balance, 0.005) },
     6: { id: 6, completed: () => isPChallComp(6), effect: () => player.prestige.challenge.activated == 8 || !isPChallComp(6) ? 1 : ACHS.has(59) ? 1.1*1e12 : 1e12 },
     7: { id: 7, completed: () => isPChallComp(7), effect: () => player.prestige.challenge.activated == 8 || !isPChallComp(7) ? 1 : (ACHS.has(59) ? 1.1*(player.challenge.time[12].times_completed + 1) : player.challenge.time[12].times_completed + 1) }
 };
