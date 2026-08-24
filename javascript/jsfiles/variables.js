@@ -41,12 +41,24 @@ const generateEmptyObj = (count, hasStart = false) => {
     return obj;
 };
 
+const getAutoMechanisms = () => {
+    let checked = {};
+    for (let i = 1; i <= 16; i++) { checked[i] = false; }
+    return { checked };
+};
+
+const getAutoMechanisms_2 = () => {
+    let interval = {};
+    for (let i = 1; i <= 16; i++) { interval[i] = ''; }
+    return { interval };
+};
+
 // --- ГЛАВНЫЙ ОБЪЕКТ ИГРОКА (Blueprint) ---
 
 let player = {
     saveName: 'Save',
     clicks: { real: 0, simulated: 0, critical: 0, prestige: 0 },
-    achievements: [], achievement_rows: [], shard_achievements: [], progressBarGoals: [0],
+    achievements: [], achievement_rows: [], shard_achievements: [], progressBarGoals: [0], 
     umultipliers: 0, upowers: 0, uadders: 0, ureducers: 0,
     
     coin: {
@@ -150,7 +162,102 @@ let player = {
         conditions: { umultiplier: 0, upower: { time: 0, x_of_umulti: 0 }, prestige: { time: 3600, coins: 1e15, prestige: 10000, crystals: 1e50 }, uadder: { time: 0, x_of_upower: 0 }, ureducer: {time: 0, x_of_uadder: 0} },
         small: {
             prestige: false
+        },
+        mechanism: getAutoMechanisms(),
+        mechanism_conditions: {
+            12: {
+                preset: 1,
+                presets: {
+                    1: [null, null],
+                    2: [null, null],
+                    3: [null, null]
+                },
+                change_preset_per_x_prestiges: null,
+                cppxp_diff: null,
+            },
+            13: {
+                tokens: null
+            },
+            14: {
+                preset: 1,
+                presets: {
+                    1: {
+                        order: [],
+                        amount_to_buy: {
+                            1: null,
+                            2: null,
+                            3: null,
+                            4: null
+                        },
+                    },
+                    2: {
+                        order: [],
+                        amount_to_buy: {
+                            1: null,
+                            2: null,
+                            3: null,
+                            4: null
+                        },
+                    },
+                    3: {
+                        order: [],
+                        amount_to_buy: {
+                            1: null,
+                            2: null,
+                            3: null,
+                            4: null
+                        },
+                    },
+                },
+                change_preset_per_x_prestiges: null,
+                cppxp_diff: null,
+            },
+            15: {
+                preset: 1,
+                presets: {
+                    1: {
+                        order: [],
+                        amount_to_buy: {
+                            1: null,
+                            2: null,
+                            3: null,
+                            4: null,
+                            5: null,
+                            6: null
+                        },
+                    },
+                    2: {
+                        order: [],
+                        amount_to_buy: {
+                            1: null,
+                            2: null,
+                            3: null,
+                            4: null,
+                            5: null,
+                            6: null
+                        },
+                    },
+                    3: {
+                        order: [],
+                        amount_to_buy: {
+                            1: null,
+                            2: null,
+                            3: null,
+                            4: null,
+                            5: null,
+                            6: null
+                        },
+                    },
+                },
+                change_preset_per_x_prestiges: null,
+                cppxp_diff: null,
+                respec_after_changing_preset: false,
+            }
         }
+    },
+    achievement_conditions: {
+        69: true,
+        70: true,
     },
     got_daily_reward: false,
     got_export_reward: false,
@@ -245,7 +352,8 @@ const ELS = {
     isAch60Opened: false,
     page: 1,
     shopPage: 1,
-    selectedShopTab: 0
+    selectedShopTab: 0,
+    auto_mechanisms: getAutoMechanisms_2()
 };
 
 const text = {
@@ -281,10 +389,10 @@ const text = {
         "0.8.0.1":'', "0.9":'', "0.9.1":'', "0.9.2":'', "0.10":'', "0.10.1":'', "0.11":'', "0.11.1":'', "0.12":'', "0.12.1": '', "0.13": '', "0.14": '', "0.15": '', "0.15.x": "", "1.0": "", "1.0.x": ""
     },
     // Генерируем повторяющиеся тексты с помощью функции
-    chapter: generateEmptyObj(21, true),
-    chapterTitle: generateEmptyObj(21, true),
-    helpTitle: generateEmptyObj(24, true),
-    help: generateEmptyObj(24, true),
+    chapter: generateEmptyObj(23, true),
+    chapterTitle: generateEmptyObj(23, true),
+    helpTitle: generateEmptyObj(26, true),
+    help: generateEmptyObj(26, true),
     empty: '',
     talk: {
         1: { //MrSuper

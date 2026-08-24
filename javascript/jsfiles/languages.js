@@ -184,11 +184,22 @@ function loadTranslationsAlways() {
     let bGain = GAIN.reflash.reset();
     const btnReflash = document.getElementById('doReflash');
     if ((player.coin.currency >= 1.79e308 || player.coin.currency == Infinity) && player.prestige.challenge.completed.includes(8)) {
-        btnReflash.textContent = bGain > 1 ? 
-        i18next.t('reflashEnabled', {reflashesTemp: formatNumber(bGain, 'boost', 2, true), ref_cur: i18next.t(getBitOrByteKey(bGain))}) :
-        i18next.t('reflashFirst', globals);
+        switch (true) {
+            case bGain >= 1 && bGain == UPGS.reflash.computer[4].effect():
+                btnReflash.innerHTML = i18next.t('reflashEnabled_3', {reflashesTemp: formatNumber(bGain, 'boost', 2, true), ref_cur: i18next.t(getBitOrByteKey(bGain))})
+                break;
+            case bGain >= 1 && player.reflash.algo.includes(101):
+                btnReflash.innerHTML = i18next.t('reflashEnabled_2', {reflashesTemp: formatNumber(bGain, 'boost', 2, true), ref_cur: i18next.t(getBitOrByteKey(bGain)), nextBit: formatNumber(GAIN.reflash.next_bit())})
+                break;
+            case bGain >= 1:
+                btnReflash.innerHTML = i18next.t('reflashEnabled', {reflashesTemp: formatNumber(bGain, 'boost', 2, true), ref_cur: i18next.t(getBitOrByteKey(bGain))})
+                break;
+            default:
+                btnReflash.innerHTML = i18next.t('reflashFirst', globals);
+                break;
+        }
     } else {
-        btnReflash.textContent = i18next.t('reflashDisabled', globals); // И СЮДА!
+        btnReflash.textContent = i18next.t('reflashDisabled', globals);
     }
 
     // == VIRUS ==
@@ -1205,7 +1216,7 @@ function loadTranslationsReflash() {
         // 5, Компуктер
         for (let i = 0; i < 5; i++) {
             document.getElementsByClassName('computerComponentLevel')[i].textContent = formatNumber(player.reflash.computer[i+1]);
-            document.getElementsByClassName('computerComponentPrice')[i].textContent = formatNumber(UPGS.reflash.computer[i+1].cost(), undefined, undefined, true);
+            document.getElementsByClassName('computerComponentPrice')[i].textContent = formatNumber(UPGS.reflash.computer[i+1].cost(), 'boost', undefined, true);
             document.getElementsByClassName('computerComponentCurrency')[i].textContent = i18next.t(getBitOrByteKey(UPGS.reflash.computer[i+1].cost()))
 
             //tooltip
@@ -1229,6 +1240,27 @@ function loadTranslationsReflash() {
         document.getElementById('cur_watt_val').textContent = formatNumber(MISC.sum_watt())
         document.getElementById('max_watt_val').textContent = formatNumber(UPGS.reflash.computer[2].effect())
         document.getElementById('cur_comp_lvl').textContent = formatNumber(UPGS.reflash.computer[1].effect())
+
+        // 6. АВТОМЕХАНИЗМЫ
+        document.getElementById('act_mech_max').textContent = formatNumber(MISC.sum_mechanisms())
+        document.getElementById('act_mech_watt_max').textContent = formatNumber(UPGS.reflash.computer[2].effect())
+        document.getElementById('act_mech_watt_cur').textContent = formatNumber(MISC.sum_watt())
+        document.getElementById('act_mech_cur').textContent = formatNumber(MISC.sum_used_mechanisms()) 
+
+        document.getElementById('autoBalanceCoinsMode').textContent = i18next.t(`automech12preset`, {
+            preset: player.automation.mechanism_conditions[12].preset,
+            prestiges: player.automation.mechanism_conditions[12].cppxp_diff
+        }) 
+
+        document.getElementById('autoMineralsMode').textContent = i18next.t(`automech12preset`, {
+            preset: player.automation.mechanism_conditions[14].preset,
+            prestiges: player.automation.mechanism_conditions[14].cppxp_diff
+        }) 
+
+        document.getElementById('autoItemsMode').textContent = i18next.t(`automech12preset`, {
+            preset: player.automation.mechanism_conditions[15].preset,
+            prestiges: player.automation.mechanism_conditions[15].cppxp_diff
+        }) 
 }
 
 function loadTranslationsEvent() {
@@ -1351,15 +1383,29 @@ function updateStaticTranslations() {
 
     // 1. Быстрый перевод всего статического HTML
     document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (key) {
-            const translated = i18next.t(key, globals); // Подставляем сюда
-            if (translated && translated !== key) el.innerHTML = translated;
+    const rawKey = el.getAttribute('data-i18n');
+    if (!rawKey) return;
+
+    // Проверяем, есть ли в ключе инструкция для атрибута вроде [placeholder]
+    const placeholderMatch = rawKey.match(/^\[placeholder\](.+)$/);
+
+    if (placeholderMatch) {
+        const key = placeholderMatch[1];
+        const translated = i18next.t(key, globals);
+        if (translated && translated !== key) {
+            el.placeholder = translated; // Записываем в placeholder инпута!
         }
-    });
+    } else {
+        // Обычный перевод для текста (элементы типа span, div и т.д.)
+        const translated = i18next.t(rawKey, globals);
+        if (translated && translated !== rawKey) {
+            el.innerHTML = translated;
+        }
+    }
+});
 
     // 2. Инициализация массивов для Лора
-    for (let i = 1; i <= 21; i++) {
+    for (let i = 1; i <= 23; i++) {
         text.chapter[i] = i18next.t(`chapter${i}`, globals); 
         text.chapterTitle[i] = i18next.t(`chapter${i}Name`, globals);
         let tab = document.getElementById(`chapter${i}Tab`);
@@ -1367,7 +1413,7 @@ function updateStaticTranslations() {
     }
 
     // 3. Инициализация массивов для Помощи
-    for (let i = 1; i <= 25; i++) {
+    for (let i = 1; i <= 27; i++) {
         text.helpTitle[i] = i18next.t(`help${i}Name`, globals);
         if (i !== 13) {
             text.help[i] = i18next.t(`help${i}`, globals);
@@ -1448,7 +1494,7 @@ function updateStaticTranslations() {
     ];
 
     // 5. Инициализация 50 Обычных Ачивок
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 70; i++) {
         const achNaming = window["achName" + (i + 11)];
         if (achNaming) {
             const achNameKey = `achRow1.name.${i}`;

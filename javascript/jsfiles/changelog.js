@@ -62,6 +62,8 @@ const LORE = {
         19() { return player.progressBarGoals.includes(8)},
         20() { return player.reflash.resets > 0},
         21() { return player.supercoin.this_reflash_currency > 10000 && player.reflash.resets > 0},
+        22() { return player.reflash.computer[3] > 0},
+        23() { return player.reflash.computer[5] > 0},
     }
 }
 

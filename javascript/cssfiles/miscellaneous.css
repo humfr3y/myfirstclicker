@@ -304,7 +304,7 @@ it {
     color: white;
 }
 
-#autoUmultiInterval, #autoUpowerInterval, #autoUpowerInterval2, #mineralsBulkBuy, #autoUadderInterval, #autoUadderInterval2, #autoUreducerInterval, #autoUreducerInterval2 {
+#autoUmultiInterval, #autoUpowerInterval, #autoUpowerInterval2, #mineralsBulkBuy, #autoUadderInterval, #autoUadderInterval2, #autoUreducerInterval, #autoUreducerInterval2, .intervalText {
     font-size: calc(12px * var(--font-scale));
     color: white;
 }

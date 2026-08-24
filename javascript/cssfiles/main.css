@@ -2679,37 +2679,182 @@ vn {
   top: 30%;
 }
 
+.automechanismRow {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
 
+.automechanismContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: var(--reflash) solid 2px;
+  border-radius: 10px;
+  max-height: 200px;
+  max-width: 230px;
+  width: 20vw;
+  height: 25vw;
+  padding-top: 10px;
+  position: relative;
+}
 
+.automechanismCheckbox {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  cursor: pointer;
+}
 
+.automechanismGhost {
+  display: none;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  opacity: 0.8;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgb(148, 147, 147);
+  color: black;
+  font-size: calc(16px * var(--font-scale));
+}
 
+.automechanismGhost.locked {
+  display: flex;
+}
 
+.autoMechanismComplex, .autoMechanismComplex input {
+  width: 90%;
+}
 
+.autoMechanismComplex button:hover {
+  background-color: var(--reflash);
+  color: black
+}
 
+#autoBalanceCoinsInputsDiv {
+  display: flex;
+  flex-direction: row;
+  max-width: 300px;
+  width: 100%;
+}
 
+.autoMechanismComplex button {
+  border: 2px var(--reflash) solid;
+  background-color: #101010;
+  color: var(--reflash);
+  cursor: pointer;
+  font-size: calc(12px * var(--font-scale));
+  /* border-bottom: 0px; */
+  width: 100%;
+}
 
+.reflashInput {
+  border: 2px var(--reflash) solid;
+  font-size: calc(14px * var(--font-scale));
+  background-color: #222222;
+  color: white;
+  text-align: left;
+}
 
+.automechanismContainer .intervalText {
+  margin: 3px;
+}
 
+#autoBalanceCoinsMode {
+  border-bottom-width: 0px !important;
+}
 
+#mineralsAutomationEditor, #itemsAutomationEditor {
+  max-height: 90%;
+  height: 600px;
+  width: 600px;
+}
 
+.dnd-zone {
+  min-height: 80px; 
+  min-width: 400px;
+  border: 2px dashed #444; 
+  display: flex; 
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding-left: 10px;
+}
 
+.mineral-item, .item-item {
+  width: 65px; 
+  height: 65px; 
+  cursor: grab;
+  border: 1px solid var(--rune) 
+}
 
+.item-item {
+  border-color: var(--supercoin)
+}
 
+.mineral-item img, .item-item img {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
 
+#bulkBuyMinerals, #bulkBuyItems {
+  margin-top: 10px;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
+.mineralMiniContainer, .itemMiniContainer {
+  height: 95px;
+  width: 74px;
+}
 
+.mineralInput, .itemInput {
+  width: 100%;
+  font-size: calc(16px * var(--font-scale));
+}
 
+.mineralIcon, .itemIcon {
+  width: 80px;
+  height: 80px;
+  border: 1px solid var(--rune) 
+}
 
+.itemIcon {
+  border-color: var(--supercoin)
+}
 
+.mineralIcon img, .itemIcon img {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
 
+#autoMineralsMode, #autoItemsMode {
+  margin-bottom: 10px
+}
 
+.itemInput {
+  border-color: var(--supercoin)
+}
 
-
-
-
-
-
-
+#itemOrderContainer, #itemPoolContainer {
+  min-width: 500px;
+}
 
 
 

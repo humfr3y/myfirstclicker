@@ -203,15 +203,6 @@ function formatNumber(number, mode = 'number', x = 3, isReflash = false) {
     }
 }
 
-// Мини-форматтеры сжаты до тернарников
-// Мини-форматтеры сжаты до тернарников, огромные числа идут через главную нотацию
-function formatBoost(boost) { return boost < 100 ? boost.toFixed(2) : (boost < 1e6 ? boost.toFixed(0) : formatNumber(boost, 'number')); }
-function formatPower(power) { return power < 10 ? power.toFixed(3) : (power < 1e6 ? power.toFixed(0) : formatNumber(power, 'number')); }
-function formatPercent(percent) { 
-    let p = percent * 100;
-    return p < 10 ? p.toFixed(2) : (p < 1e6 ? p.toFixed(0) : formatNumber(p, 'number')); 
-}
-
 // Форматирование для значений библиотеки Break Infinity (Decimal)
 function formatDecimal(value, mode = 'number', x = 3) {
     if (typeof value === 'number' && value >= 1.79e308) return "Infinity";
@@ -714,7 +705,8 @@ function createGainWholeUI() {
         { id: 'pchall7', title: 'Испытание Престижа 7', i18nKey: 'pchall7Name', colorStyle: 'background-image: radial-gradient(rgb(0, 212, 212), black 210%)' },
         { id: 'upower', title: 'У-сила', i18nKey: 'upowerName', colorStyle: 'background-image: radial-gradient(palevioletred, black 210%)' },
         { id: 'activity2', title: 'Активность 2', i18nKey: 'pse2Name', colorStyle: 'background-image: radial-gradient(rgb(0, 212, 212), black 210%)' },
-        { id: 'gainReflash11', title: 'Рефлеш (Алт. 11)', i18nKey: 'reflashUpg11Name', colorStyle: 'background-image: radial-gradient(#26a826, black 210%)' }
+        { id: 'gainReflash11', title: 'Рефлеш (Алт. 11)', i18nKey: 'reflashUpg11Name', colorStyle: 'background-image: radial-gradient(#26a826, black 210%)' },
+        { id: 'node71', title: 'Рефлеш (Алт. 11)', i18nKey: 'node71Name', colorStyle: 'background-image: radial-gradient(#26a826, black 210%)' }
     ];
 
     const softcapHTML = `
@@ -756,7 +748,10 @@ function statsGainUpdate() {
         { effectValue: () => UPGS.prestige.singles[12].effect(), effectPrefix: '^', effectMode: 'power', effectId: 'activity2StatsEffect', pieceId: 'activity2Piece', piecePercentId: 'activity2PiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect(), graphicValue: () => gainWithoutPower1 },
         
         // Добавляем новый источник рефлеша в массив sources:
-        { effectValue: () => UPGS.reflash.singles[11].unl() ? UPGS.reflash.singles[11].effect() : new Decimal(1), effectPrefix: 'x', effectMode: 'boost', effectId: 'gainReflash11StatsEffect', pieceId: 'gainReflash11Piece', piecePercentId: 'gainReflash11PiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect() }
+        { effectValue: () => UPGS.reflash.singles[11].unl() ? UPGS.reflash.singles[11].effect() : new Decimal(1), effectPrefix: 'x', effectMode: 'boost', effectId: 'gainReflash11StatsEffect', pieceId: 'gainReflash11Piece', piecePercentId: 'gainReflash11PiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect() },
+        { effectValue: () => player.reflash.algo.includes(71) ? UPGS.reflash.algo.tree[17].effect() : new Decimal(1), effectPrefix: 'x', effectMode: 'boost', effectId: 'node71StatsEffect', pieceId: 'node71Piece', piecePercentId: 'node71PiecePercent', summary: () => GAIN.coin.gain.no_softcap_effect() }
+
+        
     ];
 
     applyStatsUpdate(sources, 'summaryGainStatsEffect', GAIN.coin.gain.effect());
@@ -779,6 +774,7 @@ function createSuperCoinChanceUI() {
         { id: 'scDigiPerm3', title: 'Цифровизация (Сокровище 3.1)', i18nKey: 'digiPerm3Name', colorStyle: 'background-image: radial-gradient(rgb(255, 215, 130), black 210%)' },
         { id: 'scDigiTemp2', title: 'Цифровизация (Сокровище 2.2)', i18nKey: 'digiTemp2Name', colorStyle: 'background-image: radial-gradient(rgb(255, 215, 130), black 210%)' },
         { id: 'scVirusBuff4', title: 'Вирусный эффект (Тип 4)', i18nKey: 'virusBuffName', colorStyle: 'background-image: radial-gradient(rgb(255, 0, 0), black 210%)' },
+        { id: 'achievement73', title: 'Достижение 73', i18nKey: 'achievement73Name', colorStyle: 'background-image: radial-gradient(lightsteelblue, black 210%)' },
         { id: 'achievement37', title: 'Достижение 37', i18nKey: 'achievement37Name', colorStyle: 'background-image: radial-gradient(lightsteelblue, black 210%)' },
         { id: 'scDigiTemp3', title: 'Цифровизация (Сокровище 3.2)', i18nKey: 'digiTemp3Name', colorStyle: 'background-image: radial-gradient(rgb(255, 215, 130), black 210%)' }
     ];
@@ -814,6 +810,7 @@ function statsSuperCoinChanceUpdate() {
             }
             return 1;
         }, effectPrefix: 'x', effectMode: 'boost', effectId: 'scVirusBuff4StatsEffect', pieceId: 'scVirusBuff4Piece', piecePercentId: 'scVirusBuff4PiecePercent', summary: () => totalChance },
+        { effectValue: () => Math.pow(1.1, ACHS.has(73)), effectPrefix: 'x', effectMode: 'boost', effectId: 'achievement73StatsEffect', pieceId: 'achievement73Piece', piecePercentId: 'achievement73PiecePercent', summary: () => totalChance },
         { effectValue: () => Number(ACHS.has(37)), effectPrefix: '+', effectMode: 'boost', effectId: 'achievement37StatsEffect', pieceId: 'achievement37Piece', piecePercentId: 'achievement37PiecePercent', summary: () => totalChance, graphicValue: ach37Graphic },
         { effectValue: () => digiTemp3Val, effectPrefix: '+', effectMode: 'boost', effectId: 'scDigiTemp3StatsEffect', pieceId: 'scDigiTemp3Piece', piecePercentId: 'scDigiTemp3PiecePercent', summary: () => totalChance, graphicValue: digiTemp3Graphic },
     ];
@@ -841,13 +838,14 @@ function createCrystalsUI() {
         { id: 'minusCoinsForCrystals', title: 'Альфа-Усилитель', i18nKey: 'minusCoinForCrystalsName', colorStyle: 'background-image: radial-gradient(white, black 210%)' },
         { id: 'pchall1', title: 'Испытание Престижа 1', i18nKey: 'pchall1Name', colorStyle: 'background-image: radial-gradient(rgb(0, 212, 212), black 210%)' },
         { id: 'achievementBonus2', title: 'Кристаллический Усилитель', i18nKey: 'achievementBonus2Name', colorStyle: 'background-image: radial-gradient(lightsteelblue, black 210%)' },
-        { id: 'crystalReflashAlgo22', title: 'Алгоритм Рефлеша (22)', i18nKey: 'reflashAlgo22Name', colorStyle: 'background-image: radial-gradient(#26a826, black 210%)' },
-        { id: 'crystalReflashSingle12', title: 'Рефлеш (Сингл 12)', i18nKey: 'reflashUpg12Name', colorStyle: 'background-image: radial-gradient(#26a826, black 210%)' },
         { id: 'crystalDigiPerm4', title: 'Цифровизация (Сокровище 4.1)', i18nKey: 'digiPerm4Name', colorStyle: 'background-image: radial-gradient(rgb(255, 215, 130), black 210%)' },
         { id: 'crystalDigiTemp4', title: 'Цифровизация (Сокровище 4.2)', i18nKey: 'digiTemp4Name', colorStyle: 'background-image: radial-gradient(rgb(255, 215, 130), black 210%)' },
         { id: 'crystalDigiPerm5', title: 'Цифровизация (Сокровище 5.1)', i18nKey: 'digiPerm5Name', colorStyle: 'background-image: radial-gradient(rgb(255, 215, 130), black 210%)' },
         { id: 'crystalDigiTemp5', title: 'Цифровизация (Сокровище 5.2)', i18nKey: 'digiTemp5Name', colorStyle: 'background-image: radial-gradient(rgb(255, 215, 130), black 210%)' },
-        { id: 'crystalVirusBuff2', title: 'Вирусный эффект (Тип 2)', i18nKey: 'virusBuffName', colorStyle: 'background-image: radial-gradient(rgb(255, 0, 0), black 210%)' }
+        { id: 'crystalVirusBuff2', title: 'Вирусный эффект (Тип 2)', i18nKey: 'virusBuffName', colorStyle: 'background-image: radial-gradient(rgb(255, 0, 0), black 210%)' },
+        { id: 'crystalReflashSingle12', title: 'Рефлеш (Сингл 12)', i18nKey: 'reflashUpg12Name', colorStyle: 'background-image: radial-gradient(#26a826, black 210%)' },
+        { id: 'crystalReflashAlgo22', title: 'Алгоритм Рефлеша (22)', i18nKey: 'reflashAlgo22Name', colorStyle: 'background-image: radial-gradient(#26a826, black 210%)' },
+        { id: 'node81', title: 'Рефлеш (Алт. 11)', i18nKey: 'node81Name', colorStyle: 'background-image: radial-gradient(#26a826, black 210%)' }
     ];
 
     const softcapHTML = `
@@ -881,18 +879,20 @@ function statsCrystalsUpdate() {
         { effectValue: () => UPGS.fortune.boosts[2].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fortuneBoostCrystalStatsEffect', pieceId: 'fortuneBoostCrystalPiece', piecePercentId: 'fortuneBoostCrystalPiecePercent', summary: () => superSummary },
         { effectValue: () => MISC.balance.minusCoins.buff().crystalGainBuff, effectPrefix: 'x', effectMode: 'boost', effectId: 'minusCoinsForCrystalsStatsEffect', pieceId: 'minusCoinsForCrystalsPiece', piecePercentId: 'minusCoinsForCrystalsPiecePercent', summary: () => superSummary },
         { effectValue: () => player.prestige.challenge.completed.includes(1) ? PRES_CHALLENGE[1].effect() : 1, effectPrefix: 'x', effectMode: 'boost', effectId: 'pchall1StatsEffect', pieceId: 'pchall1Piece', piecePercentId: 'pchall1PiecePercent', summary: () => superSummary },
-        { effectValue: () => UPGS.reflash.algo.tree[2].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalReflashAlgo22StatsEffect', pieceId: 'crystalReflashAlgo22Piece', piecePercentId: 'crystalReflashAlgo22PiecePercent', summary: () => superSummary },
-        { effectValue: () => UPGS.reflash.singles[12].unl() ? UPGS.reflash.singles[12].effect() : 1, effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalReflashSingle12StatsEffect', pieceId: 'crystalReflashSingle12Piece', piecePercentId: 'crystalReflashSingle12PiecePercent', summary: () => superSummary },
         { effectValue: () => TREASURES.event.digitalization[4].permanent.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalDigiPerm4StatsEffect', pieceId: 'crystalDigiPerm4Piece', piecePercentId: 'crystalDigiPerm4PiecePercent', summary: () => superSummary },
         { effectValue: () => TREASURES.event.digitalization[4].temporary.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalDigiTemp4StatsEffect', pieceId: 'crystalDigiTemp4Piece', piecePercentId: 'crystalDigiTemp4PiecePercent', summary: () => superSummary },
         { effectValue: () => TREASURES.event.digitalization[5].permanent.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalDigiPerm5StatsEffect', pieceId: 'crystalDigiPerm5Piece', piecePercentId: 'crystalDigiPerm5PiecePercent', summary: () => superSummary },
         { effectValue: () => TREASURES.event.digitalization[5].temporary.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalDigiTemp5StatsEffect', pieceId: 'crystalDigiTemp5Piece', piecePercentId: 'crystalDigiTemp5PiecePercent', summary: () => superSummary },
+        
         { effectValue: () => {
             if (player.virus.effect.time > 0 && player.virus.effect.type == 2) {
                 return player.virus.effect.multiplier;
             }
             return 1;
         }, effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalVirusBuff2StatsEffect', pieceId: 'crystalVirusBuff2Piece', piecePercentId: 'crystalVirusBuff2PiecePercent', summary: () => superSummary },
+        { effectValue: () => UPGS.reflash.algo.tree[2].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalReflashAlgo22StatsEffect', pieceId: 'crystalReflashAlgo22Piece', piecePercentId: 'crystalReflashAlgo22PiecePercent', summary: () => superSummary },
+        { effectValue: () => player.reflash.algo.includes(81) ? UPGS.reflash.algo.tree[18].effect() : new Decimal(1), effectPrefix: 'x', effectMode: 'boost', effectId: 'node81StatsEffect', pieceId: 'node81Piece', piecePercentId: 'node81PiecePercent', summary: () => superSummary},
+        { effectValue: () => UPGS.reflash.singles[12].unl() ? UPGS.reflash.singles[12].effect() : 1, effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalReflashSingle12StatsEffect', pieceId: 'crystalReflashSingle12Piece', piecePercentId: 'crystalReflashSingle12PiecePercent', summary: () => superSummary },
 
         { effectValue: () => GAIN.crystal.softcap().softcap_power, effectPrefix: '^', effectMode: 'power', effectId: 'CRYSTAL_GAIN_SC_001StatsEffect' }
     ];
@@ -908,10 +908,11 @@ function createShardsUI() {
         { id: 'ninthSuperCrystalSingleEffect', title: 'Удвоитель', i18nKey: 'ninthSuperCrystalSingleEffectName', colorStyle: 'background-image: radial-gradient(rgb(0, 151, 151), black 210%)' },
         { id: 'fortuneBoostShardClick', title: 'Альфа-Усилитель', i18nKey: 'shardBlessingName', colorStyle: 'background-image: radial-gradient(hotpink, black 210%)' },
         { id: 'breakPrestigeBuyable31', title: 'Удвоитель', i18nKey: 'triplerName', colorStyle: 'background-image: radial-gradient(rgb(111, 202, 199), black 210%)' },
-        { id: 'shardClickReflashAlgo42', title: 'Алгоритм Рефлеша (42)', i18nKey: 'reflashAlgo42Name', colorStyle: 'background-image: radial-gradient(#26a826, black 210%)' },
         { id: 'shardClickDigiPerm5', title: 'Цифровизация (Сокровище 5.1)', i18nKey: 'digiPerm5Name', colorStyle: 'background-image: radial-gradient(rgb(255, 215, 130), black 210%)' },
         { id: 'shardClickDigiTemp5', title: 'Цифровизация (Сокровище 5.2)', i18nKey: 'digiTemp5Name', colorStyle: 'background-image: radial-gradient(rgb(255, 215, 130), black 210%)' },
-        { id: 'shardClickVirus3', title: 'Вирусный эффект (Тип 3)', i18nKey: 'virusBuffName', colorStyle: 'background-image: radial-gradient(rgb(255, 0, 0), black 210%)' }
+        { id: 'shardClickVirus3', title: 'Вирусный эффект (Тип 3)', i18nKey: 'virusBuffName', colorStyle: 'background-image: radial-gradient(rgb(255, 0, 0), black 210%)' },
+        { id: 'shardClickReflashAlgo42', title: 'Алгоритм Рефлеша (42)', i18nKey: 'reflashAlgo42Name', colorStyle: 'background-image: radial-gradient(#26a826, black 210%)' },
+        { id: 'nodeshClick91', title: 'Рефлеш (Алт. 11)', i18nKey: 'node91Name', colorStyle: 'background-image: radial-gradient(#26a826, black 210%)' }
     ], 'Общий множитель', 'summaryShPerClickStatsEffect');
 
     buildStatsUI('shardsPerSecondStats', 'shardsPerSecondGraphic', [
@@ -923,10 +924,11 @@ function createShardsUI() {
         { id: 'fortuneBoostShardSecond', title: 'Удвоитель', i18nKey: 'shardBlessingName', colorStyle: 'background-image: radial-gradient(hotpink, black 210%)' },
         { id: 'breakPrestigeBuyable32', title: 'Удвоитель', i18nKey: 'triplerName', colorStyle: 'background-image: radial-gradient(rgb(111, 202, 199), black 210%)' },
         { id: 'achievementBonus3', title: 'Удвоитель', i18nKey: 'achievementBonus3Name', colorStyle: 'background-image: radial-gradient(lightsteelblue, black 210%)' },
-        { id: 'shardSecReflashAlgo42', title: 'Алгоритм Рефлеша (42)', i18nKey: 'reflashAlgo42Name', colorStyle: 'background-image: radial-gradient(#26a826, black 210%)' },
         { id: 'shardSecDigiPerm5', title: 'Цифровизация (Сокровище 5.1)', i18nKey: 'digiPerm5Name', colorStyle: 'background-image: radial-gradient(rgb(255, 215, 130), black 210%)' },
         { id: 'shardSecDigiTemp5', title: 'Цифровизация (Сокровище 5.2)', i18nKey: 'digiTemp5Name', colorStyle: 'background-image: radial-gradient(rgb(255, 215, 130), black 210%)' },
-        { id: 'shardSecVirus3', title: 'Вирусный эффект (Тип 3)', i18nKey: 'virusBuffName', colorStyle: 'background-image: radial-gradient(rgb(255, 0, 0), black 210%)' }
+        { id: 'shardSecVirus3', title: 'Вирусный эффект (Тип 3)', i18nKey: 'virusBuffName', colorStyle: 'background-image: radial-gradient(rgb(255, 0, 0), black 210%)' },
+        { id: 'shardSecReflashAlgo42', title: 'Алгоритм Рефлеша (42)', i18nKey: 'reflashAlgo42Name', colorStyle: 'background-image: radial-gradient(#26a826, black 210%)' },
+        { id: 'nodeshSecond91', title: 'Рефлеш (Алт. 11)', i18nKey: 'node91Name', colorStyle: 'background-image: radial-gradient(#26a826, black 210%)' }
     ], 'Общий множитель', 'summaryShPerSecondStatsEffect');
 
     const effectDescriptors = [
@@ -956,7 +958,6 @@ function statsShardsPerClickUpdate() {
         { effectValue: () => Math.pow(UPGS.supercrystal[33].effect(), UPGS.supercrystal[33].unl()), effectPrefix: 'x', effectMode: 'boost', effectId: 'ninthSuperCrystalSingleEffectStatsEffect', pieceId: 'ninthSuperCrystalSingleEffectPiece', piecePercentId: 'ninthSuperCrystalSingleEffectPiecePercent', summary: () => totalClick },
         { effectValue: () => UPGS.fortune.boosts[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fortuneBoostShardClickStatsEffect', pieceId: 'fortuneBoostShardClickPiece', piecePercentId: 'fortuneBoostShardClickPiecePercent', summary: () => totalClick },
         { effectValue: () => UPGS.prestige.break.buyables[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'breakPrestigeBuyable31StatsEffect', pieceId: 'breakPrestigeBuyable31Piece', piecePercentId: 'breakPrestigeBuyable31PiecePercent', summary: () => totalClick },
-        { effectValue: () => UPGS.reflash.algo.tree[10].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'shardClickReflashAlgo42StatsEffect', pieceId: 'shardClickReflashAlgo42Piece', piecePercentId: 'shardClickReflashAlgo42PiecePercent', summary: () => totalClick },
         { effectValue: () => TREASURES.event.digitalization[5].permanent.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'shardClickDigiPerm5StatsEffect', pieceId: 'shardClickDigiPerm5Piece', piecePercentId: 'shardClickDigiPerm5PiecePercent', summary: () => totalClick },
         { effectValue: () => TREASURES.event.digitalization[5].temporary.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'shardClickDigiTemp5StatsEffect', pieceId: 'shardClickDigiTemp5Piece', piecePercentId: 'shardClickDigiTemp5PiecePercent', summary: () => totalClick },
         { effectValue: () => {
@@ -964,7 +965,9 @@ function statsShardsPerClickUpdate() {
                 return player.virus.effect.multiplier;
             }
             return 1;
-        }, effectPrefix: 'x', effectMode: 'boost', effectId: 'shardClickVirus3StatsEffect', pieceId: 'shardClickVirus3Piece', piecePercentId: 'shardClickVirus3PiecePercent', summary: () => totalClick }
+        }, effectPrefix: 'x', effectMode: 'boost', effectId: 'shardClickVirus3StatsEffect', pieceId: 'shardClickVirus3Piece', piecePercentId: 'shardClickVirus3PiecePercent', summary: () => totalClick },
+        { effectValue: () => UPGS.reflash.algo.tree[10].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'shardClickReflashAlgo42StatsEffect', pieceId: 'shardClickReflashAlgo42Piece', piecePercentId: 'shardClickReflashAlgo42PiecePercent', summary: () => totalClick },
+        { effectValue: () => UPGS.reflash.algo.tree[19].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'nodeshClick91StatsEffect', pieceId: 'nodeshClick91Piece', piecePercentId: 'nodeshClick91PiecePercent', summary: () => totalClick },
     ], 'summaryShPerClickStatsEffect', totalClick);
 }
 
@@ -980,7 +983,6 @@ function statsShardsPerSecondUpdate() {
         { effectValue: () => ACHS.effect.shard(), effectPrefix: 'x', effectMode: 'boost', effectId: 'achievementBonus3StatsEffect', pieceId: 'achievementBonus3Piece', piecePercentId: 'achievementBonus3PiecePercent', summary: () => totalSecond },
         { effectValue: () => UPGS.fortune.boosts[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fortuneBoostShardSecondStatsEffect', pieceId: 'fortuneBoostShardSecondPiece', piecePercentId: 'fortuneBoostShardSecondPiecePercent', summary: () => totalSecond },
         { effectValue: () => UPGS.prestige.break.buyables[3].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'breakPrestigeBuyable32StatsEffect', pieceId: 'breakPrestigeBuyable32Piece', piecePercentId: 'breakPrestigeBuyable32PiecePercent', summary: () => totalSecond },
-        { effectValue: () => UPGS.reflash.algo.tree[10].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'shardSecReflashAlgo42StatsEffect', pieceId: 'shardSecReflashAlgo42Piece', piecePercentId: 'shardSecReflashAlgo42PiecePercent', summary: () => totalSecond },
         { effectValue: () => TREASURES.event.digitalization[5].permanent.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'shardSecDigiPerm5StatsEffect', pieceId: 'shardSecDigiPerm5Piece', piecePercentId: 'shardSecDigiPerm5PiecePercent', summary: () => totalSecond },
         { effectValue: () => TREASURES.event.digitalization[5].temporary.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'shardSecDigiTemp5StatsEffect', pieceId: 'shardSecDigiTemp5Piece', piecePercentId: 'shardSecDigiTemp5PiecePercent', summary: () => totalSecond },
         { effectValue: () => {
@@ -988,7 +990,9 @@ function statsShardsPerSecondUpdate() {
                 return player.virus.effect.multiplier;
             }
             return 1;
-        }, effectPrefix: 'x', effectMode: 'boost', effectId: 'shardSecVirus3StatsEffect', pieceId: 'shardSecVirus3Piece', piecePercentId: 'shardSecVirus3PiecePercent', summary: () => totalSecond }
+        }, effectPrefix: 'x', effectMode: 'boost', effectId: 'shardSecVirus3StatsEffect', pieceId: 'shardSecVirus3Piece', piecePercentId: 'shardSecVirus3PiecePercent', summary: () => totalSecond },
+        { effectValue: () => UPGS.reflash.algo.tree[10].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'shardSecReflashAlgo42StatsEffect', pieceId: 'shardSecReflashAlgo42Piece', piecePercentId: 'shardSecReflashAlgo42PiecePercent', summary: () => totalSecond },
+        { effectValue: () => UPGS.reflash.algo.tree[19].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'nodeshSecond91StatsEffect', pieceId: 'nodeshSecond91Piece', piecePercentId: 'nodeshSecond91PiecePercent', summary: () => totalSecond },
     ], 'summaryShPerSecondStatsEffect', totalSecond);
 }
 
@@ -2006,4 +2010,95 @@ function getBitOrByteKey(number) {
         return 'currency_bits.byte'; // Вернет "Bytes" / "Байтов"
     }
     return 'currency_bits.bit'; // Вернет "BITs" / "БИТов"
+}
+
+const sortableConfig = {
+    group: 'mineralsGroup',
+    animation: 150,
+    // ВАЖНО для мобилок: даем задержку в 100мс и порог смещения, 
+    // чтобы браузер отличал скролл страницы от перетаскивания элемента
+    delay: 100, 
+    delayOnTouchOnly: true,
+    touchStartThreshold: 5,
+    onEnd: function (evt) {
+        updateMineralOrderArray();
+    }
+};
+
+// Применяем к обоим контейнерам
+new Sortable(document.getElementById('orderContainer'), sortableConfig);
+new Sortable(document.getElementById('poolContainer'), sortableConfig);
+
+new Sortable(document.getElementById('itemOrderContainer'), sortableConfig);
+new Sortable(document.getElementById('itemPoolContainer'), sortableConfig);
+
+function updateMineralOrderArray() {
+    const orderContainer = document.getElementById('orderContainer');
+    const items = orderContainer.querySelectorAll('.mineral-item');
+    
+    // Превращаем элементы в массив чисел по их data-id
+    const mineralOrderArray = Array.from(items).map(item => {
+        return parseInt(item.getAttribute('data-id'));
+    });
+
+    let preset = player.automation.mechanism_conditions[14].preset
+    player.automation.mechanism_conditions[14].presets[preset].order = mineralOrderArray 
+}
+function updateItemOrderArray() {
+    const orderContainer = document.getElementById('itemOrderContainer');
+    const items = orderContainer.querySelectorAll('.item-item');
+    
+    // Превращаем элементы в массив чисел по их data-id
+    const itemOrderArray = Array.from(items).map(item => {
+        return parseInt(item.getAttribute('data-item-id'));
+    });
+
+    let preset = player.automation.mechanism_conditions[15].preset
+    player.automation.mechanism_conditions[15].presets[preset].order = itemOrderArray 
+}
+
+function initDoubleTapTransfer() {
+    const orderContainer = document.getElementById('orderContainer');
+    const poolContainer = document.getElementById('poolContainer');
+    const orderContainer2 = document.getElementById('itemOrderContainer');
+    const poolContainer2 = document.getElementById('itemPoolContainer');
+
+    document.addEventListener('dblclick', (e) => {
+        const item = e.target.closest('.mineral-item');
+        if (!item) return;
+
+        const currentParent = item.parentElement;
+
+        if (currentParent === poolContainer) {
+            orderContainer.appendChild(item);
+        } else if (currentParent === orderContainer) {
+            poolContainer.appendChild(item);
+        }
+
+        if (typeof updateMineralOrderArray === 'function') {
+            updateMineralOrderArray();
+        }
+    });
+    document.addEventListener('dblclick', (e) => {
+        const item = e.target.closest('.item-item');
+        if (!item) return;
+
+        const currentParent = item.parentElement;
+
+        if (currentParent === poolContainer2) {
+            orderContainer2.appendChild(item);
+        } else if (currentParent === orderContainer2) {
+            poolContainer2.appendChild(item);
+        }
+
+        if (typeof updateItemOrderArray === 'function') {
+            updateItemOrderArray();
+        }
+    });
+}
+
+initDoubleTapTransfer();
+
+function isEqualArray(array1, array2) {
+  return JSON.stringify(array1) === JSON.stringify(array2);
 }

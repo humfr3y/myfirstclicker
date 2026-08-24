@@ -114,6 +114,15 @@ const ACHS = {
         64() { return player.reflash.currency >= 8 },
 
         66() { return player.time.real.fastestReflash.timer <= 3600 },
+
+        68() { return MISC.sum_of_minerals() >= 100 },
+
+        71() { return player.reflash.computer[1] > 0 && player.reflash.computer[2] > 0 && player.reflash.computer[3] > 0 && player.reflash.computer[4] > 0 && player.reflash.computer[5] },
+        72() { return UPGS.balance.buyables[2].effect() >= 2},
+        73() { return player.supercoin.this_reflash_currency >= 1e6 },
+        74() { return player.prestige.challenge.time[1].timer <= 0.05 && player.prestige.challenge.time[2].timer <= 0.05 && player.prestige.challenge.time[3].timer <= 0.05 && player.prestige.challenge.time[4].timer <= 0.05 && player.prestige.challenge.time[5].timer <= 0.05 && player.prestige.challenge.time[6].timer <= 0.05 && player.prestige.challenge.time[7].timer <= 0.05 && player.prestige.challenge.time[8].timer <= 0.05 },
+        75() { return player.time.real.fastestReflash.timer <= 300 },
+        76() { return player.supercrystal.total_currency >= 100 },
     },
 
     // --- УНИВЕРСАЛЬНАЯ ФУНКЦИЯ ДЛЯ ЭФФЕКТОВ АЧИВОК ---
@@ -153,7 +162,8 @@ const ACHS = {
         { id: 'thirdAchievementRow', start: 31, end: 40 },
         { id: 'fourthAchievementRow', start: 41, end: 50 },
         { id: 'fifthAchievementRow', start: 51, end: 60 },
-        { id: 'sixthAchievementRow', start: 61, end: 70 }
+        { id: 'sixthAchievementRow', start: 61, end: 70 },
+        { id: 'seventhAchievementRow', start: 71, end: 80 }
     ];
 
     list.innerHTML = '';
@@ -180,7 +190,7 @@ const ACHS = {
 };
 
 function setAchievementsBg() {
-  for (let i = 11; i <= 70; i++) {
+  for (let i = 11; i <= 80; i++) {
     const el = document.getElementById(`ach${i}`);
     if (el) el.style.backgroundImage = `url("javascript/cssfiles/images/achs/ach${i}.jpg")`;
   }

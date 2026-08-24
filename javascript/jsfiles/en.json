@@ -18,7 +18,8 @@
     "pbtitle8": "Prestige Challenges",
     "pbtitle9": "Reflash",
     "pbtitle10": "Reflash tab",
-    "pbtitle11": "Computer (1.1)",
+    "pbtitle11": "Computer",
+    "pbtitle12": "Console",
 
     "pbcurrency1": "α-coins",
     "pbcurrency2": "prestiges",
@@ -28,6 +29,7 @@
     "pbcurrency6": "reflashes",
     "pbcurrency7": "51 node",
     "pbcurrency8": "BITs",
+    "pbcurrency9": "level of CPU",
 
     "prestigeDisabled": "Collect {{n1e15}} α-coins",
     "prestigeEnabled": "Reset everything for {{crystalsTemp}} crystals {{prestigeCountMultiplierText}}",
@@ -40,6 +42,8 @@
     "reflashDisabled": "Collect Infinity α-coins and complete Prestige Challenge 8",
     "reflashFirst": "The limit has been reached, time to Reflash this world!",
     "reflashEnabled": "Reset everything to get {{reflashesTemp}} {{ref_cur}}",
+    "reflashEnabled_3": "Reset everything to get {{reflashesTemp}} {{ref_cur}} <br> You reached limir, you should upgrade RAM!",
+    "reflashEnabled_2": "Reset everything to get {{reflashesTemp}} {{ref_cur}} <br> (+1 BIT - {{nextBit}} Crystals)",
 
     "maxUpgradesTrue": "Buy All",
     "maxUpgradesFalse": "Buy One",
@@ -80,6 +84,7 @@
     "cosmeticsButton": "Cosmetics",
     "treasureButton": "Treasures",
     "computerButton": "Computer",
+    "autoMechanismsButton": "Auto-mechanisms",
 
     "reflashButton": "Reflash",
     "reflashUpgradesButton": "Upgrades",
@@ -690,37 +695,37 @@
     "upg_algo_42_name": "Node 42",
     "upg_algo_42_desc": "Increases Shard gain by x{{n1000}}",
     "upg_algo_43_name": "Node 43",
-    "upg_algo_43_desc": "Reduce Break Prestige upgrades cost by ^0.975",
+    "upg_algo_43_desc": "Reduce Break Prestige upgrades cost by ^0.98",
     "upg_algo_44_name": "Node 44",
     "upg_algo_44_desc": "Doubles Supercoin gain",
     "upg_algo_51_name": "Node 51",
-    "upg_algo_51_desc": "Unlock Computer (soon in 1.1)",
+    "upg_algo_51_desc": "Unlock Computer",
     "upg_algo_61_name": "Node 61",
-    "upg_algo_61_desc": "Усиления фортуны ^1.5",
+    "upg_algo_61_desc": "Fortune boosts minimal and maximum effects ^1.25",
     "upg_algo_62_name": "Node 62",
-    "upg_algo_62_desc": "Удваивает позитивные эффекты монет Баланса",
+    "upg_algo_62_desc": "Balance upgrades cost ^0.75",
     "upg_algo_63_name": "Node 63",
-    "upg_algo_63_desc": "Суперкристаллы увеличивают эффекты Супер-улучшений",
+    "upg_algo_63_desc": "Minerals effects ^1.25",
     "upg_algo_71_name": "Node 71",
-    "upg_algo_71_desc": "Доход монет ^1.25",
+    "upg_algo_71_desc": "Coin gain x{{n1e15}}",
     "upg_algo_81_name": "Node 81",
-    "upg_algo_81_desc": "Доход кристаллов ^1.25",
+    "upg_algo_81_desc": "Crystal gain x{{n1e9}}",
     "upg_algo_91_name": "Node 91",
-    "upg_algo_91_desc": "Доход осколков ^1.1",
+    "upg_algo_91_desc": "Shard gain x{{n1e12}}",
     "upg_algo_72_name": "Node 72",
-    "upg_algo_72_desc": "Ослабление монет за нажатие/в секунду снижено до ^0.8",
+    "upg_algo_72_desc": "Coin softcap per click/second reduced to ^0.5/^0.6",
     "upg_algo_82_name": "Node 82",
-    "upg_algo_82_desc": "Отталкивает начало ослабления Кристаллов до {{n1e100}}",
+    "upg_algo_82_desc": "Immediately unlock Break Prestige, formula starts at 10 coins and coin affection towards formula x1.5",
     "upg_algo_92_name": "Node 92",
-    "upg_algo_92_desc": "Осколки за Разбитие x{{n1e10}}",
+    "upg_algo_92_desc": "Shard Achievements rewards x2 and then ^1.25",
     "upg_algo_73_name": "Node 73",
-    "upg_algo_73_desc": "Требования У-телей ^0.75",
+    "upg_algo_73_desc": "U-tils requirements ^0.85",
     "upg_algo_83_name": "Node 83",
-    "upg_algo_83_desc": "Снижает стоимость Улучшений Разбитого Престижа до ^0.95",
+    "upg_algo_83_desc": "Break Prestige buyable upgrades effects ^1.015",
     "upg_algo_93_name": "Node 93",
-    "upg_algo_93_desc": "Усиливает эффекты всех покупаемых улучшений Осколков на ^1.25",
+    "upg_algo_93_desc": "Shard Achievements requirements ^0.8 and remove 10 stages limit",
     "upg_algo_101_name": "Node 101",
-    "upg_algo_101_desc": "Утраивает доход {{ref_cur}}",
+    "upg_algo_101_desc": "Gain more {{ref_cur}} based on gathered Crystals",
 
     "upg_algo_cpu_req": "Requires {{cpu_lvl}} CPU level",
 
@@ -757,13 +762,78 @@
             },
             "names": {
                 "1": ["Imtel SIM4-01", "Imtel SIM4-02", "Imtel SIM8-01", "Epple I", "MMD-1", "MMD-2"],
-                "2": ["5 VDC PSU", "Epple I PSU", "110/230 VAC PSU"],
+                "2": ["5 VDC PSU", "110/230 VAC PSU", "Epple I PSU", "110/230 VAC PSU II"],
                 "3": ["Imtel 4004", "Imtel 8008", "MOS Tech 6502", "Imtel 8080a"],
                 "4": ["4 BIT chip", "2 byte chip", "8 byte chip", "32 byte chip"],
                 "5": ["4 byte PROM", "16 byte PROM", "64 byte EPROM", "256 byte EPROM"]
             }
         } 
     },
+
+    "automechanism": {
+        "name": {
+            "1": "Auto unlock Shard Achievements",
+            "2": "Autobuy Fortune Tokens",
+            "3": "Autobuy Supercrystal upgrades",
+            "4": "Autobuy runes",
+            "5": "Auto coin upgrade super-modernization",
+            "6": "Autobuy Shard upgrades",
+            "7": "Autobuy Break Prestige upgrades",
+            "8": "Autobuy Fortune upgrades",
+            "9": "Autofill Overdrive",
+            "10": "Autogenerate Supercrystals",
+            "11": "Autobuy Balance upgrades",
+            "12": "Autobuy +Coins and -Coins",
+            "13": "Auto activate Fortune Boosts",
+            "14": "Autobuy Minerals",
+            "15": "Autobuy and use supershop items",
+            "16": "Auto complete Prestige Challenges"
+        },
+        "consumation": {
+            "1": "Consumes: 2 Watt",
+            "2": "Consumes: 4 Watt",
+            "3": "Consumes: 2 Watt",
+            "4": "Consumes: 4 Watt",
+            "5": "Consumes: 5 Watt",
+            "6": "Consumes: 5 Watt",
+            "7": "Consumes: 6 Watt",
+            "8": "Consumes: 4 Watt",
+            "9": "Consumes: 4 Watt",
+            "10": "Consumes: 6 Watt",
+            "11": "Consumes: 6 Watt",
+            "12": "Consumes: 7 Watt",
+            "13": "Consumes: 6 Watt",
+            "14": "Consumes: 8 Watt",
+            "15": "Consumes: 8 Watt",
+            "16": "Consumes: 10 Watt"
+        },
+        "romreq": {
+            "1": "Requires 1st Hard disk level",
+            "2": "Requires 2nd Hard disk level",
+            "3": "Requires 3rd Hard disk level"
+        }
+    },
+    "maxActivatedMechs": "Maximum mechanisms activated",
+    "notEnoughWatt": "Not enough Watt to activate",
+    "activeMechanisms": "Active mechanisms: ",
+
+    "plusCoinsPlaceholder": "+Coins to buy",
+    "minusCoinsPlaceholder": "-Coins to buy",
+    "amount": "Amount",
+    "changePresetAfterXPrestiges": "Change preset after X prestiges",
+    "automech12preset": "Preset: {{preset}} ({{prestiges}} prestiges left)",
+
+    "spentXFortuneTokens": "Spend X fortune tokens",
+
+    "openMenu": "Open menu",
+    "mineralOrder": "Minerals order to buy (from left to right):",
+    "availableMinerals": "Available minerals (drag&drop):",
+    "mineralsToBuy": "Amount of minerals to buy:",
+
+    "itemOrder": "Items order to buy and use (from left to right):",
+    "availableItems": "Available items (drag&drop):",
+    "itemsToBuy": "Amount of items to buy:",
+    "itemsRespec": "Respec items after changing preset: ",
 
     "motherboardRequirment": "A newer motherboard is required!",
     "wattRequirement": "Not enough Watts for upgrade!",
@@ -790,7 +860,8 @@
             "\"Let the game begin!\"", "\"Ah shard here we go again\"", "\"This is NOT game about miners\"", "\"I like the pain\"", "\"Super everything\"", "\"Why shards won't help?\"", "\"Jackpot\"", "\"I was in [REDACTED] dimension\"", "\"NICE\"", "\"Hamon OVERDRIVE\"",
             "Adios.", "After all these years, finally I have them all!", "This is not Sparta", "Modernize yourself. Now!", "Super first 10 thousands", "Soporific virus", "Only invest!", "Be aware of many shards", "Too prestigious", "U-100",
             "99% Of Gamblers Quit Before They Win Big", "The First Googol of Coins", "Yin and Yang", "INCREDIBLE POWER", "Flaming Drive", "God of Luck", "Game On", "Total Annihilation", "Prestigious Champion", "Finale",
-            "Made In Heaven", "I'll find a Virus and destroy it", "Time Machine", "First Byte", "TREE OF LIFE", "Is this a Reflash?"
+            "Made In Heaven", "I'll find a Virus and destroy it", "Time Machine", "First Byte", "TREE OF LIFE", "Is this a Reflash?", "Shattered but not broken", "M-100", "Digit", "al God",
+            "My first Computer", "Negativity can be like addiction", "Who wants to be a Supermillionaire?", "At Speed Of Light", "This is NOT Reflash", "I the hell need those crystals"
         ]
         },
 
@@ -856,10 +927,17 @@
     "achievement64Desc": "<ut> First Byte (64) </ut> <br> <br> Get 8 BITs.</it>",
     "achievement65Desc": "<ut> TREE OF LIFE (65) </ut> <br> <br> Buy all nodes in BIT-TREE.",
     "achievement66Desc": "<ut> Is this a Reflash? (66) </ut> <br> <br> Do Reflash in less than 1 hour. <br> <br> <it>Reward: Buyable and Single upgrades, U-mulitplier, U-power and Prestige automation won't reset after Reflash. </it>",
-    "achievement67Desc": "<ut>  (47) </ut> <br> <br>  <br> <br> <it>:  </it>",
-    "achievement68Desc": "<ut>  (48) </ut> <br> <br>  <br> <br> <it>:  </it>",
-    "achievement69Desc": "<ut>  (49) </ut> <br> <br>  <br> <br> <it>:  </it>",
-    "achievement70Desc": "<ut>  (50) </ut> <br> <br>  <br> <br> <it>:  </it>",
+    "achievement67Desc": "<ut> Shattered but not broken (67) </ut> <br> <br> Complete Challenge inside Prestige Challenge 8.",
+    "achievement68Desc": "<ut> M-100 (68) </ut> <br> <br> Gather total 100 minerals. <br> <br> <it>Reward: Reduce base cost of Aquamarine.</it>",
+    "achievement69Desc": "<ut> Digit (69) </ut> <br> <br> Do Reflash without using + and - Coins. <br> <br> <it>Reward: Increase max effects of all Fortune Boosts by 5%. </it>",
+    "achievement70Desc": "<ut> al God (70) </ut> <br> <br> Do Reflash without Fortune Boosts. <br> <br> <it>Reward: Increase Scales of Balance generation speed by 10%. </it>",
+
+    "achievement71Desc": "<ut> My first Computer (71) </ut><br><br> Upgrade all Computer components to level 1.",
+    "achievement72Desc": "<ut> Negativity can be like addiction (72) </ut><br><br> Reduce negative effects of Balance coins to 0%.",
+    "achievement73Desc": "<ut> Who wants to be a Supermillionaire? (73) </ut><br><br> Gather {{n1e6}} supercoins<br><br><it>Reward: Increase supercoin chance multiplicatively by 10%.</it>",
+    "achievement74Desc": "<ut> At Speed Of Light (74) </ut><br><br>Complete all Prestige Challenges within 50ms.",
+    "achievement75Desc": "<ut> This is NOT Reflash (75) </ut><br><br> Do Reflash within 5 minutes. <br><br><it>Reward: U-Adder and U-Reducer automation won't reset after Reflash. </it>",
+    "achievement76Desc": "<ut> I the hell need those crystals (76) </ut><br><br> Gather 100 supercrystals.",
 
     "sa_name_1": "Coin Factory",
     "sa_effdesc_1": "to α-coin gain",
@@ -996,6 +1074,7 @@
     "plusCoinForCoinsName": "+Coins: ",
     "pchall7Name": "Challenge 12 completions (PC7): ",
     "reflashUpg11Name": "Heritage: ",
+    "node71Name": "Node 71: ",
 
     "luckyCloverName": "Lucky Clover: ",
     "charismaName": "Charisma: ",
@@ -1010,6 +1089,7 @@
     "digiPerm3Name": "Event treasure Supersupercoin (permanent): ",
     "digiTemp2Name": "Event treasure First alpha-coin (temporary): ",
     "digiTemp3Name": "Event treasure Supersupercoin (permanent): ",
+    "achievement73Name": "Achievement 73: ",
 
     "baseCrystalName": "Base crystals: ",
     "brilliantDoublerName": "Brillian Doubler: ",
@@ -1029,6 +1109,7 @@
     "reflashAlgo22Name": "Node 22: ",
     "digiPerm4Name": "Event treasure Legacy Prestige (permanent): ",
     "digiTemp4Name": "Event treasure Legacy Prestige (temporary): ",
+    "node81Name": "Node 81: ",
 
     "firstShardBuyableEffectName": "Crystal Gauntlet: ",
     "fifthShopBuyableEffect1Name": "Shard Rain: ",
@@ -1036,6 +1117,7 @@
     "shardBlessingName": "Shard Blessing: ",
     "triplerName": "Tripler: ",
     "reflashAlgo42Name": "Node 42: ",
+    "node91Name": "Node 91: ",
 
     "secondShardBuyableEffectName": "Generator Boost: ",
     "fifthShopBuyableEffectStats2Name": "Shard Rain: ",
@@ -1311,6 +1393,8 @@
     "chapter19Name": "Prestige Challenges",
     "chapter20Name": "Reflash",
     "chapter21Name": "Supercoins 2",
+    "chapter22Name": "Computer",
+    "chapter23Name": "Auto-mechanisms",
 
     "chapter1": "<b> July 10, 2175. </b> <br> Who... am... I and... what is this place? <br> You dont remember anything. <br> I feel... feel something looking at me. <br> That \"something\" probably wants me to pick up those coins. <br> They had <b>Alpha</b> icon, I don't see anything except them. <br> I don't like it... <br> I think I have no choice...",
     "chapter2": "<b> July 11, 2175. </b> <br> Next day... <br> I've collected enough coins for buying something called <b>Upgrades</b>. <br> They're really became helpful, because I started to gaining more coins. <br> Anyway I hope it's not end and something more hides behind them.",
@@ -1333,6 +1417,9 @@
     "chapter19": "<b>April 10, 2177.</b> <br> After a stormy controversy between Fortune and Balance <br> Where I had to balance Fortune tokens between these two branches <br> I finally saw the true face of Fortune, who was shocked that I made their ability neutral <br> Fortunately, Balance, although neutral, helped me put this snide individual in their place <br> In the end, all their random values and buffs were destroyed by stability <br> After long attempts to build a fine gain of Crystals, another gate appeared in front of me... <br> They were similar to ones that called me to pass Challenges... <br> However, these ones glowed a bright blue color, and this time, they did not call me to themselves, but checked whether I was worthy of them or not... <br> <ut>Prestige Challenges</ut>, I will show you what it means to be worthy.",
     "chapter20": "<b>June 21, 2177.</b><br>A special day...<br>I've been here for almost two years...<br>But I have never felt anything like this...<br>After completing Prestige Challenges with immense difficulty...<br>Defeated Fortune with help of Balance, broke Prestige barrier...<br>Collected Supercrystals, broke Crystals, performed Prestiges...<br>Performed U-multiplier resets, collected supercoins, collected coins...<br>I felt an incredible power and a completely renewed world.<br>I <ut>reflashed</ut> it completely.<br>Now everything old here looks brand new, yet I have nothing except 1 BIT.<br>This single 1 BIT radiates incredible power, as if it is ready to turn world upside down.<br>It seems the most interesting part is just beginning...",
     "chapter21": "<b>July 11, 2177.</b><br>A lot has changed in supershop over all this time...<br>I decided to write second part about <ut>supercoins</ut>...<br>In process of collecting coins and reflashing, the so-called Mr. Super...<br>Became more... human? I don't know. He is still an NPC, but the number of phrases is increasing.<br>His phrases were becoming more and more suspicious, but he still brushes it off.<br>Perhaps he knows why I am here?<br>God, two years have passed, and not a single answer.<br>Oh right, I was very upset that the power of supercoins is not enough...<br>To remain between world reflashes...<br>Fortunately, Special upgrades are still with me.",
+    "chapter22": "<b>March 9, 2179</b><br>After buying Accelerator time was flying too fast,<br>I wasn't in conditions to control this crazy machine...<br>Although coin and neutral gains got increased,<br>And I'm very happy about it.<br>Neutral farm is most boring part in Reflash.<br>After 2 years I collected enough BITs...<br>To unlock... Computer? Wait what?<br>Computer? So Reflash changed this world as well<br>It became more bright than 4 years ago.<br>I noticed that after upgrading some components everything became more...<br>Readable and understandable<br>I have feeling that this world is holding by this computer...<br>But how this is possible if it stands right in front of me?<br>However this is fact.<br>Interesting, can I run DOOM on this computer?",
+    "chapter23": "<ut>May 8, 2179</ut><br>After upgrading some components I noticed something new<br>Some... Auto-mechanisms...<br>I came closer and understood it's some new type of Automation<br>But it can automate literally everything!<br>Although... I didn't find auto-reflash settings...<br>I guess my computer is not powerful enough.<br>Also something strange happened...<br>After activating 5 mechanisms (I could only 4)...<br>All world became blue and after that I fainted and...<br>Everything became fine, but activated mechanisms again 0.<br>I see, Computer is core of this world, I guess.<br>I don't want to test blue world again. Blue world of death.",
+
 
     "leftLoreTitle": {
         "1": "1 - The Beginning of Journey",
@@ -1370,6 +1457,8 @@
     "help23Name": "Reflash",
     "help24Name": "Accelerator",
     "help25Name": "ALGORITMIC TREE",
+    "help26Name": "Computer",
+    "help27Name": "Аuto-mechanisms",
 
     "help1": "Welcome to Digital God! Here you will find exciting and interesting adventure, where you, the main character, wake up in unknow world, where there is no one except you. Your goal is reveal all secrets of this world. Alpha-coins is gonna help you through this adventure, but they're seems suspicious for you. <br> <br> You can get Alpha-coins in two ways: Active and Passive.<br><br><ut>Active</ut> it's a way to get α-coins by clicking on α-coin icon in center of the screen. At beginning you'll get only one α-coin, but you can increase gain by buying upgrades, which you'll find at bottom. <br><br><ut>Passive</ut> gain of α-coins is alternative way. You can leave the game, close, or even turn off the computer, you'll still gain the same amount of α-coins! To start getting α-coins passively or \"per second\" (actually every 50ms) you need to buy first upgrade \"Small Investment\". You have enough α-coins for it. Later you can buy them more ane more, and then increase the gain by other upgrades! <br><br>Besides upgrades there is another α-coin multipliers. To learn more about them check other tabs. Good luck and have fun!",
     "help2": "Game has different tabs where you can read the information or do some action.<br><br><ut>Settings</ut> - tab, where you can change the game. <br> It's divided into tree subtabs: <ut>Saving</ut>, <ut>Graphic</ut>, <ut>Other</ut>.  <br> <ut>Saving</ut> - there you can do manual save/loading, change autosaving settings or import/export to file.<br> <ut>Graphic</ut> will allow to change the game looking <br> <ut>Other</ut> actually it doesn't have settings, but different information like changelog.<br><br><ut>Clicker</ut> - main tab. It does have two subtabs: <ut>Coins</ut> - there you can click on the α-coin and buy upgrades, and <ut>Overdrive</ut>, which will unlock later (check. Overdrive page) <br><br><ut>Achievements</ut> - it does show achievements, their requirements. which rewards they're give and total bonus based on their count.<br><br><ut>Information</ut> - does have three subtabs: <ut>Statistics</ut> - shows game time, count of different resources and some things, <ut>Multipliers</ut> - shows what and how much boosts the gain of different resources. <ut>About game</ut> - information about game, it's devs and thanks.",
@@ -1396,6 +1485,8 @@
     "help23": "<ut>Reflash</ut> - the second full layer prestige layer. To perform a Reflash reset, you need to complete two tasks: collect Infinity coins and complete Prestige Challenge 8. It resets all progress, including supershop, except for Achievements, some Shard Achievements, and Special Supershop upgrades.<br>As a reward, you will receive a new currency - BITs, which can later be converted into Bytes, etc. BITs can be spent on Reflash upgrades - standard upgrades: 6 single and 1 buyable, increasing the <ut>Accelerator</ut> efficiency, and purchasing nodes in <ut>ALGORITHMIC TREE</ut>. Other options will be added as game updates.<br><br>Don't forget that you can disable confirmation before each reset in settings, as well as perform a reset using the \"R\" hotkey.",
     "help24": "<ut>Accelerator</ut> - a brand new way to increase all production in game, allowing you to directly speed up time in world. Accelerator allows you to speed up all passive production (coins, shards, and even supercoins), and even works offline (it doesn't clog limit, for example, if you have x2 acceleration with an 8-hour limit, the maximum offline time will be 16 hours). Obviously, it also speeds up GAME time, which allows you to increase effect of upgrades that depend on time faster.<br><br> Accelerator DOES NOT AFFECT automation, since it uses real time.<br>To buy Accelerator, you need to collect ALL U-tils; the U-tils themselves won't be spent. Formula for buying Accelerator is 50^(Total U-tils).<br><br>The effect of Accelerator is not static, it changes within a certain radius (if Acc. 1, effect will be from x1.25 to x2) every Reflash.<br><br>The Accelerator itself has 4 upgrades that increase the min. and max. effect boundaries of Accelerator (Stabilizers), give an additional additive effect to it, and increase effect of Stabilizers. Upon purchase, they are immediately applied to the current Accelerator effect.",
     "help25": "<ut>ALGORITHMIC TREE</ut> - an upgrade tree that becomes available after completing first Reflash. This tree is divided into several layers: BIT-tree, Byte-tree, etc. When this tab first appears, only the BIT-tree layer will be available. Stay tuned for updates.<br>Upgrades (nodes) have connecting branches, meaning to purchase a lower node, you need to purchase the node above it. Cost of node is expressed in BITs.<br><br>Tree can also be reset, except for permanent nodes (for example, Node 51), but this requires completing current Reflash and performing a reset, making sure to select the tree reset button.<br>Also, for flexible tree configuration, preset functions have been added. On tree tab, you can quickly export or import the tree from clipboard. In modal window of one of presets, you can perform several operations: Rename (preset), Copy (node order), Paste (node order), Reset (preset completely), Save preset, Import (activate available node order into tree). Node order means activating nodes in a given order. The node order format must be strictly \"XX, XX, XX, XX, ...\".<br><br>The maximum length of a preset name is 8 characters, reference :D.",
+    "help26": "<ut>Computer</ut> - a new Reflash tab that unlocks after purchasing Node 51.<br><br>This tab shows your OS, DigitalOS, which will be updated as you upgrade your components. The operating system does not affect the gameplay and is available only for decoration (changes may occur in the future).<br><br>All components have some common conditions:<br>- Maximum level, usually increased by your Motherboard. You cannot upgrade a component if it exceeds maximum level.<br>- Watt consumption, increased by your Power Supply Unit (PSU). If after next upgrade used Watt value exceeds the maximum, you also can't upgrade the component.<br><br>Types of components:<br>- Motherboard - the most important component, which increases the maximum level for upgrading other components.<br>- Power Supply - increases the maximum Watt consumption of other components and Auto-mechanisms.<br>- Processor - opens new nodes in the ALGORITHMIC TREE. The required processor levels for activation will appear on Nodes in TREE. Some levels can also unlock new features.<br>- RAM - increases the limit of BITs that can be obtained after Reflash reset and increases the maximum simultaneous use of Auto-mechanisms.<br>- Hard Disk - increases the maximum number of activated Nodes and unlocks new types of Auto-mechanisms.<br><br>Some components have real prototypes, from which the names and images were taken. ",
+    "help27": "<ut>Auto-mechanisms</ut> - a new era of Automation that unlocks after upgrading the Hard Disk to level 1.<br><br>In this tab, you can activate Auto-mechanisms that automate different processes, such as: buying upgrades, buying runes, activating generations, and even using items.<br><br>All Auto-mechanisms have some common conditions:<br>- Active mechanisms, upgrade RAM to increase this number. This is number of simultaneously activated auto-mechanisms. Each level of RAM increases limit by 2, the base limit is 4.<br>- Watt consumption, increased by your Power Supply Unit (PSU). Just like Computer components, these auto-mechanisms require a certain amount of Watts to activate.<br><br>Many names of auto-mechanisms speak for themselves, here will be described the most interesting of them:<br>- <ut>Buying Shards/Fortune/Balance/Break Prestige upgrades</ut> - implies buying of buyable AND single upgrades. Buying Fortune upgrades is carried out in order: Luck -> Wheel of Fortune -> Cornucopia and does reset after each Prestige.<br>- <ut>Autofill Overdrive</ut> - activates all Overdrives and saves this state after Prestige and Reflash.<br>- <ut>Supercrystals generation </ut> - automatically starts generating a Supercrystal as if you were holding it.<br>- <ut>Activate Fortune Boosts</ut> - spends X Fortune Tokens on boosts (don't forget to change 12 to 6 if you bought Neutrality)<br>- <ut>Complete Prestige Challenges</ut> - automatically completes Prestige Challenges with 50ms time upon reaching a certain amount of coins (starting from 1e200 and up to 1e280).<br><br>Auto-mechanisms with presets<br><br>This is type of automation with advanced solution with 3 presets that change every X Prestiges, the number of which can be changed below. For each preset, you can set up Crystal farming or Coin farming and automatically alternate between presets. If you don't want to use them, just write a large number in a preset change. The maximum number of presets is 3. <br>Types of auto-mechanisms with presets:<br>- <ut>Buy + and - coins</ut> - buys the exact number of + Coins and - Coins (if you have more or equal, it won't buy). Coins do reset after every preset change.<br>- <ut>Buy minerals</ut> - has a personal menu in which you can drag and drop (or double-click) to set order of buying minerals, and below you can write EXACTLY how many minerals you need to buy. If you write amount, but did not add it to order, it won't buy, similarly if you added it to order, but didn't write amount. Minerals do reset after every preset change.<br>- <ut>Buy and use items</ut> - similar to minerals, it has a personal menu for setting order and amount of purchases. Note that mechanism simultaneously BUYS AND USES an item, they can eat your supercoins, if set up incorrectly. It does share same nuances as Buy Minerals, and also you can't buy and use more than limit, nor activate more than three different Item effects.",
 
     "noEvent": "There are no events in the game right now, come back later",
     "spiritualEventTitle": "Welcome to Spiritual Event!",

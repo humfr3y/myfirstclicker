@@ -292,12 +292,12 @@ const UPGS = {
                         let finalCost = Math.pow(10, logCost);
 
                         if (player.reflash.algo.includes(43)) {
-                            finalCost = Math.pow(finalCost, 0.975);
+                            finalCost = Math.pow(finalCost, 0.98);
                         }
 
                         return finalCost
                     },
-                    effect: function(x = player.prestige.break.buyables[1]) { return x * 0.1 * UPGS.prestige.break.buyables[2].effect(); },
+                    effect: function(x = player.prestige.break.buyables[1]) { return Math.pow(x * 0.1 * UPGS.prestige.break.buyables[2].effect(), UPGS.reflash.algo.tree[24].effect()); },
                 },
                 {
                     id: 2, power: 8, basePrice: 1e15, elementId: 'breakPBuyableU2',
@@ -306,13 +306,13 @@ const UPGS = {
                         let finalCost = Math.pow(10, logCost);
 
                         if (player.reflash.algo.includes(43)) {
-                            finalCost = Math.pow(finalCost, 0.975);
+                            finalCost = Math.pow(finalCost, 0.98);
                         }
 
                         return finalCost
                     },
                     customCostMod: function() { return player.reflash.algo.includes(43) ? 0.9 : 1; },
-                    effect: function(x = player.prestige.break.buyables[2]) { return 1 + x / 4; },
+                    effect: function(x = player.prestige.break.buyables[2]) { return Math.pow(1 + x / 5, UPGS.reflash.algo.tree[24].effect()); },
                 },
                 {
                     id: 3, power: 10000, basePrice: 5e17, elementId: 'breakPBuyableU3',
@@ -321,13 +321,13 @@ const UPGS = {
                         let finalCost = Math.pow(10, logCost);
 
                         if (player.reflash.algo.includes(43)) {
-                            finalCost = Math.pow(finalCost, 0.975);
+                            finalCost = Math.pow(finalCost, 0.98);
                         }
 
                         return finalCost
                     },
                     customCostMod: function() { return player.reflash.algo.includes(43) ? 0.9 : 1; },
-                    effect: function(x = player.prestige.break.buyables[3]) { return Math.pow(3, x); },
+                    effect: function(x = player.prestige.break.buyables[3]) { return Math.pow(Math.pow(3, x), UPGS.reflash.algo.tree[24].effect()); },
                 },
                 {
                     id: 4, power: 16, basePrice: 1e20, elementId: 'breakPBuyableU4',
@@ -336,13 +336,13 @@ const UPGS = {
                         let finalCost = Math.pow(10, logCost);
 
                         if (player.reflash.algo.includes(43)) {
-                            finalCost = Math.pow(finalCost, 0.975);
+                            finalCost = Math.pow(finalCost, 0.98);
                         }
 
                         return finalCost
                     },
                     customCostMod: function() { return player.reflash.algo.includes(43) ? 0.9 : 1; },
-                    effect: function(x = player.prestige.break.buyables[4]) { return Math.pow(1.5, x); },
+                    effect: function(x = player.prestige.break.buyables[4]) { return Math.pow(Math.pow(1.5, x), UPGS.reflash.algo.tree[24].effect()); },
                 },
                 {
                     id: 5, power: 10000, basePrice: 5e22, elementId: 'breakPBuyableU5',
@@ -351,13 +351,13 @@ const UPGS = {
                         let finalCost = Math.pow(10, logCost);
 
                         if (player.reflash.algo.includes(43)) {
-                            finalCost = Math.pow(finalCost, 0.975);
+                            finalCost = Math.pow(finalCost, 0.98);
                         }
 
                         return finalCost
                     },
                     customCostMod: function() { return player.reflash.algo.includes(43) ? 0.9 : 1; },
-                    effect: function(x = player.prestige.break.buyables[5]) { return x / 10000; },
+                    effect: function(x = player.prestige.break.buyables[5]) { return Math.pow(1 + x / 10000, UPGS.reflash.algo.tree[24].effect()) - 1; },
                 }
             ], 'break.buyables'),
             singles: new UniversalSinglesManager('prestige', 'break.singles', [
@@ -463,7 +463,7 @@ const UPGS = {
             { id: 5, elementId: 'shopSingleU5', basePrice: 3000 },
             { id: 6, elementId: 'shopSingleU6', basePrice: 100 },
             { id: 7, elementId: 'shopSingleU7', basePrice: 10000 },
-            { id: 8, elementId: 'shopSingleU8', basePrice: 25000 },
+            { id: 8, elementId: 'shopSingleU8', basePrice: 50000 },
         ]),
 
         permanent: new ShopPermanentManager('shop', [
@@ -482,19 +482,24 @@ const UPGS = {
         ], 'permanentUpgrades'),
 
         temporaryBonuses() { 
-            const elements = document.querySelectorAll('#temporaryBonuses .temporaryEffect'); let count = 0
+            const used = player.shop.items.used
+            let total = 0
         
-            elements.forEach(el => {
-                const displayStyle = window.getComputedStyle(el).display;
-                
-                if (displayStyle === 'block') {
-                    count++;
+            for (let i = 1; i <= 6; i++) {
+                if (used[i] > 0 && i != 3) {
+                    total++
                 }
-            });
-            return count
+            }
+            return total
         },
         items_limit() {
-            return this.temporaryBonuses() == 3
+            return this.temporaryBonuses() >= 3
+        },
+        respec_items() {
+            for (let i = 1; i <= 6; i++) {
+                player.shop.items.used[i] = 0
+                player.shop.items.timer[i] = 0
+            }
         },
 
         items: new ShopItemsManager([
@@ -545,7 +550,7 @@ const UPGS = {
         {
             id: 4, elementId: 'mineral4',
             cost1: x => 2 + Math.floor(x / 5),
-            cost2: x => 1e111 * Math.pow(100000, x) * (Math.pow(1000000, Math.floor(x / 10))),
+            cost2: x => ACHS.has(68) ? 1e90 * Math.pow(100000, x) * (Math.pow(1000000, Math.floor(x / 10))) : 1e111 * Math.pow(100000, x) * (Math.pow(1000000, Math.floor(x / 10))),
             effect1: function(x) { return x == 0 || player.prestige.challenge.activated == 8 ? 1 : this.applyMods(Math.pow(3, x / 1.7)); },
             effect2: function(x) { return x == 0 || player.prestige.challenge.activated == 8 ? 1 : this.applyMods(Math.pow(1.045, x)); },
             effect3: function(x) { return x == 0 || player.prestige.challenge.activated == 8 ? 1 : this.applyMods(x*33); }
@@ -555,39 +560,39 @@ const UPGS = {
         boosts: new FortuneBoostsManager([
             { id: 1, generatorType: 'digits', 
                 min: () => Math.pow(Math.pow(10, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
-                max: () => Math.pow(Math.pow(1500, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+                max: () => Math.pow(Math.pow(1500, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (ACHS.has(69) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
             { id: 2, generatorType: 'digits', 
                 min: () => Math.pow(Math.pow(1.5, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
-                max: () => Math.pow(Math.pow(5, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+                max: () => Math.pow(Math.pow(5, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (ACHS.has(69) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
             { id: 3, generatorType: 'digits', 
                 min: () => Math.pow(Math.pow(2, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
-                max: () => Math.pow(Math.pow(8, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+                max: () => Math.pow(Math.pow(8, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (ACHS.has(69) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
             { id: 4, generatorType: 'float2', 
                 min: () => Math.pow(Math.pow(1.01, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
-                max: () => Math.pow(Math.pow(1.045, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+                max: () => Math.pow(Math.pow(1.045, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (ACHS.has(69) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
             { id: 5, generatorType: 'float2', 
                 min: () => Math.pow(Math.pow(1.01, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
-                max: () => Math.pow(Math.pow(1.065, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+                max: () => Math.pow(Math.pow(1.065, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (ACHS.has(69) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
             { id: 6, generatorType: 'digits', 
                 min: () => Math.pow(Math.pow(1.5, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
-                max: () => Math.pow(Math.pow(4, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+                max: () => Math.pow(Math.pow(4, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (ACHS.has(69) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
             { id: 7, generatorType: 'float3', 
                 min: () => Math.pow(Math.pow(1.015, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
-                max: () => Math.pow(Math.pow(1.095, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+                max: () => Math.pow(Math.pow(1.095, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (ACHS.has(69) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
             { id: 8, generatorType: 'float2', 
                 min: () => Math.pow(Math.pow(2.5, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
-                max: () => Math.pow(Math.pow(4.5, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) },
+                max: () => Math.pow(Math.pow(4.5, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (ACHS.has(69) ? 1.05 : 1) },
             { id: 9, generatorType: 'float3', 
                 min: () => Math.pow(Math.pow(1.055, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
-                max: () => Math.pow(Math.pow(1.115, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+                max: () => Math.pow(Math.pow(1.115, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1 )* (ACHS.has(69) ? 1.05 : 1)  * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
             { id: 10, generatorType: 'int', 
                 min: () => 2, max: () => 2 },
             { id: 11, generatorType: 'float3', 
                 min: () => Math.pow(Math.pow(1.005, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
-                max: () => Math.pow(Math.pow(1.0125, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
+                max: () => Math.pow(Math.pow(1.0125, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (ACHS.has(69) ? 1.05 : 1)  * (player.prestige.challenge.completed.includes(5) ? PRES_CHALLENGE[5].effect() : 1) },
             { id: 12, generatorType: 'float3', 
                 min: () => Math.pow(Math.pow(1.01, UPGS.fortune.upgrades.buyables[1].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()), 
-                max: () => Math.pow(Math.pow(1.03, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) }
+                max: () => Math.pow(Math.pow(1.03, UPGS.fortune.upgrades.buyables[2].effect() * UPGS.shop.buyables[13].effect()), UPGS.reflash.algo.tree[14].effect()) * (ACHS.has(54) ? 1.05 : 1) * (ACHS.has(69) ? 1.05 : 1) }
         ]),
         upgrades: {
             buyables: new FortuneBuyablesManager('supercrystal', [
@@ -623,9 +628,42 @@ const UPGS = {
     },
     balance: {
         buyables: new BalanceBuyablesManager('balance', [
-            { id: 1, basePrice: 10, power: 1.125, elementIndex: 2, effect: function(x = player.balance.upgrades.buyables[1]) { return x == 0 ? 1 : 1 + x / 250; } },
-            { id: 2, basePrice: 10, power: 1.15, elementIndex: 3, effect: function(x = player.balance.upgrades.buyables[2]) { return x == 0 ? 1 : 1 + x / 400; } },
-            { id: 3, basePrice: 50, power: 1.15, elementIndex: 4, effect: function(x = player.balance.upgrades.buyables[3]) { return x == 0 ? 1 : Math.pow(1.05, x); } }
+            { id: 1, basePrice: 10, power: 1.125, elementIndex: 2, 
+                cost: function(x = player.balance.upgrades.buyables[1]) {
+                    let logCost = Math.log10(this.basePrice) + x * Math.log10(this.power);
+                    let finalCost = Math.pow(10, logCost);
+
+                    if (player.reflash.algo.includes(62)) {
+                        finalCost = Math.pow(finalCost, UPGS.reflash.algo.tree[15].effect());
+                    }
+
+                    return finalCost
+                },
+                effect: function(x = player.balance.upgrades.buyables[1]) { return x == 0 ? 1 : 1 + x / 250; } },
+            { id: 2, basePrice: 10, power: 1.15, elementIndex: 3, 
+                cost: function(x = player.balance.upgrades.buyables[2]) {
+                    let logCost = Math.log10(this.basePrice) + x * Math.log10(this.power);
+                    let finalCost = Math.pow(10, logCost);
+
+                    if (player.reflash.algo.includes(62)) {
+                        finalCost = Math.pow(finalCost, UPGS.reflash.algo.tree[15].effect());
+                    }
+
+                    return finalCost
+                },
+                effect: function(x = player.balance.upgrades.buyables[2]) { return x == 0 ? 1 : Math.min(1 + x / 400, 2); } },
+            { id: 3, basePrice: 50, power: 1.15, elementIndex: 4, 
+                cost: function(x = player.balance.upgrades.buyables[3]) {
+                    let logCost = Math.log10(this.basePrice) + x * Math.log10(this.power);
+                    let finalCost = Math.pow(10, logCost);
+
+                    if (player.reflash.algo.includes(62)) {
+                        finalCost = Math.pow(finalCost, UPGS.reflash.algo.tree[15].effect());
+                    }
+
+                    return finalCost
+                },
+                effect: function(x = player.balance.upgrades.buyables[3]) { return x == 0 ? 1 : Math.pow(1.05, x); } }
         ], 'upgrades.buyables'),
 
         singles: new BalanceSinglesManager('balance', 'upgrades.singles', [
@@ -643,7 +681,7 @@ const UPGS = {
     reflash: {
         buyables: new UniversalBuyablesManager('reflash', [
             {
-                id: 1, power: 4, basePrice: 4, elementId: 'rBuyableU1',
+                id: 1, power: 6, basePrice: 4, elementId: 'rBuyableU1',
                 effect: function(x = player.reflash.upgrades[1]) { return Math.pow(2, x); }
             },
         ]),
@@ -720,18 +758,18 @@ const UPGS = {
                 { id: 51, row: 5, col: 2,   draw: [41, 42, 43],     req: [41, 42, 43],                                                                                          cost: 6     },
                 // byte tree                nodes to draw line btwn required nodes              cpu req level   required to not have    required to have at least one           cost of node
                 { id: 61, row: 6, col: 2,   draw: [51],             req: [51],                  cpu_req: 1,                             at_least_one_req: [41, 42, 43],         cost: 8,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 1.25 : 1}},
-                { id: 62, row: 6, col: 3,   draw: [61],             req: [61],                  cpu_req: 2,                                                                     cost: 16,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 2 : 1} },
-                { id: 63, row: 6, col: 4,   draw: [62],             req: [62],                  cpu_req: 3,                                                                     cost: 64,   effect(x=player.reflash.algo.includes(this.id)) {return x ? player.supercrystal.currency : 1}},
+                { id: 62, row: 6, col: 3,   draw: [61],             req: [61],                  cpu_req: 2,                                                                     cost: 16,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.75 : 1} },
+                { id: 63, row: 6, col: 4,   draw: [62],             req: [62],                  cpu_req: 3,                                                                     cost: 64,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 1.25 : 1}},
                 { id: 71, row: 7, col: 1,   draw: [61],             req: [61],                  cpu_req: 1,     not_req: [72, 73],                                              cost: 8,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 1e15 : 1}},
                 { id: 81, row: 8, col: 1,   draw: [71],             req: [71],                  cpu_req: 1,                                                                     cost: 8,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 1e9 : 1}},
-                { id: 91, row: 9, col: 1,   draw: [81],             req: [81],                  cpu_req: 1,                                                                     cost: 8,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 1e10 : 1}},
+                { id: 91, row: 9, col: 1,   draw: [81],             req: [81],                  cpu_req: 1,                                                                     cost: 8,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 1e12 : 1}},
                 { id: 72, row: 7, col: 2,   draw: [61],             req: [61],                  cpu_req: 2,     not_req: [71, 73],                                              cost: 16    },
-                { id: 82, row: 8, col: 2,   draw: [72],             req: [72],                  cpu_req: 2,                                                                     cost: 16,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 2.5 : 1}},
+                { id: 82, row: 8, col: 2,   draw: [72],             req: [72],                  cpu_req: 2,                                                                     cost: 16,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 1.5 : 1}},
                 { id: 92, row: 9, col: 2,   draw: [82],             req: [82],                  cpu_req: 2,                                                                     cost: 16,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 2 : 1}},
-                { id: 73, row: 7, col: 3,   draw: [61],             req: [61],                  cpu_req: 3,     not_req: [71, 72],                                              cost: 32,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.8 : 1}},
-                { id: 83, row: 8, col: 3,   draw: [73],             req: [73],                  cpu_req: 3,                                                                     cost: 32,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.95 : 1} },
-                { id: 93, row: 9, col: 3,   draw: [83],             req: [83],                  cpu_req: 3,                                                                     cost: 32,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.6 : 1} },
-                { id: 101, row: 10, col: 2, draw: [91, 92, 93],                                 cpu_req: 3,                             at_least_one_req: [91, 92, 93],         cost: 24,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 1}},
+                { id: 73, row: 7, col: 3,   draw: [61],             req: [61],                  cpu_req: 3,     not_req: [71, 72],                                              cost: 24,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.85 : 1}},
+                { id: 83, row: 8, col: 3,   draw: [73],             req: [73],                  cpu_req: 3,                                                                     cost: 24,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 1.015 : 1} },
+                { id: 93, row: 9, col: 3,   draw: [83],             req: [83],                  cpu_req: 3,                                                                     cost: 24,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.8 : 1} },
+                { id: 101, row: 10, col: 2, draw: [91, 92, 93],                                 cpu_req: 3,                             at_least_one_req: [91, 92, 93],         cost: 24,   effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 1}},
 
                 //пример
                 // { 
@@ -912,14 +950,14 @@ const UPGS = {
         },
         computer: new ComputerManager('reflash', [
             {
-                id: 1, power: 4, basePrice: 3, elementId: 'computerComponent1', maxAmount: 4,
+                id: 1, power: 5, basePrice: 3, elementId: 'computerComponent1', maxAmount: 4,
                 effect: function(x = player.reflash.computer[1]) { return 1 + x; },
                 consumation: function(x = player.reflash.computer[1]) { return x * 6; },
                 next_effect: function() { return this.effect(x = player.reflash.computer[1] + 1) },
                 next_consumation: function() { return this.consumation(x = player.reflash.computer[1] + 1) },
             },
             {
-                id: 2, power: 4, basePrice: 3, elementId: 'computerComponent2', maxAmount: 2,
+                id: 2, power: 4, basePrice: 3, elementId: 'computerComponent2', maxAmount: 3,
                 effect: function(x = player.reflash.computer[2]) { return 25 * (x + 1); },
                 next_effect: function() { return this.effect(x = player.reflash.computer[2] + 1) },
             },
@@ -930,14 +968,14 @@ const UPGS = {
                 next_consumation: function() { return this.consumation(x = player.reflash.computer[3] + 1) },
             },
             {
-                id: 4, power: 3, basePrice: 4, elementId: 'computerComponent4', maxAmount: 3,
-                effect: function(x = player.reflash.computer[4]) { return 4 * Math.pow(4, x); },
+                id: 4, power: 4, basePrice: 3, elementId: 'computerComponent4', maxAmount: 3,
+                effect: function(x = player.reflash.computer[4]) { return 4 * Math.pow(2, x); },
                 consumation: function(x = player.reflash.computer[4]) { return x * 2; },
                 next_effect: function() { return this.effect(x = player.reflash.computer[4] + 1) },
                 next_consumation: function() { return this.consumation(x = player.reflash.computer[4] + 1) },
             },
             {
-                id: 5, power: 3, basePrice: 4, elementId: 'computerComponent5', maxAmount: 3,
+                id: 5, power: 4, basePrice: 3, elementId: 'computerComponent5', maxAmount: 3,
                 effect: function(x = player.reflash.computer[5]) { return 12 + x * 3 },
                 consumation: function(x = player.reflash.computer[5]) { return x * 3; },
                 next_effect: function() { return this.effect(x = player.reflash.computer[5] + 1) },
@@ -1070,7 +1108,425 @@ const AUTO = {
     ureducer: new AutomationTask('ureducer', function() {
         if (this.misc.time() > 50 && player.prestige.challenge.activated != 3 && player.uadders >= 4) LAYERS.ureducer.doReset();
         else if (player.time.ureducer >= player.automation.conditions.ureducer.time && player.uadders >= player.automation.conditions.ureducer.x_of_uadder && player.uadders >= 4 && player.prestige.challenge.activated != 3) LAYERS.ureducer.doReset();
-    })
+    }),
+
+    mechanisms: {
+        start(x) {
+            this.stop(x); // На всякий случай очищаем старый интервал
+            ELS.auto_mechanisms.interval[x] = setInterval(() => this[x].work(), 50);
+            player.automation.mechanism.checked[x] = true;
+        },
+
+        stop(x) {
+            if (ELS.auto_mechanisms.interval[x]) {
+                clearInterval(ELS.auto_mechanisms.interval[x]);
+                ELS.auto_mechanisms.interval[x] = '';
+            }
+            player.automation.mechanism.checked[x] = false;
+            if (this[x].after_work != undefined) this[x].after_work()
+        },
+
+        run(x) {
+            let mechanism = this[x].activated()
+            if (mechanism && ELS.auto_mechanisms.interval[x] == '') {
+                this.start(x);
+            }
+            else this.stop(x);
+        },
+
+        run_all() {
+            for (let i = 1; i <= 16; i++) {
+                if (player.automation.mechanism.checked[i]) {
+                    document.getElementsByClassName('automechanismCheckbox')[i-1].checked = true
+                    this.run(i)
+                }
+            }
+        },
+
+        updateStates() {
+            if (!player.reflash.resets) return;
+            
+            let maxMechs = MISC.sum_mechanisms();
+            let activated = 0
+            let reachedMechLimit = false 
+            for (let i = 1; i <= 16; i++) {
+                if (AUTO.mechanisms[i].activated()) activated++
+            }
+            for (let i = 1; i <= 16; i++) {
+                reachedMechLimit = activated >= maxMechs;
+                let ghost = document.getElementsByClassName('automechanismGhost')[i-1];
+                let div = document.getElementsByClassName('automechanismContainer')[i-1];
+                
+                // let isActivated = player.automation.mechanism.checked[i]
+                let reqMet = UPGS.reflash.computer[2].effect() >= MISC.sum_watt() + this[i].consumation
+                let romLocked = this[i].rom_req > player.reflash.computer[5]
+
+                ghost.classList.remove('locked')
+                switch (true) {
+                    case romLocked:
+                        ghost.classList.add('locked')
+                        break;
+                    case reachedMechLimit:
+                        ghost.classList.add('locked')
+                        ghost.textContent = i18next.t('maxActivatedMechs')
+                        break;
+                    case !reqMet:
+                        ghost.classList.add('locked')
+                        ghost.textContent = i18next.t('notEnoughWatt')
+                        break;
+                    default:
+                        ghost.classList.remove('locked')
+                        break;
+                }
+                if (AUTO.mechanisms[i].activated()) ghost.classList.remove('locked')
+            }
+        },
+
+        1: { //auto shard achs
+            id: 1,
+            consumation: 2, 
+            rom_req: 0,
+            activated() { return document.getElementsByClassName('automechanismCheckbox')[this.id-1].checked },
+            finished_work() { return player.shard_achievements.length == 5},
+            work() { 
+                if (this.finished_work()) return 0;
+                for (let i = 1; i <= 5; i++) {
+                    unlockShardAch(i)
+                }  
+            }
+        },
+        2: { //auto fortune tokens
+            id: 2,
+            consumation: 4, 
+            rom_req: 0,
+            activated() { return document.getElementsByClassName('automechanismCheckbox')[this.id-1].checked },
+            finished_work() { return player.prestige.currency < MISC.fortune.cost.crystal() && player.coin.currency < MISC.fortune.cost.coin()},
+            work() { 
+                if (this.finished_work()) return 0;
+                MISC.fortune.convert('coin')
+                MISC.fortune.convert('crystal')
+            }
+        },
+        3: { //auto supercrystal upgrades
+            id: 3,
+            consumation: 2, 
+            rom_req: 0,
+            activated() { return document.getElementsByClassName('automechanismCheckbox')[this.id-1].checked },
+            finished_work() { return player.supercrystal.upgrades.length == 9 },
+            work() { 
+                if (this.finished_work()) return 0;
+                let ids = [11,12,13,21,22,23,31,32,33]
+                ids.forEach(id => {
+                    UPGS.supercrystal.buy(id)
+                })
+            }
+        },
+        4: { //auto runes
+            id: 4,
+            consumation: 4, 
+            rom_req: 0,
+            activated() { return document.getElementsByClassName('automechanismCheckbox')[this.id-1].checked },
+            finished_work() { return player.prestige.currency < UNL.rune.cost() },
+            work() { 
+                if (this.finished_work()) return 0;
+                generateRune(999)
+            }
+        },
+        5: { //auto modernization
+            id: 5,
+            consumation: 5, 
+            rom_req: 0,
+            activated() { return document.getElementsByClassName('automechanismCheckbox')[this.id-1].checked },
+            finished_work() { return player.coin.superUpgrades.length == 15 },
+            work() { 
+                if (this.finished_work()) return 0;
+                for (let i = 1; i <= 5; i++) {
+                    UPGS.coin.buyables.buy_super(i)
+                }
+                let ids = [11,12,13,14,15,21,22,23,24,25]
+                ids.forEach(id => {
+                    UPGS.coin.singles.buy_super(id)
+                })
+            }
+        },
+        6: { //auto shard upgs
+            id: 6,
+            consumation: 5, 
+            rom_req: 1,
+            activated() { return document.getElementsByClassName('automechanismCheckbox')[this.id-1].checked },
+            finished_work() { return false },
+            work() { 
+                if (this.finished_work()) return 0;
+                for (let i = 1; i <= 3; i++) {
+                    UPGS.shard.buyables.buyMax()
+                }
+            }
+        },
+        7: { //auto break prestige upgs
+            id: 7,
+            consumation: 6, 
+            rom_req: 1,
+            activated() { return document.getElementsByClassName('automechanismCheckbox')[this.id-1].checked },
+            finished_work() { return false },
+            work() { 
+                for (let i = 1; i <= 5; i++) {
+                    UPGS.prestige.break.buyables.buyMax()
+                }
+                let ids = [11,12,13,14,15,21,22,23,24,25]
+                ids.forEach(id => {
+                    UPGS.prestige.break.singles.buy(id)
+                })
+            }
+        },
+        8: { //auto fortune upgs
+            id: 8,
+            consumation: 4, 
+            rom_req: 1,
+            activated() { return document.getElementsByClassName('automechanismCheckbox')[this.id-1].checked },
+            finished_work() { return false },
+            work() { 
+                if (this.finished_work()) return 0;
+                let ids = [11,12,13,21,22,23,31,32,33]
+                ids.forEach(id => {
+                    UPGS.fortune.upgrades.singles.buy(id)
+                })
+                while (player.supercrystal.currency >= UPGS.fortune.upgrades.buyables[2].cost()) {
+                    UPGS.fortune.upgrades.buyables.buy(2)
+                }
+                while (player.supercrystal.currency >= UPGS.fortune.upgrades.buyables[3].cost()) {
+                    UPGS.fortune.upgrades.buyables.buy(3)
+                }
+                while (player.supercrystal.currency >= UPGS.fortune.upgrades.buyables[1].cost()) {
+                    UPGS.fortune.upgrades.buyables.buy(1)
+                }
+            }
+        },
+        9: { //auto overdrive
+            id: 9,
+            consumation: 4, 
+            rom_req: 1,
+            activated() { return document.getElementsByClassName('automechanismCheckbox')[this.id-1].checked },
+            after_work() { 
+                activateOverdrive('overdriveType1ProgressBarBase', UNL.overdrive.type1, 'overdriveType1ProgressBarActive', 'coin', 'type1')
+                if (UNL.overdrive.type2.unl()) activateOverdrive('overdriveType2ProgressBarBase', UNL.overdrive.type2, 'overdriveType2ProgressBarActive', 'prestige', 'type2')
+                if (UNL.overdrive.type3.unl()) activateOverdrive('overdriveType3ProgressBarBase', UNL.overdrive.type3, 'overdriveType3ProgressBarActive', 'supercoin', 'type3')
+            },
+            finished_work() { return UNL.overdrive.type1.activate },
+            work() { 
+                if (this.finished_work()) return 0;
+                activateOverdrive('overdriveType1ProgressBarBase', UNL.overdrive.type1, 'overdriveType1ProgressBarActive', 'coin', 'type1')
+                if (UNL.overdrive.type2.unl()) activateOverdrive('overdriveType2ProgressBarBase', UNL.overdrive.type2, 'overdriveType2ProgressBarActive', 'prestige', 'type2')
+                if (UNL.overdrive.type3.unl()) activateOverdrive('overdriveType3ProgressBarBase', UNL.overdrive.type3, 'overdriveType3ProgressBarActive', 'supercoin', 'type3')
+            }
+        },
+        10: { //auto supercrystal gen
+            id: 10,
+            consumation: 6, 
+            rom_req: 1,
+            activated() { 
+                return document.getElementsByClassName('automechanismCheckbox')[this.id-1].checked;
+            },
+            after_work() { 
+                stopSuperCrystalGen();
+            },
+            finished_work() { 
+                return false; 
+            },
+            work() { 
+                startSuperCrystalGen(); 
+            }
+        },
+        11: { //auto balance upgs
+            id: 11,
+            consumation: 6, 
+            rom_req: 2,
+            activated() { return document.getElementsByClassName('automechanismCheckbox')[this.id-1].checked },
+            finished_work() { return false },
+            work() { 
+                if (this.finished_work()) return 0;
+                let ids = [11,12,13,21,22,23,31,32,33]
+                ids.forEach(id => {
+                    UPGS.balance.singles.buy(id)
+                })
+                UPGS.balance.buyables.buyMax()
+            }
+        },
+        12: { //auto balance upgs
+            id: 12,
+            consumation: 7, 
+            rom_req: 2,
+            activated() { return document.getElementsByClassName('automechanismCheckbox')[this.id-1].checked },
+            finished_work(x = player.balance.coins.plus, y = player.balance.coins.minus, p = player.automation.mechanism_conditions[12].preset) { 
+                let array = this.current_preset()
+                return x >= array[0] && y >= array[1]
+             },
+            work() { 
+                if (this.finished_work()) return 0;
+
+                //buy plus coins
+                for (let i = player.balance.coins.plus; i < this.current_preset()[0]; i++) {
+                    MISC.balance.exchange('plus')
+                }
+                //buy minus coins
+                for (let i = player.balance.coins.minus; i < this.current_preset()[1]; i++) {
+                    MISC.balance.exchange('minus')
+                }
+            },
+            switch() {
+                let preset = player.automation.mechanism_conditions[12].preset 
+                player.automation.mechanism_conditions[12].preset = preset % 3 + 1
+                preset = player.automation.mechanism_conditions[12].preset 
+
+                document.getElementById('autoBPCInput').value = this.current_preset()[0]
+                document.getElementById('autoBMCInput').value = this.current_preset()[1]
+                player.automation.mechanism_conditions[12].cppxp_diff = player.automation.mechanism_conditions[12].change_preset_per_x_prestiges
+            },
+            current_preset() {
+                let preset = player.automation.mechanism_conditions[12].preset 
+                return player.automation.mechanism_conditions[12].presets[preset]
+            }
+        },
+        13: { //auto balance upgs
+            id: 13,
+            consumation: 6, 
+            rom_req: 2,
+            activated() { return document.getElementsByClassName('automechanismCheckbox')[this.id-1].checked },
+            finished_work(x = player.fortune.spent_tokens, p = player.automation.mechanism_conditions[13].tokens) { 
+                return x >= p
+             },
+            work(x = player.fortune.spent_tokens, p = player.automation.mechanism_conditions[13].tokens) { 
+                if (this.finished_work()) return 0;
+
+                //buy plus coins
+                for (let i = x; i < p; i++) {
+                    UPGS.fortune.boosts.activateTheBoost()
+                }
+            },
+        },
+        14: { //auto minerals
+            id: 14,
+            consumation: 8, 
+            rom_req: 3,
+            activated() { return document.getElementsByClassName('automechanismCheckbox')[this.id-1].checked },
+            finished_work(x = player.minerals) { 
+                //массив с количеством требуемых попыток
+                let buy_array = this.current_preset().amount_to_buy
+                //массив с порядком и указанными только теми минералами КОТОРЫЕ НАДО КУПИТЬ. А также пустой массив с минералами которые мы уже купили полностью
+                let order_array = this.current_preset().order, completed_array = []
+                //цикл в котором мы сравниваем купили ли больше или равно от того сколько нужно
+                //если да то пушим айди минерала в пустой массив
+                order_array.forEach(mineral => {
+                    if (x[order_array] >= buy_array[order_array]) completed_array.push(order_array)
+                });
+                //сравниваем массивы (функция такая), если ВЫПОЛНЕННЫЙ порядок совпадает с ТРЕБУЕМЫМ то возвращаем тру (однако могут возникнуть трудности так как порядок разным может быть, стоит учесть, но вроде как всё нормально должно быть)
+                return isEqualArray(completed_array, order_array) 
+             },
+            work() { 
+                if (this.finished_work()) return 0;
+
+                //массив с количеством требуемых попыток покупки, короче говоря СКОЛЬКО НАМ НУЖНО КУПИТЬ
+                let buy_array = this.current_preset().amount_to_buy
+                //такие же массивы и действия чтобы скипать отдельные минерады которые нам больше не нужно покупать
+                let order_array = this.current_preset().order, completed_array = []
+                //главный цикл, вообще имбулечка, выбираем только те минералы которые указали в порядке И ПОКУПАЕМ ИХ В ТОМ ЖЕ ПОРЯДКЕ.
+                order_array.forEach(mineral => {
+                    //под-цикл, тут мы начинаем ОТ ТЕКУЩЕГО КОЛИЧЕСТВО и идём ДО НЕОБХОДИМОГО ДЛЯ ПОКУПКИ. По идее если количество будет равно или больше то покупать не будет, хз
+                    for (let j = player.minerals[mineral]; j < buy_array[mineral]; j++) {
+                        //функция единичной покупки минерала ПОД ВИДОМ <mineral>, это не количество а вид минерала (1 - Опал, 2 - Топаз, ...)
+                        UPGS.minerals.buy(mineral)
+                    }
+                });
+            },
+            switch() {
+                let preset = player.automation.mechanism_conditions[14].preset 
+                player.automation.mechanism_conditions[14].preset = preset % 3 + 1
+                preset = player.automation.mechanism_conditions[14].preset 
+
+                document.getElementById('mineralInput1').value = this.current_preset().amount_to_buy[1]
+                document.getElementById('mineralInput2').value = this.current_preset().amount_to_buy[2]
+                document.getElementById('mineralInput3').value = this.current_preset().amount_to_buy[3]
+                document.getElementById('mineralInput4').value = this.current_preset().amount_to_buy[4]
+
+                loadMineralOrder()
+
+                player.automation.mechanism_conditions[14].cppxp_diff = player.automation.mechanism_conditions[14].change_preset_per_x_prestiges
+            },
+            current_preset() {
+                let preset = player.automation.mechanism_conditions[14].preset 
+                return player.automation.mechanism_conditions[14].presets[preset]
+            }
+        },
+        15: { //auto items
+            id: 15,
+            consumation: 8, 
+            rom_req: 3,
+            activated() { return document.getElementsByClassName('automechanismCheckbox')[this.id-1].checked },
+            finished_work(x = player.shop.items.amount, y = UPGS.shop.items_limit()) { 
+                let buy_array = this.current_preset().amount_to_buy
+                let order_array = this.current_preset().order, completed_array = []
+                order_array.forEach(item => {
+                    if (x[order_array] >= buy_array[order_array]) completed_array.push(order_array)
+                });
+                return isEqualArray(completed_array, order_array) || y
+             },
+            work() { 
+                if (this.finished_work()) return 0;
+
+                let buy_array = this.current_preset().amount_to_buy
+
+                let order_array = this.current_preset().order, completed_array = []
+                order_array.forEach(item => {
+                    if (UPGS.shop.items_limit()) return 0
+                    for (let j = player.shop.items.amount[item]; j < buy_array[item]; j++) {
+                        UPGS.shop.items.buy(item)
+                    }
+                    for (let j = player.shop.items.used[item]; j < buy_array[item]; j++) {
+                        UPGS.shop.items[item].useItem(true)
+                    }
+                });
+            },
+            switch() {
+                let preset = player.automation.mechanism_conditions[15].preset 
+                player.automation.mechanism_conditions[15].preset = preset % 3 + 1
+                preset = player.automation.mechanism_conditions[15].preset 
+
+                document.getElementById('itemInput1').value = this.current_preset().amount_to_buy[1]
+                document.getElementById('itemInput2').value = this.current_preset().amount_to_buy[2]
+                document.getElementById('itemInput3').value = this.current_preset().amount_to_buy[3]
+                document.getElementById('itemInput4').value = this.current_preset().amount_to_buy[4]
+                document.getElementById('itemInput5').value = this.current_preset().amount_to_buy[5]
+                document.getElementById('itemInput6').value = this.current_preset().amount_to_buy[6]
+
+                loadMineralOrder()
+
+                player.automation.mechanism_conditions[15].cppxp_diff = player.automation.mechanism_conditions[15].change_preset_per_x_prestiges
+            },
+            current_preset() {
+                let preset = player.automation.mechanism_conditions[15].preset 
+                return player.automation.mechanism_conditions[15].presets[preset]
+            }
+        },
+        16: { //auto PCs
+            id: 16,
+            consumation: 10, 
+            rom_req: 3,
+            activated() { return document.getElementsByClassName('automechanismCheckbox')[this.id-1].checked },
+            finished_work(x = player.prestige.challenge.completed.length) { 
+                return x == 8
+             },
+            work(x = player.coin.this_reflash_currency, y = player.prestige.challenge.completed.length) { 
+                if (this.finished_work()) return 0;
+
+                cost = 1e200 * Math.pow(1e10, y)
+                //buy plus coins
+                if (x >= cost && y != 8) {
+                    player.prestige.challenge.completed.push(y+1)
+                    updateTimeObject(player.prestige.challenge.time[y+1], 0.05)
+                }
+                return cost
+            },
+        },
+    }
 };
 
 // --- СОКРАЩЕННАЯ ЛОГИКА ИНТЕРВАЛОВ И КНОПОК ---
@@ -1105,6 +1561,13 @@ Object.entries(autoCheckboxes).forEach(([type, checkbox]) => {
     checkbox.addEventListener('change', function() {
         if (this.checked) AUTO[type].start();
         else AUTO[type].stop();
+    });
+});
+
+[...document.getElementsByClassName('automechanismCheckbox')].forEach((checkbox, index) => {
+    checkbox.addEventListener('change', function() {
+        let clickedIndex = index+1; 
+        AUTO.mechanisms.run(clickedIndex);
     });
 });
 
@@ -1167,6 +1630,74 @@ mineralsBulkInput.addEventListener("blur", () => {
 howMuchCrystalsInput.addEventListener("keydown", function(event) {
     if (event.key == "Enter") submitTheBreak();
 });
+
+autoBPCInput.addEventListener("blur", () => {
+    player.automation.mechanism_conditions[12].presets[player.automation.mechanism_conditions[12].preset][0] = parseFloat(autoBPCInput.value);
+});
+autoBMCInput.addEventListener("blur", () => {
+    player.automation.mechanism_conditions[12].presets[player.automation.mechanism_conditions[12].preset][1] = parseFloat(autoBMCInput.value);
+});
+autoBCPrestigesInput.addEventListener("blur", () => {
+    player.automation.mechanism_conditions[12].change_preset_per_x_prestiges = parseFloat(autoBCPrestigesInput.value);
+    player.automation.mechanism_conditions[12].cppxp_diff = player.automation.mechanism_conditions[12].change_preset_per_x_prestiges
+});
+autoFortuneBoostsInput.addEventListener("blur", () => {
+    player.automation.mechanism_conditions[13].tokens = parseFloat(autoFortuneBoostsInput.value);
+});
+
+mineralInput1.addEventListener("blur", () => {
+    let preset = player.automation.mechanism_conditions[14].preset
+    player.automation.mechanism_conditions[14].presets[preset].amount_to_buy[1] = parseFloat(mineralInput1.value);
+});
+mineralInput2.addEventListener("blur", () => {
+    let preset = player.automation.mechanism_conditions[14].preset
+    player.automation.mechanism_conditions[14].presets[preset].amount_to_buy[2] = parseFloat(mineralInput2.value);
+});
+mineralInput3.addEventListener("blur", () => {
+    let preset = player.automation.mechanism_conditions[14].preset
+    player.automation.mechanism_conditions[14].presets[preset].amount_to_buy[3] = parseFloat(mineralInput3.value);
+});
+mineralInput4.addEventListener("blur", () => {
+    let preset = player.automation.mechanism_conditions[14].preset
+    player.automation.mechanism_conditions[14].presets[preset].amount_to_buy[4] = parseFloat(mineralInput4.value);
+});
+autoMineralsPrestigesInput.addEventListener("blur", () => {
+    player.automation.mechanism_conditions[14].change_preset_per_x_prestiges = parseFloat(autoMineralsPrestigesInput.value || 0);
+    player.automation.mechanism_conditions[14].cppxp_diff = player.automation.mechanism_conditions[14].change_preset_per_x_prestiges
+});
+
+itemInput1.addEventListener("blur", () => {
+    let preset = player.automation.mechanism_conditions[15].preset
+    player.automation.mechanism_conditions[15].presets[preset].amount_to_buy[1] = parseFloat(itemInput1.value);
+});
+itemInput2.addEventListener("blur", () => {
+    let preset = player.automation.mechanism_conditions[15].preset
+    player.automation.mechanism_conditions[15].presets[preset].amount_to_buy[2] = parseFloat(itemInput2.value);
+});
+itemInput3.addEventListener("blur", () => {
+    let preset = player.automation.mechanism_conditions[15].preset
+    player.automation.mechanism_conditions[15].presets[preset].amount_to_buy[3] = parseFloat(itemInput3.value);
+});
+itemInput4.addEventListener("blur", () => {
+    let preset = player.automation.mechanism_conditions[15].preset
+    player.automation.mechanism_conditions[15].presets[preset].amount_to_buy[4] = parseFloat(itemInput4.value);
+});
+itemInput5.addEventListener("blur", () => {
+    let preset = player.automation.mechanism_conditions[15].preset
+    player.automation.mechanism_conditions[15].presets[preset].amount_to_buy[5] = parseFloat(itemInput5.value);
+});
+itemInput6.addEventListener("blur", () => {
+    let preset = player.automation.mechanism_conditions[15].preset
+    player.automation.mechanism_conditions[15].presets[preset].amount_to_buy[6] = parseFloat(itemInput6.value);
+});
+autoItemsPrestigesInput.addEventListener("blur", () => {
+    player.automation.mechanism_conditions[15].change_preset_per_x_prestiges = parseFloat(autoItemsPrestigesInput.value || 0);
+    player.automation.mechanism_conditions[15].cppxp_diff = player.automation.mechanism_conditions[15].change_preset_per_x_prestiges
+});
+respecItemsCheckbox.addEventListener('change', function() {
+        if (this.checked) player.automation.mechanism_conditions[15].respec_after_changing_preset = true
+        else player.automation.mechanism_conditions[15].respec_after_changing_preset = false
+    });
 
 function submitTheBreak() {
     let temp = parseFloat(howMuchCrystalsInput.value);

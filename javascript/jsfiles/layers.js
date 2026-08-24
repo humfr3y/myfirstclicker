@@ -85,7 +85,8 @@ const LAYERS = {
             if (player.challenge.activated === 12 || player.prestige.challenge.activated === 2 || player.prestige.challenge.activated === 7) {
                 cost = 9 + Math.pow((5 * scaler), scaler / 13.5);
             }
-            return applyUtilsCostModifiers(cost);
+            let finalCost = player.reflash.algo.includes(73) ? Math.pow(applyUtilsCostModifiers(cost), UPGS.reflash.algo.tree[23].effect()) : applyUtilsCostModifiers(cost)
+            return finalCost
         },
         doForcedReset() {
             if (player.umultipliers === 0) return 1;
@@ -133,7 +134,8 @@ const LAYERS = {
             if (player.challenge.activated === 12 || player.prestige.challenge.activated === 2 || player.prestige.challenge.activated === 7) {
                 cost = 24 + Math.pow((10 * scaler), scaler / 23);
             }
-            return applyUtilsCostModifiers(cost);
+            let finalCost = player.reflash.algo.includes(73) ? Math.pow(applyUtilsCostModifiers(cost), UPGS.reflash.algo.tree[23].effect()) : applyUtilsCostModifiers(cost)
+            return finalCost
         },
         disable(x = this.cost(), y = document.getElementById('upowerBoost'), z = player.umultipliers) {
             y.disabled = !(player.coin.upgrades[1] >= x && z >= 4 && player.prestige.challenge.activated !== 3);
@@ -156,7 +158,8 @@ const LAYERS = {
         cost() {
             let scaler = player.prestige.challenge.activated === 6 ? MISC.amount_of_upgrades.utils() : player.uadders;
             let cost = scaler >= 10 ? Math.pow((250 + (80 * scaler)), 1 + (scaler - 9) / 60) : 250 + (80 * scaler);
-            return applyUtilsCostModifiers(cost);
+            let finalCost = player.reflash.algo.includes(73) ? Math.pow(applyUtilsCostModifiers(cost), UPGS.reflash.algo.tree[23].effect()) : applyUtilsCostModifiers(cost)
+            return finalCost
         },
         disable(x = this.cost(), y = document.getElementById('uadderBoost'), z = player.upowers) {
             y.disabled = !(player.coin.upgrades[2] >= x && z >= 6 && player.prestige.challenge.activated !== 3);
@@ -176,7 +179,8 @@ const LAYERS = {
         cost() {
             let scaler = player.prestige.challenge.activated === 6 ? MISC.amount_of_upgrades.utils() : player.ureducers;
             let cost = scaler >= 10 ? Math.pow((650 + (250 * scaler)), 1 + (scaler - 9) / 60) : 650 + (250 * scaler);
-            return applyUtilsCostModifiers(cost, "ureducer");
+            let finalCost = player.reflash.algo.includes(73) ? Math.pow(applyUtilsCostModifiers(cost, "ureducer"), UPGS.reflash.algo.tree[23].effect()) : applyUtilsCostModifiers(cost, "ureducer")
+            return finalCost
         },
         disable(x = this.cost(), y = document.getElementById('ureducerBoost'), z = player.uadders) {
             y.disabled = !(player.coin.upgrades[2] >= x && z >= 4 && player.prestige.challenge.activated !== 3);
@@ -198,7 +202,7 @@ const LAYERS = {
                 if (!ACHS.has(47)) ACHS.unl(47);
             }
 
-            let cr_gain = GAIN.crystal.reset();
+            let cr_gain = GAIN.crystal.reset()*1;
             player.prestige.currency += cr_gain;
             player.prestige.total_currency += cr_gain;
             player.prestige.this_reflash_currency += cr_gain;
@@ -267,8 +271,12 @@ const LAYERS = {
                 }
                 
                 if (!ACHS.has(57)) ACHS.unl(57);
+                if (player.challenge.activated != 0) {
+                    if (!ACHS.has(67)) ACHS.unl(67)
+                }
                 startPChallenge(9, true);
             }
+
     
             if (!restartChallenge.checked) player.challenge.activated = 0;
             if (!restartPChallenge.checked) player.prestige.challenge.activated = 0;
@@ -283,6 +291,30 @@ const LAYERS = {
 
             player.shop.items.used[3] = 0;
 
+            if (player.automation.mechanism.checked[12]) {
+                if (player.automation.mechanism_conditions[12].cppxp_diff <= 1) {
+                    AUTO.mechanisms[12].switch()
+                    MISC.balance.respec()
+                }
+                else player.automation.mechanism_conditions[12].cppxp_diff -= 1
+            }
+
+            if (player.automation.mechanism.checked[14]) {
+                if (player.automation.mechanism_conditions[14].cppxp_diff <= 1) {
+                    AUTO.mechanisms[14].switch()
+                    respecMinerals()
+                }
+                else player.automation.mechanism_conditions[14].cppxp_diff -= 1
+            }
+
+            if (player.automation.mechanism.checked[15]) {
+                if (player.automation.mechanism_conditions[15].cppxp_diff <= 1) {
+                    AUTO.mechanisms[15].switch()
+                    if (player.automation.mechanism_conditions[15].respec_after_changing_preset) UPGS.shop.respec_items()
+                }
+                else player.automation.mechanism_conditions[15].cppxp_diff -= 1
+            }
+
             LAYERS.doReset();
         },
         cost() { return player.prestige.challenge.activated !== 0 ? PRES_CHALL.goals[player.prestige.challenge.activated] : 1e15; }
@@ -293,6 +325,9 @@ const LAYERS = {
             if (player.coin.currency < 1.7e308 || !player.prestige.challenge.completed.includes(8)) return 0;
 
             if (!ACHS.has(61)) ACHS.unl(61);
+
+            if (!ACHS.has(69) && player.achievement_conditions[69]) ACHS.unl(69)
+            if (!ACHS.has(70) && player.achievement_conditions[70]) ACHS.unl(70)
 
             rollNextAcceleratorSeed();
 
@@ -355,6 +390,7 @@ const LAYERS = {
 //                 player.fortune.tokens += 2
 //                 player.fortune.total_tokens += 2
 //             }
+            
         },
     },
     
@@ -363,7 +399,7 @@ const LAYERS = {
         restoreSavedUtils(4); // И тут уровень 4
         player.coin.currency = 10;
         player.clicks.prestige = 0;
-        for (let i = 3; i <= 6; i++) player.shop.items.used[i] = 0;
+        for (let i = 3; i <= 3; i++) player.shop.items.used[i] = 0;
         LAYERS.doReset();
     },
     
@@ -479,7 +515,7 @@ const LAYERS = {
             player.prestige.challenge.time[i] = getMaxTime();
         }
         player.overdrive.consumed = { type1: 0, type2: 0, type3: 0 };
-        const autoTypes = ACHS.has(66) ? ['uadder', 'ureducer'] : ['single', 'buyable', 'umultiplier', 'upower', 'prestige', 'uadder', 'ureducer'];
+        const autoTypes = ACHS.has(75) ? [] : ACHS.has(66) ? ['uadder', 'ureducer'] : ['single', 'buyable', 'umultiplier', 'upower', 'prestige', 'uadder', 'ureducer'];
         autoTypes.forEach(type => {
             player.automation.checkbox[type] = false;
             player.automation.upgrades[type] = 0;
@@ -496,7 +532,7 @@ const LAYERS = {
         player.time.uadder = 0;
         player.time.ureducer = 0;
 
-        const autoKeys = ACHS.has(66) ? ['uadder', 'ureducer'] : ['single', 'buyable', 'umultiplier', 'upower', 'prestige', 'uadder', 'ureducer'];
+        const autoKeys = ACHS.has(75) ? [] : ACHS.has(66) ? ['uadder', 'ureducer'] : ['single', 'buyable', 'umultiplier', 'upower', 'prestige', 'uadder', 'ureducer'];
         autoKeys.forEach(type => {
             if (player.automation.checkbox[type]) {
                 const checkboxEl = document.getElementById(checkboxId);

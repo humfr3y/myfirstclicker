@@ -29,6 +29,7 @@
       <script>
           window.i18next || document.write('<script src="libs/i18next.min.js"><\/script>');
       </script>
+      <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 
 </head>
 <body>
@@ -581,6 +582,8 @@
               <button onclick="showHelpPage(text.help[23], text.helpTitle[23])" id="helpTab23" class="versionButton versionButtonVertical">У-сложители и У-разнители</button>
               <button onclick="showHelpPage(text.help[24], text.helpTitle[24])" id="helpTab24" class="versionButton versionButtonVertical">У-сложители и У-разнители</button>
               <button onclick="showHelpPage(text.help[25], text.helpTitle[25])" id="helpTab25" class="versionButton versionButtonVertical">У-сложители и У-разнители</button>
+              <button onclick="showHelpPage(text.help[26], text.helpTitle[26])" id="helpTab26" class="versionButton versionButtonVertical">У-сложители и У-разнители</button>
+              <button onclick="showHelpPage(text.help[27], text.helpTitle[27])" id="helpTab27" class="versionButton versionButtonVertical">У-сложители и У-разнители</button>
             </div>
             </div>
           </div>
@@ -2017,6 +2020,7 @@
         <button onclick="selectSubTab(acceleratorTab, true, 'reflash')" id="acceleratorSelect" class="tabButton subButton reflashButton" data-i18n="acceleratorButton">Ускоритель</button>
         <button onclick="selectSubTab(algorithmTab, true, 'reflash')" id="algorithmSelect" class="tabButton subButton reflashButton" data-i18n="algorithmButton">АЛГОРИТМ. ДРЕВО</button>
         <button onclick="selectSubTab(computerTab, true, 'reflash')" id="computerSelect" class="tabButton subButton reflashButton" data-i18n="computerButton">Компьютер</button>
+        <button onclick="selectSubTab(autoMechanismsTab, false, 'reflash')" id="autoMechanismsSelect" class="tabButton subButton reflashButton" data-i18n="autoMechanismsButton">Компьютер</button>
         <!-- <button onclick="" id="consoleSelect" class="tabButton subButton reflashButton" data-i18n="consoleButton">Консоль</button> -->
       </div>
       <div id="reflashUpgradesTab">
@@ -2360,6 +2364,149 @@
             </div>
           </div>
         </div>
+      </div>
+      <div id="autoMechanismsTab" style="display:none">
+        <div id="autoMechStats">
+          <p class="titleTab">
+            <span data-i18n="activeMechanisms">Активные механизмы: </span>
+            <bt id="act_mech_cur">3</bt>/<bt id="act_mech_max">3</bt>
+          </p>
+          <p class="currencyCount" style="text-align: center">
+            <span data-i18n="uses">Потребление: </span>
+            <gt id="act_mech_watt_cur">3</gt>/<gt id="act_mech_watt_max">3</gt>&nbsp;<span data-i18n="wattUsage2"> Ватт</span>
+          </p>
+        </div>
+        <div id="automechanisms">
+          <div class="automechanismRow">
+            <div class="automechanismContainer">
+              <span class="whiteText" data-i18n="automechanism.name.1">Покупка улучшений Суперкристаллов</span>
+              <span class="statsSlot" data-i18n="automechanism.consumation.1">Потребляет: 2 Ватт</span>
+              <input type="checkbox" class="automechanismCheckbox">
+              <div class="automechanismGhost" data-i18n="automechanism.romreq.1">Text</div>
+            </div>
+            <div class="automechanismContainer">
+              <span class="whiteText" data-i18n="automechanism.name.2">Покупка рун</span>
+              <span class="statsSlot" data-i18n="automechanism.consumation.2">Потребляет: 3 Ватт</span>
+              <input type="checkbox" class="automechanismCheckbox">
+              <div class="automechanismGhost" data-i18n="automechanism.romreq.1">Text</div>
+            </div>
+            <div class="automechanismContainer">
+              <span class="whiteText" data-i18n="automechanism.name.3">Разблокировка Достижений Осколков</span>
+              <span class="statsSlot" data-i18n="automechanism.consumation.3">Потребляет: 4 Ватт</span>
+              <input type="checkbox" class="automechanismCheckbox">
+              <div class="automechanismGhost" data-i18n="automechanism.romreq.1">Text</div>
+            </div>
+            <div class="automechanismContainer">
+              <span class="whiteText" data-i18n="automechanism.name.4">Покупка Жетонов Фортуны</span>
+              <span class="statsSlot" data-i18n="automechanism.consumation.4">Потребляет: 4 Ватт</span>
+              <input type="checkbox" class="automechanismCheckbox">
+              <div class="automechanismGhost" data-i18n="automechanism.romreq.1">Text</div>
+            </div>
+            <div class="automechanismContainer">
+              <span class="whiteText" data-i18n="automechanism.name.5">Супер-модернизация улучшений монет</span>
+              <span class="statsSlot" data-i18n="automechanism.consumation.5">Потребляет: 5 Ватт</span>
+              <input type="checkbox" class="automechanismCheckbox">
+              <div class="automechanismGhost" data-i18n="automechanism.romreq.1">Text</div>
+            </div>
+          </div>
+          <div class="automechanismRow">
+            <div class="automechanismContainer">
+              <span class="whiteText" data-i18n="automechanism.name.6">Покупка улучшений Суперкристаллов</span>
+              <span class="statsSlot" data-i18n="automechanism.consumation.6">Потребляет: 2 Ватт</span>
+              <input type="checkbox" class="automechanismCheckbox">
+              <div class="automechanismGhost" data-i18n="automechanism.romreq.1">Text</div>
+            </div>
+            <div class="automechanismContainer">
+              <span class="whiteText" data-i18n="automechanism.name.7">Покупка рун</span>
+              <span class="statsSlot" data-i18n="automechanism.consumation.7">Потребляет: 3 Ватт</span>
+              <input type="checkbox" class="automechanismCheckbox">
+              <div class="automechanismGhost" data-i18n="automechanism.romreq.1">Text</div>
+            </div>
+            <div class="automechanismContainer">
+              <span class="whiteText" data-i18n="automechanism.name.8">Разблокировка Достижений Осколков</span>
+              <span class="statsSlot" data-i18n="automechanism.consumation.8">Потребляет: 4 Ватт</span>
+              <input type="checkbox" class="automechanismCheckbox">
+              <div class="automechanismGhost" data-i18n="automechanism.romreq.1">Text</div>
+            </div>
+            <div class="automechanismContainer">
+              <span class="whiteText" data-i18n="automechanism.name.9">Покупка Жетонов Фортуны</span>
+              <span class="statsSlot" data-i18n="automechanism.consumation.9">Потребляет: 4 Ватт</span>
+              <input type="checkbox" class="automechanismCheckbox">
+              <div class="automechanismGhost" data-i18n="automechanism.romreq.1">Text</div>
+            </div>
+            <div class="automechanismContainer">
+              <span class="whiteText" data-i18n="automechanism.name.10">Супер-модернизация улучшений монет</span>
+              <span class="statsSlot" data-i18n="automechanism.consumation.10">Потребляет: 5 Ватт</span>
+              <input type="checkbox" class="automechanismCheckbox">
+              <div class="automechanismGhost" data-i18n="automechanism.romreq.1">Text</div>
+            </div>
+          </div>
+          <div class="automechanismRow">
+            <div class="automechanismContainer">
+                <span class="whiteText" data-i18n="automechanism.name.11">Разблокировка Достижений Осколков</span>
+                <span class="statsSlot" data-i18n="automechanism.consumation.11">Потребляет: 4 Ватт</span>
+                <input type="checkbox" class="automechanismCheckbox">
+                <div class="automechanismGhost" data-i18n="automechanism.romreq.2">Text</div>
+              </div>
+              <div class="automechanismContainer">
+                <span class="whiteText" data-i18n="automechanism.name.12">Покупка Жетонов Фортуны</span>
+                <span class="statsSlot" data-i18n="automechanism.consumation.12">Потребляет: 4 Ватт</span>
+                <span class="intervalText" data-i18n="amount">Количество</span>
+                <div class="autoMechanismComplex">
+                  <button onclick="AUTO.mechanisms[12].switch()" id="autoBalanceCoinsMode">Mode: time</button>
+                  <div id="autoBalanceCoinsInputsDiv">
+                    <input type="text" id="autoBPCInput" class="reflashInput" data-i18n="[placeholder]plusCoinsPlaceholder">
+                    <input type="text" id="autoBMCInput" class="reflashInput" data-i18n="[placeholder]minusCoinsPlaceholder">
+                  </div>
+                </div>
+                <span class="intervalText" data-i18n="changePresetAfterXPrestiges">Менять пресет через Х Престижей</span>
+                <input type="text" id="autoBCPrestigesInput" class="reflashInput">
+                <input type="checkbox" class="automechanismCheckbox">
+                <div class="automechanismGhost" data-i18n="automechanism.romreq.2">Text</div>
+              </div>
+              <div class="automechanismContainer">
+                <span class="whiteText" data-i18n="automechanism.name.13">Супер-модернизация улучшений монет</span>
+                <span class="statsSlot" data-i18n="automechanism.consumation.13">Потребляет: 5 Ватт</span>
+                <span class="intervalText" data-i18n="spentXFortuneTokens">Менять пресет через Х Престижей</span>
+                <input type="text" id="autoFortuneBoostsInput" class="reflashInput">
+                <input type="checkbox" class="automechanismCheckbox">
+                <div class="automechanismGhost" data-i18n="automechanism.romreq.2">Text</div>
+              </div>
+          </div>
+          <div class="automechanismRow">
+            <div class="automechanismContainer">
+                <span class="whiteText" data-i18n="automechanism.name.14">Разблокировка Достижений Осколков</span>
+                <span class="statsSlot" data-i18n="automechanism.consumation.14">Потребляет: 4 Ватт</span>
+                <div class="autoMechanismComplex">
+                  <button onclick="AUTO.mechanisms[14].switch()" id="autoMineralsMode">Mode: time</button>
+                  <button id="autoMinerals" onclick="openWindow('mineralsAutomationEditor', true)" class="subButton reflashButton" data-i18n="openMenu">Открыть меню</button>
+                </div>
+                <span class="intervalText" data-i18n="changePresetAfterXPrestiges">Менять пресет через Х Престижей</span>
+                <input type="text" id="autoMineralsPrestigesInput" class="reflashInput">
+                <input type="checkbox" class="automechanismCheckbox">
+                <div class="automechanismGhost" data-i18n="automechanism.romreq.3">Text</div>
+              </div>
+              <div class="automechanismContainer">
+                <span class="whiteText" data-i18n="automechanism.name.15">Покупка Жетонов Фортуны</span>
+                <span class="statsSlot" data-i18n="automechanism.consumation.15">Потребляет: 4 Ватт</span>
+                <div class="autoMechanismComplex">
+                  <button onclick="AUTO.mechanisms[15].switch()" id="autoItemsMode">Mode: time</button>
+                  <button id="autoItems" onclick="openWindow('itemsAutomationEditor', true)" class="subButton reflashButton" data-i18n="openMenu">Открыть меню</button>
+                </div>
+                <span class="intervalText" data-i18n="changePresetAfterXPrestiges">Менять пресет через Х Престижей</span>
+                <input type="text" id="autoItemsPrestigesInput" class="reflashInput">
+                <input type="checkbox" class="automechanismCheckbox">
+                <div class="automechanismGhost" data-i18n="automechanism.romreq.3">Text</div>
+              </div>
+              <div class="automechanismContainer">
+                <span class="whiteText" data-i18n="automechanism.name.16">Супер-модернизация улучшений монет</span>
+                <span class="statsSlot" data-i18n="automechanism.consumation.16">Потребляет: 5 Ватт</span>
+                <input type="checkbox" class="automechanismCheckbox">
+                <div class="automechanismGhost" data-i18n="automechanism.romreq.3">Text</div>
+              </div>
+          </div>
+        </div>
+        
       </div>
   </div>
     <div id="achTab" style="display:none">
@@ -3564,6 +3711,144 @@
             <div id="treasureDescription">
               <span id="treasureDescriptionText" class="whiteText">Description</span>
               <p id="treasureDescriptionDate" class="whiteText">Obtained: 23.07.2026</p>
+            </div>
+          </div>
+
+          <div id="mineralsAutomationEditor" class="windowDesc" style="display: none">
+            <div class="centeredDiv">
+              <ut><span data-i18n="presetTitle">Preset</span>: <span id="mineralPresetName">1</span></ut>
+            </div>
+            <div class="centeredDiv">
+              <span data-i18n="mineralOrder">Порядок покупки минералов</span>
+              <div id="orderContainer" class="dnd-zone">
+                  <!-- Сюда пользователь будет перетаскивать элементы -->
+              </div>
+            </div>
+            <div class="centeredDiv" style="margin-top: 15px;">
+              <span data-i18n="availableMinerals">Доступные минералы</span>
+              <div id="poolContainer" class="dnd-zone">
+                  <div class="mineral-item" data-id="1">
+                    <img src="javascript/cssfiles/images/mins/opalfinished.webp">
+                  </div>
+                  <div class="mineral-item" data-id="2">
+                    <img src="javascript/cssfiles/images/mins/topazfinished.webp">
+                  </div>
+                  <div class="mineral-item" data-id="3">
+                    <img src="javascript/cssfiles/images/mins/jadeshiny.webp">
+                  </div>
+                  <div class="mineral-item" data-id="4">
+                    <img src="javascript/cssfiles/images/mins/aquamarine.png">
+                  </div>
+              </div>
+            </div>
+            <div class="centeredDiv" style="margin-top: 15px;">
+              <span data-i18n="mineralsToBuy">Покупка минералов</span>
+              <div id="bulkBuyMinerals">
+                <div class="mineralMiniContainer">
+                  <div class="mineralIcon">
+                    <img src="javascript/cssfiles/images/mins/opalfinished.webp">
+                  </div>
+                  <input type="text" id="mineralInput1" class="prestigeInput mineralInput">
+                </div>
+                <div class="mineralMiniContainer">
+                  <div class="mineralIcon">
+                    <img src="javascript/cssfiles/images/mins/topazfinished.webp">
+                  </div>
+                  <input type="text" id="mineralInput2" class="prestigeInput mineralInput">
+                </div>
+                <div class="mineralMiniContainer">
+                  <div class="mineralIcon">
+                    <img src="javascript/cssfiles/images/mins/jadeshiny.webp">
+                  </div>
+                  <input type="text" id="mineralInput3" class="prestigeInput mineralInput">
+                </div>
+                <div class="mineralMiniContainer">
+                  <div class="mineralIcon">
+                    <img src="javascript/cssfiles/images/mins/aquamarine.png">
+                  </div>
+                  <input type="text" id="mineralInput4" class="prestigeInput mineralInput">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="itemsAutomationEditor" class="windowDesc" style="display: none">
+            <div class="centeredDiv">
+              <ut><span data-i18n="presetTitle">Preset</span>: <span id="itemPresetName">1</span></ut>
+            </div>
+            <div class="centeredDiv">
+              <span data-i18n="itemOrder">Порядок покупки минералов</span>
+              <div id="itemOrderContainer" class="dnd-zone">
+                  <!-- Сюда пользователь будет перетаскивать элементы -->
+              </div>
+            </div>
+            <div class="centeredDiv" style="margin-top: 15px;">
+              <span data-i18n="availableItems">Доступные минералы</span>
+              <div id="itemPoolContainer" class="dnd-zone">
+                  <div class="item-item" data-item-id="1">
+                    <img src="javascript/cssfiles/images/items/Uxtotallydonenow.bmp">
+                  </div>
+                  <div class="item-item" data-item-id="2">
+                    <img src="javascript/cssfiles/images/items/U1totallydonenow.bmp">
+                  </div>
+                  <div class="item-item" data-item-id="3">
+                    <img src="javascript/cssfiles/images/items/TW1m.bmp">
+                  </div>
+                  <div class="item-item" data-item-id="4">
+                    <img src="javascript/cssfiles/images/items/coinrain.png">
+                  </div>
+                  <div class="item-item" data-item-id="5">
+                    <img src="javascript/cssfiles/images/items/crystalrain.png">
+                  </div>
+                  <div class="item-item" data-item-id="6">
+                    <img src="javascript/cssfiles/images/items/FreeUAdder.png">
+                  </div>
+              </div>
+            </div>
+            <div class="centeredDiv" style="margin-top: 15px;">
+              <span data-i18n="itemsToBuy">Покупка минералов</span>
+              <div id="bulkBuyItems">
+                <div class="itemMiniContainer">
+                  <div class="itemIcon">
+                    <img src="javascript/cssfiles/images/items/Uxtotallydonenow.bmp">
+                  </div>
+                  <input type="text" id="itemInput1" class="prestigeInput itemInput">
+                </div>
+                <div class="itemMiniContainer">
+                  <div class="itemIcon">
+                    <img src="javascript/cssfiles/images/items/U1totallydonenow.bmp">
+                  </div>
+                  <input type="text" id="itemInput2" class="prestigeInput itemInput">
+                </div>
+                <div class="itemMiniContainer">
+                  <div class="itemIcon">
+                    <img src="javascript/cssfiles/images/items/TW1m.bmp">
+                  </div>
+                  <input type="text" id="itemInput3" class="prestigeInput itemInput">
+                </div>
+                <div class="itemMiniContainer">
+                  <div class="itemIcon">
+                    <img src="javascript/cssfiles/images/items/coinrain.png">
+                  </div>
+                  <input type="text" id="itemInput4" class="prestigeInput itemInput">
+                </div>
+                <div class="itemMiniContainer">
+                  <div class="itemIcon">
+                    <img src="javascript/cssfiles/images/items/crystalrain.png">
+                  </div>
+                  <input type="text" id="itemInput5" class="prestigeInput itemInput">
+                </div>
+                <div class="itemMiniContainer">
+                  <div class="itemIcon">
+                    <img src="javascript/cssfiles/images/items/FreeUAdder.png">
+                  </div>
+                  <input type="text" id="itemInput6" class="prestigeInput itemInput">
+                </div>
+              </div>
+            </div>
+            <div class="centeredDiv" style="margin-top: 15px; flex-direction: row;">
+              <span data-i18n="itemsRespec"></span>
+              <input type="checkbox" id="respecItemsCheckbox">
             </div>
           </div>
         </div>

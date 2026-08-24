@@ -67,6 +67,40 @@ function updateNestedProperties(targetObj, sourceObj) {
     }
 }
 
+function loadMineralOrder() {
+    const orderContainer = document.getElementById('orderContainer');
+    const poolContainer = document.getElementById('poolContainer');
+    const allItems = Array.from(document.querySelectorAll('.mineral-item'));
+    allItems.forEach(item => {
+        poolContainer.appendChild(item);
+    });
+    const savedOrder = player.automation.mechanism_conditions[14].presets[player.automation.mechanism_conditions[14].preset].order;
+    savedOrder.forEach(id => {
+        const item = allItems.find(el => parseInt(el.getAttribute('data-id')) === id);
+        if (item) {
+            orderContainer.appendChild(item);
+        }
+    });
+    document.getElementById('mineralPresetName').textContent = player.automation.mechanism_conditions[14].preset
+    updateMineralOrderArray();
+
+    const orderContainer2 = document.getElementById('itemOrderContainer');
+    const poolContainer2 = document.getElementById('itemPoolContainer');
+    const allItems2 = Array.from(document.querySelectorAll('.item-item'));
+    allItems2.forEach(item => {
+        poolContainer2.appendChild(item);
+    });
+    const savedOrder2 = player.automation.mechanism_conditions[15].presets[player.automation.mechanism_conditions[15].preset].order;
+    savedOrder2.forEach(id => {
+        const item = allItems2.find(el => parseInt(el.getAttribute('data-item-id')) === id);
+        if (item) {
+            orderContainer2.appendChild(item);
+        }
+    });
+    document.getElementById('itemPresetName').textContent = player.automation.mechanism_conditions[15].preset
+    updateItemOrderArray();
+}
+
 // --- ЗАГРУЗКА ИГРЫ ---
 
 function loadGame() {
@@ -155,6 +189,27 @@ function loadGame() {
     autoUreducerInput.value = player.automation.conditions.ureducer.time;
     autoUreducerInput2.value = player.automation.conditions.ureducer.x_of_uadder;
 
+    autoBPCInput.value = player.automation.mechanism_conditions[12].presets[player.automation.mechanism_conditions[12].preset][0];
+    autoBMCInput.value = player.automation.mechanism_conditions[12].presets[player.automation.mechanism_conditions[12].preset][1];
+    autoBCPrestigesInput.value = player.automation.mechanism_conditions[12].change_preset_per_x_prestiges;
+    autoFortuneBoostsInput.value = player.automation.mechanism_conditions[13].tokens;
+
+    mineralInput1.value = player.automation.mechanism_conditions[14].presets[player.automation.mechanism_conditions[14].preset].amount_to_buy[1];
+    mineralInput2.value = player.automation.mechanism_conditions[14].presets[player.automation.mechanism_conditions[14].preset].amount_to_buy[2];
+    mineralInput3.value = player.automation.mechanism_conditions[14].presets[player.automation.mechanism_conditions[14].preset].amount_to_buy[3];
+    mineralInput4.value = player.automation.mechanism_conditions[14].presets[player.automation.mechanism_conditions[14].preset].amount_to_buy[4];
+    autoMineralsPrestigesInput.value = player.automation.mechanism_conditions[14].change_preset_per_x_prestiges;
+
+    itemInput1.value = player.automation.mechanism_conditions[15].presets[player.automation.mechanism_conditions[15].preset].amount_to_buy[1];
+    itemInput2.value = player.automation.mechanism_conditions[15].presets[player.automation.mechanism_conditions[15].preset].amount_to_buy[2];
+    itemInput3.value = player.automation.mechanism_conditions[15].presets[player.automation.mechanism_conditions[15].preset].amount_to_buy[3];
+    itemInput4.value = player.automation.mechanism_conditions[15].presets[player.automation.mechanism_conditions[15].preset].amount_to_buy[4];
+    itemInput5.value = player.automation.mechanism_conditions[15].presets[player.automation.mechanism_conditions[15].preset].amount_to_buy[5];
+    itemInput6.value = player.automation.mechanism_conditions[15].presets[player.automation.mechanism_conditions[15].preset].amount_to_buy[6];
+    autoItemsPrestigesInput.value = player.automation.mechanism_conditions[15].change_preset_per_x_prestiges;
+
+    loadMineralOrder()
+
     const pModes = { time: 'time', prestige: 'prestige', crystals: 'crystals' };
     let modeKey = pModes[player.settings.whichPrestigeMode] || 'coins';
     autoPrestigeInput.value = player.automation.conditions.prestige[modeKey];
@@ -169,6 +224,9 @@ function loadGame() {
             if (AUTO[type]) AUTO[type].start();
         }
     });
+    document.getElementById('respecItemsCheckbox').checked = player.automation.mechanism_conditions[15].respec_after_changing_preset
+
+    AUTO.mechanisms.run_all()
 
     if (player.reflash.respecTree) {
         document.getElementById('respecTree').classList.add('active')

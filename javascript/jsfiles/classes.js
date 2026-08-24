@@ -59,6 +59,7 @@ class UniversalBuyableUpgrade {
         if (this.layer === 'reflash') {
             finalCost = Math.round(finalCost)
         }
+        finalCost = Math.max(0, finalCost)
         return isFinite(finalCost) ? finalCost : 1.79e308;
     }
 
@@ -145,6 +146,7 @@ class UniversalBuyablesManager {
             if (player.challenge.activated == 1 || player.challenge.activated == 11 || player.prestige.challenge.activated == 1 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) return false;
             if ((player.challenge.activated == 10 || player.prestige.challenge.activated == 2 || player.prestige.challenge.activated == 7) && MISC.amount_of_upgrades.coin() >= 25) return false;
         }
+        if (this[x].cost() >= 1.7e308) return false
         return canAffordBase;
     }
 
@@ -481,35 +483,32 @@ class ShopItemUpgrade {
     
     canUseItem(x = player.shop.items.amount[this.id], y = player.shop.items.used[this.id]) {
         if (player.challenge.activated != 0 || player.prestige.challenge.activated != 0) return false
-        if (x == 0 || y == this.maxAmount) return false
+        if (x == 0 || y == this.maxAmount || UPGS.shop.items_limit()) return false
         let used_array = []
-        console.log(used_array)
         for (let i = 1; i <= 6; i++) {
             if (player.shop.items.used[i] >= 1) used_array.push(i)
         }
-        console.log(used_array)
-        console.log(!UPGS.shop.items_limit())
         if (used_array.includes(this.id)) {
             return true
         }
         else return !UPGS.shop.items_limit()
     }
     
-    useItem() {
-        if (this.canUseItem()) {
+    useItem(auto=false) {
+        if (this.canUseItem() && !UPGS.shop.items_limit()) {
             if (this.id != 3) player.shop.items.timer[this.id] = 60
             player.shop.items.amount[this.id]--;
             player.shop.items.used[this.id]++;
             this.effect();
-            notify(text.notification.used_item + text.itemNames[this.id - 1], "limegreen", "550px");
+            auto ? 0 : notify(text.notification.used_item + text.itemNames[this.id - 1], "limegreen", "550px");
         } else if (player.shop.items.used[this.id] == this.maxAmount) {
-            notify(text.notification.limit_item + this.maxAmount + " " + text.itemNames[this.id - 1] + text.notification.limit_item_2, "red", "550px");
+            auto ? 0 : notify(text.notification.limit_item + this.maxAmount + " " + text.itemNames[this.id - 1] + text.notification.limit_item_2, "red", "550px");
         } else if (player.challenge.activated != 0 || player.prestige.challenge.activated != 0) {
-            notify(text.notification.challenge_item + text.itemNames[this.id - 1] + "!", "red", "550px");
+            auto ? 0 : notify(text.notification.challenge_item + text.itemNames[this.id - 1] + "!", "red", "550px");
         } else if (UPGS.shop.items_limit()) {
-            notify(text.notification.total_limit_item + text.itemNames[this.id - 1] + "!", "red", "550px");
+            auto ? 0 : notify(text.notification.total_limit_item + text.itemNames[this.id - 1] + "!", "red", "550px");
         } else {
-            notify(text.notification.dont_have_item + text.itemNames[this.id - 1] + "!", "red", "550px");
+            auto ? 0 : notify(text.notification.dont_have_item + text.itemNames[this.id - 1] + "!", "red", "550px");
         }
     }
 }
@@ -557,6 +556,7 @@ class MineralUpgrade {
         if (player.prestige.break.singles.includes(23)) eff *= UPGS.prestige.break.singles[23].effect();
         if (player.fortune.activatedBoosts[7].activated) eff *= UPGS.fortune.boosts[7].effect();
         if (player.shard.singleUpgrades.includes(22)) eff = Math.pow(eff, UPGS.shard.singles[22].effect());
+        if (player.reflash.algo.includes(63)) eff = Math.pow(eff, UPGS.reflash.algo.tree[16].effect());
         if (player.prestige.challenge.activated == 5) eff = Math.pow(eff, 0.1);
         return eff;
     }
@@ -743,6 +743,7 @@ class FortuneBoostsManager {
         if (player.fortune.tokens == 0 || player.fortune.activatedBoosts.list.length == 12) return 0;
         for (let i = 1; i <= x; i++) {
             if (player.fortune.activatedBoosts.list.length == 12) return 0;
+            player.achievement_conditions[70] = false
             let max_rarity_number = 80;
             if (player.fortune.upgrades.singles.includes(12)) max_rarity_number = 90;
             if (player.fortune.upgrades.singles.includes(21)) max_rarity_number = 98;
