@@ -35,7 +35,7 @@
 <body>
   <div id="loadingScreen">
       <video autoplay muted loop playsinline id="introVideo">
-          <source src="javascript/cssfiles/images/misc/matrix.mp4" type="video/mp4">
+          <source src="javascript/cssfiles/images/misc/computer.mp4" type="video/mp4">
       </video>
   </div>
   <div id="wholeGame" style="display: none">
@@ -480,6 +480,7 @@
             <div class="versionButtons" style="display: none">
               <button onclick='showChangelog(text.changelog["1.0"])' class="versionButton">1.0</button>
               <button onclick='showChangelog(text.changelog["1.0.x"])' class="versionButton">1.0.x</button>
+              <button onclick='showChangelog(text.changelog["1.1"])' class="versionButton">1.1</button>
             </div>
           </div>
         <div id="versionDiv" class="windowDesc">
@@ -610,7 +611,7 @@
         </button>
         <button onclick="LAYERS.umultiplier.doForcedReset()" id="harshUmulti" class="tabButton" style="display:none" data-i18n="harshUmulti">Decrease U-multiplier by 1</button> 
         <button onclick="LAYERS.uadder.doReset()" id="uadderBoost" class="upgradeButton">
-          <ut><span data-i18n="layer_uadder_name">U-adder</span> (<span id="uadder_amt">0</span>)</ut><br>
+          <ut><span data-i18n="layer_uadder_name">U-adder</span> (<span id="uadder_amt">0</span><span id="uadder_free"></span>)</ut><br>
           <span data-i18n="layer_uadder_desc1">Reset everything including U-powers to get +</span><span id="uadder_base">1</span> <span data-i18n="layer_uadder_desc2">free U-multipliers!</span><br>
           <span data-i18n="word_currently">Currently:</span> +<span id="uadder_eff">0</span><br>
           <span data-i18n="word_requires">Requires:</span> <span id="uadder_cost">10</span> <span data-i18n="layer_uadder_req">Productivities and 6 U-powers</span>

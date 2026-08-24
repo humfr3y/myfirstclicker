@@ -658,7 +658,7 @@ st {
   font-size: calc(16px * var(--font-scale));
 }
 
-#progressBarGain, #progressBarGain2 {
+#progressBarGain, #progressBarGain2, #progressBarGain3 {
   font-size: calc(18px * var(--font-scale));
 }
 
@@ -2585,7 +2585,8 @@ vn {
 }
 
 #computerComponentsDiv {
-  width: 50%;
+  width: 90%;
+  max-width: 800px;
   display: flex;
   align-items: center;
   height: 42vh;
@@ -2696,7 +2697,7 @@ vn {
   max-height: 200px;
   max-width: 230px;
   width: 20vw;
-  height: 25vw;
+  height: 20vh;
   padding-top: 10px;
   position: relative;
 }
@@ -2777,14 +2778,17 @@ vn {
 }
 
 #mineralsAutomationEditor, #itemsAutomationEditor {
-  max-height: 90%;
-  height: 600px;
-  width: 600px;
+  height: 90%;
+  max-height: 600px;
+  max-width: 750px;
+  width: 90%;
+  font-size: calc(18px * var(--font-scale));
 }
 
 .dnd-zone {
   min-height: 80px; 
   min-width: 400px;
+  width: 90%;
   border: 2px dashed #444; 
   display: flex; 
   align-items: center;
@@ -2852,9 +2856,9 @@ vn {
   border-color: var(--supercoin)
 }
 
-#itemOrderContainer, #itemPoolContainer {
+/* #itemOrderContainer, #itemPoolContainer {
   min-width: 500px;
-}
+} */
 
 
 
@@ -3111,5 +3115,24 @@ vn {
     height: 35px;
     width: 45px;
     position: absolute;
+  }
+
+  .computerComponentText {
+    font-size: calc(10px * var(--font-scale));
+  }
+
+  .dnd-zone {
+    min-height: 45px; 
+    min-width: 200px;
+  }
+
+  .mineral-item, .item-item, .mineralIcon, .itemIcon {
+    width: 40px; 
+    height: 40px; 
+  }
+
+  .mineralMiniContainer, .itemMiniContainer {
+    height: 45px;
+    width: 34px;
   }
 }

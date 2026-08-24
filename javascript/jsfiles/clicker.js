@@ -696,12 +696,12 @@ const GAIN = {
             return base;
         },
         effect(x = player.uadders) {
-            let effect = this.base() * x;
+            let effect = this.base() * (x + MISC.free_upgrade.uadder())
             if (player.prestige.challenge.activated === 8) effect = Math.pow(effect, 0.1);
             return effect;
         },
         effect2(x = player.uadders) {
-            let effect = this.base2() * x;
+            let effect = this.base2() * (x + MISC.free_upgrade.uadder());
             if (player.prestige.challenge.activated === 8) effect = Math.pow(effect, 0.1);
             return effect;
         }
@@ -2569,10 +2569,14 @@ function openWindow(arg, isFlex, number) {
         case 'mineralsAutomationEditor':
             windowGame.style.height = '650px'
             windowGame.style.width = '750px'
+            windowGame.style.height = '60vh'
+            windowGame.style.width = '90vw'
             break;
         case 'itemsAutomationEditor':
             windowGame.style.height = '700px'
             windowGame.style.width = '750px'
+            windowGame.style.height = '60vh'
+            windowGame.style.width = '90vw'
             break;
         case 'reflashConfirm':
             windowGame.style.height = '400px'

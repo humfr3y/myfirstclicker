@@ -358,6 +358,8 @@ function loadTranslationsCoins() {
         document.getElementById('upower_cost').textContent = formatNumber(LAYERS.upower.cost());
 
         document.getElementById('uadder_amt').textContent = formatNumber(player.uadders);
+        let ua_free = MISC.free_upgrade.uadder();
+        document.getElementById('uadder_free').textContent = ua_free > 0 ? `+${formatNumber(ua_free, 'boost')}` : '';
         document.getElementById('uadder_base').textContent = formatNumber(GAIN.uadder.base(), 'number');
         document.getElementById('uadder_eff').textContent = formatNumber(GAIN.uadder.effect(), 'number');
         document.getElementById('uadder_cost').textContent = formatNumber(LAYERS.uadder.cost());
@@ -1466,7 +1468,7 @@ function updateStaticTranslations() {
     text.chapter.start = i18next.t('startLoreDescription');
     text.help.start = i18next.t('startHelpDescription');
 
-    const versions = ['0.0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.5.1', '0.6', '0.7', '0.7.1', '0.8', '0.8.0.1', '0.9', '0.9.1', '0.9.2', '0.10', '0.10.1', '0.11', '0.12', '0.12.1', '0.13', '0.14', '0.15', '0.15.x', '1.0', '1.0.x'];
+    const versions = ['0.0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.5.1', '0.6', '0.7', '0.7.1', '0.8', '0.8.0.1', '0.9', '0.9.1', '0.9.2', '0.10', '0.10.1', '0.11', '0.12', '0.12.1', '0.13', '0.14', '0.15', '0.15.x', '1.0', '1.0.x', '1.1'];
     versions.forEach(v => {
         let key = 'version' + v.replace(/\./g, '');
         text.changelog[v] = i18next.t(key);
@@ -1532,6 +1534,7 @@ function getGlobalNumbers() {
         n1e8: formatNumber(1e8),
         n1e9: formatNumber(1e9),
         n1e10: formatNumber(1e10),
+        n1e12: formatNumber(1e12),
         n1e15: formatNumber(1e15),
         n1e21: formatNumber(1e21),
         n1e25: formatNumber(1e25),
@@ -1606,7 +1609,7 @@ setTimeout(() => {
     initAlgoTree();
     renamePresets();
     changeFonts2(player.cosmetics.fonts.current);
-}, 3200);
+}, 2000);
 
 codeInput.addEventListener("keydown", function(event) {
     if (event.key == "Enter") {

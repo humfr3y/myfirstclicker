@@ -450,7 +450,7 @@ const UPGS = {
 
             { id: 12, power: 1.25, basePrice: 20, maxAmount: 100, elementId: 'shopBuyableU12', effect: function(x = player.shop.upgrades[12]) { return x * 40; }, next_effect: function(x = player.shop.upgrades[12] + this.bulk()) { return x * 40; } },
             { id: 13, power: 1.4, basePrice: 50, maxAmount: 20, elementId: 'shopBuyableU13', effect: function(x = player.shop.upgrades[13]) { return 1 + x / 30; }, next_effect: function(x = player.shop.upgrades[13] + this.bulk()) { return 1 + x / 30; } },
-            { id: 14, power: 1.4, basePrice: 25, maxAmount: 50, elementId: 'shopBuyableU14', effect: function(x = player.shop.upgrades[14]) { return 1 + x / 10; }, next_effect: function(x = player.shop.upgrades[14] + this.bulk()) { return 1 + x / 10; } },
+            { id: 14, power: 1.3, basePrice: 25, maxAmount: 50, elementId: 'shopBuyableU14', effect: function(x = player.shop.upgrades[14]) { return 1 + x / 10; }, next_effect: function(x = player.shop.upgrades[14] + this.bulk()) { return 1 + x / 10; } },
             { id: 15, power: 1.5, basePrice: 120, maxAmount: 10, elementId: 'shopBuyableU15', effect: function(x = player.shop.upgrades[15]) { return 1 + x / 10; }, next_effect: function(x = player.shop.upgrades[15] + this.bulk()) { return 1 + x / 10; } },
         ], 'upgrades'),
 
@@ -477,8 +477,8 @@ const UPGS = {
             { id: 8, power: 1.33, basePrice: 100, maxAmount: 5, elementId: 'shopPermanentU8', effect: function(x = player.shop.permanentUpgrades[8]) { return !x ? 0 : x * 5; }, next_effect: function(x = player.shop.permanentUpgrades[8] + 1) { return !x ? 0 : x * 5; } },
             { id: 9, power: 1.35, basePrice: 250, maxAmount: 10, elementId: 'shopPermanentU9', effect: function(x = player.shop.permanentUpgrades[9]) { return 1 + x / 3; }, next_effect: function(x = player.shop.permanentUpgrades[9] + 1) { return 1 + x / 3; } },
             { id: 10, power: 1.5, basePrice: 150, maxAmount: 10, elementId: 'shopPermanentU10', effect: function(x = player.shop.permanentUpgrades[10]) { return 1 + x / 40; }, next_effect: function(x = player.shop.permanentUpgrades[10] + 1) { return 1 + x / 40; } },
-            { id: 11, power: 1.6, basePrice: 200, maxAmount: 10, elementId: 'shopPermanentU11', effect: function(x = player.shop.permanentUpgrades[11]) { return Math.pow(3, x); }, next_effect: function(x = player.shop.permanentUpgrades[11] + 1) { return Math.pow(3, x) } },
-            { id: 12, power: 1.25, basePrice: 100, maxAmount: 20, elementId: 'shopPermanentU12', effect: function(x = player.shop.permanentUpgrades[12]) { return !x ? 1 : Math.pow(10, x / 6.666667) * 10; }, next_effect: function(x = player.shop.permanentUpgrades[12] + 1) { return Math.pow(10, x / 6.666667) * 10} },
+            { id: 11, power: 1.6, basePrice: 200, maxAmount: 10, elementId: 'shopPermanentU11', effect: function(x = player.shop.permanentUpgrades[11]) { return Math.pow(4, x); }, next_effect: function(x = player.shop.permanentUpgrades[11] + 1) { return Math.pow(4, x) } },
+            { id: 12, power: 1.25, basePrice: 100, maxAmount: 20, elementId: 'shopPermanentU12', effect: function(x = player.shop.permanentUpgrades[12]) { return !x ? 1 : Math.pow(10, x / 6.666667) * 1000; }, next_effect: function(x = player.shop.permanentUpgrades[12] + 1) { return Math.pow(10, x / 6.666667) * 1000} },
         ], 'permanentUpgrades'),
 
         temporaryBonuses() { 
@@ -688,12 +688,12 @@ const UPGS = {
         singles: new UniversalSinglesManager('reflash', 'singleUpgrades', [
             { id: 11, elementId: 'rSingleU1', basePrice: 2, effect: function(x = this.unl()) {
                 if (x == 0) return 1;
-                let eff = Math.pow(1 + player.reflash.resets, 6);
+                let eff = Math.pow(1 + player.reflash.resets, 7);
                 return eff;
             }},
             { id: 12, elementId: 'rSingleU2', basePrice: 16, effect: function(x = this.unl()) {
                 if (x == 0) return 1;
-                let eff = 1 + Math.pow(player.time.game.reflash.timer, 0.45);
+                let eff = 1 + Math.pow(player.time.game.reflash.timer, 0.5);
                 return eff;
             }},
             { id: 13, elementId: 'rSingleU3', basePrice: 128 },
@@ -742,12 +742,12 @@ const UPGS = {
         algo: {
             tree: [ // lmao looks weird and fine at same time
                 //bit tree                  nodes to draw line btwn required nodes              cpu req level   required to not have    required to have at least one           cost of node
-                { id: 11, row: 1, col: 1,   draw: [],               req: [],                                                                                                    cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 10 : 1} }, 
-                { id: 21, row: 2, col: 1,   draw: [11],             req: [11],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 3 : 0}  },
-                { id: 22, row: 2, col: 2,   draw: [11],             req: [11],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 5 : 1}  },
+                { id: 11, row: 1, col: 1,   draw: [],               req: [],                                                                                                    cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 100 : 1} }, 
+                { id: 21, row: 2, col: 1,   draw: [11],             req: [11],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 5 : 0}  },
+                { id: 22, row: 2, col: 2,   draw: [11],             req: [11],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 10 : 1}  },
                 { id: 23, row: 2, col: 3,   draw: [11],             req: [11],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? true : false}  },
                 { id: 24, row: 2, col: 4,   draw: [23],             req: [23],                                                                                                  cost: 5,    effect(x=player.reflash.algo.includes(this.id)) {return x ? true : false } },
-                { id: 31, row: 3, col: 1,   draw: [21],             req: [21],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? { shard: 1e6, rune: 2} : { shard: 0, rune: 0} } },
+                { id: 31, row: 3, col: 1,   draw: [21],             req: [21],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? { shard: 1e9, rune: 3} : { shard: 0, rune: 0} } },
                 { id: 32, row: 3, col: 2,   draw: [22],             req: [22],                                                                                                  cost: 2,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 10 : 1}  },
                 { id: 33, row: 3, col: 3,   draw: [23],             req: [23],                                                                                                  cost: 2,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 10 : 1}  },
                 { id: 34, row: 3, col: 4,   draw: [23],             req: [23],                                                                                                  cost: 1,    effect(x=player.reflash.algo.includes(this.id)) {return x ? 0.1 : 0}  },
