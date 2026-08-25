@@ -1097,7 +1097,7 @@ const AUTO = {
         if (mode == 'time' && player.time.real.prestige.timer >= cond.time) LAYERS.prestige.doReset();
         else if (mode == 'coins' && player.coin.currency >= cond.coins) LAYERS.prestige.doReset();
         else if (mode == 'prestige' && GAIN.prestige.reset() >= cond.prestige) LAYERS.prestige.doReset();
-        else if (mode == 'crystals' && GAIN.crystal.reset() >= cond.crystals) LAYERS.prestige.doReset();
+        else if (mode == 'crystals' && Number(GAIN.crystal.reset()) >= cond.crystals) LAYERS.prestige.doReset();
     }),
 
     uadder: new AutomationTask('uadder', function() {
