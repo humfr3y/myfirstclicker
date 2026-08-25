@@ -741,62 +741,116 @@ class FortuneBoostsManager {
     activateTheBoost() {
         let x = player.balance.upgrades.singles.includes(13) ? 2 : 1;
         if (player.fortune.tokens == 0 || player.fortune.activatedBoosts.list.length == 12) return 0;
-
         for (let i = 1; i <= x; i++) {
             if (player.fortune.activatedBoosts.list.length == 12) return 0;
             player.achievement_conditions[70] = false;
-
-            if (player.fortune.upgrades.singles.includes(33)) {
-                let rarity = 'ALL';
-                continue;
-            }
-
-            let max_rarity = 80;
-            if (player.fortune.upgrades.singles.includes(12)) max_rarity = 90;
-            if (player.fortune.upgrades.singles.includes(21)) max_rarity = 98;
-            if (player.fortune.upgrades.singles.includes(32)) max_rarity = 100;
-
-            let roll = randomNumber(1, max_rarity);
+            let max_rarity_number = 80;
+            if (player.fortune.upgrades.singles.includes(12)) max_rarity_number = 90;
+            if (player.fortune.upgrades.singles.includes(21)) max_rarity_number = 98;
+            if (player.fortune.upgrades.singles.includes(32)) max_rarity_number = 100;
+            
+            let rarity_number = randomNumber(1, max_rarity_number);
+            let rarity = null;
             let list = player.fortune.activatedBoosts.list;
+
+            let has12 = player.fortune.upgrades.singles.includes(12);
+            let has21 = player.fortune.upgrades.singles.includes(21);
+            let has32 = player.fortune.upgrades.singles.includes(32);
+            let has33 = player.fortune.upgrades.singles.includes(33);
 
             let b_full = [1, 2, 3].every(e => list.includes(e));
             let a_full = [1, 2, 3, 4, 5, 6].every(e => list.includes(e));
             let s_full = [1, 2, 3, 4, 5, 6, 7, 8, 9].every(e => list.includes(e));
-
-            let rarity = null;
-
-            if (roll >= 99 && (!s_full && player.fortune.upgrades.singles.includes(32))) {
-                rarity = 'EX';
-            } else if (roll >= 91 && (!s_full && player.fortune.upgrades.singles.includes(21))) {
-                rarity = 'S';
-            } else if (roll >= 81 && (!a_full && player.fortune.upgrades.singles.includes(12))) {
-                rarity = 'A';
-            } else if (!b_full) {
-                rarity = 'B';
-            } else {
-                // Каскад падения на доступные тиры, если предыдущие уже фулловые
-                if (!a_full && player.fortune.upgrades.singles.includes(12)) rarity = 'A';
-                else if (!s_full && player.fortune.upgrades.singles.includes(21)) rarity = 'S';
-                else if (!s_full && player.fortune.upgrades.singles.includes(32)) rarity = 'EX';
-                else if (!b_full) rarity = 'B';
-                else return 0;
+            
+            switch (true) {
+                case has33: 
+                    rarity = 'ALL'; 
+                    break;
+                case (rarity_number >= 1 && rarity_number <= 80 && !b_full): 
+                    rarity = 'B'; 
+                    break;
+                case ((rarity_number >= 81 && rarity_number <= 90 && !a_full) || (b_full && !a_full && has12)): 
+                    rarity = 'A'; 
+                    break;
+                case (
+                    (rarity_number >= 91 && rarity_number <= 98 && !s_full) 
+                    || (b_full && !has12 && (has21 || has32) && !s_full)
+                    || (a_full && !has12 && (has21 || has32) && !s_full)
+                ): 
+                    rarity = 'S'; 
+                    break;
+                case (
+                    (rarity_number >= 99 && rarity_number <= 100) 
+                    || (s_full && has32)
+                    || (has12 && has32 && !has21 && s_full)
+                ): 
+                    rarity = 'EX'; 
+                    break;
+                default: 
+                    if (!b_full) rarity = 'B';
+                    else if (!a_full && has12) rarity = 'A';
+                    else if (!s_full && (has21 || has32)) rarity = 'S';
+                    else rarity = 'EX';
             }
+
+            console.log(rarity);
             
             let boost = 0;
+            let getAvailableInRange = (min, max) => {
+                let range = [];
+                for (let n = min; n <= max; n++) {
+                    if (!list.includes(n)) range.push(n);
+                }
+                return range;
+            };
+
             switch (true) {
-                case rarity == 'B' && ![1, 2, 3].every(e => list.includes(e)): do { boost = randomNumber(1, 3); } while (list.includes(boost)); if (!list.includes(boost)) list.push(boost); break;
-                case rarity == 'A' && ![1, 2, 3, 4, 5, 6].every(e => list.includes(e)) && player.fortune.upgrades.singles.includes(12): do { boost = randomNumber(4, 6); } while (list.includes(boost)); if (!list.includes(boost)) list.push(boost); break;
-                case rarity == 'S' && ![1, 2, 3, 4, 5, 6, 7, 8, 9].every(e => list.includes(e)): do { boost = randomNumber(7, 9); } while (list.includes(boost)); if (!list.includes(boost)) list.push(boost); break;
-                case rarity == 'EX' && ![1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].every(e => list.includes(e)): do { boost = randomNumber(10, 12); } while (list.includes(boost)); if (!list.includes(boost)) list.push(boost); break;
-                case rarity == 'ALL': do { boost = randomNumber(1, 12); } while (list.includes(boost)); if (!list.includes(boost)) list.push(boost); break;
-                default: return 0;
+                case rarity == 'B': {
+                    let range = getAvailableInRange(1, 3);
+                    if (range.length > 0) boost = range[Math.floor(Math.random() * range.length)];
+                    break;
+                }
+                case rarity == 'A': {
+                    let range = getAvailableInRange(4, 6);
+                    if (range.length > 0) boost = range[Math.floor(Math.random() * range.length)];
+                    break;
+                }
+                case rarity == 'S': {
+                    let range = getAvailableInRange(7, 9);
+                    if (range.length > 0) boost = range[Math.floor(Math.random() * range.length)];
+                    break;
+                }
+                case rarity == 'EX': {
+                    let range = getAvailableInRange(10, 12);
+                    if (range.length > 0) boost = range[Math.floor(Math.random() * range.length)];
+                    break;
+                }
+                case rarity == 'ALL': {
+                    let range = getAvailableInRange(1, 12);
+                    if (range.length > 0) boost = range[Math.floor(Math.random() * range.length)];
+                    break;
+                }
             }
-            if (rarity != null) {
+
+            if (boost === 0) {
+                let range = getAvailableInRange(1, 12);
+                if (range.length > 0) {
+                    boost = range[Math.floor(Math.random() * range.length)];
+                } else {
+                    return 0;
+                }
+            }
+
+            if (!list.includes(boost)) {
+                list.push(boost);
+            }
+
+            if (rarity != null && boost > 0) {
                 if (i == 1) {
                     player.fortune.tokens -= 1; 
                     player.fortune.spent_tokens += 1; 
-                    if (player.virus.activated && player.virus.type == 6) player.virus.current++
-                    }
+                    if (player.virus.activated && player.virus.type == 6) player.virus.current++;
+                }
                 this.activate(boost);
             }
         }
