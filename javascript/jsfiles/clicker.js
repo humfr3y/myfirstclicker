@@ -113,7 +113,7 @@ const GAIN = {
                     else val = val.div(player.virus.effect.multiplier)
                 }
 
-                if (player.challenge.activated != 0 || player.prestige.challenge.activated != 0) val *= UPGS.shop.permanent[12].effect()
+                if (player.challenge.activated != 0 || player.prestige.challenge.activated != 0) val *= UPGS.shop.permanent[8].effect()
                 return val
             }
         },
@@ -203,7 +203,7 @@ const GAIN = {
                     else val = val.div(player.virus.effect.multiplier)
                 }
 
-                if (player.challenge.activated != 0 || player.prestige.challenge.activated != 0) val *= UPGS.shop.permanent[12].effect()
+                if (player.challenge.activated != 0 || player.prestige.challenge.activated != 0) val *= UPGS.shop.permanent[8].effect()
                 return val
             }
         },
@@ -351,7 +351,7 @@ const GAIN = {
             softcap() {
                 return {
                     softcap_start: player.supercrystal.upgrades.includes(23) ? 1e15 : 1e12,
-                    softcap_power: UPGS.shop.permanent[6].effect()
+                    softcap_power: UPGS.shop.permanent[3].effect()
                 };
             }
         },
@@ -392,7 +392,7 @@ const GAIN = {
             }
             gain *= TREASURES.event.digitalization[5].permanent.effect()
             gain *= TREASURES.event.digitalization[5].temporary.effect()
-            gain *= UPGS.shop.permanent[11].effect()
+            gain *= UPGS.shop.buyables[19].effect()
             if (player.reflash.algo.includes(91)) gain *= 1e12;
             
             return { gain: Math.min(gain, 1.7e308), broken_crystals };
@@ -417,7 +417,7 @@ const GAIN = {
                 [player.prestige.upgrades[1], UPGS.prestige.buyables[1].effect()],
                 [ACHS.has(28), 4],
                 [player.shard.singleUpgrades.includes(11), UPGS.shard.singles[11].effect()],
-                [player.shop.permanentUpgrades[1], UPGS.shop.permanent[1].effect()],
+                [player.shop.upgrades[16], UPGS.shop.buyables[16].effect()],
                 [UNL.overdrive.type2.unl(), UNL.overdrive.type2.effect()],
                 [player.minerals[3], UPGS.minerals[3].effect1()],
                 [player.challenge.completed.includes(10) && player.challenge.activated === 0, CHALL[10].effect()],
@@ -565,15 +565,15 @@ const GAIN = {
         daily: {
             min() {
                 let effect = 25;
-                if (player.shop.permanentUpgrades[2]) effect *= UPGS.shop.permanent[2].effect();
-                if (player.shop.permanentUpgrades[9]) effect *= UPGS.shop.permanent[9].effect();
+                if (player.shop.permanentUpgrades[1]) effect *= UPGS.shop.permanent[1].effect();
+                if (player.shop.permanentUpgrades[6]) effect *= UPGS.shop.permanent[6].effect();
                 if (ACHS.has(52)) effect *= 2;
                 return effect;
             },
             max() {
                 let effect = 100;
-                if (player.shop.permanentUpgrades[2]) effect *= UPGS.shop.permanent[2].effect();
-                if (player.shop.permanentUpgrades[9]) effect *= UPGS.shop.permanent[9].effect();
+                if (player.shop.permanentUpgrades[1]) effect *= UPGS.shop.permanent[1].effect();
+                if (player.shop.permanentUpgrades[6]) effect *= UPGS.shop.permanent[6].effect();
                 if (ACHS.has(52)) effect *= 2;
                 return effect;
             },
@@ -585,7 +585,7 @@ const GAIN = {
             base: 50,
             reward() {
                 let effect = this.base;
-                if (player.shop.permanentUpgrades[9]) effect *= UPGS.shop.permanent[9].effect();
+                if (player.shop.permanentUpgrades[6]) effect *= UPGS.shop.permanent[6].effect();
                 return effect
             }
         },
@@ -602,7 +602,7 @@ const GAIN = {
             let effect = GAIN.critical.baseMult;
             const mults = [
                 [player.supercrystal.upgrades.includes(22), 5],
-                [player.shop.permanentUpgrades[4], UPGS.shop.permanent[4].effect()],
+                [player.shop.permanentUpgrades[4], UPGS.shop.buyables[18].effect()],
                 [player.minerals[1], UPGS.minerals[1].effect2()], // Исправлено player.minerals на player.minerals[1]
                 [player.coin.superUpgrades.includes(13), UPGS.coin.buyables[3].effect_super()],
                 [player.shard.achievements[9], UNL.shard_achievements[9].effect()],
@@ -617,7 +617,7 @@ const GAIN = {
             additive() {
                 let effect = GAIN.critical.baseChance;
                 if (player.supercrystal.upgrades.includes(21)) effect += 2;
-                if (player.shop.permanentUpgrades[3]) effect += UPGS.shop.permanent[3].effect();
+                if (player.shop.upgrades[17]) effect += UPGS.shop.buyables[17].effect();
                 return effect;
             },
             multiplicative() {
@@ -899,7 +899,7 @@ const UNL = {
         pour() { return Math.max(Math.min(findRatio(player.supercrystal.consumedShards, this.cost()), 100), 0); },
         cost() {
             let total_currency = player.reflash.algo.includes(21) ? player.supercrystal.total_currency - 3 : player.supercrystal.total_currency;
-            let cost = 1e15 * Math.pow(1000 - UPGS.shop.permanent[7].effect(), total_currency);
+            let cost = 1e15 * Math.pow(1000 - UPGS.shop.permanent[4].effect(), total_currency);
             if (cost == Infinity) return 1.7e308
             cost /= UPGS.minerals[3].effect3();
             if (PRES_CHALLENGE[6].completed()) cost /= PRES_CHALLENGE[6].effect();
@@ -1723,7 +1723,7 @@ const VIRUS = {
     check() {
         if (player.virus.activated) return 0
 
-        let chance = 24000*UPGS.shop.permanent[10].effect()/UPGS.shop.buyables[15].effect()
+        let chance = 24000*UPGS.shop.permanent[7].effect()/UPGS.shop.buyables[15].effect()
         let maxChance = Math.round(chance)
         let randomNum = randomNumber(0, maxChance)
 
@@ -1735,7 +1735,7 @@ const VIRUS = {
 
         player.virus.type = this.current_type()
         player.virus.level = this[player.virus.type].current_level.req()
-        player.virus.goal = this[player.virus.type].req(player.virus.level) / UPGS.shop.permanent[10].effect()
+        player.virus.goal = this[player.virus.type].req(player.virus.level) / UPGS.shop.permanent[7].effect()
         player.virus.time = 60
         player.virus.activated = true
     },
@@ -2232,13 +2232,14 @@ function setupOverdriveButton(baseId, typeObj, activeBarId, consumeCurrency, typ
 function activateOverdrive(baseId, typeObj, activeBarId, consumeCurrency, type) {
     const baseEl = document.getElementById(baseId);
     const activeBarEl = document.getElementById(activeBarId);
+    if (typeObj.cost() == 1e305) return 0;
     typeObj.activate = !typeObj.activate;
     if (typeObj.activate) {
         typeObj.blink = setInterval(() => {
             activeBarEl.style.opacity = activeBarEl.style.opacity == 1 ? 0 : 1;
         }, 500);
         typeObj.interval = setInterval(() => {
-            if (player[consumeCurrency].currency >= typeObj.cost() && typeObj.percent() !== typeObj.max()) {
+            if (player[consumeCurrency].currency >= typeObj.cost() && typeObj.percent() !== typeObj.max() && typeObj.cost() < 1e305) {
                 let sub = player[consumeCurrency].currency / 100;
                 player.overdrive.consumed[type] += sub;
                 player[consumeCurrency].currency -= sub;
@@ -2401,9 +2402,9 @@ function getCoin(e) {
         
         if (GAIN.critical.get()) {
             gain = GAIN.critical.gain(gain); getCrit = true; player.clicks.critical++;
-            player.supercoin.currency += UPGS.shop.permanent[5].effect();
-            player.supercoin.total_currency += UPGS.shop.permanent[5].effect();
-            player.supercoin.this_reflash_currency += UPGS.shop.permanent[5].effect()
+            player.supercoin.currency += UPGS.shop.permanent[2].effect();
+            player.supercoin.total_currency += UPGS.shop.permanent[2].effect();
+            player.supercoin.this_reflash_currency += UPGS.shop.permanent[2].effect()
         }
         if (GAIN.supercoin.get()) getSuper = true;
         if (getCrit && getSuper && !ACHS.has(37)) ACHS.unl(37);

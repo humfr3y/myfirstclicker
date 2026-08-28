@@ -2211,6 +2211,10 @@
       <div id="algorithmTab" style="display:none">
         <div id="algoTopBar">
           <span id="bitsCount2" class="currencyCount" style="text-align: center;"><span data-i18n="top_you_have">You have</span> <rt id="top_ref_cur_val2">0</rt> <span id="bitsCount2_currency">bits</span></span>
+          <span class="currencyCount" style="text-align: center;">
+            <span data-i18n="activeNodes">Максимум узлов: </span>
+            <bt id="act_nodes_cur">3</bt>/<bt id="act_nodes_max">3</bt>
+          </span>
           <div class="centeredDiv" style="flex-direction: row;">
             <button data-i18n="export_tree" class="whiteButton" onclick="exportTree()">Экспорт древа</button>
             <button id="respecTree" data-i18n="respec_tree" class="whiteButton" onclick="respecTree()">Сброс древа после Перепрошивания</button>
@@ -3025,6 +3029,20 @@
                 <span id="shopBuyableU4Title" data-i18n="shop_b4_name">Clover</span>
                 <span id="shopBuyableU4Req">0/100</span>
                 </div>
+                <div class="shopContainer shop_unlock_post_prestige" style="display: none">
+                  <button id="shopBuyableU16" class="shopButton"></button>
+                  <div id="tooltip-shopBuyableU16" class="tooltip" role="tooltip">
+                    <span class="tooltipShop">
+                      <ut><span data-i18n="shop_b16_name">Clover</span> (<span id="sb16_amt">0</span>/<span id="sb16_max">100</span>) [+<span id="sb16_bulk">1</span>]</ut><br>
+                      <span data-i18n="shop_b16_desc">Increase the Super Coin chance</span><br>
+                      <span data-i18n="word_currently">Currently:</span> +<span id="sb16_eff">0</span>% <span id="sb16_next_cont">=> +<span id="sb16_neff">0</span>%</span><br>
+                      <span id="sb16_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb16_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                    </span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopBuyableU16Title" data-i18n="shop_b16_name">Clover</span>
+                  <span id="shopBuyableU16Req">0/100</span>
+                </div>
               <div class="shopContainer shop_unlock_post_shards" style="display: none">
                     <button id="shopBuyableU5" class="shopButton"></button>
                     <div id="tooltip-shopBuyableU5" class="tooltip" role="tooltip">
@@ -3039,20 +3057,7 @@
                     <span id="shopBuyableU5Title" data-i18n="shop_b5_name">Shard Rain</span>
                     <span id="shopBuyableU5Req">0/50</span>
                 </div>
-              <div class="shopContainer shop_unlock_post_ach33" style="display: none">
-                    <button id="shopBuyableU6" class="shopButton"></button>
-                    <div id="tooltip-shopBuyableU6" class="tooltip" role="tooltip">
-                      <span class="tooltipShop">
-                        <ut><span data-i18n="shop_b6_name">Precious Prestige</span> (<span id="sb6_amt">0</span>/<span id="sb6_max">100</span>) [+<span id="sb6_bulk">1</span>]</ut><br>
-                        <span data-i18n="shop_b6_desc">Increase Prestiges gain</span><br>
-                        <span data-i18n="word_currently">Currently:</span> +<span id="sb6_eff">0</span>% <span id="sb6_next_cont">=> +<span id="sb6_neff">0</span>%</span><br>
-                        <span id="sb6_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb6_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                      </span>
-                      <div class="arrow" data-popper-arrow></div>
-                    </div>
-                    <span id="shopBuyableU6Title" data-i18n="shop_b6_name">Precious Prestige</span>
-                    <span id="shopBuyableU6Req">0/100</span>
-                </div>
+              
               </div>
               <div class="shopShelfRow shopShelfRowTop shopPermanentRow" style="display: none">
                 <div class="shopContainer shop_unlock_post_prestige" style="display: none">
@@ -3069,13 +3074,13 @@
                     <span id="shopPermanentU1Title" data-i18n="shop_p1_name">Crystal Booster</span>
                     <span id="shopPermanentU1Req">0/25</span>
                   </div>
-                <div class="shopContainer shop_unlock_post_prestige" style="display: none">
+                <div class="shopContainer shop_unlock_post_challenge11" style="display: none">
                     <button id="shopPermanentU2" class="shopButton" onclick="UPGS.shop.permanent.buy(2)"></button>
                     <div id="tooltip-shopPermanentU2" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
                         <ut><span data-i18n="shop_p2_name">Credit Card</span> (<span id="sp2_amt">0</span>/<span id="sp2_max">5</span>)</ut><br>
                         <span data-i18n="shop_p2_desc">Increase daily reward</span><br>
-                        <span data-i18n="word_currently">Currently:</span> +<span id="sp2_eff">0</span>% <span id="sp2_next_cont">=> +<span id="sp2_neff">0</span>%</span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sp2_eff">0</span> <span id="sp2_next_cont">=> +<span id="sp2_neff">0</span></span><br>
                         <span id="sp2_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp2_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
                       </span>
                       <div class="arrow" data-popper-arrow></div>
@@ -3083,13 +3088,13 @@
                     <span id="shopPermanentU2Title" data-i18n="shop_p2_name">Credit Card</span>
                     <span id="shopPermanentU2Req">0/5</span>
                   </div>
-                <div class="shopContainer shop_unlock_post_supercrystal" style="display: none">
+                <div class="shopContainer shop_unlock_post_challenge11" style="display: none">
                   <button id="shopPermanentU3" class="shopButton" onclick="UPGS.shop.permanent.buy(3)"></button>
                   <div id="tooltip-shopPermanentU3" class="tooltip" role="tooltip">
                     <span class="tooltipShop">
                       <ut><span data-i18n="shop_p3_name">Super Muscles</span> (<span id="sp3_amt">0</span>/<span id="sp3_max">100</span>)</ut><br>
                       <span data-i18n="shop_p3_desc">Increase critical chance</span><br>
-                      <span data-i18n="word_currently">Currently:</span> +<span id="sp3_eff">0</span>% <span id="sp3_next_cont">=> +<span id="sp3_neff">0</span>%</span><br>
+                      <span data-i18n="word_currently">Currently:</span> ^<span id="sp3_eff">0</span> <span id="sp3_next_cont">=> ^<span id="sp3_neff">0</span></span><br>
                       <span id="sp3_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp3_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
                     </span>
                     <div class="arrow" data-popper-arrow></div>
@@ -3097,13 +3102,13 @@
                   <span id="shopPermanentU3Title" data-i18n="shop_p3_name">Super Muscles</span>
                   <span id="shopPermanentU3Req">0/100</span>
                   </div>
-                <div class="shopContainer shop_unlock_post_supercrystal" style="display: none">
+                <div class="shopContainer shop_unlock_post_breakprestige" style="display: none">
                   <button id="shopPermanentU4" class="shopButton" onclick="UPGS.shop.permanent.buy(4)"></button>
                   <div id="tooltip-shopPermanentU4" class="tooltip" role="tooltip">
                     <span class="tooltipShop">
                       <ut><span data-i18n="shop_p4_name">Flame Hand</span> (<span id="sp4_amt">0</span>/<span id="sp4_max">100</span>)</ut><br>
                       <span data-i18n="shop_p4_desc">Increase critical click multiplier</span><br>
-                      <span data-i18n="word_currently">Currently:</span> +<span id="sp4_eff">0</span>% <span id="sp4_next_cont">=> +<span id="sp4_neff">0</span>%</span><br>
+                      <span data-i18n="word_currently">Currently:</span> -<span id="sp4_eff">0</span> <span id="sp4_next_cont">=> -<span id="sp4_neff">0</span></span><br>
                       <span id="sp4_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp4_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
                     </span>
                     <div class="arrow" data-popper-arrow></div>
@@ -3111,7 +3116,7 @@
                   <span id="shopPermanentU4Title" data-i18n="shop_p4_name">Flame Hand</span>
                   <span id="shopPermanentU4Req">0/100</span>
                   </div>
-                <div class="shopContainer shop_unlock_post_challenge11" style="display: none">
+                <div class="shopContainer shop_unlock_post_fortune" style="display: none">
                     <button id="shopPermanentU5" class="shopButton" onclick="UPGS.shop.permanent.buy(5)"></button>
                     <div id="tooltip-shopPermanentU5" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
@@ -3125,13 +3130,13 @@
                     <span id="shopPermanentU5Title" data-i18n="shop_p5_name">Midas's Touch</span>
                     <span id="shopPermanentU5Req">0/3</span>
                   </div>
-                <div class="shopContainer shop_unlock_post_challenge11" style="display: none">
+                <div class="shopContainer shop_unlock_post_reflash" style="display: none">
                     <button id="shopPermanentU6" class="shopButton" onclick="UPGS.shop.permanent.buy(6)"></button>
                     <div id="tooltip-shopPermanentU6" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
                         <ut><span data-i18n="shop_p6_name">Energy Shard</span> (<span id="sp6_amt">0</span>/<span id="sp6_max">5</span>)</ut><br>
                         <span data-i18n="shop_p6_desc">Reduces shards effect softcap</span><br>
-                        <span data-i18n="word_currently">Currently:</span> ^<span id="sp6_eff">0</span> <span id="sp6_next_cont">=> ^<span id="sp6_neff">0</span></span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sp6_eff">0</span>% <span id="sp6_next_cont">=> +<span id="sp6_neff">0</span>%</span><br>
                         <span id="sp6_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp6_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
                       </span>
                       <div class="arrow" data-popper-arrow></div>
@@ -3307,6 +3312,48 @@
                   </div>
               </div>
               <div class="shopShelfRow shopBuyableRow" style="display: none">
+                <div class="shopContainer shop_unlock_post_reflash" style="display: none">
+                  <button id="shopBuyableU10" class="shopButton"></button>
+                  <div id="tooltip-shopBuyableU10" class="tooltip" role="tooltip">
+                    <span class="tooltipShop">
+                      <ut><span data-i18n="shop_b10_name">Golden Key II</span> (<span id="sb10_amt">0</span>/<span id="sb10_max">100</span>) [+<span id="sb10_bulk">1</span>]</ut><br>
+                      <span data-i18n="shop_b10_desc">Increase α-coins per second</span><br>
+                      <span data-i18n="word_currently">Currently:</span> +<span id="sb10_eff">0</span>% <span id="sb10_next_cont">=> +<span id="sb10_neff">0</span>%</span><br>
+                      <span id="sb10_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb10_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                    </span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopBuyableU10Title" data-i18n="shop_b10_name">Golden Key II</span>
+                  <span id="shopBuyableU10Req">0/100</span>
+                </div>
+              <div class="shopContainer shop_unlock_post_reflash" style="display: none">
+                    <button id="shopBuyableU11" class="shopButton"></button>
+                    <div id="tooltip-shopBuyableU11" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut><span data-i18n="shop_b11_name">Golden Clover</span> (<span id="sb11_amt">0</span>/<span id="sb11_max">100</span>) [+<span id="sb11_bulk">1</span>]</ut><br>
+                        <span data-i18n="shop_b11_desc">Increase supercoin chance</span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sb11_eff">0</span>% <span id="sb11_next_cont">=> +<span id="sb11_neff">0</span>%</span><br>
+                        <span id="sb11_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb11_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopBuyableU11Title" data-i18n="shop_b11_name">Golden Clover</span>
+                    <span id="shopBuyableU11Req">0/100</span>
+                </div>
+                <div class="shopContainer shop_unlock_post_computer" style="display: none">
+                    <button id="shopBuyableU12" class="shopButton"></button>
+                    <div id="tooltip-shopBuyableU12" class="tooltip" role="tooltip">
+                      <span class="tooltipShop">
+                        <ut><span data-i18n="shop_b12_name">Golden Clover</span> (<span id="sb12_amt">0</span>/<span id="sb12_max">100</span>) [+<span id="sb12_bulk">1</span>]</ut><br>
+                        <span data-i18n="shop_b12_desc">Increase supercoin chance</span><br>
+                        <span data-i18n="word_currently">Currently:</span> +<span id="sb12_eff">0</span> <span id="sb12_next_cont">=> +<span id="sb12_neff">0</span></span><br>
+                        <span id="sb12_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb12_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                      </span>
+                      <div class="arrow" data-popper-arrow></div>
+                    </div>
+                    <span id="shopBuyableU12Title" data-i18n="shop_b12_name">Golden Clover</span>
+                    <span id="shopBuyableU12Req">0/100</span>
+                </div>
                 <div class="shopContainer shop_unlock_post_computer" style="display: none">
                     <button id="shopBuyableU13" class="shopButton"></button>
                     <div id="tooltip-shopBuyableU13" class="tooltip" role="tooltip">
@@ -3363,34 +3410,76 @@
             <hr>
             <div class="shopShelf"> 
               <div class="shopShelfRow shopShelfRowBottom shopBuyableRow">
+                <div class="shopContainer shop_unlock_post_ach33" style="display: none">
+                  <button id="shopBuyableU6" class="shopButton"></button>
+                  <div id="tooltip-shopBuyableU6" class="tooltip" role="tooltip">
+                    <span class="tooltipShop">
+                      <ut><span data-i18n="shop_b6_name">Precious Prestige</span> (<span id="sb6_amt">0</span>/<span id="sb6_max">100</span>) [+<span id="sb6_bulk">1</span>]</ut><br>
+                      <span data-i18n="shop_b6_desc">Increase Prestiges gain</span><br>
+                      <span data-i18n="word_currently">Currently:</span> +<span id="sb6_eff">0</span>% <span id="sb6_next_cont">=> +<span id="sb6_neff">0</span>%</span><br>
+                      <span id="sb6_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb6_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                    </span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopBuyableU6Title" data-i18n="shop_b6_name">Precious Prestige</span>
+                  <span id="shopBuyableU6Req">0/100</span>
+                </div>
               <div class="shopContainer shop_unlock_post_challenge11" style="display: none">
-                    <button id="shopBuyableU7" class="shopButton"></button>
-                    <div id="tooltip-shopBuyableU7" class="tooltip" role="tooltip">
-                      <span class="tooltipShop">
-                        <ut><span data-i18n="shop_b7_name">Energy Drink</span> (<span id="sb7_amt">0</span>/<span id="sb7_max">20</span>) [+<span id="sb7_bulk">1</span>]</ut><br>
-                        <span data-i18n="shop_b7_desc">Increase Overdrives effect</span><br>
-                        <span data-i18n="word_currently">Currently:</span> +<span id="sb7_eff">0</span>% <span id="sb7_next_cont">=> +<span id="sb7_neff">0</span>%</span><br>
-                        <span id="sb7_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb7_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                      </span>
-                      <div class="arrow" data-popper-arrow></div>
-                    </div>
-                    <span id="shopBuyableU7Title" data-i18n="shop_b7_name">Energy Drink</span>
-                    <span id="shopBuyableU7Req">0/20</span>
+                <button id="shopBuyableU7" class="shopButton"></button>
+                <div id="tooltip-shopBuyableU7" class="tooltip" role="tooltip">
+                  <span class="tooltipShop">
+                    <ut><span data-i18n="shop_b7_name">Energy Drink</span> (<span id="sb7_amt">0</span>/<span id="sb7_max">20</span>) [+<span id="sb7_bulk">1</span>]</ut><br>
+                    <span data-i18n="shop_b7_desc">Increase Overdrives effect</span><br>
+                    <span data-i18n="word_currently">Currently:</span> +<span id="sb7_eff">0</span>% <span id="sb7_next_cont">=> +<span id="sb7_neff">0</span>%</span><br>
+                    <span id="sb7_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb7_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                  </span>
+                  <div class="arrow" data-popper-arrow></div>
                 </div>
+                <span id="shopBuyableU7Title" data-i18n="shop_b7_name">Energy Drink</span>
+                <span id="shopBuyableU7Req">0/20</span>
+              </div>
+              <div class="shopContainer shop_unlock_post_supercrystal" style="display: none">
+                <button id="shopBuyableU17" class="shopButton"></button>
+                <div id="tooltip-shopBuyableU17" class="tooltip" role="tooltip">
+                  <span class="tooltipShop">
+                    <ut><span data-i18n="shop_b17_name">Energy Drink</span> (<span id="sb17_amt">0</span>/<span id="sb17_max">20</span>) [+<span id="sb17_bulk">1</span>]</ut><br>
+                    <span data-i18n="shop_b17_desc">Increase Overdrives effect</span><br>
+                    <span data-i18n="word_currently">Currently:</span> +<span id="sb17_eff">0</span>% <span id="sb17_next_cont">=> +<span id="sb17_neff">0</span>%</span><br>
+                    <span id="sb17_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb17_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                  </span>
+                  <div class="arrow" data-popper-arrow></div>
+                </div>
+                <span id="shopBuyableU17Title" data-i18n="shop_b17_name">Energy Drink</span>
+                <span id="shopBuyableU17Req">0/20</span>
+              </div>
+              <div class="shopContainer shop_unlock_post_supercrystal" style="display: none">
+                <button id="shopBuyableU18" class="shopButton"></button>
+                <div id="tooltip-shopBuyableU18" class="tooltip" role="tooltip">
+                  <span class="tooltipShop">
+                    <ut><span data-i18n="shop_b18_name">Energy Drink</span> (<span id="sb18_amt">0</span>/<span id="sb18_max">20</span>) [+<span id="sb18_bulk">1</span>]</ut><br>
+                    <span data-i18n="shop_b18_desc">Increase Overdrives effect</span><br>
+                    <span data-i18n="word_currently">Currently:</span> +<span id="sb18_eff">0</span>% <span id="sb18_next_cont">=> +<span id="sb18_neff">0</span>%</span><br>
+                    <span id="sb18_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb18_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                  </span>
+                  <div class="arrow" data-popper-arrow></div>
+                </div>
+                <span id="shopBuyableU18Title" data-i18n="shop_b18_name">Energy Drink</span>
+                <span id="shopBuyableU18Req">0/20</span>
+              </div>
               <div class="shopContainer shop_unlock_post_reflash" style="display: none">
-                    <button id="shopBuyableU8" class="shopButton"></button>
-                    <div id="tooltip-shopBuyableU8" class="tooltip" role="tooltip">
-                      <span class="tooltipShop">
-                        <ut><span data-i18n="shop_b8_name">Golden Glove II</span> (<span id="sb8_amt">0</span>/<span id="sb8_max">100</span>) [+<span id="sb8_bulk">1</span>]</ut><br>
-                        <span data-i18n="shop_b8_desc">Increase α-coins per click</span><br>
-                        <span data-i18n="word_currently">Currently:</span> +<span id="sb8_eff">0</span>% <span id="sb8_next_cont">=> +<span id="sb8_neff">0</span>%</span><br>
-                        <span id="sb8_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb8_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                      </span>
-                      <div class="arrow" data-popper-arrow></div>
-                    </div>
-                    <span id="shopBuyableU8Title" data-i18n="shop_b8_name">Golden Glove II</span>
-                    <span id="shopBuyableU8Req">0/100</span>
+                <button id="shopBuyableU8" class="shopButton"></button>
+                <div id="tooltip-shopBuyableU8" class="tooltip" role="tooltip">
+                  <span class="tooltipShop">
+                    <ut><span data-i18n="shop_b8_name">Golden Glove II</span> (<span id="sb8_amt">0</span>/<span id="sb8_max">100</span>) [+<span id="sb8_bulk">1</span>]</ut><br>
+                    <span data-i18n="shop_b8_desc">Increase α-coins per click</span><br>
+                    <span data-i18n="word_currently">Currently:</span> +<span id="sb8_eff">0</span>% <span id="sb8_next_cont">=> +<span id="sb8_neff">0</span>%</span><br>
+                    <span id="sb8_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb8_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                  </span>
+                  <div class="arrow" data-popper-arrow></div>
                 </div>
+                <span id="shopBuyableU8Title" data-i18n="shop_b8_name">Golden Glove II</span>
+                <span id="shopBuyableU8Req">0/100</span>
+              </div>
               <div class="shopContainer shop_unlock_post_reflash" style="display: none">
                     <button id="shopBuyableU9" class="shopButton"></button>
                     <div id="tooltip-shopBuyableU9" class="tooltip" role="tooltip">
@@ -3405,57 +3494,15 @@
                     <span id="shopBuyableU9Title" data-i18n="shop_b9_name">Golden Watch II</span>
                     <span id="shopBuyableU9Req">0/100</span>
                 </div>
-              <div class="shopContainer shop_unlock_post_reflash" style="display: none">
-                    <button id="shopBuyableU10" class="shopButton"></button>
-                    <div id="tooltip-shopBuyableU10" class="tooltip" role="tooltip">
-                      <span class="tooltipShop">
-                        <ut><span data-i18n="shop_b10_name">Golden Key II</span> (<span id="sb10_amt">0</span>/<span id="sb10_max">100</span>) [+<span id="sb10_bulk">1</span>]</ut><br>
-                        <span data-i18n="shop_b10_desc">Increase α-coins per second</span><br>
-                        <span data-i18n="word_currently">Currently:</span> +<span id="sb10_eff">0</span>% <span id="sb10_next_cont">=> +<span id="sb10_neff">0</span>%</span><br>
-                        <span id="sb10_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb10_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                      </span>
-                      <div class="arrow" data-popper-arrow></div>
-                    </div>
-                    <span id="shopBuyableU10Title" data-i18n="shop_b10_name">Golden Key II</span>
-                    <span id="shopBuyableU10Req">0/100</span>
-                </div>
-              <div class="shopContainer shop_unlock_post_reflash" style="display: none">
-                    <button id="shopBuyableU11" class="shopButton"></button>
-                    <div id="tooltip-shopBuyableU11" class="tooltip" role="tooltip">
-                      <span class="tooltipShop">
-                        <ut><span data-i18n="shop_b11_name">Golden Clover</span> (<span id="sb11_amt">0</span>/<span id="sb11_max">100</span>) [+<span id="sb11_bulk">1</span>]</ut><br>
-                        <span data-i18n="shop_b11_desc">Increase supercoin chance</span><br>
-                        <span data-i18n="word_currently">Currently:</span> +<span id="sb11_eff">0</span>% <span id="sb11_next_cont">=> +<span id="sb11_neff">0</span>%</span><br>
-                        <span id="sb11_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb11_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                      </span>
-                      <div class="arrow" data-popper-arrow></div>
-                    </div>
-                    <span id="shopBuyableU11Title" data-i18n="shop_b11_name">Golden Clover</span>
-                    <span id="shopBuyableU11Req">0/100</span>
-                </div>
-                <div class="shopContainer shop_unlock_post_computer" style="display: none">
-                    <button id="shopBuyableU12" class="shopButton"></button>
-                    <div id="tooltip-shopBuyableU12" class="tooltip" role="tooltip">
-                      <span class="tooltipShop">
-                        <ut><span data-i18n="shop_b12_name">Golden Clover</span> (<span id="sb12_amt">0</span>/<span id="sb12_max">100</span>) [+<span id="sb12_bulk">1</span>]</ut><br>
-                        <span data-i18n="shop_b12_desc">Increase supercoin chance</span><br>
-                        <span data-i18n="word_currently">Currently:</span> +<span id="sb12_eff">0</span> <span id="sb12_next_cont">=> +<span id="sb12_neff">0</span></span><br>
-                        <span id="sb12_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb12_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
-                      </span>
-                      <div class="arrow" data-popper-arrow></div>
-                    </div>
-                    <span id="shopBuyableU12Title" data-i18n="shop_b12_name">Golden Clover</span>
-                    <span id="shopBuyableU12Req">0/100</span>
-                </div>
               </div>
               <div class="shopShelfRow shopShelfRowBottom shopPermanentRow" style="display: none">
-                <div class="shopContainer shop_unlock_post_breakprestige" style="display: none">
+                <div class="shopContainer shop_unlock_post_reflash" style="display: none">
                     <button id="shopPermanentU7" class="shopButton" onclick="UPGS.shop.permanent.buy(7)"></button>
                     <div id="tooltip-shopPermanentU7" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
                         <ut><span data-i18n="shop_p7_name">Crystal Sword</span> (<span id="sp7_amt">0</span>/<span id="sp7_max">5</span>)</ut><br>
                         <span data-i18n="shop_p7_desc">Reduces Supercrystal cost scaling</span><br>
-                        <span data-i18n="word_currently">Currently:</span> -<span id="sp7_eff">0</span> <span id="sp7_next_cont">=> -<span id="sp7_neff">0</span></span><br>
+                        <span data-i18n="word_currently">Currently:</span> <span id="sp7_eff">0</span>% <span id="sp7_next_cont">=> <span id="sp7_neff">0</span>%</span><br>
                         <span id="sp7_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp7_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
                       </span>
                       <div class="arrow" data-popper-arrow></div>
@@ -3463,13 +3510,13 @@
                     <span id="shopPermanentU7Title" data-i18n="shop_p7_name">Crystal Sword</span>
                     <span id="shopPermanentU7Req">0/5</span>
                   </div>
-                <div class="shopContainer shop_unlock_post_fortune" style="display: none">
+                <div class="shopContainer shop_unlock_post_reflash" style="display: none">
                     <button id="shopPermanentU8" class="shopButton" onclick="UPGS.shop.permanent.buy(8)"></button>
                     <div id="tooltip-shopPermanentU8" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
                         <ut><span data-i18n="shop_p8_name">Fortune Ticket</span> (<span id="sp8_amt">0</span>/<span id="sp8_max">5</span>)</ut><br>
                         <span data-i18n="shop_p8_desc">Increase daily resets of Fortune Boosts by +2</span><br>
-                        <span data-i18n="word_currently">Currently:</span> +<span id="sp8_eff">0</span> <span id="sp8_next_cont">=> +<span id="sp8_neff">0</span></span><br>
+                        <span data-i18n="word_currently">Currently:</span> x<span id="sp8_eff">0</span> <span id="sp8_next_cont">=> x<span id="sp8_neff">0</span></span><br>
                         <span id="sp8_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sp8_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
                       </span>
                       <div class="arrow" data-popper-arrow></div>
@@ -3477,7 +3524,7 @@
                     <span id="shopPermanentU8Title" data-i18n="shop_p8_name">Fortune Ticket</span>
                     <span id="shopPermanentU8Req">0/5</span>
                   </div>
-                <div class="shopContainer shop_unlock_post_reflash" style="display: none">
+                <div class="shopContainer" style="display: none">
                     <button id="shopPermanentU9" class="shopButton" onclick="UPGS.shop.permanent.buy(9)"></button>
                     <div id="tooltip-shopPermanentU9" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
@@ -3491,7 +3538,7 @@
                     <span id="shopPermanentU9Title" data-i18n="shop_p9_name">Credit Card PLUS</span>
                     <span id="shopPermanentU9Req">0/10</span>
                   </div>
-                <div class="shopContainer shop_unlock_post_reflash" style="display: none">
+                <div class="shopContainer" style="display: none">
                     <button id="shopPermanentU10" class="shopButton" onclick="UPGS.shop.permanent.buy(10)"></button>
                     <div id="tooltip-shopPermanentU10" class="tooltip" role="tooltip">
                       <span class="tooltipShop">
@@ -3505,7 +3552,7 @@
                     <span id="shopPermanentU10Title" data-i18n="shop_p10_name">REAPER</span>
                     <span id="shopPermanentU10Req">0/10</span>
                   </div>
-                  <div class="shopContainer shop_unlock_post_computer" style="display: none">
+                  <div class="shopContainer" style="display: none">
                   <button id="shopPermanentU11" class="shopButton" onclick="UPGS.shop.permanent.buy(11)"></button>
                   <div id="tooltip-shopPermanentU11" class="tooltip" role="tooltip">
                     <span class="tooltipShop">
@@ -3519,7 +3566,7 @@
                   <span id="shopPermanentU11Title" data-i18n="shop_p11_name">Energy Shard</span>
                   <span id="shopPermanentU11Req">0/10</span>
                 </div>
-                <div class="shopContainer shop_unlock_post_computer" style="display: none">
+                <div class="shopContainer" style="display: none">
                   <button id="shopPermanentU12" class="shopButton" onclick="UPGS.shop.permanent.buy(12)"></button>
                   <div id="tooltip-shopPermanentU12" class="tooltip" role="tooltip">
                     <span class="tooltipShop">
@@ -3565,7 +3612,20 @@
               <div class="shopShelfRow shopShelfRowBottom shopItemRow" style="display: none">
               </div>
               <div class="shopShelfRow shopBuyableRow" style="display: none">
-                
+                <div class="shopContainer shop_unlock_post_computer" style="display: none">
+                  <button id="shopBuyableU19" class="shopButton"></button>
+                  <div id="tooltip-shopBuyableU19" class="tooltip" role="tooltip">
+                    <span class="tooltipShop">
+                      <ut><span data-i18n="shop_b19_name">Golden Clover</span> (<span id="sb19_amt">0</span>/<span id="sb19_max">100</span>) [+<span id="sb19_bulk">1</span>]</ut><br>
+                      <span data-i18n="shop_b19_desc">Increase supercoin chance</span><br>
+                      <span data-i18n="word_currently">Currently:</span> x<span id="sb19_eff">0</span> <span id="sb19_next_cont">=> x<span id="sb19_neff">0</span></span><br>
+                      <span id="sb19_cost_cont"><span data-i18n="word_cost">Cost:</span> <span id="sb19_cost">0</span> <span data-i18n="currency_supercoins">supercoins</span></span>
+                    </span>
+                    <div class="arrow" data-popper-arrow></div>
+                  </div>
+                  <span id="shopBuyableU19Title" data-i18n="shop_b19_name">Golden Clover</span>
+                  <span id="shopBuyableU19Req">0/10</span>
+                </div>
               </div>
               <div class="shopShelfRow shopPermanentRow" style="display: none">
 

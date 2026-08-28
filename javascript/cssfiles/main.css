@@ -1072,44 +1072,44 @@ rn {
 #shopBuyableU15 {
   background-image: url('./images/items/adrenaline.png')
 }
-#shopPermanentU1 {
+#shopBuyableU16 {
   background-image: url('./images/items/diamondpersV3.webp')
 }
-#shopPermanentU2 {
+#shopPermanentU1 {
   background-image: url('./images/items/creditcard.png')
 }
-#shopPermanentU3 {
+#shopBuyableU17 {
   background-image: url('./images/items/cursorwhitepercent.bmp')
 }
-#shopPermanentU4 {
+#shopBuyableU18 {
   background-image: url('./images/items/cursorredX.bmp')
 }
-#shopPermanentU5 {
+#shopPermanentU2 {
   background-image: url('./images/items/glowhand.webp')
 }
-#shopPermanentU6 {
+#shopPermanentU3 {
   background-image: url('./images/items/lightningcrystalfinish.webp')
 }
-#shopPermanentU7 {
+#shopPermanentU4 {
   background-image: url('./images/items/swordcrystal.webp')
 }
-#shopPermanentU8 {
+#shopPermanentU5 {
   background-image: url('./images/items/fortuneTicket.png')
 }
-#shopPermanentU9 {
+#shopPermanentU6 {
   background-image: url('./images/items/creditcardplus.png');
   background-position: -0.75px -4px;
   image-rendering: pixelated;
 }
-#shopPermanentU10 {
+#shopPermanentU7 {
   background-image: url('./images/items/reaper.png');
   background-position: -0.75px -0.5px;
   image-rendering: pixelated;
 }
-#shopPermanentU11 {
+#shopBuyableU19 {
   background-image: url('./images/items/shardhammer.png')
 }
-#shopPermanentU12 {
+#shopPermanentU8 {
   background-image: url('./images/items/winnerheadband.png')
 }
 /* #shopSingleU2{

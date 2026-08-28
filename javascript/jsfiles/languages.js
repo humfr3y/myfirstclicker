@@ -528,16 +528,20 @@ function loadTranslationsShop() {
     document.getElementById('top_scoins_gain_val').textContent = formatNumber(GAIN.supercoin.gain_per_second(), 'power', 3);
 
     // 1. Покупаемые улучшения (Buyables 1-11)
-    for (let i = 1; i <= 15; i++) {
+    for (let i = 1; i <= 19; i++) {
         let max = UPGS.shop.buyables[i].maxAmount;
         let amt = player.shop.upgrades[i];
         
         document.getElementById(`sb${i}_amt`).textContent = formatNumber(amt);
         document.getElementById(`sb${i}_max`).textContent = max;
         document.getElementById(`sb${i}_bulk`).textContent = formatNumber(UPGS.shop.buyables[i].bulk());
-        if (i != 12) {
+        if (i != 12 && i != 17) {
             document.getElementById(`sb${i}_eff`).textContent = formatNumber(UPGS.shop.buyables[i].effect(), 'percent');
             document.getElementById(`sb${i}_neff`).textContent = formatNumber(UPGS.shop.buyables[i].next_effect(), 'percent');
+        }
+        else if (i == 17) {
+            document.getElementById(`sb${i}_eff`).textContent = formatNumber(UPGS.shop.buyables[i].effect(), 'boost');
+            document.getElementById(`sb${i}_neff`).textContent = formatNumber(UPGS.shop.buyables[i].next_effect(), 'boost');
         }
         else {
             document.getElementById(`sb${i}_eff`).textContent = formatNumber(UPGS.shop.buyables[i].effect());
@@ -555,21 +559,17 @@ function loadTranslationsShop() {
     // Правильное форматирование для Постоянных улучшений
     const fmtMap = {
         1: 'percent', // Crystal Booster (x2 -> 100%)
-        2: 'percent', // Credit Card (x3 -> 200%)
-        3: 'boost',   // Super Muscles (+0.4)
-        4: 'percent',   // Flame Hand (+0.2)
+        2: 'number', // Credit Card (x3 -> 200%)
+        3: 'power',   // Super Muscles (+0.4)
+        4: 'number',   // Flame Hand (+0.2)
         5: 'number',  // Midas Touch (+1)
-        6: 'power',   // Energy Shard (^0.5)
-        7: 'number',  // Crystal Sword (-1)
+        6: 'percent',   // Energy Shard (^0.5)
+        7: 'percent',  // Crystal Sword (-1)
         8: 'number',   // Fortune Ticket (+2)
-        9: 'percent',
-        10: 'percent',
-        11: 'number',
-        12: 'number'
     };
 
     // 2. Постоянные улучшения (Permanents 1-10)
-    for (let i = 1; i <= 12; i++) {
+    for (let i = 1; i <= 8; i++) {
         let max = UPGS.shop.permanent[i].maxAmount;
         let amt = player.shop.permanentUpgrades[i];
         let fmt = fmtMap[i];
@@ -1214,6 +1214,8 @@ function loadTranslationsReflash() {
         const topBits = document.getElementById('top_ref_cur_val2');
         if (topBits) topBits.textContent = formatNumber(player.reflash.currency, 'boost', 2, true)
         document.getElementById('bitsCount2_currency').textContent = i18next.t(getBitOrByteKey(player.reflash.currency))
+        document.getElementById('act_nodes_max').textContent = formatNumber(UPGS.reflash.computer[5].effect())
+        document.getElementById('act_nodes_cur').textContent = formatNumber(player.reflash.algo.length) 
 
         // 5, Компуктер
         for (let i = 0; i < 5; i++) {

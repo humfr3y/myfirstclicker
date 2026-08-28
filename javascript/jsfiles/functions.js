@@ -869,7 +869,7 @@ function statsCrystalsUpdate() {
         { effectValue: () => UPGS.prestige.buyables[1].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'brilliantDoublerStatsEffect', pieceId: 'brilliantDoublerPiece', piecePercentId: 'brilliantDoublerPiecePercent', summary: () => superSummary },
         { effectValue: () => UPGS.shard.singles[11].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'recyclingStatsEffect', pieceId: 'recyclingPiece', piecePercentId: 'recyclingPiecePercent', summary: () => superSummary },
         { effectValue: () => (player.challenge.completed.includes(10) ? CHALL[10].effect() : 1), effectPrefix: 'x', effectMode: 'boost', effectId: 'challenge10StatsEffect', pieceId: 'challenge10Piece', piecePercentId: 'challenge10PiecePercent', summary: () => superSummary },
-        { effectValue: () => UPGS.shop.permanent[1].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalBoostStatsEffect', pieceId: 'crystalBoostPiece', piecePercentId: 'crystalBoostPiecePercent', summary: () => superSummary },
+        { effectValue: () => UPGS.shop.buyables[16].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'crystalBoostStatsEffect', pieceId: 'crystalBoostPiece', piecePercentId: 'crystalBoostPiecePercent', summary: () => superSummary },
         { effectValue: () => UNL.overdrive.type2.effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'overdrive2EffectStatsEffect', pieceId: 'overdrive2EffectPiece', piecePercentId: 'overdrive2EffectPiecePercent', summary: () => superSummary },
         { effectValue: () => UPGS.minerals[3].effect1(), effectPrefix: 'x', effectMode: 'boost', effectId: 'thirdMineralEffect1StatsEffect', pieceId: 'thirdMineralEffect1Piece', piecePercentId: 'thirdMineralEffect1PiecePercent', summary: () => superSummary },
         { effectValue: () => Math.pow(3, UPGS.supercrystal[12].unl()), effectPrefix: 'x', effectMode: 'boost', effectId: 'secondSuperCrystalSingleEffectStatsEffect', pieceId: 'secondSuperCrystalSingleEffectPiece', piecePercentId: 'secondSuperCrystalSingleEffectPiecePercent', summary: () => superSummary },
@@ -1030,7 +1030,7 @@ function statsCritChanceUpdate() {
     // Обновляем текстовые значения
     setIf('baseCriticalChanceEffectStatsEffect', '+' + formatDecimal(GAIN.critical.baseChance, 'boost'));
     setIf('fourthSuperCrystalSingleEffectStatsEffect', '+' + formatDecimal(UPGS.supercrystal[21].unl() ? 2 : 0, 'boost'));
-    setIf('eighthShopBuyableEffectStatsEffect', '+' + formatDecimal(UPGS.shop.permanent[3].effect(), 'boost'));
+    setIf('eighthShopBuyableEffectStatsEffect', '+' + formatDecimal(UPGS.shop.buyables[17].effect(), 'boost'));
     setIf('firstMineralEffect1StatsEffect', 'x' + formatDecimal(UPGS.minerals[1].effect1(), 'boost'));
     setIf('critChShAchStatsEffect', 'x' + formatDecimal(UNL.shard_achievements[8].effect(), 'boost'));
     setIf('fortuneBoostCritChanceStatsEffect', 'x' + formatDecimal(UPGS.fortune.boosts[5].effect(), 'boost'));
@@ -1039,7 +1039,7 @@ function statsCritChanceUpdate() {
     const additiveSources = [
         { raw: GAIN.critical.baseChance, pid: 'baseCriticalChanceEffectPiece', ppid: 'baseCriticalChanceEffectPiecePercent' },
         { raw: (UPGS.supercrystal[21].unl() ? 2 : 0), pid: 'fourthSuperCrystalSingleEffectPiece', ppid: 'fourthSuperCrystalSingleEffectPiecePercent' },
-        { raw: UPGS.shop.permanent[3].effect(), pid: 'eighthShopBuyableEffectPiece', ppid: 'eighthShopBuyableEffectPiecePercent' }
+        { raw: UPGS.shop.buyables[17].effect(), pid: 'eighthShopBuyableEffectPiece', ppid: 'eighthShopBuyableEffectPiecePercent' }
     ];
 
     const multiplicativeSources = [
@@ -1149,7 +1149,7 @@ function statsCritMultiUpdate() {
     applyStatsUpdate([
         { effectValue: () => GAIN.critical.baseMult, effectPrefix: 'x', effectMode: 'boost', effectId: 'baseCriticalGainEffectStatsEffect', pieceId: 'baseCriticalGainEffectPiece', piecePercentId: 'baseCriticalGainEffectPiecePercent', summary: () => GAIN.critical.multiplier() },
         { effectValue: () => Math.pow(5, UPGS.supercrystal[22].unl()), effectPrefix: 'x', effectMode: 'boost', effectId: 'fifthSuperCrystalSingleEffectStatsEffect', pieceId: 'fifthSuperCrystalSingleEffectPiece', piecePercentId: 'fifthSuperCrystalSingleEffectPiecePercent', summary: () => GAIN.critical.multiplier() },
-        { effectValue: () => UPGS.shop.permanent[4].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'ninthShopBuyableEffectStatsEffect', pieceId: 'ninthShopBuyableEffectPiece', piecePercentId: 'ninthShopBuyableEffectPiecePercent', summary: () => GAIN.critical.multiplier() },
+        { effectValue: () => UPGS.shop.buyables[18].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'ninthShopBuyableEffectStatsEffect', pieceId: 'ninthShopBuyableEffectPiece', piecePercentId: 'ninthShopBuyableEffectPiecePercent', summary: () => GAIN.critical.multiplier() },
         { effectValue: () => UPGS.minerals[1].effect2(), effectPrefix: 'x', effectMode: 'boost', effectId: 'firstMineralEffect2StatsEffect', pieceId: 'firstMineralEffect2Piece', piecePercentId: 'firstMineralEffect2PiecePercent', summary: () => GAIN.critical.multiplier() },
         { effectValue: () => UNL.shard_achievements[9].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'critMuShAchStatsEffect', pieceId: 'critMuShAchPiece', piecePercentId: 'critMuShAchPiecePercent', summary: () => GAIN.critical.multiplier() },
         { effectValue: () => UPGS.fortune.boosts[6].effect(), effectPrefix: 'x', effectMode: 'boost', effectId: 'fortuneBoostCritMultiStatsEffect', pieceId: 'fortuneBoostCritMultiPiece', piecePercentId: 'fortuneBoostCritMultiPiecePercent', summary: () => GAIN.critical.multiplier() },

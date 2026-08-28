@@ -272,6 +272,9 @@ function loadGame() {
     document.getElementById('changeTheme').value = player.cosmetics.themes.current
     document.getElementById('changeCoinIcon').value = player.cosmetics.coins.current
     document.getElementById('changeProgressBar').value = player.cosmetics.progressBars.current
+
+    player.overdrive.consumed.type3 = 0
+    convert_permanentUpgrades()
 }
 
 function resetDailyReward() {
@@ -283,7 +286,7 @@ function resetDailyReward() {
         player.time.next_daily = nextDay.getTime();
         player.got_daily_reward = false;
         player.got_export_reward = false;
-        player.fortune.daily_resets = player.fortune.upgrades.singles.includes(23) ? 30 + UPGS.shop.permanent[8].effect() : 15 + UPGS.shop.permanent[8].effect() ;
+        player.fortune.daily_resets = player.fortune.upgrades.singles.includes(23) ? 30 + UPGS.shop.permanent[5].effect() : 15 + UPGS.shop.permanent[5].effect() ;
     }
 }
 
@@ -349,6 +352,31 @@ if (fileUpload) {
         reader.readAsText(file);
         fileUpload.value = null;
     });
+}
+
+function convert_permanentUpgrades() {
+    if (player.settings.version == "1.1.1") return 0;
+
+    let temp_object = player.shop.permanentUpgrades
+
+    let array = [1, 3, 4, 11], array_perm = [2, 5, 6, 7, 8, 9, 10, 12]
+
+    for (let i = 1; i <= 12; i++) {
+        if (i == 1 || i == 3 || i == 4 || i == 11) {
+            let array_num = array.indexOf(i)+1
+            player.shop.upgrades[15+array_num] = temp_object[i]
+        }
+        else {
+            let array_num = array_perm.indexOf(i)+1
+            player.shop.permanentUpgrades[array_num] = temp_object[i]
+        }
+    }
+
+    for (let i = 9; i <= 12; i++) {
+        player.shop.permanentUpgrades[i] = 0
+    } 
+
+    player.settings.version = "1.1.1"
 }
 
 // --- СТАРЫЙ КОНВЕРТЕР СОХРАНЕНИЙ (ОПТИМИЗИРОВАННЫЙ) ---
