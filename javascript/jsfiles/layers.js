@@ -329,6 +329,9 @@ const LAYERS = {
             if (!ACHS.has(69) && player.achievement_conditions[69]) ACHS.unl(69)
             if (!ACHS.has(70) && player.achievement_conditions[70]) ACHS.unl(70)
 
+            player.achievement_conditions[69] = true
+            player.achievement_conditions[70] = true
+
             rollNextAcceleratorSeed();
 
             // Исправлено начисление валюты перепрошивания

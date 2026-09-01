@@ -2543,7 +2543,8 @@ vn {
 }
 
 .temporaryTreasure {
-  text-shadow: 0 0 1px #ffee00;
+  text-shadow: 0 0 1px #000000;
+  color: var(--grey-text);
 }
 
 .temporaryTreasure.disabled {

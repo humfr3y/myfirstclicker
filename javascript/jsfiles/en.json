@@ -1732,9 +1732,9 @@
     "digitalization": {
         "eventName": "DIGITALIZATION",
 
-        "eventStarts_1": "Event starts in {{d}}d {{h}}h",
-        "eventStarts_2": "Event starts in {{h}}h {{m}}m",
-        "eventStarts_3": "Event starts in {{m}}m {{s}}s",
+        "eventStarts_1": "Event finished.",
+        "eventStarts_2": "Event finished.",
+        "eventStarts_3": "Event finished.",
 
         "eventEnds_1": "Event ends in {{d}}d {{h}}h",
         "eventEnds_2": "Event ends in {{h}}h {{m}}m",

@@ -1347,7 +1347,7 @@ function getAcceleratorPower() {
     }
     let randomFloat = player.reflash.seed / 4294967296;
     
-    return 1 + randomFloat * 2; // Returns a value between 1 and 3
+    return (1 + UPGS.reflash.accelerator[1].effect()) + randomFloat * (2 + UPGS.reflash.accelerator[2].effect()); // Returns a value between 1 and 3
 }
 
 function rollNextAcceleratorSeed() {
