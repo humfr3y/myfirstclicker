@@ -249,19 +249,6 @@ const LAYERS = {
                 player.shard.currency += (player.challenge.activated === 0 && player.challenge.completed.includes(2)) ? 1000000 * player.prestige.currency : 10;
             }
 
-            if (player.challenge.activated !== 0) {
-                let act = player.challenge.activated;
-                if (!player.challenge.completed.includes(act)) player.challenge.completed.push(act);
-                
-                if (player.challenge.time[act].timer >= player.time.real.prestige.timer) {
-                    updateTimeObject(player.challenge.time[act], player.time.real.prestige.timer);
-                }
-                
-                if (act === 9 && MISC.amount_of_upgrades.coin() === 0 && !ACHS.has(38)) ACHS.unl(38);
-                if (act === 12 && PRES_CHALLENGE[7].completed()) player.challenge.time[12].times_completed++;
-                startChallenge(13, true);
-            }
-
             if (player.prestige.challenge.activated !== 0) {
                 let pact = player.prestige.challenge.activated;
                 if (!player.prestige.challenge.completed.includes(pact)) player.prestige.challenge.completed.push(pact);
@@ -277,7 +264,19 @@ const LAYERS = {
                 startPChallenge(9, true);
             }
 
-    
+            if (player.challenge.activated !== 0) {
+                let act = player.challenge.activated;
+                if (!player.challenge.completed.includes(act)) player.challenge.completed.push(act);
+                
+                if (player.challenge.time[act].timer >= player.time.real.prestige.timer) {
+                    updateTimeObject(player.challenge.time[act], player.time.real.prestige.timer);
+                }
+                
+                if (act === 9 && MISC.amount_of_upgrades.coin() === 0 && !ACHS.has(38)) ACHS.unl(38);
+                if (act === 12 && PRES_CHALLENGE[7].completed()) player.challenge.time[12].times_completed++;
+                startChallenge(13, true);
+            }
+
             if (!restartChallenge.checked) player.challenge.activated = 0;
             if (!restartPChallenge.checked) player.prestige.challenge.activated = 0;
 
