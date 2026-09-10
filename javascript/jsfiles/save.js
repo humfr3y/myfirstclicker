@@ -274,7 +274,7 @@ function loadGame() {
     document.getElementById('changeProgressBar').value = player.cosmetics.progressBars.current
 
     player.overdrive.consumed.type3 = 0
-    player.coin.total_currency == 10 ? convert_permanentUpgrades() : null;
+    player.coin.total_currency != 10 ? convert_permanentUpgrades() : null;
 }
 
 function resetDailyReward() {
@@ -355,6 +355,7 @@ if (fileUpload) {
 }
 
 function convert_permanentUpgrades() {
+    console.log("Convert upgrades")
     if (player.settings.version == "1.1.1") return 0;
 
     let temp_object = player.shop.permanentUpgrades
