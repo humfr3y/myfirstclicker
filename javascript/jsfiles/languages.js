@@ -10,14 +10,17 @@ try {
 
 const responseEn = await fetch('./javascript/jsfiles/en.json');
 const responseRu = await fetch('./javascript/jsfiles/ru.json');
+const responseZh = await fetch('./javascript/jsfiles/zh.json');
 const translationsEnData = await responseEn.json();
 const translationsRuData = await responseRu.json();
+const translationsZhData = await responseZh.json();
 await i18next.init({
     lng: player.settings.currentLanguage,
     fallbackLng: 'en',
     resources: {
         en: { translation: translationsEnData },
-        ru: { translation: translationsRuData }
+        ru: { translation: translationsRuData },
+        zh: { translation: translationsZhData }
     },
     interpolation: {
         escapeValue: false,
@@ -1548,8 +1551,12 @@ function getGlobalNumbers() {
     };
 }
 
+// Languages that have a translation file loaded above, in cycle order
+const availableLanguages = ['en', 'ru', 'zh'];
+
 document.getElementById('changingLanguage').addEventListener('click', () => {
-    player.settings.currentLanguage = i18next.language == 'ru' ? 'en' : 'ru';
+    const currentIndex = availableLanguages.indexOf(i18next.language);
+    player.settings.currentLanguage = availableLanguages[(currentIndex + 1) % availableLanguages.length];
     i18next.changeLanguage(player.settings.currentLanguage, () => {
         updateStaticTranslations(); // Мгновенно переводит всю статику
         showChangelog(text.changelog.start);

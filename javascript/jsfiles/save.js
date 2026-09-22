@@ -167,7 +167,8 @@ function loadGame() {
 
     if (player.coin.total_currency === 10) {
         let userLang = navigator.language || navigator.userLanguage;
-        player.settings.currentLanguage = (userLang.includes('ru')) ? 'ru' : 'en';
+        player.settings.currentLanguage = userLang.includes('ru') ? 'ru'
+            : (userLang.includes('zh') ? 'zh' : 'en');
         openWindow('welcome', false);
         toggleBadges(['badge-settings-1', 'badge-misc-1', 'badge-h2p'], !player.checked.h2p)
     }
